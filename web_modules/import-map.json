@@ -1,0 +1,29 @@
+{
+  "imports": {
+    "@material/mwc-button": "./@material/mwc-button.js",
+    "@material/mwc-circular-progress-four-color": "./@material/mwc-circular-progress-four-color.js",
+    "@material/mwc-dialog": "./@material/mwc-dialog.js",
+    "@material/mwc-drawer": "./@material/mwc-drawer.js",
+    "@material/mwc-fab": "./@material/mwc-fab.js",
+    "@material/mwc-formfield": "./@material/mwc-formfield.js",
+    "@material/mwc-icon": "./@material/mwc-icon.js",
+    "@material/mwc-icon-button": "./@material/mwc-icon-button.js",
+    "@material/mwc-linear-progress": "./@material/mwc-linear-progress.js",
+    "@material/mwc-list": "./@material/mwc-list.js",
+    "@material/mwc-list/mwc-list-item": "./@material/mwc-list/mwc-list-item.js",
+    "@material/mwc-menu": "./@material/mwc-menu.js",
+    "@material/mwc-select": "./@material/mwc-select.js",
+    "@material/mwc-snackbar": "./@material/mwc-snackbar.js",
+    "@material/mwc-switch": "./@material/mwc-switch.js",
+    "@material/mwc-tab": "./@material/mwc-tab.js",
+    "@material/mwc-tab-bar": "./@material/mwc-tab-bar.js",
+    "@material/mwc-textfield": "./@material/mwc-textfield.js",
+    "@material/mwc-top-app-bar-fixed": "./@material/mwc-top-app-bar-fixed.js",
+    "lit-element": "./lit-element.js",
+    "lit-html": "./lit-html.js",
+    "lit-html/directives/if-defined": "./lit-html/directives/if-defined.js",
+    "lit-html/directives/until.js": "./lit-html/directives/until.js",
+    "lit-translate": "./lit-translate.js",
+    "tslib": "./tslib.js"
+  }
+}
