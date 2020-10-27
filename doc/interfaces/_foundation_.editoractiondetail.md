@@ -1,16 +1,12 @@
-**[open-scd](../README.md)**
+[open-scd](../README.md) › [Globals](../globals.md) › ["foundation"](../modules/_foundation_.md) › [EditorActionDetail](_foundation_.editoractiondetail.md)
 
-> [Globals](../globals.md) / ["foundation"](../modules/_foundation_.md) / EditorActionDetail
-
-# Interface: EditorActionDetail\<T>
+# Interface: EditorActionDetail ‹**T**›
 
 Represents some modification of a `Document` being edited.
 
 ## Type parameters
 
-Name | Type |
------- | ------ |
-`T` | [EditorAction](../modules/_foundation_.md#editoraction) |
+▪ **T**: *[EditorAction](../modules/_foundation_.md#editoraction)*
 
 ## Hierarchy
 
@@ -24,8 +20,8 @@ Name | Type |
 
 ## Properties
 
-### action
+###  action
 
-•  **action**: T
+• **action**: *T*
 
-*Defined in [src/foundation.ts:89](https://github.com/openscd/open-scd/blob/12e7252/src/foundation.ts#L89)*
+*Defined in [src/foundation.ts:88](https://github.com/openscd/open-scd/blob/56480b8/src/foundation.ts#L88)*

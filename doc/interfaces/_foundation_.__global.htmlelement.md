@@ -1,6 +1,4 @@
-**[open-scd](../README.md)**
-
-> [Globals](../globals.md) / ["foundation"](../modules/_foundation_.md) / [\_\_global](../modules/_foundation_.__global.md) / HTMLElement
+[open-scd](../README.md) › [Globals](../globals.md) › ["foundation"](../modules/_foundation_.md) › [__global](../modules/_foundation_.__global.md) › [HTMLElement](_foundation_.__global.htmlelement.md)
 
 # Interface: HTMLElement
 
@@ -12,39 +10,39 @@
 
 ### Methods
 
-* [info](_foundation_.__global.htmlelement.md#info)
-* [warn](_foundation_.__global.htmlelement.md#warn)
+* [info](_foundation_.__global.htmlelement.md#optional-info)
+* [warn](_foundation_.__global.htmlelement.md#optional-warn)
 
 ## Methods
 
-### info
+### `Optional` info
 
-▸ `Optional`**info**(`message`: string, ...`data`: any[]): void
+▸ **info**(`message`: string, ...`data`: any[]): *void*
 
-*Defined in [src/foundation.ts:241](https://github.com/openscd/open-scd/blob/12e7252/src/foundation.ts#L241)*
+*Defined in [src/foundation.ts:228](https://github.com/openscd/open-scd/blob/56480b8/src/foundation.ts#L228)*
 
-#### Parameters:
+**Parameters:**
 
 Name | Type |
 ------ | ------ |
 `message` | string |
 `...data` | any[] |
 
-**Returns:** void
+**Returns:** *void*
 
 ___
 
-### warn
+### `Optional` warn
 
-▸ `Optional`**warn**(`message`: string, ...`data`: any[]): void
+▸ **warn**(`message`: string, ...`data`: any[]): *void*
 
-*Defined in [src/foundation.ts:242](https://github.com/openscd/open-scd/blob/12e7252/src/foundation.ts#L242)*
+*Defined in [src/foundation.ts:229](https://github.com/openscd/open-scd/blob/56480b8/src/foundation.ts#L229)*
 
-#### Parameters:
+**Parameters:**
 
 Name | Type |
 ------ | ------ |
 `message` | string |
 `...data` | any[] |
 
-**Returns:** void
+**Returns:** *void*

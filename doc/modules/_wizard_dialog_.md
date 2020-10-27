@@ -1,6 +1,4 @@
-**[open-scd](../README.md)**
-
-> [Globals](../globals.md) / "wizard-dialog"
+[open-scd](../README.md) › [Globals](../globals.md) › ["wizard-dialog"](_wizard_dialog_.md)
 
 # Module: "wizard-dialog"
 
@@ -17,32 +15,32 @@
 
 ## Functions
 
-### dialogInputs
+###  dialogInputs
 
-▸ **dialogInputs**(`dialog?`: Dialog): [WizardInput](_foundation_.md#wizardinput)[]
+▸ **dialogInputs**(`dialog?`: Dialog): *[WizardInput](_foundation_.md#wizardinput)[]*
 
-*Defined in [src/wizard-dialog.ts:28](https://github.com/openscd/open-scd/blob/12e7252/src/wizard-dialog.ts#L28)*
+*Defined in [src/wizard-dialog.ts:26](https://github.com/openscd/open-scd/blob/56480b8/src/wizard-dialog.ts#L26)*
 
-#### Parameters:
+**Parameters:**
 
 Name | Type |
 ------ | ------ |
 `dialog?` | Dialog |
 
-**Returns:** [WizardInput](_foundation_.md#wizardinput)[]
+**Returns:** *[WizardInput](_foundation_.md#wizardinput)[]*
 
 ___
 
-### dialogValid
+###  dialogValid
 
-▸ **dialogValid**(`dialog?`: Dialog): boolean
+▸ **dialogValid**(`dialog?`: Dialog): *boolean*
 
-*Defined in [src/wizard-dialog.ts:32](https://github.com/openscd/open-scd/blob/12e7252/src/wizard-dialog.ts#L32)*
+*Defined in [src/wizard-dialog.ts:30](https://github.com/openscd/open-scd/blob/56480b8/src/wizard-dialog.ts#L30)*
 
-#### Parameters:
+**Parameters:**
 
 Name | Type |
 ------ | ------ |
 `dialog?` | Dialog |
 
-**Returns:** boolean
+**Returns:** *boolean*

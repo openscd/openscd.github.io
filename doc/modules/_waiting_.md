@@ -1,6 +1,4 @@
-**[open-scd](../README.md)**
-
-> [Globals](../globals.md) / "Waiting"
+[open-scd](../README.md) › [Globals](../globals.md) › ["Waiting"](_waiting_.md)
 
 # Module: "Waiting"
 
@@ -16,30 +14,28 @@
 
 ## Type aliases
 
-### WaitingElement
+###  WaitingElement
 
-Ƭ  **WaitingElement**: [Mixin](_foundation_.md#mixin)\<*typeof* [Waiting](_waiting_.md#waiting)>
+Ƭ **WaitingElement**: *[Mixin](_foundation_.md#mixin)‹typeof Waiting›*
 
-*Defined in [src/Waiting.ts:13](https://github.com/openscd/open-scd/blob/12e7252/src/Waiting.ts#L13)*
+*Defined in [src/Waiting.ts:13](https://github.com/openscd/open-scd/blob/56480b8/src/Waiting.ts#L13)*
 
 ## Functions
 
-### Waiting
+###  Waiting
 
-▸ **Waiting**\<TBase>(`Base`: TBase): WaitingElement & TBase
+▸ **Waiting**‹**TBase**›(`Base`: TBase): *WaitingElement & TBase*
 
-*Defined in [src/Waiting.ts:15](https://github.com/openscd/open-scd/blob/12e7252/src/Waiting.ts#L15)*
+*Defined in [src/Waiting.ts:15](https://github.com/openscd/open-scd/blob/56480b8/src/Waiting.ts#L15)*
 
-#### Type parameters:
+**Type parameters:**
 
-Name | Type |
------- | ------ |
-`TBase` | [LitElementConstructor](_foundation_.md#litelementconstructor) |
+▪ **TBase**: *[LitElementConstructor](_foundation_.md#litelementconstructor)*
 
-#### Parameters:
+**Parameters:**
 
 Name | Type |
 ------ | ------ |
 `Base` | TBase |
 
-**Returns:** WaitingElement & TBase
+**Returns:** *WaitingElement & TBase*

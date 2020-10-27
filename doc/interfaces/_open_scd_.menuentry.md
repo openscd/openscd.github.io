@@ -1,6 +1,4 @@
-**[open-scd](../README.md)**
-
-> [Globals](../globals.md) / ["open-scd"](../modules/_open_scd_.md) / MenuEntry
+[open-scd](../README.md) › [Globals](../globals.md) › ["open-scd"](../modules/_open_scd_.md) › [MenuEntry](_open_scd_.menuentry.md)
 
 # Interface: MenuEntry
 
@@ -12,66 +10,66 @@
 
 ### Properties
 
-* [action](_open_scd_.menuentry.md#action)
-* [actionItem](_open_scd_.menuentry.md#actionitem)
-* [disabled](_open_scd_.menuentry.md#disabled)
-* [hint](_open_scd_.menuentry.md#hint)
+* [action](_open_scd_.menuentry.md#optional-action)
+* [actionItem](_open_scd_.menuentry.md#optional-actionitem)
+* [disabled](_open_scd_.menuentry.md#optional-disabled)
+* [hint](_open_scd_.menuentry.md#optional-hint)
 * [icon](_open_scd_.menuentry.md#icon)
 * [name](_open_scd_.menuentry.md#name)
-* [startsGroup](_open_scd_.menuentry.md#startsgroup)
+* [startsGroup](_open_scd_.menuentry.md#optional-startsgroup)
 
 ## Properties
 
-### action
+### `Optional` action
 
-• `Optional` **action**: undefined \| () => void
+• **action**? : *undefined | function*
 
-*Defined in [src/open-scd.ts:49](https://github.com/openscd/open-scd/blob/12e7252/src/open-scd.ts#L49)*
-
-___
-
-### actionItem
-
-• `Optional` **actionItem**: undefined \| false \| true
-
-*Defined in [src/open-scd.ts:48](https://github.com/openscd/open-scd/blob/12e7252/src/open-scd.ts#L48)*
+*Defined in [src/open-scd.ts:45](https://github.com/openscd/open-scd/blob/56480b8/src/open-scd.ts#L45)*
 
 ___
 
-### disabled
+### `Optional` actionItem
 
-• `Optional` **disabled**: undefined \| () => boolean
+• **actionItem**? : *undefined | false | true*
 
-*Defined in [src/open-scd.ts:50](https://github.com/openscd/open-scd/blob/12e7252/src/open-scd.ts#L50)*
-
-___
-
-### hint
-
-• `Optional` **hint**: undefined \| string
-
-*Defined in [src/open-scd.ts:46](https://github.com/openscd/open-scd/blob/12e7252/src/open-scd.ts#L46)*
+*Defined in [src/open-scd.ts:44](https://github.com/openscd/open-scd/blob/56480b8/src/open-scd.ts#L44)*
 
 ___
 
-### icon
+### `Optional` disabled
 
-•  **icon**: string
+• **disabled**? : *undefined | function*
 
-*Defined in [src/open-scd.ts:44](https://github.com/openscd/open-scd/blob/12e7252/src/open-scd.ts#L44)*
-
-___
-
-### name
-
-•  **name**: string
-
-*Defined in [src/open-scd.ts:45](https://github.com/openscd/open-scd/blob/12e7252/src/open-scd.ts#L45)*
+*Defined in [src/open-scd.ts:46](https://github.com/openscd/open-scd/blob/56480b8/src/open-scd.ts#L46)*
 
 ___
 
-### startsGroup
+### `Optional` hint
 
-• `Optional` **startsGroup**: undefined \| false \| true
+• **hint**? : *undefined | string*
 
-*Defined in [src/open-scd.ts:47](https://github.com/openscd/open-scd/blob/12e7252/src/open-scd.ts#L47)*
+*Defined in [src/open-scd.ts:42](https://github.com/openscd/open-scd/blob/56480b8/src/open-scd.ts#L42)*
+
+___
+
+###  icon
+
+• **icon**: *string*
+
+*Defined in [src/open-scd.ts:40](https://github.com/openscd/open-scd/blob/56480b8/src/open-scd.ts#L40)*
+
+___
+
+###  name
+
+• **name**: *string*
+
+*Defined in [src/open-scd.ts:41](https://github.com/openscd/open-scd/blob/56480b8/src/open-scd.ts#L41)*
+
+___
+
+### `Optional` startsGroup
+
+• **startsGroup**? : *undefined | false | true*
+
+*Defined in [src/open-scd.ts:43](https://github.com/openscd/open-scd/blob/56480b8/src/open-scd.ts#L43)*

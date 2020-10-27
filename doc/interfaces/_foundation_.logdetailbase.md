@@ -1,6 +1,4 @@
-**[open-scd](../README.md)**
-
-> [Globals](../globals.md) / ["foundation"](../modules/_foundation_.md) / LogDetailBase
+[open-scd](../README.md) › [Globals](../globals.md) › ["foundation"](../modules/_foundation_.md) › [LogDetailBase](_foundation_.logdetailbase.md)
 
 # Interface: LogDetailBase
 
@@ -16,21 +14,21 @@
 
 ### Properties
 
-* [message](_foundation_.logdetailbase.md#message)
+* [message](_foundation_.logdetailbase.md#optional-message)
 * [title](_foundation_.logdetailbase.md#title)
 
 ## Properties
 
-### message
+### `Optional` message
 
-• `Optional` **message**: undefined \| string
+• **message**? : *undefined | string*
 
-*Defined in [src/foundation.ts:162](https://github.com/openscd/open-scd/blob/12e7252/src/foundation.ts#L162)*
+*Defined in [src/foundation.ts:149](https://github.com/openscd/open-scd/blob/56480b8/src/foundation.ts#L149)*
 
 ___
 
-### title
+###  title
 
-•  **title**: string
+• **title**: *string*
 
-*Defined in [src/foundation.ts:161](https://github.com/openscd/open-scd/blob/12e7252/src/foundation.ts#L161)*
+*Defined in [src/foundation.ts:148](https://github.com/openscd/open-scd/blob/56480b8/src/foundation.ts#L148)*

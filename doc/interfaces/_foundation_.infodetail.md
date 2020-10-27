@@ -1,6 +1,4 @@
-**[open-scd](../README.md)**
-
-> [Globals](../globals.md) / ["foundation"](../modules/_foundation_.md) / InfoDetail
+[open-scd](../README.md) › [Globals](../globals.md) › ["foundation"](../modules/_foundation_.md) › [InfoDetail](_foundation_.infodetail.md)
 
 # Interface: InfoDetail
 
@@ -14,43 +12,43 @@
 
 ### Properties
 
-* [cause](_foundation_.infodetail.md#cause)
+* [cause](_foundation_.infodetail.md#optional-cause)
 * [kind](_foundation_.infodetail.md#kind)
-* [message](_foundation_.infodetail.md#message)
+* [message](_foundation_.infodetail.md#optional-message)
 * [title](_foundation_.infodetail.md#title)
 
 ## Properties
 
-### cause
+### `Optional` cause
 
-• `Optional` **cause**: [LogEntry](../modules/_foundation_.md#logentry)
+• **cause**? : *[LogEntry](../modules/_foundation_.md#logentry)*
 
-*Defined in [src/foundation.ts:170](https://github.com/openscd/open-scd/blob/12e7252/src/foundation.ts#L170)*
-
-___
-
-### kind
-
-•  **kind**: [InfoEntryKind](../modules/_foundation_.md#infoentrykind)
-
-*Defined in [src/foundation.ts:169](https://github.com/openscd/open-scd/blob/12e7252/src/foundation.ts#L169)*
+*Defined in [src/foundation.ts:157](https://github.com/openscd/open-scd/blob/56480b8/src/foundation.ts#L157)*
 
 ___
 
-### message
+###  kind
 
-• `Optional` **message**: undefined \| string
+• **kind**: *[InfoEntryKind](../modules/_foundation_.md#infoentrykind)*
 
-*Inherited from [LogDetailBase](_foundation_.logdetailbase.md).[message](_foundation_.logdetailbase.md#message)*
-
-*Defined in [src/foundation.ts:162](https://github.com/openscd/open-scd/blob/12e7252/src/foundation.ts#L162)*
+*Defined in [src/foundation.ts:156](https://github.com/openscd/open-scd/blob/56480b8/src/foundation.ts#L156)*
 
 ___
 
-### title
+### `Optional` message
 
-•  **title**: string
+• **message**? : *undefined | string*
+
+*Inherited from [LogDetailBase](_foundation_.logdetailbase.md).[message](_foundation_.logdetailbase.md#optional-message)*
+
+*Defined in [src/foundation.ts:149](https://github.com/openscd/open-scd/blob/56480b8/src/foundation.ts#L149)*
+
+___
+
+###  title
+
+• **title**: *string*
 
 *Inherited from [LogDetailBase](_foundation_.logdetailbase.md).[title](_foundation_.logdetailbase.md#title)*
 
-*Defined in [src/foundation.ts:161](https://github.com/openscd/open-scd/blob/12e7252/src/foundation.ts#L161)*
+*Defined in [src/foundation.ts:148](https://github.com/openscd/open-scd/blob/56480b8/src/foundation.ts#L148)*

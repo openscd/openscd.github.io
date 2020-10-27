@@ -1,6 +1,4 @@
-**[open-scd](../README.md)**
-
-> [Globals](../globals.md) / ["open-scd"](../modules/_open_scd_.md) / Tab
+[open-scd](../README.md) › [Globals](../globals.md) › ["open-scd"](../modules/_open_scd_.md) › [Tab](_open_scd_.tab.md)
 
 # Interface: Tab
 
@@ -14,28 +12,28 @@
 
 * [icon](_open_scd_.tab.md#icon)
 * [id](_open_scd_.tab.md#id)
-* [name](_open_scd_.tab.md#name)
+* [label](_open_scd_.tab.md#label)
 
 ## Properties
 
-### icon
+###  icon
 
-•  **icon**: string \| TemplateResult
+• **icon**: *string | TemplateResult*
 
-*Defined in [src/open-scd.ts:40](https://github.com/openscd/open-scd/blob/12e7252/src/open-scd.ts#L40)*
-
-___
-
-### id
-
-•  **id**: string
-
-*Defined in [src/open-scd.ts:39](https://github.com/openscd/open-scd/blob/12e7252/src/open-scd.ts#L39)*
+*Defined in [src/open-scd.ts:36](https://github.com/openscd/open-scd/blob/56480b8/src/open-scd.ts#L36)*
 
 ___
 
-### name
+###  id
 
-•  **name**: string
+• **id**: *string*
 
-*Defined in [src/open-scd.ts:38](https://github.com/openscd/open-scd/blob/12e7252/src/open-scd.ts#L38)*
+*Defined in [src/open-scd.ts:35](https://github.com/openscd/open-scd/blob/56480b8/src/open-scd.ts#L35)*
+
+___
+
+###  label
+
+• **label**: *string*
+
+*Defined in [src/open-scd.ts:34](https://github.com/openscd/open-scd/blob/56480b8/src/open-scd.ts#L34)*

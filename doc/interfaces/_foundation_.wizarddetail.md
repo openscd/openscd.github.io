@@ -1,6 +1,4 @@
-**[open-scd](../README.md)**
-
-> [Globals](../globals.md) / ["foundation"](../modules/_foundation_.md) / WizardDetail
+[open-scd](../README.md) › [Globals](../globals.md) › ["foundation"](../modules/_foundation_.md) › [WizardDetail](_foundation_.wizarddetail.md)
 
 # Interface: WizardDetail
 
@@ -16,8 +14,8 @@
 
 ## Properties
 
-### wizard
+###  wizard
 
-•  **wizard**: [Wizard](../modules/_foundation_.md#wizard) \| null
+• **wizard**: *[Wizard](../modules/_foundation_.md#wizard) | null*
 
-*Defined in [src/foundation.ts:144](https://github.com/openscd/open-scd/blob/12e7252/src/foundation.ts#L144)*
+*Defined in [src/foundation.ts:131](https://github.com/openscd/open-scd/blob/56480b8/src/foundation.ts#L131)*

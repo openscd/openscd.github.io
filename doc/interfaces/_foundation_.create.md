@@ -1,6 +1,4 @@
-**[open-scd](../README.md)**
-
-> [Globals](../globals.md) / ["foundation"](../modules/_foundation_.md) / Create
+[open-scd](../README.md) › [Globals](../globals.md) › ["foundation"](../modules/_foundation_.md) › [Create](_foundation_.create.md)
 
 # Interface: Create
 
@@ -14,29 +12,29 @@ Represents prepending `create.new.element` to `create.new.parent`.
 
 ### Properties
 
-* [derived](_foundation_.create.md#derived)
+* [derived](_foundation_.create.md#optional-derived)
 * [new](_foundation_.create.md#new)
 
 ## Properties
 
-### derived
+### `Optional` derived
 
-• `Optional` **derived**: undefined \| false \| true
+• **derived**? : *undefined | false | true*
 
-*Defined in [src/foundation.ts:12](https://github.com/openscd/open-scd/blob/12e7252/src/foundation.ts#L12)*
+*Defined in [src/foundation.ts:11](https://github.com/openscd/open-scd/blob/56480b8/src/foundation.ts#L11)*
 
 ___
 
-### new
+###  new
 
-•  **new**: { element: Element ; parent: Element ; reference: Element \| null  }
+• **new**: *object*
 
-*Defined in [src/foundation.ts:11](https://github.com/openscd/open-scd/blob/12e7252/src/foundation.ts#L11)*
+*Defined in [src/foundation.ts:10](https://github.com/openscd/open-scd/blob/56480b8/src/foundation.ts#L10)*
 
 #### Type declaration:
 
-Name | Type |
------- | ------ |
-`element` | Element |
-`parent` | Element |
-`reference` | Element \| null |
+* **element**: *Element*
+
+* **parent**: *Element*
+
+* **reference**: *Node | null*

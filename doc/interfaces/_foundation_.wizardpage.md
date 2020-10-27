@@ -1,6 +1,4 @@
-**[open-scd](../README.md)**
-
-> [Globals](../globals.md) / ["foundation"](../modules/_foundation_.md) / WizardPage
+[open-scd](../README.md) › [Globals](../globals.md) › ["foundation"](../modules/_foundation_.md) › [WizardPage](_foundation_.wizardpage.md)
 
 # Interface: WizardPage
 
@@ -14,39 +12,39 @@ Represents a page of a wizard dialog
 
 ### Properties
 
-* [content](_foundation_.wizardpage.md#content)
-* [primary](_foundation_.wizardpage.md#primary)
-* [secondary](_foundation_.wizardpage.md#secondary)
+* [content](_foundation_.wizardpage.md#optional-content)
+* [primary](_foundation_.wizardpage.md#optional-primary)
+* [secondary](_foundation_.wizardpage.md#optional-secondary)
 * [title](_foundation_.wizardpage.md#title)
 
 ## Properties
 
-### content
+### `Optional` content
 
-• `Optional` **content**: TemplateResult[]
+• **content**? : *TemplateResult[]*
 
-*Defined in [src/foundation.ts:129](https://github.com/openscd/open-scd/blob/12e7252/src/foundation.ts#L129)*
-
-___
-
-### primary
-
-• `Optional` **primary**: undefined \| { action: [WizardAction](../modules/_foundation_.md#wizardaction) ; icon: string ; label: string  }
-
-*Defined in [src/foundation.ts:130](https://github.com/openscd/open-scd/blob/12e7252/src/foundation.ts#L130)*
+*Defined in [src/foundation.ts:116](https://github.com/openscd/open-scd/blob/56480b8/src/foundation.ts#L116)*
 
 ___
 
-### secondary
+### `Optional` primary
 
-• `Optional` **secondary**: undefined \| { action: [WizardAction](../modules/_foundation_.md#wizardaction) ; icon: string ; label: string  }
+• **primary**? : *undefined | object*
 
-*Defined in [src/foundation.ts:135](https://github.com/openscd/open-scd/blob/12e7252/src/foundation.ts#L135)*
+*Defined in [src/foundation.ts:117](https://github.com/openscd/open-scd/blob/56480b8/src/foundation.ts#L117)*
 
 ___
 
-### title
+### `Optional` secondary
 
-•  **title**: string
+• **secondary**? : *undefined | object*
 
-*Defined in [src/foundation.ts:128](https://github.com/openscd/open-scd/blob/12e7252/src/foundation.ts#L128)*
+*Defined in [src/foundation.ts:122](https://github.com/openscd/open-scd/blob/56480b8/src/foundation.ts#L122)*
+
+___
+
+###  title
+
+• **title**: *string*
+
+*Defined in [src/foundation.ts:115](https://github.com/openscd/open-scd/blob/56480b8/src/foundation.ts#L115)*
