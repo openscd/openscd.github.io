@@ -26,6 +26,8 @@ import {
 } from "../../foundation.js";
 import "./bay-editor.js";
 import {BayEditor} from "./bay-editor.js";
+import {iedIcon} from "../../icons.js";
+import {add} from "./LNodeWizard.js";
 function isVoltageLevelCreateOptions(options) {
   return options.parent !== void 0;
 }
@@ -60,6 +62,9 @@ export let VoltageLevelEditor = class extends LitElement {
     const event = newWizardEvent(BayEditor.wizard({parent: this.element}));
     this.dispatchEvent(event);
   }
+  openLNodeWizard() {
+    this.dispatchEvent(newWizardEvent(add(this.element)));
+  }
   removeAction() {
     if (this.element)
       this.dispatchEvent(newActionEvent({
@@ -73,6 +78,9 @@ export let VoltageLevelEditor = class extends LitElement {
         ${this.voltage === null ? "" : html`(${this.voltage})`}
       </h2>
       <div id="header-icon">
+        <mwc-icon-button @click=${() => this.openLNodeWizard()}
+          >${iedIcon}</mwc-icon-button
+        >
         <mwc-icon-button
           icon="edit"
           @click=${() => this.openEditWizard()}

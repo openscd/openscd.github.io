@@ -10,6 +10,7 @@
     "@material/mwc-icon-button": "./@material/mwc-icon-button.js",
     "@material/mwc-linear-progress": "./@material/mwc-linear-progress.js",
     "@material/mwc-list": "./@material/mwc-list.js",
+    "@material/mwc-list/mwc-check-list-item": "./@material/mwc-list/mwc-check-list-item.js",
     "@material/mwc-list/mwc-list-item": "./@material/mwc-list/mwc-list-item.js",
     "@material/mwc-menu": "./@material/mwc-menu.js",
     "@material/mwc-select": "./@material/mwc-select.js",
@@ -23,7 +24,6 @@
     "lit-html": "./lit-html.js",
     "lit-html/directives/if-defined": "./lit-html/directives/if-defined.js",
     "lit-html/directives/until.js": "./lit-html/directives/until.js",
-    "lit-translate": "./lit-translate.js",
-    "tslib": "./tslib.js"
+    "lit-translate": "./lit-translate.js"
   }
 }

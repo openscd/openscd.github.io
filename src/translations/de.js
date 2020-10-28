@@ -90,6 +90,19 @@ export const de = {
       }
     }
   },
+  lnode: {
+    wizard: {
+      nameHelper: "Conducting Equipment Name",
+      descHelper: "Conducting Equipment Description",
+      typeHelper: "Conducting Equipment Type",
+      title: {
+        selectIEDs: "Auswahl IEDs",
+        selectLDs: "Auswahl logische Ger\xE4te",
+        selectLNs: "Auswahl logische Knoten",
+        selectLNodes: "Verkn\xFCpfte logische Knoten"
+      }
+    }
+  },
   add: "Hinzuf\xFCgen",
   edit: "Bearbeiten",
   save: "Speichern",
@@ -97,5 +110,7 @@ export const de = {
   cancel: "Abbrechen",
   close: "Schlie\xDFen",
   undo: "R\xFCckg\xE4ngig",
-  redo: "Wiederholen"
+  redo: "Wiederholen",
+  remove: "Entfernen",
+  filter: "Filter"
 };
