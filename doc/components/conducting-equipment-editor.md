@@ -13,7 +13,8 @@
 
 ## Methods
 
-| Method           | Type       |
-|------------------|------------|
-| `openEditWizard` | `(): void` |
-| `removeAction`   | `(): void` |
+| Method               | Type       |
+|----------------------|------------|
+| `openEditWizard`     | `(): void` |
+| `openLNodeAddWizard` | `(): void` |
+| `removeAction`       | `(): void` |

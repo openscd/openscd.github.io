@@ -157,8 +157,8 @@ export function editlNode(element) {
     {
       title: get("lnode.wizard.title.selectLNs"),
       primary: {
-        icon: "add",
-        label: get("add"),
+        icon: "save",
+        label: get("save"),
         action: lNodeActions(element)
       },
       content: [renderLnPage()]

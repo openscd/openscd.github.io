@@ -346,13 +346,6 @@ VoltageLevelEditor.styles = css`
       overflow-x: auto;
       overflow-y: hidden;
     }
-
-    svg {
-      width: 25px;
-      height: 25px;
-      position: relative;
-      padding: 5px;
-    }
   `;
 __decorate([
   property()

@@ -24,7 +24,8 @@ import {
   getValue
 } from "../../foundation.js";
 import {typeIcons, typeNames} from "./conducting-equipment-types.js";
-import {generalConductingEquipmentIcon} from "../../icons.js";
+import {generalConductingEquipmentIcon, iedIcon} from "../../icons.js";
+import {editlNode} from "./lnodewizard.js";
 function isConductingEquipmentCreateOptions(options) {
   return options.parent !== void 0;
 }
@@ -40,6 +41,9 @@ export let ConductingEquipmentEditor = class extends LitElement {
   }
   openEditWizard() {
     this.dispatchEvent(newWizardEvent(ConductingEquipmentEditor.wizard({element: this.element})));
+  }
+  openLNodeAddWizard() {
+    this.dispatchEvent(newWizardEvent(editlNode(this.element)));
   }
   removeAction() {
     if (this.element)
@@ -65,16 +69,22 @@ export let ConductingEquipmentEditor = class extends LitElement {
         <h4 id="header">${this.name}</h4>
       </label>
       <mwc-icon-button
+        class="menu-item edit"
+        icon="edit"
+        @click="${() => this.openEditWizard()}}"
+      ></mwc-icon-button
+      ><mwc-icon-button
         class="menu-item delete"
         id="delete"
         icon="delete"
         @click="${() => this.removeAction()}}"
       ></mwc-icon-button>
       <mwc-icon-button
-        class="menu-item edit"
-        icon="edit"
-        @click="${() => this.openEditWizard()}}"
-      ></mwc-icon-button>
+        class="menu-item connect"
+        id="lNodeButton"
+        @click="${() => this.openLNodeAddWizard()}"
+        >${iedIcon}</mwc-icon-button
+      >
     </div>`;
   }
   static createAction(parent) {
@@ -150,7 +160,7 @@ export let ConductingEquipmentEditor = class extends LitElement {
     const [reservedValues] = isConductingEquipmentCreateOptions(options) ? [
       Array.from(options.parent.querySelectorAll("ConductingEquipment")).map((condEq) => condEq.getAttribute("name"))
     ] : [
-      Array.from(options.element.parentNode.querySelectorAll("ConductingEquipment")).map((condEq) => condEq.getAttribute("name"))
+      Array.from(options.element.parentNode.querySelectorAll("ConductingEquipment")).map((condEq) => condEq.getAttribute("name")).filter((name2) => name2 !== options.element.getAttribute("name"))
     ];
     return [
       {
@@ -206,11 +216,17 @@ export let ConductingEquipmentEditor = class extends LitElement {
   }
 };
 ConductingEquipmentEditor.styles = css`
+    :host {
+      display: inline-block;
+    }
+
     #container {
       width: 80px;
       height: 100px;
-      margin: 10px;
-      display: inline-block;
+      margin: 20px;
+      margin-top: 20px;
+      margin-bottom: 20px;
+      position: relative;
     }
 
     .type-icon-button {
@@ -249,15 +265,22 @@ ConductingEquipmentEditor.styles = css`
     }
 
     .menu-item:nth-child(3) {
-      position: relative;
-      top: -80px;
+      position: absolute;
+      top: 25px;
       left: 15px;
       color: var(--mdc-theme-on-surface);
     }
 
     .menu-item:nth-child(4) {
-      position: relative;
-      top: -128px;
+      position: absolute;
+      top: 25px;
+      left: 15px;
+      color: var(--mdc-theme-on-surface);
+    }
+
+    .menu-item:nth-child(5) {
+      position: absolute;
+      top: 25px;
       left: 15px;
       color: var(--mdc-theme-on-surface);
     }
@@ -275,10 +298,17 @@ ConductingEquipmentEditor.styles = css`
     }
 
     #container:focus-within > .menu-item:nth-child(4) {
-      transition-duration: 400ms;
-      -webkit-transition-duration: 400ms;
+      transition-duration: 200ms;
+      -webkit-transition-duration: 200ms;
       -webkit-transform: translate3d(0px, 65px, 0);
       transform: translate3d(0px, 65px, 0);
+    }
+
+    #container:focus-within > .menu-item:nth-child(5) {
+      transition-duration: 200ms;
+      -webkit-transition-duration: 200ms;
+      -webkit-transform: translate3d(55px, 0px, 0);
+      transform: translate3d(55px, 0px, 0);
     }
 
     #header {
@@ -291,7 +321,7 @@ ConductingEquipmentEditor.styles = css`
       text-overflow: ellipsis;
     }
 
-    svg {
+    .type-icon-button > svg {
       color: var(--mdc-theme-on-surface);
       width: 80px;
       height: 80px;

@@ -16,7 +16,7 @@ import {
   property,
   query
 } from "../web_modules/lit-element.js";
-import {translate} from "../web_modules/lit-translate.js";
+import {translate, get} from "../web_modules/lit-translate.js";
 import "../web_modules/@material/mwc-list/mwc-list-item.js";
 import "../web_modules/@material/mwc-menu.js";
 import "../web_modules/@material/mwc-switch.js";
@@ -93,8 +93,10 @@ export let WizardTextField = class extends TextField {
       this.multiplierMenu.anchor = this.multiplierButton ?? null;
   }
   checkValidity() {
-    if (this.reservedValues && this.reservedValues.some((array) => array === this.value))
+    if (this.reservedValues && this.reservedValues.some((array) => array === this.value)) {
+      this.setCustomValidity(get("textfield.unique"));
       return false;
+    }
     return super.checkValidity();
   }
   renderUnitSelector() {

@@ -31,7 +31,8 @@ export const en = {
   textfield: {
     required: "Required",
     nonempty: "Must not be empty",
-    noMultiplier: "none"
+    noMultiplier: "none",
+    unique: "Must be unique"
   },
   log: {
     name: "Log",
@@ -92,14 +93,10 @@ export const en = {
   },
   lnode: {
     wizard: {
-      nameHelper: "Conducting Equipment Name",
-      descHelper: "Conducting Equipment Description",
-      typeHelper: "Conducting Equipment Type",
       title: {
         selectIEDs: "Select IEDs",
         selectLDs: "Select Logical Devices",
-        selectLNs: "Select Logical Nodes",
-        selectLNodes: "Logical Node Connections"
+        selectLNs: "Select Logical Nodes"
       }
     }
   },

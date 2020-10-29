@@ -181,7 +181,7 @@ export let BayEditor = class extends LitElement {
 };
 BayEditor.styles = css`
     #container {
-      width: 320px;
+      width: 370px;
       min-height: 320px;
       background-color: var(--mdc-theme-surface);
       margin: 10px;

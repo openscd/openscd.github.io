@@ -31,7 +31,8 @@ export const de = {
   textfield: {
     required: "Pflichtfeld",
     nonempty: "Darf nicht leer sein",
-    noMultiplier: "keiner"
+    noMultiplier: "keiner",
+    unique: "Darf sich nicht wiederholen"
   },
   log: {
     name: "Protokoll",
@@ -92,14 +93,10 @@ export const de = {
   },
   lnode: {
     wizard: {
-      nameHelper: "Conducting Equipment Name",
-      descHelper: "Conducting Equipment Description",
-      typeHelper: "Conducting Equipment Type",
       title: {
         selectIEDs: "Auswahl IEDs",
         selectLDs: "Auswahl logische Ger\xE4te",
-        selectLNs: "Auswahl logische Knoten",
-        selectLNodes: "Verkn\xFCpfte logische Knoten"
+        selectLNs: "Auswahl logische Knoten"
       }
     }
   },
