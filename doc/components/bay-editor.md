@@ -19,6 +19,5 @@
 | `openConductingEquipmentWizard` | `(): void`           |
 | `openEditWizard`                | `(): void`           |
 | `openLNodeAddWizard`            | `(): void`           |
-| `openLNodeRemoveWizard`         | `(): void`           |
 | `removeAction`                  | `(): void`           |
 | `renderHeader`                  | `(): TemplateResult` |

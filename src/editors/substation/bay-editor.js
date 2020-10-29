@@ -25,7 +25,7 @@ import {
 import {get, translate} from "../../../web_modules/lit-translate.js";
 import "./conducting-equipment-editor.js";
 import {ConductingEquipmentEditor} from "./conducting-equipment-editor.js";
-import {add, remove} from "./LNodeWizard.js";
+import {editlNode} from "./lnodewizard.js";
 import {iedIcon} from "../../icons.js";
 function isBayCreateOptions(options) {
   return options.parent !== void 0;
@@ -41,10 +41,7 @@ export let BayEditor = class extends LitElement {
     this.dispatchEvent(newWizardEvent(BayEditor.wizard({element: this.element})));
   }
   openLNodeAddWizard() {
-    this.dispatchEvent(newWizardEvent(add(this.element)));
-  }
-  openLNodeRemoveWizard() {
-    this.dispatchEvent(newWizardEvent(remove(this.element)));
+    this.dispatchEvent(newWizardEvent(editlNode(this.element)));
   }
   openConductingEquipmentWizard() {
     if (!this.element)
@@ -64,21 +61,11 @@ export let BayEditor = class extends LitElement {
         ${this.name} ${this.desc === null ? "" : html`&mdash;`} ${this.desc}
       </h3>
       <div id="header-icon">
-        <div style="position: relative;">
-          <mwc-icon-button
-            id="lNodeButton"
-            @click="${() => this.lNodeMenu?.show()}"
-            >${iedIcon}</mwc-icon-button
-          >
-          <mwc-menu id="lNodeMenu" .anchor=${this.lNodeButton}>
-            <mwc-list-item @click=${() => this.openLNodeAddWizard()}
-              >${translate("add")}</mwc-list-item
-            >
-            <mwc-list-item @click=${() => this.openLNodeRemoveWizard()}
-              >${translate("remove")}</mwc-list-item
-            >
-          </mwc-menu>
-        </div>
+        <mwc-icon-button
+          id="lNodeButton"
+          @click="${() => this.openLNodeAddWizard()}"
+          >${iedIcon}</mwc-icon-button
+        >
         <mwc-icon-button
           icon="edit"
           @click=${() => this.openEditWizard()}
