@@ -24,7 +24,6 @@
     "lit-html": "./lit-html.js",
     "lit-html/directives/if-defined": "./lit-html/directives/if-defined.js",
     "lit-html/directives/until.js": "./lit-html/directives/until.js",
-    "lit-translate": "./lit-translate.js",
-    "tslib": "./tslib.js"
+    "lit-translate": "./lit-translate.js"
   }
 }
