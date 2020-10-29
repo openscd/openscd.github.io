@@ -3,10 +3,10 @@ import {get, translate} from "../../../web_modules/lit-translate.js";
 import "../../../web_modules/@material/mwc-list/mwc-check-list-item.js";
 import "../../../web_modules/@material/mwc-list/mwc-list-item.js";
 import "../../../web_modules/@material/mwc-textfield.js";
-function existLNode(value, parent) {
-  return parent.querySelector(`${parent.tagName} > LNode[iedName="${value.iedName}"][ldInst="${value.ldInst}"]${value.prefix ? `[prefix="${value.prefix}"]` : ``}[lnClass="${value.lnClass}"]${value.inst === "" ? `` : `[lnInst="${value.inst}"]`}`) ? true : false;
+function hasLNode(parent, value) {
+  return parent.querySelector(`${parent.tagName} > LNode[iedName="${value.iedName}"][ldInst="${value.ldInst}"]${value.prefix ? `[prefix="${value.prefix}"]` : ``}${value.inst ? `[lnInst="${value.inst}"]` : ""}[lnClass="${value.lnClass}"]`) !== null;
 }
-function creteAction(value, parent) {
+function createAction(parent, value) {
   return {
     new: {
       parent,
@@ -15,8 +15,8 @@ function creteAction(value, parent) {
     }
   };
 }
-function deleteAction(value, parent) {
-  const element = parent.querySelector(`${parent.tagName} > LNode[iedName="${value.iedName}"][ldInst="${value.ldInst}"]${value.prefix ? `[prefix="${value.prefix}"]` : ``}[lnClass="${value.lnClass}"]${value.inst === "" ? `` : `[lnInst="${value.inst}"]`}`);
+function deleteAction(parent, value) {
+  const element = parent.querySelector(`${parent.tagName} > LNode[iedName="${value.iedName}"][ldInst="${value.ldInst}"]${value.prefix ? `[prefix="${value.prefix}"]` : ""}[lnClass="${value.lnClass}"]${value.inst ? `[lnInst="${value.inst}"]` : ""}`);
   return {
     old: {
       parent,
@@ -27,18 +27,20 @@ function deleteAction(value, parent) {
 }
 function lNodeActions(parent) {
   return (inputs, wizard) => {
-    const actions = [];
-    (wizard.shadowRoot?.querySelector("#lnList")).items.forEach((item) => {
-      const value = JSON.parse(item.value);
-      if (item.selected && !existLNode(value, parent)) {
-        actions.push(creteAction(value, parent));
-      }
-      if (!item.selected && existLNode(value, parent)) {
-        actions.push(deleteAction(value, parent));
-      }
-    });
+    const newLNodes = wizard.shadowRoot.querySelector("#lnList").items.filter((item) => item.selected).map((item) => item.value);
+    const oldLNodes = Array.from(parent.querySelectorAll(`${parent.tagName} > LNode`)).map((node) => {
+      return {
+        iedName: node.getAttribute("iedName") ?? "",
+        ldInst: node.getAttribute("ldInst") ?? "",
+        prefix: node.getAttribute("prefix"),
+        lnClass: node.getAttribute("lnClass") ?? "",
+        inst: node.getAttribute("lnInst") ?? ""
+      };
+    }).map((value) => JSON.stringify(value));
+    const deleteActions = oldLNodes.filter((node) => !newLNodes.includes(node)).map((node) => deleteAction(parent, JSON.parse(node)));
+    const createActions = newLNodes.filter((node) => !oldLNodes.includes(node)).map((node) => createAction(parent, JSON.parse(node)));
     wizard.close();
-    return actions;
+    return deleteActions.concat(createActions);
   };
 }
 function onIEDSelect(evt, element) {
@@ -50,7 +52,7 @@ function onIEDSelect(evt, element) {
     const values = Array.from(ied.querySelectorAll("LDevice")).map((lDevice) => {
       return {
         iedName: ied.getAttribute("name"),
-        ldInst: lDevice.getAttribute("inst")
+        ldInst: lDevice.getAttribute("inst") ?? ""
       };
     });
     const deviceItems = values.map((value) => html`<mwc-check-list-item
@@ -74,15 +76,15 @@ function onLdSelect(evt, element) {
     const values = Array.from(doc.querySelectorAll(`IED[name="${ldValue.iedName}"] LDevice[inst="${ldValue.ldInst}"] LN
           ,IED[name="${ldValue.iedName}"] LDevice[inst="${ldValue.ldInst}"] LN0`)).map((ln) => {
       return {
+        ...ldValue,
         prefix: ln.getAttribute("prefix"),
         lnClass: ln.getAttribute("lnClass") ?? "",
-        inst: ln.getAttribute("inst") ?? "",
-        ...ldValue
+        inst: ln.getAttribute("inst") ?? ""
       };
     });
     const nodeItems = values.map((value) => {
       return html`<mwc-check-list-item
-          ?selected=${existLNode(value, element)}
+          ?selected=${hasLNode(element, value)}
           value="${JSON.stringify(value)}"
           twoline
           ><span>${value.prefix}${value.lnClass}${value.inst}</span
@@ -112,7 +114,6 @@ function renderIEDPage(element) {
       @input="${(evt) => onFilter(evt, "#iedList")}"
     ></wizard-textfield>
     <mwc-list
-      activatable
       multi
       id="iedList"
       @selected="${(evt) => onIEDSelect(evt, element)}"
@@ -130,7 +131,6 @@ function renderLdPage(element) {
       @input="${(evt) => onFilter(evt, "#ldList")}"
     ></wizard-textfield>
     <mwc-list
-      activatable
       multi
       id="ldList"
       @selected="${(evt) => onLdSelect(evt, element)}"
@@ -142,7 +142,7 @@ function renderLnPage() {
       iconTrailing="search"
       @input="${(evt) => onFilter(evt, "#lnList")}"
     ></wizard-textfield>
-    <mwc-list activatable multi id="lnList"></mwc-list>`;
+    <mwc-list multi id="lnList"></mwc-list>`;
 }
 export function editlNode(element) {
   return [
