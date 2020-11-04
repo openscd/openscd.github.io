@@ -25,7 +25,7 @@ function deleteAction(parent, value) {
     }
   };
 }
-function lNodeActions(parent) {
+export function lNodeActions(parent) {
   return (inputs, wizard) => {
     const newLNodes = wizard.shadowRoot.querySelector("#lnList").items.filter((item) => item.selected).map((item) => item.value);
     const oldLNodes = Array.from(parent.querySelectorAll(`${parent.tagName} > LNode`)).map((node) => {
