@@ -117,6 +117,8 @@ export let OpenSCD = class extends Setting2(Wizarding2(Waiting2(Editing2(Logging
         title: get("openSCD.loading", {name: this.srcName})
       }));
       const reader = new FileReader();
+      reader.addEventListener("error", () => reject(get("openSCD.readError", {name: this.srcName})));
+      reader.addEventListener("abort", () => reject(get("openSCD.readAbort", {name: this.srcName})));
       reader.addEventListener("load", () => {
         this.doc = reader.result ? new DOMParser().parseFromString(reader.result, "application/xml") : newEmptySCD();
         if (src.startsWith("blob:"))
@@ -135,8 +137,6 @@ export let OpenSCD = class extends Setting2(Wizarding2(Waiting2(Editing2(Logging
             reject(get("openSCD.invalidated", {name: this.srcName}));
         });
       });
-      reader.addEventListener("error", () => reject(get("openSCD.readError", {name: this.srcName})));
-      reader.addEventListener("abort", () => reject(get("openSCD.readAbort", {name: this.srcName})));
       fetch(src ?? "").then((res) => res.blob().then((b) => reader.readAsText(b)));
     });
   }
@@ -189,14 +189,18 @@ export let OpenSCD = class extends Setting2(Wizarding2(Waiting2(Editing2(Logging
     else
       return html``;
   }
-  renderEditorTab(editor) {
+  renderEditorTab({
+    name,
+    id,
+    icon
+  }) {
     return html`<mwc-tab
-      label=${translate(editor.name)}
-      icon=${editor.icon instanceof TemplateResult ? "" : editor.icon}
-      id=${editor.id}
+      label=${translate(name)}
+      icon=${icon instanceof TemplateResult ? "" : icon}
+      id=${id}
       hasimageicon
     >
-      ${editor.icon instanceof TemplateResult ? editor.icon : ""}
+      ${icon instanceof TemplateResult ? icon : ""}
     </mwc-tab>`;
   }
   render() {

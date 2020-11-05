@@ -394,11 +394,15 @@
 <a name='L335'></a><a href='#L335'>335</a>
 <a name='L336'></a><a href='#L336'>336</a>
 <a name='L337'></a><a href='#L337'>337</a>
-<a name='L338'></a><a href='#L338'>338</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L338'></a><a href='#L338'>338</a>
+<a name='L339'></a><a href='#L339'>339</a>
+<a name='L340'></a><a href='#L340'>340</a>
+<a name='L341'></a><a href='#L341'>341</a>
+<a name='L342'></a><a href='#L342'>342</a>
+<a name='L343'></a><a href='#L343'>343</a>
+<a name='L344'></a><a href='#L344'>344</a>
+<a name='L345'></a><a href='#L345'>345</a>
+<a name='L346'></a><a href='#L346'>346</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -453,6 +457,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">9x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">60x</span>
@@ -474,16 +479,24 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -508,11 +521,6 @@
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
@@ -594,7 +602,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">20x</span>
-<span class="cline-any cline-yes">12x</span>
+<span class="cline-any cline-yes">13x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -634,6 +642,14 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">100x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -767,12 +783,6 @@ import { plugin } from './plugin.js';
 import { validateSCL } from './validate.js';
 import { zeroLineIcon } from './icons.js';
 &nbsp;
-interface Tab {
-  name: string;
-  id: string;
-  icon: string | TemplateResult;
-}
-&nbsp;
 interface MenuEntry {
   icon: string;
   name: string;
@@ -783,6 +793,8 @@ interface MenuEntry {
   disabled?: () =&gt; boolean;
 }
 &nbsp;
+/** The `&lt;open-scd&gt;` custom element is the main entry point of the
+ * Open Substation Configuration Designer. */
 @customElement('open-scd')
 export class OpenSCD extends Setting(
   Wizarding(Waiting(Editing(Logging(LitElement))))
@@ -790,6 +802,7 @@ export class OpenSCD extends Setting(
   /** The currently active editor tab. */
   @property({ type: Number })
   activeTab = 0;
+  /** The name of the first `Substation` in the current [[`doc`]]. */
   @property()
   get name(): string | null {
     return this.doc.querySelector('Substation')?.getAttribute('name') ?? null;
@@ -810,6 +823,7 @@ export class OpenSCD extends Setting(
   @query('#menu') menuUI!: Drawer;
   @query('#file-input') fileUI!: HTMLInputElement;
 &nbsp;
+  /** Loads and parses an `XMLDocument` after [[`src`]] has changed. */
   private loadDoc(src: string): Promise&lt;string&gt; {
     return new Promise&lt;string&gt;(
       (resolve: (msg: string) =&gt; void, reject: (msg: string) =&gt; void) =&gt; {
@@ -820,7 +834,14 @@ export class OpenSCD extends Setting(
             title: get('openSCD.loading', { name: this.srcName }),
           })
         );
+&nbsp;
         const reader: FileReader = new FileReader();
+        reader.addEventListener('error', <span class="fstat-no" title="function not covered" >() =</span>&gt;
+<span class="cstat-no" title="statement not covered" >          reject(get('openSCD.readError', { name: this.srcName }))</span>
+        );
+        reader.addEventListener('abort', <span class="fstat-no" title="function not covered" >() =</span>&gt;
+<span class="cstat-no" title="statement not covered" >          reject(get('openSCD.readAbort', { name: this.srcName }))</span>
+        );
         reader.addEventListener('load', () =&gt; {
           this.doc = reader.result
             ? new DOMParser().parseFromString(
@@ -845,12 +866,7 @@ export class OpenSCD extends Setting(
             else reject(get('openSCD.invalidated', { name: this.srcName }));
           });
         });
-        reader.addEventListener('error', <span class="fstat-no" title="function not covered" >() =</span>&gt;
-<span class="cstat-no" title="statement not covered" >          reject(get('openSCD.readError', { name: this.srcName }))</span>
-        );
-        reader.addEventListener('abort', <span class="fstat-no" title="function not covered" >() =</span>&gt;
-<span class="cstat-no" title="statement not covered" >          reject(get('openSCD.readAbort', { name: this.srcName }))</span>
-        );
+&nbsp;
         fetch(src ?? <span class="branch-1 cbranch-no" title="branch not covered" >'')</span>.then(res =&gt;
           res.blob().then(b =&gt; reader.readAsText(b))
         );
@@ -858,7 +874,7 @@ export class OpenSCD extends Setting(
     );
   }
 &nbsp;
-  /** Loads the file selected by input `event.target.files[0]`. */
+  /** Loads the file `event.target.files[0]` into [[`src`]]. */
   private <span class="fstat-no" title="function not covered" >loadFile(</span>event: Event): void {
     const file =
       (&lt;HTMLInputElement | null&gt;<span class="cstat-no" title="statement not covered" >event.target)?.files?.item(0) ?? false;</span>
@@ -973,14 +989,22 @@ export class OpenSCD extends Setting(
     else return html``;
   }
 &nbsp;
-  renderEditorTab(editor: Tab): TemplateResult {
+  renderEditorTab({
+    name,
+    id,
+    icon,
+  }: {
+    name: string;
+    id: string;
+    icon: string | TemplateResult;
+  }): TemplateResult {
     return html`&lt;mwc-tab
-      label=${translate(editor.name)}
-      icon=${editor.icon instanceof TemplateResult ? '' : <span class="branch-1 cbranch-no" title="branch not covered" >editor.icon}</span>
-      id=${editor.id}
+      label=${translate(name)}
+      icon=${icon instanceof TemplateResult ? '' : <span class="branch-1 cbranch-no" title="branch not covered" >icon}</span>
+      id=${id}
       hasimageicon
     &gt;
-      ${editor.icon instanceof TemplateResult ? editor.icon : <span class="branch-1 cbranch-no" title="branch not covered" >''}</span>
+      ${icon instanceof TemplateResult ? icon : <span class="branch-1 cbranch-no" title="branch not covered" >''}</span>
     &lt;/mwc-tab&gt;`;
   }
 &nbsp;
@@ -1075,7 +1099,7 @@ export class OpenSCD extends Setting(
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Thu Nov 05 2020 12:03:11 GMT+0000 (Coordinated Universal Time)
+                at Thu Nov 05 2020 14:20:15 GMT+0000 (Coordinated Universal Time)
             </div>
         </div>
         <script src="../prettify.js"></script>

@@ -1,5 +1,8 @@
 # open-scd
 
+The `<open-scd>` custom element is the main entry point of the
+Open Substation Configuration Designer.
+
 **Mixins:** Setting, Wizarding, Waiting, Editing, Logging
 
 ## Properties
@@ -11,7 +14,7 @@
 | `canUndo`        |             | readonly  | `boolean`                                        |                                                  |                                                  |
 | `currentAction`  |             |           | `number`                                         | -1                                               |                                                  |
 | `darkThemeUI`    |             |           | `Switch`                                         |                                                  |                                                  |
-| `doc`            | `doc`       |           | `XMLDocument`                                    | "newEmptySCD()"                                  | The `XMLDocument` being edited.                  |
+| `doc`            | `doc`       |           | `XMLDocument`                                    | "newEmptySCD()"                                  | The `XMLDocument` to be edited                   |
 | `fileUI`         |             |           | `HTMLInputElement`                               |                                                  |                                                  |
 | `handleKeyPress` |             |           |                                                  |                                                  |                                                  |
 | `history`        | `history`   |           | `LogEntry[]`                                     | []                                               |                                                  |
@@ -20,7 +23,7 @@
 | `menu`           |             |           | `MenuEntry[]`                                    | [{"icon":"folder_open","name":"menu.open","startsGroup":true,"actionItem":true},{"icon":"create_new_folder","name":"menu.new"},{"icon":"snippet_folder","name":"menu.importIED"},{"icon":"save","name":"save"},{"icon":"undo","name":"undo","startsGroup":true,"actionItem":true,"action":true},{"icon":"redo","name":"redo","actionItem":true,"action":true},{"icon":"rule_folder","name":"menu.validate","startsGroup":true},{"icon":"rule","name":"menu.viewLog","actionItem":true},{"icon":"settings","name":"settings.name","startsGroup":true}] |                                                  |
 | `menuUI`         |             |           | `Drawer`                                         |                                                  |                                                  |
 | `messageUI`      |             |           | `Snackbar`                                       |                                                  |                                                  |
-| `name`           | `name`      | readonly  | `string \| null`                                 |                                                  |                                                  |
+| `name`           | `name`      | readonly  | `string \| null`                                 |                                                  | The name of the first `Substation` in the current [[`doc`]]. |
 | `nextAction`     |             | readonly  | `number`                                         |                                                  |                                                  |
 | `onLog`          |             |           |                                                  |                                                  |                                                  |
 | `onPendingState` |             |           |                                                  |                                                  |                                                  |
@@ -39,18 +42,18 @@
 
 ## Methods
 
-| Method             | Type                                             |
-|--------------------|--------------------------------------------------|
-| `onClosing`        | `(ae: CustomEvent<{ action: string; } \| null>): void` |
-| `onLog`            | `(le: LogEvent): void`                           |
-| `onPendingState`   | `(e: CustomEvent<PendingStateDetail>): Promise<void>` |
-| `onWizard`         | `(we: WizardEvent): void`                        |
-| `redo`             | `(): boolean`                                    |
-| `renderActionItem` | `(me: MenuEntry): TemplateResult`                |
-| `renderEditorTab`  | `(editor: Tab): TemplateResult`                  |
-| `renderHistory`    | `(): TemplateResult \| TemplateResult[]`         |
-| `renderLogEntry`   | `(entry: LogEntry, index: number, history: LogEntry[]): TemplateResult` |
-| `renderMenuEntry`  | `(me: MenuEntry): TemplateResult`                |
-| `reset`            | `(): void`                                       |
-| `setSetting`       | `<T extends "language" \| "theme">(setting: T, value: Settings[T]): void` |
-| `undo`             | `(): boolean`                                    |
+| Method             | Type                                             | Description                           |
+|--------------------|--------------------------------------------------|---------------------------------------|
+| `onClosing`        | `(ae: CustomEvent<{ action: string; } \| null>): void` |                                       |
+| `onLog`            | `(le: LogEvent): void`                           |                                       |
+| `onPendingState`   | `(e: CustomEvent<PendingStateDetail>): Promise<void>` |                                       |
+| `onWizard`         | `(we: WizardEvent): void`                        |                                       |
+| `redo`             | `(): boolean`                                    |                                       |
+| `renderActionItem` | `(me: MenuEntry): TemplateResult`                |                                       |
+| `renderEditorTab`  | `({ name, id, icon, }: { name: string; id: string; icon: string \| TemplateResult; }): TemplateResult` |                                       |
+| `renderHistory`    | `(): TemplateResult \| TemplateResult[]`         |                                       |
+| `renderLogEntry`   | `(entry: LogEntry, index: number, history: LogEntry[]): TemplateResult` |                                       |
+| `renderMenuEntry`  | `(me: MenuEntry): TemplateResult`                |                                       |
+| `reset`            | `(): void`                                       | Resets the history to an empty state. |
+| `setSetting`       | `<T extends "language" \| "theme">(setting: T, value: Settings[T]): void` |                                       |
+| `undo`             | `(): boolean`                                    |                                       |
