@@ -69,6 +69,14 @@
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-comment">
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>A wizard style dialog consisting of several pages commiting some
+						<a href="../modules/_foundation_.html#editoraction"><code>EditorAction</code></a> on completion and aborting on dismissal.</p>
+					</div>
+				</div>
+			</section>
 			<section class="tsd-panel tsd-hierarchy">
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
@@ -287,7 +295,7 @@
 							<h3>Accessors</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-get-signature tsd-parent-kind-class"><a href="_wizard_dialog_.wizarddialog.html#dialog" class="tsd-kind-icon">dialog</a></li>
-								<li class="tsd-kind-get-signature tsd-parent-kind-class"><a href="_wizard_dialog_.wizarddialog.html#firstinvalidpage" class="tsd-kind-icon">first<wbr>Invalid<wbr>Page</a></li>
+								<li class="tsd-kind-get-signature tsd-parent-kind-class tsd-is-private"><a href="_wizard_dialog_.wizarddialog.html#firstinvalidpage" class="tsd-kind-icon">first<wbr>Invalid<wbr>Page</a></li>
 								<li class="tsd-kind-get-signature tsd-parent-kind-class tsd-is-inherited tsd-is-protected"><a href="_wizard_dialog_.wizarddialog.html#hasupdated" class="tsd-kind-icon">has<wbr>Updated</a></li>
 								<li class="tsd-kind-get-signature tsd-parent-kind-class tsd-is-inherited"><a href="_wizard_dialog_.wizarddialog.html#updatecomplete" class="tsd-kind-icon">update<wbr>Complete</a></li>
 								<li class="tsd-kind-get-signature tsd-parent-kind-class tsd-is-inherited tsd-is-static"><a href="_wizard_dialog_.wizarddialog.html#observedattributes" class="tsd-kind-icon">observed<wbr>Attributes</a></li>
@@ -353,7 +361,7 @@
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="_wizard_dialog_.wizarddialog.html#msgetregioncontent" class="tsd-kind-icon">ms<wbr>Get<wbr>Region<wbr>Content</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_wizard_dialog_.wizarddialog.html#next" class="tsd-kind-icon">next</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="_wizard_dialog_.wizarddialog.html#normalize" class="tsd-kind-icon">normalize</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_wizard_dialog_.wizarddialog.html#onclosed" class="tsd-kind-icon">on<wbr>Closed</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="_wizard_dialog_.wizarddialog.html#onclosed" class="tsd-kind-icon">on<wbr>Closed</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-protected"><a href="_wizard_dialog_.wizarddialog.html#performupdate" class="tsd-kind-icon">perform<wbr>Update</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="_wizard_dialog_.wizarddialog.html#prepend" class="tsd-kind-icon">prepend</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_wizard_dialog_.wizarddialog.html#prev" class="tsd-kind-icon">prev</a></li>
@@ -411,7 +419,7 @@
 							<aside class="tsd-sources">
 								<p>Overrides <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#constructor">constructor</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/265a853/src/wizard-dialog.ts#L94">src/wizard-dialog.ts:94</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/7a989ad/src/wizard-dialog.ts#L102">src/wizard-dialog.ts:102</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <a href="_wizard_dialog_.wizarddialog.html" class="tsd-signature-type">WizardDialog</a></h4>
@@ -914,7 +922,7 @@
 					<div class="tsd-signature tsd-kind-icon">dialogs<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">NodeListOf</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Dialog</span><span class="tsd-signature-symbol">&gt;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/265a853/src/wizard-dialog.ts#L43">src/wizard-dialog.ts:43</a></li>
+							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/7a989ad/src/wizard-dialog.ts#L48">src/wizard-dialog.ts:48</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -1061,7 +1069,7 @@
 					<div class="tsd-signature tsd-kind-icon">inputs<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">NodeListOf</span><span class="tsd-signature-symbol">&lt;</span><a href="../modules/_foundation_.html#wizardinput" class="tsd-signature-type">WizardInput</a><span class="tsd-signature-symbol">&gt;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/265a853/src/wizard-dialog.ts#L45">src/wizard-dialog.ts:45</a></li>
+							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/7a989ad/src/wizard-dialog.ts#L50">src/wizard-dialog.ts:50</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -2790,9 +2798,14 @@
 					<div class="tsd-signature tsd-kind-icon">page<wbr>Index<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> = 0</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/265a853/src/wizard-dialog.ts#L41">src/wizard-dialog.ts:41</a></li>
+							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/7a989ad/src/wizard-dialog.ts#L45">src/wizard-dialog.ts:45</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Index of the currently active <a href="../interfaces/_foundation_.wizardpage.html"><code>WizardPage</code></a></p>
+						</div>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
 					<a name="parentelement" class="tsd-anchor"></a>
@@ -3055,9 +3068,14 @@
 					<div class="tsd-signature tsd-kind-icon">wizard<span class="tsd-signature-symbol">:</span> <a href="../modules/_foundation_.html#wizard" class="tsd-signature-type">Wizard</a><span class="tsd-signature-symbol"> = []</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/265a853/src/wizard-dialog.ts#L39">src/wizard-dialog.ts:39</a></li>
+							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/7a989ad/src/wizard-dialog.ts#L42">src/wizard-dialog.ts:42</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The <a href="../modules/_foundation_.html#wizard"><code>Wizard</code></a> implemented by this dialog.</p>
+						</div>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-protected tsd-is-static">
 					<a name="_finalized_" class="tsd-anchor"></a>
@@ -3174,7 +3192,7 @@
 					<aside class="tsd-sources">
 						<p>Overrides LitElement.styles</p>
 						<ul>
-							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/265a853/src/wizard-dialog.ts#L158">src/wizard-dialog.ts:158</a></li>
+							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/7a989ad/src/wizard-dialog.ts#L166">src/wizard-dialog.ts:166</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -3191,24 +3209,29 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/265a853/src/wizard-dialog.ts#L47">src/wizard-dialog.ts:47</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/7a989ad/src/wizard-dialog.ts#L53">src/wizard-dialog.ts:53</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>The <code>Dialog</code> showing the active <a href="../interfaces/_foundation_.wizardpage.html"><code>WizardPage</code></a>.</p>
+								</div>
+							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Dialog</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span></h4>
 						</li>
 					</ul>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-get-signature tsd-parent-kind-class">
+				<section class="tsd-panel tsd-member tsd-kind-get-signature tsd-parent-kind-class tsd-is-private">
 					<a name="firstinvalidpage" class="tsd-anchor"></a>
-					<h3>first<wbr>Invalid<wbr>Page</h3>
-					<ul class="tsd-signatures tsd-kind-get-signature tsd-parent-kind-class">
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> first<wbr>Invalid<wbr>Page</h3>
+					<ul class="tsd-signatures tsd-kind-get-signature tsd-parent-kind-class tsd-is-private">
 						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> firstInvalidPage<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/265a853/src/wizard-dialog.ts#L55">src/wizard-dialog.ts:55</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/7a989ad/src/wizard-dialog.ts#L62">src/wizard-dialog.ts:62</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
@@ -3340,9 +3363,14 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/265a853/src/wizard-dialog.ts#L77">src/wizard-dialog.ts:77</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/7a989ad/src/wizard-dialog.ts#L85">src/wizard-dialog.ts:85</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Commits <code>action</code> if all inputs are valid, reports validity otherwise.</p>
+								</div>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
@@ -3702,9 +3730,14 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/265a853/src/wizard-dialog.ts#L51">src/wizard-dialog.ts:51</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/7a989ad/src/wizard-dialog.ts#L58">src/wizard-dialog.ts:58</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Checks the inputs of all <a href="../interfaces/_foundation_.wizardpage.html"><code>WizardPage</code></a>s for validity.</p>
+								</div>
+							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
 						</li>
 					</ul>
@@ -3766,9 +3799,14 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/265a853/src/wizard-dialog.ts#L73">src/wizard-dialog.ts:73</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/7a989ad/src/wizard-dialog.ts#L80">src/wizard-dialog.ts:80</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Dismisses the entire wizard by dispatching an empty <a href="../modules/_foundation_.html#wizardevent"><code>WizardEvent</code></a>.</p>
+								</div>
+							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
 						</li>
 					</ul>
@@ -4920,7 +4958,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/265a853/src/wizard-dialog.ts#L63">src/wizard-dialog.ts:63</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/7a989ad/src/wizard-dialog.ts#L69">src/wizard-dialog.ts:69</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
@@ -4950,17 +4988,17 @@
 						</li>
 					</ul>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private">
 					<a name="onclosed" class="tsd-anchor"></a>
-					<h3>on<wbr>Closed</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> on<wbr>Closed</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private">
 						<li class="tsd-signature tsd-kind-icon">on<wbr>Closed<span class="tsd-signature-symbol">(</span>ae<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">CustomEvent</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">{ </span>action<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/265a853/src/wizard-dialog.ts#L89">src/wizard-dialog.ts:89</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/7a989ad/src/wizard-dialog.ts#L97">src/wizard-dialog.ts:97</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -5044,7 +5082,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/265a853/src/wizard-dialog.ts#L59">src/wizard-dialog.ts:59</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/7a989ad/src/wizard-dialog.ts#L66">src/wizard-dialog.ts:66</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -5463,7 +5501,7 @@
 							<aside class="tsd-sources">
 								<p>Overrides <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#render">render</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/265a853/src/wizard-dialog.ts#L154">src/wizard-dialog.ts:154</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/7a989ad/src/wizard-dialog.ts#L162">src/wizard-dialog.ts:162</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">TemplateResult</span></h4>
@@ -5480,7 +5518,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/265a853/src/wizard-dialog.ts#L103">src/wizard-dialog.ts:103</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/7a989ad/src/wizard-dialog.ts#L111">src/wizard-dialog.ts:111</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -7042,7 +7080,7 @@
 							<li class=" tsd-kind-get-signature tsd-parent-kind-class">
 								<a href="_wizard_dialog_.wizarddialog.html#dialog" class="tsd-kind-icon">dialog</a>
 							</li>
-							<li class=" tsd-kind-get-signature tsd-parent-kind-class">
+							<li class=" tsd-kind-get-signature tsd-parent-kind-class tsd-is-private">
 								<a href="_wizard_dialog_.wizarddialog.html#firstinvalidpage" class="tsd-kind-icon">first<wbr>Invalid<wbr>Page</a>
 							</li>
 							<li class=" tsd-kind-get-signature tsd-parent-kind-class tsd-is-inherited tsd-is-protected">
@@ -7225,7 +7263,7 @@
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
 								<a href="_wizard_dialog_.wizarddialog.html#normalize" class="tsd-kind-icon">normalize</a>
 							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class">
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private">
 								<a href="_wizard_dialog_.wizarddialog.html#onclosed" class="tsd-kind-icon">on<wbr>Closed</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-protected">
@@ -7386,6 +7424,9 @@
 			<ul class="tsd-legend">
 				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited property</span></li>
 				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited method</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private method</span></li>
 			</ul>
 			<ul class="tsd-legend">
 				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static property</span></li>

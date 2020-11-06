@@ -166,6 +166,9 @@ export function Logging(Base) {
     property()
   ], LoggingElement.prototype, "history", 2);
   __decorate([
+    property({type: Number})
+  ], LoggingElement.prototype, "currentAction", 2);
+  __decorate([
     query("#log")
   ], LoggingElement.prototype, "logUI", 2);
   __decorate([

@@ -301,8 +301,15 @@
 <a name='L242'></a><a href='#L242'>242</a>
 <a name='L243'></a><a href='#L243'>243</a>
 <a name='L244'></a><a href='#L244'>244</a>
-<a name='L245'></a><a href='#L245'>245</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L245'></a><a href='#L245'>245</a>
+<a name='L246'></a><a href='#L246'>246</a>
+<a name='L247'></a><a href='#L247'>247</a>
+<a name='L248'></a><a href='#L248'>248</a>
+<a name='L249'></a><a href='#L249'>249</a>
+<a name='L250'></a><a href='#L250'>250</a>
+<a name='L251'></a><a href='#L251'>251</a>
+<a name='L252'></a><a href='#L252'>252</a>
+<a name='L253'></a><a href='#L253'>253</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -408,7 +415,10 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -419,6 +429,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">84x</span>
 <span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -451,7 +462,11 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -505,6 +520,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">7x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -514,9 +530,9 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">186x</span>
-<span class="cline-any cline-yes">186x</span>
-<span class="cline-any cline-yes">105x</span>
+<span class="cline-any cline-yes">199x</span>
+<span class="cline-any cline-yes">199x</span>
+<span class="cline-any cline-yes">118x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -551,32 +567,31 @@ import { directive, Part } from 'lit-html';
 import { WizardTextField } from './wizard-textfield.js';
 import { Select } from '@material/mwc-select';
 &nbsp;
-/** Represents a change to some `Element`. */
+/** Represents an intended or committed change to some `Element`. */
 export type EditorAction = Create | Update | Delete | Move;
-/** Represents prepending `create.new.element` to `create.new.parent`. */
+/** Inserts `new.element` to `new.parent` before `new.reference`. */
 export interface Create {
   new: { parent: Element; element: Element; reference: Element | null };
   derived?: boolean;
 }
-/** Represents removal of `delete.old.element`. */
+/** Removes `old.element` from `old.parent` before `old.reference`. */
 export interface Delete {
   old: { parent: Element; element: Element; reference: Element | null };
   derived?: boolean;
 }
-/** Represents reparenting of `move.old.element` to `move.new.parent`. */
+/** Reparents of `old.element` to `new.parent` before `new.reference`. */
 export interface Move {
   old: { parent: Element; element: Element; reference: Element | null };
   new: { parent: Element; reference: Element | null };
   derived?: boolean;
 }
-/** Represents replacement of `update.old.element` by `update.new.element`. */
+/** Replaces `old.element` with `new.element`, keeping element children. */
 export interface Update {
   old: { element: Element };
   new: { element: Element };
   derived?: boolean;
 }
 &nbsp;
-// typescriptlang.org/docs/handbook/advanced-types.html#user-defined-type-guards
 export function isCreate(action: EditorAction): action is Create {
   return (
     (action as Update).old === undefined &amp;&amp;
@@ -612,7 +627,7 @@ export function isUpdate(action: EditorAction): action is Update {
   );
 }
 &nbsp;
-/** Returns the inverse of `action`, i.e. an `EditorAction` with opposite effect. */
+/** @returns an [[`EditorAction`]] with opposite effect of `action`. */
 export function invert(action: EditorAction): EditorAction {
   if (isCreate(action)) return { old: action.new, derived: action.derived };
   else if (isDelete(action))
@@ -631,7 +646,7 @@ export function invert(action: EditorAction): EditorAction {
   else return unreachable('Unknown EditorAction type in invert.');
 }
 &nbsp;
-/** Represents some modification of a `Document` being edited. */
+/** Represents some intended modification of a `Document` being edited. */
 export interface EditorActionDetail&lt;T extends EditorAction&gt; {
   action: T;
 }
@@ -650,21 +665,25 @@ export function newActionEvent&lt;T extends EditorAction&gt;(
   });
 }
 &nbsp;
+/** `HTMLElement` with a `close()` method. */
 export type CloseableElement = HTMLElement &amp; { close: () =&gt; void };
 &nbsp;
 export const wizardInputSelector = 'wizard-textfield, mwc-select';
-&nbsp;
 export type WizardInput = WizardTextField | Select;
+&nbsp;
+/** @returns [[`EditorAction`]]s to dispatch on [[`WizardDialog`]] commit. */
 export type WizardAction = (
   inputs: WizardInput[],
   wizard: CloseableElement
 ) =&gt; EditorAction[];
 &nbsp;
+/** @returns the `value` or `maybeValue` of `input` depending on type. */
 export function getValue(input: WizardInput): string | null {
   if (input instanceof WizardTextField) return input.maybeValue;
   else return input.value;
 }
 &nbsp;
+/** @returns the `multiplier` of `input` if available. */
 export function getMultiplier(input: WizardInput): string | null {
   <span class="missing-if-branch" title="else path not taken" >E</span>if (input instanceof WizardTextField) return input.multiplier;
   else <span class="cstat-no" title="statement not covered" >return null;</span>
@@ -687,6 +706,7 @@ export interface WizardPage {
 }
 export type Wizard = WizardPage[];
 &nbsp;
+/** If `wizard === null`, close the current wizard, else queue `wizard`. */
 export interface WizardDetail {
   wizard: Wizard | null;
 }
@@ -704,14 +724,17 @@ export function newWizardEvent(
 }
 &nbsp;
 type InfoEntryKind = 'info' | 'warning' | 'error';
+/** The basic information contained in each [[`LogEntry`]]. */
 interface LogDetailBase {
   title: string;
   message?: string;
 }
+/** The [[`LogEntry`]] for a committed [[`EditorAction`]]. */
 export interface CommitDetail extends LogDetailBase {
   kind: 'action';
   action: EditorAction;
 }
+/** A [[`LogEntry`]] for notifying the user. */
 export interface InfoDetail extends LogDetailBase {
   kind: InfoEntryKind;
   cause?: LogEntry;
@@ -731,6 +754,7 @@ export function newLogEvent(
   });
 }
 &nbsp;
+/** [[`LogEntry`]]s are timestamped upon being committed to the `history`. */
 interface Timestamped {
   time: Date;
 }
@@ -757,7 +781,7 @@ export function newPendingStateEvent(
   });
 }
 &nbsp;
-/** Useful `lit-html` directives */
+/** A directive rendering its argument `rendered` only if `rendered !== {}`. */
 export const ifImplemented = directive(rendered =&gt; (part: Part) =&gt; {
   if (Object.keys(rendered).length) part.setValue(rendered);
   else part.setValue('');
@@ -796,7 +820,7 @@ declare global {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Thu Nov 05 2020 14:20:15 GMT+0000 (Coordinated Universal Time)
+                at Fri Nov 06 2020 00:12:44 GMT+0000 (Coordinated Universal Time)
             </div>
         </div>
         <script src="../prettify.js"></script>
