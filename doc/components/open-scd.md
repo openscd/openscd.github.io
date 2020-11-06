@@ -3,7 +3,7 @@
 The `<open-scd>` custom element is the main entry point of the
 Open Substation Configuration Designer.
 
-**Mixins:** Setting, Wizarding, Waiting, Editing, Logging
+**Mixins:** Setting, Wizarding, Waiting, Validating, Editing, Logging
 
 ## Properties
 
@@ -35,6 +35,7 @@ Open Substation Configuration Designer.
 | `src`            | `src`           |           | `string`                                         |                                                  | The current file's URL. `blob:` URLs are *revoked after parsing*! |
 | `srcName`        | `srcName`       |           | `string`                                         | "untitled.scd"                                   | The name of the current file.                    |
 | `undo`           |                 |           |                                                  |                                                  |                                                  |
+| `validated`      | `validated`     |           | `Promise<ValidationResult>`                      | "Promise.resolve({\n      file: 'untitled.scd',\n      valid: true,\n      code: 0,\n    })" |                                                  |
 | `waiting`        | `waiting`       |           | `boolean`                                        | false                                            | Whether the element is currently waiting for some async work. |
 | `workDone`       |                 |           | `Promise<PromiseSettledResult<string>[]>`        | "Promise.allSettled(this.work)"                  | A promise which resolves once all currently pending work is done. |
 | `workflow`       |                 |           | `Wizard[]`                                       | []                                               | FIFO queue of [[`Wizard`]]s to display.          |
@@ -43,6 +44,7 @@ Open Substation Configuration Designer.
 
 | Method             | Type                                             | Description                                      |
 |--------------------|--------------------------------------------------|--------------------------------------------------|
+| `performUpdate`    | `(): Promise<void>`                              |                                                  |
 | `redo`             | `(): boolean`                                    |                                                  |
 | `renderActionItem` | `(me: MenuEntry): TemplateResult`                |                                                  |
 | `renderEditorTab`  | `({ name, id, icon, }: { name: string; id: string; icon: string \| TemplateResult; }): TemplateResult` |                                                  |
@@ -52,3 +54,4 @@ Open Substation Configuration Designer.
 | `reset`            | `(): void`                                       | Resets the history to an empty state.            |
 | `setSetting`       | `<T extends "language" \| "theme">(setting: T, value: Settings[T]): void` | Update the `value` of `setting`, storing to `localStorage`. |
 | `undo`             | `(): boolean`                                    |                                                  |
+| `validate`         | `(doc: XMLDocument, { version, revision, release, fileName, }?: { version?: string \| undefined; revision?: string \| undefined; release?: string \| undefined; fileName?: string \| undefined; }): Promise<ValidationResult>` |                                                  |

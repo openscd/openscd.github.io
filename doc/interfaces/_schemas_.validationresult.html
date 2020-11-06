@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>XMLParams | open-scd</title>
+	<title>ValidationResult | open-scd</title>
 	<meta name="description" content="Documentation for open-scd">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -56,13 +56,13 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="../modules/_validate_.html">&quot;validate&quot;</a>
+					<a href="../modules/_schemas_.html">&quot;schemas&quot;</a>
 				</li>
 				<li>
-					<a href="_validate_.xmlparams.html">XMLParams</a>
+					<a href="_schemas_.validationresult.html">ValidationResult</a>
 				</li>
 			</ul>
-			<h1>Interface XMLParams</h1>
+			<h1>Interface ValidationResult</h1>
 		</div>
 	</div>
 </header>
@@ -73,7 +73,7 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">XMLParams</span>
+						<span class="target">ValidationResult</span>
 					</li>
 				</ul>
 			</section>
@@ -81,46 +81,57 @@
 				<h2>Index</h2>
 				<section class="tsd-panel tsd-index-panel">
 					<div class="tsd-index-content">
-						<section class="tsd-index-section tsd-is-not-exported">
+						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported"><a href="_validate_.xmlparams.html#arguments" class="tsd-kind-icon">arguments</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported"><a href="_validate_.xmlparams.html#schema" class="tsd-kind-icon">schema</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported"><a href="_validate_.xmlparams.html#xml" class="tsd-kind-icon">xml</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_schemas_.validationresult.html#code" class="tsd-kind-icon">code</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_schemas_.validationresult.html#file" class="tsd-kind-icon">file</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_schemas_.validationresult.html#loaded" class="tsd-kind-icon">loaded</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_schemas_.validationresult.html#valid" class="tsd-kind-icon">valid</a></li>
 							</ul>
 						</section>
 					</div>
 				</section>
 			</section>
-			<section class="tsd-panel-group tsd-member-group tsd-is-not-exported">
+			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported">
-					<a name="arguments" class="tsd-anchor"></a>
-					<h3>arguments</h3>
-					<div class="tsd-signature tsd-kind-icon">arguments<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Array</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></div>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="code" class="tsd-anchor"></a>
+					<h3>code</h3>
+					<div class="tsd-signature tsd-kind-icon">code<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/7a989ad/src/validate.ts#L7">src/validate.ts:7</a></li>
+							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/aa66096/src/schemas.ts#L16">src/schemas.ts:16</a></li>
 						</ul>
 					</aside>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported">
-					<a name="schema" class="tsd-anchor"></a>
-					<h3>schema</h3>
-					<div class="tsd-signature tsd-kind-icon">schema<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="file" class="tsd-anchor"></a>
+					<h3>file</h3>
+					<div class="tsd-signature tsd-kind-icon">file<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/7a989ad/src/validate.ts#L6">src/validate.ts:6</a></li>
+							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/aa66096/src/schemas.ts#L15">src/schemas.ts:15</a></li>
 						</ul>
 					</aside>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported">
-					<a name="xml" class="tsd-anchor"></a>
-					<h3>xml</h3>
-					<div class="tsd-signature tsd-kind-icon">xml<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="loaded" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> loaded</h3>
+					<div class="tsd-signature tsd-kind-icon">loaded<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/7a989ad/src/validate.ts#L5">src/validate.ts:5</a></li>
+							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/aa66096/src/schemas.ts#L18">src/schemas.ts:18</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="valid" class="tsd-anchor"></a>
+					<h3>valid</h3>
+					<div class="tsd-signature tsd-kind-icon">valid<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/aa66096/src/schemas.ts#L17">src/schemas.ts:17</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -140,6 +151,9 @@
 					</li>
 					<li class=" tsd-kind-module">
 						<a href="../modules/_setting_.html">&quot;<wbr>Setting&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/_validating_.html">&quot;<wbr>Validating&quot;</a>
 					</li>
 					<li class=" tsd-kind-module">
 						<a href="../modules/_waiting_.html">&quot;<wbr>Waiting&quot;</a>
@@ -177,6 +191,9 @@
 					<li class=" tsd-kind-module">
 						<a href="../modules/_plugin_.html">&quot;plugin&quot;</a>
 					</li>
+					<li class="current tsd-kind-module">
+						<a href="../modules/_schemas_.html">&quot;schemas&quot;</a>
+					</li>
 					<li class=" tsd-kind-module">
 						<a href="../modules/_themes_.html">&quot;themes&quot;</a>
 					</li>
@@ -189,48 +206,63 @@
 					<li class=" tsd-kind-module">
 						<a href="../modules/_translations_loader_.html">&quot;translations/loader&quot;</a>
 					</li>
-					<li class="current tsd-kind-module">
-						<a href="../modules/_validate_.html">&quot;validate&quot;</a>
-					</li>
 					<li class=" tsd-kind-module">
 						<a href="../modules/_wizard_dialog_.html">&quot;wizard-<wbr>dialog&quot;</a>
 					</li>
 					<li class=" tsd-kind-module">
 						<a href="../modules/_wizard_textfield_.html">&quot;wizard-<wbr>textfield&quot;</a>
 					</li>
-					<li class=" tsd-kind-module">
-						<a href="../modules/_xml_entities_.html">&quot;xml-<wbr>entities&quot;</a>
-					</li>
 				</ul>
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
+					<li class=" tsd-kind-interface tsd-parent-kind-module">
+						<a href="_schemas_.loadschemaresult.html" class="tsd-kind-icon">Load<wbr>Schema<wbr>Result</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-module">
+						<a href="_schemas_.validationerror.html" class="tsd-kind-icon">Validation<wbr>Error</a>
+					</li>
 				</ul>
 				<ul class="current">
-					<li class="current tsd-kind-interface tsd-parent-kind-module tsd-is-not-exported">
-						<a href="_validate_.xmlparams.html" class="tsd-kind-icon">XMLParams</a>
+					<li class="current tsd-kind-interface tsd-parent-kind-module">
+						<a href="_schemas_.validationresult.html" class="tsd-kind-icon">Validation<wbr>Result</a>
 						<ul>
-							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported">
-								<a href="_validate_.xmlparams.html#arguments" class="tsd-kind-icon">arguments</a>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_schemas_.validationresult.html#code" class="tsd-kind-icon">code</a>
 							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported">
-								<a href="_validate_.xmlparams.html#schema" class="tsd-kind-icon">schema</a>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_schemas_.validationresult.html#file" class="tsd-kind-icon">file</a>
 							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported">
-								<a href="_validate_.xmlparams.html#xml" class="tsd-kind-icon">xml</a>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_schemas_.validationresult.html#loaded" class="tsd-kind-icon">loaded</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_schemas_.validationresult.html#valid" class="tsd-kind-icon">valid</a>
 							</li>
 						</ul>
 					</li>
 				</ul>
 				<ul class="after-current">
-					<li class=" tsd-kind-variable tsd-parent-kind-module tsd-is-not-exported">
-						<a href="../modules/_validate_.html#scl2007b1_2014_07_18" class="tsd-kind-icon">SCL2007<wbr>B1_<wbr>2014_<wbr>07_<wbr>18</a>
+					<li class=" tsd-kind-type-alias tsd-parent-kind-module">
+						<a href="../modules/_schemas_.html#validator" class="tsd-kind-icon">Validator</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-parent-kind-module">
+						<a href="../modules/_schemas_.html#workermessage" class="tsd-kind-icon">Worker<wbr>Message</a>
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-module">
-						<a href="../modules/_validate_.html#validatescl" class="tsd-kind-icon">validateSCL</a>
+						<a href="../modules/_schemas_.html#getschema" class="tsd-kind-icon">get<wbr>Schema</a>
 					</li>
-					<li class=" tsd-kind-function tsd-parent-kind-module tsd-is-not-exported">
-						<a href="../modules/_validate_.html#validatexml" class="tsd-kind-icon">validateXML</a>
+					<li class=" tsd-kind-function tsd-parent-kind-module">
+						<a href="../modules/_schemas_.html#isloadschemaresult" class="tsd-kind-icon">is<wbr>Load<wbr>Schema<wbr>Result</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-module">
+						<a href="../modules/_schemas_.html#isvalidationerror" class="tsd-kind-icon">is<wbr>Validation<wbr>Error</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-module">
+						<a href="../modules/_schemas_.html#isvalidationresult" class="tsd-kind-icon">is<wbr>Validation<wbr>Result</a>
+					</li>
+					<li class=" tsd-kind-object-literal tsd-parent-kind-module">
+						<a href="../modules/_schemas_.html#schemas" class="tsd-kind-icon">schemas</a>
 					</li>
 				</ul>
 			</nav>

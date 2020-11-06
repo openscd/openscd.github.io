@@ -34,13 +34,13 @@ import {Editing as Editing2, newEmptySCD} from "./Editing.js";
 import {Logging as Logging2} from "./Logging.js";
 import {Waiting as Waiting2} from "./Waiting.js";
 import {Wizarding as Wizarding2} from "./Wizarding.js";
+import {Validating as Validating2} from "./Validating.js";
 import {getTheme} from "./themes.js";
 import {Setting as Setting2} from "./Setting.js";
 import {newLogEvent, newPendingStateEvent} from "./foundation.js";
 import {plugin as plugin2} from "./plugin.js";
-import {validateSCL} from "./validate.js";
 import {zeroLineIcon} from "./icons.js";
-export let OpenSCD = class extends Setting2(Wizarding2(Waiting2(Editing2(Logging2(LitElement))))) {
+export let OpenSCD = class extends Setting2(Wizarding2(Waiting2(Validating2(Editing2(Logging2(LitElement)))))) {
   constructor() {
     super();
     this.activeTab = 0;
@@ -123,19 +123,8 @@ export let OpenSCD = class extends Setting2(Wizarding2(Waiting2(Editing2(Logging
         this.doc = reader.result ? new DOMParser().parseFromString(reader.result, "application/xml") : newEmptySCD();
         if (src.startsWith("blob:"))
           URL.revokeObjectURL(src);
-        this.dispatchEvent(newLogEvent({
-          kind: "info",
-          title: get("openSCD.loaded", {name: this.srcName})
-        }));
-        validateSCL(this.doc, this.srcName).then((errors) => {
-          errors.map((id) => {
-            this.dispatchEvent(newLogEvent(id));
-          });
-          if (errors.length == 0)
-            resolve(get("openSCD.validated", {name: this.srcName}));
-          else
-            reject(get("openSCD.invalidated", {name: this.srcName}));
-        });
+        this.validate(this.doc, {fileName: this.srcName});
+        resolve(get("openSCD.loaded", {name: this.srcName}));
       });
       fetch(src ?? "").then((res) => res.blob().then((b) => reader.readAsText(b)));
     });

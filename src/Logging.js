@@ -96,8 +96,13 @@ export function Logging(Base) {
         this.currentAction = this.history.length;
       }
       this.history.push(entry);
-      if (le.detail.kind == "error")
+      if (le.detail.kind == "error" && !this.logUI.open)
         this.messageUI.show();
+      this.requestUpdate();
+    }
+    async performUpdate() {
+      await new Promise((resolve) => requestAnimationFrame(() => resolve()));
+      super.performUpdate();
     }
     renderLogEntry(entry, index, history) {
       return html`<mwc-list-item

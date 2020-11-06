@@ -1,21 +1,17 @@
-import {encodeNonASCII} from "./xml-entities.js";
-export async function validateSCL(doc, fileName = "untitled.scd", cause) {
-  const result = validateXML({
-    xml: encodeNonASCII(new XMLSerializer().serializeToString(doc)),
-    schema: SCL2007B1_2014_07_18,
-    arguments: ["--noout", "--schema", "SCL.xsd", fileName]
-  }).split("\n").filter((s) => s).slice(0, -1) ?? [];
-  return result.map((e) => e.split(": ").map((s) => s.trim())).map((a) => {
-    a.reverse();
-    return {
-      kind: "error",
-      title: a[0],
-      message: a.slice(1).reverse().join(" | "),
-      cause
-    };
-  });
+export function isValidationError(msg) {
+  return typeof msg !== "string" && msg.file !== void 0 && msg.valid === void 0 && msg.loaded === void 0;
 }
-const SCL2007B1_2014_07_18 = `<?xml version="1.0" encoding="utf-8" ?>
+export function isValidationResult(msg) {
+  return typeof msg !== "string" && msg.file !== void 0 && msg.valid !== void 0 && msg.loaded === void 0;
+}
+export function isLoadSchemaResult(msg) {
+  return typeof msg !== "string" && msg.file !== void 0 && msg.valid === void 0 && msg.loaded !== void 0;
+}
+export function getSchema(version, revision, release) {
+  return schemas[version + revision + release] ?? schemas["2007B1"];
+}
+export const schemas = {
+  "2007B1": `<?xml version="1.0" encoding="utf-8" ?>
 <xs:schema xmlns:scl="http://www.iec.ch/61850/2003/SCL" xmlns="http://www.iec.ch/61850/2003/SCL" elementFormDefault="qualified" targetNamespace="http://www.iec.ch/61850/2003/SCL" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:annotation>
     <xs:documentation xml:lang="en">
@@ -3295,4 +3291,5 @@ const SCL2007B1_2014_07_18 = `<?xml version="1.0" encoding="utf-8" ?>
       <xs:field xpath="@id" />
     </xs:key>
   </xs:element>
-</xs:schema>`;
+</xs:schema>`
+};
