@@ -20,9 +20,9 @@ import {
   newWizardEvent,
   getValue
 } from "../foundation.js";
+import {iedIcon} from "../icons.js";
 import "./substation/voltage-level-editor.js";
 import {VoltageLevelEditor} from "./substation/voltage-level-editor.js";
-import {iedIcon} from "../icons.js";
 import {editlNode} from "./substation/lnodewizard.js";
 export default class SubstationEditor extends LitElement {
   get element() {

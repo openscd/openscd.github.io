@@ -52,7 +52,11 @@ export let BayEditor = class extends LitElement {
   removeAction() {
     if (this.element)
       this.dispatchEvent(newActionEvent({
-        old: {parent: this.parent, element: this.element, reference: null}
+        old: {
+          parent: this.parent,
+          element: this.element,
+          reference: this.element.nextElementSibling
+        }
       }));
   }
   renderHeader() {
@@ -214,10 +218,10 @@ BayEditor.styles = css`
     }
   `;
 __decorate([
-  property({type: Element})
+  property()
 ], BayEditor.prototype, "element", 2);
 __decorate([
-  property({type: Element})
+  property()
 ], BayEditor.prototype, "parent", 2);
 __decorate([
   property({type: String})

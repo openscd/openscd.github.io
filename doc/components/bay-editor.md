@@ -1,5 +1,7 @@
 # bay-editor
 
+[[`SubstationEditor`]] subeditor for editing `Bay` elements.
+
 ## Properties
 
 | Property      | Attribute | Modifiers | Type             |
