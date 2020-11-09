@@ -3,7 +3,7 @@ import {get, translate} from "../../../web_modules/lit-translate.js";
 import "../../../web_modules/@material/mwc-list/mwc-check-list-item.js";
 import "../../../web_modules/@material/mwc-list/mwc-list-item.js";
 import "../../../web_modules/@material/mwc-textfield.js";
-function hasLNode(parent, value) {
+export function hasLNode(parent, value) {
   return parent.querySelector(`${parent.tagName} > LNode[iedName="${value.iedName}"][ldInst="${value.ldInst}"]${value.prefix ? `[prefix="${value.prefix}"]` : ``}${value.inst ? `[lnInst="${value.inst}"]` : ""}[lnClass="${value.lnClass}"]`) !== null;
 }
 function createAction(parent, value) {
@@ -32,7 +32,7 @@ export function lNodeActions(parent) {
       return {
         iedName: node.getAttribute("iedName") ?? "",
         ldInst: node.getAttribute("ldInst") ?? "",
-        prefix: node.getAttribute("prefix"),
+        prefix: node.getAttribute("prefix") ?? "",
         lnClass: node.getAttribute("lnClass") ?? "",
         inst: node.getAttribute("lnInst") ?? ""
       };
@@ -77,7 +77,7 @@ function onLdSelect(evt, element) {
           ,IED[name="${ldValue.iedName}"] LDevice[inst="${ldValue.ldInst}"] LN0`)).map((ln) => {
       return {
         ...ldValue,
-        prefix: ln.getAttribute("prefix"),
+        prefix: ln.getAttribute("prefix") ?? "",
         lnClass: ln.getAttribute("lnClass") ?? "",
         inst: ln.getAttribute("inst") ?? ""
       };

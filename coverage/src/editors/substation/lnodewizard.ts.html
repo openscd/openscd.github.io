@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">31.03% </span>
+                <span class="strong">41.38% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>18/58</span>
+                <span class='fraction'>24/58</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">26.32% </span>
+                <span class="strong">38.1% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>10/38</span>
+                <span class='fraction'>16/42</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">32.43% </span>
+                <span class="strong">45.95% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>12/37</span>
+                <span class='fraction'>17/37</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">32.14% </span>
+                <span class="strong">42.86% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>18/56</span>
+                <span class='fraction'>24/56</span>
             </div>
         
             
@@ -364,7 +364,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -408,7 +408,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-yes">12x</span>
 <span class="cline-any cline-yes">8x</span>
@@ -541,8 +541,8 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -567,7 +567,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -580,7 +580,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -589,7 +589,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -639,8 +639,8 @@ interface lnValue extends ldValue {
   inst: string;
 }
 &nbsp;
-function <span class="fstat-no" title="function not covered" >hasLNode(</span>parent: Element, value: lnValue): boolean {
-<span class="cstat-no" title="statement not covered" >  return (</span>
+export function hasLNode(parent: Element, value: lnValue): boolean {
+  return (
     parent.querySelector(
       `${parent.tagName} &gt; LNode[iedName="${value.iedName}"][ldInst="${
         value.ldInst
@@ -695,7 +695,7 @@ export function lNodeActions(parent: Element): WizardAction {
         return {
           iedName: node.getAttribute('iedName') ?? <span class="branch-1 cbranch-no" title="branch not covered" >'',</span>
           ldInst: node.getAttribute('ldInst') ?? <span class="branch-1 cbranch-no" title="branch not covered" >'',</span>
-          prefix: node.getAttribute('prefix'),
+          prefix: node.getAttribute('prefix') ?? '',
           lnClass: node.getAttribute('lnClass') ?? <span class="branch-1 cbranch-no" title="branch not covered" >'',</span>
           inst: node.getAttribute('lnInst') ?? '',
           /* ORDER IS IMPORTANT HERE, since we stringify to compare! */
@@ -778,7 +778,7 @@ function <span class="fstat-no" title="function not covered" >onLdSelect(</span>
       ).map(<span class="fstat-no" title="function not covered" >ln </span>=&gt; {
 <span class="cstat-no" title="statement not covered" >        return {</span>
           ...ldValue,
-          prefix: ln.getAttribute('prefix'),
+          prefix: ln.getAttribute('prefix') ?? '',
           lnClass: ln.getAttribute('lnClass') ?? '',
           inst: ln.getAttribute('inst') ?? '',
           /* ORDER IS IMPORTANT HERE, since we stringify to compare! */
@@ -816,9 +816,9 @@ function <span class="fstat-no" title="function not covered" >onFilter(</span>ev
   });
 }
 &nbsp;
-function <span class="fstat-no" title="function not covered" >renderIEDPage(</span>element: Element): TemplateResult {
-  const doc = <span class="cstat-no" title="statement not covered" >element.ownerDocument;</span>
-<span class="cstat-no" title="statement not covered" >  return html`&lt;wizard-textfield</span>
+function renderIEDPage(element: Element): TemplateResult {
+  const doc = element.ownerDocument;
+  return html`&lt;wizard-textfield
       label="${translate('filter')}"
       iconTrailing="search"
       @input="${<span class="fstat-no" title="function not covered" >(e</span>vt: InputEvent) =&gt; <span class="cstat-no" title="statement not covered" >onFilter(evt, '#iedList')}</span>"
@@ -842,8 +842,8 @@ function <span class="fstat-no" title="function not covered" >renderIEDPage(</sp
     &gt;`;
 }
 &nbsp;
-function <span class="fstat-no" title="function not covered" >renderLdPage(</span>element: Element): TemplateResult {
-<span class="cstat-no" title="statement not covered" >  return html`&lt;wizard-textfield</span>
+function renderLdPage(element: Element): TemplateResult {
+  return html`&lt;wizard-textfield
       label="${translate('filter')}"
       iconTrailing="search"
       @input="${<span class="fstat-no" title="function not covered" >(e</span>vt: InputEvent) =&gt; <span class="cstat-no" title="statement not covered" >onFilter(evt, '#ldList')}</span>"
@@ -855,8 +855,8 @@ function <span class="fstat-no" title="function not covered" >renderLdPage(</spa
     &gt;&lt;/mwc-list&gt;`;
 }
 &nbsp;
-function <span class="fstat-no" title="function not covered" >renderLnPage(</span>): TemplateResult {
-<span class="cstat-no" title="statement not covered" >  return html`&lt;wizard-textfield</span>
+function renderLnPage(): TemplateResult {
+  return html`&lt;wizard-textfield
       label="${translate('filter')}"
       iconTrailing="search"
       @input="${<span class="fstat-no" title="function not covered" >(e</span>vt: InputEvent) =&gt; <span class="cstat-no" title="statement not covered" >onFilter(evt, '#lnList')}</span>"
@@ -864,8 +864,8 @@ function <span class="fstat-no" title="function not covered" >renderLnPage(</spa
     &lt;mwc-list multi id="lnList"&gt;&lt;/mwc-list&gt;`;
 }
 &nbsp;
-export function <span class="fstat-no" title="function not covered" >editlNode(</span>element: Element): Wizard {
-<span class="cstat-no" title="statement not covered" >  return [</span>
+export function editlNode(element: Element): Wizard {
+  return [
     {
       title: get('lnode.wizard.title.selectIEDs'),
       content: [renderIEDPage(element)],
@@ -892,7 +892,7 @@ export function <span class="fstat-no" title="function not covered" >editlNode(<
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Fri Nov 06 2020 21:44:16 GMT+0000 (Coordinated Universal Time)
+                at Mon Nov 09 2020 10:53:22 GMT+0000 (Coordinated Universal Time)
             </div>
         </div>
         <script src="../../../prettify.js"></script>
