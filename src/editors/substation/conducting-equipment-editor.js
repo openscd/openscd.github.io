@@ -344,7 +344,7 @@ __decorate([
   property({type: String})
 ], ConductingEquipmentEditor.prototype, "type", 1);
 __decorate([
-  query("h4")
+  query("#header")
 ], ConductingEquipmentEditor.prototype, "header", 2);
 ConductingEquipmentEditor = __decorate([
   customElement("conducting-equipment-editor")
