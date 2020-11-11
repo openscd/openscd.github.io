@@ -1,4 +1,4 @@
-import { d as directive, A as AttributePart, P as PropertyPart } from './lit-html-8cd1c43a.js';
+import { d as directive, A as AttributePart, P as PropertyPart } from './lit-html-2d16f7a1.js';
 
 /**
  * @license

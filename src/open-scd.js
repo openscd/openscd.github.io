@@ -20,6 +20,7 @@ import {
 } from "../web_modules/lit-element.js";
 import {translate, get} from "../web_modules/lit-translate.js";
 import {until as until2} from "../web_modules/lit-html/directives/until.js";
+import {cache as cache2} from "../web_modules/lit-html/directives/cache.js";
 import "../web_modules/@material/mwc-button.js";
 import "../web_modules/@material/mwc-drawer.js";
 import "../web_modules/@material/mwc-icon.js";
@@ -219,7 +220,7 @@ export let OpenSCD = class extends Setting2(Wizarding2(Waiting2(Validating2(Edit
         </mwc-top-app-bar-fixed>
       </mwc-drawer>
 
-      ${until2(this.plugins.editors[this.activeTab].getContent(), html`<mwc-linear-progress indeterminate></mwc-linear-progress>`)}
+      ${cache2(until2(this.plugins.editors[this.activeTab].getContent(), html`<mwc-linear-progress indeterminate></mwc-linear-progress>`))}
 
       <input id="file-input" type="file" @change="${this.loadFile}"></input>
       ${super.render()}
@@ -261,6 +262,7 @@ OpenSCD.styles = css`
       left: 50%;
       transform: translate(-50%, -50%);
       z-index: 1;
+      pointer-events: none;
     }
 
     tt {

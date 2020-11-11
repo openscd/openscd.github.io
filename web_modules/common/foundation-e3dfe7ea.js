@@ -1,4 +1,4 @@
-import { M as MDCFoundation } from './foundation-879b4d20.js';
+import { M as MDCFoundation } from './foundation-2623e8ee.js';
 
 /*! *****************************************************************************
 Copyright (c) Microsoft Corporation.

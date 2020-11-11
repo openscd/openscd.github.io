@@ -24,7 +24,8 @@ export function invert(action) {
         element: action.old.element,
         reference: action.new.reference
       },
-      new: {parent: action.old.parent, reference: action.old.reference}
+      new: {parent: action.old.parent, reference: action.old.reference},
+      derived: action.derived
     };
   else if (isUpdate(action))
     return {new: action.old, old: action.new, derived: action.derived};
