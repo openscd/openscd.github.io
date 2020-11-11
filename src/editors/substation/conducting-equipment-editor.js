@@ -24,8 +24,9 @@ import {
   getValue
 } from "../../foundation.js";
 import {typeIcons, typeNames} from "./conducting-equipment-types.js";
-import {generalConductingEquipmentIcon, iedIcon} from "../../icons.js";
+import {generalConductingEquipmentIcon} from "../../icons.js";
 import {editlNode} from "./lnodewizard.js";
+import {BayEditor} from "./bay-editor.js";
 function isConductingEquipmentCreateOptions(options) {
   return options.parent !== void 0;
 }
@@ -45,7 +46,7 @@ export let ConductingEquipmentEditor = class extends LitElement {
   openLNodeAddWizard() {
     this.dispatchEvent(newWizardEvent(editlNode(this.element)));
   }
-  removeAction() {
+  remove() {
     if (this.element)
       this.dispatchEvent(newActionEvent({
         old: {
@@ -55,28 +56,56 @@ export let ConductingEquipmentEditor = class extends LitElement {
         }
       }));
   }
+  startMove() {
+    this.container.classList.add("moving");
+    const moveToTarget = (e) => {
+      e.preventDefault();
+      e.stopImmediatePropagation();
+      this.container.classList.remove("moving");
+      const targetEditor = e.composedPath().find((e2) => e2 instanceof ConductingEquipmentEditor || e2 instanceof BayEditor);
+      if (targetEditor === void 0 || targetEditor === this)
+        return;
+      const destination = targetEditor instanceof ConductingEquipmentEditor ? {parent: targetEditor.parent, reference: targetEditor.element} : {parent: targetEditor.element, reference: null};
+      if (this.parent !== destination.parent || this.element.nextElementSibling !== destination.reference)
+        this.dispatchEvent(newActionEvent({
+          old: {
+            element: this.element,
+            parent: this.parent,
+            reference: this.element.nextElementSibling
+          },
+          new: destination
+        }));
+    };
+    window.addEventListener("click", moveToTarget, {
+      capture: true,
+      once: true
+    });
+  }
   render() {
     return html`
       <div id="container" tabindex="0">
         ${typeIcons[this.type] ?? generalConductingEquipmentIcon}
         <h4 id="header">${this.name}</h4>
         <mwc-icon-button
-          class="menu-item edit"
-          icon="edit"
-          @click="${() => this.openEditWizard()}}"
-        ></mwc-icon-button
-        ><mwc-icon-button
-          class="menu-item delete"
-          id="delete"
-          icon="delete"
-          @click="${() => this.removeAction()}}"
+          class="menu-item left"
+          @click="${() => this.startMove()}"
+          icon="forward"
         ></mwc-icon-button>
         <mwc-icon-button
-          class="menu-item connect"
-          id="lNodeButton"
+          class="menu-item up"
+          icon="edit"
+          @click="${() => this.openEditWizard()}}"
+        ></mwc-icon-button>
+        <mwc-icon-button
+          class="menu-item right"
           @click="${() => this.openLNodeAddWizard()}"
-          >${iedIcon}</mwc-icon-button
-        >
+          icon="ballot"
+        ></mwc-icon-button>
+        <mwc-icon-button
+          class="menu-item down"
+          icon="delete"
+          @click="${() => this.remove()}}"
+        ></mwc-icon-button>
       </div>
     `;
   }
@@ -216,9 +245,16 @@ ConductingEquipmentEditor.styles = css`
     }
 
     #container {
+      background: var(--mdc-theme-surface);
       color: var(--mdc-theme-on-surface);
       width: 80px;
       height: 100px;
+      opacity: 1;
+      transition: all 150ms cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    #container.moving {
+      opacity: 0.3;
     }
 
     #container:focus-within {
@@ -257,16 +293,20 @@ ConductingEquipmentEditor.styles = css`
       opacity: 1;
     }
 
-    #container:focus-within > .menu-item.edit {
+    #container:focus-within > .menu-item.up {
       transform: translate(0px, -55px);
     }
 
-    #container:focus-within > .menu-item.delete {
+    #container:focus-within > .menu-item.down {
       transform: translate(0px, 57px);
     }
 
-    #container:focus-within > .menu-item.connect {
+    #container:focus-within > .menu-item.right {
       transform: translate(57px, 0px);
+    }
+
+    #container:focus-within > .menu-item.left {
+      transform: translate(-55px, 0px);
     }
 
     #header {
@@ -297,6 +337,9 @@ __decorate([
 __decorate([
   query("#header")
 ], ConductingEquipmentEditor.prototype, "header", 2);
+__decorate([
+  query("#container")
+], ConductingEquipmentEditor.prototype, "container", 2);
 ConductingEquipmentEditor = __decorate([
   customElement("conducting-equipment-editor")
 ], ConductingEquipmentEditor);

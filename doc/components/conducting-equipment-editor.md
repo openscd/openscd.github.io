@@ -2,14 +2,15 @@
 
 ## Properties
 
-| Property  | Attribute | Modifiers | Type      |
-|-----------|-----------|-----------|-----------|
-| `desc`    | `desc`    | readonly  | `string`  |
-| `element` | `element` |           | `Element` |
-| `header`  |           |           | `Element` |
-| `name`    | `name`    | readonly  | `string`  |
-| `parent`  | `parent`  |           | `Element` |
-| `type`    | `type`    | readonly  | `string`  |
+| Property    | Attribute | Modifiers | Type      |
+|-------------|-----------|-----------|-----------|
+| `container` |           |           | `Element` |
+| `desc`      | `desc`    | readonly  | `string`  |
+| `element`   | `element` |           | `Element` |
+| `header`    |           |           | `Element` |
+| `name`      | `name`    | readonly  | `string`  |
+| `parent`    | `parent`  |           | `Element` |
+| `type`      | `type`    | readonly  | `string`  |
 
 ## Methods
 
@@ -17,4 +18,5 @@
 |----------------------|------------|
 | `openEditWizard`     | `(): void` |
 | `openLNodeAddWizard` | `(): void` |
-| `removeAction`       | `(): void` |
+| `remove`             | `(): void` |
+| `startMove`          | `(): void` |

@@ -98,7 +98,7 @@ export function Logging(Base) {
       this.history.push(entry);
       if (le.detail.kind == "error" && !this.logUI.open)
         this.messageUI.show();
-      this.requestUpdate();
+      this.requestUpdate("history", []);
     }
     async performUpdate() {
       await new Promise((resolve) => requestAnimationFrame(() => resolve()));
