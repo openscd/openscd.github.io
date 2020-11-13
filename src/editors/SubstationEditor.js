@@ -164,7 +164,7 @@ export default class SubstationEditor extends LitElement {
     return html`
       <main tabindex="0">
         ${this.renderHeader()}
-        ${Array.from(this.element?.querySelectorAll("VoltageLevel") ?? []).map((voltageLevel) => html`<voltage-level-editor
+        ${Array.from(this.element?.querySelectorAll("Substation > VoltageLevel") ?? []).map((voltageLevel) => html`<voltage-level-editor
               .element=${voltageLevel}
               .parent=${this.element}
             ></voltage-level-editor>`)}

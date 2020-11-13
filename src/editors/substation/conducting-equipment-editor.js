@@ -156,9 +156,9 @@ export let ConductingEquipmentEditor = class extends LitElement {
       options.element.getAttribute("type")
     ];
     const [reservedValues] = isConductingEquipmentCreateOptions(options) ? [
-      Array.from(options.parent.querySelectorAll("ConductingEquipment")).map((condEq) => condEq.getAttribute("name"))
+      Array.from(options.parent.querySelectorAll("Bay > ConductingEquipment")).map((condEq) => condEq.getAttribute("name"))
     ] : [
-      Array.from(options.element.parentNode.querySelectorAll("ConductingEquipment")).map((condEq) => condEq.getAttribute("name")).filter((name2) => name2 !== options.element.getAttribute("name"))
+      Array.from(options.element.parentNode.querySelectorAll("Bay > ConductingEquipment")).map((condEq) => condEq.getAttribute("name")).filter((name2) => name2 !== options.element.getAttribute("name"))
     ];
     return [
       {

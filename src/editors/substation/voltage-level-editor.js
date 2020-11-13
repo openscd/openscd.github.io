@@ -46,7 +46,7 @@ export let VoltageLevelEditor = class extends LitElement {
     return this.element.getAttribute("desc") ?? null;
   }
   get voltage() {
-    const V = this.element.querySelector("Voltage");
+    const V = this.element.querySelector("VoltageLevel > Voltage");
     if (V === null)
       return null;
     const v = V.textContent ?? "";
@@ -104,7 +104,7 @@ export let VoltageLevelEditor = class extends LitElement {
     return html`<section tabindex="0">
       ${this.renderHeader()}
       <div id="bayContainer">
-        ${Array.from(this.element?.querySelectorAll("Bay") ?? []).map((bay) => html`<bay-editor
+        ${Array.from(this.element?.querySelectorAll("VoltageLevel > Bay") ?? []).map((bay) => html`<bay-editor
               .element=${bay}
               .parent=${this.element}
             ></bay-editor>`)}
@@ -165,10 +165,10 @@ export let VoltageLevelEditor = class extends LitElement {
           newElement.setAttribute("numPhases", numPhases);
         voltageLevelAction = {old: {element}, new: {element: newElement}};
       }
-      if (Voltage === (element.querySelector("Voltage")?.textContent?.trim() ?? null) && multiplier === (element.querySelector("Voltage")?.getAttribute("multiplier") ?? null)) {
+      if (Voltage === (element.querySelector("VoltageLevel > Voltage")?.textContent?.trim() ?? null) && multiplier === (element.querySelector("VoltageLevel > Voltage")?.getAttribute("multiplier") ?? null)) {
         voltageAction = null;
       } else {
-        const oldVoltage = element.querySelector("Voltage");
+        const oldVoltage = element.querySelector("VoltageLevel > Voltage");
         if (oldVoltage === null) {
           const newVoltage = new DOMParser().parseFromString('<Voltage unit="V"></Voltage>', "application/xml").documentElement;
           newVoltage.textContent = Voltage;
@@ -250,8 +250,8 @@ export let VoltageLevelEditor = class extends LitElement {
       options.element.getAttribute("desc"),
       options.element.getAttribute("nomFreq"),
       options.element.getAttribute("numPhases"),
-      options.element.querySelector("Voltage")?.textContent?.trim() ?? null,
-      options.element.querySelector("Voltage")?.getAttribute("multiplier") ?? null
+      options.element.querySelector("VoltageLevel > Voltage")?.textContent?.trim() ?? null,
+      options.element.querySelector("VoltageLevel > Voltage")?.getAttribute("multiplier") ?? null
     ];
     return [
       {
