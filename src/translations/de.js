@@ -29,7 +29,7 @@ export const de = {
       create: "Konnte {{ name }} nicht hinzuf\xFCgen",
       update: "Konnte {{ name }} nicht bearbeiten",
       move: "Konnte {{ name }} nicht verschieben",
-      nameClash: 'Element {{ parent }} enth\xE4lt bereits ein Kind {{ child }} namens "{{ name }}"'
+      nameClash: '{{ parent }} enth\xE4lt bereits ein {{ child }} Kind namens "{{ name }}"'
     }
   },
   validating: {
