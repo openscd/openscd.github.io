@@ -37,10 +37,11 @@ export const styles = css`
   main,
   section {
     background-color: var(--mdc-theme-surface);
-    transition: opacity 150ms cubic-bezier(0.4, 0, 0.2, 1),
-      box-shadow 200ms cubic-bezier(0.4, 0, 0.2, 1);
+    transition: all 200ms linear;
+    outline-color: var(--mdc-theme-primary);
+    outline-style: solid;
+    outline-width: 0px;
     margin: 8px 12px 16px;
-    overflow: auto;
     opacity: 1;
   }
 
@@ -57,7 +58,8 @@ export const styles = css`
 
   main:focus-within,
   section:focus-within {
-    outline: 2px solid var(--mdc-theme-primary);
+    outline-width: 2px;
+    transition: all 250ms linear;
   }
 
   h1,
@@ -72,6 +74,7 @@ export const styles = css`
     margin: 0px;
     line-height: 48px;
     padding-left: 0.3em;
+    transition: background-color 150ms linear;
   }
 
   main:focus-within > h1,
@@ -79,6 +82,7 @@ export const styles = css`
   section:focus-within > h3 {
     color: var(--mdc-theme-surface);
     background-color: var(--mdc-theme-primary);
+    transition: background-color 200ms linear;
   }
 
   h1 > nav,

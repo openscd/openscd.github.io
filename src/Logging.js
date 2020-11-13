@@ -96,8 +96,10 @@ export function Logging(Base) {
         this.currentAction = this.history.length;
       }
       this.history.push(entry);
-      if (le.detail.kind == "error" && !this.logUI.open)
+      if (le.detail.kind == "error" && !this.logUI.open) {
+        this.messageUI.close();
         this.messageUI.show();
+      }
       this.requestUpdate("history", []);
     }
     async performUpdate() {

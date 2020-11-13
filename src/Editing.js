@@ -28,7 +28,25 @@ export function Editing(Base) {
       this.doc = newEmptySCD();
       this.addEventListener("editor-action", this.onAction);
     }
+    checkCreateValidity(create) {
+      const invalid = create.new.element.hasAttribute("name") && create.new.parent.querySelectorAll(`${create.new.element.tagName}[name="${create.new.element.getAttribute("name")}"]`).length > 0;
+      if (invalid)
+        this.dispatchEvent(newLogEvent({
+          kind: "error",
+          title: get("editing.error.create", {
+            name: create.new.element.tagName
+          }),
+          message: get("editing.error.nameClash", {
+            parent: create.new.parent.tagName,
+            child: create.new.element.tagName,
+            name: create.new.element.getAttribute("name")
+          })
+        }));
+      return !invalid;
+    }
     onCreate(event) {
+      if (!this.checkCreateValidity(event.detail.action))
+        return;
       event.detail.action.new.parent.insertBefore(event.detail.action.new.element, event.detail.action.new.reference);
       this.dispatchEvent(newLogEvent({
         kind: "action",
@@ -48,7 +66,25 @@ export function Editing(Base) {
         action: event.detail.action
       }));
     }
+    checkMoveValidity(move) {
+      const invalid = move.old.element.hasAttribute("name") && move.new.parent !== move.old.parent && move.new.parent.querySelectorAll(`${move.old.element.tagName}[name="${move.old.element.getAttribute("name")}"]`).length > 0;
+      if (invalid)
+        this.dispatchEvent(newLogEvent({
+          kind: "error",
+          title: get("editing.error.create", {
+            name: move.old.element.tagName
+          }),
+          message: get("editing.error.nameClash", {
+            parent: move.new.parent.tagName,
+            child: move.old.element.tagName,
+            name: move.old.element.getAttribute("name")
+          })
+        }));
+      return !invalid;
+    }
     onMove(event) {
+      if (!this.checkMoveValidity(event.detail.action))
+        return;
       event.detail.action.new.parent.insertBefore(event.detail.action.old.element, event.detail.action.new.reference);
       this.dispatchEvent(newLogEvent({
         kind: "action",
@@ -58,7 +94,25 @@ export function Editing(Base) {
         action: event.detail.action
       }));
     }
+    checkUpdateValidity(update) {
+      const invalid = update.new.element.hasAttribute("name") && update.new.element.getAttribute("name") !== update.old.element.getAttribute("name") && update.old.element.parentElement?.querySelectorAll(`${update.new.element.tagName}[name="${update.new.element.getAttribute("name")}"]`)?.length;
+      if (invalid)
+        this.dispatchEvent(newLogEvent({
+          kind: "error",
+          title: get("editing.error.create", {
+            name: update.new.element.tagName
+          }),
+          message: get("editing.error.nameClash", {
+            parent: update.old.element.parentElement.tagName,
+            child: update.new.element.tagName,
+            name: update.new.element.getAttribute("name")
+          })
+        }));
+      return !invalid;
+    }
     onUpdate(event) {
+      if (!this.checkUpdateValidity(event.detail.action))
+        return;
       event.detail.action.new.element.append(...Array.from(event.detail.action.old.element.children));
       event.detail.action.old.element.replaceWith(event.detail.action.new.element);
       this.dispatchEvent(newLogEvent({

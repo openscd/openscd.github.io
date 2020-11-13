@@ -24,7 +24,13 @@ export const de = {
     created: "{{ name }} hinzugef\xFCgt",
     deleted: "{{ name }} entfernt",
     moved: "{{ name }} verschoben",
-    updated: "{{ name }} bearbeitet"
+    updated: "{{ name }} bearbeitet",
+    error: {
+      create: "Konnte {{ name }} nicht hinzuf\xFCgen",
+      update: "Konnte {{ name }} nicht bearbeiten",
+      move: "Konnte {{ name }} nicht verschieben",
+      nameClash: 'Element {{ parent }} enth\xE4lt bereits ein Kind {{ child }} namens "{{ name }}"'
+    }
   },
   validating: {
     valid: "{{ name }} erfolgreich validiert",

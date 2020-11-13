@@ -191,7 +191,6 @@ BayEditor.styles = css`
 
     section {
       margin: 0px;
-      overflow: visible;
     }
 
     #ceContainer {
