@@ -9,10 +9,15 @@ var __decorate = (decorators, target, key, kind) => {
     __defProp(target, key, result);
   return result;
 };
-import {LitElement, html, property, css} from "../../web_modules/lit-element.js";
+import {
+  LitElement,
+  html,
+  property,
+  css,
+  query
+} from "../../web_modules/lit-element.js";
 import {translate, get} from "../../web_modules/lit-translate.js";
 import "../../web_modules/@material/mwc-button.js";
-import "../../web_modules/@material/mwc-fab.js";
 import "../../web_modules/@material/mwc-icon-button.js";
 import "../../web_modules/@material/mwc-list/mwc-list-item.js";
 import {
@@ -20,7 +25,7 @@ import {
   newWizardEvent,
   getValue
 } from "../foundation.js";
-import {iedIcon} from "../icons.js";
+import {styles} from "./substation/foundation.js";
 import "./substation/voltage-level-editor.js";
 import {VoltageLevelEditor} from "./substation/voltage-level-editor.js";
 import {editlNode} from "./substation/lnodewizard.js";
@@ -133,93 +138,45 @@ export default class SubstationEditor extends LitElement {
       </h1>`;
     return html`
       <h1>
+        ${this.name} ${this.desc === null ? "" : html`&mdash;`} ${this.desc}
         <mwc-icon-button
           icon="playlist_add"
           @click=${() => this.openVoltageLevelWizard()}
         ></mwc-icon-button>
-        <span style="position:relative; float:right;">&#124;</span>
-        <mwc-icon-button
-          icon="delete"
-          @click=${() => this.removeSubstation()}
-        ></mwc-icon-button>
-        <mwc-icon-button
-          icon="edit"
-          @click=${() => this.openSubstationWizard()}
-        ></mwc-icon-button>
-        <mwc-icon-button @click=${() => this.openLNodeWizard()}
-          >${iedIcon}</mwc-icon-button
-        >
-        ${this.name} ${this.desc === null ? "" : html`&mdash;`} ${this.desc}
+        <nav>
+          <mwc-icon-button
+            icon="device_hub"
+            @click=${() => this.openLNodeWizard()}
+          ></mwc-icon-button>
+          <mwc-icon-button
+            icon="edit"
+            @click=${() => this.openSubstationWizard()}
+          ></mwc-icon-button>
+          <mwc-icon-button
+            icon="delete"
+            @click=${() => this.removeSubstation()}
+          ></mwc-icon-button>
+        </nav>
       </h1>
     `;
   }
   render() {
     return html`
-      <div id="container">
+      <main tabindex="0">
         ${this.renderHeader()}
         ${Array.from(this.element?.querySelectorAll("VoltageLevel") ?? []).map((voltageLevel) => html`<voltage-level-editor
               .element=${voltageLevel}
               .parent=${this.element}
             ></voltage-level-editor>`)}
-        <mwc-fab
-          @click=${this.openSubstationWizard}
-          icon="${this.element ? "edit" : "add"}"
-        >
-        </mwc-fab>
-      </div>
+      </main>
     `;
   }
 }
 SubstationEditor.styles = css`
+    ${styles}
+
     :host {
       width: calc(100vw);
-      overflow-x: hidden;
-    }
-
-    #container {
-      background-color: var(--mdc-theme-surface);
-    }
-
-    h1 {
-      font-family: 'Roboto', sans-serif;
-      font-weight: 300;
-      color: var(--mdc-theme-on-surface);
-      margin: 0px;
-      padding: 0.3em;
-    }
-
-    h1 > mwc-icon-button {
-      position: relative;
-      float: right;
-      top: -5px;
-    }
-
-    mwc-dialog {
-      display: flex;
-      flex-direction: column;
-    }
-
-    mwc-dialog > * {
-      display: block;
-      margin-top: 16px;
-    }
-
-    pre {
-      font-family: 'Roboto Mono', monospace;
-      font-weight: 100;
-    }
-
-    mwc-fab {
-      position: fixed;
-      bottom: 32px;
-      right: 32px;
-    }
-
-    h1 > svg {
-      position: relative;
-      widht: 30px;
-      height: 30px;
-      padding: 6px;
     }
   `;
 __decorate([
@@ -237,3 +194,6 @@ __decorate([
 __decorate([
   property({type: String})
 ], SubstationEditor.prototype, "desc", 1);
+__decorate([
+  query("main")
+], SubstationEditor.prototype, "container", 2);

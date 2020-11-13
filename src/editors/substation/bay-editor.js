@@ -23,10 +23,11 @@ import {
   getValue
 } from "../../foundation.js";
 import {get, translate} from "../../../web_modules/lit-translate.js";
+import {startMove, styles} from "./foundation.js";
 import "./conducting-equipment-editor.js";
 import {ConductingEquipmentEditor} from "./conducting-equipment-editor.js";
 import {editlNode} from "./lnodewizard.js";
-import {iedIcon} from "../../icons.js";
+import {VoltageLevelEditor} from "./voltage-level-editor.js";
 function isBayCreateOptions(options) {
   return options.parent !== void 0;
 }
@@ -60,40 +61,42 @@ export let BayEditor = class extends LitElement {
       }));
   }
   renderHeader() {
-    return html`<div id="header">
-      <h3>
-        ${this.name} ${this.desc === null ? "" : html`&mdash;`} ${this.desc}
-      </h3>
-      <div id="header-icon">
+    return html`<h3>
+      ${this.name} ${this.desc === null ? "" : html`&mdash;`} ${this.desc}
+      <mwc-icon-button
+        icon="playlist_add"
+        @click=${() => this.openConductingEquipmentWizard()}
+      ></mwc-icon-button>
+      <nav>
         <mwc-icon-button
-          id="lNodeButton"
+          icon="device_hub"
           @click="${() => this.openLNodeAddWizard()}"
-          >${iedIcon}</mwc-icon-button
-        >
+        ></mwc-icon-button>
         <mwc-icon-button
           icon="edit"
           @click=${() => this.openEditWizard()}
         ></mwc-icon-button>
         <mwc-icon-button
+          icon="forward"
+          @click=${() => startMove(this, BayEditor, VoltageLevelEditor)}
+        ></mwc-icon-button>
+        <mwc-icon-button
           icon="delete"
           @click=${() => this.removeAction()}
         ></mwc-icon-button>
-        <span style="position:relative; float:right;">&#124;</span>
-        <mwc-icon-button
-          icon="playlist_add"
-          @click=${() => this.openConductingEquipmentWizard()}
-        ></mwc-icon-button>
-      </div>
-    </div> `;
+      </nav>
+    </h3>`;
   }
   render() {
-    return html`<div id="container">
+    return html`<section tabindex="0">
       ${this.renderHeader()}
-      ${Array.from(this.element?.querySelectorAll("ConductingEquipment") ?? []).map((voltageLevel) => html`<conducting-equipment-editor
-            .element=${voltageLevel}
-            .parent=${this.element}
-          ></conducting-equipment-editor>`)}
-    </div> `;
+      <div id="ceContainer">
+        ${Array.from(this.element?.querySelectorAll("ConductingEquipment") ?? []).map((voltageLevel) => html`<conducting-equipment-editor
+              .element=${voltageLevel}
+              .parent=${this.element}
+            ></conducting-equipment-editor>`)}
+      </div>
+    </section> `;
   }
   static createAction(parent) {
     return (inputs, wizard) => {
@@ -184,37 +187,19 @@ export let BayEditor = class extends LitElement {
   }
 };
 BayEditor.styles = css`
-    #container {
-      width: 370px;
-      min-height: 320px;
-      background-color: var(--mdc-theme-surface);
-      margin: 10px;
+    ${styles}
+
+    section {
+      margin: 0px;
+      overflow: visible;
     }
 
-    #header {
-      display: flex;
-      color: var(--mdc-theme-on-surface);
-    }
-
-    h3 {
-      font-family: 'Roboto', sans-serif;
-      font-weight: 300;
-      overflow: hidden;
-      white-space: nowrap;
-      text-overflow: ellipsis;
-      flex: auto;
-      padding-left: 0.5em;
-    }
-
-    #header-icon {
-      display: flex;
-      align-items: center;
-    }
-
-    #header > mwc-icon-button {
-      position: relative;
-      float: right;
-      top: -5px;
+    #ceContainer {
+      display: grid;
+      grid-gap: 12px;
+      padding: 12px;
+      box-sizing: border-box;
+      grid-template-columns: repeat(auto-fit, minmax(80px, auto));
     }
   `;
 __decorate([
@@ -230,14 +215,11 @@ __decorate([
   property({type: String})
 ], BayEditor.prototype, "desc", 1);
 __decorate([
+  query("section")
+], BayEditor.prototype, "container", 2);
+__decorate([
   query("h3")
 ], BayEditor.prototype, "header", 2);
-__decorate([
-  query("#lNodeMenu")
-], BayEditor.prototype, "lNodeMenu", 2);
-__decorate([
-  query("#lNodeButton")
-], BayEditor.prototype, "lNodeButton", 2);
 BayEditor = __decorate([
   customElement("bay-editor")
 ], BayEditor);

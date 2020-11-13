@@ -154,7 +154,7 @@ export function Logging(Base) {
 
         <mwc-snackbar
           id="message"
-          timeoutMs="-1"
+          timeoutMs="10000"
           labelText="${this.history.slice().reverse().find((le) => le.kind == "error")?.title ?? get("log.snackbar.placeholder")}"
         >
           <mwc-button

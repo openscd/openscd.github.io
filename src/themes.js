@@ -1,5 +1,6 @@
 import {html} from "../web_modules/lit-element.js";
 export function getTheme(theme) {
+  document.body.style.cssText = bodyStyles[theme];
   return html`
     ${themes[theme]}
     <style>
@@ -35,6 +36,10 @@ export function getTheme(theme) {
     </style>
   `;
 }
+const bodyStyles = {
+  dark: "background: #073642",
+  light: "background: #eee8d5"
+};
 const themes = {
   light: html`
     <style>

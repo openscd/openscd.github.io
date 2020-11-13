@@ -23,8 +23,9 @@ import {
   newActionEvent,
   getValue
 } from "../../foundation.js";
-import {typeIcons, typeNames} from "./conducting-equipment-types.js";
 import {generalConductingEquipmentIcon} from "../../icons.js";
+import {startMove} from "./foundation.js";
+import {typeIcons, typeNames} from "./conducting-equipment-types.js";
 import {editlNode} from "./lnodewizard.js";
 import {BayEditor} from "./bay-editor.js";
 function isConductingEquipmentCreateOptions(options) {
@@ -56,46 +57,15 @@ export let ConductingEquipmentEditor = class extends LitElement {
         }
       }));
   }
-  startMove() {
-    this.container.classList.add("moving");
-    const moveToTarget = (e) => {
-      console.warn(e);
-      if (e instanceof KeyboardEvent && e.key !== "Escape" && e.key !== " " && e.key !== "Enter")
-        return;
-      e.preventDefault();
-      e.stopImmediatePropagation();
-      this.container.classList.remove("moving");
-      window.removeEventListener("keydown", moveToTarget, true);
-      window.removeEventListener("click", moveToTarget, true);
-      console.log("removed", moveToTarget);
-      if (e instanceof KeyboardEvent && e.key === "Escape")
-        return;
-      const targetEditor = e.composedPath().find((e2) => e2 instanceof ConductingEquipmentEditor || e2 instanceof BayEditor);
-      if (targetEditor === void 0 || targetEditor === this)
-        return;
-      const destination = targetEditor instanceof ConductingEquipmentEditor ? {parent: targetEditor.parent, reference: targetEditor.element} : {parent: targetEditor.element, reference: null};
-      if (this.parent !== destination.parent || this.element.nextElementSibling !== destination.reference)
-        this.dispatchEvent(newActionEvent({
-          old: {
-            element: this.element,
-            parent: this.parent,
-            reference: this.element.nextElementSibling
-          },
-          new: destination
-        }));
-    };
-    window.addEventListener("click", moveToTarget, true);
-    window.addEventListener("keydown", moveToTarget, true);
-  }
   render() {
     return html`
       <div id="container" tabindex="0">
         ${typeIcons[this.type] ?? generalConductingEquipmentIcon}
-        <h4 id="header">${this.name}</h4>
+        <h4>${this.name}</h4>
         <mwc-icon-button
           class="menu-item left"
-          @click="${() => this.startMove()}"
-          icon="forward"
+          @click="${() => this.openLNodeAddWizard()}"
+          icon="device_hub"
         ></mwc-icon-button>
         <mwc-icon-button
           class="menu-item up"
@@ -104,8 +74,8 @@ export let ConductingEquipmentEditor = class extends LitElement {
         ></mwc-icon-button>
         <mwc-icon-button
           class="menu-item right"
-          @click="${() => this.openLNodeAddWizard()}"
-          icon="device_hub"
+          @click="${() => startMove(this, ConductingEquipmentEditor, BayEditor)}"
+          icon="forward"
         ></mwc-icon-button>
         <mwc-icon-button
           class="menu-item down"
@@ -244,17 +214,12 @@ export let ConductingEquipmentEditor = class extends LitElement {
   }
 };
 ConductingEquipmentEditor.styles = css`
-    :host {
-      display: inline-block;
-      margin: 20px;
-      position: relative;
-    }
-
     #container {
-      background: var(--mdc-theme-surface);
       color: var(--mdc-theme-on-surface);
       width: 80px;
       height: 100px;
+      margin: auto;
+      position: relative;
       opacity: 1;
       transition: all 150ms cubic-bezier(0.4, 0, 0.2, 1);
     }
@@ -263,7 +228,7 @@ ConductingEquipmentEditor.styles = css`
       opacity: 0.3;
     }
 
-    #container:focus-within {
+    #container:focus {
       outline: none;
     }
 
@@ -271,8 +236,13 @@ ConductingEquipmentEditor.styles = css`
       color: var(--mdc-theme-on-surface);
       width: 80px;
       height: 80px;
-      position: relative;
-      transition: all 150ms cubic-bezier(0.4, 0, 0.2, 1);
+      transition: transform 150ms cubic-bezier(0.4, 0, 0.2, 1),
+        box-shadow 200ms cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    #container:focus > svg {
+      box-shadow: 0 8px 10px 1px rgba(0, 0, 0, 0.14),
+        0 3px 14px 2px rgba(0, 0, 0, 0.12), 0 5px 5px -3px rgba(0, 0, 0, 0.2);
     }
 
     #container:hover > svg {
@@ -280,6 +250,7 @@ ConductingEquipmentEditor.styles = css`
     }
 
     #container:focus-within > svg {
+      outline: 2px solid var(--mdc-theme-primary);
       background: var(--mdc-theme-on-primary);
       transform: scale(0.8);
     }
@@ -315,14 +286,14 @@ ConductingEquipmentEditor.styles = css`
       transform: translate(-55px, 0px);
     }
 
-    #header {
+    h4 {
+      color: var(--mdc-theme-on-surface);
       font-family: 'Roboto', sans-serif;
       font-weight: 300;
-      color: var(--mdc-theme-on-surface);
-      margin: 0px;
       overflow: hidden;
-      text-overflow: ellipsis;
       white-space: nowrap;
+      text-overflow: ellipsis;
+      margin: 0px;
     }
   `;
 __decorate([
@@ -341,7 +312,7 @@ __decorate([
   property({type: String})
 ], ConductingEquipmentEditor.prototype, "type", 1);
 __decorate([
-  query("#header")
+  query("h4")
 ], ConductingEquipmentEditor.prototype, "header", 2);
 __decorate([
   query("#container")

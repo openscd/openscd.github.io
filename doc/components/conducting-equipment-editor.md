@@ -19,4 +19,3 @@
 | `openEditWizard`     | `(): void` |
 | `openLNodeAddWizard` | `(): void` |
 | `remove`             | `(): void` |
-| `startMove`          | `(): void` |

@@ -129,6 +129,7 @@
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="_editors_substation_voltage_level_editor_.voltageleveleditor.html#clientleft" class="tsd-kind-icon">client<wbr>Left</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="_editors_substation_voltage_level_editor_.voltageleveleditor.html#clienttop" class="tsd-kind-icon">client<wbr>Top</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="_editors_substation_voltage_level_editor_.voltageleveleditor.html#clientwidth" class="tsd-kind-icon">client<wbr>Width</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="_editors_substation_voltage_level_editor_.voltageleveleditor.html#container" class="tsd-kind-icon">container</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="_editors_substation_voltage_level_editor_.voltageleveleditor.html#contenteditable" class="tsd-kind-icon">content<wbr>Editable</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="_editors_substation_voltage_level_editor_.voltageleveleditor.html#dataset" class="tsd-kind-icon">dataset</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="_editors_substation_voltage_level_editor_.voltageleveleditor.html#dir" class="tsd-kind-icon">dir</a></li>
@@ -887,6 +888,16 @@
 						</ul>
 					</aside>
 				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="container" class="tsd-anchor"></a>
+					<h3>container</h3>
+					<div class="tsd-signature tsd-kind-icon">container<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Element</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/3302255/src/editors/substation/voltage-level-editor.ts#L76">src/editors/substation/voltage-level-editor.ts:76</a></li>
+						</ul>
+					</aside>
+				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
 					<a name="contenteditable" class="tsd-anchor"></a>
 					<h3>content<wbr>Editable</h3>
@@ -937,7 +948,7 @@
 					<div class="tsd-signature tsd-kind-icon">element<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Element</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/a6e4b5a/src/editors/substation/voltage-level-editor.ts#L56">src/editors/substation/voltage-level-editor.ts:56</a></li>
+							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/3302255/src/editors/substation/voltage-level-editor.ts#L57">src/editors/substation/voltage-level-editor.ts:57</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -1002,7 +1013,7 @@
 					<div class="tsd-signature tsd-kind-icon">header<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Element</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/a6e4b5a/src/editors/substation/voltage-level-editor.ts#L75">src/editors/substation/voltage-level-editor.ts:75</a></li>
+							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/3302255/src/editors/substation/voltage-level-editor.ts#L77">src/editors/substation/voltage-level-editor.ts:77</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -2791,7 +2802,7 @@
 					<div class="tsd-signature tsd-kind-icon">parent<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Element</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/a6e4b5a/src/editors/substation/voltage-level-editor.ts#L54">src/editors/substation/voltage-level-editor.ts:54</a></li>
+							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/3302255/src/editors/substation/voltage-level-editor.ts#L55">src/editors/substation/voltage-level-editor.ts:55</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -3161,11 +3172,11 @@
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-overwrite tsd-is-static">
 					<a name="styles" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagStatic">Static</span> styles</h3>
-					<div class="tsd-signature tsd-kind-icon">styles<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">CSSResult</span><span class="tsd-signature-symbol"> = css&#x60;#conainer {background-color: var(--mdc-theme-on-primary);color: var(--mdc-theme-on-surface);margin: 10px;}#header {display: flex;}#header-icon {display: flex;align-items: center;}h2 {font-family: &#x27;Roboto&#x27;, sans-serif;font-weight: 300;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;flex: auto;padding-left: 0.5em;}#voltageLevelContainer {display: flex;flex-direction: row;overflow-x: auto;overflow-y: hidden;}&#x60;</span></div>
+					<div class="tsd-signature tsd-kind-icon">styles<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">CSSResult</span><span class="tsd-signature-symbol"> = css&#x60;${styles}section {background-color: var(--mdc-theme-on-primary);}#bayContainer {display: grid;grid-gap: 12px;padding: 8px 12px 16px;box-sizing: border-box;grid-template-columns: repeat(3, minmax(196px, auto));}@media (max-width: 1200px) {#bayContainer {grid-template-columns: repeat(2, minmax(196px, auto));}}@media (max-width: 600px) {#bayContainer {grid-template-columns: repeat(1, minmax(196px, auto));}}&#x60;</span></div>
 					<aside class="tsd-sources">
 						<p>Overrides LitElement.styles</p>
 						<ul>
-							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/a6e4b5a/src/editors/substation/voltage-level-editor.ts#L386">src/editors/substation/voltage-level-editor.ts:386</a></li>
+							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/3302255/src/editors/substation/voltage-level-editor.ts#L390">src/editors/substation/voltage-level-editor.ts:390</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -3182,7 +3193,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/a6e4b5a/src/editors/substation/voltage-level-editor.ts#L62">src/editors/substation/voltage-level-editor.ts:62</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/3302255/src/editors/substation/voltage-level-editor.ts#L63">src/editors/substation/voltage-level-editor.ts:63</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span></h4>
@@ -3217,7 +3228,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/a6e4b5a/src/editors/substation/voltage-level-editor.ts#L58">src/editors/substation/voltage-level-editor.ts:58</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/3302255/src/editors/substation/voltage-level-editor.ts#L59">src/editors/substation/voltage-level-editor.ts:59</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
@@ -3267,7 +3278,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/a6e4b5a/src/editors/substation/voltage-level-editor.ts#L66">src/editors/substation/voltage-level-editor.ts:66</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/3302255/src/editors/substation/voltage-level-editor.ts#L67">src/editors/substation/voltage-level-editor.ts:67</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span></h4>
@@ -4894,7 +4905,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/a6e4b5a/src/editors/substation/voltage-level-editor.ts#L83">src/editors/substation/voltage-level-editor.ts:83</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/3302255/src/editors/substation/voltage-level-editor.ts#L85">src/editors/substation/voltage-level-editor.ts:85</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -4911,7 +4922,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/a6e4b5a/src/editors/substation/voltage-level-editor.ts#L77">src/editors/substation/voltage-level-editor.ts:77</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/3302255/src/editors/substation/voltage-level-editor.ts#L79">src/editors/substation/voltage-level-editor.ts:79</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -4928,7 +4939,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/a6e4b5a/src/editors/substation/voltage-level-editor.ts#L89">src/editors/substation/voltage-level-editor.ts:89</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/3302255/src/editors/substation/voltage-level-editor.ts#L91">src/editors/substation/voltage-level-editor.ts:91</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -5211,7 +5222,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/a6e4b5a/src/editors/substation/voltage-level-editor.ts#L93">src/editors/substation/voltage-level-editor.ts:93</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/3302255/src/editors/substation/voltage-level-editor.ts#L95">src/editors/substation/voltage-level-editor.ts:95</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -5425,7 +5436,7 @@
 							<aside class="tsd-sources">
 								<p>Overrides <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#render">render</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/a6e4b5a/src/editors/substation/voltage-level-editor.ts#L129">src/editors/substation/voltage-level-editor.ts:129</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/3302255/src/editors/substation/voltage-level-editor.ts#L133">src/editors/substation/voltage-level-editor.ts:133</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">TemplateResult</span></h4>
@@ -5442,7 +5453,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/a6e4b5a/src/editors/substation/voltage-level-editor.ts#L102">src/editors/substation/voltage-level-editor.ts:102</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/3302255/src/editors/substation/voltage-level-editor.ts#L104">src/editors/substation/voltage-level-editor.ts:104</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">TemplateResult</span></h4>
@@ -6102,7 +6113,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/a6e4b5a/src/editors/substation/voltage-level-editor.ts#L144">src/editors/substation/voltage-level-editor.ts:144</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/3302255/src/editors/substation/voltage-level-editor.ts#L148">src/editors/substation/voltage-level-editor.ts:148</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -6378,7 +6389,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/a6e4b5a/src/editors/substation/voltage-level-editor.ts#L186">src/editors/substation/voltage-level-editor.ts:186</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/3302255/src/editors/substation/voltage-level-editor.ts#L190">src/editors/substation/voltage-level-editor.ts:190</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -6401,7 +6412,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/a6e4b5a/src/editors/substation/voltage-level-editor.ts#L277">src/editors/substation/voltage-level-editor.ts:277</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/3302255/src/editors/substation/voltage-level-editor.ts#L281">src/editors/substation/voltage-level-editor.ts:281</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -6451,6 +6462,9 @@
 					</li>
 					<li class=" tsd-kind-module">
 						<a href="../modules/_editors_substation_conducting_equipment_types_.html">&quot;editors/substation/conducting-<wbr>equipment-<wbr>types&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/_editors_substation_foundation_.html">&quot;editors/substation/foundation&quot;</a>
 					</li>
 					<li class=" tsd-kind-module">
 						<a href="../modules/_editors_substation_lnodewizard_.html">&quot;editors/substation/lnodewizard&quot;</a>
@@ -6604,6 +6618,9 @@
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
 								<a href="_editors_substation_voltage_level_editor_.voltageleveleditor.html#clientwidth" class="tsd-kind-icon">client<wbr>Width</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="_editors_substation_voltage_level_editor_.voltageleveleditor.html#container" class="tsd-kind-icon">container</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
 								<a href="_editors_substation_voltage_level_editor_.voltageleveleditor.html#contenteditable" class="tsd-kind-icon">content<wbr>Editable</a>

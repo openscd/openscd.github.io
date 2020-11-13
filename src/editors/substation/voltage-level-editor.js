@@ -24,10 +24,11 @@ import {
   getValue,
   getMultiplier
 } from "../../foundation.js";
+import {startMove, styles} from "./foundation.js";
 import "./bay-editor.js";
 import {BayEditor} from "./bay-editor.js";
-import {iedIcon} from "../../icons.js";
 import {editlNode} from "./lnodewizard.js";
+import SubstationEditor2 from "../SubstationEditor.js";
 function isVoltageLevelCreateOptions(options) {
   return options.parent !== void 0;
 }
@@ -72,41 +73,43 @@ export let VoltageLevelEditor = class extends LitElement {
       }));
   }
   renderHeader() {
-    return html`<div id="header">
-      <h2>
-        ${this.name} ${this.desc === null ? "" : html`&mdash;`} ${this.desc}
-        ${this.voltage === null ? "" : html`(${this.voltage})`}
-      </h2>
-      <div id="header-icon">
-        <mwc-icon-button @click=${() => this.openLNodeWizard()}
-          >${iedIcon}</mwc-icon-button
-        >
+    return html`<h2>
+      ${this.name} ${this.desc === null ? "" : html`&mdash;`} ${this.desc}
+      ${this.voltage === null ? "" : html`(${this.voltage})`}
+      <mwc-icon-button
+        icon="playlist_add"
+        @click=${() => this.openBayWizard()}
+      ></mwc-icon-button>
+      <nav>
+        <mwc-icon-button
+          icon="device_hub"
+          @click=${() => this.openLNodeWizard()}
+        ></mwc-icon-button>
         <mwc-icon-button
           icon="edit"
           @click=${() => this.openEditWizard()}
         ></mwc-icon-button>
         <mwc-icon-button
+          icon="forward"
+          @click=${() => startMove(this, VoltageLevelEditor, SubstationEditor2)}
+        ></mwc-icon-button>
+        <mwc-icon-button
           icon="delete"
           @click=${() => this.removeAction()}
         ></mwc-icon-button>
-        <span style="position:relative;float:right;">&vert;</span>
-        <mwc-icon-button
-          icon="playlist_add"
-          @click=${() => this.openBayWizard()}
-        ></mwc-icon-button>
-      </div>
-    </div>`;
+      </nav>
+    </h2>`;
   }
   render() {
-    return html`<div id="conainer">
+    return html`<section tabindex="0">
       ${this.renderHeader()}
-      <div id="voltageLevelContainer">
+      <div id="bayContainer">
         ${Array.from(this.element?.querySelectorAll("Bay") ?? []).map((bay) => html`<bay-editor
               .element=${bay}
               .parent=${this.element}
             ></bay-editor>`)}
       </div>
-    </div>`;
+    </section>`;
   }
   static createAction(parent) {
     return (inputs, wizard) => {
@@ -315,36 +318,30 @@ export let VoltageLevelEditor = class extends LitElement {
   }
 };
 VoltageLevelEditor.styles = css`
-    #conainer {
+    ${styles}
+
+    section {
       background-color: var(--mdc-theme-on-primary);
-      color: var(--mdc-theme-on-surface);
-      margin: 10px;
     }
 
-    #header {
-      display: flex;
+    #bayContainer {
+      display: grid;
+      grid-gap: 12px;
+      padding: 8px 12px 16px;
+      box-sizing: border-box;
+      grid-template-columns: repeat(3, minmax(196px, auto));
     }
 
-    #header-icon {
-      display: flex;
-      align-items: center;
+    @media (max-width: 1200px) {
+      #bayContainer {
+        grid-template-columns: repeat(2, minmax(196px, auto));
+      }
     }
 
-    h2 {
-      font-family: 'Roboto', sans-serif;
-      font-weight: 300;
-      overflow: hidden;
-      white-space: nowrap;
-      text-overflow: ellipsis;
-      flex: auto;
-      padding-left: 0.5em;
-    }
-
-    #voltageLevelContainer {
-      display: flex;
-      flex-direction: row;
-      overflow-x: auto;
-      overflow-y: hidden;
+    @media (max-width: 600px) {
+      #bayContainer {
+        grid-template-columns: repeat(1, minmax(196px, auto));
+      }
     }
   `;
 __decorate([
@@ -362,6 +359,9 @@ __decorate([
 __decorate([
   property()
 ], VoltageLevelEditor.prototype, "voltage", 1);
+__decorate([
+  query("section")
+], VoltageLevelEditor.prototype, "container", 2);
 __decorate([
   query("h2")
 ], VoltageLevelEditor.prototype, "header", 2);

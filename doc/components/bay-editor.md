@@ -4,15 +4,14 @@
 
 ## Properties
 
-| Property      | Attribute | Modifiers | Type             |
-|---------------|-----------|-----------|------------------|
-| `desc`        | `desc`    | readonly  | `string \| null` |
-| `element`     | `element` |           | `Element`        |
-| `header`      |           |           | `Element`        |
-| `lNodeButton` |           |           | `IconButton`     |
-| `lNodeMenu`   |           |           | `Menu`           |
-| `name`        | `name`    | readonly  | `string`         |
-| `parent`      | `parent`  |           | `Element`        |
+| Property    | Attribute | Modifiers | Type             |
+|-------------|-----------|-----------|------------------|
+| `container` |           |           | `Element`        |
+| `desc`      | `desc`    | readonly  | `string \| null` |
+| `element`   | `element` |           | `Element`        |
+| `header`    |           |           | `Element`        |
+| `name`      | `name`    | readonly  | `string`         |
+| `parent`    | `parent`  |           | `Element`        |
 
 ## Methods
 
