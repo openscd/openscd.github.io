@@ -23,16 +23,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">86.36% </span>
+                <span class="strong">82% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>38/44</span>
+                <span class='fraction'>41/50</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">66.67% </span>
+                <span class="strong">63.89% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>20/30</span>
+                <span class='fraction'>23/36</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">92.31% </span>
+                <span class="strong">92.86% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>36/39</span>
+                <span class='fraction'>39/42</span>
             </div>
         
             
@@ -277,7 +277,13 @@
 <a name='L218'></a><a href='#L218'>218</a>
 <a name='L219'></a><a href='#L219'>219</a>
 <a name='L220'></a><a href='#L220'>220</a>
-<a name='L221'></a><a href='#L221'>221</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L221'></a><a href='#L221'>221</a>
+<a name='L222'></a><a href='#L222'>222</a>
+<a name='L223'></a><a href='#L223'>223</a>
+<a name='L224'></a><a href='#L224'>224</a>
+<a name='L225'></a><a href='#L225'>225</a>
+<a name='L226'></a><a href='#L226'>226</a>
+<a name='L227'></a><a href='#L227'>227</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -318,6 +324,8 @@
 <span class="cline-any cline-yes">24x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -378,6 +386,8 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -424,6 +434,8 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
@@ -538,6 +550,8 @@ export function Editing&lt;TBase extends LitElementConstructor&gt;(Base: TBase) 
     doc: XMLDocument = newEmptySCD();
 &nbsp;
     private checkCreateValidity(create: Create): boolean {
+      <span class="missing-if-branch" title="if path not taken" >I</span>if (create.checkValidity !== undefined) <span class="cstat-no" title="statement not covered" >return create.checkValidity();</span>
+&nbsp;
       const invalid =
         create.new.element.hasAttribute('name') &amp;&amp;
 <span class="branch-1 cbranch-no" title="branch not covered" >        create.new.parent.querySelectorAll(</span>
@@ -598,6 +612,8 @@ export function Editing&lt;TBase extends LitElementConstructor&gt;(Base: TBase) 
     }
 &nbsp;
     private checkMoveValidity(move: Move): boolean {
+      <span class="missing-if-branch" title="if path not taken" >I</span>if (move.checkValidity !== undefined) <span class="cstat-no" title="statement not covered" >return move.checkValidity();</span>
+&nbsp;
       const invalid =
         move.old.element.hasAttribute('name') &amp;&amp;
         move.new.parent !== move.old.parent &amp;&amp;
@@ -645,6 +661,8 @@ export function Editing&lt;TBase extends LitElementConstructor&gt;(Base: TBase) 
     }
 &nbsp;
     private checkUpdateValidity(update: Update): boolean {
+      <span class="missing-if-branch" title="if path not taken" >I</span>if (update.checkValidity !== undefined) <span class="cstat-no" title="statement not covered" >return update.checkValidity();</span>
+&nbsp;
       const invalid =
         update.new.element.hasAttribute('name') &amp;&amp;
 <span class="branch-1 cbranch-no" title="branch not covered" >        update.new.element.getAttribute('name') !==</span>
@@ -724,7 +742,7 @@ export function Editing&lt;TBase extends LitElementConstructor&gt;(Base: TBase) 
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Wed Nov 18 2020 10:57:46 GMT+0000 (Coordinated Universal Time)
+                at Wed Nov 18 2020 11:07:21 GMT+0000 (Coordinated Universal Time)
             </div>
         </div>
         <script src="../prettify.js"></script>

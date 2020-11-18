@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">96.67% </span>
+                <span class="strong">96.77% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>29/30</span>
+                <span class='fraction'>30/31</span>
             </div>
         
             
@@ -310,7 +310,18 @@
 <a name='L251'></a><a href='#L251'>251</a>
 <a name='L252'></a><a href='#L252'>252</a>
 <a name='L253'></a><a href='#L253'>253</a>
-<a name='L254'></a><a href='#L254'>254</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L254'></a><a href='#L254'>254</a>
+<a name='L255'></a><a href='#L255'>255</a>
+<a name='L256'></a><a href='#L256'>256</a>
+<a name='L257'></a><a href='#L257'>257</a>
+<a name='L258'></a><a href='#L258'>258</a>
+<a name='L259'></a><a href='#L259'>259</a>
+<a name='L260'></a><a href='#L260'>260</a>
+<a name='L261'></a><a href='#L261'>261</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -379,8 +390,11 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">16x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">16x</span>
 <span class="cline-any cline-yes">14x</span>
-<span class="cline-any cline-yes">11x</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -532,9 +546,9 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">204x</span>
-<span class="cline-any cline-yes">204x</span>
-<span class="cline-any cline-yes">123x</span>
+<span class="cline-any cline-yes">200x</span>
+<span class="cline-any cline-yes">200x</span>
+<span class="cline-any cline-yes">122x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -575,23 +589,27 @@ export type EditorAction = Create | Update | Delete | Move;
 export interface Create {
   new: { parent: Element; element: Element; reference: Element | null };
   derived?: boolean;
+  checkValidity?: () =&gt; boolean;
 }
 /** Removes `old.element` from `old.parent` before `old.reference`. */
 export interface Delete {
   old: { parent: Element; element: Element; reference: Element | null };
   derived?: boolean;
+  checkValidity?: () =&gt; boolean;
 }
 /** Reparents of `old.element` to `new.parent` before `new.reference`. */
 export interface Move {
   old: { parent: Element; element: Element; reference: Element | null };
   new: { parent: Element; reference: Element | null };
   derived?: boolean;
+  checkValidity?: () =&gt; boolean;
 }
 /** Replaces `old.element` with `new.element`, keeping element children. */
 export interface Update {
   old: { element: Element };
   new: { element: Element };
   derived?: boolean;
+  checkValidity?: () =&gt; boolean;
 }
 &nbsp;
 export function isCreate(action: EditorAction): action is Create {
@@ -631,9 +649,12 @@ export function isUpdate(action: EditorAction): action is Update {
 &nbsp;
 /** @returns an [[`EditorAction`]] with opposite effect of `action`. */
 export function invert(action: EditorAction): EditorAction {
-  if (isCreate(action)) return { old: action.new, derived: action.derived };
-  else if (isDelete(action))
-    return { new: action.old, derived: action.derived };
+  const metaData = {
+    derived: action.derived,
+    checkValidity: action.checkValidity,
+  };
+  if (isCreate(action)) return { old: action.new, ...metaData };
+  else if (isDelete(action)) return { new: action.old, ...metaData };
   else if (isMove(action))
     return {
       old: {
@@ -642,10 +663,10 @@ export function invert(action: EditorAction): EditorAction {
         reference: action.new.reference,
       },
       new: { parent: action.old.parent, reference: action.old.reference },
-      derived: action.derived,
+      ...metaData,
     };
   else if (isUpdate(action))
-    return { new: action.old, old: action.new, derived: action.derived };
+    return { new: action.old, old: action.new, ...metaData };
   else return unreachable('Unknown EditorAction type in invert.');
 }
 &nbsp;
@@ -823,7 +844,7 @@ declare global {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Wed Nov 18 2020 10:57:46 GMT+0000 (Coordinated Universal Time)
+                at Wed Nov 18 2020 11:07:21 GMT+0000 (Coordinated Universal Time)
             </div>
         </div>
         <script src="../prettify.js"></script>

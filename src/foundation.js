@@ -13,10 +13,14 @@ export function isUpdate(action) {
   return action.old?.parent === void 0 && action.old?.element !== void 0 && action.new?.parent === void 0 && action.new?.element !== void 0;
 }
 export function invert(action) {
+  const metaData = {
+    derived: action.derived,
+    checkValidity: action.checkValidity
+  };
   if (isCreate(action))
-    return {old: action.new, derived: action.derived};
+    return {old: action.new, ...metaData};
   else if (isDelete(action))
-    return {new: action.old, derived: action.derived};
+    return {new: action.old, ...metaData};
   else if (isMove(action))
     return {
       old: {
@@ -25,10 +29,10 @@ export function invert(action) {
         reference: action.new.reference
       },
       new: {parent: action.old.parent, reference: action.old.reference},
-      derived: action.derived
+      ...metaData
     };
   else if (isUpdate(action))
-    return {new: action.old, old: action.new, derived: action.derived};
+    return {new: action.old, old: action.new, ...metaData};
   else
     return unreachable("Unknown EditorAction type in invert.");
 }
