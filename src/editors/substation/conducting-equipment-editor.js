@@ -61,7 +61,6 @@ export let ConductingEquipmentEditor = class extends LitElement {
     return html`
       <div id="container" tabindex="0">
         ${typeIcons[this.type] ?? generalConductingEquipmentIcon}
-        <h4>${this.name}</h4>
         <mwc-icon-button
           class="menu-item left"
           @click="${() => this.openLNodeAddWizard()}"
@@ -83,6 +82,7 @@ export let ConductingEquipmentEditor = class extends LitElement {
           @click="${() => this.remove()}}"
         ></mwc-icon-button>
       </div>
+      <h4>${this.name}</h4>
     `;
   }
   static createAction(parent) {
@@ -217,15 +217,11 @@ ConductingEquipmentEditor.styles = css`
     #container {
       color: var(--mdc-theme-on-surface);
       width: 64px;
-      height: 84px;
+      height: 64px;
       margin: auto;
       position: relative;
       opacity: 1;
       transition: all 200ms linear;
-    }
-
-    #container.moving {
-      opacity: 0.3;
     }
 
     #container:focus {
@@ -267,6 +263,7 @@ ConductingEquipmentEditor.styles = css`
       top: 8px;
       left: 8px;
       pointer-events: none;
+      z-index: 1;
       opacity: 0;
     }
 
@@ -301,6 +298,13 @@ ConductingEquipmentEditor.styles = css`
       white-space: nowrap;
       text-overflow: ellipsis;
       margin: 0px;
+      opacity: 1;
+      transition: opacity 200ms linear;
+    }
+
+    #container.moving,
+    #container.moving + h4 {
+      opacity: 0.3;
     }
   `;
 __decorate([

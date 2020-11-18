@@ -447,7 +447,11 @@
 <a name='L388'></a><a href='#L388'>388</a>
 <a name='L389'></a><a href='#L389'>389</a>
 <a name='L390'></a><a href='#L390'>390</a>
-<a name='L391'></a><a href='#L391'>391</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L391'></a><a href='#L391'>391</a>
+<a name='L392'></a><a href='#L392'>392</a>
+<a name='L393'></a><a href='#L393'>393</a>
+<a name='L394'></a><a href='#L394'>394</a>
+<a name='L395'></a><a href='#L395'>395</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -498,7 +502,7 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">84x</span>
+<span class="cline-any cline-yes">74x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
@@ -506,7 +510,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">83x</span>
+<span class="cline-any cline-yes">73x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
@@ -538,8 +542,18 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">83x</span>
+<span class="cline-any cline-yes">73x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -552,16 +566,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -837,6 +841,10 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import {
   customElement,
   LitElement,
@@ -931,7 +939,6 @@ export class ConductingEquipmentEditor extends LitElement {
     return html`
       &lt;div id="container" tabindex="0"&gt;
         ${typeIcons[this.type] ?? <span class="branch-1 cbranch-no" title="branch not covered" >generalConductingEquipmentIcon}</span>
-        &lt;h4&gt;${this.name}&lt;/h4&gt;
         &lt;mwc-icon-button
           class="menu-item left"
           @click="${<span class="fstat-no" title="function not covered" >() =</span>&gt; <span class="cstat-no" title="statement not covered" >this.openLNodeAddWizard()}</span>"
@@ -954,6 +961,7 @@ export class ConductingEquipmentEditor extends LitElement {
           @click="${<span class="fstat-no" title="function not covered" >() =</span>&gt; <span class="cstat-no" title="statement not covered" >this.remove()}</span>}"
         &gt;&lt;/mwc-icon-button&gt;
       &lt;/div&gt;
+      &lt;h4&gt;${this.name}&lt;/h4&gt;
     `;
   }
 &nbsp;
@@ -1140,15 +1148,11 @@ export class ConductingEquipmentEditor extends LitElement {
     #container {
       color: var(--mdc-theme-on-surface);
       width: 64px;
-      height: 84px;
+      height: 64px;
       margin: auto;
       position: relative;
       opacity: 1;
       transition: all 200ms linear;
-    }
-&nbsp;
-    #container.moving {
-      opacity: 0.3;
     }
 &nbsp;
     #container:focus {
@@ -1190,6 +1194,7 @@ export class ConductingEquipmentEditor extends LitElement {
       top: 8px;
       left: 8px;
       pointer-events: none;
+      z-index: 1;
       opacity: 0;
     }
 &nbsp;
@@ -1224,6 +1229,13 @@ export class ConductingEquipmentEditor extends LitElement {
       white-space: nowrap;
       text-overflow: ellipsis;
       margin: 0px;
+      opacity: 1;
+      transition: opacity 200ms linear;
+    }
+&nbsp;
+    #container.moving,
+    #container.moving + h4 {
+      opacity: 0.3;
     }
   `;
 }
@@ -1234,7 +1246,7 @@ export class ConductingEquipmentEditor extends LitElement {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Wed Nov 18 2020 13:04:24 GMT+0000 (Coordinated Universal Time)
+                at Wed Nov 18 2020 19:53:56 GMT+0000 (Coordinated Universal Time)
             </div>
         </div>
         <script src="../../../prettify.js"></script>
