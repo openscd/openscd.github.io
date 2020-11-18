@@ -33,9 +33,6 @@ export default class SubstationEditor extends LitElement {
   get element() {
     return this.doc?.querySelector("Substation") ?? null;
   }
-  get parent() {
-    return this.doc.documentElement;
-  }
   get name() {
     return this.element?.getAttribute("name") ?? "";
   }
@@ -61,7 +58,7 @@ export default class SubstationEditor extends LitElement {
       throw new Error("Will not create a second Substation");
     return {
       new: {
-        parent: this.parent,
+        parent: this.doc.documentElement,
         element: new DOMParser().parseFromString(`<Substation name="${name}"${desc === null ? "" : ` desc="${desc}"`}></Substation>`, "application/xml").documentElement,
         reference: null
       }
@@ -118,7 +115,11 @@ export default class SubstationEditor extends LitElement {
   removeSubstation() {
     if (this.element)
       this.dispatchEvent(newActionEvent({
-        old: {parent: this.parent, element: this.element, reference: null}
+        old: {
+          parent: this.doc.documentElement,
+          element: this.element,
+          reference: null
+        }
       }));
   }
   constructor() {
@@ -166,7 +167,6 @@ export default class SubstationEditor extends LitElement {
         ${this.renderHeader()}
         ${Array.from(this.element?.querySelectorAll("Substation > VoltageLevel") ?? []).map((voltageLevel) => html`<voltage-level-editor
               .element=${voltageLevel}
-              .parent=${this.element}
             ></voltage-level-editor>`)}
       </main>
     `;
@@ -189,9 +189,6 @@ __decorate([
 __decorate([
   property()
 ], SubstationEditor.prototype, "element", 1);
-__decorate([
-  property()
-], SubstationEditor.prototype, "parent", 1);
 __decorate([
   property({type: String})
 ], SubstationEditor.prototype, "name", 1);

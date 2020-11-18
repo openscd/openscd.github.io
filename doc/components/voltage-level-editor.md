@@ -9,7 +9,6 @@
 | `element`   | `element` |           | `Element`        |
 | `header`    |           |           | `Element`        |
 | `name`      | `name`    | readonly  | `string`         |
-| `parent`    | `parent`  |           | `Element`        |
 | `voltage`   | `voltage` | readonly  | `string \| null` |
 
 ## Methods

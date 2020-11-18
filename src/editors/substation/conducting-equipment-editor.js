@@ -51,7 +51,7 @@ export let ConductingEquipmentEditor = class extends LitElement {
     if (this.element)
       this.dispatchEvent(newActionEvent({
         old: {
-          parent: this.parent,
+          parent: this.element.parentElement,
           element: this.element,
           reference: this.element.nextElementSibling
         }
@@ -310,9 +310,6 @@ ConductingEquipmentEditor.styles = css`
 __decorate([
   property({type: Element})
 ], ConductingEquipmentEditor.prototype, "element", 2);
-__decorate([
-  property({type: Element})
-], ConductingEquipmentEditor.prototype, "parent", 2);
 __decorate([
   property({type: String})
 ], ConductingEquipmentEditor.prototype, "name", 1);

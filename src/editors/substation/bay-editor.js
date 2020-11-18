@@ -54,7 +54,7 @@ export let BayEditor = class extends LitElement {
     if (this.element)
       this.dispatchEvent(newActionEvent({
         old: {
-          parent: this.parent,
+          parent: this.element.parentElement,
           element: this.element,
           reference: this.element.nextElementSibling
         }
@@ -93,7 +93,6 @@ export let BayEditor = class extends LitElement {
       <div id="ceContainer">
         ${Array.from(this.element?.querySelectorAll("Bay > ConductingEquipment") ?? []).map((voltageLevel) => html`<conducting-equipment-editor
               .element=${voltageLevel}
-              .parent=${this.element}
             ></conducting-equipment-editor>`)}
       </div>
     </section> `;
@@ -204,9 +203,6 @@ BayEditor.styles = css`
 __decorate([
   property()
 ], BayEditor.prototype, "element", 2);
-__decorate([
-  property()
-], BayEditor.prototype, "parent", 2);
 __decorate([
   property({type: String})
 ], BayEditor.prototype, "name", 1);

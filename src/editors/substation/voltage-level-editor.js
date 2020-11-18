@@ -69,7 +69,11 @@ export let VoltageLevelEditor = class extends LitElement {
   removeAction() {
     if (this.element)
       this.dispatchEvent(newActionEvent({
-        old: {parent: this.parent, element: this.element, reference: null}
+        old: {
+          parent: this.element.parentElement,
+          element: this.element,
+          reference: null
+        }
       }));
   }
   renderHeader() {
@@ -104,10 +108,7 @@ export let VoltageLevelEditor = class extends LitElement {
     return html`<section tabindex="0">
       ${this.renderHeader()}
       <div id="bayContainer">
-        ${Array.from(this.element?.querySelectorAll("VoltageLevel > Bay") ?? []).map((bay) => html`<bay-editor
-              .element=${bay}
-              .parent=${this.element}
-            ></bay-editor>`)}
+        ${Array.from(this.element?.querySelectorAll("VoltageLevel > Bay") ?? []).map((bay) => html`<bay-editor .element=${bay}></bay-editor>`)}
       </div>
     </section>`;
   }
@@ -338,9 +339,6 @@ VoltageLevelEditor.styles = css`
       }
     }
   `;
-__decorate([
-  property()
-], VoltageLevelEditor.prototype, "parent", 2);
 __decorate([
   property()
 ], VoltageLevelEditor.prototype, "element", 2);

@@ -17,14 +17,17 @@ export function startMove(editor, Child, Parent) {
     const targetEditor = e.composedPath().find((e2) => e2 instanceof Child || e2 instanceof Parent);
     if (targetEditor === void 0 || targetEditor === editor)
       return;
-    const destination = targetEditor instanceof Child ? {parent: targetEditor.parent, reference: targetEditor.element} : {parent: targetEditor.element, reference: null};
+    const destination = targetEditor instanceof Child ? {
+      parent: targetEditor.element.parentElement,
+      reference: targetEditor.element
+    } : {parent: targetEditor.element, reference: null};
     if (!destination.parent)
       return;
-    if (editor.parent !== destination.parent || editor.element.nextElementSibling !== destination.reference)
+    if (editor.element.parentElement !== destination.parent || editor.element.nextElementSibling !== destination.reference)
       editor.dispatchEvent(newActionEvent({
         old: {
           element: editor.element,
-          parent: editor.parent,
+          parent: editor.element.parentElement,
           reference: editor.element.nextElementSibling
         },
         new: destination
