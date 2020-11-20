@@ -25,13 +25,13 @@ import {
   newWizardEvent,
   getValue
 } from "../foundation.js";
-import {styles} from "./substation/foundation.js";
+import {selectors, styles} from "./substation/foundation.js";
 import "./substation/voltage-level-editor.js";
 import {VoltageLevelEditor} from "./substation/voltage-level-editor.js";
 import {editlNode} from "./substation/lnodewizard.js";
 export default class SubstationEditor extends LitElement {
   get element() {
-    return this.doc?.querySelector("Substation") ?? null;
+    return this.doc?.querySelector(selectors.Substation) ?? null;
   }
   get name() {
     return this.element?.getAttribute("name") ?? "";
@@ -165,7 +165,7 @@ export default class SubstationEditor extends LitElement {
     return html`
       <main tabindex="0">
         ${this.renderHeader()}
-        ${Array.from(this.element?.querySelectorAll("Substation > VoltageLevel") ?? []).map((voltageLevel) => html`<voltage-level-editor
+        ${Array.from(this.element?.querySelectorAll(selectors.VoltageLevel) ?? []).map((voltageLevel) => html`<voltage-level-editor
               .element=${voltageLevel}
             ></voltage-level-editor>`)}
       </main>

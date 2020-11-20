@@ -1,5 +1,7 @@
 # conducting-equipment-editor
 
+[[`SubstationEditor`]] subeditor for a `ConductingEquipment` element.
+
 ## Properties
 
 | Property    | Attribute | Modifiers | Type      |
@@ -9,7 +11,6 @@
 | `element`   | `element` |           | `Element` |
 | `header`    |           |           | `Element` |
 | `name`      | `name`    | readonly  | `string`  |
-| `type`      | `type`    | readonly  | `string`  |
 
 ## Methods
 

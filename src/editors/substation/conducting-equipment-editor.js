@@ -10,12 +10,12 @@ var __decorate = (decorators, target, key, kind) => {
   return result;
 };
 import {
-  customElement,
   LitElement,
+  css,
+  customElement,
   html,
   property,
-  query,
-  css
+  query
 } from "../../../web_modules/lit-element.js";
 import {translate, get} from "../../../web_modules/lit-translate.js";
 import {
@@ -24,7 +24,7 @@ import {
   getValue
 } from "../../foundation.js";
 import {generalConductingEquipmentIcon} from "../../icons.js";
-import {startMove} from "./foundation.js";
+import {selectors, startMove} from "./foundation.js";
 import {typeIcons, typeNames} from "./conducting-equipment-types.js";
 import {editlNode} from "./lnodewizard.js";
 import {BayEditor} from "./bay-editor.js";
@@ -37,9 +37,6 @@ export let ConductingEquipmentEditor = class extends LitElement {
   }
   get desc() {
     return this.element.getAttribute("desc") ?? "";
-  }
-  get type() {
-    return this.element.getAttribute("type") ?? "missing";
   }
   openEditWizard() {
     this.dispatchEvent(newWizardEvent(ConductingEquipmentEditor.wizard({element: this.element})));
@@ -60,7 +57,7 @@ export let ConductingEquipmentEditor = class extends LitElement {
   render() {
     return html`
       <div id="container" tabindex="0">
-        ${typeIcons[this.type] ?? generalConductingEquipmentIcon}
+        ${typeIcons[this.element.getAttribute("type") ?? ""] ?? generalConductingEquipmentIcon}
         <mwc-icon-button
           class="menu-item left"
           @click="${() => this.openLNodeAddWizard()}"
@@ -156,9 +153,9 @@ export let ConductingEquipmentEditor = class extends LitElement {
       options.element.getAttribute("type")
     ];
     const [reservedValues] = isConductingEquipmentCreateOptions(options) ? [
-      Array.from(options.parent.querySelectorAll("Bay > ConductingEquipment")).map((condEq) => condEq.getAttribute("name"))
+      Array.from(options.parent.querySelectorAll(selectors.ConductingEquipment)).map((condEq) => condEq.getAttribute("name"))
     ] : [
-      Array.from(options.element.parentNode.querySelectorAll("Bay > ConductingEquipment")).map((condEq) => condEq.getAttribute("name")).filter((name2) => name2 !== options.element.getAttribute("name"))
+      Array.from(options.element.parentNode.querySelectorAll(selectors.ConductingEquipment)).map((condEq) => condEq.getAttribute("name")).filter((name2) => name2 !== options.element.getAttribute("name"))
     ];
     return [
       {
@@ -316,9 +313,6 @@ __decorate([
 __decorate([
   property({type: String})
 ], ConductingEquipmentEditor.prototype, "desc", 1);
-__decorate([
-  property({type: String})
-], ConductingEquipmentEditor.prototype, "type", 1);
 __decorate([
   query("h4")
 ], ConductingEquipmentEditor.prototype, "header", 2);

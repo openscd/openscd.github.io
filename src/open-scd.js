@@ -41,6 +41,7 @@ import {Setting as Setting2} from "./Setting.js";
 import {newLogEvent, newPendingStateEvent} from "./foundation.js";
 import {plugin as plugin2} from "./plugin.js";
 import {zeroLineIcon} from "./icons.js";
+import {selectors} from "./editors/substation/foundation.js";
 export let OpenSCD = class extends Setting2(Wizarding2(Waiting2(Validating2(Editing2(Logging2(LitElement)))))) {
   constructor() {
     super();
@@ -101,7 +102,7 @@ export let OpenSCD = class extends Setting2(Wizarding2(Waiting2(Validating2(Edit
     document.onkeydown = this.handleKeyPress;
   }
   get name() {
-    return this.doc.querySelector("Substation")?.getAttribute("name") ?? null;
+    return this.doc.querySelector(selectors.Substation)?.getAttribute("name") ?? null;
   }
   get src() {
     return this.currentSrc;

@@ -24,7 +24,7 @@ import {
   getValue,
   getMultiplier
 } from "../../foundation.js";
-import {startMove, styles} from "./foundation.js";
+import {selectors, startMove, styles} from "./foundation.js";
 import "./bay-editor.js";
 import {BayEditor} from "./bay-editor.js";
 import {editlNode} from "./lnodewizard.js";
@@ -46,7 +46,7 @@ export let VoltageLevelEditor = class extends LitElement {
     return this.element.getAttribute("desc") ?? null;
   }
   get voltage() {
-    const V = this.element.querySelector("VoltageLevel > Voltage");
+    const V = this.element.querySelector(selectors.VoltageLevel + " > Voltage");
     if (V === null)
       return null;
     const v = V.textContent ?? "";
@@ -108,7 +108,7 @@ export let VoltageLevelEditor = class extends LitElement {
     return html`<section tabindex="0">
       ${this.renderHeader()}
       <div id="bayContainer">
-        ${Array.from(this.element?.querySelectorAll("VoltageLevel > Bay") ?? []).map((bay) => html`<bay-editor .element=${bay}></bay-editor>`)}
+        ${Array.from(this.element?.querySelectorAll(selectors.Bay) ?? []).map((bay) => html`<bay-editor .element=${bay}></bay-editor>`)}
       </div>
     </section>`;
   }

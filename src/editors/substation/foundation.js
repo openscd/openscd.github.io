@@ -36,6 +36,14 @@ export function startMove(editor, Child, Parent) {
   window.addEventListener("click", moveToTarget, true);
   window.addEventListener("keydown", moveToTarget, true);
 }
+const substationPath = [
+  ":root",
+  "Substation",
+  "VoltageLevel",
+  "Bay",
+  "ConductingEquipment"
+];
+export const selectors = Object.fromEntries(substationPath.map((e, i, a) => [e, a.slice(0, i + 1).join(" > ")]));
 export const styles = css`
   main,
   section {

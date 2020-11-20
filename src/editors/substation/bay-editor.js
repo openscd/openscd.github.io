@@ -10,19 +10,19 @@ var __decorate = (decorators, target, key, kind) => {
   return result;
 };
 import {
-  customElement,
   LitElement,
+  css,
+  customElement,
   html,
   property,
-  css,
   query
 } from "../../../web_modules/lit-element.js";
+import {get, translate} from "../../../web_modules/lit-translate.js";
 import {
   newWizardEvent,
   newActionEvent,
   getValue
 } from "../../foundation.js";
-import {get, translate} from "../../../web_modules/lit-translate.js";
 import {startMove, styles} from "./foundation.js";
 import "./conducting-equipment-editor.js";
 import {ConductingEquipmentEditor} from "./conducting-equipment-editor.js";
@@ -91,7 +91,7 @@ export let BayEditor = class extends LitElement {
     return html`<section tabindex="0">
       ${this.renderHeader()}
       <div id="ceContainer">
-        ${Array.from(this.element?.querySelectorAll("Bay > ConductingEquipment") ?? []).map((voltageLevel) => html`<conducting-equipment-editor
+        ${Array.from(this.element?.querySelectorAll(":root > Substation > VoltageLevel > Bay > ConductingEquipment") ?? []).map((voltageLevel) => html`<conducting-equipment-editor
               .element=${voltageLevel}
             ></conducting-equipment-editor>`)}
       </div>
@@ -210,11 +210,11 @@ __decorate([
   property({type: String})
 ], BayEditor.prototype, "desc", 1);
 __decorate([
-  query("section")
-], BayEditor.prototype, "container", 2);
-__decorate([
   query("h3")
 ], BayEditor.prototype, "header", 2);
+__decorate([
+  query("section")
+], BayEditor.prototype, "container", 2);
 BayEditor = __decorate([
   customElement("bay-editor")
 ], BayEditor);

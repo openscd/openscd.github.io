@@ -9,6 +9,8 @@ var __decorate = (decorators, target, key, kind) => {
     __defProp(target, key, result);
   return result;
 };
+import {LitElement, property} from "../web_modules/lit-element.js";
+import {get} from "../web_modules/lit-translate.js";
 import {
   isCreate,
   isDelete,
@@ -16,8 +18,6 @@ import {
   isUpdate,
   newLogEvent
 } from "./foundation.js";
-import {LitElement, property} from "../web_modules/lit-element.js";
-import {get} from "../web_modules/lit-translate.js";
 export function newEmptySCD() {
   return document.implementation.createDocument("http://www.iec.ch/61850/2003/SCL", "SCL", null);
 }
@@ -31,7 +31,7 @@ export function Editing(Base) {
     checkCreateValidity(create) {
       if (create.checkValidity !== void 0)
         return create.checkValidity();
-      const invalid = create.new.element.hasAttribute("name") && create.new.parent.querySelectorAll(`${create.new.element.tagName}[name="${create.new.element.getAttribute("name")}"]`).length > 0;
+      const invalid = create.new.element.hasAttribute("name") && Array.from(create.new.parent.children).some((elm) => elm.tagName === create.new.element.tagName && elm.getAttribute("name") === create.new.element.getAttribute("name"));
       if (invalid)
         this.dispatchEvent(newLogEvent({
           kind: "error",
@@ -71,7 +71,7 @@ export function Editing(Base) {
     checkMoveValidity(move) {
       if (move.checkValidity !== void 0)
         return move.checkValidity();
-      const invalid = move.old.element.hasAttribute("name") && move.new.parent !== move.old.parent && move.new.parent.querySelectorAll(`${move.old.element.tagName}[name="${move.old.element.getAttribute("name")}"]`).length > 0;
+      const invalid = move.old.element.hasAttribute("name") && move.new.parent !== move.old.parent && Array.from(move.new.parent.children).some((elm) => elm.tagName === move.old.element.tagName && elm.getAttribute("name") === move.old.element.getAttribute("name"));
       if (invalid)
         this.dispatchEvent(newLogEvent({
           kind: "error",
@@ -101,7 +101,7 @@ export function Editing(Base) {
     checkUpdateValidity(update) {
       if (update.checkValidity !== void 0)
         return update.checkValidity();
-      const invalid = update.new.element.hasAttribute("name") && update.new.element.getAttribute("name") !== update.old.element.getAttribute("name") && update.old.element.parentElement?.querySelectorAll(`${update.new.element.tagName}[name="${update.new.element.getAttribute("name")}"]`)?.length;
+      const invalid = update.new.element.hasAttribute("name") && update.new.element.getAttribute("name") !== update.old.element.getAttribute("name") && Array.from(update.old.element.parentElement?.children ?? []).some((elm) => elm.tagName === update.new.element.tagName && elm.getAttribute("name") === update.new.element.getAttribute("name"));
       if (invalid)
         this.dispatchEvent(newLogEvent({
           kind: "error",
