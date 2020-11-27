@@ -14,8 +14,8 @@
 
 ## Methods
 
-| Method               | Type       |
-|----------------------|------------|
-| `openAddLNodeWizard` | `(): void` |
-| `openEditWizard`     | `(): void` |
-| `remove`             | `(): void` |
+| Method            | Type       |
+|-------------------|------------|
+| `openEditWizard`  | `(): void` |
+| `openLNodeWizard` | `(): void` |
+| `remove`          | `(): void` |

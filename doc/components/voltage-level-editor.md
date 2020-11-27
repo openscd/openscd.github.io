@@ -1,5 +1,7 @@
 # voltage-level-editor
 
+[[`SubstationEditor`]] subeditor for a `VoltageLevel` element.
+
 ## Properties
 
 | Property    | Attribute | Modifiers | Type             |
@@ -18,5 +20,5 @@
 | `openBayWizard`   | `(): void`           |
 | `openEditWizard`  | `(): void`           |
 | `openLNodeWizard` | `(): void`           |
-| `removeAction`    | `(): void`           |
+| `remove`          | `(): void`           |
 | `renderHeader`    | `(): TemplateResult` |

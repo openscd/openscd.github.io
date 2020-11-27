@@ -40,7 +40,7 @@ export let ConductingEquipmentEditor = class extends LitElement {
   openEditWizard() {
     this.dispatchEvent(newWizardEvent(ConductingEquipmentEditor.wizard({element: this.element})));
   }
-  openAddLNodeWizard() {
+  openLNodeWizard() {
     this.dispatchEvent(newWizardEvent(editlNode(this.element)));
   }
   remove() {
@@ -59,7 +59,7 @@ export let ConductingEquipmentEditor = class extends LitElement {
         ${typeIcon(this.element)}
         <mwc-icon-button
           class="menu-item left"
-          @click="${() => this.openAddLNodeWizard()}"
+          @click="${() => this.openLNodeWizard()}"
           icon="account_tree"
         ></mwc-icon-button>
         <mwc-icon-button

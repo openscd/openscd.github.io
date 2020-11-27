@@ -38,6 +38,34 @@ const initial = {
   Voltage: "110",
   multiplier: "k"
 };
+function getVoltageAction(oldVoltage, Voltage, multiplier, voltageLevel) {
+  if (oldVoltage === null)
+    return {
+      new: {
+        parent: voltageLevel,
+        element: new DOMParser().parseFromString(`<Voltage unit="V"${multiplier === null ? "" : `multiplier="${multiplier}"`}>${Voltage === null ? "" : Voltage}</Voltage>`, "application/xml").documentElement,
+        reference: voltageLevel.firstElementChild
+      }
+    };
+  if (Voltage === null)
+    return {
+      old: {
+        parent: voltageLevel,
+        element: oldVoltage,
+        reference: oldVoltage.nextElementSibling
+      }
+    };
+  const newVoltage = oldVoltage.cloneNode(false);
+  newVoltage.textContent = Voltage;
+  if (multiplier === null)
+    newVoltage.removeAttribute("multiplier");
+  else
+    newVoltage.setAttribute("multiplier", multiplier);
+  return {
+    old: {element: oldVoltage},
+    new: {element: newVoltage}
+  };
+}
 export let VoltageLevelEditor = class extends LitElement {
   get name() {
     return this.element.getAttribute("name") ?? "";
@@ -66,7 +94,7 @@ export let VoltageLevelEditor = class extends LitElement {
   openLNodeWizard() {
     this.dispatchEvent(newWizardEvent(editlNode(this.element)));
   }
-  removeAction() {
+  remove() {
     if (this.element)
       this.dispatchEvent(newActionEvent({
         old: {
@@ -99,7 +127,7 @@ export let VoltageLevelEditor = class extends LitElement {
         ></mwc-icon-button>
         <mwc-icon-button
           icon="delete"
-          @click=${() => this.removeAction()}
+          @click=${() => this.remove()}
         ></mwc-icon-button>
       </nav>
     </h2>`;
@@ -169,41 +197,7 @@ export let VoltageLevelEditor = class extends LitElement {
       if (Voltage === (element.querySelector("VoltageLevel > Voltage")?.textContent?.trim() ?? null) && multiplier === (element.querySelector("VoltageLevel > Voltage")?.getAttribute("multiplier") ?? null)) {
         voltageAction = null;
       } else {
-        const oldVoltage = element.querySelector("VoltageLevel > Voltage");
-        if (oldVoltage === null) {
-          const newVoltage = new DOMParser().parseFromString('<Voltage unit="V"></Voltage>', "application/xml").documentElement;
-          newVoltage.textContent = Voltage;
-          if (multiplier !== null)
-            newVoltage.setAttribute("multiplier", multiplier);
-          voltageAction = {
-            new: {
-              parent: voltageLevelAction?.new.element ?? element,
-              element: newVoltage,
-              reference: element.firstElementChild
-            }
-          };
-        } else {
-          if (Voltage === null)
-            voltageAction = {
-              old: {
-                parent: voltageLevelAction?.new.element ?? element,
-                element: oldVoltage,
-                reference: oldVoltage.nextElementSibling
-              }
-            };
-          else {
-            const newVoltage = oldVoltage.cloneNode(false);
-            newVoltage.textContent = Voltage;
-            if (multiplier === null)
-              newVoltage.removeAttribute("multiplier");
-            else
-              newVoltage.setAttribute("multiplier", multiplier);
-            voltageAction = {
-              old: {element: oldVoltage},
-              new: {element: newVoltage}
-            };
-          }
-        }
+        voltageAction = getVoltageAction(element.querySelector("VoltageLevel > Voltage"), Voltage, multiplier, voltageLevelAction?.new.element ?? element);
       }
       if (voltageLevelAction || voltageAction)
         wizard.close();
@@ -352,11 +346,11 @@ __decorate([
   property()
 ], VoltageLevelEditor.prototype, "voltage", 1);
 __decorate([
-  query("section")
-], VoltageLevelEditor.prototype, "container", 2);
-__decorate([
   query("h2")
 ], VoltageLevelEditor.prototype, "header", 2);
+__decorate([
+  query("section")
+], VoltageLevelEditor.prototype, "container", 2);
 VoltageLevelEditor = __decorate([
   customElement("voltage-level-editor")
 ], VoltageLevelEditor);
