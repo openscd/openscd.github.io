@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">80% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>2/2</span>
+                <span class='fraction'>4/5</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">50% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/0</span>
+                <span class='fraction'>5/10</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">66.67% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/0</span>
+                <span class='fraction'>2/3</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">80% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>2/2</span>
+                <span class='fraction'>4/5</span>
             </div>
         
             
@@ -102,8 +102,56 @@
 <a name='L43'></a><a href='#L43'>43</a>
 <a name='L44'></a><a href='#L44'>44</a>
 <a name='L45'></a><a href='#L45'>45</a>
-<a name='L46'></a><a href='#L46'>46</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L46'></a><a href='#L46'>46</a>
+<a name='L47'></a><a href='#L47'>47</a>
+<a name='L48'></a><a href='#L48'>48</a>
+<a name='L49'></a><a href='#L49'>49</a>
+<a name='L50'></a><a href='#L50'>50</a>
+<a name='L51'></a><a href='#L51'>51</a>
+<a name='L52'></a><a href='#L52'>52</a>
+<a name='L53'></a><a href='#L53'>53</a>
+<a name='L54'></a><a href='#L54'>54</a>
+<a name='L55'></a><a href='#L55'>55</a>
+<a name='L56'></a><a href='#L56'>56</a>
+<a name='L57'></a><a href='#L57'>57</a>
+<a name='L58'></a><a href='#L58'>58</a>
+<a name='L59'></a><a href='#L59'>59</a>
+<a name='L60'></a><a href='#L60'>60</a>
+<a name='L61'></a><a href='#L61'>61</a>
+<a name='L62'></a><a href='#L62'>62</a>
+<a name='L63'></a><a href='#L63'>63</a>
+<a name='L64'></a><a href='#L64'>64</a>
+<a name='L65'></a><a href='#L65'>65</a>
+<a name='L66'></a><a href='#L66'>66</a>
+<a name='L67'></a><a href='#L67'>67</a>
+<a name='L68'></a><a href='#L68'>68</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">73x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">73x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -115,10 +163,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -148,22 +192,42 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { TemplateResult } from 'lit-html';
+import { get } from 'lit-translate';
 &nbsp;
 import {
   disconnectorIcon,
   circuitBreakerIcon,
   currentTransformerIcon,
+  earthSwitchIcon,
+  generalConductingEquipmentIcon,
   voltageTransformerIcon,
 } from '../../icons.js';
 &nbsp;
-export const typeIcons: Partial&lt;Record&lt;string, TemplateResult&gt;&gt; = {
+function typeStr(condEq: Element): string {
+  return condEq.getAttribute('type') === 'DIS' &amp;&amp;
+    condEq.querySelector('Terminal')?.getAttribute('cNodeName') === 'grounded'
+    ? <span class="branch-0 cbranch-no" title="branch not covered" >'ERS'</span>
+    : condEq.getAttribute('type') ?? <span class="branch-1 cbranch-no" title="branch not covered" >'';</span>
+}
+&nbsp;
+export function typeIcon(condEq: Element): TemplateResult {
+  return typeIcons[typeStr(condEq)] ?? <span class="branch-1 cbranch-no" title="branch not covered" >generalConductingEquipmentIcon;</span>
+}
+&nbsp;
+export function <span class="fstat-no" title="function not covered" >typeName(</span>condEq: Element): string {
+<span class="cstat-no" title="statement not covered" >  return types[typeStr(condEq)] ?? get('conductingequipment.unknownType');</span>
+}
+&nbsp;
+const typeIcons: Partial&lt;Record&lt;string, TemplateResult&gt;&gt; = {
   CBR: circuitBreakerIcon,
   DIS: disconnectorIcon,
   CTR: currentTransformerIcon,
   VTR: voltageTransformerIcon,
+  ERS: earthSwitchIcon,
 };
 &nbsp;
-export const typeNames: Partial&lt;Record&lt;string, string&gt;&gt; = {
+export const types: Partial&lt;Record&lt;string, string&gt;&gt; = {
+  // standard
   CBR: 'Circuit Breaker',
   DIS: 'Disconnector',
   CTR: 'Current Transformer',
@@ -171,7 +235,7 @@ export const typeNames: Partial&lt;Record&lt;string, string&gt;&gt; = {
   GEN: 'Genarator',
   CAP: 'Capacitor Bank',
   REA: 'Reactor',
-  CON: 'Coverter',
+  CON: 'Converter',
   MOT: 'Motor',
   FAN: 'Fan',
   PMP: 'Pump',
@@ -181,16 +245,18 @@ export const typeNames: Partial&lt;Record&lt;string, string&gt;&gt; = {
   BAT: 'Battery',
   BSH: 'Bushing',
   CAB: 'Power Cable',
-  GIL: 'Gas Insulates Line',
-  LIN: 'Pwer Overhead Line',
+  GIL: 'Gas Insulated Line',
+  LIN: 'Power Overhead Line',
   RES: 'Neutral Resistor',
-  RRC: 'Rotating REactive Component',
+  RRC: 'Rotating Reactive Component',
   SAR: 'Surge Arrester',
-  SCR: 'Semiconductor controlled rectifier',
+  SCR: 'Semiconductor Controlled Rectifier',
   SMC: 'Synchronous Machine',
-  TCF: 'Thyristor controlled frequency converter',
-  TCR: 'Thyristor controlled reactive component',
-  IFL: 'Infeeding line',
+  TCF: 'Thyristor Controlled Frequency Converter',
+  TCR: 'Thyristor Controlled Reactive Component',
+  IFL: 'Infeeding Line',
+  // custom
+  ERS: 'Earth Switch',
 };
 &nbsp;</pre></td></tr></table></pre>
 
@@ -199,7 +265,7 @@ export const typeNames: Partial&lt;Record&lt;string, string&gt;&gt; = {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Fri Nov 27 2020 13:22:35 GMT+0000 (Coordinated Universal Time)
+                at Fri Nov 27 2020 15:02:23 GMT+0000 (Coordinated Universal Time)
             </div>
         </div>
         <script src="../../../prettify.js"></script>

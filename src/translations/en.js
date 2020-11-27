@@ -99,7 +99,8 @@ export const en = {
         add: "Add Conducting Equipment",
         edit: "Edit Conducting Equipment"
       }
-    }
+    },
+    unknownType: "Unknown type"
   },
   lnode: {
     wizard: {

@@ -99,7 +99,8 @@ export const de = {
         add: "Prim\xE4relement hinzuf\xFCgen",
         edit: "Prim\xE4relement bearbeiten"
       }
-    }
+    },
+    unknownType: "Unbekannter Typ"
   },
   lnode: {
     wizard: {
