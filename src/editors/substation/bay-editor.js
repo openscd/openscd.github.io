@@ -41,7 +41,7 @@ export let BayEditor = class extends LitElement {
   openEditWizard() {
     this.dispatchEvent(newWizardEvent(BayEditor.wizard({element: this.element})));
   }
-  openLNodeAddWizard() {
+  openAddLNodeWizard() {
     this.dispatchEvent(newWizardEvent(editlNode(this.element)));
   }
   openConductingEquipmentWizard() {
@@ -50,7 +50,7 @@ export let BayEditor = class extends LitElement {
     const event = newWizardEvent(ConductingEquipmentEditor.wizard({parent: this.element}));
     this.dispatchEvent(event);
   }
-  removeAction() {
+  remove() {
     if (this.element)
       this.dispatchEvent(newActionEvent({
         old: {
@@ -70,7 +70,7 @@ export let BayEditor = class extends LitElement {
       <nav>
         <mwc-icon-button
           icon="account_tree"
-          @click="${() => this.openLNodeAddWizard()}"
+          @click="${() => this.openAddLNodeWizard()}"
         ></mwc-icon-button>
         <mwc-icon-button
           icon="edit"
@@ -82,7 +82,7 @@ export let BayEditor = class extends LitElement {
         ></mwc-icon-button>
         <mwc-icon-button
           icon="delete"
-          @click=${() => this.removeAction()}
+          @click=${() => this.remove()}
         ></mwc-icon-button>
       </nav>
     </h3>`;
@@ -117,41 +117,40 @@ export let BayEditor = class extends LitElement {
   }
   static updateAction(element) {
     return (inputs, wizard) => {
-      const name = inputs.find((i) => i.label === "name").value;
+      const name = getValue(inputs.find((i) => i.label === "name"));
       const desc = getValue(inputs.find((i) => i.label === "desc"));
-      let bayAction;
-      if (name === element.getAttribute("name") && desc === element.getAttribute("desc")) {
-        bayAction = null;
-      } else {
-        const newElement = element.cloneNode(false);
-        newElement.setAttribute("name", name);
-        if (desc === null)
-          newElement.removeAttribute("desc");
-        else
-          newElement.setAttribute("desc", desc);
-        bayAction = {old: {element}, new: {element: newElement}};
-      }
-      if (bayAction)
-        wizard.close();
-      const actions = [];
-      if (bayAction)
-        actions.push(bayAction);
-      return actions;
+      if (name === element.getAttribute("name") && desc === element.getAttribute("desc"))
+        return [];
+      const newElement = element.cloneNode(false);
+      newElement.setAttribute("name", name);
+      if (desc === null)
+        newElement.removeAttribute("desc");
+      else
+        newElement.setAttribute("desc", desc);
+      wizard.close();
+      return [{old: {element}, new: {element: newElement}}];
     };
   }
   static wizard(options) {
-    const [heading, actionName, actionIcon, action] = isBayCreateOptions(options) ? [
+    const [
+      heading,
+      actionName,
+      actionIcon,
+      action,
+      name,
+      desc
+    ] = isBayCreateOptions(options) ? [
       get("bay.wizard.title.add"),
       get("add"),
       "add",
-      BayEditor.createAction(options.parent)
+      BayEditor.createAction(options.parent),
+      "",
+      null
     ] : [
       get("bay.wizard.title.edit"),
       get("save"),
       "edit",
-      BayEditor.updateAction(options.element)
-    ];
-    const [name, desc] = isBayCreateOptions(options) ? ["", null] : [
+      BayEditor.updateAction(options.element),
       options.element.getAttribute("name"),
       options.element.getAttribute("desc")
     ];

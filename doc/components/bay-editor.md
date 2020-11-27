@@ -16,8 +16,8 @@
 
 | Method                          | Type                 |
 |---------------------------------|----------------------|
+| `openAddLNodeWizard`            | `(): void`           |
 | `openConductingEquipmentWizard` | `(): void`           |
 | `openEditWizard`                | `(): void`           |
-| `openLNodeAddWizard`            | `(): void`           |
-| `removeAction`                  | `(): void`           |
+| `remove`                        | `(): void`           |
 | `renderHeader`                  | `(): TemplateResult` |
