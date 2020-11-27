@@ -9,7 +9,11 @@ var __decorate = (decorators, target, key, kind) => {
     __defProp(target, key, result);
   return result;
 };
-import {html, internalProperty} from "../web_modules/lit-element.js";
+import {
+  html,
+  internalProperty,
+  query
+} from "../web_modules/lit-element.js";
 import {
   ifImplemented
 } from "./foundation.js";
@@ -36,5 +40,8 @@ export function Wizarding(Base) {
   __decorate([
     internalProperty()
   ], WizardingElement.prototype, "workflow", 2);
+  __decorate([
+    query("wizard-dialog")
+  ], WizardingElement.prototype, "wizardUI", 2);
   return WizardingElement;
 }

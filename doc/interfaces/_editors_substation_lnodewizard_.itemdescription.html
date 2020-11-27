@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>WizardDetail | open-scd</title>
+	<title>itemDescription | open-scd</title>
 	<meta name="description" content="Documentation for open-scd">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -56,13 +56,13 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="../modules/_foundation_.html">&quot;foundation&quot;</a>
+					<a href="../modules/_editors_substation_lnodewizard_.html">&quot;editors/substation/lnodewizard&quot;</a>
 				</li>
 				<li>
-					<a href="_foundation_.wizarddetail.html">WizardDetail</a>
+					<a href="_editors_substation_lnodewizard_.itemdescription.html">itemDescription</a>
 				</li>
 			</ul>
-			<h1>Interface WizardDetail</h1>
+			<h1>Interface itemDescription</h1>
 		</div>
 	</div>
 </header>
@@ -72,7 +72,7 @@
 			<section class="tsd-panel tsd-comment">
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p>If <code>wizard === null</code>, close the current wizard, else queue <code>wizard</code>.</p>
+						<p>Description of a <code>ListItem</code> representing an <code>IED</code>, <code>LDevice</code>, or <code>LN[0]</code></p>
 					</div>
 				</div>
 			</section>
@@ -80,7 +80,7 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">WizardDetail</span>
+						<span class="target">itemDescription</span>
 					</li>
 				</ul>
 			</section>
@@ -88,24 +88,46 @@
 				<h2>Index</h2>
 				<section class="tsd-panel tsd-index-panel">
 					<div class="tsd-index-content">
-						<section class="tsd-index-section ">
+						<section class="tsd-index-section tsd-is-not-exported">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_foundation_.wizarddetail.html#wizard" class="tsd-kind-icon">wizard</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported"><a href="_editors_substation_lnodewizard_.itemdescription.html#disabled" class="tsd-kind-icon">disabled</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported"><a href="_editors_substation_lnodewizard_.itemdescription.html#selected" class="tsd-kind-icon">selected</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported"><a href="_editors_substation_lnodewizard_.itemdescription.html#value" class="tsd-kind-icon">value</a></li>
 							</ul>
 						</section>
 					</div>
 				</section>
 			</section>
-			<section class="tsd-panel-group tsd-member-group ">
+			<section class="tsd-panel-group tsd-member-group tsd-is-not-exported">
 				<h2>Properties</h2>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="wizard" class="tsd-anchor"></a>
-					<h3>wizard</h3>
-					<div class="tsd-signature tsd-kind-icon">wizard<span class="tsd-signature-symbol">:</span> <a href="../modules/_foundation_.html#wizard" class="tsd-signature-type">Wizard</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span></div>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported">
+					<a name="disabled" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> disabled</h3>
+					<div class="tsd-signature tsd-kind-icon">disabled<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">false</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">true</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/944e2cf/src/foundation.ts#L156">src/foundation.ts:156</a></li>
+							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/944e2cf/src/editors/substation/lnodewizard.ts#L41">src/editors/substation/lnodewizard.ts:41</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported">
+					<a name="selected" class="tsd-anchor"></a>
+					<h3>selected</h3>
+					<div class="tsd-signature tsd-kind-icon">selected<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/944e2cf/src/editors/substation/lnodewizard.ts#L40">src/editors/substation/lnodewizard.ts:40</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported">
+					<a name="value" class="tsd-anchor"></a>
+					<h3>value</h3>
+					<div class="tsd-signature tsd-kind-icon">value<span class="tsd-signature-symbol">:</span> <a href="_editors_substation_lnodewizard_.lnvalue.html" class="tsd-signature-type">LNValue</a><span class="tsd-signature-symbol"> | </span><a href="_editors_substation_lnodewizard_.ldvalue.html" class="tsd-signature-type">LDValue</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/944e2cf/src/editors/substation/lnodewizard.ts#L39">src/editors/substation/lnodewizard.ts:39</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -150,19 +172,14 @@
 					<li class=" tsd-kind-module">
 						<a href="../modules/_editors_substation_foundation_.html">&quot;editors/substation/foundation&quot;</a>
 					</li>
-					<li class=" tsd-kind-module">
+					<li class="current tsd-kind-module">
 						<a href="../modules/_editors_substation_lnodewizard_.html">&quot;editors/substation/lnodewizard&quot;</a>
 					</li>
 					<li class=" tsd-kind-module">
 						<a href="../modules/_editors_substation_voltage_level_editor_.html">&quot;editors/substation/voltage-<wbr>level-<wbr>editor&quot;</a>
 					</li>
-					<li class="current tsd-kind-module">
+					<li class=" tsd-kind-module">
 						<a href="../modules/_foundation_.html">&quot;foundation&quot;</a>
-						<ul>
-							<li class=" tsd-kind-namespace tsd-parent-kind-module tsd-is-not-exported">
-								<a href="../modules/_foundation_.__global.html">__global</a>
-							</li>
-						</ul>
 					</li>
 					<li class=" tsd-kind-module">
 						<a href="../modules/_icons_.html">&quot;icons&quot;</a>
@@ -198,18 +215,72 @@
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
+					<li class=" tsd-kind-interface tsd-parent-kind-module tsd-is-not-exported">
+						<a href="_editors_substation_lnodewizard_.ldvalue.html" class="tsd-kind-icon">LDValue</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-module tsd-is-not-exported">
+						<a href="_editors_substation_lnodewizard_.lnvalue.html" class="tsd-kind-icon">LNValue</a>
+					</li>
 				</ul>
 				<ul class="current">
-					<li class="current tsd-kind-interface tsd-parent-kind-module">
-						<a href="_foundation_.wizarddetail.html" class="tsd-kind-icon">Wizard<wbr>Detail</a>
+					<li class="current tsd-kind-interface tsd-parent-kind-module tsd-is-not-exported">
+						<a href="_editors_substation_lnodewizard_.itemdescription.html" class="tsd-kind-icon">item<wbr>Description</a>
 						<ul>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="_foundation_.wizarddetail.html#wizard" class="tsd-kind-icon">wizard</a>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported">
+								<a href="_editors_substation_lnodewizard_.itemdescription.html#disabled" class="tsd-kind-icon">disabled</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported">
+								<a href="_editors_substation_lnodewizard_.itemdescription.html#selected" class="tsd-kind-icon">selected</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported">
+								<a href="_editors_substation_lnodewizard_.itemdescription.html#value" class="tsd-kind-icon">value</a>
 							</li>
 						</ul>
 					</li>
 				</ul>
 				<ul class="after-current">
+					<li class=" tsd-kind-variable tsd-parent-kind-module tsd-is-not-exported">
+						<a href="../modules/_editors_substation_lnodewizard_.html#apldinst" class="tsd-kind-icon">APld<wbr>Inst</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-module tsd-is-not-exported">
+						<a href="../modules/_editors_substation_lnodewizard_.html#comparedescription" class="tsd-kind-icon">compare<wbr>Description</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-module tsd-is-not-exported">
+						<a href="../modules/_editors_substation_lnodewizard_.html#createaction" class="tsd-kind-icon">create<wbr>Action</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-module tsd-is-not-exported">
+						<a href="../modules/_editors_substation_lnodewizard_.html#deleteaction" class="tsd-kind-icon">delete<wbr>Action</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-module">
+						<a href="../modules/_editors_substation_lnodewizard_.html#editlnode" class="tsd-kind-icon">editl<wbr>Node</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-module">
+						<a href="../modules/_editors_substation_lnodewizard_.html#getlnode" class="tsd-kind-icon">getLNode</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-module tsd-is-not-exported">
+						<a href="../modules/_editors_substation_lnodewizard_.html#getlistcontainer" class="tsd-kind-icon">get<wbr>List<wbr>Container</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-module">
+						<a href="../modules/_editors_substation_lnodewizard_.html#lnodewizardaction" class="tsd-kind-icon">l<wbr>Node<wbr>Wizard<wbr>Action</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-module tsd-is-not-exported">
+						<a href="../modules/_editors_substation_lnodewizard_.html#onfilterinput" class="tsd-kind-icon">on<wbr>Filter<wbr>Input</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-module tsd-is-not-exported">
+						<a href="../modules/_editors_substation_lnodewizard_.html#oniedselect" class="tsd-kind-icon">onIEDSelect</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-module tsd-is-not-exported">
+						<a href="../modules/_editors_substation_lnodewizard_.html#onldselect" class="tsd-kind-icon">onLDSelect</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-module tsd-is-not-exported">
+						<a href="../modules/_editors_substation_lnodewizard_.html#renderiedpage" class="tsd-kind-icon">renderIEDPage</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-module tsd-is-not-exported">
+						<a href="../modules/_editors_substation_lnodewizard_.html#renderldpage" class="tsd-kind-icon">render<wbr>LdPage</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-module tsd-is-not-exported">
+						<a href="../modules/_editors_substation_lnodewizard_.html#renderlnpage" class="tsd-kind-icon">render<wbr>LnPage</a>
+					</li>
 				</ul>
 			</nav>
 		</div>

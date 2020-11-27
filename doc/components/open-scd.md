@@ -37,6 +37,7 @@ Open Substation Configuration Designer.
 | `undo`           |                 |           |                                                  |                                                  |                                                  |
 | `validated`      | `validated`     |           | `Promise<ValidationResult>`                      | "Promise.resolve({\n      file: 'untitled.scd',\n      valid: true,\n      code: 0,\n    })" |                                                  |
 | `waiting`        | `waiting`       |           | `boolean`                                        | false                                            | Whether the element is currently waiting for some async work. |
+| `wizardUI`       |                 |           | `WizardDialog`                                   |                                                  |                                                  |
 | `workDone`       |                 |           | `Promise<PromiseSettledResult<string>[]>`        | "Promise.allSettled(this.work)"                  | A promise which resolves once all currently pending work is done. |
 | `workflow`       |                 |           | `Wizard[]`                                       | []                                               | FIFO queue of [[`Wizard`]]s to display.          |
 

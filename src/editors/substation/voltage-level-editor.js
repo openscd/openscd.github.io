@@ -86,7 +86,7 @@ export let VoltageLevelEditor = class extends LitElement {
       ></mwc-icon-button>
       <nav>
         <mwc-icon-button
-          icon="device_hub"
+          icon="account_tree"
           @click=${() => this.openLNodeWizard()}
         ></mwc-icon-button>
         <mwc-icon-button

@@ -81,6 +81,15 @@ export function newPendingStateEvent(promise, eventInitDict) {
     ...eventInitDict
   });
 }
+export function referencePath(element) {
+  let path = "";
+  let nextParent = element.parentElement;
+  while (nextParent?.getAttribute("name")) {
+    path = "/" + nextParent.getAttribute("name") + path;
+    nextParent = nextParent.parentElement;
+  }
+  return path;
+}
 export const ifImplemented = directive((rendered) => (part) => {
   if (Object.keys(rendered).length)
     part.setValue(rendered);
@@ -89,4 +98,7 @@ export const ifImplemented = directive((rendered) => (part) => {
 });
 export function unreachable(message) {
   throw new Error(message);
+}
+export function crossProduct(...arrays) {
+  return arrays.reduce((a, b) => a.flatMap((d) => b.map((e) => [d, e].flat())), [[]]);
 }
