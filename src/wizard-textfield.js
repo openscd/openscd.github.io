@@ -97,6 +97,7 @@ export let WizardTextField = class extends TextField {
       this.setCustomValidity(get("textfield.unique"));
       return false;
     }
+    this.setCustomValidity("");
     return super.checkValidity();
   }
   renderUnitSelector() {
