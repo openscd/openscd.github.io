@@ -153,6 +153,7 @@
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="_wizard_textfield_.wizardtextfield.html#firstchild" class="tsd-kind-icon">first<wbr>Child</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="_wizard_textfield_.wizardtextfield.html#firstelementchild" class="tsd-kind-icon">first<wbr>Element<wbr>Child</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-overwrite tsd-is-inherited"><a href="_wizard_textfield_.wizardtextfield.html#floatinglabelfoundation" class="tsd-kind-icon">floating<wbr>Label<wbr>Foundation</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-protected"><a href="_wizard_textfield_.wizardtextfield.html#focused" class="tsd-kind-icon">focused</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-overwrite tsd-is-inherited tsd-is-protected"><a href="_wizard_textfield_.wizardtextfield.html#formelement" class="tsd-kind-icon">form<wbr>Element</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="_wizard_textfield_.wizardtextfield.html#helper" class="tsd-kind-icon">helper</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="_wizard_textfield_.wizardtextfield.html#helperpersistent" class="tsd-kind-icon">helper<wbr>Persistent</a></li>
@@ -343,14 +344,12 @@
 						<section class="tsd-index-section ">
 							<h3>Accessors</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-get-signature tsd-parent-kind-class tsd-is-inherited tsd-is-protected"><a href="_wizard_textfield_.wizardtextfield.html#charcountervisible" class="tsd-kind-icon">char<wbr>Counter<wbr>Visible</a></li>
 								<li class="tsd-kind-get-signature tsd-parent-kind-class tsd-is-inherited tsd-is-protected"><a href="_wizard_textfield_.wizardtextfield.html#hasupdated" class="tsd-kind-icon">has<wbr>Updated</a></li>
 								<li class="tsd-kind-accessor tsd-parent-kind-class"><a href="_wizard_textfield_.wizardtextfield.html#maybevalue" class="tsd-kind-icon">maybe<wbr>Value</a></li>
 								<li class="tsd-kind-accessor tsd-parent-kind-class"><a href="_wizard_textfield_.wizardtextfield.html#multiplier" class="tsd-kind-icon">multiplier</a></li>
 								<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-private"><a href="_wizard_textfield_.wizardtextfield.html#null" class="tsd-kind-icon">null</a></li>
 								<li class="tsd-kind-get-signature tsd-parent-kind-class tsd-is-inherited"><a href="_wizard_textfield_.wizardtextfield.html#selectionend" class="tsd-kind-icon">selection<wbr>End</a></li>
 								<li class="tsd-kind-get-signature tsd-parent-kind-class tsd-is-inherited"><a href="_wizard_textfield_.wizardtextfield.html#selectionstart" class="tsd-kind-icon">selection<wbr>Start</a></li>
-								<li class="tsd-kind-get-signature tsd-parent-kind-class tsd-is-inherited tsd-is-protected"><a href="_wizard_textfield_.wizardtextfield.html#shouldrenderhelpertext" class="tsd-kind-icon">should<wbr>Render<wbr>Helper<wbr>Text</a></li>
 								<li class="tsd-kind-get-signature tsd-parent-kind-class tsd-is-inherited"><a href="_wizard_textfield_.wizardtextfield.html#updatecomplete" class="tsd-kind-icon">update<wbr>Complete</a></li>
 								<li class="tsd-kind-get-signature tsd-parent-kind-class tsd-is-inherited"><a href="_wizard_textfield_.wizardtextfield.html#validity" class="tsd-kind-icon">validity</a></li>
 								<li class="tsd-kind-get-signature tsd-parent-kind-class tsd-is-inherited"><a href="_wizard_textfield_.wizardtextfield.html#willvalidate" class="tsd-kind-icon">will<wbr>Validate</a></li>
@@ -427,6 +426,7 @@
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="_wizard_textfield_.wizardtextfield.html#msgetregioncontent" class="tsd-kind-icon">ms<wbr>Get<wbr>Region<wbr>Content</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="_wizard_textfield_.wizardtextfield.html#normalize" class="tsd-kind-icon">normalize</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-protected"><a href="_wizard_textfield_.wizardtextfield.html#oninputblur" class="tsd-kind-icon">on<wbr>Input<wbr>Blur</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-protected"><a href="_wizard_textfield_.wizardtextfield.html#oninputfocus" class="tsd-kind-icon">on<wbr>Input<wbr>Focus</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-protected"><a href="_wizard_textfield_.wizardtextfield.html#performupdate" class="tsd-kind-icon">perform<wbr>Update</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="_wizard_textfield_.wizardtextfield.html#prepend" class="tsd-kind-icon">prepend</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-inherited"><a href="_wizard_textfield_.wizardtextfield.html#queryselector" class="tsd-kind-icon">query<wbr>Selector</a></li>
@@ -521,7 +521,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#attribute_node">ATTRIBUTE_NODE</a></p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:10841</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:10866</li>
 						</ul>
 					</aside>
 				</section>
@@ -532,7 +532,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#cdata_section_node">CDATA_SECTION_NODE</a></p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:10845</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:10870</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -548,7 +548,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#comment_node">COMMENT_NODE</a></p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:10849</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:10874</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -564,7 +564,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#document_fragment_node">DOCUMENT_FRAGMENT_NODE</a></p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:10853</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:10878</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -580,7 +580,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#document_node">DOCUMENT_NODE</a></p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:10857</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:10882</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -596,7 +596,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#document_position_contained_by">DOCUMENT_POSITION_CONTAINED_BY</a></p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:10861</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:10886</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -612,7 +612,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#document_position_contains">DOCUMENT_POSITION_CONTAINS</a></p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:10865</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:10890</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -628,7 +628,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#document_position_disconnected">DOCUMENT_POSITION_DISCONNECTED</a></p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:10869</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:10894</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -644,7 +644,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#document_position_following">DOCUMENT_POSITION_FOLLOWING</a></p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:10873</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:10898</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -660,7 +660,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#document_position_implementation_specific">DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC</a></p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:10874</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:10899</li>
 						</ul>
 					</aside>
 				</section>
@@ -671,7 +671,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#document_position_preceding">DOCUMENT_POSITION_PRECEDING</a></p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:10878</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:10903</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -687,7 +687,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#document_type_node">DOCUMENT_TYPE_NODE</a></p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:10882</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:10907</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -703,7 +703,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#element_node">ELEMENT_NODE</a></p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:10886</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:10911</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -719,7 +719,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#entity_node">ENTITY_NODE</a></p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:10887</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:10912</li>
 						</ul>
 					</aside>
 				</section>
@@ -730,7 +730,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#entity_reference_node">ENTITY_REFERENCE_NODE</a></p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:10888</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:10913</li>
 						</ul>
 					</aside>
 				</section>
@@ -741,7 +741,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#notation_node">NOTATION_NODE</a></p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:10889</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:10914</li>
 						</ul>
 					</aside>
 				</section>
@@ -752,7 +752,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#processing_instruction_node">PROCESSING_INSTRUCTION_NODE</a></p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:10893</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:10918</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -768,7 +768,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#text_node">TEXT_NODE</a></p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:10897</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:10922</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -784,7 +784,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#_outlineupdatecomplete">_outlineUpdateComplete</a></p>
 						<ul>
-							<li>Defined in node_modules/@material/mwc-textfield/mwc-textfield-base.d.ts:91</li>
+							<li>Defined in node_modules/@material/mwc-textfield/mwc-textfield-base.d.ts:92</li>
 						</ul>
 					</aside>
 				</section>
@@ -795,7 +795,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#_validity">_validity</a></p>
 						<ul>
-							<li>Defined in node_modules/@material/mwc-textfield/mwc-textfield-base.d.ts:90</li>
+							<li>Defined in node_modules/@material/mwc-textfield/mwc-textfield-base.d.ts:91</li>
 						</ul>
 					</aside>
 				</section>
@@ -806,7 +806,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#accesskey">accessKey</a></p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:6587</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:6614</li>
 						</ul>
 					</aside>
 				</section>
@@ -817,7 +817,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#accesskeylabel">accessKeyLabel</a></p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:6588</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:6615</li>
 						</ul>
 					</aside>
 				</section>
@@ -829,7 +829,7 @@
 						<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#assignedslot">assignedSlot</a></p>
 						<p>Overrides Slottable.assignedSlot</p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5099</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5080</li>
 						</ul>
 					</aside>
 				</section>
@@ -840,7 +840,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#attributes">attributes</a></p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5100</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5081</li>
 						</ul>
 					</aside>
 				</section>
@@ -874,7 +874,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#autofocus">autofocus</a></p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:8001</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:8028</li>
 						</ul>
 					</aside>
 				</section>
@@ -885,7 +885,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#baseuri">baseURI</a></p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:10756</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:10781</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -912,7 +912,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#childelementcount">childElementCount</a></p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:11313</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:11338</li>
 						</ul>
 					</aside>
 				</section>
@@ -923,7 +923,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#childnodes">childNodes</a></p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:10760</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:10785</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -939,7 +939,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#children">children</a></p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:11317</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:11342</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -955,7 +955,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#classlist">classList</a></p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5104</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5085</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -971,7 +971,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#classname">className</a></p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5108</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5089</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -987,7 +987,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#clientheight">clientHeight</a></p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5109</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5090</li>
 						</ul>
 					</aside>
 				</section>
@@ -998,7 +998,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#clientleft">clientLeft</a></p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5110</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5091</li>
 						</ul>
 					</aside>
 				</section>
@@ -1009,7 +1009,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#clienttop">clientTop</a></p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5111</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5092</li>
 						</ul>
 					</aside>
 				</section>
@@ -1020,7 +1020,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#clientwidth">clientWidth</a></p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5112</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5093</li>
 						</ul>
 					</aside>
 				</section>
@@ -1031,7 +1031,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#contenteditable">contentEditable</a></p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5264</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5245</li>
 						</ul>
 					</aside>
 				</section>
@@ -1042,7 +1042,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#dataset">dataset</a></p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:8002</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:8029</li>
 						</ul>
 					</aside>
 				</section>
@@ -1052,7 +1052,7 @@
 					<div class="tsd-signature tsd-kind-icon">default<wbr>Value<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = &quot;&quot;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/0445516/src/wizard-textfield.ts#L75">src/wizard-textfield.ts:75</a></li>
+							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/bdf68ca/src/wizard-textfield.ts#L75">src/wizard-textfield.ts:75</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -1068,7 +1068,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#dir">dir</a></p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:6590</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:6617</li>
 						</ul>
 					</aside>
 				</section>
@@ -1090,7 +1090,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#draggable">draggable</a></p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:6591</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:6618</li>
 						</ul>
 					</aside>
 				</section>
@@ -1112,7 +1112,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#enterkeyhint">enterKeyHint</a></p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5265</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5246</li>
 						</ul>
 					</aside>
 				</section>
@@ -1123,7 +1123,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#firstchild">firstChild</a></p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:10764</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:10789</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -1139,7 +1139,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#firstelementchild">firstElementChild</a></p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:11321</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:11346</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -1156,7 +1156,18 @@
 						<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#floatinglabelfoundation">floatingLabelFoundation</a></p>
 						<p>Overrides HTMLElement.floatingLabelFoundation</p>
 						<ul>
-							<li>Defined in node_modules/@material/mwc-textfield/mwc-textfield-base.d.ts:34</li>
+							<li>Defined in node_modules/@material/mwc-textfield/mwc-textfield-base.d.ts:33</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-protected">
+					<a name="focused" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagProtected">Protected</span> focused</h3>
+					<div class="tsd-signature tsd-kind-icon">focused<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#focused">focused</a></p>
+						<ul>
+							<li>Defined in node_modules/@material/mwc-textfield/mwc-textfield-base.d.ts:90</li>
 						</ul>
 					</aside>
 				</section>
@@ -1201,7 +1212,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#hidden">hidden</a></p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:6592</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:6619</li>
 						</ul>
 					</aside>
 				</section>
@@ -1234,7 +1245,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#id">id</a></p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5116</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5097</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -1250,7 +1261,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#innerhtml">innerHTML</a></p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:9586</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:9611</li>
 						</ul>
 					</aside>
 				</section>
@@ -1261,7 +1272,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#innertext">innerText</a></p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:6593</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:6620</li>
 						</ul>
 					</aside>
 				</section>
@@ -1284,7 +1295,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#isconnected">isConnected</a></p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:10768</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:10793</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -1300,7 +1311,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#iscontenteditable">isContentEditable</a></p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5267</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5248</li>
 						</ul>
 					</aside>
 				</section>
@@ -1310,7 +1321,7 @@
 					<div class="tsd-signature tsd-kind-icon">is<wbr>Null<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = false</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/0445516/src/wizard-textfield.ts#L50">src/wizard-textfield.ts:50</a></li>
+							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/bdf68ca/src/wizard-textfield.ts#L50">src/wizard-textfield.ts:50</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -1354,7 +1365,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#lang">lang</a></p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:6594</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:6621</li>
 						</ul>
 					</aside>
 				</section>
@@ -1365,7 +1376,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#lastchild">lastChild</a></p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:10772</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:10797</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -1381,7 +1392,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#lastelementchild">lastElementChild</a></p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:11325</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:11350</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -1409,7 +1420,7 @@
 						<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#lineripplefoundation">lineRippleFoundation</a></p>
 						<p>Overrides HTMLElement.lineRippleFoundation</p>
 						<ul>
-							<li>Defined in node_modules/@material/mwc-textfield/mwc-textfield-base.d.ts:35</li>
+							<li>Defined in node_modules/@material/mwc-textfield/mwc-textfield-base.d.ts:34</li>
 						</ul>
 					</aside>
 				</section>
@@ -1420,7 +1431,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#localname">localName</a></p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5120</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5101</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -1515,7 +1526,7 @@
 					<div class="tsd-signature tsd-kind-icon">multiplier<wbr>Button<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">IconButton</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/0445516/src/wizard-textfield.ts#L82">src/wizard-textfield.ts:82</a></li>
+							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/bdf68ca/src/wizard-textfield.ts#L82">src/wizard-textfield.ts:82</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -1525,7 +1536,7 @@
 					<div class="tsd-signature tsd-kind-icon">multiplier<wbr>Index<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> = 0</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/0445516/src/wizard-textfield.ts#L33">src/wizard-textfield.ts:33</a></li>
+							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/bdf68ca/src/wizard-textfield.ts#L33">src/wizard-textfield.ts:33</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -1535,7 +1546,7 @@
 					<div class="tsd-signature tsd-kind-icon">multiplier<wbr>Menu<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Menu</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/0445516/src/wizard-textfield.ts#L81">src/wizard-textfield.ts:81</a></li>
+							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/bdf68ca/src/wizard-textfield.ts#L81">src/wizard-textfield.ts:81</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -1545,7 +1556,7 @@
 					<div class="tsd-signature tsd-kind-icon">multipliers<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> = [null, &#x27;&#x27;]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/0445516/src/wizard-textfield.ts#L32">src/wizard-textfield.ts:32</a></li>
+							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/bdf68ca/src/wizard-textfield.ts#L32">src/wizard-textfield.ts:32</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -1573,7 +1584,7 @@
 						<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#namespaceuri">namespaceURI</a></p>
 						<p>Overrides Node.namespaceURI</p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5124</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5105</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -1589,7 +1600,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#nextelementsibling">nextElementSibling</a></p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:11043</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:11068</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -1605,7 +1616,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#nextsibling">nextSibling</a></p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:10778</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:10803</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -1621,7 +1632,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#nodename">nodeName</a></p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:10782</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:10807</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -1637,7 +1648,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#nodetype">nodeType</a></p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:10786</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:10811</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -1653,7 +1664,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#nodevalue">nodeValue</a></p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:10787</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:10812</li>
 						</ul>
 					</aside>
 				</section>
@@ -1664,7 +1675,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#nonce">nonce</a></p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:8003</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:8030</li>
 						</ul>
 					</aside>
 				</section>
@@ -1685,7 +1696,7 @@
 					<div class="tsd-signature tsd-kind-icon">null<wbr>Switch<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Switch</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/0445516/src/wizard-textfield.ts#L80">src/wizard-textfield.ts:80</a></li>
+							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/bdf68ca/src/wizard-textfield.ts#L80">src/wizard-textfield.ts:80</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -1695,7 +1706,7 @@
 					<div class="tsd-signature tsd-kind-icon">nullable<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = false</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/0445516/src/wizard-textfield.ts#L29">src/wizard-textfield.ts:29</a></li>
+							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/bdf68ca/src/wizard-textfield.ts#L29">src/wizard-textfield.ts:29</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -1710,7 +1721,7 @@
 					<div class="tsd-signature tsd-kind-icon">nulled<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> = null</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/0445516/src/wizard-textfield.ts#L84">src/wizard-textfield.ts:84</a></li>
+							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/bdf68ca/src/wizard-textfield.ts#L84">src/wizard-textfield.ts:84</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -1721,7 +1732,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#offsetheight">offsetHeight</a></p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:6595</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:6622</li>
 						</ul>
 					</aside>
 				</section>
@@ -1732,7 +1743,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#offsetleft">offsetLeft</a></p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:6596</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:6623</li>
 						</ul>
 					</aside>
 				</section>
@@ -1743,7 +1754,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#offsetparent">offsetParent</a></p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:6597</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:6624</li>
 						</ul>
 					</aside>
 				</section>
@@ -1754,7 +1765,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#offsettop">offsetTop</a></p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:6598</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:6625</li>
 						</ul>
 					</aside>
 				</section>
@@ -1765,7 +1776,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#offsetwidth">offsetWidth</a></p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:6599</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:6626</li>
 						</ul>
 					</aside>
 				</section>
@@ -1776,7 +1787,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#onabort">onabort</a></p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5777</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5804</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -1797,7 +1808,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#onanimationcancel">onanimationcancel</a></p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5778</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5805</li>
 						</ul>
 					</aside>
 				</section>
@@ -1808,7 +1819,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#onanimationend">onanimationend</a></p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5779</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5806</li>
 						</ul>
 					</aside>
 				</section>
@@ -1819,7 +1830,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#onanimationiteration">onanimationiteration</a></p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5780</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5807</li>
 						</ul>
 					</aside>
 				</section>
@@ -1830,7 +1841,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#onanimationstart">onanimationstart</a></p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5781</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5808</li>
 						</ul>
 					</aside>
 				</section>
@@ -1841,7 +1852,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#onauxclick">onauxclick</a></p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5782</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5809</li>
 						</ul>
 					</aside>
 				</section>
@@ -1852,7 +1863,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#onblur">onblur</a></p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5787</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5814</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -1873,7 +1884,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#oncancel">oncancel</a></p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5788</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5815</li>
 						</ul>
 					</aside>
 				</section>
@@ -1884,7 +1895,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#oncanplay">oncanplay</a></p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5793</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5820</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -1905,7 +1916,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#oncanplaythrough">oncanplaythrough</a></p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5794</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5821</li>
 						</ul>
 					</aside>
 				</section>
@@ -1916,7 +1927,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#onchange">onchange</a></p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5799</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5826</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -1937,7 +1948,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#onclick">onclick</a></p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5804</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5831</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -1958,7 +1969,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#onclose">onclose</a></p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5805</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5832</li>
 						</ul>
 					</aside>
 				</section>
@@ -1969,7 +1980,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#oncontextmenu">oncontextmenu</a></p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5810</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5837</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -1990,7 +2001,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#oncopy">oncopy</a></p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:4898</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:4879</li>
 						</ul>
 					</aside>
 				</section>
@@ -2001,7 +2012,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#oncuechange">oncuechange</a></p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5811</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5838</li>
 						</ul>
 					</aside>
 				</section>
@@ -2012,7 +2023,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#oncut">oncut</a></p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:4899</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:4880</li>
 						</ul>
 					</aside>
 				</section>
@@ -2023,7 +2034,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#ondblclick">ondblclick</a></p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5816</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5843</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -2044,7 +2055,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#ondrag">ondrag</a></p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5821</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5848</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -2065,7 +2076,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#ondragend">ondragend</a></p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5826</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5853</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -2086,7 +2097,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#ondragenter">ondragenter</a></p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5831</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5858</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -2107,7 +2118,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#ondragexit">ondragexit</a></p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5832</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5859</li>
 						</ul>
 					</aside>
 				</section>
@@ -2118,7 +2129,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#ondragleave">ondragleave</a></p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5837</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5864</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -2139,7 +2150,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#ondragover">ondragover</a></p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5842</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5869</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -2160,7 +2171,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#ondragstart">ondragstart</a></p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5847</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5874</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -2181,7 +2192,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#ondrop">ondrop</a></p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5848</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5875</li>
 						</ul>
 					</aside>
 				</section>
@@ -2192,7 +2203,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#ondurationchange">ondurationchange</a></p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5853</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5880</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -2213,7 +2224,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#onemptied">onemptied</a></p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5858</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5885</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -2234,7 +2245,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#onended">onended</a></p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5863</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5890</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -2255,7 +2266,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#onerror">onerror</a></p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5868</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5895</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -2276,7 +2287,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#onfocus">onfocus</a></p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5873</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5900</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -2297,7 +2308,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#onfullscreenchange">onfullscreenchange</a></p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5125</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5106</li>
 						</ul>
 					</aside>
 				</section>
@@ -2308,7 +2319,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#onfullscreenerror">onfullscreenerror</a></p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5126</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5107</li>
 						</ul>
 					</aside>
 				</section>
@@ -2319,7 +2330,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#ongotpointercapture">ongotpointercapture</a></p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5874</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5901</li>
 						</ul>
 					</aside>
 				</section>
@@ -2330,7 +2341,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#oninput">oninput</a></p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5875</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5902</li>
 						</ul>
 					</aside>
 				</section>
@@ -2341,7 +2352,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#oninvalid">oninvalid</a></p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5876</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5903</li>
 						</ul>
 					</aside>
 				</section>
@@ -2352,7 +2363,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#onkeydown">onkeydown</a></p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5881</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5908</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -2373,7 +2384,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#onkeypress">onkeypress</a></p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5886</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5913</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -2394,7 +2405,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#onkeyup">onkeyup</a></p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5891</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5918</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -2415,7 +2426,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#onload">onload</a></p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5896</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5923</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -2436,7 +2447,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#onloadeddata">onloadeddata</a></p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5901</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5928</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -2457,7 +2468,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#onloadedmetadata">onloadedmetadata</a></p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5906</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5933</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -2478,7 +2489,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#onloadstart">onloadstart</a></p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5911</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5938</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -2499,7 +2510,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#onlostpointercapture">onlostpointercapture</a></p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5912</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5939</li>
 						</ul>
 					</aside>
 				</section>
@@ -2510,7 +2521,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#onmousedown">onmousedown</a></p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5917</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5944</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -2531,7 +2542,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#onmouseenter">onmouseenter</a></p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5918</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5945</li>
 						</ul>
 					</aside>
 				</section>
@@ -2542,7 +2553,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#onmouseleave">onmouseleave</a></p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5919</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5946</li>
 						</ul>
 					</aside>
 				</section>
@@ -2553,7 +2564,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#onmousemove">onmousemove</a></p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5924</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5951</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -2574,7 +2585,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#onmouseout">onmouseout</a></p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5929</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5956</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -2595,7 +2606,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#onmouseover">onmouseover</a></p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5934</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5961</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -2616,7 +2627,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#onmouseup">onmouseup</a></p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5939</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5966</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -2637,7 +2648,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#onpaste">onpaste</a></p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:4900</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:4881</li>
 						</ul>
 					</aside>
 				</section>
@@ -2648,7 +2659,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#onpause">onpause</a></p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5944</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5971</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -2669,7 +2680,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#onplay">onplay</a></p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5949</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5976</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -2690,7 +2701,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#onplaying">onplaying</a></p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5954</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5981</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -2711,7 +2722,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#onpointercancel">onpointercancel</a></p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5955</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5982</li>
 						</ul>
 					</aside>
 				</section>
@@ -2722,7 +2733,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#onpointerdown">onpointerdown</a></p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5956</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5983</li>
 						</ul>
 					</aside>
 				</section>
@@ -2733,7 +2744,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#onpointerenter">onpointerenter</a></p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5957</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5984</li>
 						</ul>
 					</aside>
 				</section>
@@ -2744,7 +2755,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#onpointerleave">onpointerleave</a></p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5958</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5985</li>
 						</ul>
 					</aside>
 				</section>
@@ -2755,7 +2766,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#onpointermove">onpointermove</a></p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5959</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5986</li>
 						</ul>
 					</aside>
 				</section>
@@ -2766,7 +2777,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#onpointerout">onpointerout</a></p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5960</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5987</li>
 						</ul>
 					</aside>
 				</section>
@@ -2777,7 +2788,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#onpointerover">onpointerover</a></p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5961</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5988</li>
 						</ul>
 					</aside>
 				</section>
@@ -2788,7 +2799,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#onpointerup">onpointerup</a></p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5962</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5989</li>
 						</ul>
 					</aside>
 				</section>
@@ -2799,7 +2810,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#onprogress">onprogress</a></p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5967</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5994</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -2820,7 +2831,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#onratechange">onratechange</a></p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5972</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5999</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -2841,7 +2852,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#onreset">onreset</a></p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5977</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:6004</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -2862,7 +2873,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#onresize">onresize</a></p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5978</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:6005</li>
 						</ul>
 					</aside>
 				</section>
@@ -2873,7 +2884,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#onscroll">onscroll</a></p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5983</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:6010</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -2894,7 +2905,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#onsecuritypolicyviolation">onsecuritypolicyviolation</a></p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5984</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:6011</li>
 						</ul>
 					</aside>
 				</section>
@@ -2905,7 +2916,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#onseeked">onseeked</a></p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5989</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:6016</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -2926,7 +2937,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#onseeking">onseeking</a></p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5994</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:6021</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -2947,7 +2958,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#onselect">onselect</a></p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5999</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:6026</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -2968,7 +2979,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#onselectionchange">onselectionchange</a></p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:6000</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:6027</li>
 						</ul>
 					</aside>
 				</section>
@@ -2979,7 +2990,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#onselectstart">onselectstart</a></p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:6001</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:6028</li>
 						</ul>
 					</aside>
 				</section>
@@ -2990,7 +3001,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#onstalled">onstalled</a></p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:6006</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:6033</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -3011,7 +3022,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#onsubmit">onsubmit</a></p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:6007</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:6034</li>
 						</ul>
 					</aside>
 				</section>
@@ -3022,7 +3033,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#onsuspend">onsuspend</a></p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:6012</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:6039</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -3043,7 +3054,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#ontimeupdate">ontimeupdate</a></p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:6017</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:6044</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -3064,7 +3075,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#ontoggle">ontoggle</a></p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:6018</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:6045</li>
 						</ul>
 					</aside>
 				</section>
@@ -3075,7 +3086,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#ontouchcancel">ontouchcancel</a></p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:6019</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:6046</li>
 						</ul>
 					</aside>
 				</section>
@@ -3086,7 +3097,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#ontouchend">ontouchend</a></p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:6020</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:6047</li>
 						</ul>
 					</aside>
 				</section>
@@ -3097,7 +3108,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#ontouchmove">ontouchmove</a></p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:6021</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:6048</li>
 						</ul>
 					</aside>
 				</section>
@@ -3108,7 +3119,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#ontouchstart">ontouchstart</a></p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:6022</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:6049</li>
 						</ul>
 					</aside>
 				</section>
@@ -3119,7 +3130,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#ontransitioncancel">ontransitioncancel</a></p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:6023</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:6050</li>
 						</ul>
 					</aside>
 				</section>
@@ -3130,7 +3141,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#ontransitionend">ontransitionend</a></p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:6024</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:6051</li>
 						</ul>
 					</aside>
 				</section>
@@ -3141,7 +3152,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#ontransitionrun">ontransitionrun</a></p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:6025</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:6052</li>
 						</ul>
 					</aside>
 				</section>
@@ -3152,7 +3163,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#ontransitionstart">ontransitionstart</a></p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:6026</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:6053</li>
 						</ul>
 					</aside>
 				</section>
@@ -3163,7 +3174,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#onvolumechange">onvolumechange</a></p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:6031</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:6058</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -3184,7 +3195,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#onwaiting">onwaiting</a></p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:6036</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:6063</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -3205,7 +3216,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#onwheel">onwheel</a></p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:6037</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:6064</li>
 						</ul>
 					</aside>
 				</section>
@@ -3216,7 +3227,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#outerhtml">outerHTML</a></p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5127</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5108</li>
 						</ul>
 					</aside>
 				</section>
@@ -3272,7 +3283,7 @@
 						<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#ownerdocument">ownerDocument</a></p>
 						<p>Overrides Node.ownerDocument</p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5128</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5109</li>
 						</ul>
 					</aside>
 				</section>
@@ -3283,7 +3294,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#parentelement">parentElement</a></p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:10795</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:10820</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -3299,7 +3310,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#parentnode">parentNode</a></p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:10799</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:10824</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -3349,7 +3360,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#previouselementsibling">previousElementSibling</a></p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:11047</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:11072</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -3365,7 +3376,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#previoussibling">previousSibling</a></p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:10803</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:10828</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -3419,7 +3430,7 @@
 					<div class="tsd-signature tsd-kind-icon">reserved<wbr>Values<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> = []</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/0445516/src/wizard-textfield.ts#L78">src/wizard-textfield.ts:78</a></li>
+							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/bdf68ca/src/wizard-textfield.ts#L78">src/wizard-textfield.ts:78</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -3451,7 +3462,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#scrollheight">scrollHeight</a></p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5133</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5114</li>
 						</ul>
 					</aside>
 				</section>
@@ -3462,7 +3473,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#scrollleft">scrollLeft</a></p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5134</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5115</li>
 						</ul>
 					</aside>
 				</section>
@@ -3473,7 +3484,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#scrolltop">scrollTop</a></p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5135</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5116</li>
 						</ul>
 					</aside>
 				</section>
@@ -3484,7 +3495,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#scrollwidth">scrollWidth</a></p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5136</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5117</li>
 						</ul>
 					</aside>
 				</section>
@@ -3495,7 +3506,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#shadowroot">shadowRoot</a></p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5140</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5121</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -3522,7 +3533,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#slot">slot</a></p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5144</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5125</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -3538,7 +3549,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#spellcheck">spellcheck</a></p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:6600</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:6627</li>
 						</ul>
 					</aside>
 				</section>
@@ -3560,7 +3571,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#style">style</a></p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5260</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5241</li>
 						</ul>
 					</aside>
 				</section>
@@ -3582,7 +3593,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#tabindex">tabIndex</a></p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:8004</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:8031</li>
 						</ul>
 					</aside>
 				</section>
@@ -3593,7 +3604,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#tagname">tagName</a></p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5148</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5129</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -3609,7 +3620,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#textcontent">textContent</a></p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:10804</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:10829</li>
 						</ul>
 					</aside>
 				</section>
@@ -3620,7 +3631,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#title">title</a></p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:6601</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:6628</li>
 						</ul>
 					</aside>
 				</section>
@@ -3631,7 +3642,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#translate">translate</a></p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:6602</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:6629</li>
 						</ul>
 					</aside>
 				</section>
@@ -3652,7 +3663,7 @@
 					<div class="tsd-signature tsd-kind-icon">unit<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = &quot;&quot;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/0445516/src/wizard-textfield.ts#L49">src/wizard-textfield.ts:49</a></li>
+							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/bdf68ca/src/wizard-textfield.ts#L49">src/wizard-textfield.ts:49</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -3691,7 +3702,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#validitytransform">validityTransform</a></p>
 						<ul>
-							<li>Defined in node_modules/@material/mwc-textfield/mwc-textfield-base.d.ts:98</li>
+							<li>Defined in node_modules/@material/mwc-textfield/mwc-textfield-base.d.ts:97</li>
 						</ul>
 					</aside>
 				</section>
@@ -3822,31 +3833,13 @@
 						<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#styles">styles</a></p>
 						<p>Overrides LitElement.styles</p>
 						<ul>
-							<li>Defined in node_modules/@material/mwc-textfield/mwc-textfield.d.ts:25</li>
+							<li>Defined in node_modules/@material/mwc-textfield/mwc-textfield.d.ts:26</li>
 						</ul>
 					</aside>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Accessors</h2>
-				<section class="tsd-panel tsd-member tsd-kind-get-signature tsd-parent-kind-class tsd-is-inherited tsd-is-protected">
-					<a name="charcountervisible" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagProtected">Protected</span> char<wbr>Counter<wbr>Visible</h3>
-					<ul class="tsd-signatures tsd-kind-get-signature tsd-parent-kind-class tsd-is-inherited tsd-is-protected">
-						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> charCounterVisible<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#charcountervisible">charCounterVisible</a></p>
-								<ul>
-									<li>Defined in node_modules/@material/mwc-textfield/mwc-textfield-base.d.ts:97</li>
-								</ul>
-							</aside>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
-						</li>
-					</ul>
-				</section>
 				<section class="tsd-panel tsd-member tsd-kind-get-signature tsd-parent-kind-class tsd-is-inherited tsd-is-protected">
 					<a name="hasupdated" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagProtected">Protected</span> has<wbr>Updated</h3>
@@ -3876,7 +3869,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/0445516/src/wizard-textfield.ts#L63">src/wizard-textfield.ts:63</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/bdf68ca/src/wizard-textfield.ts#L63">src/wizard-textfield.ts:63</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -3889,7 +3882,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/0445516/src/wizard-textfield.ts#L66">src/wizard-textfield.ts:66</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/bdf68ca/src/wizard-textfield.ts#L66">src/wizard-textfield.ts:66</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -3918,7 +3911,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/0445516/src/wizard-textfield.ts#L35">src/wizard-textfield.ts:35</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/bdf68ca/src/wizard-textfield.ts#L35">src/wizard-textfield.ts:35</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span></h4>
@@ -3926,7 +3919,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/0445516/src/wizard-textfield.ts#L41">src/wizard-textfield.ts:41</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/bdf68ca/src/wizard-textfield.ts#L41">src/wizard-textfield.ts:41</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -3950,7 +3943,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/0445516/src/wizard-textfield.ts#L52">src/wizard-textfield.ts:52</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/bdf68ca/src/wizard-textfield.ts#L52">src/wizard-textfield.ts:52</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
@@ -3958,7 +3951,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/0445516/src/wizard-textfield.ts#L55">src/wizard-textfield.ts:55</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/bdf68ca/src/wizard-textfield.ts#L55">src/wizard-textfield.ts:55</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -3982,7 +3975,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#selectionend">selectionEnd</a></p>
 								<ul>
-									<li>Defined in node_modules/@material/mwc-textfield/mwc-textfield-base.d.ts:95</li>
+									<li>Defined in node_modules/@material/mwc-textfield/mwc-textfield-base.d.ts:96</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span></h4>
@@ -4000,28 +3993,10 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#selectionstart">selectionStart</a></p>
 								<ul>
-									<li>Defined in node_modules/@material/mwc-textfield/mwc-textfield-base.d.ts:94</li>
+									<li>Defined in node_modules/@material/mwc-textfield/mwc-textfield-base.d.ts:95</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span></h4>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-get-signature tsd-parent-kind-class tsd-is-inherited tsd-is-protected">
-					<a name="shouldrenderhelpertext" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagProtected">Protected</span> should<wbr>Render<wbr>Helper<wbr>Text</h3>
-					<ul class="tsd-signatures tsd-kind-get-signature tsd-parent-kind-class tsd-is-inherited tsd-is-protected">
-						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> shouldRenderHelperText<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#shouldrenderhelpertext">shouldRenderHelperText</a></p>
-								<ul>
-									<li>Defined in node_modules/@material/mwc-textfield/mwc-textfield-base.d.ts:96</li>
-								</ul>
-							</aside>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -4069,7 +4044,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#validity">validity</a></p>
 								<ul>
-									<li>Defined in node_modules/@material/mwc-textfield/mwc-textfield-base.d.ts:92</li>
+									<li>Defined in node_modules/@material/mwc-textfield/mwc-textfield-base.d.ts:93</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">ValidityState</span></h4>
@@ -4087,7 +4062,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#willvalidate">willValidate</a></p>
 								<ul>
-									<li>Defined in node_modules/@material/mwc-textfield/mwc-textfield-base.d.ts:93</li>
+									<li>Defined in node_modules/@material/mwc-textfield/mwc-textfield-base.d.ts:94</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
@@ -4135,7 +4110,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#_checkvalidity">_checkValidity</a></p>
 								<ul>
-									<li>Defined in node_modules/@material/mwc-textfield/mwc-textfield-base.d.ts:122</li>
+									<li>Defined in node_modules/@material/mwc-textfield/mwc-textfield-base.d.ts:136</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -4160,7 +4135,7 @@
 								<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#_getupdatecomplete">_getUpdateComplete</a></p>
 								<p>Overrides <a href="_wizard_dialog_.wizarddialog.html">WizardDialog</a>.<a href="_wizard_dialog_.wizarddialog.html#_getupdatecomplete">_getUpdateComplete</a></p>
 								<ul>
-									<li>Defined in node_modules/@material/mwc-textfield/mwc-textfield-base.d.ts:131</li>
+									<li>Defined in node_modules/@material/mwc-textfield/mwc-textfield-base.d.ts:145</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
@@ -4180,7 +4155,7 @@
 								<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#addeventlistener">addEventListener</a></p>
 								<p>Overrides Element.addEventListener</p>
 								<ul>
-									<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:6604</li>
+									<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:6631</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-type-parameters-title">Type parameters</h4>
@@ -4229,7 +4204,7 @@
 								<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#addeventlistener">addEventListener</a></p>
 								<p>Overrides Element.addEventListener</p>
 								<ul>
-									<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:6605</li>
+									<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:6632</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -4288,7 +4263,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#after">after</a></p>
 								<ul>
-									<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:3506</li>
+									<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:3498</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -4318,7 +4293,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#animate">animate</a></p>
 								<ul>
-									<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:2044</li>
+									<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:2036</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -4345,7 +4320,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#append">append</a></p>
 								<ul>
-									<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:11331</li>
+									<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:11356</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -4375,7 +4350,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#appendchild">appendChild</a></p>
 								<ul>
-									<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:10805</li>
+									<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:10830</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-type-parameters-title">Type parameters</h4>
@@ -4405,7 +4380,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#attachshadow">attachShadow</a></p>
 								<ul>
-									<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5152</li>
+									<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5133</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -4469,7 +4444,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#before">before</a></p>
 								<ul>
-									<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:3512</li>
+									<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:3504</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -4500,7 +4475,7 @@
 								<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#blur">blur</a></p>
 								<p>Overrides <a href="_wizard_dialog_.wizarddialog.html">WizardDialog</a>.<a href="_wizard_dialog_.wizarddialog.html#blur">blur</a></p>
 								<ul>
-									<li>Defined in node_modules/@material/mwc-textfield/mwc-textfield-base.d.ts:100</li>
+									<li>Defined in node_modules/@material/mwc-textfield/mwc-textfield-base.d.ts:99</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -4518,7 +4493,7 @@
 							<aside class="tsd-sources">
 								<p>Overrides TextFieldBase.checkValidity</p>
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/0445516/src/wizard-textfield.ts#L112">src/wizard-textfield.ts:112</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/bdf68ca/src/wizard-textfield.ts#L112">src/wizard-textfield.ts:112</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
@@ -4555,7 +4530,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#clonenode">cloneNode</a></p>
 								<ul>
-									<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:10809</li>
+									<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:10834</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -4586,7 +4561,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#closest">closest</a></p>
 								<ul>
-									<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5156</li>
+									<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5137</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -4612,7 +4587,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#closest">closest</a></p>
 								<ul>
-									<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5157</li>
+									<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5138</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-type-parameters-title">Type parameters</h4>
@@ -4633,7 +4608,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#closest">closest</a></p>
 								<ul>
-									<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5158</li>
+									<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5139</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-type-parameters-title">Type parameters</h4>
@@ -4663,7 +4638,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#comparedocumentposition">compareDocumentPosition</a></p>
 								<ul>
-									<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:10813</li>
+									<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:10838</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -4711,7 +4686,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#contains">contains</a></p>
 								<ul>
-									<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:10817</li>
+									<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:10842</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -4741,7 +4716,7 @@
 								<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#createadapter">createAdapter</a></p>
 								<p>Overrides BaseElement.createAdapter</p>
 								<ul>
-									<li>Defined in node_modules/@material/mwc-textfield/mwc-textfield-base.d.ts:126</li>
+									<li>Defined in node_modules/@material/mwc-textfield/mwc-textfield-base.d.ts:140</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">MDCTextFieldAdapter</span></h4>
@@ -4760,7 +4735,7 @@
 								<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#createfoundation">createFoundation</a></p>
 								<p>Overrides BaseElement.createFoundation</p>
 								<ul>
-									<li>Defined in node_modules/@material/mwc-textfield/mwc-textfield-base.d.ts:125</li>
+									<li>Defined in node_modules/@material/mwc-textfield/mwc-textfield-base.d.ts:139</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -4796,7 +4771,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/0445516/src/wizard-textfield.ts#L98">src/wizard-textfield.ts:98</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/bdf68ca/src/wizard-textfield.ts#L98">src/wizard-textfield.ts:98</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -4839,7 +4814,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#dispatchevent">dispatchEvent</a></p>
 								<ul>
-									<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5428</li>
+									<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5409</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -4867,7 +4842,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/0445516/src/wizard-textfield.ts#L90">src/wizard-textfield.ts:90</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/bdf68ca/src/wizard-textfield.ts#L90">src/wizard-textfield.ts:90</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -4903,7 +4878,7 @@
 							<aside class="tsd-sources">
 								<p>Overrides TextFieldBase.firstUpdated</p>
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/0445516/src/wizard-textfield.ts#L106">src/wizard-textfield.ts:106</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/bdf68ca/src/wizard-textfield.ts#L106">src/wizard-textfield.ts:106</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
@@ -4922,7 +4897,7 @@
 								<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#focus">focus</a></p>
 								<p>Overrides <a href="_wizard_dialog_.wizarddialog.html">WizardDialog</a>.<a href="_wizard_dialog_.wizarddialog.html#focus">focus</a></p>
 								<ul>
-									<li>Defined in node_modules/@material/mwc-textfield/mwc-textfield-base.d.ts:99</li>
+									<li>Defined in node_modules/@material/mwc-textfield/mwc-textfield-base.d.ts:98</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -4940,7 +4915,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#getanimations">getAnimations</a></p>
 								<ul>
-									<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:2045</li>
+									<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:2037</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Animation</span><span class="tsd-signature-symbol">[]</span></h4>
@@ -4958,7 +4933,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#getattribute">getAttribute</a></p>
 								<ul>
-									<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5162</li>
+									<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5143</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -4987,7 +4962,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#getattributens">getAttributeNS</a></p>
 								<ul>
-									<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5166</li>
+									<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5147</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -5019,7 +4994,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#getattributenames">getAttributeNames</a></p>
 								<ul>
-									<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5170</li>
+									<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5151</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -5035,20 +5010,20 @@
 					<a name="getattributenode" class="tsd-anchor"></a>
 					<h3>get<wbr>Attribute<wbr>Node</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
-						<li class="tsd-signature tsd-kind-icon">get<wbr>Attribute<wbr>Node<span class="tsd-signature-symbol">(</span>name<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Attr</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span></li>
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Attribute<wbr>Node<span class="tsd-signature-symbol">(</span>qualifiedName<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Attr</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#getattributenode">getAttributeNode</a></p>
 								<ul>
-									<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5171</li>
+									<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5152</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>name: <span class="tsd-signature-type">string</span></h5>
+									<h5>qualifiedName: <span class="tsd-signature-type">string</span></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Attr</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span></h4>
@@ -5059,20 +5034,20 @@
 					<a name="getattributenodens" class="tsd-anchor"></a>
 					<h3>get<wbr>Attribute<wbr>NodeNS</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
-						<li class="tsd-signature tsd-kind-icon">get<wbr>Attribute<wbr>NodeNS<span class="tsd-signature-symbol">(</span>namespaceURI<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, localName<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Attr</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span></li>
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Attribute<wbr>NodeNS<span class="tsd-signature-symbol">(</span>namespace<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span>, localName<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Attr</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#getattributenodens">getAttributeNodeNS</a></p>
 								<ul>
-									<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5172</li>
+									<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5153</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>namespaceURI: <span class="tsd-signature-type">string</span></h5>
+									<h5>namespace: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span></h5>
 								</li>
 								<li>
 									<h5>localName: <span class="tsd-signature-type">string</span></h5>
@@ -5093,7 +5068,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#getboundingclientrect">getBoundingClientRect</a></p>
 								<ul>
-									<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5173</li>
+									<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5154</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">DOMRect</span></h4>
@@ -5111,7 +5086,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#getclientrects">getClientRects</a></p>
 								<ul>
-									<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5174</li>
+									<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5155</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">DOMRectList</span></h4>
@@ -5129,7 +5104,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#getelementsbyclassname">getElementsByClassName</a></p>
 								<ul>
-									<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5178</li>
+									<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5159</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -5160,7 +5135,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#getelementsbytagname">getElementsByTagName</a></p>
 								<ul>
-									<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5179</li>
+									<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5160</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-type-parameters-title">Type parameters</h4>
@@ -5181,7 +5156,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#getelementsbytagname">getElementsByTagName</a></p>
 								<ul>
-									<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5180</li>
+									<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5161</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-type-parameters-title">Type parameters</h4>
@@ -5202,7 +5177,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#getelementsbytagname">getElementsByTagName</a></p>
 								<ul>
-									<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5181</li>
+									<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5162</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -5228,7 +5203,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#getelementsbytagnamens">getElementsByTagNameNS</a></p>
 								<ul>
-									<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5182</li>
+									<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5163</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -5246,7 +5221,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#getelementsbytagnamens">getElementsByTagNameNS</a></p>
 								<ul>
-									<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5183</li>
+									<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5164</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -5264,7 +5239,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#getelementsbytagnamens">getElementsByTagNameNS</a></p>
 								<ul>
-									<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5184</li>
+									<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5165</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -5291,7 +5266,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#getinputadaptermethods">getInputAdapterMethods</a></p>
 								<ul>
-									<li>Defined in node_modules/@material/mwc-textfield/mwc-textfield-base.d.ts:128</li>
+									<li>Defined in node_modules/@material/mwc-textfield/mwc-textfield-base.d.ts:142</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">MDCTextFieldInputAdapter</span></h4>
@@ -5309,7 +5284,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#getlabeladaptermethods">getLabelAdapterMethods</a></p>
 								<ul>
-									<li>Defined in node_modules/@material/mwc-textfield/mwc-textfield-base.d.ts:129</li>
+									<li>Defined in node_modules/@material/mwc-textfield/mwc-textfield-base.d.ts:143</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">MDCTextFieldLabelAdapter</span></h4>
@@ -5327,7 +5302,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#getlinerippleadaptermethods">getLineRippleAdapterMethods</a></p>
 								<ul>
-									<li>Defined in node_modules/@material/mwc-textfield/mwc-textfield-base.d.ts:130</li>
+									<li>Defined in node_modules/@material/mwc-textfield/mwc-textfield-base.d.ts:144</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">MDCTextFieldLineRippleAdapter</span></h4>
@@ -5345,7 +5320,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#getoutlineadaptermethods">getOutlineAdapterMethods</a></p>
 								<ul>
-									<li>Defined in node_modules/@material/mwc-textfield/mwc-textfield-base.d.ts:133</li>
+									<li>Defined in node_modules/@material/mwc-textfield/mwc-textfield-base.d.ts:147</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">MDCTextFieldOutlineAdapter</span></h4>
@@ -5363,7 +5338,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#getrootadaptermethods">getRootAdapterMethods</a></p>
 								<ul>
-									<li>Defined in node_modules/@material/mwc-textfield/mwc-textfield-base.d.ts:127</li>
+									<li>Defined in node_modules/@material/mwc-textfield/mwc-textfield-base.d.ts:141</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">MDCTextFieldRootAdapter</span></h4>
@@ -5381,7 +5356,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#getrootnode">getRootNode</a></p>
 								<ul>
-									<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:10821</li>
+									<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:10846</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -5410,7 +5385,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#handleinputchange">handleInputChange</a></p>
 								<ul>
-									<li>Defined in node_modules/@material/mwc-textfield/mwc-textfield-base.d.ts:124</li>
+									<li>Defined in node_modules/@material/mwc-textfield/mwc-textfield-base.d.ts:138</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -5428,7 +5403,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#hasattribute">hasAttribute</a></p>
 								<ul>
-									<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5188</li>
+									<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5169</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -5457,7 +5432,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#hasattributens">hasAttributeNS</a></p>
 								<ul>
-									<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5192</li>
+									<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5173</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -5489,7 +5464,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#hasattributes">hasAttributes</a></p>
 								<ul>
-									<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5196</li>
+									<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5177</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -5512,7 +5487,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#haschildnodes">hasChildNodes</a></p>
 								<ul>
-									<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:10825</li>
+									<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:10850</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -5535,7 +5510,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#haspointercapture">hasPointerCapture</a></p>
 								<ul>
-									<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5197</li>
+									<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5178</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -5585,7 +5560,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#insertadjacentelement">insertAdjacentElement</a></p>
 								<ul>
-									<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5198</li>
+									<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5179</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -5612,7 +5587,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#insertadjacenthtml">insertAdjacentHTML</a></p>
 								<ul>
-									<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5199</li>
+									<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5180</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -5639,7 +5614,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#insertadjacenttext">insertAdjacentText</a></p>
 								<ul>
-									<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5200</li>
+									<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5181</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -5666,7 +5641,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#insertbefore">insertBefore</a></p>
 								<ul>
-									<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:10826</li>
+									<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:10851</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-type-parameters-title">Type parameters</h4>
@@ -5699,7 +5674,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#isdefaultnamespace">isDefaultNamespace</a></p>
 								<ul>
-									<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:10827</li>
+									<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:10852</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -5723,7 +5698,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#isequalnode">isEqualNode</a></p>
 								<ul>
-									<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:10831</li>
+									<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:10856</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -5752,7 +5727,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#issamenode">isSameNode</a></p>
 								<ul>
-									<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:10832</li>
+									<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:10857</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -5776,7 +5751,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#layout">layout</a></p>
 								<ul>
-									<li>Defined in node_modules/@material/mwc-textfield/mwc-textfield-base.d.ts:134</li>
+									<li>Defined in node_modules/@material/mwc-textfield/mwc-textfield-base.d.ts:148</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
@@ -5794,7 +5769,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#lookupnamespaceuri">lookupNamespaceURI</a></p>
 								<ul>
-									<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:10833</li>
+									<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:10858</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -5818,7 +5793,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#lookupprefix">lookupPrefix</a></p>
 								<ul>
-									<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:10834</li>
+									<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:10859</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -5842,7 +5817,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#matches">matches</a></p>
 								<ul>
-									<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5204</li>
+									<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5185</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -5871,7 +5846,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#msgetregioncontent">msGetRegionContent</a></p>
 								<ul>
-									<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5205</li>
+									<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5186</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>
@@ -5889,7 +5864,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#normalize">normalize</a></p>
 								<ul>
-									<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:10838</li>
+									<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:10863</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -5912,7 +5887,25 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#oninputblur">onInputBlur</a></p>
 								<ul>
-									<li>Defined in node_modules/@material/mwc-textfield/mwc-textfield-base.d.ts:119</li>
+									<li>Defined in node_modules/@material/mwc-textfield/mwc-textfield-base.d.ts:133</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-protected">
+					<a name="oninputfocus" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagProtected">Protected</span> on<wbr>Input<wbr>Focus</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-protected">
+						<li class="tsd-signature tsd-kind-icon">on<wbr>Input<wbr>Focus<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#oninputfocus">onInputFocus</a></p>
+								<ul>
+									<li>Defined in node_modules/@material/mwc-textfield/mwc-textfield-base.d.ts:132</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -5961,7 +5954,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#prepend">prepend</a></p>
 								<ul>
-									<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:11337</li>
+									<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:11362</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -5993,7 +5986,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#queryselector">querySelector</a></p>
 								<ul>
-									<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:11341</li>
+									<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:11366</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -6019,7 +6012,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#queryselector">querySelector</a></p>
 								<ul>
-									<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:11342</li>
+									<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:11367</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-type-parameters-title">Type parameters</h4>
@@ -6040,7 +6033,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#queryselector">querySelector</a></p>
 								<ul>
-									<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:11343</li>
+									<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:11368</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-type-parameters-title">Type parameters</h4>
@@ -6072,7 +6065,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#queryselectorall">querySelectorAll</a></p>
 								<ul>
-									<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:11347</li>
+									<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:11372</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -6098,7 +6091,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#queryselectorall">querySelectorAll</a></p>
 								<ul>
-									<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:11348</li>
+									<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:11373</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-type-parameters-title">Type parameters</h4>
@@ -6119,7 +6112,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#queryselectorall">querySelectorAll</a></p>
 								<ul>
-									<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:11349</li>
+									<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:11374</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-type-parameters-title">Type parameters</h4>
@@ -6149,7 +6142,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#releasepointercapture">releasePointerCapture</a></p>
 								<ul>
-									<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5206</li>
+									<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5187</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -6173,7 +6166,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#remove">remove</a></p>
 								<ul>
-									<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:3516</li>
+									<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:3508</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -6196,7 +6189,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#removeattribute">removeAttribute</a></p>
 								<ul>
-									<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5210</li>
+									<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5191</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -6225,7 +6218,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#removeattributens">removeAttributeNS</a></p>
 								<ul>
-									<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5214</li>
+									<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5195</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -6257,7 +6250,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#removeattributenode">removeAttributeNode</a></p>
 								<ul>
-									<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5215</li>
+									<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5196</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -6281,7 +6274,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#removechild">removeChild</a></p>
 								<ul>
-									<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:10839</li>
+									<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:10864</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-type-parameters-title">Type parameters</h4>
@@ -6313,7 +6306,7 @@
 								<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#removeeventlistener">removeEventListener</a></p>
 								<p>Overrides Element.removeEventListener</p>
 								<ul>
-									<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:6606</li>
+									<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:6633</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-type-parameters-title">Type parameters</h4>
@@ -6362,7 +6355,7 @@
 								<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#removeeventlistener">removeEventListener</a></p>
 								<p>Overrides Element.removeEventListener</p>
 								<ul>
-									<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:6607</li>
+									<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:6634</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -6392,7 +6385,7 @@
 							<aside class="tsd-sources">
 								<p>Overrides TextFieldBase.render</p>
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/0445516/src/wizard-textfield.ts#L167">src/wizard-textfield.ts:167</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/bdf68ca/src/wizard-textfield.ts#L167">src/wizard-textfield.ts:167</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">TemplateResult</span></h4>
@@ -6403,16 +6396,22 @@
 					<a name="renderaffix" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagProtected">Protected</span> render<wbr>Affix</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-protected">
-						<li class="tsd-signature tsd-kind-icon">render<wbr>Affix<span class="tsd-signature-symbol">(</span>content<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, isSuffix<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">false</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">true</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">TemplateResult</span></li>
+						<li class="tsd-signature tsd-kind-icon">render<wbr>Affix<span class="tsd-signature-symbol">(</span>content<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, isSuffix<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">false</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">true</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">TemplateResult</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#renderaffix">renderAffix</a></p>
 								<ul>
-									<li>Defined in node_modules/@material/mwc-textfield/mwc-textfield-base.d.ts:114</li>
+									<li>Defined in node_modules/@material/mwc-textfield/mwc-textfield-base.d.ts:123</li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<dl class="tsd-comment-tags">
+									<dt>soytemplate</dt>
+									<dd></dd>
+								</dl>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
@@ -6422,7 +6421,7 @@
 									<h5><span class="tsd-flag ts-flagOptional">Optional</span> isSuffix: <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">false</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">true</span></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">TemplateResult</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">TemplateResult</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -6430,19 +6429,29 @@
 					<a name="rendercharcounter" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagProtected">Protected</span> render<wbr>Char<wbr>Counter</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-protected">
-						<li class="tsd-signature tsd-kind-icon">render<wbr>Char<wbr>Counter<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">{}</span></li>
+						<li class="tsd-signature tsd-kind-icon">render<wbr>Char<wbr>Counter<span class="tsd-signature-symbol">(</span>shouldRenderCharCounter<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">TemplateResult</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#rendercharcounter">renderCharCounter</a></p>
 								<ul>
-									<li>Defined in node_modules/@material/mwc-textfield/mwc-textfield-base.d.ts:118</li>
+									<li>Defined in node_modules/@material/mwc-textfield/mwc-textfield-base.d.ts:131</li>
 								</ul>
 							</aside>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-symbol">{}</span></h4>
+							<div class="tsd-comment tsd-typography">
+								<dl class="tsd-comment-tags">
+									<dt>soytemplate</dt>
+									<dd></dd>
+								</dl>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
+								<li>
+									<h5>shouldRenderCharCounter: <span class="tsd-signature-type">boolean</span></h5>
+								</li>
 							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">TemplateResult</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -6450,25 +6459,32 @@
 					<a name="renderhelpertext" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagProtected">Protected</span> render<wbr>Helper<wbr>Text</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-protected">
-						<li class="tsd-signature tsd-kind-icon">render<wbr>Helper<wbr>Text<span class="tsd-signature-symbol">(</span>charCounterTemplate<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">TemplateResult</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">typeof </span><span class="tsd-signature-type">nothing</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">{}</span></li>
+						<li class="tsd-signature tsd-kind-icon">render<wbr>Helper<wbr>Text<span class="tsd-signature-symbol">(</span>shouldRenderHelperText<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span>, shouldRenderCharCounter<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">TemplateResult</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#renderhelpertext">renderHelperText</a></p>
 								<ul>
-									<li>Defined in node_modules/@material/mwc-textfield/mwc-textfield-base.d.ts:117</li>
+									<li>Defined in node_modules/@material/mwc-textfield/mwc-textfield-base.d.ts:129</li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<dl class="tsd-comment-tags">
+									<dt>soytemplate</dt>
+									<dd></dd>
+								</dl>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5><span class="tsd-flag ts-flagOptional">Optional</span> charCounterTemplate: <span class="tsd-signature-type">TemplateResult</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">typeof </span><span class="tsd-signature-type">nothing</span></h5>
+									<h5>shouldRenderHelperText: <span class="tsd-signature-type">boolean</span></h5>
+								</li>
+								<li>
+									<h5>shouldRenderCharCounter: <span class="tsd-signature-type">boolean</span></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-symbol">{}</span></h4>
-							<ul class="tsd-parameters">
-							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">TemplateResult</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -6483,9 +6499,15 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#rendericon">renderIcon</a></p>
 								<ul>
-									<li>Defined in node_modules/@material/mwc-textfield/mwc-textfield-base.d.ts:111</li>
+									<li>Defined in node_modules/@material/mwc-textfield/mwc-textfield-base.d.ts:117</li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<dl class="tsd-comment-tags">
+									<dt>soytemplate</dt>
+									<dd></dd>
+								</dl>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
@@ -6503,16 +6525,28 @@
 					<a name="renderinput" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagProtected">Protected</span> render<wbr>Input</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-protected">
-						<li class="tsd-signature tsd-kind-icon">render<wbr>Input<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">TemplateResult</span></li>
+						<li class="tsd-signature tsd-kind-icon">render<wbr>Input<span class="tsd-signature-symbol">(</span>shouldRenderHelperText<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">TemplateResult</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#renderinput">renderInput</a></p>
 								<ul>
-									<li>Defined in node_modules/@material/mwc-textfield/mwc-textfield-base.d.ts:115</li>
+									<li>Defined in node_modules/@material/mwc-textfield/mwc-textfield-base.d.ts:125</li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<dl class="tsd-comment-tags">
+									<dt>soytemplate</dt>
+									<dd></dd>
+								</dl>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>shouldRenderHelperText: <span class="tsd-signature-type">boolean</span></h5>
+								</li>
+							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">TemplateResult</span></h4>
 						</li>
 					</ul>
@@ -6521,19 +6555,23 @@
 					<a name="renderlabel" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagProtected">Protected</span> render<wbr>Label</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-protected">
-						<li class="tsd-signature tsd-kind-icon">render<wbr>Label<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">{}</span></li>
+						<li class="tsd-signature tsd-kind-icon">render<wbr>Label<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">TemplateResult</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#renderlabel">renderLabel</a></p>
 								<ul>
-									<li>Defined in node_modules/@material/mwc-textfield/mwc-textfield-base.d.ts:108</li>
+									<li>Defined in node_modules/@material/mwc-textfield/mwc-textfield-base.d.ts:111</li>
 								</ul>
 							</aside>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-symbol">{}</span></h4>
-							<ul class="tsd-parameters">
-							</ul>
+							<div class="tsd-comment tsd-typography">
+								<dl class="tsd-comment-tags">
+									<dt>soytemplate</dt>
+									<dd></dd>
+								</dl>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">TemplateResult</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -6541,19 +6579,23 @@
 					<a name="renderleadingicon" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagProtected">Protected</span> render<wbr>Leading<wbr>Icon</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-protected">
-						<li class="tsd-signature tsd-kind-icon">render<wbr>Leading<wbr>Icon<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">{}</span></li>
+						<li class="tsd-signature tsd-kind-icon">render<wbr>Leading<wbr>Icon<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">TemplateResult</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#renderleadingicon">renderLeadingIcon</a></p>
 								<ul>
-									<li>Defined in node_modules/@material/mwc-textfield/mwc-textfield-base.d.ts:109</li>
+									<li>Defined in node_modules/@material/mwc-textfield/mwc-textfield-base.d.ts:113</li>
 								</ul>
 							</aside>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-symbol">{}</span></h4>
-							<ul class="tsd-parameters">
-							</ul>
+							<div class="tsd-comment tsd-typography">
+								<dl class="tsd-comment-tags">
+									<dt>soytemplate</dt>
+									<dd></dd>
+								</dl>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">TemplateResult</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -6561,19 +6603,23 @@
 					<a name="renderlineripple" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagProtected">Protected</span> render<wbr>Line<wbr>Ripple</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-protected">
-						<li class="tsd-signature tsd-kind-icon">render<wbr>Line<wbr>Ripple<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">{}</span></li>
+						<li class="tsd-signature tsd-kind-icon">render<wbr>Line<wbr>Ripple<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">TemplateResult</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#renderlineripple">renderLineRipple</a></p>
 								<ul>
-									<li>Defined in node_modules/@material/mwc-textfield/mwc-textfield-base.d.ts:116</li>
+									<li>Defined in node_modules/@material/mwc-textfield/mwc-textfield-base.d.ts:127</li>
 								</ul>
 							</aside>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-symbol">{}</span></h4>
-							<ul class="tsd-parameters">
-							</ul>
+							<div class="tsd-comment tsd-typography">
+								<dl class="tsd-comment-tags">
+									<dt>soytemplate</dt>
+									<dd></dd>
+								</dl>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">TemplateResult</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -6587,7 +6633,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/0445516/src/wizard-textfield.ts#L143">src/wizard-textfield.ts:143</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/bdf68ca/src/wizard-textfield.ts#L143">src/wizard-textfield.ts:143</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">TemplateResult</span></h4>
@@ -6598,19 +6644,23 @@
 					<a name="renderoutline" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagProtected">Protected</span> render<wbr>Outline</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-protected">
-						<li class="tsd-signature tsd-kind-icon">render<wbr>Outline<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">{}</span></li>
+						<li class="tsd-signature tsd-kind-icon">render<wbr>Outline<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">TemplateResult</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#renderoutline">renderOutline</a></p>
 								<ul>
-									<li>Defined in node_modules/@material/mwc-textfield/mwc-textfield-base.d.ts:107</li>
+									<li>Defined in node_modules/@material/mwc-textfield/mwc-textfield-base.d.ts:109</li>
 								</ul>
 							</aside>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-symbol">{}</span></h4>
-							<ul class="tsd-parameters">
-							</ul>
+							<div class="tsd-comment tsd-typography">
+								<dl class="tsd-comment-tags">
+									<dt>soytemplate</dt>
+									<dd></dd>
+								</dl>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">TemplateResult</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -6618,19 +6668,23 @@
 					<a name="renderprefix" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagProtected">Protected</span> render<wbr>Prefix</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-protected">
-						<li class="tsd-signature tsd-kind-icon">render<wbr>Prefix<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">{}</span></li>
+						<li class="tsd-signature tsd-kind-icon">render<wbr>Prefix<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">TemplateResult</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#renderprefix">renderPrefix</a></p>
 								<ul>
-									<li>Defined in node_modules/@material/mwc-textfield/mwc-textfield-base.d.ts:112</li>
+									<li>Defined in node_modules/@material/mwc-textfield/mwc-textfield-base.d.ts:119</li>
 								</ul>
 							</aside>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-symbol">{}</span></h4>
-							<ul class="tsd-parameters">
-							</ul>
+							<div class="tsd-comment tsd-typography">
+								<dl class="tsd-comment-tags">
+									<dt>soytemplate</dt>
+									<dd></dd>
+								</dl>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">TemplateResult</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -6638,19 +6692,23 @@
 					<a name="renderripple" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagProtected">Protected</span> render<wbr>Ripple</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-protected">
-						<li class="tsd-signature tsd-kind-icon">render<wbr>Ripple<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">{}</span></li>
+						<li class="tsd-signature tsd-kind-icon">render<wbr>Ripple<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">TemplateResult</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#renderripple">renderRipple</a></p>
 								<ul>
-									<li>Defined in node_modules/@material/mwc-textfield/mwc-textfield-base.d.ts:106</li>
+									<li>Defined in node_modules/@material/mwc-textfield/mwc-textfield-base.d.ts:107</li>
 								</ul>
 							</aside>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-symbol">{}</span></h4>
-							<ul class="tsd-parameters">
-							</ul>
+							<div class="tsd-comment tsd-typography">
+								<dl class="tsd-comment-tags">
+									<dt>soytemplate</dt>
+									<dd></dd>
+								</dl>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">TemplateResult</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -6658,19 +6716,23 @@
 					<a name="rendersuffix" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagProtected">Protected</span> render<wbr>Suffix</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-protected">
-						<li class="tsd-signature tsd-kind-icon">render<wbr>Suffix<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">{}</span></li>
+						<li class="tsd-signature tsd-kind-icon">render<wbr>Suffix<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">TemplateResult</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#rendersuffix">renderSuffix</a></p>
 								<ul>
-									<li>Defined in node_modules/@material/mwc-textfield/mwc-textfield-base.d.ts:113</li>
+									<li>Defined in node_modules/@material/mwc-textfield/mwc-textfield-base.d.ts:121</li>
 								</ul>
 							</aside>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-symbol">{}</span></h4>
-							<ul class="tsd-parameters">
-							</ul>
+							<div class="tsd-comment tsd-typography">
+								<dl class="tsd-comment-tags">
+									<dt>soytemplate</dt>
+									<dd></dd>
+								</dl>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">TemplateResult</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -6684,7 +6746,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/0445516/src/wizard-textfield.ts#L154">src/wizard-textfield.ts:154</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/bdf68ca/src/wizard-textfield.ts#L154">src/wizard-textfield.ts:154</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">TemplateResult</span></h4>
@@ -6695,19 +6757,23 @@
 					<a name="rendertrailingicon" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagProtected">Protected</span> render<wbr>Trailing<wbr>Icon</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-protected">
-						<li class="tsd-signature tsd-kind-icon">render<wbr>Trailing<wbr>Icon<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">{}</span></li>
+						<li class="tsd-signature tsd-kind-icon">render<wbr>Trailing<wbr>Icon<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">TemplateResult</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#rendertrailingicon">renderTrailingIcon</a></p>
 								<ul>
-									<li>Defined in node_modules/@material/mwc-textfield/mwc-textfield-base.d.ts:110</li>
+									<li>Defined in node_modules/@material/mwc-textfield/mwc-textfield-base.d.ts:115</li>
 								</ul>
 							</aside>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-symbol">{}</span></h4>
-							<ul class="tsd-parameters">
-							</ul>
+							<div class="tsd-comment tsd-typography">
+								<dl class="tsd-comment-tags">
+									<dt>soytemplate</dt>
+									<dd></dd>
+								</dl>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">TemplateResult</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -6721,7 +6787,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/0445516/src/wizard-textfield.ts#L124">src/wizard-textfield.ts:124</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/bdf68ca/src/wizard-textfield.ts#L124">src/wizard-textfield.ts:124</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">TemplateResult</span></h4>
@@ -6739,7 +6805,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#replacechild">replaceChild</a></p>
 								<ul>
-									<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:10840</li>
+									<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:10865</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-type-parameters-title">Type parameters</h4>
@@ -6772,7 +6838,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#replacewith">replaceWith</a></p>
 								<ul>
-									<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:3522</li>
+									<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:3514</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -6802,7 +6868,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#reportvalidity">reportValidity</a></p>
 								<ul>
-									<li>Defined in node_modules/@material/mwc-textfield/mwc-textfield-base.d.ts:121</li>
+									<li>Defined in node_modules/@material/mwc-textfield/mwc-textfield-base.d.ts:135</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
@@ -6820,7 +6886,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#requestfullscreen">requestFullscreen</a></p>
 								<ul>
-									<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5221</li>
+									<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5202</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -6850,7 +6916,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#requestpointerlock">requestPointerLock</a></p>
 								<ul>
-									<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5222</li>
+									<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5203</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -6951,7 +7017,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#scroll">scroll</a></p>
 								<ul>
-									<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5223</li>
+									<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5204</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -6966,7 +7032,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#scroll">scroll</a></p>
 								<ul>
-									<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5224</li>
+									<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5205</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -6994,7 +7060,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#scrollby">scrollBy</a></p>
 								<ul>
-									<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5225</li>
+									<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5206</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -7009,7 +7075,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#scrollby">scrollBy</a></p>
 								<ul>
-									<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5226</li>
+									<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5207</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -7036,7 +7102,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#scrollintoview">scrollIntoView</a></p>
 								<ul>
-									<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5227</li>
+									<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5208</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -7061,7 +7127,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#scrollto">scrollTo</a></p>
 								<ul>
-									<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5228</li>
+									<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5209</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -7076,7 +7142,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#scrollto">scrollTo</a></p>
 								<ul>
-									<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5229</li>
+									<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5210</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -7103,7 +7169,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#select">select</a></p>
 								<ul>
-									<li>Defined in node_modules/@material/mwc-textfield/mwc-textfield-base.d.ts:101</li>
+									<li>Defined in node_modules/@material/mwc-textfield/mwc-textfield-base.d.ts:100</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -7120,7 +7186,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/0445516/src/wizard-textfield.ts#L86">src/wizard-textfield.ts:86</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/bdf68ca/src/wizard-textfield.ts#L86">src/wizard-textfield.ts:86</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -7168,7 +7234,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#setattribute">setAttribute</a></p>
 								<ul>
-									<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5233</li>
+									<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5214</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -7200,7 +7266,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#setattributens">setAttributeNS</a></p>
 								<ul>
-									<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5237</li>
+									<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5218</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -7235,7 +7301,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#setattributenode">setAttributeNode</a></p>
 								<ul>
-									<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5238</li>
+									<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5219</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -7259,7 +7325,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#setattributenodens">setAttributeNodeNS</a></p>
 								<ul>
-									<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5239</li>
+									<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5220</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -7283,7 +7349,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#setcustomvalidity">setCustomValidity</a></p>
 								<ul>
-									<li>Defined in node_modules/@material/mwc-textfield/mwc-textfield-base.d.ts:123</li>
+									<li>Defined in node_modules/@material/mwc-textfield/mwc-textfield-base.d.ts:137</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -7307,7 +7373,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#setpointercapture">setPointerCapture</a></p>
 								<ul>
-									<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5240</li>
+									<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5221</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -7331,7 +7397,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#setselectionrange">setSelectionRange</a></p>
 								<ul>
-									<li>Defined in node_modules/@material/mwc-textfield/mwc-textfield-base.d.ts:102</li>
+									<li>Defined in node_modules/@material/mwc-textfield/mwc-textfield-base.d.ts:101</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -7395,7 +7461,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#toggleattribute">toggleAttribute</a></p>
 								<ul>
-									<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5246</li>
+									<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5227</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -7429,7 +7495,7 @@
 								<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#update">update</a></p>
 								<p>Overrides <a href="_wizard_dialog_.wizarddialog.html">WizardDialog</a>.<a href="_wizard_dialog_.wizarddialog.html#update">update</a></p>
 								<ul>
-									<li>Defined in node_modules/@material/mwc-textfield/mwc-textfield-base.d.ts:103</li>
+									<li>Defined in node_modules/@material/mwc-textfield/mwc-textfield-base.d.ts:102</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -7478,7 +7544,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="_wizard_textfield_.wizardtextfield.html">WizardTextField</a>.<a href="_wizard_textfield_.wizardtextfield.html#webkitmatchesselector">webkitMatchesSelector</a></p>
 								<ul>
-									<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5247</li>
+									<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5228</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -7985,6 +8051,9 @@
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-overwrite tsd-is-inherited">
 								<a href="_wizard_textfield_.wizardtextfield.html#floatinglabelfoundation" class="tsd-kind-icon">floating<wbr>Label<wbr>Foundation</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-protected">
+								<a href="_wizard_textfield_.wizardtextfield.html#focused" class="tsd-kind-icon">focused</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-overwrite tsd-is-inherited tsd-is-protected">
 								<a href="_wizard_textfield_.wizardtextfield.html#formelement" class="tsd-kind-icon">form<wbr>Element</a>
@@ -8542,9 +8611,6 @@
 								<a href="_wizard_textfield_.wizardtextfield.html#styles" class="tsd-kind-icon">styles</a>
 							</li>
 							<li class=" tsd-kind-get-signature tsd-parent-kind-class tsd-is-inherited tsd-is-protected">
-								<a href="_wizard_textfield_.wizardtextfield.html#charcountervisible" class="tsd-kind-icon">char<wbr>Counter<wbr>Visible</a>
-							</li>
-							<li class=" tsd-kind-get-signature tsd-parent-kind-class tsd-is-inherited tsd-is-protected">
 								<a href="_wizard_textfield_.wizardtextfield.html#hasupdated" class="tsd-kind-icon">has<wbr>Updated</a>
 							</li>
 							<li class=" tsd-kind-accessor tsd-parent-kind-class">
@@ -8561,9 +8627,6 @@
 							</li>
 							<li class=" tsd-kind-get-signature tsd-parent-kind-class tsd-is-inherited">
 								<a href="_wizard_textfield_.wizardtextfield.html#selectionstart" class="tsd-kind-icon">selection<wbr>Start</a>
-							</li>
-							<li class=" tsd-kind-get-signature tsd-parent-kind-class tsd-is-inherited tsd-is-protected">
-								<a href="_wizard_textfield_.wizardtextfield.html#shouldrenderhelpertext" class="tsd-kind-icon">should<wbr>Render<wbr>Helper<wbr>Text</a>
 							</li>
 							<li class=" tsd-kind-get-signature tsd-parent-kind-class tsd-is-inherited">
 								<a href="_wizard_textfield_.wizardtextfield.html#updatecomplete" class="tsd-kind-icon">update<wbr>Complete</a>
@@ -8777,6 +8840,9 @@
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-protected">
 								<a href="_wizard_textfield_.wizardtextfield.html#oninputblur" class="tsd-kind-icon">on<wbr>Input<wbr>Blur</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-protected">
+								<a href="_wizard_textfield_.wizardtextfield.html#oninputfocus" class="tsd-kind-icon">on<wbr>Input<wbr>Focus</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-protected">
 								<a href="_wizard_textfield_.wizardtextfield.html#performupdate" class="tsd-kind-icon">perform<wbr>Update</a>

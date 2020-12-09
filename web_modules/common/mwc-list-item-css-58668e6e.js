@@ -1,9 +1,9 @@
-import { h as html } from './lit-html-2d16f7a1.js';
-import { q as query, a as queryAsync, p as property, i as internalProperty, L as LitElement, c as css } from './lit-element-1ae1fc5f.js';
-import { R as RippleHandlers } from './ripple-handlers-c9105106.js';
-import { c as classMap } from './class-map-fd8dd570.js';
-import { o as observer } from './observer-306f3f70.js';
-import { _ as __decorate } from './tslib.es6-5628ff4f.js';
+import { _ as __decorate } from './tslib.es6-f4316a58.js';
+import { h as html } from './lit-html-05aef0cb.js';
+import { q as query, a as queryAsync, p as property, i as internalProperty, L as LitElement, c as css } from './lit-element-57f5f9f9.js';
+import { R as RippleHandlers } from './ripple-handlers-0620b2ae.js';
+import { c as classMap } from './class-map-970d9842.js';
+import { o as observer } from './observer-fa3d205e.js';
 
 /**
  @license
@@ -186,9 +186,12 @@ class ListItemBase extends LitElement {
             }
         }
         if (this._managingList) {
-            this._managingList.layout(true);
+            this._managingList.debouncedLayout ?
+                this._managingList.debouncedLayout(true) :
+                this._managingList.layout(true);
         }
     }
+    // composed flag, event fire through shadow root and up through composed tree
     firstUpdated() {
         const ev = new Event('list-item-rendered', { bubbles: true, composed: true });
         this.dispatchEvent(ev);

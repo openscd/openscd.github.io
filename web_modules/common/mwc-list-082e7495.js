@@ -1,9 +1,10 @@
-import { h as html } from './lit-html-2d16f7a1.js';
-import { q as query, p as property, c as css, b as customElement } from './lit-element-1ae1fc5f.js';
-import { M as MDCFoundation, f as findAssignedElement, B as BaseElement, i as isNodeElement, d as doesElementContainFocus, b as deepActiveElementPath } from './foundation-2623e8ee.js';
-import { i as ifDefined } from './if-defined-041e861a.js';
-import { o as observer } from './observer-306f3f70.js';
-import { _ as __decorate } from './tslib.es6-5628ff4f.js';
+import { _ as __decorate } from './tslib.es6-f4316a58.js';
+import { h as html } from './lit-html-05aef0cb.js';
+import { p as property, q as query, c as css, b as customElement } from './lit-element-57f5f9f9.js';
+import { M as MDCFoundation, f as findAssignedElement, B as BaseElement, i as isNodeElement, d as doesElementContainFocus, b as deepActiveElementPath } from './foundation-91823900.js';
+import { i as ifDefined } from './if-defined-17e885f9.js';
+import { o as observer } from './observer-fa3d205e.js';
+import '../@material/mwc-list/mwc-list-item.js';
 
 /**
  * @license
@@ -668,25 +669,26 @@ class MDCListFoundation extends MDCFoundation {
     }
 }
 
-/**
-@license
-Copyright 2020 Google Inc. All Rights Reserved.
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-    http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-*/
+function debounceLayout(callback, waitInMS = 50) {
+    let timeoutId;
+    // tslint:disable-next-line
+    return function (updateItems = true) {
+        clearTimeout(timeoutId);
+        timeoutId = setTimeout(() => {
+            callback(updateItems);
+        }, waitInMS);
+    };
+}
 const isListItem = (element) => {
     return element.hasAttribute('mwc-list-item');
 };
+function clearAndCreateItemsReadyPromise() {
+    const oldResolver = this.itemsReadyResolver;
+    this.itemsReady = new Promise((res) => {
+        return this.itemsReadyResolver = res;
+    });
+    oldResolver();
+}
 /**
  * @fires selected {SelectedDetail}
  * @fires action {ActionDetail}
@@ -694,7 +696,7 @@ const isListItem = (element) => {
  */
 class ListBase extends BaseElement {
     constructor() {
-        super(...arguments);
+        super();
         this.mdcAdapter = null;
         this.mdcFoundationClass = MDCListFoundation;
         this.activatable = false;
@@ -706,7 +708,20 @@ class ListBase extends BaseElement {
         this.rootTabbable = false;
         this.previousTabindex = null;
         this.noninteractive = false;
+        this.itemsReadyResolver = (() => {
+            //
+        });
+        this.itemsReady = Promise.resolve([]);
         this.items_ = [];
+        const debouncedFunction = debounceLayout(this.layout.bind(this));
+        this.debouncedLayout = (updateItems = true) => {
+            clearAndCreateItemsReadyPromise.call(this);
+            debouncedFunction(updateItems);
+        };
+    }
+    async _getUpdateComplete() {
+        await super._getUpdateComplete();
+        await this.itemsReady;
     }
     get assignedElements() {
         const slot = this.slotElement;
@@ -790,8 +805,17 @@ class ListBase extends BaseElement {
           @request-selected=${this.onRequestSelected}
           @list-item-rendered=${this.onListItemConnected}>
         <slot></slot>
+        ${this.renderPlaceholder()}
       </ul>
     `;
+    }
+    renderPlaceholder() {
+        if (this.emptyMessage !== undefined && this.assignedElements.length === 0) {
+            return html `
+        <mwc-list-item noninteractive>${this.emptyMessage}</mwc-list-item>
+      `;
+        }
+        return null;
     }
     firstUpdated() {
         super.firstUpdated();
@@ -1001,6 +1025,7 @@ class ListBase extends BaseElement {
                 first.tabindex = 0;
             }
         }
+        this.itemsReadyResolver();
     }
     getFocusedItemIndex() {
         if (!this.mdcRoot) {
@@ -1044,6 +1069,9 @@ class ListBase extends BaseElement {
         }
     }
 }
+__decorate([
+    property({ type: String })
+], ListBase.prototype, "emptyMessage", void 0);
 __decorate([
     query('.mdc-list')
 ], ListBase.prototype, "mdcRoot", void 0);

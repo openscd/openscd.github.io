@@ -1,4 +1,4 @@
-import { m as marker, T as Template, r as removeNodes, N as NodePart } from './lit-html-2d16f7a1.js';
+import { m as marker, T as Template, r as removeNodes, N as NodePart } from './lit-html-05aef0cb.js';
 
 /**
  * @license
@@ -87,4 +87,4 @@ const render = (result, container, options) => {
     part.commit();
 };
 
-export { templateFactory as a, parts as p, render as r, templateCaches as t };
+export { parts as p, render as r, templateCaches as t };

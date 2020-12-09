@@ -1127,4 +1127,4 @@ if (typeof window !== 'undefined') {
  */
 const html = (strings, ...values) => new TemplateResult(strings, values, 'html', defaultTemplateProcessor);
 
-export { AttributePart as A, BooleanAttributePart as B, EventPart as E, NodePart as N, PropertyPart as P, Template as T, TemplateInstance as a, noChange as b, TemplateResult as c, directive as d, reparentNodes as e, isPrimitive as f, html as h, isTemplatePartActive as i, marker as m, nothing as n, removeNodes as r };
+export { AttributePart as A, BooleanAttributePart as B, EventPart as E, NodePart as N, PropertyPart as P, Template as T, TemplateInstance as a, TemplateResult as b, reparentNodes as c, directive as d, isPrimitive as e, html as h, isTemplatePartActive as i, marker as m, nothing as n, removeNodes as r };

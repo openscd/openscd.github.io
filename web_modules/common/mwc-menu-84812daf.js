@@ -1,32 +1,11 @@
-import { h as html } from './lit-html-2d16f7a1.js';
-import { q as query, p as property, i as internalProperty, c as css, b as customElement } from './lit-element-1ae1fc5f.js';
-import { M as MDCFoundation, B as BaseElement, a as addHasRemoveClass, d as doesElementContainFocus, b as deepActiveElementPath } from './foundation-2623e8ee.js';
-import { c as classMap } from './class-map-fd8dd570.js';
-import { s as styleMap } from './style-map-bafa38aa.js';
-import { o as observer } from './observer-306f3f70.js';
-import { c as cssClasses$2 } from './mwc-list-b0f16694.js';
-
-/*! *****************************************************************************
-Copyright (c) Microsoft Corporation.
-
-Permission to use, copy, modify, and/or distribute this software for any
-purpose with or without fee is hereby granted.
-
-THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH
-REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY
-AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT,
-INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM
-LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR
-OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
-PERFORMANCE OF THIS SOFTWARE.
-***************************************************************************** */
-
-function __decorate(decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-}
+import { _ as __decorate } from './tslib.es6-f4316a58.js';
+import { h as html } from './lit-html-05aef0cb.js';
+import { q as query, p as property, i as internalProperty, c as css, b as customElement } from './lit-element-57f5f9f9.js';
+import { M as MDCFoundation, B as BaseElement, a as addHasRemoveClass, d as doesElementContainFocus, b as deepActiveElementPath } from './foundation-91823900.js';
+import { c as classMap } from './class-map-970d9842.js';
+import { s as styleMap } from './style-map-f71359d7.js';
+import { o as observer } from './observer-fa3d205e.js';
+import { c as cssClasses$2 } from './mwc-list-082e7495.js';
 
 /**
  * @license
@@ -509,7 +488,8 @@ var MDCMenuSurfaceFoundation = /** @class */ (function (_super) {
         }
         var isRtl = this.adapter.isRtl();
         var isFlipRtl = this.hasBit(this.anchorCorner, CornerBit.FLIP_RTL);
-        var hasRightBit = this.hasBit(this.anchorCorner, CornerBit.RIGHT);
+        var hasRightBit = this.hasBit(this.anchorCorner, CornerBit.RIGHT) ||
+            this.hasBit(corner, CornerBit.RIGHT);
         // Whether surface attached to right side of anchor element.
         var isAnchoredToRight = false;
         // Anchored to start
@@ -860,7 +840,7 @@ class MenuSurfaceBase extends BaseElement {
         document.body.addEventListener('click', this.onBodyClickBound, { passive: true, capture: true });
     }
     deregisterBodyClick() {
-        document.body.removeEventListener('click', this.onBodyClickBound);
+        document.body.removeEventListener('click', this.onBodyClickBound, { capture: true });
     }
     close() {
         this.open = false;

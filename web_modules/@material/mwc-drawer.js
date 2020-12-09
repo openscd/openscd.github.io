@@ -1,32 +1,11 @@
-import { h as html } from '../common/lit-html-2d16f7a1.js';
-import { q as query, p as property, c as css, b as customElement } from '../common/lit-element-1ae1fc5f.js';
-import '../common/render-0b63444f.js';
-import { M as MDCFoundation, B as BaseElement, a as addHasRemoveClass } from '../common/foundation-2623e8ee.js';
-import { c as classMap } from '../common/class-map-fd8dd570.js';
-import '../common/inert-17e0b8f9.js';
-import { o as observer } from '../common/observer-306f3f70.js';
-
-/*! *****************************************************************************
-Copyright (c) Microsoft Corporation.
-
-Permission to use, copy, modify, and/or distribute this software for any
-purpose with or without fee is hereby granted.
-
-THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH
-REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY
-AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT,
-INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM
-LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR
-OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
-PERFORMANCE OF THIS SOFTWARE.
-***************************************************************************** */
-
-function __decorate(decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-}
+import { _ as __decorate } from '../common/tslib.es6-f4316a58.js';
+import { h as html } from '../common/lit-html-05aef0cb.js';
+import { q as query, p as property, c as css, b as customElement } from '../common/lit-element-57f5f9f9.js';
+import '../common/render-f4da6f6f.js';
+import { M as MDCFoundation, B as BaseElement, a as addHasRemoveClass } from '../common/foundation-91823900.js';
+import { c as classMap } from '../common/class-map-970d9842.js';
+import '../common/inert.esm-e76ef07d.js';
+import { o as observer } from '../common/observer-fa3d205e.js';
 
 /**
  * @license
