@@ -4,13 +4,11 @@
 
 ## Properties
 
-| Property    | Attribute | Modifiers | Type             |
-|-------------|-----------|-----------|------------------|
-| `container` |           |           | `Element`        |
-| `desc`      | `desc`    | readonly  | `string \| null` |
-| `element`   | `element` |           | `Element`        |
-| `header`    |           |           | `Element`        |
-| `name`      | `name`    | readonly  | `string`         |
+| Property  | Attribute | Modifiers | Type             |
+|-----------|-----------|-----------|------------------|
+| `desc`    | `desc`    | readonly  | `string \| null` |
+| `element` | `element` |           | `Element`        |
+| `name`    | `name`    | readonly  | `string`         |
 
 ## Methods
 

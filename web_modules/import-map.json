@@ -4,6 +4,7 @@
     "@material/mwc-circular-progress-four-color": "./@material/mwc-circular-progress-four-color.js",
     "@material/mwc-dialog": "./@material/mwc-dialog.js",
     "@material/mwc-drawer": "./@material/mwc-drawer.js",
+    "@material/mwc-fab": "./@material/mwc-fab.js",
     "@material/mwc-formfield": "./@material/mwc-formfield.js",
     "@material/mwc-icon": "./@material/mwc-icon.js",
     "@material/mwc-icon-button": "./@material/mwc-icon-button.js",

@@ -10,26 +10,27 @@ var __decorate = (decorators, target, key, kind) => {
   return result;
 };
 import {
-  LitElement,
   css,
   customElement,
   html,
-  property,
-  query
+  LitElement,
+  property
 } from "../../../web_modules/lit-element.js";
 import {translate, get} from "../../../web_modules/lit-translate.js";
 import {
-  newWizardEvent,
+  getValue,
   newActionEvent,
-  getValue
+  newWizardEvent
 } from "../../foundation.js";
-import {selectors, startMove} from "./foundation.js";
+import {
+  isCreateOptions,
+  selectors,
+  startMove,
+  updateNamingAction
+} from "./foundation.js";
 import {typeIcon, typeName, types} from "./conducting-equipment-types.js";
 import {editlNode} from "./lnodewizard.js";
 import {BayEditor} from "./bay-editor.js";
-function isConductingEquipmentCreateOptions(options) {
-  return options.parent !== void 0;
-}
 export let ConductingEquipmentEditor = class extends LitElement {
   get name() {
     return this.element.getAttribute("name") ?? "";
@@ -102,27 +103,6 @@ export let ConductingEquipmentEditor = class extends LitElement {
       return [action];
     };
   }
-  static updateAction(element) {
-    return (inputs, wizard) => {
-      const name = getValue(inputs.find((i) => i.label === "name"));
-      const desc = getValue(inputs.find((i) => i.label === "desc"));
-      if (name === element.getAttribute("name") && desc === element.getAttribute("desc"))
-        return [];
-      const newElement = element.cloneNode(false);
-      newElement.setAttribute("name", name);
-      if (desc === null)
-        newElement.removeAttribute("desc");
-      else
-        newElement.setAttribute("desc", desc);
-      wizard.close();
-      return [
-        {
-          old: {element},
-          new: {element: newElement}
-        }
-      ];
-    };
-  }
   static wizard(options) {
     const [
       heading,
@@ -132,7 +112,7 @@ export let ConductingEquipmentEditor = class extends LitElement {
       name,
       desc,
       reservedNames
-    ] = isConductingEquipmentCreateOptions(options) ? [
+    ] = isCreateOptions(options) ? [
       get("conductingequipment.wizard.title.add"),
       get("add"),
       "add",
@@ -144,7 +124,7 @@ export let ConductingEquipmentEditor = class extends LitElement {
       get("conductingequipment.wizard.title.edit"),
       get("save"),
       "edit",
-      ConductingEquipmentEditor.updateAction(options.element),
+      updateNamingAction(options.element),
       options.element.getAttribute("name"),
       options.element.getAttribute("desc"),
       Array.from(options.element.parentNode.querySelectorAll(selectors.ConductingEquipment)).map((condEq) => condEq.getAttribute("name")).filter((name2) => name2 !== options.element.getAttribute("name"))
@@ -181,7 +161,7 @@ export let ConductingEquipmentEditor = class extends LitElement {
     ];
   }
   static renderTypeSelector(options) {
-    return isConductingEquipmentCreateOptions(options) ? html`<mwc-select
+    return isCreateOptions(options) ? html`<mwc-select
           required
           label="type"
           helper="${translate("conductingequipment.wizard.typeHelper")}"
@@ -207,7 +187,6 @@ ConductingEquipmentEditor.styles = css`
       height: 64px;
       margin: auto;
       position: relative;
-      opacity: 1;
       transition: all 200ms linear;
     }
 
@@ -289,8 +268,8 @@ ConductingEquipmentEditor.styles = css`
       transition: opacity 200ms linear;
     }
 
-    #container.moving,
-    #container.moving + h4 {
+    :host(.moving) #container,
+    :host(.moving) h4 {
       opacity: 0.3;
     }
   `;
@@ -303,12 +282,6 @@ __decorate([
 __decorate([
   property({type: String})
 ], ConductingEquipmentEditor.prototype, "desc", 1);
-__decorate([
-  query("h4")
-], ConductingEquipmentEditor.prototype, "header", 2);
-__decorate([
-  query("#container")
-], ConductingEquipmentEditor.prototype, "container", 2);
 ConductingEquipmentEditor = __decorate([
   customElement("conducting-equipment-editor")
 ], ConductingEquipmentEditor);

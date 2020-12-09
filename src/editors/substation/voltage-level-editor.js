@@ -14,7 +14,6 @@ import {
   customElement,
   html,
   property,
-  query,
   css
 } from "../../../web_modules/lit-element.js";
 import {translate, get} from "../../../web_modules/lit-translate.js";
@@ -24,14 +23,16 @@ import {
   getValue,
   getMultiplier
 } from "../../foundation.js";
-import {selectors, startMove, styles} from "./foundation.js";
+import {
+  isCreateOptions,
+  selectors,
+  startMove,
+  styles
+} from "./foundation.js";
 import "./bay-editor.js";
 import {BayEditor} from "./bay-editor.js";
 import {editlNode} from "./lnodewizard.js";
-import SubstationEditor2 from "../SubstationEditor.js";
-function isVoltageLevelCreateOptions(options) {
-  return options.parent !== void 0;
-}
+import {SubstationEditor} from "./substation-editor.js";
 const initial = {
   nomFreq: "50",
   numPhases: "3",
@@ -86,10 +87,7 @@ export let VoltageLevelEditor = class extends LitElement {
     this.dispatchEvent(newWizardEvent(VoltageLevelEditor.wizard({element: this.element})));
   }
   openBayWizard() {
-    if (!this.element)
-      return;
-    const event = newWizardEvent(BayEditor.wizard({parent: this.element}));
-    this.dispatchEvent(event);
+    this.dispatchEvent(newWizardEvent(BayEditor.wizard({parent: this.element})));
   }
   openLNodeWizard() {
     this.dispatchEvent(newWizardEvent(editlNode(this.element)));
@@ -123,7 +121,7 @@ export let VoltageLevelEditor = class extends LitElement {
         ></mwc-icon-button>
         <mwc-icon-button
           icon="forward"
-          @click=${() => startMove(this, VoltageLevelEditor, SubstationEditor2)}
+          @click=${() => startMove(this, VoltageLevelEditor, SubstationEditor)}
         ></mwc-icon-button>
         <mwc-icon-button
           icon="delete"
@@ -139,31 +137,6 @@ export let VoltageLevelEditor = class extends LitElement {
         ${Array.from(this.element?.querySelectorAll(selectors.Bay) ?? []).map((bay) => html`<bay-editor .element=${bay}></bay-editor>`)}
       </div>
     </section>`;
-  }
-  static createAction(parent) {
-    return (inputs, wizard) => {
-      const name = getValue(inputs.find((i) => i.label === "name"));
-      const desc = getValue(inputs.find((i) => i.label === "desc"));
-      const nomFreq = getValue(inputs.find((i) => i.label === "nomFreq"));
-      const numPhases = getValue(inputs.find((i) => i.label === "numPhases"));
-      const Voltage = getValue(inputs.find((i) => i.label === "Voltage"));
-      const multiplier = getMultiplier(inputs.find((i) => i.label === "Voltage"));
-      const action = {
-        new: {
-          parent,
-          element: new DOMParser().parseFromString(`<VoltageLevel
-              name="${name}"
-              ${desc === null ? "" : `desc="${desc}"`}
-              ${nomFreq === null ? "" : `nomFreq="${nomFreq}"`}
-              ${numPhases === null ? "" : `numPhases="${numPhases}"`}
-            >${Voltage === null ? "" : `<Voltage unit="V" ${multiplier === null ? "" : `multiplier="${multiplier}"`}
-            >${Voltage}</Voltage>`}</VoltageLevel>`, "application/xml").documentElement,
-          reference: null
-        }
-      };
-      wizard.close();
-      return [action];
-    };
   }
   static updateAction(element) {
     return (inputs, wizard) => {
@@ -209,31 +182,48 @@ export let VoltageLevelEditor = class extends LitElement {
       return actions;
     };
   }
+  static createAction(parent) {
+    return (inputs, wizard) => {
+      const name = getValue(inputs.find((i) => i.label === "name"));
+      const desc = getValue(inputs.find((i) => i.label === "desc"));
+      const nomFreq = getValue(inputs.find((i) => i.label === "nomFreq"));
+      const numPhases = getValue(inputs.find((i) => i.label === "numPhases"));
+      const Voltage = getValue(inputs.find((i) => i.label === "Voltage"));
+      const multiplier = getMultiplier(inputs.find((i) => i.label === "Voltage"));
+      const action = {
+        new: {
+          parent,
+          element: new DOMParser().parseFromString(`<VoltageLevel
+              name="${name}"
+              ${desc === null ? "" : `desc="${desc}"`}
+              ${nomFreq === null ? "" : `nomFreq="${nomFreq}"`}
+              ${numPhases === null ? "" : `numPhases="${numPhases}"`}
+            >${Voltage === null ? "" : `<Voltage unit="V" ${multiplier === null ? "" : `multiplier="${multiplier}"`}
+            >${Voltage}</Voltage>`}</VoltageLevel>`, "application/xml").documentElement,
+          reference: null
+        }
+      };
+      wizard.close();
+      return [action];
+    };
+  }
   static wizard(options) {
     const [
       heading,
       actionName,
       actionIcon,
-      action
-    ] = isVoltageLevelCreateOptions(options) ? [
-      get("voltagelevel.wizard.title.add"),
-      get("add"),
-      "add",
-      VoltageLevelEditor.createAction(options.parent)
-    ] : [
-      get("voltagelevel.wizard.title.edit"),
-      get("save"),
-      "edit",
-      VoltageLevelEditor.updateAction(options.element)
-    ];
-    const [
+      action,
       name,
       desc,
       nomFreq,
       numPhases,
       Voltage,
       multiplier
-    ] = isVoltageLevelCreateOptions(options) ? [
+    ] = isCreateOptions(options) ? [
+      get("voltagelevel.wizard.title.add"),
+      get("add"),
+      "add",
+      VoltageLevelEditor.createAction(options.parent),
       "",
       null,
       initial.nomFreq,
@@ -241,6 +231,10 @@ export let VoltageLevelEditor = class extends LitElement {
       initial.Voltage,
       initial.multiplier
     ] : [
+      get("voltagelevel.wizard.title.edit"),
+      get("save"),
+      "edit",
+      VoltageLevelEditor.updateAction(options.element),
       options.element.getAttribute("name"),
       options.element.getAttribute("desc"),
       options.element.getAttribute("nomFreq"),
@@ -345,12 +339,6 @@ __decorate([
 __decorate([
   property()
 ], VoltageLevelEditor.prototype, "voltage", 1);
-__decorate([
-  query("h2")
-], VoltageLevelEditor.prototype, "header", 2);
-__decorate([
-  query("section")
-], VoltageLevelEditor.prototype, "container", 2);
 VoltageLevelEditor = __decorate([
   customElement("voltage-level-editor")
 ], VoltageLevelEditor);

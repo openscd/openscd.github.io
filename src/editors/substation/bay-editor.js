@@ -10,27 +10,28 @@ var __decorate = (decorators, target, key, kind) => {
   return result;
 };
 import {
-  LitElement,
   css,
   customElement,
   html,
-  property,
-  query
+  LitElement,
+  property
 } from "../../../web_modules/lit-element.js";
-import {get, translate} from "../../../web_modules/lit-translate.js";
+import {translate, get} from "../../../web_modules/lit-translate.js";
 import {
-  newWizardEvent,
+  getValue,
   newActionEvent,
-  getValue
+  newWizardEvent
 } from "../../foundation.js";
-import {startMove, styles} from "./foundation.js";
+import {
+  isCreateOptions,
+  startMove,
+  styles,
+  updateNamingAction
+} from "./foundation.js";
 import "./conducting-equipment-editor.js";
 import {ConductingEquipmentEditor} from "./conducting-equipment-editor.js";
 import {editlNode} from "./lnodewizard.js";
 import {VoltageLevelEditor} from "./voltage-level-editor.js";
-function isBayCreateOptions(options) {
-  return options.parent !== void 0;
-}
 export let BayEditor = class extends LitElement {
   get name() {
     return this.element.getAttribute("name") ?? "";
@@ -115,22 +116,6 @@ export let BayEditor = class extends LitElement {
       return [action];
     };
   }
-  static updateAction(element) {
-    return (inputs, wizard) => {
-      const name = getValue(inputs.find((i) => i.label === "name"));
-      const desc = getValue(inputs.find((i) => i.label === "desc"));
-      if (name === element.getAttribute("name") && desc === element.getAttribute("desc"))
-        return [];
-      const newElement = element.cloneNode(false);
-      newElement.setAttribute("name", name);
-      if (desc === null)
-        newElement.removeAttribute("desc");
-      else
-        newElement.setAttribute("desc", desc);
-      wizard.close();
-      return [{old: {element}, new: {element: newElement}}];
-    };
-  }
   static wizard(options) {
     const [
       heading,
@@ -139,7 +124,7 @@ export let BayEditor = class extends LitElement {
       action,
       name,
       desc
-    ] = isBayCreateOptions(options) ? [
+    ] = isCreateOptions(options) ? [
       get("bay.wizard.title.add"),
       get("add"),
       "add",
@@ -150,7 +135,7 @@ export let BayEditor = class extends LitElement {
       get("bay.wizard.title.edit"),
       get("save"),
       "edit",
-      BayEditor.updateAction(options.element),
+      updateNamingAction(options.element),
       options.element.getAttribute("name"),
       options.element.getAttribute("desc")
     ];
@@ -208,12 +193,6 @@ __decorate([
 __decorate([
   property({type: String})
 ], BayEditor.prototype, "desc", 1);
-__decorate([
-  query("h3")
-], BayEditor.prototype, "header", 2);
-__decorate([
-  query("section")
-], BayEditor.prototype, "container", 2);
 BayEditor = __decorate([
   customElement("bay-editor")
 ], BayEditor);

@@ -94,7 +94,7 @@ export let OpenSCD = class extends Setting2(Wizarding2(Waiting2(Validating2(Edit
           name: "substation.name",
           id: "substation",
           icon: zeroLineIcon,
-          getContent: () => plugin2("./editors/SubstationEditor.js", "editor-0").then(() => html`<editor-0 .doc=${this.doc}></editor-0>`)
+          getContent: () => plugin2("./editors/Substation.js", "editor-0").then(() => html`<editor-0 .doc=${this.doc}></editor-0>`)
         }
       ]
     };
@@ -235,7 +235,7 @@ OpenSCD.styles = css`
     } /* hack to fix disabled icon buttons rendering black */
 
     mwc-tab {
-      background-color: var(--blue);
+      background-color: var(--primary);
       --mdc-theme-primary: var(--mdc-theme-on-primary);
     }
 

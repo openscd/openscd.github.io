@@ -92,7 +92,7 @@ export let WizardDialog = class extends LitElement {
   }
   renderPage(page, index) {
     return html`<mwc-dialog
-      defaultAction="none"
+      defaultAction="close"
       ?open=${index === this.pageIndex}
       heading=${page.title}
       @closed=${this.onClosed}

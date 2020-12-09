@@ -1,15 +1,37 @@
 import {css} from "../../../web_modules/lit-element.js";
-import {newActionEvent} from "../../foundation.js";
+import {
+  getValue,
+  newActionEvent
+} from "../../foundation.js";
+export function isCreateOptions(options) {
+  return options.parent !== void 0;
+}
+export function updateNamingAction(element) {
+  return (inputs, wizard) => {
+    const name = getValue(inputs.find((i) => i.label === "name"));
+    const desc = getValue(inputs.find((i) => i.label === "desc"));
+    if (name === element.getAttribute("name") && desc === element.getAttribute("desc"))
+      return [];
+    const newElement = element.cloneNode(false);
+    newElement.setAttribute("name", name);
+    if (desc === null)
+      newElement.removeAttribute("desc");
+    else
+      newElement.setAttribute("desc", desc);
+    wizard.close();
+    return [{old: {element}, new: {element: newElement}}];
+  };
+}
 export function startMove(editor, Child, Parent) {
   if (!editor.element)
     return;
-  editor.container.classList.add("moving");
+  editor.classList.add("moving");
   const moveToTarget = (e) => {
     if (e instanceof KeyboardEvent && e.key !== "Escape" && e.key !== " " && e.key !== "Enter")
       return;
     e.preventDefault();
     e.stopImmediatePropagation();
-    editor.container.classList.remove("moving");
+    editor.classList.remove("moving");
     window.removeEventListener("keydown", moveToTarget, true);
     window.removeEventListener("click", moveToTarget, true);
     if (e instanceof KeyboardEvent && e.key === "Escape")
@@ -45,7 +67,10 @@ const substationPath = [
 ];
 export const selectors = Object.fromEntries(substationPath.map((e, i, a) => [e, a.slice(0, i + 1).join(" > ")]));
 export const styles = css`
-  main,
+  :host(.moving) section {
+    opacity: 0.3;
+  }
+
   section {
     background-color: var(--mdc-theme-surface);
     transition: all 200ms linear;
@@ -56,18 +81,11 @@ export const styles = css`
     opacity: 1;
   }
 
-  main.moving,
-  section.moving {
-    opacity: 0.3;
-  }
-
-  main:focus,
   section:focus {
     box-shadow: 0 8px 10px 1px rgba(0, 0, 0, 0.14),
       0 3px 14px 2px rgba(0, 0, 0, 0.12), 0 5px 5px -3px rgba(0, 0, 0, 0.2);
   }
 
-  main:focus-within,
   section:focus-within {
     outline-width: 2px;
     transition: all 250ms linear;
@@ -88,7 +106,7 @@ export const styles = css`
     transition: background-color 150ms linear;
   }
 
-  main:focus-within > h1,
+  section:focus-within > h1,
   section:focus-within > h2,
   section:focus-within > h3 {
     color: var(--mdc-theme-surface);

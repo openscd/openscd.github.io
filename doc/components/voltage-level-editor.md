@@ -1,17 +1,15 @@
 # voltage-level-editor
 
-[[`SubstationEditor`]] subeditor for a `VoltageLevel` element.
+[[`Substation`]] subeditor for a `VoltageLevel` element.
 
 ## Properties
 
-| Property    | Attribute | Modifiers | Type             |
-|-------------|-----------|-----------|------------------|
-| `container` |           |           | `Element`        |
-| `desc`      | `desc`    | readonly  | `string \| null` |
-| `element`   | `element` |           | `Element`        |
-| `header`    |           |           | `Element`        |
-| `name`      | `name`    | readonly  | `string`         |
-| `voltage`   | `voltage` | readonly  | `string \| null` |
+| Property  | Attribute | Modifiers | Type             |
+|-----------|-----------|-----------|------------------|
+| `desc`    | `desc`    | readonly  | `string \| null` |
+| `element` | `element` |           | `Element`        |
+| `name`    | `name`    | readonly  | `string`         |
+| `voltage` | `voltage` | readonly  | `string \| null` |
 
 ## Methods
 
