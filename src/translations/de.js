@@ -115,6 +115,7 @@ export const de = {
   add: "Hinzuf\xFCgen",
   edit: "Bearbeiten",
   save: "Speichern",
+  saveAs: "Speichern unter",
   reset: "Zur\xFCcksetzen",
   cancel: "Abbrechen",
   close: "Schlie\xDFen",

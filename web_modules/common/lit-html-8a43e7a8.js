@@ -19,18 +19,6 @@ const isCEPolyfill = typeof window !== 'undefined' &&
     window.customElements.polyfillWrapFlushCallback !==
         undefined;
 /**
- * Reparents nodes, starting from `start` (inclusive) to `end` (exclusive),
- * into another container (could be the same container), before `before`. If
- * `before` is null, it appends the nodes to the container.
- */
-const reparentNodes = (container, start, end = null, before = null) => {
-    while (start !== end) {
-        const n = start.nextSibling;
-        container.insertBefore(start, before);
-        start = n;
-    }
-};
-/**
  * Removes nodes, starting from `start` (inclusive) to `end` (exclusive), from
  * `container`.
  */
@@ -1127,4 +1115,4 @@ if (typeof window !== 'undefined') {
  */
 const html = (strings, ...values) => new TemplateResult(strings, values, 'html', defaultTemplateProcessor);
 
-export { AttributePart as A, BooleanAttributePart as B, EventPart as E, NodePart as N, PropertyPart as P, Template as T, TemplateInstance as a, TemplateResult as b, reparentNodes as c, directive as d, isPrimitive as e, html as h, isTemplatePartActive as i, marker as m, nothing as n, removeNodes as r };
+export { AttributePart as A, BooleanAttributePart as B, EventPart as E, NodePart as N, PropertyPart as P, Template as T, TemplateInstance as a, TemplateResult as b, isPrimitive as c, directive as d, html as h, isTemplatePartActive as i, marker as m, nothing as n, removeNodes as r };

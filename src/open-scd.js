@@ -20,8 +20,8 @@ import {
 } from "../web_modules/lit-element.js";
 import {translate, get} from "../web_modules/lit-translate.js";
 import {until as until2} from "../web_modules/lit-html/directives/until.js";
-import {cache as cache2} from "../web_modules/lit-html/directives/cache.js";
 import "../web_modules/@material/mwc-button.js";
+import "../web_modules/@material/mwc-dialog.js";
 import "../web_modules/@material/mwc-drawer.js";
 import "../web_modules/@material/mwc-icon.js";
 import "../web_modules/@material/mwc-icon-button.js";
@@ -30,6 +30,7 @@ import "../web_modules/@material/mwc-list.js";
 import "../web_modules/@material/mwc-list/mwc-list-item.js";
 import "../web_modules/@material/mwc-tab.js";
 import "../web_modules/@material/mwc-tab-bar.js";
+import "../web_modules/@material/mwc-textfield.js";
 import "../web_modules/@material/mwc-top-app-bar-fixed.js";
 import {Editing as Editing2, newEmptySCD} from "./Editing.js";
 import {Logging as Logging2} from "./Logging.js";
@@ -58,7 +59,8 @@ export let OpenSCD = class extends Setting2(Wizarding2(Waiting2(Validating2(Edit
       },
       {icon: "create_new_folder", name: "menu.new"},
       {icon: "snippet_folder", name: "menu.importIED"},
-      {icon: "save", name: "save"},
+      {icon: "save_alt", name: "save", action: () => this.save()},
+      {icon: "save", name: "saveAs", action: () => this.saveUI.show()},
       {
         icon: "undo",
         name: "undo",
@@ -98,6 +100,8 @@ export let OpenSCD = class extends Setting2(Wizarding2(Waiting2(Validating2(Edit
         }
       ]
     };
+    if ("serviceWorker" in navigator)
+      navigator.serviceWorker.register("/sw.js");
     this.handleKeyPress = this.handleKeyPress.bind(this);
     document.onkeydown = this.handleKeyPress;
   }
@@ -138,6 +142,27 @@ export let OpenSCD = class extends Setting2(Wizarding2(Waiting2(Validating2(Edit
       this.setAttribute("src", URL.createObjectURL(file));
     }
   }
+  saveAs() {
+    this.srcName = this.saveUI.querySelector("mwc-textfield")?.value || this.srcName;
+    this.save();
+    this.saveUI.close();
+  }
+  save() {
+    const blob = new Blob([new XMLSerializer().serializeToString(this.doc)], {
+      type: "application/xml"
+    });
+    const a = document.createElement("a");
+    a.download = this.srcName;
+    a.href = URL.createObjectURL(blob);
+    a.dataset.downloadurl = ["application/xml", a.download, a.href].join(":");
+    a.style.display = "none";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    setTimeout(function() {
+      URL.revokeObjectURL(a.href);
+    }, 1500);
+  }
   handleKeyPress(e) {
     let handled = false;
     const ctrlAnd = (key) => e.key === key && e.ctrlKey && (handled = true);
@@ -151,6 +176,10 @@ export let OpenSCD = class extends Setting2(Wizarding2(Waiting2(Validating2(Edit
       this.menuUI.open = !this.menuUI.open;
     if (ctrlAnd("o"))
       this.fileUI.click();
+    if (ctrlAnd("s"))
+      this.save();
+    if (ctrlAnd("S"))
+      this.saveUI.show();
     if (handled)
       e.preventDefault();
   }
@@ -221,7 +250,24 @@ export let OpenSCD = class extends Setting2(Wizarding2(Waiting2(Validating2(Edit
         </mwc-top-app-bar-fixed>
       </mwc-drawer>
 
-      ${cache2(until2(this.plugins.editors[this.activeTab].getContent(), html`<mwc-linear-progress indeterminate></mwc-linear-progress>`))}
+      <mwc-dialog heading="${translate("saveAs")}" id="saveas">
+        <mwc-textfield dialogInitialFocus label="${translate("filename")}" value="${this.srcName}">
+        </mwc-textfield>
+        <mwc-button
+          @click=${() => this.saveAs()}
+          icon="save"
+          slot="primaryAction">
+          ${translate("save")}
+        </mwc-button>
+        <mwc-button
+          dialogAction="cancel"
+          style="--mdc-theme-primary: var(--mdc-theme-error)"
+          slot="secondaryAction">
+          ${translate("cancel")}
+        </mwc-button>
+      </mwc-dialog>
+
+      ${until2(this.plugins.editors[this.activeTab].getContent(), html`<mwc-linear-progress indeterminate></mwc-linear-progress>`)}
 
       <input id="file-input" type="file" @change="${this.loadFile}"></input>
       ${super.render()}
@@ -289,6 +335,9 @@ __decorate([
 __decorate([
   query("#file-input")
 ], OpenSCD.prototype, "fileUI", 2);
+__decorate([
+  query("#saveas")
+], OpenSCD.prototype, "saveUI", 2);
 OpenSCD = __decorate([
   customElement("open-scd")
 ], OpenSCD);

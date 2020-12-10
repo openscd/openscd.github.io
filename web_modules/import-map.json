@@ -22,7 +22,6 @@
     "@material/mwc-top-app-bar-fixed": "./@material/mwc-top-app-bar-fixed.js",
     "lit-element": "./lit-element.js",
     "lit-html": "./lit-html.js",
-    "lit-html/directives/cache.js": "./lit-html/directives/cache.js",
     "lit-html/directives/if-defined": "./lit-html/directives/if-defined.js",
     "lit-html/directives/until.js": "./lit-html/directives/until.js",
     "lit-translate": "./lit-translate.js"
