@@ -130,7 +130,7 @@ export let BayEditor = class extends LitElement {
       "add",
       BayEditor.createAction(options.parent),
       "",
-      null
+      ""
     ] : [
       get("bay.wizard.title.edit"),
       get("save"),

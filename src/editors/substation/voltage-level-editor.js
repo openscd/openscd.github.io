@@ -226,7 +226,7 @@ export let VoltageLevelEditor = class extends LitElement {
       "add",
       VoltageLevelEditor.createAction(options.parent),
       "",
-      null,
+      "",
       initial.nomFreq,
       initial.numPhases,
       initial.Voltage,

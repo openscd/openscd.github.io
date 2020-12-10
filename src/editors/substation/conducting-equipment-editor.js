@@ -118,7 +118,7 @@ export let ConductingEquipmentEditor = class extends LitElement {
       "add",
       ConductingEquipmentEditor.createAction(options.parent),
       "",
-      null,
+      "",
       Array.from(options.parent.querySelectorAll(selectors.ConductingEquipment)).map((condEq) => condEq.getAttribute("name"))
     ] : [
       get("conductingequipment.wizard.title.edit"),
@@ -265,6 +265,7 @@ ConductingEquipmentEditor.styles = css`
       margin: 0px;
       opacity: 1;
       transition: opacity 200ms linear;
+      text-align: center;
     }
 
     :host(.moving) #container,
