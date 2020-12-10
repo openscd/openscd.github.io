@@ -108,7 +108,8 @@ export const en = {
         selectIEDs: "Select IEDs",
         selectLDs: "Select Logical Devices",
         selectLNs: "Select Logical Nodes"
-      }
+      },
+      placeholder: "No IEDs loaded yet. Please load a SCL file that contains IED elements first."
     }
   },
   add: "Add",

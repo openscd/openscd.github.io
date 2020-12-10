@@ -172,26 +172,32 @@ function onFilterInput(evt) {
 }
 function renderIEDPage(element) {
   const doc = element.ownerDocument;
-  return html`<mwc-textfield
-      label="${translate("filter")}"
-      iconTrailing="search"
-      @input=${onFilterInput}
-    ></mwc-textfield>
-    <mwc-list
-      multi
-      id="iedList"
-      @selected="${(evt) => onIEDSelect(evt, element)}"
-      >${Array.from(doc.querySelectorAll(":root > IED")).map((ied) => ied.getAttribute("name")).map((iedName) => {
-    return {
-      selected: element.querySelector(`${selectors[element.tagName]} > LNode[iedName="${iedName}"]`) !== null,
-      value: iedName
-    };
-  }).sort(compareDescription).map((item) => html`<mwc-check-list-item
-              value="${item.value ?? ""}"
-              ?selected=${item.selected}
-              >${item.value}</mwc-check-list-item
-            >`)}</mwc-list
-    >`;
+  if (doc.querySelectorAll(":root > IED").length > 0)
+    return html`<mwc-textfield
+        label="${translate("filter")}"
+        iconTrailing="search"
+        @input=${onFilterInput}
+      ></mwc-textfield>
+      <mwc-list
+        multi
+        id="iedList"
+        @selected="${(evt) => onIEDSelect(evt, element)}"
+        >${Array.from(doc.querySelectorAll(":root > IED")).map((ied) => ied.getAttribute("name")).map((iedName) => {
+      return {
+        selected: element.querySelector(`${selectors[element.tagName]} > LNode[iedName="${iedName}"]`) !== null,
+        value: iedName
+      };
+    }).sort(compareDescription).map((item) => html`<mwc-check-list-item
+                value="${item.value ?? ""}"
+                ?selected=${item.selected}
+                >${item.value}</mwc-check-list-item
+              >`)}</mwc-list
+      >`;
+  else
+    return html`<mwc-list-item disabled graphic="icon">
+      <span>${translate("lnode.wizard.placeholder")}</span>
+      <mwc-icon slot="graphic">info</mwc-icon>
+    </mwc-list-item>`;
 }
 function renderLdPage(element) {
   return html`<mwc-textfield

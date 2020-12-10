@@ -23,16 +23,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">91.86% </span>
+                <span class="strong">90.91% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>79/86</span>
+                <span class='fraction'>80/88</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">70.97% </span>
+                <span class="strong">70.31% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>44/62</span>
+                <span class='fraction'>45/64</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">96.25% </span>
+                <span class="strong">95.12% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>77/80</span>
+                <span class='fraction'>78/82</span>
             </div>
         
             
@@ -437,7 +437,13 @@
 <a name='L378'></a><a href='#L378'>378</a>
 <a name='L379'></a><a href='#L379'>379</a>
 <a name='L380'></a><a href='#L380'>380</a>
-<a name='L381'></a><a href='#L381'>381</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L381'></a><a href='#L381'>381</a>
+<a name='L382'></a><a href='#L382'>382</a>
+<a name='L383'></a><a href='#L383'>383</a>
+<a name='L384'></a><a href='#L384'>384</a>
+<a name='L385'></a><a href='#L385'>385</a>
+<a name='L386'></a><a href='#L386'>386</a>
+<a name='L387'></a><a href='#L387'>387</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -513,7 +519,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">762x</span>
-<span class="cline-any cline-yes">3058x</span>
+<span class="cline-any cline-yes">3032x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">762x</span>
@@ -740,6 +746,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">17x</span>
 <span class="cline-any cline-yes">17x</span>
+<span class="cline-any cline-yes">17x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -768,6 +775,11 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1119,38 +1131,44 @@ function <span class="fstat-no" title="function not covered" >onFilterInput(</sp
 &nbsp;
 function renderIEDPage(element: Element): TemplateResult {
   const doc = element.ownerDocument;
-  return html`&lt;mwc-textfield
-      label="${translate('filter')}"
-      iconTrailing="search"
-      @input=${onFilterInput}
-    &gt;&lt;/mwc-textfield&gt;
-    &lt;mwc-list
-      multi
-      id="iedList"
-      @selected="${(evt: MultiSelectedEvent) =&gt; onIEDSelect(evt, element)}"
-      &gt;${Array.from(doc.querySelectorAll(':root &gt; IED'))
-        .map(ied =&gt; ied.getAttribute('name')!)
-        .map(iedName =&gt; {
-          return {
-            selected:
-              element.querySelector(
-                `${
-                  selectors[&lt;SubstationTag&gt;element.tagName]
-                } &gt; LNode[iedName="${iedName}"]`
-              ) !== null,
-            value: iedName,
-          };
-        })
-        .sort(compareDescription)
-        .map(
-          item =&gt;
-            html`&lt;mwc-check-list-item
-              value="${item.value ?? <span class="branch-1 cbranch-no" title="branch not covered" >''}</span>"
-              ?selected=${item.selected}
-              &gt;${item.value}&lt;/mwc-check-list-item
-            &gt;`
-        )}&lt;/mwc-list
-    &gt;`;
+  <span class="missing-if-branch" title="else path not taken" >E</span>if (doc.querySelectorAll(':root &gt; IED').length &gt; 0)
+    return html`&lt;mwc-textfield
+        label="${translate('filter')}"
+        iconTrailing="search"
+        @input=${onFilterInput}
+      &gt;&lt;/mwc-textfield&gt;
+      &lt;mwc-list
+        multi
+        id="iedList"
+        @selected="${(evt: MultiSelectedEvent) =&gt; onIEDSelect(evt, element)}"
+        &gt;${Array.from(doc.querySelectorAll(':root &gt; IED'))
+          .map(ied =&gt; ied.getAttribute('name')!)
+          .map(iedName =&gt; {
+            return {
+              selected:
+                element.querySelector(
+                  `${
+                    selectors[&lt;SubstationTag&gt;element.tagName]
+                  } &gt; LNode[iedName="${iedName}"]`
+                ) !== null,
+              value: iedName,
+            };
+          })
+          .sort(compareDescription)
+          .map(
+            item =&gt;
+              html`&lt;mwc-check-list-item
+                value="${item.value ?? <span class="branch-1 cbranch-no" title="branch not covered" >''}</span>"
+                ?selected=${item.selected}
+                &gt;${item.value}&lt;/mwc-check-list-item
+              &gt;`
+          )}&lt;/mwc-list
+      &gt;`;
+  else
+<span class="cstat-no" title="statement not covered" >    return html`&lt;mwc-list-item disabled graphic="icon"&gt;</span>
+      &lt;span&gt;${translate('lnode.wizard.placeholder')}&lt;/span&gt;
+      &lt;mwc-icon slot="graphic"&gt;info&lt;/mwc-icon&gt;
+    &lt;/mwc-list-item&gt;`;
 }
 &nbsp;
 function renderLdPage(element: Element): TemplateResult {
@@ -1204,7 +1222,7 @@ export function editlNode(element: Element): Wizard {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Wed Dec 09 2020 13:06:25 GMT+0000 (Coordinated Universal Time)
+                at Thu Dec 10 2020 10:00:05 GMT+0000 (Coordinated Universal Time)
             </div>
         </div>
         <script src="../../../prettify.js"></script>

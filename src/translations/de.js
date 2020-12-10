@@ -108,7 +108,8 @@ export const de = {
         selectIEDs: "Auswahl IEDs",
         selectLDs: "Auswahl logische Ger\xE4te",
         selectLNs: "Auswahl logische Knoten"
-      }
+      },
+      placeholder: "Keine IEDs geladen. Bitte laden Sie eine SCL Datei, die IED Elemente enth\xE4lt."
     }
   },
   add: "Hinzuf\xFCgen",
