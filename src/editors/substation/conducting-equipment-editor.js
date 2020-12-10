@@ -138,6 +138,7 @@ export let ConductingEquipmentEditor = class extends LitElement {
           action
         },
         content: [
+          ConductingEquipmentEditor.renderTypeSelector(options),
           html`<wizard-textfield
             label="name"
             .maybeValue=${name}
@@ -152,14 +153,14 @@ export let ConductingEquipmentEditor = class extends LitElement {
             .maybeValue=${desc}
             nullable="true"
             helper="${translate("conductingequipment.wizard.descHelper")}"
-          ></wizard-textfield>`,
-          ConductingEquipmentEditor.renderTypeSelector(options)
+          ></wizard-textfield>`
         ]
       }
     ];
   }
   static renderTypeSelector(options) {
     return isCreateOptions(options) ? html`<mwc-select
+          style="--mdc-menu-max-height: 196px;"
           required
           label="type"
           helper="${translate("conductingequipment.wizard.typeHelper")}"
