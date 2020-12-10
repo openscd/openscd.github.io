@@ -256,7 +256,6 @@ export let VoltageLevelEditor = class extends LitElement {
             label="name"
             .maybeValue=${name}
             helper="${translate("voltagelevel.wizard.nameHelper")}"
-            iconTrailing="title"
             required
             validationMessage="${translate("textfield.required")}"
             dialogInitialFocus
@@ -266,7 +265,6 @@ export let VoltageLevelEditor = class extends LitElement {
             .maybeValue=${desc}
             nullable="true"
             helper="${translate("voltagelevel.wizard.descHelper")}"
-            iconTrailing="description"
           ></wizard-textfield>`,
           html`<wizard-textfield
             label="nomFreq"

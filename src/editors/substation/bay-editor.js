@@ -152,7 +152,6 @@ export let BayEditor = class extends LitElement {
             label="name"
             .maybeValue=${name}
             helper="${translate("bay.wizard.nameHelper")}"
-            iconTrailing="title"
             required
             validationMessage="${translate("textfield.required")}"
             dialogInitialFocus
@@ -162,7 +161,6 @@ export let BayEditor = class extends LitElement {
             .maybeValue=${desc}
             nullable="true"
             helper="${translate("bay.wizard.descHelper")}"
-            iconTrailing="description"
           ></wizard-textfield>`
         ]
       }
