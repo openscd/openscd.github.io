@@ -231,14 +231,17 @@ export let OpenSCD = class extends Setting2(Wizarding2(Waiting2(Validating2(Edit
             ></wizard-textfield>
             <mwc-list activatable>
               <mwc-radio-list-item
+                left
                 value="${JSON.stringify(versionSupport.edition1)}"
                 >Edition 1 (Schema 1.7)</mwc-radio-list-item
               >
               <mwc-radio-list-item
+                left
                 value="${JSON.stringify(versionSupport.edition2)}"
                 >Edition 2 (2007A)</mwc-radio-list-item
               >
               <mwc-radio-list-item
+                left
                 selected
                 value="${JSON.stringify(versionSupport.edition21)}"
                 >Edition 2.1 (2007B4)</mwc-radio-list-item
@@ -406,21 +409,29 @@ OpenSCD.styles = css`
       flex-direction: row;
       justify-content: center;
       position: absolute;
-      top: calc(50vh - 80px);
-      left: calc(50vw - 180px);
+      top: calc(50vh - 82px);
+      left: calc(50vw - 184px);
+    }
+
+    .landing_icon:hover {
+      box-shadow: 0 12px 17px 2px rgba(0, 0, 0, 0.14),
+        0 5px 22px 4px rgba(0, 0, 0, 0.12), 0 7px 8px -4px rgba(0, 0, 0, 0.2);
     }
 
     .landing_icon {
-      margin: 10px;
-      border-style: solid;
-      border-radius: 10px;
+      margin: 12px;
+      border-radius: 16px;
       width: 160px;
-      height: 150px;
+      height: 140px;
       text-align: center;
-      color: var(--mdc-theme-primary);
+      color: var(--mdc-theme-on-secondary);
+      background: var(--secondary);
       --mdc-icon-button-size: 100px;
       --mdc-icon-size: 100px;
-      --mdc-theme-primary: var(--mdc-theme-secondary);
+      --mdc-ripple-color: rgba(0, 0, 0, 0);
+      box-shadow: rgb(0 0 0 / 14%) 0px 6px 10px 0px,
+        rgb(0 0 0 / 12%) 0px 1px 18px 0px, rgb(0 0 0 / 20%) 0px 3px 5px -1px;
+      transition: box-shadow 280ms cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     .landing_label {
