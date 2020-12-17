@@ -9,7 +9,8 @@ import '../../common/style-map-0f6d1bd7.js';
 import { i as ifDefined } from '../../common/if-defined-472da897.js';
 import '../../common/observer-fa3d205e.js';
 import { F as FormElement } from '../../common/form-element-0c86ea9f.js';
-import { L as ListItemBase, s as style$2 } from '../../common/mwc-list-item-css-38e33c46.js';
+import { L as ListItemBase, s as style$1 } from '../../common/mwc-list-item-css-38e33c46.js';
+import { s as style$2 } from '../../common/mwc-control-list-item-css-715789c8.js';
 
 /** @soyCompatible */
 class CheckboxBase extends FormElement {
@@ -321,24 +322,6 @@ __decorate([
 
 /**
 @license
-Copyright 2018 Google Inc. All Rights Reserved.
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-    http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-*/
-const style$1 = css `:host(:not([twoline])){height:56px}:host(:not([left])) .mdc-list-item__meta{height:40px;width:40px}`;
-
-/**
-@license
 Copyright 2020 Google Inc. All Rights Reserved.
 
 Licensed under the Apache License, Version 2.0 (the "License");
@@ -355,7 +338,7 @@ limitations under the License.
 */
 let CheckListItem = class CheckListItem extends CheckListItemBase {
 };
-CheckListItem.styles = [style$2, style$1];
+CheckListItem.styles = [style$1, style$2];
 CheckListItem = __decorate([
     customElement('mwc-check-list-item')
 ], CheckListItem);

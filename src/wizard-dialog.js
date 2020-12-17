@@ -103,6 +103,7 @@ export let WizardDialog = class extends LitElement {
             dialogAction="prev"
             icon="navigate_before"
             label=${this.wizard?.[index - 1].title}
+            outlined
           ></mwc-button>` : html``}
       ${page.secondary ? html`<mwc-button
             slot="secondaryAction"
@@ -114,6 +115,7 @@ export let WizardDialog = class extends LitElement {
             slot="secondaryAction"
             dialogAction="close"
             label="${translate("cancel")}"
+            outlined
             style="--mdc-theme-primary: var(--mdc-theme-error)"
           ></mwc-button>`}
       ${page.primary ? html`<mwc-button
@@ -128,6 +130,7 @@ export let WizardDialog = class extends LitElement {
             dialogAction="next"
             icon="navigate_next"
             label=${this.wizard?.[index + 1].title}
+            outlined
             trailingicon
           ></mwc-button>` : html``}
     </mwc-dialog>`;

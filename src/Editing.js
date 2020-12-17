@@ -18,14 +18,18 @@ import {
   isUpdate,
   newLogEvent
 } from "./foundation.js";
-export function newEmptySCD() {
-  return document.implementation.createDocument("http://www.iec.ch/61850/2003/SCL", "SCL", null);
+export function newEmptySCD(id, version, revision, release) {
+  const markup = `<?xml version="1.0" encoding="UTF-8"?>
+    <SCL xmlns="http://www.iec.ch/61850/2003/SCL" ${version ? `version="${version}"` : ``} ${revision ? `revision="${revision}"` : ``} ${release ? `release="${release}"` : ``}>
+      <Header id="${id}"/>
+    </SCL>`;
+  return new DOMParser().parseFromString(markup, "application/xml");
 }
 export function Editing(Base) {
   class EditingElement extends Base {
     constructor(...args) {
       super(...args);
-      this.doc = newEmptySCD();
+      this.doc = null;
       this.addEventListener("editor-action", this.onAction);
     }
     checkCreateValidity(create) {
@@ -39,7 +43,7 @@ export function Editing(Base) {
             name: create.new.element.tagName
           }),
           message: get("editing.error.nameClash", {
-            parent: create.new.parent.tagName,
+            parent: create.new.parent instanceof HTMLElement ? create.new.parent.tagName : "Document",
             child: create.new.element.tagName,
             name: create.new.element.getAttribute("name")
           })

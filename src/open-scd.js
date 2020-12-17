@@ -28,6 +28,7 @@ import "../web_modules/@material/mwc-icon-button.js";
 import "../web_modules/@material/mwc-linear-progress.js";
 import "../web_modules/@material/mwc-list.js";
 import "../web_modules/@material/mwc-list/mwc-list-item.js";
+import "../web_modules/@material/mwc-list/mwc-radio-list-item.js";
 import "../web_modules/@material/mwc-tab.js";
 import "../web_modules/@material/mwc-tab-bar.js";
 import "../web_modules/@material/mwc-textfield.js";
@@ -39,28 +40,46 @@ import {Wizarding as Wizarding2} from "./Wizarding.js";
 import {Validating as Validating2} from "./Validating.js";
 import {getTheme} from "./themes.js";
 import {Setting as Setting2} from "./Setting.js";
-import {newLogEvent, newPendingStateEvent} from "./foundation.js";
+import {
+  newLogEvent,
+  newPendingStateEvent,
+  versionSupport,
+  newWizardEvent
+} from "./foundation.js";
 import {plugin as plugin2} from "./plugin.js";
 import {zeroLineIcon} from "./icons.js";
-import {selectors} from "./editors/substation/foundation.js";
+import {styles} from "./editors/substation/foundation.js";
 export let OpenSCD = class extends Setting2(Wizarding2(Waiting2(Validating2(Editing2(Logging2(LitElement)))))) {
   constructor() {
     super();
     this.activeTab = 0;
-    this.srcName = "untitled.scd";
+    this.srcName = "";
     this.currentSrc = "";
     this.menu = [
       {
         icon: "folder_open",
         name: "menu.open",
         startsGroup: true,
-        actionItem: true,
         action: () => this.fileUI.click()
       },
-      {icon: "create_new_folder", name: "menu.new"},
+      {
+        icon: "create_new_folder",
+        name: "menu.new",
+        action: () => this.openNewProjectWizard()
+      },
       {icon: "snippet_folder", name: "menu.importIED"},
-      {icon: "save_alt", name: "save", action: () => this.save()},
-      {icon: "save", name: "saveAs", action: () => this.saveUI.show()},
+      {
+        icon: "save_alt",
+        name: "save",
+        action: () => this.save(),
+        disabled: () => this.doc === null
+      },
+      {
+        icon: "save",
+        name: "saveAs",
+        action: () => this.saveUI.show(),
+        disabled: () => this.doc === null
+      },
       {
         icon: "undo",
         name: "undo",
@@ -105,9 +124,6 @@ export let OpenSCD = class extends Setting2(Wizarding2(Waiting2(Validating2(Edit
     this.handleKeyPress = this.handleKeyPress.bind(this);
     document.onkeydown = this.handleKeyPress;
   }
-  get name() {
-    return this.doc.querySelector(selectors.Substation)?.getAttribute("name") ?? null;
-  }
   get src() {
     return this.currentSrc;
   }
@@ -126,10 +142,11 @@ export let OpenSCD = class extends Setting2(Wizarding2(Waiting2(Validating2(Edit
       reader.addEventListener("error", () => reject(get("openSCD.readError", {name: this.srcName})));
       reader.addEventListener("abort", () => reject(get("openSCD.readAbort", {name: this.srcName})));
       reader.addEventListener("load", () => {
-        this.doc = reader.result ? new DOMParser().parseFromString(reader.result, "application/xml") : newEmptySCD();
+        this.doc = reader.result ? new DOMParser().parseFromString(reader.result, "application/xml") : null;
         if (src.startsWith("blob:"))
           URL.revokeObjectURL(src);
-        this.validate(this.doc, {fileName: this.srcName});
+        if (this.doc)
+          this.validate(this.doc, {fileName: this.srcName});
         resolve(get("openSCD.loaded", {name: this.srcName}));
       });
       fetch(src ?? "").then((res) => res.blob().then((b) => reader.readAsText(b)));
@@ -148,20 +165,22 @@ export let OpenSCD = class extends Setting2(Wizarding2(Waiting2(Validating2(Edit
     this.saveUI.close();
   }
   save() {
-    const blob = new Blob([new XMLSerializer().serializeToString(this.doc)], {
-      type: "application/xml"
-    });
-    const a = document.createElement("a");
-    a.download = this.srcName;
-    a.href = URL.createObjectURL(blob);
-    a.dataset.downloadurl = ["application/xml", a.download, a.href].join(":");
-    a.style.display = "none";
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    setTimeout(function() {
-      URL.revokeObjectURL(a.href);
-    }, 1500);
+    if (this.doc) {
+      const blob = new Blob([new XMLSerializer().serializeToString(this.doc)], {
+        type: "application/xml"
+      });
+      const a = document.createElement("a");
+      a.download = this.srcName + ".scd";
+      a.href = URL.createObjectURL(blob);
+      a.dataset.downloadurl = ["application/xml", a.download, a.href].join(":");
+      a.style.display = "none";
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      setTimeout(function() {
+        URL.revokeObjectURL(a.href);
+      }, 1500);
+    }
   }
   handleKeyPress(e) {
     let handled = false;
@@ -182,6 +201,55 @@ export let OpenSCD = class extends Setting2(Wizarding2(Waiting2(Validating2(Edit
       this.saveUI.show();
     if (handled)
       e.preventDefault();
+  }
+  createNewProject() {
+    return (inputs, wizard) => {
+      this.srcName = inputs[0].value;
+      const schema = JSON.parse(wizard.shadowRoot.querySelector("mwc-list").selected.value);
+      this.doc = newEmptySCD(this.srcName, schema.version, schema.revision, schema.release);
+      wizard.close();
+      return [];
+    };
+  }
+  newProjectWizard() {
+    return [
+      {
+        title: get("menu.new"),
+        primary: {
+          icon: "add",
+          label: get("add"),
+          action: this.createNewProject()
+        },
+        content: [
+          html`<wizard-textfield
+              id="srcName"
+              label="name"
+              maybeValue="NewProject"
+              required
+              validationMessage="${translate("textfield.required")}"
+              dialogInitialFocus
+            ></wizard-textfield>
+            <mwc-list activatable>
+              <mwc-radio-list-item
+                value="${JSON.stringify(versionSupport.edition1)}"
+                >Edition 1 (Schema 1.7)</mwc-radio-list-item
+              >
+              <mwc-radio-list-item
+                value="${JSON.stringify(versionSupport.edition2)}"
+                >Edition 2 (2007A)</mwc-radio-list-item
+              >
+              <mwc-radio-list-item
+                selected
+                value="${JSON.stringify(versionSupport.edition21)}"
+                >Edition 2.1 (2007B4)</mwc-radio-list-item
+              >
+            </mwc-list>`
+        ]
+      }
+    ];
+  }
+  openNewProjectWizard() {
+    this.dispatchEvent(newWizardEvent(this.newProjectWizard()));
   }
   renderMenuEntry(me) {
     return html`
@@ -226,8 +294,8 @@ export let OpenSCD = class extends Setting2(Wizarding2(Waiting2(Validating2(Edit
   render() {
     return html`
       <mwc-drawer class="mdc-theme--surface" hasheader type="modal" id="menu">
-        <span slot="title">${this.name ?? html`${translate("menu.name")}`}</span>
-        ${this.name ? html`<span slot="subtitle">${this.srcName}</span>` : ""}
+        <span slot="title">${translate("menu.name")}</span>
+        ${this.srcName ? html`<span slot="subtitle">${this.srcName}</span>` : ""}
         <mwc-list
           wrapFocus
           @action=${(ae) => this.menu[ae.detail.index]?.action()}
@@ -241,12 +309,13 @@ export let OpenSCD = class extends Setting2(Wizarding2(Waiting2(Validating2(Edit
             slot="navigationIcon"
             @click=${() => this.menuUI.open = true}
           ></mwc-icon-button>
-          <div slot="title" id="title">${this.name ?? this.srcName}</div>
+          <div slot="title" id="title">${this.srcName}</div>
           ${this.menu.map(this.renderActionItem)}
-          <mwc-tab-bar
-            @MDCTabBar:activated=${(e) => this.activeTab = e.detail.index}
-          > ${this.plugins.editors.map(this.renderEditorTab)}
-          </mwc-tab-bar>
+          ${this.doc ? html`<mwc-tab-bar
+                  @MDCTabBar:activated=${(e) => this.activeTab = e.detail.index}
+                >
+                  ${this.plugins.editors.map(this.renderEditorTab)}
+                </mwc-tab-bar>` : ``}
         </mwc-top-app-bar-fixed>
       </mwc-drawer>
 
@@ -266,16 +335,31 @@ export let OpenSCD = class extends Setting2(Wizarding2(Waiting2(Validating2(Edit
           ${translate("cancel")}
         </mwc-button>
       </mwc-dialog>
+        
+      ${this.doc ? until2(this.plugins.editors[this.activeTab].getContent(), html`<mwc-linear-progress indeterminate></mwc-linear-progress>`) : html`<div class="landing">
+          <mwc-icon-button 
+            class="landing_icon"
+            icon="create_new_folder"
+            @click=${() => this.openNewProjectWizard()}>
+          <div class="landing_label">${translate("menu.new")}</div>
+          </mwc-icon-button>
+          <mwc-icon-button 
+            class="landing_icon"
+            icon="folder_open" 
+            @click=${() => this.fileUI.click()}>
+            <div class="landing_label">${translate("menu.open")}</div>
+          </mwc-button>
+        </div>`}
 
-      ${until2(this.plugins.editors[this.activeTab].getContent(), html`<mwc-linear-progress indeterminate></mwc-linear-progress>`)}
-
-      <input id="file-input" type="file" @change="${this.loadFile}"></input>
+      <input id="file-input" type="file" accept=".scd,.ssd" @change="${this.loadFile}"></input>
       ${super.render()}
       ${getTheme(this.settings.theme)}
     `;
   }
 };
 OpenSCD.styles = css`
+    ${styles}
+
     mwc-top-app-bar-fixed {
       --mdc-theme-text-disabled-on-light: rgba(255, 255, 255, 0.38);
     } /* hack to fix disabled icon buttons rendering black */
@@ -316,13 +400,40 @@ OpenSCD.styles = css`
       font-family: 'Roboto Mono', monospace;
       font-weight: 300;
     }
+
+    .landing {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      position: absolute;
+      top: calc(50vh - 80px);
+      left: calc(50vw - 180px);
+    }
+
+    .landing_icon {
+      margin: 10px;
+      border-style: solid;
+      border-radius: 10px;
+      width: 160px;
+      height: 150px;
+      text-align: center;
+      color: var(--mdc-theme-primary);
+      --mdc-icon-button-size: 100px;
+      --mdc-icon-size: 100px;
+      --mdc-theme-primary: var(--mdc-theme-secondary);
+    }
+
+    .landing_label {
+      width: 160px;
+      height: 50px;
+      margin-top: 100px;
+      margin-left: -30px;
+      font-family: 'Roboto', sans-serif;
+    }
   `;
 __decorate([
   property({type: Number})
 ], OpenSCD.prototype, "activeTab", 2);
-__decorate([
-  property()
-], OpenSCD.prototype, "name", 1);
 __decorate([
   property({type: String})
 ], OpenSCD.prototype, "srcName", 2);
