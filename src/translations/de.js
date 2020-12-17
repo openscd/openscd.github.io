@@ -8,14 +8,14 @@ export const de = {
   menu: {
     name: "Men\xFC",
     open: "Projekt \xF6ffnen",
-    new: "Neues Project",
-    importIED: "IED Importieren",
+    new: "Neues Projekt",
+    importIED: "IED importieren",
     save: "Projekt speichern",
     validate: "Projekt validieren",
     viewLog: "Protokoll anzeigen"
   },
   openSCD: {
-    loading: "Lade Project {{ name }}",
+    loading: "Lade Projekt {{ name }}",
     loaded: "{{ name }} geladen",
     readError: "{{ name }} Lesefehler",
     readAbort: "{{ name }} Leseabbruch"
@@ -68,6 +68,7 @@ export const de = {
     }
   },
   voltagelevel: {
+    name: "Spannungsebene",
     wizard: {
       nameHelper: "Name der Spannungsebene",
       descHelper: "Beschreibung der Spannungsebene",
@@ -81,6 +82,7 @@ export const de = {
     }
   },
   bay: {
+    name: "Feld",
     wizard: {
       nameHelper: "Feldname",
       descHelper: "Beschreibung des Feldes",
@@ -91,6 +93,7 @@ export const de = {
     }
   },
   conductingequipment: {
+    name: "Prim\xE4relement",
     wizard: {
       nameHelper: "Name des Prim\xE4relements",
       descHelper: "Beschreibung des Prim\xE4relements",
@@ -109,8 +112,9 @@ export const de = {
         selectLDs: "Auswahl logische Ger\xE4te",
         selectLNs: "Auswahl logische Knoten"
       },
-      placeholder: "Keine IEDs geladen. Bitte laden Sie eine SCL Datei, die IED Elemente enth\xE4lt."
-    }
+      placeholder: "Bitte laden Sie eine SCL-Datei, die IED-Elemente enth\xE4lt."
+    },
+    tooltip: "Referenz zi logischen Knoten erstellen"
   },
   add: "Hinzuf\xFCgen",
   edit: "Bearbeiten",
@@ -122,5 +126,6 @@ export const de = {
   undo: "R\xFCckg\xE4ngig",
   redo: "Wiederholen",
   remove: "Entfernen",
-  filter: "Filter"
+  filter: "Filter",
+  move: "Verschieben"
 };
