@@ -95,7 +95,12 @@ export let OpenSCD = class extends Setting2(Wizarding2(Waiting2(Validating2(Edit
         action: this.redo,
         disabled: () => !this.canRedo
       },
-      {icon: "rule_folder", name: "menu.validate", startsGroup: true},
+      {
+        icon: "rule_folder",
+        name: "menu.validate",
+        startsGroup: true,
+        action: () => this.doc ? this.validate(this.doc, {fileName: this.srcName}) : null
+      },
       {
         icon: "rule",
         name: "menu.viewLog",

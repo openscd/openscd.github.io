@@ -135,8 +135,7 @@
     >
     </li>
     <mwc-list-item
-      aria-disabled="true"
-      disabled=""
+      aria-disabled="false"
       graphic="icon"
       iconid="rule_folder"
       mwc-list-item=""
