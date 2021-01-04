@@ -107,20 +107,22 @@ export function Logging(Base) {
       super.performUpdate();
     }
     renderLogEntry(entry, index, history) {
-      return html`<mwc-list-item
-        graphic="icon"
-        style="--mdc-theme-text-icon-on-background:var(${ifDefined(colors[entry.kind])})"
-        ?twoline=${entry.message}
-        ?activated=${this.currentAction == history.length - index - 1}
-      >
-        <span>
-          <!-- FIXME: replace tt with mwc-chip asap -->
-          <tt>${entry.time.toLocaleTimeString()}</tt>
-          ${entry.title}</span
+      return html` <abbr title="${entry.title}">
+        <mwc-list-item
+          graphic="icon"
+          style="--mdc-theme-text-icon-on-background:var(${ifDefined(colors[entry.kind])})"
+          ?twoline=${entry.message}
+          ?activated=${this.currentAction == history.length - index - 1}
         >
-        <span slot="secondary">${entry.message}</span>
-        <mwc-icon slot="graphic">${icons[entry.kind]}</mwc-icon>
-      </mwc-list-item>`;
+          <span>
+            <!-- FIXME: replace tt with mwc-chip asap -->
+            <tt>${entry.time.toLocaleTimeString()}</tt>
+            ${entry.title}</span
+          >
+          <span slot="secondary">${entry.message}</span>
+          <mwc-icon slot="graphic">${icons[entry.kind]}</mwc-icon>
+        </mwc-list-item></abbr
+      >`;
     }
     renderHistory() {
       if (this.history.length > 0)
