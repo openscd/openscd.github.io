@@ -10,16 +10,16 @@ var __decorate = (decorators, target, key, kind) => {
   return result;
 };
 import {
-  LitElement,
-  TemplateResult,
   css,
   customElement,
   html,
+  LitElement,
   property,
-  query
+  query,
+  TemplateResult
 } from "../web_modules/lit-element.js";
-import {translate, get} from "../web_modules/lit-translate.js";
 import {until as until2} from "../web_modules/lit-html/directives/until.js";
+import {translate, get} from "../web_modules/lit-translate.js";
 import "../web_modules/@material/mwc-button.js";
 import "../web_modules/@material/mwc-dialog.js";
 import "../web_modules/@material/mwc-drawer.js";
@@ -33,22 +33,20 @@ import "../web_modules/@material/mwc-tab.js";
 import "../web_modules/@material/mwc-tab-bar.js";
 import "../web_modules/@material/mwc-textfield.js";
 import "../web_modules/@material/mwc-top-app-bar-fixed.js";
-import {Editing as Editing2, newEmptySCD} from "./Editing.js";
-import {Logging as Logging2} from "./Logging.js";
-import {Waiting as Waiting2} from "./Waiting.js";
-import {Wizarding as Wizarding2} from "./Wizarding.js";
-import {Validating as Validating2} from "./Validating.js";
-import {getTheme} from "./themes.js";
-import {Setting as Setting2} from "./Setting.js";
 import {
   newLogEvent,
   newPendingStateEvent,
-  versionSupport,
   newWizardEvent
 } from "./foundation.js";
+import {getTheme} from "./themes.js";
 import {plugin as plugin2} from "./plugin.js";
 import {zeroLineIcon} from "./icons.js";
-import {styles} from "./editors/substation/foundation.js";
+import {Editing as Editing2, newEmptySCD} from "./Editing.js";
+import {Logging as Logging2} from "./Logging.js";
+import {Setting as Setting2} from "./Setting.js";
+import {Validating as Validating2} from "./Validating.js";
+import {Waiting as Waiting2} from "./Waiting.js";
+import {Wizarding as Wizarding2} from "./Wizarding.js";
 export let OpenSCD = class extends Setting2(Wizarding2(Waiting2(Validating2(Editing2(Logging2(LitElement)))))) {
   constructor() {
     super();
@@ -99,7 +97,7 @@ export let OpenSCD = class extends Setting2(Wizarding2(Waiting2(Validating2(Edit
         icon: "rule_folder",
         name: "menu.validate",
         startsGroup: true,
-        action: () => this.doc ? this.validate(this.doc, {fileName: this.srcName}) : null
+        action: () => this.doc ? this.dispatchEvent(newPendingStateEvent(this.validate(this.doc, {fileName: this.srcName}))) : null
       },
       {
         icon: "rule",
@@ -136,26 +134,22 @@ export let OpenSCD = class extends Setting2(Wizarding2(Waiting2(Validating2(Edit
     this.currentSrc = value;
     this.dispatchEvent(newPendingStateEvent(this.loadDoc(value)));
   }
-  loadDoc(src) {
-    return new Promise((resolve, reject) => {
-      this.reset();
-      this.dispatchEvent(newLogEvent({
-        kind: "info",
-        title: get("openSCD.loading", {name: this.srcName})
-      }));
-      const reader = new FileReader();
-      reader.addEventListener("error", () => reject(get("openSCD.readError", {name: this.srcName})));
-      reader.addEventListener("abort", () => reject(get("openSCD.readAbort", {name: this.srcName})));
-      reader.addEventListener("load", () => {
-        this.doc = reader.result ? new DOMParser().parseFromString(reader.result, "application/xml") : null;
-        if (src.startsWith("blob:"))
-          URL.revokeObjectURL(src);
-        if (this.doc)
-          this.validate(this.doc, {fileName: this.srcName});
-        resolve(get("openSCD.loaded", {name: this.srcName}));
-      });
-      fetch(src ?? "").then((res) => res.blob().then((b) => reader.readAsText(b)));
-    });
+  async loadDoc(src) {
+    this.reset();
+    this.dispatchEvent(newLogEvent({
+      kind: "info",
+      title: get("openSCD.loading", {name: this.srcName})
+    }));
+    const response = await fetch(src);
+    const text = await response.text();
+    this.doc = new DOMParser().parseFromString(text, "application/xml");
+    if (src.startsWith("blob:"))
+      URL.revokeObjectURL(src);
+    const validated = this.validate(this.doc, {fileName: this.srcName});
+    if (this.doc)
+      this.dispatchEvent(newPendingStateEvent(validated));
+    await validated;
+    return get("openSCD.loaded", {name: this.srcName});
   }
   loadFile(event) {
     const file = event.target?.files?.item(0) ?? false;
@@ -175,7 +169,7 @@ export let OpenSCD = class extends Setting2(Wizarding2(Waiting2(Validating2(Edit
         type: "application/xml"
       });
       const a = document.createElement("a");
-      a.download = this.srcName + ".scd";
+      a.download = this.srcName;
       a.href = URL.createObjectURL(blob);
       a.dataset.downloadurl = ["application/xml", a.download, a.href].join(":");
       a.style.display = "none";
@@ -207,49 +201,40 @@ export let OpenSCD = class extends Setting2(Wizarding2(Waiting2(Validating2(Edit
     if (handled)
       e.preventDefault();
   }
-  createNewProject() {
-    return (inputs, wizard) => {
-      this.srcName = inputs[0].value;
-      const schema = JSON.parse(wizard.shadowRoot.querySelector("mwc-list").selected.value);
-      this.doc = newEmptySCD(this.srcName, schema.version, schema.revision, schema.release);
-      wizard.close();
-      return [];
-    };
+  createNewProject(inputs, wizard) {
+    this.srcName = inputs[0].value.match(/\.s[sc]d$/i) ? inputs[0].value : inputs[0].value + ".scd";
+    const version = wizard.shadowRoot.querySelector("mwc-list").selected.value;
+    this.reset();
+    this.doc = newEmptySCD(this.srcName.slice(0, -4), version);
+    wizard.close();
+    return [];
   }
   newProjectWizard() {
     return [
       {
         title: get("menu.new"),
         primary: {
-          icon: "add",
-          label: get("add"),
-          action: this.createNewProject()
+          icon: "create_new_folder",
+          label: get("create"),
+          action: (inputs, wizard) => this.createNewProject(inputs, wizard)
         },
         content: [
           html`<wizard-textfield
               id="srcName"
               label="name"
-              maybeValue="NewProject"
+              value="project.scd"
               required
-              validationMessage="${translate("textfield.required")}"
               dialogInitialFocus
             ></wizard-textfield>
             <mwc-list activatable>
-              <mwc-radio-list-item
-                left
-                value="${JSON.stringify(versionSupport.edition1)}"
+              <mwc-radio-list-item left value="2003"
                 >Edition 1 (Schema 1.7)</mwc-radio-list-item
               >
-              <mwc-radio-list-item
-                left
-                value="${JSON.stringify(versionSupport.edition2)}"
-                >Edition 2 (2007A)</mwc-radio-list-item
+              <mwc-radio-list-item left value="2007B1"
+                >Edition 2.1 release 1 (2007B1)</mwc-radio-list-item
               >
-              <mwc-radio-list-item
-                left
-                selected
-                value="${JSON.stringify(versionSupport.edition21)}"
-                >Edition 2.1 (2007B4)</mwc-radio-list-item
+              <mwc-radio-list-item left selected value="2007B4"
+                >Edition 2.1 current (2007B4)</mwc-radio-list-item
               >
             </mwc-list>`
         ]
@@ -366,8 +351,6 @@ export let OpenSCD = class extends Setting2(Wizarding2(Waiting2(Validating2(Edit
   }
 };
 OpenSCD.styles = css`
-    ${styles}
-
     mwc-top-app-bar-fixed {
       --mdc-theme-text-disabled-on-light: rgba(255, 255, 255, 0.38);
     } /* hack to fix disabled icon buttons rendering black */

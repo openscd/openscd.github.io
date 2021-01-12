@@ -55,4 +55,4 @@ Open Substation Configuration Designer.
 | `reset`            | `(): void`                                       | Resets the history to an empty state.            |
 | `setSetting`       | `<T extends "language" \| "theme">(setting: T, value: Settings[T]): void` | Update the `value` of `setting`, storing to `localStorage`. |
 | `undo`             | `(): boolean`                                    |                                                  |
-| `validate`         | `(doc: XMLDocument, { version, revision, release, fileName, }?: { version?: string \| undefined; revision?: string \| undefined; release?: string \| undefined; fileName?: string \| undefined; }): Promise<ValidationResult>` |                                                  |
+| `validate`         | `(doc: XMLDocument, { version, revision, release, fileName, }?: { version?: string \| undefined; revision?: string \| undefined; release?: string \| undefined; fileName?: string \| undefined; }): Promise<string>` |                                                  |

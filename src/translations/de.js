@@ -114,18 +114,19 @@ export const de = {
       },
       placeholder: "Bitte laden Sie eine SCL-Datei, die IED-Elemente enth\xE4lt."
     },
-    tooltip: "Referenz zi logischen Knoten erstellen"
+    tooltip: "Referenz zu logischen Knoten erstellen"
   },
   add: "Hinzuf\xFCgen",
+  remove: "Entfernen",
   edit: "Bearbeiten",
+  move: "Verschieben",
+  create: "Erstellen",
   save: "Speichern",
   saveAs: "Speichern unter",
   reset: "Zur\xFCcksetzen",
   cancel: "Abbrechen",
   close: "Schlie\xDFen",
-  undo: "R\xFCckg\xE4ngig",
-  redo: "Wiederholen",
-  remove: "Entfernen",
   filter: "Filter",
-  move: "Verschieben"
+  undo: "R\xFCckg\xE4ngig",
+  redo: "Wiederholen"
 };

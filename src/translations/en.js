@@ -117,15 +117,16 @@ export const en = {
     tooltip: "Create logical nodes reference"
   },
   add: "Add",
+  remove: "Remove",
   edit: "Edit",
+  move: "Move",
+  create: "Create",
   save: "Save",
   saveAs: "Save as",
   reset: "Reset",
   cancel: "Cancel",
   close: "Close",
-  undo: "Undo",
-  redo: "Redo",
-  remove: "Remove",
   filter: "Filter",
-  move: "Move"
+  undo: "Undo",
+  redo: "Redo"
 };

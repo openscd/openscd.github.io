@@ -35,8 +35,16 @@ export function Validating(Base) {
       release = "1",
       fileName = "untitled.scd"
     } = {}) {
+      if (doc.documentElement)
+        [version, revision, release] = [
+          doc.documentElement.getAttribute("version") ?? "2003",
+          doc.documentElement.getAttribute("revision") ?? "",
+          doc.documentElement.getAttribute("release") ?? ""
+        ];
       this.validated = this.getValidator(getSchema(version, revision, release), "SCL" + version + revision + release + ".xsd").then((validator) => validator(new XMLSerializer().serializeToString(doc), fileName));
-      return this.validated;
+      if (!(await this.validated).valid)
+        throw get("validating.invalid", {name: fileName});
+      return get("validating.valid", {name: fileName});
     }
     async getValidator(xsd, xsdName) {
       if (!window.Worker)
@@ -69,12 +77,7 @@ export function Validating(Base) {
               kind: e.data.level > 1 ? "error" : "warning",
               message: e.data.file + ":" + e.data.line + " " + e.data.node + " " + e.data.part + qualifiedTag
             }));
-          } else if (isValidationResult(e.data)) {
-            this.dispatchEvent(newLogEvent({
-              title: get(e.data.valid ? "validating.valid" : "validating.invalid", {name: e.data.file}),
-              kind: e.data.valid ? "info" : "warning"
-            }));
-          } else {
+          } else if (!isValidationResult(e.data)) {
             this.dispatchEvent(newLogEvent({
               title: get("validating.fatal"),
               kind: "error",

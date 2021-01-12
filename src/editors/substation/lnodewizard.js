@@ -176,6 +176,7 @@ function renderIEDPage(element) {
     return html`<mwc-textfield
         label="${translate("filter")}"
         iconTrailing="search"
+        outlined
         @input=${onFilterInput}
       ></mwc-textfield>
       <mwc-list
@@ -203,6 +204,7 @@ function renderLdPage(element) {
   return html`<mwc-textfield
       label="${translate("filter")}"
       iconTrailing="search"
+      outlined
       @input=${onFilterInput}
     ></mwc-textfield>
     <mwc-list
@@ -215,6 +217,7 @@ function renderLnPage() {
   return html`<mwc-textfield
       label="${translate("filter")}"
       iconTrailing="search"
+      outlined
       @input=${onFilterInput}
     ></mwc-textfield>
     <mwc-list multi id="lnList"></mwc-list>`;

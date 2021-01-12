@@ -153,6 +153,10 @@ WizardDialog.styles = css`
       display: block;
       margin-top: 16px;
     }
+
+    *[iconTrailing='search'][outlined] {
+      --mdc-shape-small: 28px;
+    }
   `;
 __decorate([
   property()

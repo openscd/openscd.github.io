@@ -8,12 +8,23 @@ export function isLoadSchemaResult(msg) {
   return typeof msg !== "string" && msg.file !== void 0 && msg.valid === void 0 && msg.loaded !== void 0;
 }
 export function getSchema(version, revision, release) {
-  return schemas[version + revision + release] ?? schemas["2007B1"];
+  const schemaVersion = version + revision + release;
+  if (isSupported(schemaVersion))
+    return schemas[schemaVersion];
+  return schemas["2007B1"];
 }
+export function isSupported(version) {
+  return Object.keys(schemas).includes(version);
+}
+export const supportedAttributes = {
+  "2003": {version: "2003", revision: "", release: ""},
+  "2007B1": {version: "2007", revision: "B", release: "1"},
+  "2007B4": {version: "2007", revision: "B", release: "4"}
+};
 export const schemas = {
   "2003": `<?xml version="1.0" encoding="UTF-8"?>
   <xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified"
-      finalDefault="extension" targetNamespace="http://www.iec.ch/61850/2003/SCL" version="1.7"
+      targetNamespace="http://www.iec.ch/61850/2003/SCL" version="1.7"
       xmlns="http://www.iec.ch/61850/2003/SCL" xmlns:scl="http://www.iec.ch/61850/2003/SCL"
       xmlns:xs="http://www.w3.org/2001/XMLSchema">
       <xs:annotation>
@@ -5534,10 +5545,11 @@ export const schemas = {
       <xs:field xpath="@id" />
     </xs:key>
   </xs:element>
-</xs:schema>`,
+  </xs:schema>
+  `,
   "2007B4": `<?xml version="1.0" encoding="UTF-8"?>
   <xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified"
-      finalDefault="extension" targetNamespace="http://www.iec.ch/61850/2003/SCL" version="2007B4"
+      targetNamespace="http://www.iec.ch/61850/2003/SCL" version="2007B4"
       xmlns="http://www.iec.ch/61850/2003/SCL" xmlns:scl="http://www.iec.ch/61850/2003/SCL"
       xmlns:xs="http://www.w3.org/2001/XMLSchema">
       <xs:annotation>
