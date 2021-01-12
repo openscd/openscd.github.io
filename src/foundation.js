@@ -12,7 +12,19 @@ export function isMove(action) {
 export function isUpdate(action) {
   return action.old?.parent === void 0 && action.old?.element !== void 0 && action.new?.parent === void 0 && action.new?.element !== void 0;
 }
+export function isSimple(action) {
+  return !(action.actions instanceof Array);
+}
 export function invert(action) {
+  if (!isSimple(action)) {
+    const inverse = {
+      title: action.title,
+      derived: action.derived,
+      actions: []
+    };
+    action.actions.forEach((element) => inverse.actions.unshift(invert(element)));
+    return inverse;
+  }
   const metaData = {
     derived: action.derived,
     checkValidity: action.checkValidity

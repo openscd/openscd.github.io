@@ -16,7 +16,8 @@ import {
   isDelete,
   isMove,
   isUpdate,
-  newLogEvent
+  newLogEvent,
+  isSimple
 } from "./foundation.js";
 export function newEmptySCD(id, version, revision, release) {
   const markup = `<?xml version="1.0" encoding="UTF-8"?>
@@ -50,26 +51,30 @@ export function Editing(Base) {
         }));
       return !invalid;
     }
-    onCreate(event) {
-      if (!this.checkCreateValidity(event.detail.action))
+    onCreate(action) {
+      if (!this.checkCreateValidity(action))
         return;
-      event.detail.action.new.parent.insertBefore(event.detail.action.new.element, event.detail.action.new.reference);
+      action.new.parent.insertBefore(action.new.element, action.new.reference);
+    }
+    logCreate(action) {
       this.dispatchEvent(newLogEvent({
         kind: "action",
         title: get("editing.created", {
-          name: event.detail.action.new.element.tagName
+          name: action.new.element.tagName
         }),
-        action: event.detail.action
+        action
       }));
     }
-    onDelete(event) {
-      event.detail.action.old.element.remove();
+    onDelete(action) {
+      action.old.element.remove();
+    }
+    logDelete(action) {
       this.dispatchEvent(newLogEvent({
         kind: "action",
         title: get("editing.deleted", {
-          name: event.detail.action.old.element.tagName
+          name: action.old.element.tagName
         }),
-        action: event.detail.action
+        action
       }));
     }
     checkMoveValidity(move) {
@@ -90,16 +95,18 @@ export function Editing(Base) {
         }));
       return !invalid;
     }
-    onMove(event) {
-      if (!this.checkMoveValidity(event.detail.action))
+    onMove(action) {
+      if (!this.checkMoveValidity(action))
         return;
-      event.detail.action.new.parent.insertBefore(event.detail.action.old.element, event.detail.action.new.reference);
+      action.new.parent.insertBefore(action.old.element, action.new.reference);
+    }
+    logMove(action) {
       this.dispatchEvent(newLogEvent({
         kind: "action",
         title: get("editing.moved", {
-          name: event.detail.action.old.element.tagName
+          name: action.old.element.tagName
         }),
-        action: event.detail.action
+        action
       }));
     }
     checkUpdateValidity(update) {
@@ -120,28 +127,53 @@ export function Editing(Base) {
         }));
       return !invalid;
     }
-    onUpdate(event) {
-      if (!this.checkUpdateValidity(event.detail.action))
+    onUpdate(action) {
+      if (!this.checkUpdateValidity(action))
         return;
-      event.detail.action.new.element.append(...Array.from(event.detail.action.old.element.children));
-      event.detail.action.old.element.replaceWith(event.detail.action.new.element);
+      action.new.element.append(...Array.from(action.old.element.children));
+      action.old.element.replaceWith(action.new.element);
+    }
+    logUpdate(action) {
       this.dispatchEvent(newLogEvent({
         kind: "action",
         title: get("editing.updated", {
-          name: event.detail.action.new.element.tagName
+          name: action.new.element.tagName
         }),
-        action: event.detail.action
+        action
       }));
     }
+    onSimpleAction(action) {
+      if (isMove(action))
+        this.onMove(action);
+      else if (isCreate(action))
+        this.onCreate(action);
+      else if (isDelete(action))
+        this.onDelete(action);
+      else if (isUpdate(action))
+        this.onUpdate(action);
+    }
+    logSimpleAction(action) {
+      if (isMove(action))
+        this.logMove(action);
+      else if (isCreate(action))
+        this.logCreate(action);
+      else if (isDelete(action))
+        this.logDelete(action);
+      else if (isUpdate(action))
+        this.logUpdate(action);
+    }
     onAction(event) {
-      if (isMove(event.detail.action))
-        this.onMove(event);
-      else if (isCreate(event.detail.action))
-        this.onCreate(event);
-      else if (isDelete(event.detail.action))
-        this.onDelete(event);
-      else if (isUpdate(event.detail.action))
-        this.onUpdate(event);
+      if (isSimple(event.detail.action)) {
+        this.onSimpleAction(event.detail.action);
+        this.logSimpleAction(event.detail.action);
+      } else if (event.detail.action.actions !== []) {
+        event.detail.action.actions.forEach((element) => this.onSimpleAction(element));
+        this.dispatchEvent(newLogEvent({
+          kind: "action",
+          title: event.detail.action.title,
+          action: event.detail.action
+        }));
+      }
       for (const element of event.composedPath())
         if (element instanceof LitElement)
           element.requestUpdate();
