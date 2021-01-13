@@ -116,6 +116,14 @@ export const de = {
     },
     tooltip: "Referenz zu logischen Knoten erstellen"
   },
+  guess: {
+    wizard: {
+      primary: "Inhalt erraten",
+      title: "Auswahl Steuerungsmodel(ctlModel)",
+      description: `Schaltger\xE4ten im Feld k\xF6nnen oftmals bestimmten Steuerungsmodellen zugeordnet werden. 
+ Damit wird die Absch\xE4tzung oftmals genauer.`
+    }
+  },
   add: "Hinzuf\xFCgen",
   remove: "Entfernen",
   edit: "Bearbeiten",

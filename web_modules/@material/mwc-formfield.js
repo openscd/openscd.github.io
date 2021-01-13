@@ -4,8 +4,8 @@ import { p as property, q as query, c as css, b as customElement } from '../comm
 import '../common/render-60aafaaf.js';
 import { M as MDCFoundation, B as BaseElement, f as findAssignedElement } from '../common/foundation-9d700227.js';
 import { c as classMap } from '../common/class-map-a9acf8cf.js';
-import { o as observer } from '../common/observer-fa3d205e.js';
 import { F as FormElement } from '../common/form-element-0c86ea9f.js';
+import { o as observer } from '../common/observer-fa3d205e.js';
 
 /*! *****************************************************************************
 Copyright (c) Microsoft Corporation.

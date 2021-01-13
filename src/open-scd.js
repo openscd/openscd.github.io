@@ -21,8 +21,10 @@ import {
 import {until as until2} from "../web_modules/lit-html/directives/until.js";
 import {translate, get} from "../web_modules/lit-translate.js";
 import "../web_modules/@material/mwc-button.js";
+import "../web_modules/@material/mwc-checkbox.js";
 import "../web_modules/@material/mwc-dialog.js";
 import "../web_modules/@material/mwc-drawer.js";
+import "../web_modules/@material/mwc-formfield.js";
 import "../web_modules/@material/mwc-icon.js";
 import "../web_modules/@material/mwc-icon-button.js";
 import "../web_modules/@material/mwc-linear-progress.js";

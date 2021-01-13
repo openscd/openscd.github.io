@@ -6,8 +6,8 @@ import { M as MDCFoundation, a as addHasRemoveClass } from '../common/foundation
 import { R as RippleHandlers } from '../common/ripple-handlers-d284281e.js';
 import '../common/class-map-a9acf8cf.js';
 import '../common/style-map-0f6d1bd7.js';
-import { o as observer } from '../common/observer-fa3d205e.js';
 import { F as FormElement } from '../common/form-element-0c86ea9f.js';
+import { o as observer } from '../common/observer-fa3d205e.js';
 
 /*! *****************************************************************************
 Copyright (c) Microsoft Corporation.

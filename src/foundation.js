@@ -128,3 +128,6 @@ export const restrictions = {
   decimal: "((-|\\+)?([0-9]+(\\.[0-9]*)?|\\.[0-9]+))",
   unsigned: "\\+?([0-9]+(\\.[0-9]*)?|\\.[0-9]+)"
 };
+export function compareNames(a, b) {
+  return a.getAttribute("name").localeCompare(b.getAttribute("name"));
+}
