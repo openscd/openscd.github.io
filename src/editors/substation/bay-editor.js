@@ -18,6 +18,7 @@ import {
 } from "../../../web_modules/lit-element.js";
 import {translate, get} from "../../../web_modules/lit-translate.js";
 import {
+  createElement,
   getValue,
   newActionEvent,
   newWizardEvent
@@ -112,13 +113,14 @@ export let BayEditor = class extends LitElement {
     return (inputs, wizard) => {
       const name = getValue(inputs.find((i) => i.label === "name"));
       const desc = getValue(inputs.find((i) => i.label === "desc"));
+      const element = createElement(parent.ownerDocument, "Bay", {
+        name,
+        desc
+      });
       const action = {
         new: {
           parent,
-          element: new DOMParser().parseFromString(`<Bay
-              name="${name}"
-              ${desc === null ? "" : `desc="${desc}"`}
-            ></Bay>`, "application/xml").documentElement,
+          element,
           reference: null
         }
       };

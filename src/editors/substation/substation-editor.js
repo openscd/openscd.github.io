@@ -21,6 +21,7 @@ import "../../../web_modules/@material/mwc-button.js";
 import "../../../web_modules/@material/mwc-icon-button.js";
 import "../../../web_modules/@material/mwc-list/mwc-list-item.js";
 import {
+  createElement,
   getValue,
   newActionEvent,
   newWizardEvent
@@ -99,10 +100,10 @@ export let SubstationEditor = class extends LitElement {
       const desc = getValue(inputs.find((i) => i.label === "desc"));
       const guess = wizard.shadowRoot?.querySelector("mwc-checkbox")?.checked;
       parent.ownerDocument.createElement("Substation");
-      const element = new DOMParser().parseFromString(`<Substation xmlns="http://www.iec.ch/61850/2003/SCL"
-              name="${name}"
-              ${desc === null ? "" : `desc="${desc}"`}
-            ></Substation>`, "application/xml").documentElement;
+      const element = createElement(parent.ownerDocument, "Substation", {
+        name,
+        desc
+      });
       const action = {
         new: {
           parent,

@@ -23,16 +23,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">97.06% </span>
+                <span class="strong">97.14% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>33/34</span>
+                <span class='fraction'>34/35</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">56.25% </span>
+                <span class="strong">57.14% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>9/16</span>
+                <span class='fraction'>8/14</span>
             </div>
         
             
@@ -46,7 +46,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>30/30</span>
+                <span class='fraction'>31/31</span>
             </div>
         
             
@@ -288,8 +288,7 @@
 <a name='L229'></a><a href='#L229'>229</a>
 <a name='L230'></a><a href='#L230'>230</a>
 <a name='L231'></a><a href='#L231'>231</a>
-<a name='L232'></a><a href='#L232'>232</a>
-<a name='L233'></a><a href='#L233'>233</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L232'></a><a href='#L232'>232</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -324,17 +323,18 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">202x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">403x</span>
+<span class="cline-any cline-yes">199x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">397x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -369,7 +369,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">201x</span>
+<span class="cline-any cline-yes">198x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -407,7 +407,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">201x</span>
+<span class="cline-any cline-yes">198x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -416,7 +416,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">500x</span>
+<span class="cline-any cline-yes">495x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -431,14 +431,12 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-yes">10x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -533,6 +531,7 @@ import { translate, get } from 'lit-translate';
 &nbsp;
 import {
   CloseableElement,
+  createElement,
   EditorAction,
   getValue,
   newActionEvent,
@@ -663,17 +662,15 @@ export class BayEditor extends LitElement {
     ): EditorAction[] =&gt; {
       const name = getValue(inputs.find(i =&gt; i.label === 'name')!);
       const desc = getValue(inputs.find(i =&gt; i.label === 'desc')!);
+      const element = createElement(parent.ownerDocument, 'Bay', {
+        name,
+        desc,
+      });
 &nbsp;
       const action = {
         new: {
           parent,
-          element: new DOMParser().parseFromString(
-            `&lt;Bay
-              name="${name}"
-              ${desc === null ? <span class="branch-0 cbranch-no" title="branch not covered" >'' </span>: `desc="${desc}"`}
-            &gt;&lt;/Bay&gt;`,
-            'application/xml'
-          ).documentElement,
+          element,
           reference: null,
         },
       };
@@ -760,7 +757,7 @@ export class BayEditor extends LitElement {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Wed Jan 13 2021 08:40:36 GMT+0000 (Coordinated Universal Time)
+                at Fri Jan 22 2021 12:24:28 GMT+0000 (Coordinated Universal Time)
             </div>
         </div>
         <script src="../../../prettify.js"></script>

@@ -165,9 +165,22 @@ export let OpenSCD = class extends Setting2(Wizarding2(Waiting2(Validating2(Edit
     this.save();
     this.saveUI.close();
   }
+  formatXml(xml, tab) {
+    let formatted = "", indent = "";
+    if (!tab)
+      tab = "	";
+    xml.split(/>\s*</).forEach(function(node) {
+      if (node.match(/^\/\w/))
+        indent = indent.substring(tab.length);
+      formatted += indent + "<" + node + ">\r\n";
+      if (node.match(/^<?\w[^>]*[^/]$/))
+        indent += tab;
+    });
+    return formatted.substring(1, formatted.length - 3);
+  }
   save() {
     if (this.doc) {
-      const blob = new Blob([new XMLSerializer().serializeToString(this.doc)], {
+      const blob = new Blob([this.formatXml(new XMLSerializer().serializeToString(this.doc))], {
         type: "application/xml"
       });
       const a = document.createElement("a");

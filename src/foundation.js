@@ -102,18 +102,17 @@ export function referencePath(element) {
   }
   return path;
 }
+export function createElement(doc, tag, attrs) {
+  const element = doc.createElement(tag);
+  Object.entries(attrs).filter(([_, value]) => value !== null).forEach(([name2, value]) => element.setAttribute(name2, value));
+  return element;
+}
 export const ifImplemented = directive((rendered) => (part) => {
   if (Object.keys(rendered).length)
     part.setValue(rendered);
   else
     part.setValue("");
 });
-export function unreachable(message) {
-  throw new Error(message);
-}
-export function crossProduct(...arrays) {
-  return arrays.reduce((a, b) => a.flatMap((d) => b.map((e) => [d, e].flat())), [[]]);
-}
 const nameStartChar = "[:_A-Za-z]|[\xC0-\xD6]|[\xD8-\xF6]|[\xF8-\u02FF]|[\u0370-\u037D]|[\u037F-\u1FFF]|[\u200C-\u200D]|[\u2070-\u218F]|[\u2C00-\u2FEF]|[\u3001-\uD7FF]|[\uF900-\uFDCF]|[\uFDF0-\uFFFD]|[\u{10000}\\-\u{EFFFF}]";
 const nameChar = nameStartChar + "|[.0-9-]|\xB7|[\u0300-\u036F]|[\u203F-\u2040]";
 const name = nameStartChar + "(" + nameChar + ")*";
@@ -130,4 +129,10 @@ export const restrictions = {
 };
 export function compareNames(a, b) {
   return a.getAttribute("name").localeCompare(b.getAttribute("name"));
+}
+export function unreachable(message) {
+  throw new Error(message);
+}
+export function crossProduct(...arrays) {
+  return arrays.reduce((a, b) => a.flatMap((d) => b.map((e) => [d, e].flat())), [[]]);
 }

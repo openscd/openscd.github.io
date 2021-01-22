@@ -1,6 +1,7 @@
 import {html, render} from "../../../web_modules/lit-html.js";
 import {get, translate} from "../../../web_modules/lit-translate.js";
 import {
+  createElement,
   crossProduct,
   referencePath
 } from "../../foundation.js";
@@ -32,11 +33,18 @@ export function getLNode(parent, value) {
   const selector = crossProduct(ancestries, [" > "], [base], prefix, lnInst).map((a) => a.join("")).join(",");
   return parent.querySelector(selector);
 }
-function createAction(parent, value) {
+function createAction(parent, {iedName, ldInst, prefix, lnClass, inst: lnInst}) {
+  const element = createElement(parent.ownerDocument, "LNode", {
+    iedName,
+    ldInst,
+    prefix,
+    lnClass,
+    lnInst
+  });
   return {
     new: {
       parent,
-      element: new DOMParser().parseFromString(`<LNode iedName="${value.iedName}" ldInst="${value.ldInst}" ${value.prefix ? `prefix="${value.prefix}"` : ""} lnClass="${value.lnClass}" lnInst="${value.inst}"></LNode>`, "application/xml").documentElement,
+      element,
       reference: null
     }
   };
