@@ -35,6 +35,11 @@ export function getTheme(theme) {
         --mdc-circular-progress-bar-color-3: var(--mdc-theme-secondary);
         --mdc-circular-progress-bar-color-4: var(--mdc-theme-on-background);
       }
+
+      abbr {
+        text-decoration: none;
+        border-bottom: none;
+      }
     </style>
   `;
 }
