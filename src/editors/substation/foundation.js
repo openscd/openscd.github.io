@@ -1,8 +1,10 @@
 import {css} from "../../../web_modules/lit-element.js";
 import {
   getValue,
-  newActionEvent
+  newActionEvent,
+  newLogEvent
 } from "../../foundation.js";
+import {get} from "../../../web_modules/lit-translate.js";
 export function isCreateOptions(options) {
   return options.parent !== void 0;
 }
@@ -21,6 +23,30 @@ export function updateNamingAction(element) {
     wizard.close();
     return [{old: {element}, new: {element: newElement}}];
   };
+}
+export function cloneElement(editor) {
+  const element = editor.element;
+  const parent = element.parentElement;
+  const clone = element.cloneNode(true);
+  clone.querySelectorAll("LNode").forEach((lNode) => lNode.parentElement?.removeChild(lNode));
+  clone.querySelectorAll('Terminal:not([cNodeName="grounded"])').forEach((terminal) => terminal.parentElement?.removeChild(terminal));
+  clone.querySelectorAll("ConnectivityNode").forEach((condNode) => condNode.parentElement?.removeChild(condNode));
+  clone.setAttribute("name", element.getAttribute("name") + " - copy");
+  if (clone)
+    editor.dispatchEvent(newActionEvent({
+      new: {
+        parent,
+        element: clone,
+        reference: element.nextElementSibling
+      }
+    }));
+  else
+    element.dispatchEvent(newLogEvent({
+      kind: "error",
+      title: get("editing.error.duplicate", {
+        name: element.tagName
+      })
+    }));
 }
 export function startMove(editor, Child, Parent) {
   if (!editor.element)

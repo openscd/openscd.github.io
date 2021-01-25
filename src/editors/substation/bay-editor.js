@@ -27,7 +27,8 @@ import {
   isCreateOptions,
   startMove,
   styles,
-  updateNamingAction
+  updateNamingAction,
+  cloneElement
 } from "./foundation.js";
 import "./conducting-equipment-editor.js";
 import {ConductingEquipmentEditor} from "./conducting-equipment-editor.js";
@@ -76,6 +77,12 @@ export let BayEditor = class extends LitElement {
           <mwc-icon-button
             icon="account_tree"
             @click="${() => this.openLNodeWizard()}"
+          ></mwc-icon-button>
+        </abbr>
+        <abbr title="${translate("duplicate")}">
+          <mwc-icon-button
+            icon="content_copy"
+            @click=${() => cloneElement(this)}
           ></mwc-icon-button>
         </abbr>
         <abbr title="${translate("edit")}">

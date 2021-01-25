@@ -96,6 +96,7 @@
 						<section class="tsd-index-section ">
 							<h3>Functions</h3>
 							<ul class="tsd-index-list">
+								<li class="tsd-kind-function tsd-parent-kind-module"><a href="_editors_substation_foundation_.html#cloneelement" class="tsd-kind-icon">clone<wbr>Element</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-module"><a href="_editors_substation_foundation_.html#iscreateoptions" class="tsd-kind-icon">is<wbr>Create<wbr>Options</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter"><a href="_editors_substation_foundation_.html#startmove" class="tsd-kind-icon">start<wbr>Move</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-module"><a href="_editors_substation_foundation_.html#updatenamingaction" class="tsd-kind-icon">update<wbr>Naming<wbr>Action</a></li>
@@ -112,7 +113,7 @@
 					<div class="tsd-signature tsd-kind-icon">Element<wbr>Editor<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Element</span><span class="tsd-signature-symbol"> &amp; </span><span class="tsd-signature-symbol">{ </span>element<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Element</span><span class="tsd-signature-symbol"> }</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/52b745f/src/editors/substation/foundation.ts#L12">src/editors/substation/foundation.ts:12</a></li>
+							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/14551f4/src/editors/substation/foundation.ts#L16">src/editors/substation/foundation.ts:16</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -122,7 +123,7 @@
 					<div class="tsd-signature tsd-kind-icon">Substation<wbr>Tag<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">"Substation"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"VoltageLevel"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"Bay"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"ConductingEquipment"</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/52b745f/src/editors/substation/foundation.ts#L131">src/editors/substation/foundation.ts:131</a></li>
+							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/14551f4/src/editors/substation/foundation.ts#L179">src/editors/substation/foundation.ts:179</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -132,7 +133,7 @@
 					<div class="tsd-signature tsd-kind-icon">Wizard<wbr>Options<span class="tsd-signature-symbol">:</span> <a href="../interfaces/_editors_substation_foundation_.updateoptions.html" class="tsd-signature-type">UpdateOptions</a><span class="tsd-signature-symbol"> | </span><a href="../interfaces/_editors_substation_foundation_.createoptions.html" class="tsd-signature-type">CreateOptions</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/52b745f/src/editors/substation/foundation.ts#L22">src/editors/substation/foundation.ts:22</a></li>
+							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/14551f4/src/editors/substation/foundation.ts#L26">src/editors/substation/foundation.ts:26</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -145,7 +146,7 @@
 					<div class="tsd-signature tsd-kind-icon">selectors<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><a href="_editors_substation_foundation_.html#substationtag" class="tsd-signature-type">SubstationTag</a><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = &lt;Record&lt;SubstationTag, string&gt;&gt;(Object.fromEntries(substationPath.map((e, i, a) &#x3D;&gt; [e, a.slice(0, i + 1).join(&#x27; &gt; &#x27;)])))</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/52b745f/src/editors/substation/foundation.ts#L138">src/editors/substation/foundation.ts:138</a></li>
+							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/14551f4/src/editors/substation/foundation.ts#L186">src/editors/substation/foundation.ts:186</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -160,7 +161,7 @@
 					<div class="tsd-signature tsd-kind-icon">styles<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">CSSResult</span><span class="tsd-signature-symbol"> = css&#x60;:host(.moving) section {opacity: 0.3;}section {background-color: var(--mdc-theme-surface);transition: all 200ms linear;outline-color: var(--mdc-theme-primary);outline-style: solid;outline-width: 0px;margin: 8px 12px 16px;opacity: 1;}section:focus {box-shadow: 0 8px 10px 1px rgba(0, 0, 0, 0.14),0 3px 14px 2px rgba(0, 0, 0, 0.12), 0 5px 5px -3px rgba(0, 0, 0, 0.2);}section:focus-within {outline-width: 2px;transition: all 250ms linear;}h1,h2,h3 {color: var(--mdc-theme-on-surface);font-family: &#x27;Roboto&#x27;, sans-serif;font-weight: 300;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;margin: 0px;line-height: 48px;padding-left: 0.3em;transition: background-color 150ms linear;}section:focus-within &gt; h1,section:focus-within &gt; h2,section:focus-within &gt; h3 {color: var(--mdc-theme-surface);background-color: var(--mdc-theme-primary);transition: background-color 200ms linear;}h1 &gt; nav,h2 &gt; nav,h3 &gt; nav,h1 &gt; abbr &gt; mwc-icon-button,h2 &gt; abbr &gt; mwc-icon-button,h3 &gt; abbr &gt; mwc-icon-button {float: right;}abbr[title] {border-bottom: none !important;cursor: inherit !important;text-decoration: none !important;}&#x60;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/52b745f/src/editors/substation/foundation.ts#L145">src/editors/substation/foundation.ts:145</a></li>
+							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/14551f4/src/editors/substation/foundation.ts#L193">src/editors/substation/foundation.ts:193</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -175,13 +176,36 @@
 					<div class="tsd-signature tsd-kind-icon">substation<wbr>Path<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> = [&#x27;:root&#x27;,&#x27;Substation&#x27;,&#x27;VoltageLevel&#x27;,&#x27;Bay&#x27;,&#x27;ConductingEquipment&#x27;,]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/52b745f/src/editors/substation/foundation.ts#L123">src/editors/substation/foundation.ts:123</a></li>
+							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/14551f4/src/editors/substation/foundation.ts#L171">src/editors/substation/foundation.ts:171</a></li>
 						</ul>
 					</aside>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Functions</h2>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
+					<a name="cloneelement" class="tsd-anchor"></a>
+					<h3>clone<wbr>Element</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
+						<li class="tsd-signature tsd-kind-icon">clone<wbr>Element<span class="tsd-signature-symbol">(</span>editor<span class="tsd-signature-symbol">: </span><a href="../classes/_editors_substation_bay_editor_.bayeditor.html" class="tsd-signature-type">BayEditor</a><span class="tsd-signature-symbol"> | </span><a href="../classes/_editors_substation_voltage_level_editor_.voltageleveleditor.html" class="tsd-signature-type">VoltageLevelEditor</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/14551f4/src/editors/substation/foundation.ts#L55">src/editors/substation/foundation.ts:55</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>editor: <a href="../classes/_editors_substation_bay_editor_.bayeditor.html" class="tsd-signature-type">BayEditor</a><span class="tsd-signature-symbol"> | </span><a href="../classes/_editors_substation_voltage_level_editor_.voltageleveleditor.html" class="tsd-signature-type">VoltageLevelEditor</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
 				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
 					<a name="iscreateoptions" class="tsd-anchor"></a>
 					<h3>is<wbr>Create<wbr>Options</h3>
@@ -192,7 +216,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/52b745f/src/editors/substation/foundation.ts#L24">src/editors/substation/foundation.ts:24</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/14551f4/src/editors/substation/foundation.ts#L28">src/editors/substation/foundation.ts:28</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -215,7 +239,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/52b745f/src/editors/substation/foundation.ts#L59">src/editors/substation/foundation.ts:59</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/14551f4/src/editors/substation/foundation.ts#L107">src/editors/substation/foundation.ts:107</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -266,7 +290,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/52b745f/src/editors/substation/foundation.ts#L30">src/editors/substation/foundation.ts:30</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/14551f4/src/editors/substation/foundation.ts#L34">src/editors/substation/foundation.ts:34</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -317,6 +341,9 @@
 					</li>
 					<li class=" tsd-kind-variable tsd-parent-kind-module tsd-is-not-exported">
 						<a href="_editors_substation_foundation_.html#substationpath" class="tsd-kind-icon">substation<wbr>Path</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-module">
+						<a href="_editors_substation_foundation_.html#cloneelement" class="tsd-kind-icon">clone<wbr>Element</a>
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-module">
 						<a href="_editors_substation_foundation_.html#iscreateoptions" class="tsd-kind-icon">is<wbr>Create<wbr>Options</a>

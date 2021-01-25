@@ -25,7 +25,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>102/102</span>
+                <span class='fraction'>103/103</span>
             </div>
         
             
@@ -39,14 +39,14 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>33/33</span>
+                <span class='fraction'>34/34</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>83/83</span>
+                <span class='fraction'>84/84</span>
             </div>
         
             
@@ -479,7 +479,15 @@
 <a name='L420'></a><a href='#L420'>420</a>
 <a name='L421'></a><a href='#L421'>421</a>
 <a name='L422'></a><a href='#L422'>422</a>
-<a name='L423'></a><a href='#L423'>423</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L423'></a><a href='#L423'>423</a>
+<a name='L424'></a><a href='#L424'>424</a>
+<a name='L425'></a><a href='#L425'>425</a>
+<a name='L426'></a><a href='#L426'>426</a>
+<a name='L427'></a><a href='#L427'>427</a>
+<a name='L428'></a><a href='#L428'>428</a>
+<a name='L429'></a><a href='#L429'>429</a>
+<a name='L430'></a><a href='#L430'>430</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -571,20 +579,20 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">99x</span>
+<span class="cline-any cline-yes">113x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">197x</span>
+<span class="cline-any cline-yes">225x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">195x</span>
-<span class="cline-any cline-yes">195x</span>
-<span class="cline-any cline-yes">194x</span>
-<span class="cline-any cline-yes">194x</span>
-<span class="cline-any cline-yes">194x</span>
-<span class="cline-any cline-yes">194x</span>
+<span class="cline-any cline-yes">223x</span>
+<span class="cline-any cline-yes">223x</span>
+<span class="cline-any cline-yes">222x</span>
+<span class="cline-any cline-yes">222x</span>
+<span class="cline-any cline-yes">222x</span>
+<span class="cline-any cline-yes">222x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -617,7 +625,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">98x</span>
+<span class="cline-any cline-yes">112x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -631,6 +639,12 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -657,11 +671,11 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">98x</span>
+<span class="cline-any cline-yes">112x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">166x</span>
+<span class="cline-any cline-yes">193x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -931,6 +945,7 @@ import {
   startMove,
   styles,
   WizardOptions,
+  cloneElement,
 } from './foundation.js';
 import './bay-editor.js';
 import { BayEditor } from './bay-editor.js';
@@ -1053,6 +1068,12 @@ export class VoltageLevelEditor extends LitElement {
           &lt;mwc-icon-button
             icon="account_tree"
             @click=${() =&gt; this.openLNodeWizard()}
+          &gt;&lt;/mwc-icon-button&gt;
+        &lt;/abbr&gt;
+        &lt;abbr title="${translate('duplicate')}"&gt;
+          &lt;mwc-icon-button
+            icon="content_copy"
+            @click=${() =&gt; cloneElement(this)}
           &gt;&lt;/mwc-icon-button&gt;
         &lt;/abbr&gt;
         &lt;abbr title="${translate('edit')}"&gt;
@@ -1330,7 +1351,7 @@ export class VoltageLevelEditor extends LitElement {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Fri Jan 22 2021 12:24:28 GMT+0000 (Coordinated Universal Time)
+                at Mon Jan 25 2021 11:09:41 GMT+0000 (Coordinated Universal Time)
             </div>
         </div>
         <script src="../../../prettify.js"></script>

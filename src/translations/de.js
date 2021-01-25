@@ -29,6 +29,7 @@ export const de = {
       create: "Konnte {{ name }} nicht hinzuf\xFCgen",
       update: "Konnte {{ name }} nicht bearbeiten",
       move: "Konnte {{ name }} nicht verschieben",
+      duplicate: "Konnte {{name}} nicht kopieren",
       nameClash: '{{ parent }} enth\xE4lt bereits ein {{ child }} Kind namens "{{ name }}"'
     }
   },
@@ -136,5 +137,6 @@ export const de = {
   close: "Schlie\xDFen",
   filter: "Filter",
   undo: "R\xFCckg\xE4ngig",
-  redo: "Wiederholen"
+  redo: "Wiederholen",
+  duplicate: "Klonen"
 };

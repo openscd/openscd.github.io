@@ -29,6 +29,7 @@ export const en = {
       create: "Could not add {{ name }}",
       update: "Could not edit {{ name }}",
       move: "Could not move {{ name }}",
+      duplicate: "Could not copy {{name}}",
       nameClash: 'Parent {{ parent }} already contains a {{ child }} named "{{ name }}"'
     }
   },
@@ -136,5 +137,6 @@ export const en = {
   close: "Close",
   filter: "Filter",
   undo: "Undo",
-  redo: "Redo"
+  redo: "Redo",
+  duplicate: "Clone"
 };
