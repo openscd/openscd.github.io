@@ -27,11 +27,12 @@ export function updateNamingAction(element) {
 export function cloneElement(editor) {
   const element = editor.element;
   const parent = element.parentElement;
+  const num = parent.querySelectorAll(`${element.tagName}[name^="${element.getAttribute("name") ?? ""}"]`).length;
   const clone = element.cloneNode(true);
   clone.querySelectorAll("LNode").forEach((lNode) => lNode.parentElement?.removeChild(lNode));
   clone.querySelectorAll('Terminal:not([cNodeName="grounded"])').forEach((terminal) => terminal.parentElement?.removeChild(terminal));
   clone.querySelectorAll("ConnectivityNode").forEach((condNode) => condNode.parentElement?.removeChild(condNode));
-  clone.setAttribute("name", element.getAttribute("name") + " - copy");
+  clone.setAttribute("name", element.getAttribute("name") + num);
   if (clone)
     editor.dispatchEvent(newActionEvent({
       new: {
