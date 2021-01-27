@@ -125,6 +125,15 @@ export const de = {
  Damit wird die Absch\xE4tzung oftmals genauer.`
     }
   },
+  import: {
+    log: {
+      parsererror: "Parser Fehler",
+      loaderror: "Datei kann nicht geladen werden",
+      importerror: "IED Element kann nicht importiert werden",
+      missingied: "Kein IED Element in der Datei",
+      nouniqueied: "IED Element {{ name }} bereits geladen"
+    }
+  },
   add: "Hinzuf\xFCgen",
   remove: "Entfernen",
   edit: "Bearbeiten",

@@ -3,7 +3,7 @@
 The `<open-scd>` custom element is the main entry point of the
 Open Substation Configuration Designer.
 
-**Mixins:** Setting, Wizarding, Waiting, Validating, Editing, Logging
+**Mixins:** Setting, Importing, Wizarding, Waiting, Validating, Editing, Logging
 
 ## Properties
 
@@ -18,6 +18,7 @@ Open Substation Configuration Designer.
 | `fileUI`         |                 |           | `HTMLInputElement`                               |                                                  |                                                  |
 | `handleKeyPress` |                 |           |                                                  |                                                  |                                                  |
 | `history`        | `history`       |           | `LogEntry[]`                                     | []                                               | All [[`LogEntry`]]s received so far through [[`LogEvent`]]s. |
+| `iedImport`      |                 |           | `HTMLInputElement`                               |                                                  |                                                  |
 | `languageUI`     |                 |           | `Select`                                         |                                                  |                                                  |
 | `logUI`          |                 |           | `Dialog`                                         |                                                  |                                                  |
 | `menu`           |                 |           | `MenuEntry[]`                                    | [{"icon":"folder_open","name":"menu.open","startsGroup":true},{"icon":"create_new_folder","name":"menu.new"},{"icon":"snippet_folder","name":"menu.importIED"},{"icon":"save_alt","name":"save"},{"icon":"save","name":"saveAs"},{"icon":"undo","name":"undo","startsGroup":true,"actionItem":true,"action":true},{"icon":"redo","name":"redo","actionItem":true,"action":true},{"icon":"rule_folder","name":"menu.validate","startsGroup":true},{"icon":"rule","name":"menu.viewLog","actionItem":true},{"icon":"settings","name":"settings.name","startsGroup":true}] |                                                  |
@@ -33,6 +34,7 @@ Open Substation Configuration Designer.
 | `settings`       | `settings`      | readonly  | `Settings`                                       |                                                  | Current [[`Settings`]] in `localStorage`, default to [[`defaults`]]. |
 | `settingsUI`     |                 |           | `Dialog`                                         |                                                  |                                                  |
 | `src`            | `src`           |           | `string`                                         |                                                  | The current file's URL. `blob:` URLs are *revoked after parsing*! |
+| `srcIED`         | `srcIED`        |           | `string`                                         |                                                  |                                                  |
 | `srcName`        | `srcName`       |           | `string`                                         | ""                                               | The name of the current file.                    |
 | `undo`           |                 |           |                                                  |                                                  |                                                  |
 | `validated`      | `validated`     |           | `Promise<ValidationResult>`                      | "Promise.resolve({\n      file: 'untitled.scd',\n      valid: true,\n      code: 0,\n    })" |                                                  |
@@ -45,6 +47,7 @@ Open Substation Configuration Designer.
 
 | Method             | Type                                             | Description                                      |
 |--------------------|--------------------------------------------------|--------------------------------------------------|
+| `importIED`        | `(src: string, doc: Document): Promise<string>`  | Loads and parses an `XMLDocument` after [[`srcIED`]] has changed. |
 | `performUpdate`    | `(): Promise<void>`                              |                                                  |
 | `redo`             | `(): boolean`                                    |                                                  |
 | `renderActionItem` | `(me: MenuEntry): TemplateResult`                |                                                  |

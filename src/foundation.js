@@ -103,7 +103,7 @@ export function referencePath(element) {
   return path;
 }
 export function createElement(doc, tag, attrs) {
-  const element = doc.createElement(tag);
+  const element = doc.createElementNS(doc.documentElement.namespaceURI, tag);
   Object.entries(attrs).filter(([_, value]) => value !== null).forEach(([name2, value]) => element.setAttribute(name2, value));
   return element;
 }

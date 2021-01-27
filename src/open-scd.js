@@ -49,7 +49,8 @@ import {Setting as Setting2} from "./Setting.js";
 import {Validating as Validating2} from "./Validating.js";
 import {Waiting as Waiting2} from "./Waiting.js";
 import {Wizarding as Wizarding2} from "./Wizarding.js";
-export let OpenSCD = class extends Setting2(Wizarding2(Waiting2(Validating2(Editing2(Logging2(LitElement)))))) {
+import {Importing as Importing2} from "./Importing.js";
+export let OpenSCD = class extends Setting2(Importing2(Wizarding2(Waiting2(Validating2(Editing2(Logging2(LitElement))))))) {
   constructor() {
     super();
     this.activeTab = 0;
@@ -67,7 +68,12 @@ export let OpenSCD = class extends Setting2(Wizarding2(Waiting2(Validating2(Edit
         name: "menu.new",
         action: () => this.openNewProjectWizard()
       },
-      {icon: "snippet_folder", name: "menu.importIED"},
+      {
+        icon: "snippet_folder",
+        name: "menu.importIED",
+        action: () => this.iedImport.click(),
+        disabled: () => this.doc === null
+      },
       {
         icon: "save_alt",
         name: "save",
@@ -135,6 +141,17 @@ export let OpenSCD = class extends Setting2(Wizarding2(Waiting2(Validating2(Edit
   set src(value) {
     this.currentSrc = value;
     this.dispatchEvent(newPendingStateEvent(this.loadDoc(value)));
+  }
+  set srcIED(value) {
+    this.dispatchEvent(newPendingStateEvent(this.importIED(value, this.doc)));
+  }
+  async loadIEDFile(event) {
+    const file = event.target?.files?.item(0) ?? false;
+    if (file) {
+      const loaded = this.importIED(URL.createObjectURL(file), this.doc);
+      this.dispatchEvent(newPendingStateEvent(loaded));
+      await loaded;
+    }
   }
   async loadDoc(src) {
     this.reset();
@@ -360,6 +377,7 @@ export let OpenSCD = class extends Setting2(Wizarding2(Waiting2(Validating2(Edit
         </div>`}
 
       <input id="file-input" type="file" accept=".scd,.ssd" @change="${this.loadFile}"></input>
+      <input id="ied-import" type="file" accept=".icd,.iid,.cid" @change="${this.loadIEDFile}"></input>
       ${super.render()}
       ${getTheme(this.settings.theme)}
     `;
@@ -376,6 +394,10 @@ OpenSCD.styles = css`
     }
 
     #file-input {
+      display: none;
+    }
+
+    #ied-import {
       display: none;
     }
 
@@ -455,11 +477,17 @@ __decorate([
   property({type: String})
 ], OpenSCD.prototype, "src", 1);
 __decorate([
+  property({type: String})
+], OpenSCD.prototype, "srcIED", 1);
+__decorate([
   query("#menu")
 ], OpenSCD.prototype, "menuUI", 2);
 __decorate([
   query("#file-input")
 ], OpenSCD.prototype, "fileUI", 2);
+__decorate([
+  query("#ied-import")
+], OpenSCD.prototype, "iedImport", 2);
 __decorate([
   query("#saveas")
 ], OpenSCD.prototype, "saveUI", 2);
