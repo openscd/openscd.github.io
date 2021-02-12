@@ -110,7 +110,6 @@ export function Logging(Base) {
       return html` <abbr title="${entry.title}">
         <mwc-list-item
           graphic="icon"
-          style="--mdc-theme-text-icon-on-background:var(${ifDefined(colors[entry.kind])})"
           ?twoline=${entry.message}
           ?activated=${this.currentAction == history.length - index - 1}
         >
@@ -120,7 +119,11 @@ export function Logging(Base) {
             ${entry.title}</span
           >
           <span slot="secondary">${entry.message}</span>
-          <mwc-icon slot="graphic">${icons[entry.kind]}</mwc-icon>
+          <mwc-icon
+            slot="graphic"
+            style="--mdc-theme-text-icon-on-background:var(${ifDefined(colors[entry.kind])})"
+            >${icons[entry.kind]}</mwc-icon
+          >
         </mwc-list-item></abbr
       >`;
     }
