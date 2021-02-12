@@ -127,6 +127,12 @@ export let OpenSCD = class extends Setting2(Importing2(Wizarding2(Waiting2(Valid
           id: "substation",
           icon: zeroLineIcon,
           getContent: () => plugin2("./editors/Substation.js", "editor-0").then(() => html`<editor-0 .doc=${this.doc}></editor-0>`)
+        },
+        {
+          name: "communication.name",
+          id: "communication",
+          icon: "settings_ethernet",
+          getContent: () => plugin2("./editors/Communication.js", "editor-1").then(() => html`<editor-1 .doc=${this.doc}></editor-1>`)
         }
       ]
     };
@@ -283,7 +289,6 @@ export let OpenSCD = class extends Setting2(Importing2(Wizarding2(Waiting2(Valid
         iconid="${me.icon}"
         graphic="icon"
         .disabled=${me.disabled?.() || (me.action ? false : true)}
-        ?twoline=${me.hint}
         ><mwc-icon slot="graphic"> ${me.icon} </mwc-icon>
         <span>${translate(me.name)}</span>
         ${me.hint ? html`<span slot="secondary"><tt>${me.hint}</tt></span>` : ""}

@@ -134,6 +134,36 @@ export const de = {
       nouniqueied: "IED Element {{ name }} bereits geladen"
     }
   },
+  communication: {
+    name: "Netzwerkkonfiguration",
+    missing: "Kein Subnetzwerk"
+  },
+  subnetwork: {
+    name: "Subnetzwerk",
+    wizard: {
+      nameHelper: "Name des Subnetzwerkes",
+      descHelper: "Beschreibung des Subnetzwerkes",
+      typeHelper: "Netzwerktyp (Bsp. 8-MMS)",
+      bitrateHelper: "\xDCbertragungsrate",
+      title: {
+        add: "Subnetzwerk hinzuf\xFCgen",
+        edit: "Subnetzwerk bearbeiten"
+      }
+    }
+  },
+  connectedap: {
+    name: "Schnittstelle",
+    wizard: {
+      addschemainsttype: "XMLSchema-instance type hinzuf\xFCgen",
+      title: {
+        connect: "Schnittstelle verbinden",
+        edit: "Schnittstelle bearbeiten"
+      }
+    },
+    action: {
+      addaddress: "Adressfeld bearbeitet ({{iedName}} - {{apName}})"
+    }
+  },
   add: "Hinzuf\xFCgen",
   remove: "Entfernen",
   edit: "Bearbeiten",
