@@ -99,7 +99,7 @@ export function Importing(Base) {
         }
       });
       this.dispatchEvent(newActionEvent({
-        title: "Import IED " + ied.getAttribute("name"),
+        title: get("editing.import", {name: ied.getAttribute("name")}),
         actions: actions.filter((action) => action !== void 0)
       }));
     }
@@ -144,7 +144,9 @@ export function Importing(Base) {
           }
         }));
       }
-      const msg = "IED " + iedDoc.querySelector(":root > IED")?.getAttribute("name") + " loaded";
+      const msg = get("import.log.successful", {
+        name: iedDoc.querySelector(":root > IED")?.getAttribute("name") ?? ""
+      });
       const isSuccessful = this.isValidIED(iedDoc.querySelector(":root > IED"), doc);
       if (isSuccessful) {
         this.addIED(iedDoc.querySelector(":root > IED"), iedDoc.querySelector(":root > DataTypeTemplates"), doc);

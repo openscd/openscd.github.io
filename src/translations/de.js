@@ -11,6 +11,7 @@ export const de = {
     new: "Neues Projekt",
     importIED: "IED importieren",
     save: "Projekt speichern",
+    subscriberinfo: "Empf\xE4nger aktualisieren",
     validate: "Projekt validieren",
     viewLog: "Protokoll anzeigen"
   },
@@ -25,6 +26,7 @@ export const de = {
     deleted: "{{ name }} entfernt",
     moved: "{{ name }} verschoben",
     updated: "{{ name }} bearbeitet",
+    import: "{{name}} importiert",
     error: {
       create: "Konnte {{ name }} nicht hinzuf\xFCgen",
       update: "Konnte {{ name }} nicht bearbeiten",
@@ -127,6 +129,7 @@ export const de = {
   },
   import: {
     log: {
+      successful: "IED {{name}} geladen",
       parsererror: "Parser Fehler",
       loaderror: "Datei kann nicht geladen werden",
       importerror: "IED Element kann nicht importiert werden",
@@ -162,6 +165,13 @@ export const de = {
     },
     action: {
       addaddress: "Adressfeld bearbeitet ({{iedName}} - {{apName}})"
+    }
+  },
+  transform: {
+    subscriber: {
+      description: "GOOSE Ziele aktualisieren: ",
+      nonewitems: "keine neuen IEDName Elemente notwendig",
+      message: "{{updatenumber}} IEDName Element(e) hinzugef\xFCgt"
     }
   },
   add: "Hinzuf\xFCgen",

@@ -38,7 +38,8 @@ import "../web_modules/@material/mwc-top-app-bar-fixed.js";
 import {
   newLogEvent,
   newPendingStateEvent,
-  newWizardEvent
+  newWizardEvent,
+  newActionEvent
 } from "./foundation.js";
 import {getTheme} from "./themes.js";
 import {plugin as plugin2} from "./plugin.js";
@@ -50,6 +51,7 @@ import {Validating as Validating2} from "./Validating.js";
 import {Waiting as Waiting2} from "./Waiting.js";
 import {Wizarding as Wizarding2} from "./Wizarding.js";
 import {Importing as Importing2} from "./Importing.js";
+import {createMissingIEDNameSubscriberInfo} from "./transform/SubscriberInfo.js";
 export let OpenSCD = class extends Setting2(Importing2(Wizarding2(Waiting2(Validating2(Editing2(Logging2(LitElement))))))) {
   constructor() {
     super();
@@ -112,6 +114,13 @@ export let OpenSCD = class extends Setting2(Importing2(Wizarding2(Waiting2(Valid
         name: "menu.viewLog",
         actionItem: true,
         action: () => this.logUI.show()
+      },
+      {
+        icon: "extension",
+        name: get("menu.subscriberinfo"),
+        startsGroup: true,
+        action: () => this.updateSubscriberInfo(),
+        disabled: () => this.doc === null
       },
       {
         icon: "settings",
@@ -281,6 +290,22 @@ export let OpenSCD = class extends Setting2(Importing2(Wizarding2(Waiting2(Valid
   }
   openNewProjectWizard() {
     this.dispatchEvent(newWizardEvent(this.newProjectWizard()));
+  }
+  updateSubscriberInfo() {
+    const actions = createMissingIEDNameSubscriberInfo(this.doc);
+    if (!actions.length) {
+      this.dispatchEvent(newLogEvent({
+        kind: "info",
+        title: get("transform.subscriber.description") + get("transform.subscriber.nonewitems")
+      }));
+      return;
+    }
+    this.dispatchEvent(newActionEvent({
+      title: get("transform.subscriber.description") + get("transform.subscriber.message", {
+        updatenumber: actions.length
+      }),
+      actions
+    }));
   }
   renderMenuEntry(me) {
     return html`
