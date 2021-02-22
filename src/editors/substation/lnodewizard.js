@@ -73,7 +73,6 @@ export function lNodeWizardAction(parent) {
     }).map((value) => JSON.stringify(value));
     const deleteActions = oldLNodes.filter((node) => !newLNodes.includes(node)).map((node) => deleteAction(parent, JSON.parse(node)));
     const createActions = newLNodes.filter((node) => !oldLNodes.includes(node)).map((node) => createAction(parent, JSON.parse(node)));
-    wizard.close();
     return deleteActions.concat(createActions);
   };
 }

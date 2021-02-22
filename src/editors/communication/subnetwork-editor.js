@@ -177,8 +177,6 @@ export let SubNetworkEditor = class extends LitElement {
       } else {
         BitRateAction = getBitRateAction(element.querySelector("SubNetwork > BitRate"), BitRate, multiplier, SubNetworkAction?.new.element ?? element);
       }
-      if (SubNetworkAction || BitRateAction)
-        wizard.close();
       const actions = [];
       if (SubNetworkAction)
         actions.push(SubNetworkAction);
@@ -214,7 +212,6 @@ export let SubNetworkEditor = class extends LitElement {
           reference: null
         }
       };
-      wizard.close();
       return [action];
     };
   }

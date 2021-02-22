@@ -95,7 +95,6 @@ function guessBasedOnCSWI(doc) {
         reference: null
       }
     });
-    wizard.close();
     return actions;
   };
 }

@@ -164,7 +164,7 @@ export let VoltageLevelEditor = class extends LitElement {
     </section>`;
   }
   static updateAction(element) {
-    return (inputs, wizard) => {
+    return (inputs) => {
       const name = inputs.find((i) => i.label === "name").value;
       const desc = getValue(inputs.find((i) => i.label === "desc"));
       const nomFreq = getValue(inputs.find((i) => i.label === "nomFreq"));
@@ -197,8 +197,6 @@ export let VoltageLevelEditor = class extends LitElement {
       } else {
         voltageAction = getVoltageAction(element.querySelector("VoltageLevel > Voltage"), Voltage, multiplier, voltageLevelAction?.new.element ?? element);
       }
-      if (voltageLevelAction || voltageAction)
-        wizard.close();
       const actions = [];
       if (voltageLevelAction)
         actions.push(voltageLevelAction);
@@ -208,7 +206,7 @@ export let VoltageLevelEditor = class extends LitElement {
     };
   }
   static createAction(parent) {
-    return (inputs, wizard) => {
+    return (inputs) => {
       const name = getValue(inputs.find((i) => i.label === "name"));
       const desc = getValue(inputs.find((i) => i.label === "desc"));
       const nomFreq = getValue(inputs.find((i) => i.label === "nomFreq"));
@@ -229,7 +227,6 @@ export let VoltageLevelEditor = class extends LitElement {
         voltageElement.textContent = Voltage;
         element.appendChild(voltageElement);
       }
-      wizard.close();
       return [
         {
           new: {

@@ -21,7 +21,6 @@ A wizard style dialog consisting of several pages commiting some
 |-----------------|--------------------------------------------------|--------------------------------------------------|
 | `act`           | `(action?: WizardAction \| undefined): Promise<boolean>` | Commits `action` if all inputs are valid, reports validity otherwise. |
 | `checkValidity` | `(): boolean`                                    | Checks the inputs of all [[`WizardPage`]]s for validity. |
-| `close`         | `(): void`                                       | Dismisses the entire wizard by dispatching an empty [[`WizardEvent`]]. |
 | `next`          | `(): Promise<void>`                              |                                                  |
 | `prev`          | `(): void`                                       |                                                  |
 | `renderPage`    | `(page: WizardPage, index: number): TemplateResult` |                                                  |

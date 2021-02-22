@@ -1,4 +1,4 @@
-import { N as NodePart, A as AttributePart, d as directive } from './common/lit-html-8a43e7a8.js';
+import { N as NodePart, A as AttributePart, d as directive } from './common/lit-html-caf9a394.js';
 
 const CLEANUP_PARTS_MS = 1000 * 60;
 const LANG_CHANGED_EVENT = "langChanged";

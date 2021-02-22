@@ -51,7 +51,7 @@ export function Validating(Base) {
         throw new Error(get("validating.fatal"));
       if (validators[xsdName])
         return validators[xsdName];
-      const worker = window.__karma__ ? new Worker("/base/public/js/worker.js") : new Worker("public/js/worker.js");
+      const worker = new Worker("public/js/worker.js");
       async function validate(xml, xmlName) {
         return new Promise((resolve) => {
           worker.addEventListener("message", (e) => {

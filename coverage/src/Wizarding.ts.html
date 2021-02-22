@@ -25,28 +25,28 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>11/11</span>
+                <span class='fraction'>19/19</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>4/4</span>
+                <span class='fraction'>6/6</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>4/4</span>
+                <span class='fraction'>8/8</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>9/9</span>
+                <span class='fraction'>16/16</span>
             </div>
         
             
@@ -109,7 +109,10 @@
 <a name='L50'></a><a href='#L50'>50</a>
 <a name='L51'></a><a href='#L51'>51</a>
 <a name='L52'></a><a href='#L52'>52</a>
-<a name='L53'></a><a href='#L53'>53</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L53'></a><a href='#L53'>53</a>
+<a name='L54'></a><a href='#L54'>54</a>
+<a name='L55'></a><a href='#L55'>55</a>
+<a name='L56'></a><a href='#L56'>56</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -129,45 +132,42 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">304x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">556x</span>
+<span class="cline-any cline-yes">236x</span>
+<span class="cline-any cline-yes">219x</span>
+<span class="cline-any cline-yes">556x</span>
+<span class="cline-any cline-yes">556x</span>
+<span class="cline-any cline-yes">556x</span>
+<span class="cline-any cline-yes">556x</span>
+<span class="cline-any cline-yes">242x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">270x</span>
+<span class="cline-any cline-yes">304x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">438x</span>
-<span class="cline-any cline-yes">204x</span>
-<span class="cline-any cline-yes">438x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">270x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">270x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">818x</span>
+<span class="cline-any cline-yes">304x</span>
+<span class="cline-any cline-yes">304x</span>
+<span class="cline-any cline-yes">87x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">972x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import {
-  html,
-  internalProperty,
-  property,
-  TemplateResult,
-  query,
-} from 'lit-element';
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { html, internalProperty, TemplateResult, query } from 'lit-element';
 import {
   ifImplemented,
   LitElementConstructor,
@@ -193,21 +193,30 @@ export function Wizarding&lt;TBase extends LitElementConstructor&gt;(Base: TBase
 &nbsp;
     private onWizard(we: WizardEvent) {
       if (we.detail.wizard === null) this.workflow.shift();
+      else if (we.detail.subwizard) this.workflow.unshift(we.detail.wizard);
       else this.workflow.push(we.detail.wizard);
       this.requestUpdate('workflow');
+      this.updateComplete.then(() =&gt;
+        this.wizardUI.updateComplete.then(() =&gt;
+          this.wizardUI.dialog?.updateComplete.then(() =&gt;
+            this.wizardUI.dialog?.focus()
+          )
+        )
+      );
     }
 &nbsp;
     constructor(...args: any[]) {
       super(...args);
 &nbsp;
       this.addEventListener('wizard', this.onWizard);
+      this.addEventListener('editor-action', () =&gt;
+        this.wizardUI.requestUpdate()
+      );
     }
 &nbsp;
     render(): TemplateResult {
       return html`${ifImplemented(super.render())}
-      ${this.workflow.length
-        ? html`&lt;wizard-dialog .wizard=${this.workflow[0]}&gt;&lt;/wizard-dialog&gt;`
-        : ''}`;
+        &lt;wizard-dialog .wizard=${this.workflow[0] ?? []}&gt;&lt;/wizard-dialog&gt;`;
     }
   }
 &nbsp;
@@ -220,7 +229,7 @@ export function Wizarding&lt;TBase extends LitElementConstructor&gt;(Base: TBase
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Mon Feb 22 2021 10:57:48 GMT+0000 (Coordinated Universal Time)
+                at Mon Feb 22 2021 11:31:47 GMT+0000 (Coordinated Universal Time)
             </div>
         </div>
         <script src="../prettify.js"></script>

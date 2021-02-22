@@ -52,8 +52,8 @@ export function newActionEvent(action, eventInitDict) {
   return new CustomEvent("editor-action", {
     bubbles: true,
     composed: true,
-    detail: {action},
-    ...eventInitDict
+    ...eventInitDict,
+    detail: {action, ...eventInitDict?.detail}
   });
 }
 export const wizardInputSelector = "wizard-textfield, mwc-select";
@@ -73,24 +73,24 @@ export function newWizardEvent(wizard = null, eventInitDict) {
   return new CustomEvent("wizard", {
     bubbles: true,
     composed: true,
-    detail: {wizard},
-    ...eventInitDict
+    ...eventInitDict,
+    detail: {wizard, ...eventInitDict?.detail}
   });
 }
 export function newLogEvent(detail, eventInitDict) {
   return new CustomEvent("log", {
     bubbles: true,
     composed: true,
-    detail,
-    ...eventInitDict
+    ...eventInitDict,
+    detail: {...detail, ...eventInitDict?.detail}
   });
 }
 export function newPendingStateEvent(promise, eventInitDict) {
   return new CustomEvent("pending-state", {
     bubbles: true,
     composed: true,
-    detail: {promise},
-    ...eventInitDict
+    ...eventInitDict,
+    detail: {promise, ...eventInitDict?.detail}
   });
 }
 export function referencePath(element) {

@@ -105,7 +105,6 @@ export let ConnectedAPEditor = class extends LitElement {
           reference: null
         }
       }));
-      wizard.close();
       return actions;
     };
   }
@@ -199,8 +198,6 @@ export let ConnectedAPEditor = class extends LitElement {
             reference: parent.firstElementChild
           }
         });
-      if (complexAction.actions.length)
-        wizard.close();
       return [complexAction];
     };
   }

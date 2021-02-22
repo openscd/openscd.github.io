@@ -1,4 +1,13 @@
 export const de = {
+  scl: {
+    id: "ID",
+    name: "Name",
+    desc: "Beschreibung",
+    ord: "Rang",
+    value: "Wert",
+    EnumVal: "Enum Wert",
+    EnumType: "Enum Typ"
+  },
   settings: {
     name: "Einstellungen",
     language: "Sprache",
@@ -107,6 +116,27 @@ export const de = {
       }
     },
     unknownType: "Unbekannter Typ"
+  },
+  templates: {
+    name: "Data Type Templates",
+    missing: "DataTypeTemplates fehlen",
+    add: "DataTypeTemplates hinzuf\xFCgen"
+  },
+  "enum-val": {
+    wizard: {
+      title: {
+        add: "EnumVal hinzuf\xFCgen",
+        edit: "EnumVal bearbeiten"
+      }
+    }
+  },
+  enum: {
+    wizard: {
+      title: {
+        add: "EnumType hinzuf\xFCgen",
+        edit: "EnumType bearbeiten"
+      }
+    }
   },
   lnode: {
     wizard: {

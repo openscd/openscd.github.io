@@ -9,11 +9,7 @@ var __decorate = (decorators, target, key, kind) => {
     __defProp(target, key, result);
   return result;
 };
-import {
-  html,
-  internalProperty,
-  query
-} from "../web_modules/lit-element.js";
+import {html, internalProperty, query} from "../web_modules/lit-element.js";
 import {
   ifImplemented
 } from "./foundation.js";
@@ -24,17 +20,21 @@ export function Wizarding(Base) {
       super(...args);
       this.workflow = [];
       this.addEventListener("wizard", this.onWizard);
+      this.addEventListener("editor-action", () => this.wizardUI.requestUpdate());
     }
     onWizard(we) {
       if (we.detail.wizard === null)
         this.workflow.shift();
+      else if (we.detail.subwizard)
+        this.workflow.unshift(we.detail.wizard);
       else
         this.workflow.push(we.detail.wizard);
       this.requestUpdate("workflow");
+      this.updateComplete.then(() => this.wizardUI.updateComplete.then(() => this.wizardUI.dialog?.updateComplete.then(() => this.wizardUI.dialog?.focus())));
     }
     render() {
       return html`${ifImplemented(super.render())}
-      ${this.workflow.length ? html`<wizard-dialog .wizard=${this.workflow[0]}></wizard-dialog>` : ""}`;
+        <wizard-dialog .wizard=${this.workflow[0] ?? []}></wizard-dialog>`;
     }
   }
   __decorate([

@@ -113,7 +113,6 @@ export let SubstationEditor = class extends LitElement {
       };
       if (guess)
         wizard.dispatchEvent(newWizardEvent(guessVoltageLevel(parent.ownerDocument)));
-      wizard.close();
       return [action];
     };
   }

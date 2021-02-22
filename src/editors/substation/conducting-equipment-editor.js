@@ -84,7 +84,7 @@ export let ConductingEquipmentEditor = class extends LitElement {
     `;
   }
   static createAction(parent) {
-    return (inputs, wizard) => {
+    return (inputs) => {
       const name = getValue(inputs.find((i) => i.label === "name"));
       const desc = getValue(inputs.find((i) => i.label === "desc"));
       const proxyType = getValue(inputs.find((i) => i.label === "type"));
@@ -102,7 +102,6 @@ export let ConductingEquipmentEditor = class extends LitElement {
           reference: null
         }
       };
-      wizard.close();
       return [action];
     };
   }

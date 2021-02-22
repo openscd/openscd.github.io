@@ -23,16 +23,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">93.65% </span>
+                <span class="strong">93.33% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>59/63</span>
+                <span class='fraction'>56/60</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">71.88% </span>
+                <span class="strong">70% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>23/32</span>
+                <span class='fraction'>21/30</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">93.33% </span>
+                <span class="strong">93.1% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>56/60</span>
+                <span class='fraction'>54/58</span>
             </div>
         
             
@@ -488,17 +488,7 @@
 <a name='L429'></a><a href='#L429'>429</a>
 <a name='L430'></a><a href='#L430'>430</a>
 <a name='L431'></a><a href='#L431'>431</a>
-<a name='L432'></a><a href='#L432'>432</a>
-<a name='L433'></a><a href='#L433'>433</a>
-<a name='L434'></a><a href='#L434'>434</a>
-<a name='L435'></a><a href='#L435'>435</a>
-<a name='L436'></a><a href='#L436'>436</a>
-<a name='L437'></a><a href='#L437'>437</a>
-<a name='L438'></a><a href='#L438'>438</a>
-<a name='L439'></a><a href='#L439'>439</a>
-<a name='L440'></a><a href='#L440'>440</a>
-<a name='L441'></a><a href='#L441'>441</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L432'></a><a href='#L432'>432</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -649,9 +639,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
@@ -670,7 +657,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -759,9 +745,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">71x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">10x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -802,7 +785,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">10x</span>
 <span class="cline-any cline-yes">10x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -960,7 +942,6 @@ import { ListItemBase } from '@material/mwc-list/mwc-list-item-base';
 import { TextField } from '@material/mwc-textfield';
 &nbsp;
 import {
-  CloseableElement,
   EditorAction,
   newWizardEvent,
   Wizard,
@@ -1088,10 +1069,7 @@ export class ConnectedAPEditor extends LitElement {
   }
 &nbsp;
   static createAction(parent: Element): WizardAction {
-    return (
-      inputs: WizardInput[],
-      wizard: CloseableElement
-    ): EditorAction[] =&gt; {
+    return (inputs: WizardInput[], wizard: Element): EditorAction[] =&gt; {
       const apValue = (&lt;ListItemBase[]&gt;(
         (&lt;List&gt;wizard.shadowRoot!.querySelector('#apList')).selected
       )).map(item =&gt; &lt;apAttributes&gt;JSON.parse(item.value));
@@ -1110,7 +1088,6 @@ export class ConnectedAPEditor extends LitElement {
           }
       );
 &nbsp;
-      wizard.close();
       return actions;
     };
   }
@@ -1197,10 +1174,7 @@ export class ConnectedAPEditor extends LitElement {
   }
 &nbsp;
   static editAction(parent: Element): WizardAction {
-    return (
-      inputs: WizardInput[],
-      wizard: CloseableElement
-    ): EditorAction[] =&gt; {
+    return (inputs: WizardInput[], wizard: Element): EditorAction[] =&gt; {
       const instType: boolean =
         (&lt;Checkbox&gt;wizard.shadowRoot?.querySelector('#instType'))?.checked ??
         false;
@@ -1242,7 +1216,6 @@ export class ConnectedAPEditor extends LitElement {
           },
         });
 &nbsp;
-      if (complexAction.actions.length) wizard.close();
       return [complexAction];
     };
   }
@@ -1384,7 +1357,7 @@ export class ConnectedAPEditor extends LitElement {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Mon Feb 22 2021 10:57:48 GMT+0000 (Coordinated Universal Time)
+                at Mon Feb 22 2021 11:31:47 GMT+0000 (Coordinated Universal Time)
             </div>
         </div>
         <script src="../../../prettify.js"></script>

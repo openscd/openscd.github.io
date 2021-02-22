@@ -117,7 +117,7 @@ export let BayEditor = class extends LitElement {
     </section> `;
   }
   static createAction(parent) {
-    return (inputs, wizard) => {
+    return (inputs) => {
       const name = getValue(inputs.find((i) => i.label === "name"));
       const desc = getValue(inputs.find((i) => i.label === "desc"));
       const element = createElement(parent.ownerDocument, "Bay", {
@@ -131,7 +131,6 @@ export let BayEditor = class extends LitElement {
           reference: null
         }
       };
-      wizard.close();
       return [action];
     };
   }

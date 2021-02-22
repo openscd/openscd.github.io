@@ -1,15 +1,13 @@
 import {css} from "../../../web_modules/lit-element.js";
 import {
   getValue,
-  newActionEvent,
-  newLogEvent
+  newActionEvent
 } from "../../foundation.js";
-import {get} from "../../../web_modules/lit-translate.js";
 export function isCreateOptions(options) {
   return options.parent !== void 0;
 }
 export function updateNamingAction(element) {
-  return (inputs, wizard) => {
+  return (inputs) => {
     const name = getValue(inputs.find((i) => i.label === "name"));
     const desc = getValue(inputs.find((i) => i.label === "desc"));
     if (name === element.getAttribute("name") && desc === element.getAttribute("desc"))
@@ -20,7 +18,6 @@ export function updateNamingAction(element) {
       newElement.removeAttribute("desc");
     else
       newElement.setAttribute("desc", desc);
-    wizard.close();
     return [{old: {element}, new: {element: newElement}}];
   };
 }
@@ -33,21 +30,13 @@ export function cloneElement(editor) {
   clone.querySelectorAll('Terminal:not([cNodeName="grounded"])').forEach((terminal) => terminal.parentElement?.removeChild(terminal));
   clone.querySelectorAll("ConnectivityNode").forEach((condNode) => condNode.parentElement?.removeChild(condNode));
   clone.setAttribute("name", element.getAttribute("name") + num);
-  if (clone)
-    editor.dispatchEvent(newActionEvent({
-      new: {
-        parent,
-        element: clone,
-        reference: element.nextElementSibling
-      }
-    }));
-  else
-    element.dispatchEvent(newLogEvent({
-      kind: "error",
-      title: get("editing.error.duplicate", {
-        name: element.tagName
-      })
-    }));
+  editor.dispatchEvent(newActionEvent({
+    new: {
+      parent,
+      element: clone,
+      reference: element.nextElementSibling
+    }
+  }));
 }
 export function startMove(editor, Child, Parent) {
   if (!editor.element)

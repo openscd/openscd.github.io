@@ -23,16 +23,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">89.47% </span>
+                <span class="strong">90.74% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>51/57</span>
+                <span class='fraction'>49/54</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">61.11% </span>
+                <span class="strong">61.76% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>22/36</span>
+                <span class='fraction'>21/34</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">96% </span>
+                <span class="strong">97.87% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>48/50</span>
+                <span class='fraction'>46/47</span>
             </div>
         
             
@@ -296,21 +296,7 @@
 <a name='L237'></a><a href='#L237'>237</a>
 <a name='L238'></a><a href='#L238'>238</a>
 <a name='L239'></a><a href='#L239'>239</a>
-<a name='L240'></a><a href='#L240'>240</a>
-<a name='L241'></a><a href='#L241'>241</a>
-<a name='L242'></a><a href='#L242'>242</a>
-<a name='L243'></a><a href='#L243'>243</a>
-<a name='L244'></a><a href='#L244'>244</a>
-<a name='L245'></a><a href='#L245'>245</a>
-<a name='L246'></a><a href='#L246'>246</a>
-<a name='L247'></a><a href='#L247'>247</a>
-<a name='L248'></a><a href='#L248'>248</a>
-<a name='L249'></a><a href='#L249'>249</a>
-<a name='L250'></a><a href='#L250'>250</a>
-<a name='L251'></a><a href='#L251'>251</a>
-<a name='L252'></a><a href='#L252'>252</a>
-<a name='L253'></a><a href='#L253'>253</a>
-<a name='L254'></a><a href='#L254'>254</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L240'></a><a href='#L240'>240</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -337,10 +323,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">114x</span>
+<span class="cline-any cline-yes">148x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -358,7 +341,6 @@
 <span class="cline-any cline-yes">16x</span>
 <span class="cline-any cline-yes">16x</span>
 <span class="cline-any cline-yes">13x</span>
-<span class="cline-any cline-yes">16x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">16x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -392,17 +374,7 @@
 <span class="cline-any cline-yes">11x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">11x</span>
-<span class="cline-any cline-yes">11x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -566,17 +538,14 @@
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { css } from 'lit-element';
 &nbsp;
 import {
-  CloseableElement,
   EditorAction,
   getValue,
   newActionEvent,
   WizardAction,
   WizardInput,
-  newLogEvent,
 } from '../../foundation.js';
 import { VoltageLevelEditor } from './voltage-level-editor.js';
 import { BayEditor } from './bay-editor.js';
-import { get } from 'lit-translate';
 &nbsp;
 export type ElementEditor = Element &amp; {
   element: Element;
@@ -597,7 +566,7 @@ export function isCreateOptions(
 }
 &nbsp;
 export function updateNamingAction(element: Element): WizardAction {
-  return (inputs: WizardInput[], wizard: CloseableElement): EditorAction[] =&gt; {
+  return (inputs: WizardInput[]): EditorAction[] =&gt; {
     const name = getValue(inputs.find(i =&gt; i.label === 'name')!)!;
     const desc = getValue(inputs.find(i =&gt; i.label === 'desc')!);
 &nbsp;
@@ -611,7 +580,6 @@ export function updateNamingAction(element: Element): WizardAction {
     newElement.setAttribute('name', name);
     if (desc === null) newElement.removeAttribute('desc');
     else newElement.setAttribute('desc', desc);
-    wizard.close();
 &nbsp;
     return [{ old: { element }, new: { element: newElement } }];
   };
@@ -644,25 +612,15 @@ export function cloneElement(editor: BayEditor | VoltageLevelEditor): void {
 &nbsp;
   clone.setAttribute('name', element.getAttribute('name')! + num);
 &nbsp;
-  <span class="missing-if-branch" title="else path not taken" >E</span>if (clone)
-    editor.dispatchEvent(
-      newActionEvent({
-        new: {
-          parent: parent,
-          element: clone,
-          reference: element.nextElementSibling,
-        },
-      })
-    );
-  else
-<span class="cstat-no" title="statement not covered" >    element.dispatchEvent(</span>
-      newLogEvent({
-        kind: 'error',
-        title: get('editing.error.duplicate', {
-          name: element.tagName,
-        }),
-      })
-    );
+  editor.dispatchEvent(
+    newActionEvent({
+      new: {
+        parent: parent,
+        element: clone,
+        reference: element.nextElementSibling,
+      },
+    })
+  );
 }
 &nbsp;
 /**
@@ -823,7 +781,7 @@ export const styles = css`
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Mon Feb 22 2021 10:57:48 GMT+0000 (Coordinated Universal Time)
+                at Mon Feb 22 2021 11:31:47 GMT+0000 (Coordinated Universal Time)
             </div>
         </div>
         <script src="../../../prettify.js"></script>

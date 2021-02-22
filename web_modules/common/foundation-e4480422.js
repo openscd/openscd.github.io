@@ -1,4 +1,4 @@
-import { L as LitElement } from './lit-element-a56576a0.js';
+import { L as LitElement } from './lit-element-78b3e00f.js';
 
 /**
  * @license

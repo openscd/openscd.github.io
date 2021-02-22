@@ -55,8 +55,9 @@ export function Editing(Base) {
     }
     onCreate(action) {
       if (!this.checkCreateValidity(action))
-        return;
+        return false;
       action.new.parent.insertBefore(action.new.element, action.new.reference);
+      return true;
     }
     logCreate(action) {
       this.dispatchEvent(newLogEvent({
@@ -69,6 +70,7 @@ export function Editing(Base) {
     }
     onDelete(action) {
       action.old.element.remove();
+      return true;
     }
     logDelete(action) {
       this.dispatchEvent(newLogEvent({
@@ -99,8 +101,9 @@ export function Editing(Base) {
     }
     onMove(action) {
       if (!this.checkMoveValidity(action))
-        return;
+        return false;
       action.new.parent.insertBefore(action.old.element, action.new.reference);
+      return true;
     }
     logMove(action) {
       this.dispatchEvent(newLogEvent({
@@ -131,9 +134,10 @@ export function Editing(Base) {
     }
     onUpdate(action) {
       if (!this.checkUpdateValidity(action))
-        return;
+        return false;
       action.new.element.append(...Array.from(action.old.element.children));
       action.old.element.replaceWith(action.new.element);
+      return true;
     }
     logUpdate(action) {
       this.dispatchEvent(newLogEvent({
@@ -146,13 +150,13 @@ export function Editing(Base) {
     }
     onSimpleAction(action) {
       if (isMove(action))
-        this.onMove(action);
+        return this.onMove(action);
       else if (isCreate(action))
-        this.onCreate(action);
+        return this.onCreate(action);
       else if (isDelete(action))
-        this.onDelete(action);
+        return this.onDelete(action);
       else if (isUpdate(action))
-        this.onUpdate(action);
+        return this.onUpdate(action);
     }
     logSimpleAction(action) {
       if (isMove(action))
@@ -166,9 +170,9 @@ export function Editing(Base) {
     }
     onAction(event) {
       if (isSimple(event.detail.action)) {
-        this.onSimpleAction(event.detail.action);
-        this.logSimpleAction(event.detail.action);
-      } else if (event.detail.action.actions !== []) {
+        if (this.onSimpleAction(event.detail.action))
+          this.logSimpleAction(event.detail.action);
+      } else if (event.detail.action.actions.length > 0) {
         event.detail.action.actions.forEach((element) => this.onSimpleAction(element));
         this.dispatchEvent(newLogEvent({
           kind: "action",

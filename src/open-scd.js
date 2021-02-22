@@ -36,10 +36,10 @@ import "../web_modules/@material/mwc-tab-bar.js";
 import "../web_modules/@material/mwc-textfield.js";
 import "../web_modules/@material/mwc-top-app-bar-fixed.js";
 import {
+  newActionEvent,
   newLogEvent,
   newPendingStateEvent,
-  newWizardEvent,
-  newActionEvent
+  newWizardEvent
 } from "./foundation.js";
 import {getTheme} from "./themes.js";
 import {plugin as plugin2} from "./plugin.js";
@@ -142,11 +142,15 @@ export let OpenSCD = class extends Setting2(Importing2(Wizarding2(Waiting2(Valid
           id: "communication",
           icon: "settings_ethernet",
           getContent: () => plugin2("./editors/Communication.js", "editor-1").then(() => html`<editor-1 .doc=${this.doc}></editor-1>`)
+        },
+        {
+          name: "templates.name",
+          id: "templates",
+          icon: "code",
+          getContent: () => plugin2("./editors/Templates.js", "editor-2").then(() => html`<editor-2 .doc=${this.doc}></editor-2>`)
         }
       ]
     };
-    if ("serviceWorker" in navigator)
-      navigator.serviceWorker.register("/sw.js");
     this.handleKeyPress = this.handleKeyPress.bind(this);
     document.onkeydown = this.handleKeyPress;
   }
@@ -253,8 +257,7 @@ export let OpenSCD = class extends Setting2(Importing2(Wizarding2(Waiting2(Valid
     const version = wizard.shadowRoot.querySelector("mwc-list").selected.value;
     this.reset();
     this.doc = newEmptySCD(this.srcName.slice(0, -4), version);
-    wizard.close();
-    return [];
+    return [{actions: [], title: get("menu.new"), derived: true}];
   }
   newProjectWizard() {
     return [

@@ -65,9 +65,6 @@ export let WizardDialog = class extends LitElement {
       dialogInputs(this.dialog).map((wi) => wi.reportValidity());
     }
   }
-  close() {
-    this.dispatchEvent(newWizardEvent());
-  }
   async act(action) {
     if (action === void 0)
       return false;
@@ -77,18 +74,27 @@ export let WizardDialog = class extends LitElement {
       inputArray.map((wi) => wi.reportValidity());
       return false;
     }
-    action(inputArray, this).map((ea) => this.dispatchEvent(newActionEvent(ea)));
+    const editorActions = action(inputArray, this);
+    editorActions.forEach((ea) => this.dispatchEvent(newActionEvent(ea)));
+    if (editorActions.length > 0)
+      this.dispatchEvent(newWizardEvent());
     return true;
   }
   onClosed(ae) {
     if (!(ae.target instanceof Dialog && ae.detail?.action))
       return;
     if (ae.detail.action === "close")
-      this.close();
+      this.dispatchEvent(newWizardEvent());
     else if (ae.detail.action === "prev")
       this.prev();
     else if (ae.detail.action === "next")
       this.next();
+  }
+  updated(changedProperties) {
+    if (changedProperties.has("wizard")) {
+      this.dialog?.show();
+      this.pageIndex = 0;
+    }
   }
   renderPage(page, index) {
     return html`<mwc-dialog
@@ -103,19 +109,16 @@ export let WizardDialog = class extends LitElement {
             dialogAction="prev"
             icon="navigate_before"
             label=${this.wizard?.[index - 1].title}
-            outlined
           ></mwc-button>` : html``}
       ${page.secondary ? html`<mwc-button
             slot="secondaryAction"
             @click=${() => this.act(page.secondary?.action)}
             icon="${page.secondary.icon}"
             label="${page.secondary.label}"
-            outlined
           ></mwc-button>` : html`<mwc-button
             slot="secondaryAction"
             dialogAction="close"
             label="${translate("cancel")}"
-            outlined
             style="--mdc-theme-primary: var(--mdc-theme-error)"
           ></mwc-button>`}
       ${page.primary ? html`<mwc-button
@@ -124,13 +127,11 @@ export let WizardDialog = class extends LitElement {
             icon="${page.primary.icon}"
             label="${page.primary.label}"
             trailingIcon
-            unelevated
           ></mwc-button>` : index + 1 < (this.wizard?.length ?? 0) ? html`<mwc-button
             slot="primaryAction"
             dialogAction="next"
             icon="navigate_next"
             label=${this.wizard?.[index + 1].title}
-            outlined
             trailingicon
           ></mwc-button>` : html``}
     </mwc-dialog>`;
@@ -154,7 +155,7 @@ WizardDialog.styles = css`
       margin-top: 16px;
     }
 
-    *[iconTrailing='search'][outlined] {
+    *[iconTrailing='search'] {
       --mdc-shape-small: 28px;
     }
   `;
