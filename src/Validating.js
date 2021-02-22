@@ -37,7 +37,7 @@ export function Validating(Base) {
     } = {}) {
       if (doc.documentElement)
         [version, revision, release] = [
-          doc.documentElement.getAttribute("version") ?? "2003",
+          doc.documentElement.getAttribute("version") ?? "",
           doc.documentElement.getAttribute("revision") ?? "",
           doc.documentElement.getAttribute("release") ?? ""
         ];
