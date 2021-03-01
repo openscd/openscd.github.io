@@ -64,6 +64,20 @@ export const de = {
       placeholder: "Keine Fehler"
     }
   },
+  plugins: {
+    heading: "Erweiterungen",
+    editor: "Editor",
+    triggered: "Men\xFCeintrag",
+    add: {
+      heading: "Benutzerdefinierte Erweiterung",
+      warning: `Hier k\xF6nnen Sie benutzerdefinierte Erweiterungen hinzuf\xFCgen.
+                OpenSCD \xFCbernimm hierf\xFCr keine Gew\xE4hr.`,
+      name: "Name",
+      nameHelper: "Lokaler Name der Erweiterung (frei w\xE4hlbar)",
+      src: "URL",
+      srcHelper: "Die Erweiterungs-URL des Herstellers"
+    }
+  },
   substation: {
     name: "Schaltanlage",
     missing: "Keine Schaltanlage",
