@@ -9,8 +9,8 @@ var __decorate = (decorators, target, key, kind) => {
     __defProp(target, key, result);
   return result;
 };
-import {LitElement, html, property, css} from "../../web_modules/lit-element.js";
-import {translate} from "../../web_modules/lit-translate.js";
+import {LitElement, html, property, css} from "../../_snowpack/pkg/lit-element.js";
+import {translate} from "../../_snowpack/pkg/lit-translate.js";
 import {newActionEvent, newWizardEvent} from "../foundation.js";
 import {styles} from "./templates/foundation.js";
 import "./templates/enum-type-editor.js";

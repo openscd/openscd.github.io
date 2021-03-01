@@ -15,13 +15,9 @@ import {
   internalProperty,
   property,
   query
-} from "../web_modules/lit-element.js";
-import {translate, get} from "../web_modules/lit-translate.js";
-import "../web_modules/@material/mwc-list/mwc-list-item.js";
-import "../web_modules/@material/mwc-menu.js";
-import "../web_modules/@material/mwc-switch.js";
-import "../web_modules/@material/mwc-textfield.js";
-import {TextField} from "../web_modules/@material/mwc-textfield.js";
+} from "../_snowpack/pkg/lit-element.js";
+import {translate, get} from "../_snowpack/pkg/lit-translate.js";
+import {TextField} from "../_snowpack/pkg/@material/mwc-textfield.js";
 export let WizardTextField = class extends TextField {
   constructor() {
     super(...arguments);

@@ -1,15 +1,11 @@
-import {html, render} from "../../../web_modules/lit-html.js";
-import {get, translate} from "../../../web_modules/lit-translate.js";
+import {html, render} from "../../../_snowpack/pkg/lit-html.js";
+import {get, translate} from "../../../_snowpack/pkg/lit-translate.js";
 import {
   createElement,
   crossProduct,
   referencePath
 } from "../../foundation.js";
-import "../../../web_modules/@material/mwc-list/mwc-check-list-item.js";
-import "../../../web_modules/@material/mwc-list/mwc-list-item.js";
-import "../../../web_modules/@material/mwc-textfield.js";
-import "../../../web_modules/@material/mwc-icon.js";
-import {List} from "../../../web_modules/@material/mwc-list.js";
+import {List} from "../../../_snowpack/pkg/@material/mwc-list.js";
 import {selectors} from "./foundation.js";
 function compareDescription(a, b) {
   if (a.selected !== b.selected)

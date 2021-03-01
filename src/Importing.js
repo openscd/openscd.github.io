@@ -1,4 +1,4 @@
-import {get} from "../web_modules/lit-translate.js";
+import {get} from "../_snowpack/pkg/lit-translate.js";
 import {
   newLogEvent,
   newActionEvent,

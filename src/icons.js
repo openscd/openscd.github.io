@@ -1,4 +1,4 @@
-import {html} from "../web_modules/lit-element.js";
+import {html} from "../_snowpack/pkg/lit-element.js";
 export const iedIcon = html`<svg
   xmlns="http://www.w3.org/2000/svg"
   width="24"

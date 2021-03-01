@@ -9,7 +9,7 @@ var __decorate = (decorators, target, key, kind) => {
     __defProp(target, key, result);
   return result;
 };
-import {html, internalProperty, query} from "../web_modules/lit-element.js";
+import {html, internalProperty, query} from "../_snowpack/pkg/lit-element.js";
 import {
   ifImplemented
 } from "./foundation.js";

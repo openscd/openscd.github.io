@@ -15,142 +15,51 @@ import {
   html,
   LitElement,
   property,
-  query,
-  TemplateResult
-} from "../web_modules/lit-element.js";
-import {until as until2} from "../web_modules/lit-html/directives/until.js";
-import {translate, get} from "../web_modules/lit-translate.js";
-import "../web_modules/@material/mwc-button.js";
-import "../web_modules/@material/mwc-checkbox.js";
-import "../web_modules/@material/mwc-dialog.js";
-import "../web_modules/@material/mwc-drawer.js";
-import "../web_modules/@material/mwc-formfield.js";
-import "../web_modules/@material/mwc-icon.js";
-import "../web_modules/@material/mwc-icon-button.js";
-import "../web_modules/@material/mwc-linear-progress.js";
-import "../web_modules/@material/mwc-list.js";
-import "../web_modules/@material/mwc-list/mwc-list-item.js";
-import "../web_modules/@material/mwc-list/mwc-radio-list-item.js";
-import "../web_modules/@material/mwc-tab.js";
-import "../web_modules/@material/mwc-tab-bar.js";
-import "../web_modules/@material/mwc-textfield.js";
-import "../web_modules/@material/mwc-top-app-bar-fixed.js";
+  query
+} from "../_snowpack/pkg/lit-element.js";
+import {until} from "../_snowpack/pkg/lit-html/directives/until.js";
+import {translate, get} from "../_snowpack/pkg/lit-translate.js";
+import "../_snowpack/pkg/@material/mwc-button.js";
+import "../_snowpack/pkg/@material/mwc-checkbox.js";
+import "../_snowpack/pkg/@material/mwc-circular-progress-four-color.js";
+import "../_snowpack/pkg/@material/mwc-dialog.js";
+import "../_snowpack/pkg/@material/mwc-drawer.js";
+import "../_snowpack/pkg/@material/mwc-fab.js";
+import "../_snowpack/pkg/@material/mwc-formfield.js";
+import "../_snowpack/pkg/@material/mwc-icon.js";
+import "../_snowpack/pkg/@material/mwc-icon-button.js";
+import "../_snowpack/pkg/@material/mwc-linear-progress.js";
+import "../_snowpack/pkg/@material/mwc-list.js";
+import "../_snowpack/pkg/@material/mwc-list/mwc-check-list-item.js";
+import "../_snowpack/pkg/@material/mwc-list/mwc-list-item.js";
+import "../_snowpack/pkg/@material/mwc-list/mwc-radio-list-item.js";
+import "../_snowpack/pkg/@material/mwc-menu.js";
+import "../_snowpack/pkg/@material/mwc-select.js";
+import "../_snowpack/pkg/@material/mwc-snackbar.js";
+import "../_snowpack/pkg/@material/mwc-switch.js";
+import "../_snowpack/pkg/@material/mwc-tab.js";
+import "../_snowpack/pkg/@material/mwc-tab-bar.js";
+import "../_snowpack/pkg/@material/mwc-textfield.js";
+import "../_snowpack/pkg/@material/mwc-top-app-bar-fixed.js";
 import {
-  newActionEvent,
   newLogEvent,
   newPendingStateEvent,
   newWizardEvent
 } from "./foundation.js";
 import {getTheme} from "./themes.js";
-import {plugin as plugin2} from "./plugin.js";
-import {zeroLineIcon} from "./icons.js";
-import {Editing as Editing2, newEmptySCD} from "./Editing.js";
-import {Logging as Logging2} from "./Logging.js";
-import {Setting as Setting2} from "./Setting.js";
-import {Validating as Validating2} from "./Validating.js";
-import {Waiting as Waiting2} from "./Waiting.js";
-import {Wizarding as Wizarding2} from "./Wizarding.js";
-import {Importing as Importing2} from "./Importing.js";
-import {createMissingIEDNameSubscriberInfo} from "./transform/SubscriberInfo.js";
-export let OpenSCD = class extends Setting2(Importing2(Wizarding2(Waiting2(Validating2(Editing2(Logging2(LitElement))))))) {
+import {Editing, newEmptySCD} from "./Editing.js";
+import {Importing} from "./Importing.js";
+import {Logging} from "./Logging.js";
+import {Setting} from "./Setting.js";
+import {Plugging, pluginIcons} from "./Plugging.js";
+import {Validating} from "./Validating.js";
+import {Waiting} from "./Waiting.js";
+import {Wizarding} from "./Wizarding.js";
+export let OpenSCD = class extends Setting(Importing(Wizarding(Waiting(Validating(Plugging(Editing(Logging(LitElement)))))))) {
   constructor() {
     super();
     this.activeTab = 0;
-    this.srcName = "";
     this.currentSrc = "";
-    this.menu = [
-      {
-        icon: "folder_open",
-        name: "menu.open",
-        startsGroup: true,
-        action: () => this.fileUI.click()
-      },
-      {
-        icon: "create_new_folder",
-        name: "menu.new",
-        action: () => this.openNewProjectWizard()
-      },
-      {
-        icon: "snippet_folder",
-        name: "menu.importIED",
-        action: () => this.iedImport.click(),
-        disabled: () => this.doc === null
-      },
-      {
-        icon: "save_alt",
-        name: "save",
-        action: () => this.save(),
-        disabled: () => this.doc === null
-      },
-      {
-        icon: "save",
-        name: "saveAs",
-        action: () => this.saveUI.show(),
-        disabled: () => this.doc === null
-      },
-      {
-        icon: "undo",
-        name: "undo",
-        startsGroup: true,
-        actionItem: true,
-        action: this.undo,
-        disabled: () => !this.canUndo
-      },
-      {
-        icon: "redo",
-        name: "redo",
-        actionItem: true,
-        action: this.redo,
-        disabled: () => !this.canRedo
-      },
-      {
-        icon: "rule_folder",
-        name: "menu.validate",
-        startsGroup: true,
-        action: () => this.doc ? this.dispatchEvent(newPendingStateEvent(this.validate(this.doc, {fileName: this.srcName}))) : null
-      },
-      {
-        icon: "rule",
-        name: "menu.viewLog",
-        actionItem: true,
-        action: () => this.logUI.show()
-      },
-      {
-        icon: "extension",
-        name: get("menu.subscriberinfo"),
-        startsGroup: true,
-        action: () => this.updateSubscriberInfo(),
-        disabled: () => this.doc === null
-      },
-      {
-        icon: "settings",
-        name: "settings.name",
-        startsGroup: true,
-        action: () => this.settingsUI.show()
-      }
-    ];
-    this.plugins = {
-      editors: [
-        {
-          name: "substation.name",
-          id: "substation",
-          icon: zeroLineIcon,
-          getContent: () => plugin2("./editors/Substation.js", "editor-0").then(() => html`<editor-0 .doc=${this.doc}></editor-0>`)
-        },
-        {
-          name: "communication.name",
-          id: "communication",
-          icon: "settings_ethernet",
-          getContent: () => plugin2("./editors/Communication.js", "editor-1").then(() => html`<editor-1 .doc=${this.doc}></editor-1>`)
-        },
-        {
-          name: "templates.name",
-          id: "templates",
-          icon: "code",
-          getContent: () => plugin2("./editors/Templates.js", "editor-2").then(() => html`<editor-2 .doc=${this.doc}></editor-2>`)
-        }
-      ]
-    };
     this.handleKeyPress = this.handleKeyPress.bind(this);
     document.onkeydown = this.handleKeyPress;
   }
@@ -176,32 +85,32 @@ export let OpenSCD = class extends Setting2(Importing2(Wizarding2(Waiting2(Valid
     this.reset();
     this.dispatchEvent(newLogEvent({
       kind: "info",
-      title: get("openSCD.loading", {name: this.srcName})
+      title: get("openSCD.loading", {name: this.docName})
     }));
     const response = await fetch(src);
     const text = await response.text();
     this.doc = new DOMParser().parseFromString(text, "application/xml");
     if (src.startsWith("blob:"))
       URL.revokeObjectURL(src);
-    const validated = this.validate(this.doc, {fileName: this.srcName});
+    const validated = this.validate(this.doc, {fileName: this.docName});
     if (this.doc)
       this.dispatchEvent(newPendingStateEvent(validated));
     await validated;
     this.dispatchEvent(newLogEvent({
       kind: "info",
-      title: get("openSCD.loaded", {name: this.srcName})
+      title: get("openSCD.loaded", {name: this.docName})
     }));
     return;
   }
   loadFile(event) {
     const file = event.target?.files?.item(0) ?? false;
     if (file) {
-      this.srcName = file.name;
+      this.docName = file.name;
       this.setAttribute("src", URL.createObjectURL(file));
     }
   }
   saveAs() {
-    this.srcName = this.saveUI.querySelector("mwc-textfield")?.value || this.srcName;
+    this.docName = this.saveUI.querySelector("mwc-textfield")?.value || this.docName;
     this.save();
     this.saveUI.close();
   }
@@ -224,7 +133,7 @@ export let OpenSCD = class extends Setting2(Importing2(Wizarding2(Waiting2(Valid
         type: "application/xml"
       });
       const a = document.createElement("a");
-      a.download = this.srcName;
+      a.download = this.docName;
       a.href = URL.createObjectURL(blob);
       a.dataset.downloadurl = ["application/xml", a.download, a.href].join(":");
       a.style.display = "none";
@@ -253,14 +162,16 @@ export let OpenSCD = class extends Setting2(Importing2(Wizarding2(Waiting2(Valid
       this.save();
     if (ctrlAnd("S"))
       this.saveUI.show();
+    if (ctrlAnd("P"))
+      this.pluginUI.show();
     if (handled)
       e.preventDefault();
   }
   createNewProject(inputs, wizard) {
-    this.srcName = inputs[0].value.match(/\.s[sc]d$/i) ? inputs[0].value : inputs[0].value + ".scd";
+    this.docName = inputs[0].value.match(/\.s[sc]d$/i) ? inputs[0].value : inputs[0].value + ".scd";
     const version = wizard.shadowRoot.querySelector("mwc-list").selected.value;
     this.reset();
-    this.doc = newEmptySCD(this.srcName.slice(0, -4), version);
+    this.doc = newEmptySCD(this.docName.slice(0, -4), version);
     return [{actions: [], title: get("menu.new"), derived: true}];
   }
   newProjectWizard() {
@@ -288,7 +199,7 @@ export let OpenSCD = class extends Setting2(Importing2(Wizarding2(Waiting2(Valid
                 >Edition 2 (Schema 3.1)</mwc-radio-list-item
               >
               <mwc-radio-list-item left selected value="2007B4"
-                >Edition 2.1 current (2007B4)</mwc-radio-list-item
+                >Edition 2.1 (2007B4)</mwc-radio-list-item
               >
             </mwc-list>`
         ]
@@ -298,37 +209,107 @@ export let OpenSCD = class extends Setting2(Importing2(Wizarding2(Waiting2(Valid
   openNewProjectWizard() {
     this.dispatchEvent(newWizardEvent(this.newProjectWizard()));
   }
-  updateSubscriberInfo() {
-    const actions = createMissingIEDNameSubscriberInfo(this.doc);
-    if (!actions.length) {
-      this.dispatchEvent(newLogEvent({
-        kind: "info",
-        title: get("transform.subscriber.description") + get("transform.subscriber.nonewitems")
-      }));
-      return;
-    }
-    this.dispatchEvent(newActionEvent({
-      title: get("transform.subscriber.description") + get("transform.subscriber.message", {
-        updatenumber: actions.length
-      }),
-      actions
+  get menu() {
+    const items = [];
+    this.items.forEach((plugin) => items.push({
+      icon: plugin.icon || pluginIcons["triggered"],
+      name: plugin.name,
+      action: (ae) => {
+        this.dispatchEvent(newPendingStateEvent(ae.target.items[ae.detail.index].lastElementChild.trigger()));
+      },
+      disabled: () => this.doc === null,
+      content: plugin.content
     }));
+    if (items.length > 0)
+      items.push("divider");
+    return [
+      "divider",
+      {
+        icon: "folder_open",
+        name: "menu.open",
+        action: () => this.fileUI.click()
+      },
+      {
+        icon: "create_new_folder",
+        name: "menu.new",
+        action: () => this.openNewProjectWizard()
+      },
+      {
+        icon: "save_alt",
+        name: "save",
+        action: () => this.save(),
+        disabled: () => this.doc === null
+      },
+      {
+        icon: "save",
+        name: "saveAs",
+        action: () => this.saveUI.show(),
+        disabled: () => this.doc === null
+      },
+      {
+        icon: "snippet_folder",
+        name: "menu.importIED",
+        action: () => this.iedImport.click(),
+        disabled: () => this.doc === null
+      },
+      "divider",
+      {
+        icon: "undo",
+        name: "undo",
+        actionItem: true,
+        action: this.undo,
+        disabled: () => !this.canUndo
+      },
+      {
+        icon: "redo",
+        name: "redo",
+        actionItem: true,
+        action: this.redo,
+        disabled: () => !this.canRedo
+      },
+      {
+        icon: "rule_folder",
+        name: "menu.validate",
+        action: () => this.doc ? this.dispatchEvent(newPendingStateEvent(this.validate(this.doc, {fileName: this.docName}))) : null,
+        disabled: () => this.doc === null
+      },
+      {
+        icon: "rule",
+        name: "menu.viewLog",
+        actionItem: true,
+        action: () => this.logUI.show()
+      },
+      "divider",
+      ...items,
+      {
+        icon: "settings",
+        name: "settings.name",
+        action: () => this.settingsUI.show()
+      },
+      {
+        icon: "extension",
+        name: "plugins.heading",
+        action: () => this.pluginUI.show()
+      }
+    ];
   }
-  renderMenuEntry(me) {
+  renderMenuItem(me) {
+    if (me === "divider")
+      return html`<li divider padded role="separator"></li>`;
     return html`
-      ${me.startsGroup ? html`<li divider padded role="separator"></li>` : ""}
       <mwc-list-item
         iconid="${me.icon}"
         graphic="icon"
-        .disabled=${me.disabled?.() || (me.action ? false : true)}
-        ><mwc-icon slot="graphic"> ${me.icon} </mwc-icon>
+        .disabled=${me.disabled?.() || !me.action}
+        ><mwc-icon slot="graphic">${me.icon}</mwc-icon>
         <span>${translate(me.name)}</span>
         ${me.hint ? html`<span slot="secondary"><tt>${me.hint}</tt></span>` : ""}
+        ${me.content ? until(me.content(), html`<mwc-linear-progress indeterminate></mwc-linear-progress>`) : ""}
       </mwc-list-item>
     `;
   }
   renderActionItem(me) {
-    if (me.actionItem)
+    if (me !== "divider" && me.actionItem)
       return html`<mwc-icon-button
         slot="actionItems"
         icon="${me.icon}"
@@ -339,29 +320,19 @@ export let OpenSCD = class extends Setting2(Importing2(Wizarding2(Waiting2(Valid
     else
       return html``;
   }
-  renderEditorTab({
-    name,
-    id,
-    icon
-  }) {
-    return html`<mwc-tab
-      label=${translate(name)}
-      icon=${icon instanceof TemplateResult ? "" : icon}
-      id=${id}
-      hasimageicon
-    >
-      ${icon instanceof TemplateResult ? icon : ""}
+  renderEditorTab({name, icon}) {
+    return html`<mwc-tab label=${translate(name)} icon=${icon || "edit"}>
     </mwc-tab>`;
   }
   render() {
     return html`
       <mwc-drawer class="mdc-theme--surface" hasheader type="modal" id="menu">
         <span slot="title">${translate("menu.name")}</span>
-        ${this.srcName ? html`<span slot="subtitle">${this.srcName}</span>` : ""}
+        ${this.docName ? html`<span slot="subtitle">${this.docName}</span>` : ""}
         <mwc-list
           wrapFocus
-          @action=${(ae) => this.menu[ae.detail.index]?.action()}
-        > ${this.menu.map(this.renderMenuEntry)}
+          @action=${(ae) => this.menu.filter((item) => item !== "divider")[ae.detail.index]?.action?.(ae)}
+        > ${this.menu.map(this.renderMenuItem)}
         </mwc-list>
 
         <mwc-top-app-bar-fixed slot="appContent">
@@ -371,18 +342,18 @@ export let OpenSCD = class extends Setting2(Importing2(Wizarding2(Waiting2(Valid
             slot="navigationIcon"
             @click=${() => this.menuUI.open = true}
           ></mwc-icon-button>
-          <div slot="title" id="title">${this.srcName}</div>
+          <div slot="title" id="title">${this.docName}</div>
           ${this.menu.map(this.renderActionItem)}
           ${this.doc ? html`<mwc-tab-bar
                   @MDCTabBar:activated=${(e) => this.activeTab = e.detail.index}
                 >
-                  ${this.plugins.editors.map(this.renderEditorTab)}
+                  ${this.editors.map(this.renderEditorTab)}
                 </mwc-tab-bar>` : ``}
         </mwc-top-app-bar-fixed>
       </mwc-drawer>
 
       <mwc-dialog heading="${translate("saveAs")}" id="saveas">
-        <mwc-textfield dialogInitialFocus label="${translate("filename")}" value="${this.srcName}">
+        <mwc-textfield dialogInitialFocus label="${translate("filename")}" value="${this.docName}">
         </mwc-textfield>
         <mwc-button
           @click=${() => this.saveAs()}
@@ -398,7 +369,7 @@ export let OpenSCD = class extends Setting2(Importing2(Wizarding2(Waiting2(Valid
         </mwc-button>
       </mwc-dialog>
         
-      ${this.doc ? until2(this.plugins.editors[this.activeTab].getContent(), html`<mwc-linear-progress indeterminate></mwc-linear-progress>`) : html`<div class="landing">
+      ${this.doc ? until(this.editors[this.activeTab] && this.editors[this.activeTab].content(), html`<mwc-linear-progress indeterminate></mwc-linear-progress>`) : html`<div class="landing">
           <mwc-icon-button 
             class="landing_icon"
             icon="create_new_folder"
@@ -507,9 +478,6 @@ OpenSCD.styles = css`
 __decorate([
   property({type: Number})
 ], OpenSCD.prototype, "activeTab", 2);
-__decorate([
-  property({type: String})
-], OpenSCD.prototype, "srcName", 2);
 __decorate([
   property({type: String})
 ], OpenSCD.prototype, "src", 1);

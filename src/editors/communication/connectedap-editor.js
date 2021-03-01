@@ -15,14 +15,8 @@ import {
   html,
   property,
   css
-} from "../../../web_modules/lit-element.js";
-import {translate, get} from "../../../web_modules/lit-translate.js";
-import "../../../web_modules/@material/mwc-checkbox.js";
-import "../../../web_modules/@material/mwc-formfield.js";
-import "../../../web_modules/@material/mwc-icon.js";
-import "../../../web_modules/@material/mwc-icon-button.js";
-import "../../../web_modules/@material/mwc-list.js";
-import "../../../web_modules/@material/mwc-textfield.js";
+} from "../../../_snowpack/pkg/lit-element.js";
+import {translate, get} from "../../../_snowpack/pkg/lit-translate.js";
 import {
   newWizardEvent,
   newActionEvent,

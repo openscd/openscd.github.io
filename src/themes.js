@@ -1,4 +1,4 @@
-import {html} from "../web_modules/lit-element.js";
+import {html} from "../_snowpack/pkg/lit-element.js";
 export function getTheme(theme) {
   document.body.style.cssText = bodyStyles[theme];
   return html`
@@ -39,6 +39,8 @@ export function getTheme(theme) {
         --mdc-circular-progress-bar-color-2: var(--mdc-theme-on-background);
         --mdc-circular-progress-bar-color-3: var(--mdc-theme-secondary);
         --mdc-circular-progress-bar-color-4: var(--mdc-theme-on-background);
+
+        --mdc-icon-font: 'Material Icons Outlined';
       }
 
       .mdc-drawer span.mdc-drawer__title {
@@ -48,6 +50,10 @@ export function getTheme(theme) {
       abbr {
         text-decoration: none;
         border-bottom: none;
+      }
+
+      mwc-textfield[iconTrailing='search'] {
+        --mdc-shape-small: 28px;
       }
     </style>
   `;

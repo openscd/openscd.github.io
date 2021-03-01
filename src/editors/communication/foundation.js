@@ -1,4 +1,4 @@
-import {css} from "../../../web_modules/lit-element.js";
+import {css} from "../../../_snowpack/pkg/lit-element.js";
 export function isCreateOptions(options) {
   return options.parent !== void 0;
 }

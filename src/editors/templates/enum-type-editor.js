@@ -14,13 +14,9 @@ import {
   html,
   LitElement,
   property
-} from "../../../web_modules/lit-element.js";
-import {repeat as repeat2} from "../../../web_modules/lit-html/directives/repeat.js";
-import {translate, get} from "../../../web_modules/lit-translate.js";
-import "../../../web_modules/@material/mwc-button.js";
-import "../../../web_modules/@material/mwc-icon.js";
-import "../../../web_modules/@material/mwc-icon-button.js";
-import "../../../web_modules/@material/mwc-list/mwc-list-item.js";
+} from "../../../_snowpack/pkg/lit-element.js";
+import {repeat} from "../../../_snowpack/pkg/lit-html/directives/repeat.js";
+import {translate, get} from "../../../_snowpack/pkg/lit-translate.js";
 import {
   getValue,
   newActionEvent,
@@ -181,7 +177,7 @@ export let EnumTypeEditor = class extends LitElement {
           }))}
             ></mwc-button>
             <mwc-list style="margin-top: 0px;">
-              ${repeat2(element.childNodes, (child) => child instanceof Element ? html`<enum-val-editor
+              ${repeat(element.childNodes, (child) => child instanceof Element ? html`<enum-val-editor
                         .element=${child}
                       ></enum-val-editor>` : html``)}
             </mwc-list> `

@@ -7,6 +7,7 @@
 	<meta name="description" content="Documentation for open-scd">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="assets/css/main.css">
+	<script async src="assets/js/search.js" id="search-script"></script>
 </head>
 <body>
 <header>
@@ -40,8 +41,6 @@
 							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
 							<input type="checkbox" id="tsd-filter-externals" checked />
 							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
-							<input type="checkbox" id="tsd-filter-only-exported" />
-							<label class="tsd-widget" for="tsd-filter-only-exported">Only exported</label>
 						</div>
 					</div>
 					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
@@ -51,11 +50,6 @@
 	</div>
 	<div class="tsd-page-title">
 		<div class="container">
-			<ul class="tsd-breadcrumb">
-				<li>
-					<a href="globals.html">Globals</a>
-				</li>
-			</ul>
 			<h1>open-scd</h1>
 		</div>
 	</div>
@@ -78,10 +72,11 @@
 				<a href="#installation" id="installation" style="color: inherit; text-decoration: none;">
 					<h2>Installation</h2>
 				</a>
-				<pre><code>git clone http<span class="hljs-variable">s:</span>//github.<span class="hljs-keyword">com</span>/openscd/<span class="hljs-keyword">open</span>-scd.git
-<span class="hljs-keyword">cd</span> <span class="hljs-keyword">open</span>-scd
-npm install
-npm start</code></pre>
+				<pre><code><span style="color: #001080">git</span><span style="color: #000000"> </span><span style="color: #001080">clone</span><span style="color: #000000"> https:</span><span style="color: #008000">//github.com/openscd/open-scd.git</span>
+<span style="color: #001080">cd</span><span style="color: #000000"> </span><span style="color: #001080">open</span><span style="color: #000000">-</span><span style="color: #001080">scd</span>
+<span style="color: #001080">npm</span><span style="color: #000000"> </span><span style="color: #001080">install</span>
+<span style="color: #001080">npm</span><span style="color: #000000"> </span><span style="color: #001080">start</span>
+</code></pre>
 				<a href="#scripts" id="scripts" style="color: inherit; text-decoration: none;">
 					<h2>Scripts</h2>
 				</a>
@@ -104,119 +99,125 @@ npm start</code></pre>
 		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
 			<nav class="tsd-navigation primary">
 				<ul>
-					<li class="globals  ">
-						<a href="globals.html"><em>Globals</em></a>
+					<li class=" ">
+						<a href="modules.html">Exports</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="modules/_editing_.html">&quot;<wbr>Editing&quot;</a>
+						<a href="modules/editing.html">Editing</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="modules/_importing_.html">&quot;<wbr>Importing&quot;</a>
+						<a href="modules/importing.html">Importing</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="modules/_logging_.html">&quot;<wbr>Logging&quot;</a>
+						<a href="modules/logging.html">Logging</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="modules/_setting_.html">&quot;<wbr>Setting&quot;</a>
+						<a href="modules/plugging.html">Plugging</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="modules/_validating_.html">&quot;<wbr>Validating&quot;</a>
+						<a href="modules/setting.html">Setting</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="modules/_waiting_.html">&quot;<wbr>Waiting&quot;</a>
+						<a href="modules/validating.html">Validating</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="modules/_wizarding_.html">&quot;<wbr>Wizarding&quot;</a>
+						<a href="modules/waiting.html">Waiting</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="modules/_editors_communication_.html">&quot;editors/<wbr>Communication&quot;</a>
+						<a href="modules/wizarding.html">Wizarding</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="modules/_editors_substation_.html">&quot;editors/<wbr>Substation&quot;</a>
+						<a href="modules/carehtml_transform.html">carehtml/transform</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="modules/_editors_templates_.html">&quot;editors/<wbr>Templates&quot;</a>
+						<a href="modules/carehtml_wrap.html">carehtml/wrap</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="modules/_editors_communication_connectedap_editor_.html">&quot;editors/communication/connectedap-<wbr>editor&quot;</a>
+						<a href="modules/editors_communication.html">editors/<wbr>Communication</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="modules/_editors_communication_foundation_.html">&quot;editors/communication/foundation&quot;</a>
+						<a href="modules/editors_substation.html">editors/<wbr>Substation</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="modules/_editors_communication_p_types_.html">&quot;editors/communication/p-<wbr>types&quot;</a>
+						<a href="modules/editors_templates.html">editors/<wbr>Templates</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="modules/_editors_communication_subnetwork_editor_.html">&quot;editors/communication/subnetwork-<wbr>editor&quot;</a>
+						<a href="modules/editors_communication_connectedap_editor.html">editors/communication/connectedap-<wbr>editor</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="modules/_editors_substation_bay_editor_.html">&quot;editors/substation/bay-<wbr>editor&quot;</a>
+						<a href="modules/editors_communication_foundation.html">editors/communication/foundation</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="modules/_editors_substation_conducting_equipment_editor_.html">&quot;editors/substation/conducting-<wbr>equipment-<wbr>editor&quot;</a>
+						<a href="modules/editors_communication_p_types.html">editors/communication/p-<wbr>types</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="modules/_editors_substation_conducting_equipment_types_.html">&quot;editors/substation/conducting-<wbr>equipment-<wbr>types&quot;</a>
+						<a href="modules/editors_communication_subnetwork_editor.html">editors/communication/subnetwork-<wbr>editor</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="modules/_editors_substation_foundation_.html">&quot;editors/substation/foundation&quot;</a>
+						<a href="modules/editors_substation_bay_editor.html">editors/substation/bay-<wbr>editor</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="modules/_editors_substation_guess_wizard_.html">&quot;editors/substation/guess-<wbr>wizard&quot;</a>
+						<a href="modules/editors_substation_conducting_equipment_editor.html">editors/substation/conducting-<wbr>equipment-<wbr>editor</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="modules/_editors_substation_lnodewizard_.html">&quot;editors/substation/lnodewizard&quot;</a>
+						<a href="modules/editors_substation_conducting_equipment_types.html">editors/substation/conducting-<wbr>equipment-<wbr>types</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="modules/_editors_substation_substation_editor_.html">&quot;editors/substation/substation-<wbr>editor&quot;</a>
+						<a href="modules/editors_substation_foundation.html">editors/substation/foundation</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="modules/_editors_substation_voltage_level_editor_.html">&quot;editors/substation/voltage-<wbr>level-<wbr>editor&quot;</a>
+						<a href="modules/editors_substation_guess_wizard.html">editors/substation/guess-<wbr>wizard</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="modules/_editors_templates_enum_type_editor_.html">&quot;editors/templates/enum-<wbr>type-<wbr>editor&quot;</a>
+						<a href="modules/editors_substation_lnodewizard.html">editors/substation/lnodewizard</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="modules/_editors_templates_enum_val_editor_.html">&quot;editors/templates/enum-<wbr>val-<wbr>editor&quot;</a>
+						<a href="modules/editors_substation_substation_editor.html">editors/substation/substation-<wbr>editor</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="modules/_editors_templates_foundation_.html">&quot;editors/templates/foundation&quot;</a>
+						<a href="modules/editors_substation_voltage_level_editor.html">editors/substation/voltage-<wbr>level-<wbr>editor</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="modules/_foundation_.html">&quot;foundation&quot;</a>
+						<a href="modules/editors_templates_enum_type_editor.html">editors/templates/enum-<wbr>type-<wbr>editor</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="modules/_icons_.html">&quot;icons&quot;</a>
+						<a href="modules/editors_templates_enum_val_editor.html">editors/templates/enum-<wbr>val-<wbr>editor</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="modules/_open_scd_.html">&quot;open-<wbr>scd&quot;</a>
+						<a href="modules/editors_templates_foundation.html">editors/templates/foundation</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="modules/_plugin_.html">&quot;plugin&quot;</a>
+						<a href="modules/foundation.html">foundation</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="modules/_schemas_.html">&quot;schemas&quot;</a>
+						<a href="modules/icons.html">icons</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="modules/_themes_.html">&quot;themes&quot;</a>
+						<a href="modules/open_scd.html">open-<wbr>scd</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="modules/_transform_subscriberinfo_.html">&quot;transform/<wbr>Subscriber<wbr>Info&quot;</a>
+						<a href="modules/schemas.html">schemas</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="modules/_translations_de_.html">&quot;translations/de&quot;</a>
+						<a href="modules/themes.html">themes</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="modules/_translations_en_.html">&quot;translations/en&quot;</a>
+						<a href="modules/translations_de.html">translations/de</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="modules/_translations_loader_.html">&quot;translations/loader&quot;</a>
+						<a href="modules/translations_en.html">translations/en</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="modules/_wizard_dialog_.html">&quot;wizard-<wbr>dialog&quot;</a>
+						<a href="modules/translations_loader.html">translations/loader</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="modules/_wizard_textfield_.html">&quot;wizard-<wbr>textfield&quot;</a>
+						<a href="modules/triggered_subscriberinfo.html">triggered/<wbr>Subscriber<wbr>Info</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/wizard_dialog.html">wizard-<wbr>dialog</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/wizard_textfield.html">wizard-<wbr>textfield</a>
 					</li>
 				</ul>
 			</nav>
@@ -232,8 +233,6 @@ npm start</code></pre>
 		<h2>Legend</h2>
 		<div class="tsd-legend-group">
 			<ul class="tsd-legend">
-				<li class="tsd-kind-namespace"><span class="tsd-kind-icon">Namespace</span></li>
-				<li class="tsd-kind-object-literal"><span class="tsd-kind-icon">Object literal</span></li>
 				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
 				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
 				<li class="tsd-kind-function tsd-has-type-parameter"><span class="tsd-kind-icon">Function with type parameter</span></li>

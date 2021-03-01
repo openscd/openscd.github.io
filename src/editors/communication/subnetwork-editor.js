@@ -15,8 +15,8 @@ import {
   html,
   property,
   css
-} from "../../../web_modules/lit-element.js";
-import {translate, get} from "../../../web_modules/lit-translate.js";
+} from "../../../_snowpack/pkg/lit-element.js";
+import {translate, get} from "../../../_snowpack/pkg/lit-translate.js";
 import {
   newWizardEvent,
   newActionEvent,

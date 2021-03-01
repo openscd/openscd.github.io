@@ -1,8 +1,5 @@
-import {html} from "../../../web_modules/lit-html.js";
-import {get, translate} from "../../../web_modules/lit-translate.js";
-import "../../../web_modules/@material/mwc-list.js";
-import "../../../web_modules/@material/mwc-list/mwc-check-list-item.js";
-import "../../../web_modules/@material/mwc-textfield.js";
+import {html} from "../../../_snowpack/pkg/lit-html.js";
+import {get, translate} from "../../../_snowpack/pkg/lit-translate.js";
 import {
   compareNames,
   createElement

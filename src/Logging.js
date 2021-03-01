@@ -9,21 +9,14 @@ var __decorate = (decorators, target, key, kind) => {
     __defProp(target, key, result);
   return result;
 };
-import {html, property, query} from "../web_modules/lit-element.js";
-import {ifDefined} from "../web_modules/lit-html/directives/if-defined.js";
-import "../web_modules/@material/mwc-button.js";
-import "../web_modules/@material/mwc-dialog.js";
-import "../web_modules/@material/mwc-icon.js";
-import "../web_modules/@material/mwc-icon-button.js";
-import "../web_modules/@material/mwc-list.js";
-import "../web_modules/@material/mwc-list/mwc-list-item.js";
-import "../web_modules/@material/mwc-snackbar.js";
+import {html, property, query} from "../_snowpack/pkg/lit-element.js";
+import {ifDefined} from "../_snowpack/pkg/lit-html/directives/if-defined.js";
 import {
   ifImplemented,
   invert,
   newActionEvent
 } from "./foundation.js";
-import {get, translate} from "../web_modules/lit-translate.js";
+import {get, translate} from "../_snowpack/pkg/lit-translate.js";
 const icons = {
   info: "info",
   warning: "warning",

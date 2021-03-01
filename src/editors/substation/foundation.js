@@ -1,4 +1,4 @@
-import {css} from "../../../web_modules/lit-element.js";
+import {css} from "../../../_snowpack/pkg/lit-element.js";
 import {
   getValue,
   newActionEvent

@@ -9,15 +9,10 @@ var __decorate = (decorators, target, key, kind) => {
     __defProp(target, key, result);
   return result;
 };
-import {html, property, query} from "../web_modules/lit-element.js";
-import {registerTranslateConfig, translate, use} from "../web_modules/lit-translate.js";
-import "../web_modules/@material/mwc-dialog.js";
-import "../web_modules/@material/mwc-formfield.js";
-import "../web_modules/@material/mwc-list/mwc-list-item.js";
-import "../web_modules/@material/mwc-select.js";
-import "../web_modules/@material/mwc-switch.js";
+import {html, property, query} from "../_snowpack/pkg/lit-element.js";
+import {registerTranslateConfig, translate, use} from "../_snowpack/pkg/lit-translate.js";
 import {ifImplemented} from "./foundation.js";
-import {languages, loader as loader2} from "./translations/loader.js";
+import {languages, loader} from "./translations/loader.js";
 export const defaults = {language: "en", theme: "light"};
 export function Setting(Base) {
   class SettingElement extends Base {
@@ -36,7 +31,7 @@ export function Setting(Base) {
     }
     onClosing(ae) {
       if (ae.detail?.action === "reset") {
-        localStorage.clear();
+        Object.keys(this.settings).forEach((item) => localStorage.removeItem(item));
         this.requestUpdate("settings");
       } else if (ae.detail?.action === "save") {
         this.setSetting("language", this.languageUI.value);
@@ -51,7 +46,7 @@ export function Setting(Base) {
     }
     constructor(...params) {
       super(...params);
-      registerTranslateConfig({loader: loader2, empty: (key) => key});
+      registerTranslateConfig({loader, empty: (key) => key});
       use(this.settings.language);
     }
     render() {
@@ -92,7 +87,12 @@ export function Setting(Base) {
           >
             ${translate("reset")}
           </mwc-button>
-          <mwc-button slot="primaryAction" dialogAction="save">
+          <mwc-button
+            icon="save"
+            trailingIcon
+            slot="primaryAction"
+            dialogAction="save"
+          >
             ${translate("save")}
           </mwc-button>
         </mwc-dialog>`;

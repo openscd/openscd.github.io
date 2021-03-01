@@ -17,11 +17,9 @@ import {
   property,
   internalProperty,
   html
-} from "../web_modules/lit-element.js";
-import {translate} from "../web_modules/lit-translate.js";
-import "../web_modules/@material/mwc-button.js";
-import "../web_modules/@material/mwc-dialog.js";
-import {Dialog} from "../web_modules/@material/mwc-dialog.js";
+} from "../_snowpack/pkg/lit-element.js";
+import {translate} from "../_snowpack/pkg/lit-translate.js";
+import {Dialog} from "../_snowpack/pkg/@material/mwc-dialog.js";
 import "./wizard-textfield.js";
 import {
   newActionEvent,

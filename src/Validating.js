@@ -9,8 +9,8 @@ var __decorate = (decorators, target, key, kind) => {
     __defProp(target, key, result);
   return result;
 };
-import {property} from "../web_modules/lit-element.js";
-import {get} from "../web_modules/lit-translate.js";
+import {property} from "../_snowpack/pkg/lit-element.js";
+import {get} from "../_snowpack/pkg/lit-translate.js";
 import {newLogEvent} from "./foundation.js";
 import {
   getSchema,

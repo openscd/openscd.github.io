@@ -1,4 +1,4 @@
-import {directive} from "../web_modules/lit-html.js";
+import {directive} from "../_snowpack/pkg/lit-html.js";
 import {WizardTextField} from "./wizard-textfield.js";
 export function isCreate(action) {
   return action.old === void 0 && action.new?.parent !== void 0 && action.new?.element !== void 0 && action.new?.reference !== void 0;

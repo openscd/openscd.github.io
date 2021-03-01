@@ -9,8 +9,8 @@ var __decorate = (decorators, target, key, kind) => {
     __defProp(target, key, result);
   return result;
 };
-import {LitElement, property} from "../web_modules/lit-element.js";
-import {get} from "../web_modules/lit-translate.js";
+import {LitElement, property} from "../_snowpack/pkg/lit-element.js";
+import {get} from "../_snowpack/pkg/lit-translate.js";
 import {
   isCreate,
   isDelete,
@@ -33,6 +33,7 @@ export function Editing(Base) {
     constructor(...args) {
       super(...args);
       this.doc = null;
+      this.docName = "";
       this.addEventListener("editor-action", this.onAction);
     }
     checkCreateValidity(create) {
@@ -188,5 +189,8 @@ export function Editing(Base) {
   __decorate([
     property()
   ], EditingElement.prototype, "doc", 2);
+  __decorate([
+    property({type: String})
+  ], EditingElement.prototype, "docName", 2);
   return EditingElement;
 }
