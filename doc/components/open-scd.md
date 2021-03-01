@@ -40,14 +40,14 @@ Open Substation Configuration Designer.
 | `validated`      | `validated`     |           | `Promise<ValidationResult>`                      | "Promise.resolve({\n      file: 'untitled.scd',\n      valid: true,\n      code: 0,\n    })" |                                                  |
 | `waiting`        | `waiting`       |           | `boolean`                                        | false                                            | Whether the element is currently waiting for some async work. |
 | `wizardUI`       |                 |           | `WizardDialog`                                   |                                                  |                                                  |
-| `workDone`       |                 |           | `Promise<PromiseSettledResult<string>[]>`        | "Promise.allSettled(this.work)"                  | A promise which resolves once all currently pending work is done. |
+| `workDone`       |                 |           | `Promise<PromiseSettledResult<void>[]>`          | "Promise.allSettled(this.work)"                  | A promise which resolves once all currently pending work is done. |
 | `workflow`       |                 |           | `Wizard[]`                                       | []                                               | FIFO queue of [[`Wizard`]]s to display.          |
 
 ## Methods
 
 | Method             | Type                                             | Description                                      |
 |--------------------|--------------------------------------------------|--------------------------------------------------|
-| `importIED`        | `(src: string, doc: Document): Promise<string>`  | Loads and parses an `XMLDocument` after [[`srcIED`]] has changed. |
+| `importIED`        | `(src: string, doc: Document): Promise<void>`    | Loads and parses an `XMLDocument` after [[`srcIED`]] has changed. |
 | `performUpdate`    | `(): Promise<void>`                              |                                                  |
 | `redo`             | `(): boolean`                                    |                                                  |
 | `renderActionItem` | `(me: MenuEntry): TemplateResult`                |                                                  |
@@ -58,4 +58,4 @@ Open Substation Configuration Designer.
 | `reset`            | `(): void`                                       | Resets the history to an empty state.            |
 | `setSetting`       | `<T extends "language" \| "theme">(setting: T, value: Settings[T]): void` | Update the `value` of `setting`, storing to `localStorage`. |
 | `undo`             | `(): boolean`                                    |                                                  |
-| `validate`         | `(doc: XMLDocument, { version, revision, release, fileName, }?: { version?: string \| undefined; revision?: string \| undefined; release?: string \| undefined; fileName?: string \| undefined; }): Promise<string>` |                                                  |
+| `validate`         | `(doc: XMLDocument, { version, revision, release, fileName, }?: { version?: string \| undefined; revision?: string \| undefined; release?: string \| undefined; fileName?: string \| undefined; }): Promise<void>` |                                                  |

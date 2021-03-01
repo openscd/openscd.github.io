@@ -42,9 +42,18 @@ export function Validating(Base) {
           doc.documentElement.getAttribute("release") ?? ""
         ];
       this.validated = this.getValidator(getSchema(version, revision, release), "SCL" + version + revision + release + ".xsd").then((validator) => validator(new XMLSerializer().serializeToString(doc), fileName));
-      if (!(await this.validated).valid)
-        throw get("validating.invalid", {name: fileName});
-      return get("validating.valid", {name: fileName});
+      if (!(await this.validated).valid) {
+        this.dispatchEvent(newLogEvent({
+          kind: "warning",
+          title: get("validating.invalid", {name: fileName})
+        }));
+        throw new Error(get("validating.invalid", {name: fileName}));
+      }
+      this.dispatchEvent(newLogEvent({
+        kind: "info",
+        title: get("validating.valid", {name: fileName})
+      }));
+      return;
     }
     async getValidator(xsd, xsdName) {
       if (!window.Worker)

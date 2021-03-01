@@ -187,7 +187,11 @@ export let OpenSCD = class extends Setting2(Importing2(Wizarding2(Waiting2(Valid
     if (this.doc)
       this.dispatchEvent(newPendingStateEvent(validated));
     await validated;
-    return get("openSCD.loaded", {name: this.srcName});
+    this.dispatchEvent(newLogEvent({
+      kind: "info",
+      title: get("openSCD.loaded", {name: this.srcName})
+    }));
+    return;
   }
   loadFile(event) {
     const file = event.target?.files?.item(0) ?? false;

@@ -128,9 +128,14 @@ export function Importing(Base) {
       const text = await response.text();
       iedDoc = new DOMParser().parseFromString(text, "application/xml");
       if (!iedDoc || iedDoc.querySelector("parsererror")) {
+        if (iedDoc.querySelector("parsererror"))
+          this.dispatchEvent(newLogEvent({
+            kind: "error",
+            title: get("import.log.parsererror")
+          }));
         this.dispatchEvent(newLogEvent({
           kind: "error",
-          title: get("import.log.parsererror")
+          title: get("import.log.loaderror")
         }));
         throw new Error(get("import.log.loaderror"));
       }
@@ -153,8 +158,17 @@ export function Importing(Base) {
       }
       if (src.startsWith("blob:"))
         URL.revokeObjectURL(src);
-      if (isSuccessful)
-        return msg;
+      if (isSuccessful) {
+        this.dispatchEvent(newLogEvent({
+          kind: "info",
+          title: msg
+        }));
+        return;
+      }
+      this.dispatchEvent(newLogEvent({
+        kind: "warning",
+        title: get("import.log.importerror")
+      }));
       throw new Error(get("import.log.importerror"));
     }
   }

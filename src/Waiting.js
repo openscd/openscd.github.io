@@ -12,8 +12,7 @@ var __decorate = (decorators, target, key, kind) => {
 import {html, property} from "../web_modules/lit-element.js";
 import "../web_modules/@material/mwc-circular-progress-four-color.js";
 import {
-  ifImplemented,
-  newLogEvent
+  ifImplemented
 } from "./foundation.js";
 export function Waiting(Base) {
   class WaitingElement extends Base {
@@ -29,7 +28,7 @@ export function Waiting(Base) {
       this.waiting = true;
       this.work.add(e.detail.promise);
       this.workDone = Promise.allSettled(this.work);
-      await e.detail.promise.then((msg) => this.dispatchEvent(newLogEvent({kind: "info", title: msg})), (msg) => this.dispatchEvent(newLogEvent({kind: "warning", title: msg})));
+      await e.detail.promise.catch((reason) => console.warn(reason));
       this.work.delete(e.detail.promise);
       this.waiting = this.work.size > 0;
     }
