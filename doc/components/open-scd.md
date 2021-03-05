@@ -57,7 +57,6 @@ Open Substation Configuration Designer.
 | `renderActionItem` | `(me: MenuItem \| "divider"): TemplateResult`    |                                                  |
 | `renderDownloadUI` | `(): TemplateResult`                             |                                                  |
 | `renderEditorTab`  | `({ name, icon }: InstalledPlugin): TemplateResult` |                                                  |
-| `renderHistory`    | `(): TemplateResult \| TemplateResult[]`         |                                                  |
 | `renderLogEntry`   | `(entry: LogEntry, index: number, history: LogEntry[]): TemplateResult` |                                                  |
 | `renderMenuItem`   | `(me: MenuItem \| "divider"): TemplateResult`    |                                                  |
 | `renderPluginUI`   | `(): TemplateResult`                             |                                                  |

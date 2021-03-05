@@ -9,6 +9,7 @@
     "@material/mwc-formfield": "./@material/mwc-formfield.js",
     "@material/mwc-icon": "./@material/mwc-icon.js",
     "@material/mwc-icon-button": "./@material/mwc-icon-button.js",
+    "@material/mwc-icon-button-toggle": "./@material/mwc-icon-button-toggle.js",
     "@material/mwc-linear-progress": "./@material/mwc-linear-progress.js",
     "@material/mwc-list": "./@material/mwc-list.js",
     "@material/mwc-list/mwc-check-list-item": "./@material/mwc-list/mwc-check-list-item.js",

@@ -17,17 +17,12 @@ import {
   newActionEvent
 } from "./foundation.js";
 import {get, translate} from "../_snowpack/pkg/lit-translate.js";
+import {getFilterIcon, iconColors} from "./icons.js";
 const icons = {
   info: "info",
   warning: "warning",
   error: "report",
   action: "history"
-};
-const colors = {
-  info: "--cyan",
-  warning: "--yellow",
-  error: "--red",
-  action: void 0
 };
 export function Logging(Base) {
   class LoggingElement extends Base {
@@ -102,6 +97,7 @@ export function Logging(Base) {
     renderLogEntry(entry, index, history) {
       return html` <abbr title="${entry.title}">
         <mwc-list-item
+          class="${entry.kind}"
           graphic="icon"
           ?twoline=${entry.message}
           ?activated=${this.currentAction == history.length - index - 1}
@@ -114,7 +110,7 @@ export function Logging(Base) {
           <span slot="secondary">${entry.message}</span>
           <mwc-icon
             slot="graphic"
-            style="--mdc-theme-text-icon-on-background:var(${ifDefined(colors[entry.kind])})"
+            style="--mdc-theme-text-icon-on-background:var(${ifDefined(iconColors[entry.kind])})"
             >${icons[entry.kind]}</mwc-icon
           >
         </mwc-list-item></abbr
@@ -129,9 +125,60 @@ export function Logging(Base) {
           <mwc-icon slot="graphic">info</mwc-icon>
         </mwc-list-item>`;
     }
+    renderFilterButtons() {
+      return Object.keys(icons).map((kind) => html`<mwc-icon-button-toggle id="${kind}filter" on
+          >${getFilterIcon(kind, false)}
+          ${getFilterIcon(kind, true)}</mwc-icon-button-toggle
+        >`);
+    }
     render() {
       return html`${ifImplemented(super.render())}
+        <style>
+          #log > mwc-icon-button-toggle {
+            position: absolute;
+            top: 8px;
+            right: 14px;
+          }
+          #log > mwc-icon-button-toggle:nth-child(2) {
+            right: 62px;
+          }
+          #log > mwc-icon-button-toggle:nth-child(3) {
+            right: 110px;
+          }
+          #log > mwc-icon-button-toggle:nth-child(4) {
+            right: 158px;
+          }
+          #content mwc-list-item.info,
+          #content mwc-list-item.warning,
+          #content mwc-list-item.error,
+          #content mwc-list-item.action {
+            display: none;
+          }
+          #infofilter[on] ~ #content mwc-list-item.info {
+            display: flex;
+          }
+          #warningfilter[on] ~ #content mwc-list-item.warning {
+            display: flex;
+          }
+          #errorfilter[on] ~ #content mwc-list-item.error {
+            display: flex;
+          }
+          #actionfilter[on] ~ #content mwc-list-item.action {
+            display: flex;
+          }
+
+          #log {
+            --mdc-dialog-min-width: 92vw;
+          }
+
+          #log > #filterContainer {
+            position: absolute;
+            top: 14px;
+            right: 14px;
+          }
+        </style>
         <mwc-dialog id="log" heading="${translate("log.name")}">
+          ${this.renderFilterButtons()}
           <mwc-list id="content" wrapFocus>${this.renderHistory()}</mwc-list>
           <mwc-button
             icon="undo"
