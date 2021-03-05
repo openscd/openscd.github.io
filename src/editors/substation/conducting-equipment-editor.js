@@ -59,26 +59,30 @@ export let ConductingEquipmentEditor = class extends LitElement {
     return html`
       <div id="container" tabindex="0">
         ${typeIcon(this.element)}
-        <mwc-icon-button
+        <mwc-fab
+          mini
           class="menu-item left"
           @click="${() => this.openLNodeWizard()}"
           icon="account_tree"
-        ></mwc-icon-button>
-        <mwc-icon-button
+        ></mwc-fab>
+        <mwc-fab
+          mini
           class="menu-item up"
           icon="edit"
           @click="${() => this.openEditWizard()}}"
-        ></mwc-icon-button>
-        <mwc-icon-button
+        ></mwc-fab>
+        <mwc-fab
+          mini
           class="menu-item right"
           @click="${() => startMove(this, ConductingEquipmentEditor, BayEditor)}"
           icon="forward"
-        ></mwc-icon-button>
-        <mwc-icon-button
+        ></mwc-fab>
+        <mwc-fab
+          mini
           class="menu-item down"
           icon="delete"
           @click="${() => this.remove()}}"
-        ></mwc-icon-button>
+        ></mwc-fab>
       </div>
       <h4>${this.name}</h4>
     `;
