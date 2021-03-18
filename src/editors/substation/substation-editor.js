@@ -184,7 +184,7 @@ SubstationEditor.styles = css`
     ${styles}
 
     section {
-      overflow: auto;
+      overflow: hidden;
     }
 
     :host {
