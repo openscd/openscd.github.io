@@ -385,8 +385,8 @@ export let OpenSCD = class extends Setting(Importing(Wizarding(Waiting(Validatin
           </mwc-button>
         </div>`}
 
-      <input id="file-input" type="file" accept=".scd,.ssd" @change="${this.loadFile}"></input>
-      <input id="ied-import" type="file" accept=".icd,.iid,.cid" @change="${this.loadIEDFile}"></input>
+      <input id="file-input" type="file" accept=".scd,.ssd" @click=${(event) => event.target.value = ""} @change="${this.loadFile}"></input>
+      <input id="ied-import" type="file" accept=".icd,.iid,.cid" @click=${(event) => event.target.value = ""} @change="${this.loadIEDFile}"></input>
       ${super.render()}
       ${getTheme(this.settings.theme)}
     `;
