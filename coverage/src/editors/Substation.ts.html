@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">50% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>4/8</span>
+                <span class='fraction'>8/8</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">25% </span>
+                <span class="strong">75% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>1/4</span>
+                <span class='fraction'>3/4</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">25% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>1/4</span>
+                <span class='fraction'>4/4</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">50% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>4/8</span>
+                <span class='fraction'>8/8</span>
             </div>
         
             
@@ -55,7 +55,7 @@
             Press <em>n</em> or <em>j</em> to go to the next uncovered block, <em>b</em>, <em>p</em> or <em>k</em> for the previous block.
         </p>
     </div>
-    <div class='status-line medium'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -135,15 +135,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -152,13 +143,22 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">9x</span>
+<span class="cline-any cline-yes">8x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -194,8 +194,8 @@ export default class SubstationPlugin extends LitElement {
   doc!: XMLDocument;
 &nbsp;
   /** Opens a [[`WizardDialog`]] for creating a new `Substation` element. */
-<span class="fstat-no" title="function not covered" >  openCreateSubstationWizard(</span>): void {
-<span class="cstat-no" title="statement not covered" >    this.dispatchEvent(</span>
+  openCreateSubstationWizard(): void {
+    this.dispatchEvent(
       newWizardEvent(
         SubstationEditor.wizard({ parent: this.doc.documentElement })
       )
@@ -203,7 +203,7 @@ export default class SubstationPlugin extends LitElement {
   }
 &nbsp;
   render(): TemplateResult {
-    <span class="missing-if-branch" title="else path not taken" >E</span>if (!this.doc?.querySelector(selectors.Substation))
+    if (!this.doc?.querySelector(selectors.Substation))
       return html`&lt;h1&gt;
         &lt;span style="color: var(--base1)"
           &gt;${translate('substation.missing')}&lt;/span
@@ -212,13 +212,13 @@ export default class SubstationPlugin extends LitElement {
           extended
           icon="add"
           label="${get('substation.wizard.title.add')}"
-          @click=${<span class="fstat-no" title="function not covered" >() =</span>&gt; <span class="cstat-no" title="statement not covered" >this.openCreateSubstationWizard()}</span>
+          @click=${() =&gt; this.openCreateSubstationWizard()}
         &gt;&lt;/mwc-fab&gt;
       &lt;/h1&gt;`;
-<span class="cstat-no" title="statement not covered" >    return html`</span>
-      ${Array.from(this.doc.querySelectorAll(selectors.Substation) ?? []).map(
-<span class="fstat-no" title="function not covered" >        substation </span>=&gt;
-<span class="cstat-no" title="statement not covered" >          html`&lt;substation-editor .element=${substation}&gt;&lt;/substation-editor&gt;`</span>
+    return html`
+      ${Array.from(this.doc.querySelectorAll(selectors.Substation) ?? <span class="branch-1 cbranch-no" title="branch not covered" >[])</span>.map(
+        substation =&gt;
+          html`&lt;substation-editor .element=${substation}&gt;&lt;/substation-editor&gt;`
       )}
     `;
   }
@@ -244,7 +244,7 @@ export default class SubstationPlugin extends LitElement {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Fri Mar 05 2021 12:53:46 GMT+0000 (Coordinated Universal Time)
+                at Thu Mar 18 2021 10:12:43 GMT+0000 (Coordinated Universal Time)
             </div>
         </div>
         <script src="../../prettify.js"></script>
