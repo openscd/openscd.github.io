@@ -45,7 +45,7 @@ function getClassUniqueTag(klass) {
   return tag;
 }
 
-export default function transform(strings, values) {
+function transform(strings, values) {
   if (values.length === 0) {
     return [strings];
   }
@@ -77,3 +77,10 @@ export default function transform(strings, values) {
   result[0] = newStrings;
   return result;
 }
+
+function wrap(html) {
+  // eslint-disable-next-line prefer-spread
+  return (strings, ...values) => html.apply(null, transform(strings, values));
+}
+
+export default wrap;

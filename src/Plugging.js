@@ -11,7 +11,7 @@ var __decorate = (decorators, target, key, kind) => {
 };
 import {html as litHtml, query} from "../_snowpack/pkg/lit-element.js";
 import {translate} from "../_snowpack/pkg/lit-translate.js";
-import wrapHtml from "./carehtml/wrap.js";
+import wrapHtml from "../_snowpack/pkg/carehtml.js";
 const html = wrapHtml(litHtml);
 import {ifImplemented} from "./foundation.js";
 export const pluginIcons = {
