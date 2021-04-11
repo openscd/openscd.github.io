@@ -169,7 +169,7 @@ export let SubstationEditor = class extends LitElement {
           html`<wizard-textfield
             label="desc"
             .maybeValue=${desc}
-            nullable="true"
+            nullable
             helper="${translate("substation.wizard.descHelper")}"
           ></wizard-textfield>`,
           guessable ? html`<mwc-formfield label="${translate("guess.wizard.primary")}">
@@ -192,7 +192,7 @@ SubstationEditor.styles = css`
     }
   `;
 __decorate([
-  property()
+  property({attribute: false})
 ], SubstationEditor.prototype, "element", 2);
 __decorate([
   property({type: String})

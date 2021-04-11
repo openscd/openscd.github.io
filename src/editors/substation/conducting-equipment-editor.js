@@ -125,7 +125,7 @@ export let ConductingEquipmentEditor = class extends LitElement {
       ConductingEquipmentEditor.createAction(options.parent),
       "",
       "",
-      Array.from(options.parent.querySelectorAll(selectors.ConductingEquipment)).map((condEq) => condEq.getAttribute("name"))
+      Array.from(options.parent.querySelectorAll(selectors.ConductingEquipment)).map((condEq) => condEq.getAttribute("name") ?? "")
     ] : [
       get("conductingequipment.wizard.title.edit"),
       get("save"),
@@ -133,7 +133,7 @@ export let ConductingEquipmentEditor = class extends LitElement {
       updateNamingAction(options.element),
       options.element.getAttribute("name"),
       options.element.getAttribute("desc"),
-      Array.from(options.element.parentNode.querySelectorAll(selectors.ConductingEquipment)).map((condEq) => condEq.getAttribute("name")).filter((name2) => name2 !== options.element.getAttribute("name"))
+      Array.from(options.element.parentNode.querySelectorAll(selectors.ConductingEquipment)).map((condEq) => condEq.getAttribute("name") ?? "").filter((name2) => name2 !== options.element.getAttribute("name"))
     ];
     return [
       {
@@ -152,12 +152,12 @@ export let ConductingEquipmentEditor = class extends LitElement {
             required
             validationMessage="${translate("textfield.required")}"
             dialogInitialFocus
-            .reservedValues="${reservedNames}"
+            .reservedValues=${reservedNames}
           ></wizard-textfield>`,
           html`<wizard-textfield
             label="desc"
             .maybeValue=${desc}
-            nullable="true"
+            nullable
             helper="${translate("conductingequipment.wizard.descHelper")}"
           ></wizard-textfield>`
         ]

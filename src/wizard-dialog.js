@@ -24,7 +24,8 @@ import "./wizard-textfield.js";
 import {
   newActionEvent,
   newWizardEvent,
-  wizardInputSelector
+  wizardInputSelector,
+  isWizard
 } from "./foundation.js";
 function dialogInputs(dialog) {
   return Array.from(dialog?.querySelectorAll(wizardInputSelector) ?? []);
@@ -63,19 +64,28 @@ export let WizardDialog = class extends LitElement {
       dialogInputs(this.dialog).map((wi) => wi.reportValidity());
     }
   }
-  async act(action) {
+  async act(action, primary = false) {
     if (action === void 0)
       return false;
+    if (primary)
+      this.wizard[this.pageIndex].primary = void 0;
+    else
+      this.wizard[this.pageIndex].secondary = void 0;
     const inputArray = Array.from(this.inputs);
     if (!this.checkValidity()) {
       this.pageIndex = this.firstInvalidPage;
       inputArray.map((wi) => wi.reportValidity());
       return false;
     }
-    const editorActions = action(inputArray, this);
-    editorActions.forEach((ea) => this.dispatchEvent(newActionEvent(ea)));
-    if (editorActions.length > 0)
+    const wizardActions = action(inputArray, this);
+    if (wizardActions.length > 0) {
+      if (primary)
+        this.wizard[this.pageIndex].primary = void 0;
+      else
+        this.wizard[this.pageIndex].secondary = void 0;
       this.dispatchEvent(newWizardEvent());
+    }
+    wizardActions.forEach((wa) => isWizard(wa) ? this.dispatchEvent(newWizardEvent(wa())) : this.dispatchEvent(newActionEvent(wa)));
     return true;
   }
   onClosed(ae) {
@@ -110,7 +120,7 @@ export let WizardDialog = class extends LitElement {
           ></mwc-button>` : html``}
       ${page.secondary ? html`<mwc-button
             slot="secondaryAction"
-            @click=${() => this.act(page.secondary?.action)}
+            @click=${() => this.act(page.secondary?.action, false)}
             icon="${page.secondary.icon}"
             label="${page.secondary.label}"
           ></mwc-button>` : html`<mwc-button
@@ -125,6 +135,7 @@ export let WizardDialog = class extends LitElement {
             icon="${page.primary.icon}"
             label="${page.primary.label}"
             trailingIcon
+            dialogInitialFocus
           ></mwc-button>` : index + 1 < (this.wizard?.length ?? 0) ? html`<mwc-button
             slot="primaryAction"
             dialogAction="next"
@@ -158,7 +169,7 @@ WizardDialog.styles = css`
     }
   `;
 __decorate([
-  property()
+  property({type: Array})
 ], WizardDialog.prototype, "wizard", 2);
 __decorate([
   internalProperty()

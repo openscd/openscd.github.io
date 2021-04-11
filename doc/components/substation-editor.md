@@ -7,7 +7,7 @@
 | Property  | Attribute | Modifiers | Type             | Description                                      |
 |-----------|-----------|-----------|------------------|--------------------------------------------------|
 | `desc`    | `desc`    | readonly  | `string \| null` | [[element \| `element.desc`]]                    |
-| `element` | `element` |           | `Element`        | The edited `Element`, a common property of all Substation subeditors. |
+| `element` |           |           | `Element`        | The edited `Element`, a common property of all Substation subeditors. |
 | `name`    | `name`    | readonly  | `string`         | [[element \| `element.name`]]                    |
 
 ## Methods

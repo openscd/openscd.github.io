@@ -293,13 +293,13 @@ export let VoltageLevelEditor = class extends LitElement {
           html`<wizard-textfield
             label="desc"
             .maybeValue=${desc}
-            nullable="true"
+            nullable
             helper="${translate("voltagelevel.wizard.descHelper")}"
           ></wizard-textfield>`,
           html`<wizard-textfield
             label="nomFreq"
             .maybeValue=${nomFreq}
-            nullable="true"
+            nullable
             helper="${translate("voltagelevel.wizard.nomFreqHelper")}"
             suffix="Hz"
             required
@@ -309,7 +309,7 @@ export let VoltageLevelEditor = class extends LitElement {
           html`<wizard-textfield
             label="numPhases"
             .maybeValue=${numPhases}
-            nullable="true"
+            nullable
             helper="${translate("voltagelevel.wizard.numPhaseHelper")}"
             suffix="#"
             required

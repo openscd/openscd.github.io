@@ -19,7 +19,7 @@ A wizard style dialog consisting of several pages commiting some
 
 | Method          | Type                                             | Description                                      |
 |-----------------|--------------------------------------------------|--------------------------------------------------|
-| `act`           | `(action?: WizardAction \| undefined): Promise<boolean>` | Commits `action` if all inputs are valid, reports validity otherwise. |
+| `act`           | `(action?: WizardActor \| undefined, primary?: boolean): Promise<boolean>` | Commits `action` if all inputs are valid, reports validity otherwise. |
 | `checkValidity` | `(): boolean`                                    | Checks the inputs of all [[`WizardPage`]]s for validity. |
 | `next`          | `(): Promise<void>`                              |                                                  |
 | `prev`          | `(): void`                                       |                                                  |

@@ -171,6 +171,12 @@ export const de = {
  Damit wird die Absch\xE4tzung oftmals genauer.`
     }
   },
+  merge: {
+    action: "Vereinigen",
+    defaultTitle: "{{ tag }} {{ source }} mit {{ sink }} vereinigen",
+    log: "{{ tag }} {{ source }} mit {{ sink }} vereinigt",
+    children: "Kindelemente"
+  },
   import: {
     log: {
       successful: "IED {{name}} geladen",
@@ -216,7 +222,11 @@ export const de = {
       description: "GOOSE Ziele aktualisieren: ",
       nonewitems: "keine neuen IEDName Elemente notwendig",
       message: "{{updatenumber}} IEDName Element(e) hinzugef\xFCgt"
-    }
+    },
+    "comm-map": {wizard: {title: "Kommunikationszuordnung"}}
+  },
+  updatesubstation: {
+    title: "Schaltanlage aktualisieren"
   },
   add: "Hinzuf\xFCgen",
   remove: "Entfernen",

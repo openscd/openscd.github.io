@@ -42,6 +42,7 @@ import "../_snowpack/pkg/@material/mwc-tab.js";
 import "../_snowpack/pkg/@material/mwc-tab-bar.js";
 import "../_snowpack/pkg/@material/mwc-textfield.js";
 import "../_snowpack/pkg/@material/mwc-top-app-bar-fixed.js";
+import "./filtered-list.js";
 import {
   newLogEvent,
   newPendingStateEvent,
@@ -402,11 +403,7 @@ OpenSCD.styles = css`
       --mdc-theme-primary: var(--mdc-theme-on-primary);
     }
 
-    #file-input {
-      display: none;
-    }
-
-    #ied-import {
+    input[type='file'] {
       display: none;
     }
 

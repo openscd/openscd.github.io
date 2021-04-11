@@ -106,7 +106,7 @@ export let EnumTypeEditor = class extends LitElement {
           html`<wizard-textfield
             label="id"
             helper="${translate("scl.id")}"
-            .maybeValue=""
+            .maybeValue=${""}
             required
             maxlength="127"
             minlength="1"
