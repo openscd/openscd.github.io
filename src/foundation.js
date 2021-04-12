@@ -105,7 +105,7 @@ export function referencePath(element) {
   }
   return path;
 }
-function pathParts(identity2) {
+export function pathParts(identity2) {
   const path = identity2.split(">");
   const end = path.pop() ?? "";
   const start = path.join(">");
@@ -405,7 +405,7 @@ function lNIdentity(e) {
 }
 function lNSelector(tagName, identity2) {
   const [parentIdentity, myIdentity] = pathParts(identity2);
-  const parentSelectors = selector("LDevice", parentIdentity).split(",");
+  const parentSelectors = ["AccessPoint", "LDevice"].flatMap((parentTag) => selector(parentTag, parentIdentity).split(","));
   const [prefix, lnClass, inst] = myIdentity.split(" ");
   const [prefixSelectors, lnClassSelectors, instSelectors] = [
     prefix ? [`[prefix="${prefix}"]`] : [":not([prefix])", '[prefix=""]'],

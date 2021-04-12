@@ -6,7 +6,9 @@ export const de = {
     ord: "Rang",
     value: "Wert",
     EnumVal: "Enum Wert",
-    EnumType: "Enum Typ"
+    EnumType: "Enum Typ",
+    Report: "Report",
+    LN: "Logischer Knoten"
   },
   settings: {
     name: "Einstellungen",
@@ -223,7 +225,13 @@ export const de = {
       nonewitems: "keine neuen IEDName Elemente notwendig",
       message: "{{updatenumber}} IEDName Element(e) hinzugef\xFCgt"
     },
-    "comm-map": {wizard: {title: "Kommunikationszuordnung"}}
+    "comm-map": {
+      wizard: {title: "Kommunikationszuordnung"},
+      connectCB: "{{CbType}} verbinden",
+      connectToIED: "Verbinden mit {{iedName}}",
+      sourceIED: "Quellger\xE4t",
+      sinkIED: "Zielger\xE4t"
+    }
   },
   updatesubstation: {
     title: "Schaltanlage aktualisieren"
@@ -241,5 +249,7 @@ export const de = {
   filter: "Filter",
   undo: "R\xFCckg\xE4ngig",
   redo: "Wiederholen",
-  duplicate: "Klonen"
+  duplicate: "Klonen",
+  connect: "Verbinden",
+  disconnect: "Trennen"
 };

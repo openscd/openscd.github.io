@@ -78,8 +78,13 @@
 						<section class="tsd-index-section ">
 							<h3>Functions</h3>
 							<ul class="tsd-index-list">
+								<li class="tsd-kind-function tsd-parent-kind-module"><a href="triggered_communicationmapping.html#clientlnwizard" class="tsd-kind-icon">clientlnwizard</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module"><a href="triggered_communicationmapping.html#communicationmappingwizard" class="tsd-kind-icon">communication<wbr>Mapping<wbr>Wizard</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module"><a href="triggered_communicationmapping.html#createconnectionwizard" class="tsd-kind-icon">create<wbr>Connection<wbr>Wizard</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-module"><a href="triggered_communicationmapping.html#getsinkreferences" class="tsd-kind-icon">get<wbr>Sink<wbr>References</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-module"><a href="triggered_communicationmapping.html#getsourcereferences" class="tsd-kind-icon">get<wbr>Source<wbr>References</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module"><a href="triggered_communicationmapping.html#opencommunicationmappingwizard" class="tsd-kind-icon">open<wbr>Communication<wbr>Mapping<wbr>Wizard</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module"><a href="triggered_communicationmapping.html#opencreateconnection" class="tsd-kind-icon">open<wbr>Create<wbr>Connection</a></li>
 							</ul>
 						</section>
 					</div>
@@ -87,6 +92,78 @@
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Functions</h2>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
+					<a name="clientlnwizard" class="tsd-anchor"></a>
+					<h3>clientlnwizard</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
+						<li class="tsd-signature tsd-kind-icon">clientlnwizard<span class="tsd-signature-symbol">(</span>sourceIEDs<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Element</span><span class="tsd-signature-symbol">[]</span>, sinkIED<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Element</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="foundation.html#wizard" class="tsd-signature-type" data-tsd-kind="Type alias">Wizard</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/0cf0611/src/triggered/CommunicationMapping.ts#L167">src/triggered/CommunicationMapping.ts:167</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>sourceIEDs: <span class="tsd-signature-type">Element</span><span class="tsd-signature-symbol">[]</span></h5>
+								</li>
+								<li>
+									<h5>sinkIED: <span class="tsd-signature-type">Element</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="foundation.html#wizard" class="tsd-signature-type" data-tsd-kind="Type alias">Wizard</a></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
+					<a name="communicationmappingwizard" class="tsd-anchor"></a>
+					<h3>communication<wbr>Mapping<wbr>Wizard</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
+						<li class="tsd-signature tsd-kind-icon">communication<wbr>Mapping<wbr>Wizard<span class="tsd-signature-symbol">(</span>root<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">XMLDocument</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Element</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="foundation.html#wizard" class="tsd-signature-type" data-tsd-kind="Type alias">Wizard</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/0cf0611/src/triggered/CommunicationMapping.ts#L609">src/triggered/CommunicationMapping.ts:609</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>root: <span class="tsd-signature-type">XMLDocument</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Element</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="foundation.html#wizard" class="tsd-signature-type" data-tsd-kind="Type alias">Wizard</a></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
+					<a name="createconnectionwizard" class="tsd-anchor"></a>
+					<h3>create<wbr>Connection<wbr>Wizard</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
+						<li class="tsd-signature tsd-kind-icon">create<wbr>Connection<wbr>Wizard<span class="tsd-signature-symbol">(</span>doc<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Document</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="foundation.html#wizard" class="tsd-signature-type" data-tsd-kind="Type alias">Wizard</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/0cf0611/src/triggered/CommunicationMapping.ts#L301">src/triggered/CommunicationMapping.ts:301</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>doc: <span class="tsd-signature-type">Document</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="foundation.html#wizard" class="tsd-signature-type" data-tsd-kind="Type alias">Wizard</a></h4>
+						</li>
+					</ul>
+				</section>
 				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
 					<a name="getsinkreferences" class="tsd-anchor"></a>
 					<h3>get<wbr>Sink<wbr>References</h3>
@@ -97,7 +174,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/71e6996/src/triggered/CommunicationMapping.ts#L243">src/triggered/CommunicationMapping.ts:243</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/0cf0611/src/triggered/CommunicationMapping.ts#L591">src/triggered/CommunicationMapping.ts:591</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -120,7 +197,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/71e6996/src/triggered/CommunicationMapping.ts#L249">src/triggered/CommunicationMapping.ts:249</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/0cf0611/src/triggered/CommunicationMapping.ts#L597">src/triggered/CommunicationMapping.ts:597</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -130,6 +207,52 @@
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Element</span><span class="tsd-signature-symbol">[]</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
+					<a name="opencommunicationmappingwizard" class="tsd-anchor"></a>
+					<h3>open<wbr>Communication<wbr>Mapping<wbr>Wizard</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
+						<li class="tsd-signature tsd-kind-icon">open<wbr>Communication<wbr>Mapping<wbr>Wizard<span class="tsd-signature-symbol">(</span>root<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">XMLDocument</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Element</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="foundation.html#wizardactor" class="tsd-signature-type" data-tsd-kind="Type alias">WizardActor</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/0cf0611/src/triggered/CommunicationMapping.ts#L545">src/triggered/CommunicationMapping.ts:545</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>root: <span class="tsd-signature-type">XMLDocument</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Element</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="foundation.html#wizardactor" class="tsd-signature-type" data-tsd-kind="Type alias">WizardActor</a></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
+					<a name="opencreateconnection" class="tsd-anchor"></a>
+					<h3>open<wbr>Create<wbr>Connection</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
+						<li class="tsd-signature tsd-kind-icon">open<wbr>Create<wbr>Connection<span class="tsd-signature-symbol">(</span>doc<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Document</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="foundation.html#wizardactor" class="tsd-signature-type" data-tsd-kind="Type alias">WizardActor</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/0cf0611/src/triggered/CommunicationMapping.ts#L603">src/triggered/CommunicationMapping.ts:603</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>doc: <span class="tsd-signature-type">Document</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="foundation.html#wizardactor" class="tsd-signature-type" data-tsd-kind="Type alias">WizardActor</a></h4>
 						</li>
 					</ul>
 				</section>
@@ -152,10 +275,25 @@
 						<a href="../classes/triggered_communicationmapping.default.html" class="tsd-kind-icon">default</a>
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-module">
+						<a href="triggered_communicationmapping.html#clientlnwizard" class="tsd-kind-icon">clientlnwizard</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-module">
+						<a href="triggered_communicationmapping.html#communicationmappingwizard" class="tsd-kind-icon">communication<wbr>Mapping<wbr>Wizard</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-module">
+						<a href="triggered_communicationmapping.html#createconnectionwizard" class="tsd-kind-icon">create<wbr>Connection<wbr>Wizard</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-module">
 						<a href="triggered_communicationmapping.html#getsinkreferences" class="tsd-kind-icon">get<wbr>Sink<wbr>References</a>
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-module">
 						<a href="triggered_communicationmapping.html#getsourcereferences" class="tsd-kind-icon">get<wbr>Source<wbr>References</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-module">
+						<a href="triggered_communicationmapping.html#opencommunicationmappingwizard" class="tsd-kind-icon">open<wbr>Communication<wbr>Mapping<wbr>Wizard</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-module">
+						<a href="triggered_communicationmapping.html#opencreateconnection" class="tsd-kind-icon">open<wbr>Create<wbr>Connection</a>
 					</li>
 				</ul>
 			</nav>
