@@ -33,7 +33,7 @@ function getLogicalNode(doc, identity2) {
   }
   return null;
 }
-function existClientLN(cb, identity2) {
+function hasClientLN(cb, identity2) {
   for (const clientLN of Array.from(cb.getElementsByTagName("ClientLN"))) {
     const [iedName, apRef, ldInst, prefix, lnClass, lnInst] = [
       "iedName",
@@ -44,17 +44,23 @@ function existClientLN(cb, identity2) {
       "lnInst"
     ].map((attribute) => clientLN.getAttribute(attribute));
     const ln = getLogicalNode(cb.ownerDocument, identity2);
+    if (!ln)
+      break;
+    const ied = ln.closest("IED");
+    const ap = ln.closest("AccessPoint");
+    const ld = ln.closest("LDevice");
     if (identity2.split(">").length === 4) {
-      if (iedName === ln?.closest("IED")?.getAttribute("name") && apRef === ln?.closest("AccessPoint")?.getAttribute("name") && ldInst === ln?.closest("LDevice")?.getAttribute("inst") && (prefix ?? "") === (ln.getAttribute("prefix") ?? "") && lnClass === ln.getAttribute("lnClass") && (lnInst ?? "") === (ln.getAttribute("inst") ?? ""))
+      if (iedName === ied?.getAttribute("name") && apRef === ap?.getAttribute("name") && ldInst === ld?.getAttribute("inst") && (prefix ?? "") === (ln.getAttribute("prefix") ?? "") && lnClass === ln.getAttribute("lnClass") && (lnInst ?? "") === (ln.getAttribute("inst") ?? ""))
         return true;
     }
     if (identity2.split(">").length === 3) {
       if (getElement(identity2).split(" ").length > 1) {
-        if (iedName === ln?.closest("IED")?.getAttribute("name") && apRef === ln?.closest("AccessPoint")?.getAttribute("name") && (ldInst === "LD0" || ldInst === "") && (prefix ?? "") === (ln.getAttribute("prefix") ?? "") && lnClass === ln.getAttribute("lnClass") && (lnInst ?? "") === (ln.getAttribute("inst") ?? ""))
+        const apCount = ied?.querySelectorAll("AccessPoint").length;
+        if (iedName === ied?.getAttribute("name") && apCount && (apCount <= 1 || apRef === ap?.getAttribute("name")) && (prefix ?? "") === (ln.getAttribute("prefix") ?? "") && lnClass === ln.getAttribute("lnClass") && (lnInst ?? "") === (ln.getAttribute("inst") ?? ""))
           return true;
       }
       if (getElement(identity2).split(" ").length === 1) {
-        if (iedName === ln?.closest("IED")?.getAttribute("name") && apRef === ln?.closest("AccessPoint")?.getAttribute("name") && ldInst === ln.closest("LDevice")?.getAttribute("inst") && lnClass === ln.getAttribute("lnClass"))
+        if (iedName === ied?.getAttribute("name") && apRef === ap?.getAttribute("name") && ldInst === ld?.getAttribute("inst") && lnClass === ln.getAttribute("lnClass"))
           return true;
       }
     }
@@ -77,7 +83,7 @@ function addClientLNAction(doc) {
           cb.appendChild(rptEnabled);
         }
         const ln = getLogicalNode(doc, lnIdentity);
-        if (cb.querySelector("RptEnabled") !== null && !existClientLN(cb, lnIdentity) && ln) {
+        if (cb.querySelector("RptEnabled") !== null && !hasClientLN(cb, lnIdentity) && ln) {
           const element = createElement(doc, "ClientLN", {
             iedName: ln?.closest("IED")?.getAttribute("name") ?? null,
             apRef: ln?.closest("AccessPoint")?.getAttribute("name") ?? null,

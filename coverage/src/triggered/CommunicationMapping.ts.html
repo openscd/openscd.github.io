@@ -23,16 +23,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">91.71% </span>
+                <span class="strong">91.44% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>166/181</span>
+                <span class='fraction'>171/187</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">58.64% </span>
+                <span class="strong">58.54% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>95/162</span>
+                <span class='fraction'>96/164</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">94.61% </span>
+                <span class="strong">94.77% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>158/167</span>
+                <span class='fraction'>163/172</span>
             </div>
         
             
@@ -759,7 +759,15 @@
 <a name='L700'></a><a href='#L700'>700</a>
 <a name='L701'></a><a href='#L701'>701</a>
 <a name='L702'></a><a href='#L702'>702</a>
-<a name='L703'></a><a href='#L703'>703</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L703'></a><a href='#L703'>703</a>
+<a name='L704'></a><a href='#L704'>704</a>
+<a name='L705'></a><a href='#L705'>705</a>
+<a name='L706'></a><a href='#L706'>706</a>
+<a name='L707'></a><a href='#L707'>707</a>
+<a name='L708'></a><a href='#L708'>708</a>
+<a name='L709'></a><a href='#L709'>709</a>
+<a name='L710'></a><a href='#L710'>710</a>
+<a name='L711'></a><a href='#L711'>711</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -824,6 +832,10 @@
 <span class="cline-any cline-yes">18x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -838,6 +850,10 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1514,7 +1530,7 @@ function getLogicalNode(doc: XMLDocument, identity: string): Element | null {
 <span class="cstat-no" title="statement not covered" >  return null;</span>
 }
 &nbsp;
-function existClientLN(cb: Element, identity: string): boolean {
+function hasClientLN(cb: Element, identity: string): boolean {
   for (const clientLN of Array.from(cb.getElementsByTagName('ClientLN'))) {
     const [iedName, apRef, ldInst, prefix, lnClass, lnInst] = [
       'iedName',
@@ -1526,12 +1542,16 @@ function existClientLN(cb: Element, identity: string): boolean {
     ].map(attribute =&gt; clientLN.getAttribute(attribute));
 &nbsp;
     const ln = getLogicalNode(cb.ownerDocument, identity);
+    <span class="missing-if-branch" title="if path not taken" >I</span>if (!ln) <span class="cstat-no" title="statement not covered" >break;</span>
+    const ied = ln.closest('IED');
+    const ap = ln.closest('AccessPoint');
+    const ld = ln.closest('LDevice');
 &nbsp;
     <span class="missing-if-branch" title="if path not taken" >I</span>if (identity.split('&gt;').length === 4) {
 <span class="cstat-no" title="statement not covered" >      if (</span>
-        iedName === ln?.closest('IED')?.getAttribute('name') &amp;&amp;
-        apRef === ln?.closest('AccessPoint')?.getAttribute('name') &amp;&amp;
-        ldInst === ln?.closest('LDevice')?.getAttribute('inst') &amp;&amp;
+        iedName === ied?.getAttribute('name') &amp;&amp;
+        apRef === ap?.getAttribute('name') &amp;&amp;
+        ldInst === ld?.getAttribute('inst') &amp;&amp;
         (prefix ?? '') === (ln.getAttribute('prefix') ?? '') &amp;&amp;
         lnClass === ln.getAttribute('lnClass') &amp;&amp;
         (lnInst ?? '') === (ln.getAttribute('inst') ?? '')
@@ -1541,10 +1561,14 @@ function existClientLN(cb: Element, identity: string): boolean {
 &nbsp;
     <span class="missing-if-branch" title="else path not taken" >E</span>if (identity.split('&gt;').length === 3) {
       <span class="missing-if-branch" title="else path not taken" >E</span>if (getElement(identity).split(' ').length &gt; 1) {
+        // ClientLNs for LNs inside an AccessPoint have these requirements:
+        // apRef: AccessPoint name (optional if IED has only one AccessPoint)
+        // ldInst: can be arbitrary
+        const apCount = ied?.querySelectorAll('AccessPoint').length;
         <span class="missing-if-branch" title="else path not taken" >E</span>if (
-          iedName === ln?.closest('IED')?.getAttribute('name') &amp;&amp;
-          apRef === ln?.closest('AccessPoint')?.getAttribute('name') &amp;&amp;
-          (ldInst === 'LD0' || <span class="branch-3 cbranch-no" title="branch not covered" >ldInst === '')</span> &amp;&amp;
+          iedName === ied?.getAttribute('name') &amp;&amp;
+          apCount &amp;&amp;
+          (apCount &lt;= 1 || <span class="branch-3 cbranch-no" title="branch not covered" >apRef === ap?.getAttribute('name'))</span> &amp;&amp;
           (prefix ?? <span class="branch-1 cbranch-no" title="branch not covered" >'')</span> === (ln.getAttribute('prefix') ?? <span class="branch-1 cbranch-no" title="branch not covered" >'')</span> &amp;&amp;
           lnClass === ln.getAttribute('lnClass') &amp;&amp;
           (lnInst ?? <span class="branch-1 cbranch-no" title="branch not covered" >'')</span> === (ln.getAttribute('inst') ?? <span class="branch-1 cbranch-no" title="branch not covered" >'')</span>
@@ -1554,9 +1578,9 @@ function existClientLN(cb: Element, identity: string): boolean {
 &nbsp;
 <span class="cstat-no" title="statement not covered" >      if (getElement(identity).split(' ').length === 1) {</span>
 <span class="cstat-no" title="statement not covered" >        if (</span>
-          iedName === ln?.closest('IED')?.getAttribute('name') &amp;&amp;
-          apRef === ln?.closest('AccessPoint')?.getAttribute('name') &amp;&amp;
-          ldInst === ln.closest('LDevice')?.getAttribute('inst') &amp;&amp;
+          iedName === ied?.getAttribute('name') &amp;&amp;
+          apRef === ap?.getAttribute('name') &amp;&amp;
+          ldInst === ld?.getAttribute('inst') &amp;&amp;
           lnClass === ln.getAttribute('lnClass')
         )
 <span class="cstat-no" title="statement not covered" >          return true;</span>
@@ -1599,7 +1623,7 @@ function addClientLNAction(doc: XMLDocument): WizardActor {
         const ln = getLogicalNode(doc, lnIdentity);
         if (
           cb.querySelector('RptEnabled') !== null &amp;&amp;
-          !existClientLN(cb, lnIdentity) &amp;&amp;
+          !hasClientLN(cb, lnIdentity) &amp;&amp;
           ln
         ) {
           const element: Element = createElement(doc, 'ClientLN', {
@@ -2170,7 +2194,7 @@ export default class CommunicationMappingPlugin extends LitElement {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Wed Apr 14 2021 08:38:12 GMT+0000 (Coordinated Universal Time)
+                at Sat Apr 24 2021 10:33:58 GMT+0000 (Coordinated Universal Time)
             </div>
         </div>
         <script src="../../prettify.js"></script>
