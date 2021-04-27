@@ -2,25 +2,26 @@
 
 ## Properties
 
-| Property           | Attribute          | Modifiers | Type                                             |
-|--------------------|--------------------|-----------|--------------------------------------------------|
-| `activatable`      |                    |           | `boolean`                                        |
-| `debouncedLayout`  |                    |           | `(updateItems?: boolean \| undefined) => void \| undefined` |
-| `emptyMessage`     |                    |           | `string \| undefined`                            |
-| `index`            |                    | readonly  | `MWCListIndex`                                   |
-| `innerAriaLabel`   |                    |           | `string \| null`                                 |
-| `innerRole`        |                    |           | `string \| null`                                 |
-| `itemRoles`        |                    |           | `string \| null`                                 |
-| `items`            |                    | readonly  | `ListItemBase[]`                                 |
-| `itemsReady`       |                    |           | `Promise<never[]>`                               |
-| `layout`           |                    |           | `(updateItems?: boolean \| undefined) => void`   |
-| `multi`            |                    |           | `boolean`                                        |
-| `noninteractive`   |                    |           | `boolean`                                        |
-| `rootTabbable`     |                    |           | `boolean`                                        |
-| `searchField`      |                    |           | `TextField`                                      |
-| `searchFieldLabel` | `searchFieldLabel` |           | `string`                                         |
-| `selected`         |                    | readonly  | `ListItemBase \| ListItemBase[] \| null`         |
-| `wrapFocus`        |                    |           | `boolean`                                        |
+| Property           | Attribute          | Modifiers | Type                                             | Default |
+|--------------------|--------------------|-----------|--------------------------------------------------|---------|
+| `activatable`      |                    |           | `boolean`                                        |         |
+| `debouncedLayout`  |                    |           | `(updateItems?: boolean \| undefined) => void \| undefined` |         |
+| `disableCheckAll`  | `disableCheckAll`  |           | `boolean`                                        | false   |
+| `emptyMessage`     |                    |           | `string \| undefined`                            |         |
+| `index`            |                    | readonly  | `MWCListIndex`                                   |         |
+| `innerAriaLabel`   |                    |           | `string \| null`                                 |         |
+| `innerRole`        |                    |           | `string \| null`                                 |         |
+| `itemRoles`        |                    |           | `string \| null`                                 |         |
+| `items`            |                    | readonly  | `ListItemBase[]`                                 |         |
+| `itemsReady`       |                    |           | `Promise<never[]>`                               |         |
+| `layout`           |                    |           | `(updateItems?: boolean \| undefined) => void`   |         |
+| `multi`            |                    |           | `boolean`                                        |         |
+| `noninteractive`   |                    |           | `boolean`                                        |         |
+| `rootTabbable`     |                    |           | `boolean`                                        |         |
+| `searchField`      |                    |           | `TextField`                                      |         |
+| `searchFieldLabel` | `searchFieldLabel` |           | `string`                                         |         |
+| `selected`         |                    | readonly  | `ListItemBase \| ListItemBase[] \| null`         |         |
+| `wrapFocus`        |                    |           | `boolean`                                        |         |
 
 ## Methods
 
