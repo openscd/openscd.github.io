@@ -17,16 +17,17 @@ Open Substation Configuration Designer.
 | `doc`              | `doc`           |           | `XMLDocument \| null`                   | null                                             | The `XMLDocument` to be edited                   |
 | `docName`          | `docName`       |           | `string`                                | ""                                               | The name of the current [[`doc`]]                |
 | `editors`          |                 | readonly  | `InstalledPlugin[]`                     |                                                  |                                                  |
+| `errorUI`          |                 |           | `Snackbar`                              |                                                  |                                                  |
 | `fileUI`           |                 |           | `HTMLInputElement`                      |                                                  |                                                  |
 | `handleKeyPress`   |                 |           |                                         |                                                  |                                                  |
 | `history`          | `history`       |           | `LogEntry[]`                            | []                                               | All [[`LogEntry`]]s received so far through [[`LogEvent`]]s. |
 | `iedImport`        |                 |           | `HTMLInputElement`                      |                                                  |                                                  |
+| `infoUI`           |                 |           | `Snackbar`                              |                                                  |                                                  |
 | `items`            |                 | readonly  | `InstalledPlugin[]`                     |                                                  |                                                  |
 | `languageUI`       |                 |           | `Select`                                |                                                  |                                                  |
 | `logUI`            |                 |           | `Dialog`                                |                                                  |                                                  |
 | `menu`             |                 | readonly  | `(MenuItem \| "divider")[]`             |                                                  |                                                  |
 | `menuUI`           |                 |           | `Drawer`                                |                                                  |                                                  |
-| `messageUI`        |                 |           | `Snackbar`                              |                                                  |                                                  |
 | `nextAction`       |                 | readonly  | `number`                                |                                                  |                                                  |
 | `onLog`            |                 |           |                                         |                                                  |                                                  |
 | `onPendingState`   |                 |           |                                         |                                                  |                                                  |
@@ -43,6 +44,7 @@ Open Substation Configuration Designer.
 | `undo`             |                 |           |                                         |                                                  |                                                  |
 | `validated`        | `validated`     |           | `Promise<ValidationResult>`             | "Promise.resolve({\n      file: 'untitled.scd',\n      valid: true,\n      code: 0,\n    })" |                                                  |
 | `waiting`          | `waiting`       |           | `boolean`                               | false                                            | Whether the element is currently waiting for some async work. |
+| `warningUI`        |                 |           | `Snackbar`                              |                                                  |                                                  |
 | `wizardUI`         |                 |           | `WizardDialog`                          |                                                  |                                                  |
 | `workDone`         |                 |           | `Promise<PromiseSettledResult<void>[]>` | "Promise.allSettled(this.work)"                  | A promise which resolves once all currently pending work is done. |
 | `workflow`         |                 |           | `Wizard[]`                              | []                                               | FIFO queue of [[`Wizard`]]s to display.          |

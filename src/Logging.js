@@ -84,9 +84,19 @@ export function Logging(Base) {
         this.currentAction = this.history.length;
       }
       this.history.push(entry);
-      if (le.detail.kind == "error" && !this.logUI.open) {
-        this.messageUI.close();
-        this.messageUI.show();
+      if (!this.logUI.open) {
+        const ui = {
+          error: this.errorUI,
+          warning: this.warningUI,
+          info: this.infoUI,
+          action: this.infoUI
+        }[le.detail.kind];
+        ui.close();
+        ui.show();
+      }
+      if (le.detail.kind == "error") {
+        this.errorUI.close();
+        this.errorUI.show();
       }
       this.requestUpdate("history", []);
     }
@@ -99,7 +109,7 @@ export function Logging(Base) {
         <mwc-list-item
           class="${entry.kind}"
           graphic="icon"
-          ?twoline=${entry.message}
+          ?twoline=${!!entry.message}
           ?activated=${this.currentAction == history.length - index - 1}
         >
           <span>
@@ -200,9 +210,29 @@ export function Logging(Base) {
         </mwc-dialog>
 
         <mwc-snackbar
-          id="message"
+          id="info"
+          timeoutMs="2000"
+          labelText="${this.history.slice().reverse().find((le) => le.kind === "info" || le.kind === "action")?.title ?? get("log.snackbar.placeholder")}"
+        >
+          <mwc-icon-button icon="close" slot="dismiss"></mwc-icon-button>
+        </mwc-snackbar>
+        <mwc-snackbar
+          id="warning"
+          timeoutMs="5000"
+          labelText="${this.history.slice().reverse().find((le) => le.kind === "warning")?.title ?? get("log.snackbar.placeholder")}"
+        >
+          <mwc-button
+            slot="action"
+            icon="rule"
+            @click=${() => this.logUI.show()}
+            >${translate("log.snackbar.show")}</mwc-button
+          >
+          <mwc-icon-button icon="close" slot="dismiss"></mwc-icon-button>
+        </mwc-snackbar>
+        <mwc-snackbar
+          id="error"
           timeoutMs="10000"
-          labelText="${this.history.slice().reverse().find((le) => le.kind == "error")?.title ?? get("log.snackbar.placeholder")}"
+          labelText="${this.history.slice().reverse().find((le) => le.kind === "error")?.title ?? get("log.snackbar.placeholder")}"
         >
           <mwc-button
             slot="action"
@@ -215,7 +245,7 @@ export function Logging(Base) {
     }
   }
   __decorate([
-    property()
+    property({type: Array})
   ], LoggingElement.prototype, "history", 2);
   __decorate([
     property({type: Number})
@@ -224,7 +254,13 @@ export function Logging(Base) {
     query("#log")
   ], LoggingElement.prototype, "logUI", 2);
   __decorate([
-    query("#message")
-  ], LoggingElement.prototype, "messageUI", 2);
+    query("#error")
+  ], LoggingElement.prototype, "errorUI", 2);
+  __decorate([
+    query("#warning")
+  ], LoggingElement.prototype, "warningUI", 2);
+  __decorate([
+    query("#info")
+  ], LoggingElement.prototype, "infoUI", 2);
   return LoggingElement;
 }
