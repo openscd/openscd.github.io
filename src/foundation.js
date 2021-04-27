@@ -111,11 +111,14 @@ export function pathParts(identity2) {
   const start = path.join(">");
   return [start, end];
 }
+const voidSelector = ":not(*)";
 function hitemIdentity(e) {
   return `${e.getAttribute("version")}	${e.getAttribute("revision")}`;
 }
 function hitemSelector(tagName, identity2) {
   const [version, revision] = identity2.split("	");
+  if (!version || !revision)
+    return voidSelector;
   return `${tagName}[version="${version}"][revision="${revision}"]`;
 }
 function terminalIdentity(e) {
@@ -123,7 +126,7 @@ function terminalIdentity(e) {
 }
 function terminalSelector(tagName, identity2) {
   const [parentIdentity, connectivityNode] = pathParts(identity2);
-  const parentSelectors = tEquipment.flatMap((parentTag) => selector(parentTag, parentIdentity).split(","));
+  const parentSelectors = tags[tagName].parents.flatMap((parentTag) => selector(parentTag, parentIdentity).split(","));
   return crossProduct(parentSelectors, [">"], [`${tagName}[connectivityNode="${connectivityNode}"]`]).map((strings) => strings.join("")).join(",");
 }
 function lNodeIdentity(e) {
@@ -141,11 +144,15 @@ function lNodeIdentity(e) {
 }
 function lNodeSelector(tagName, identity2) {
   if (identity2.endsWith(")")) {
-    const [parentIdentity, myIdentity] = pathParts(identity2);
-    const [lnClass2, lnType] = myIdentity.substring(1, identity2.length - 2).split(" ");
-    return tLNodeContainer.map((parentTag) => `${selector(parentTag, parentIdentity)}>${tagName}[iedName="None"][lnClass="${lnClass2}"][lnType="${lnType}"]`).join(",");
+    const [parentIdentity, childIdentity] = pathParts(identity2);
+    const [lnClass2, lnType] = childIdentity.substring(1, identity2.length - 2).split(" ");
+    if (!lnClass2 || !lnType)
+      return voidSelector;
+    return tags[tagName].parents.map((parentTag) => `${selector(parentTag, parentIdentity)}>${tagName}[iedName="None"][lnClass="${lnClass2}"][lnType="${lnType}"]`).join(",");
   }
   const [iedName, ldInst, prefix, lnClass, lnInst] = identity2.split(/[ /]/);
+  if (!iedName || !ldInst || !lnClass)
+    return voidSelector;
   const [
     iedNameSelectors,
     ldInstSelectors,
@@ -165,8 +172,8 @@ function kDCIdentity(e) {
   return `${identity(e.parentElement)}>${e.getAttribute("iedName")} ${e.getAttribute("apName")}`;
 }
 function kDCSelector(tagName, identity2) {
-  const [parentIdentity, myIdentity] = pathParts(identity2);
-  const [iedName, apName] = myIdentity.split(" ");
+  const [parentIdentity, childIdentity] = pathParts(identity2);
+  const [iedName, apName] = childIdentity.split(" ");
   return `${selector("IED", parentIdentity)}>${tagName}[iedName="${iedName}"][apName="${apName}"]`;
 }
 function associationIdentity(e) {
@@ -174,6 +181,8 @@ function associationIdentity(e) {
 }
 function associationSelector(tagName, identity2) {
   const [parentIdentity, associationID] = pathParts(identity2);
+  if (!associationID)
+    return voidSelector;
   return `${selector("Server", parentIdentity)}>${tagName}[associationID="${associationID}"]`;
 }
 function lDeviceIdentity(e) {
@@ -181,6 +190,8 @@ function lDeviceIdentity(e) {
 }
 function lDeviceSelector(tagName, identity2) {
   const [iedName, inst] = identity2.split(">>");
+  if (!inst)
+    return voidSelector;
   return `IED[name="${iedName}"] ${tagName}[inst="${inst}"]`;
 }
 function iEDNameIdentity(e) {
@@ -195,8 +206,8 @@ function iEDNameIdentity(e) {
   return `${identity(e.parentElement)}>${iedName} ${apRef ? apRef : ""} ${ldInst ? ldInst : ""}/${prefix ?? ""} ${lnClass ?? ""} ${lnInst ?? ""}`;
 }
 function iEDNameSelector(tagName, identity2) {
-  const [parentIdentity, myIdentity] = pathParts(identity2);
-  const [iedName, apRef, ldInst, prefix, lnClass, lnInst] = myIdentity.split(/[ /]/);
+  const [parentIdentity, childIdentity] = pathParts(identity2);
+  const [iedName, apRef, ldInst, prefix, lnClass, lnInst] = childIdentity.split(/[ /]/);
   const [
     parentSelectors,
     apRefSelectors,
@@ -205,7 +216,7 @@ function iEDNameSelector(tagName, identity2) {
     lnClassSelectors,
     lnInstSelectors
   ] = [
-    tControlWithIEDName.flatMap((parentTag) => selector(parentTag, parentIdentity).split(",")),
+    tags[tagName].parents.flatMap((parentTag) => selector(parentTag, parentIdentity).split(",")),
     [`${iedName}`],
     apRef ? [`[apRef="${apRef}"]`] : [":not([apRef])", '[apRef=""]'],
     ldInst ? [`[ldInst="${ldInst}"]`] : [":not([ldInst])", '[ldInst=""]'],
@@ -230,13 +241,13 @@ function fCDAIdentity(e) {
   return `${identity(e.parentElement)}>${dataPath} (${fc}${ix ? " [" + ix + "]" : ""})`;
 }
 function fCDASelector(tagName, identity2) {
-  const [parentIdentity, myIdentity] = pathParts(identity2);
-  const [ldInst, prefix, lnClass, lnInst] = myIdentity.split(/[ /.]/);
-  const matchDoDa = myIdentity.match(/.([A-Z][a-z0-9.]*) ([A-Za-z0-9.]*) \(/);
+  const [parentIdentity, childIdentity] = pathParts(identity2);
+  const [ldInst, prefix, lnClass, lnInst] = childIdentity.split(/[ /.]/);
+  const matchDoDa = childIdentity.match(/.([A-Z][a-z0-9.]*) ([A-Za-z0-9.]*) \(/);
   const doName = matchDoDa && matchDoDa[1] ? matchDoDa[1] : "";
   const daName = matchDoDa && matchDoDa[2] ? matchDoDa[2] : "";
-  const matchFx = myIdentity.match(/\(([A-Z]{2})/);
-  const matchIx = myIdentity.match(/ \[([0-9]{1,2})\]/);
+  const matchFx = childIdentity.match(/\(([A-Z]{2})/);
+  const matchIx = childIdentity.match(/ \[([0-9]{1,2})\]/);
   const fc = matchFx && matchFx[1] ? matchFx[1] : "";
   const ix = matchIx && matchIx[1] ? matchIx[1] : "";
   const [
@@ -250,7 +261,7 @@ function fCDASelector(tagName, identity2) {
     fcSelectors,
     ixSelectors
   ] = [
-    selector("DataSet", parentIdentity).split(","),
+    tags[tagName].parents.flatMap((parentTag) => selector(parentTag, parentIdentity).split(",")),
     [`[ldInst="${ldInst}"]`],
     prefix ? [`[prefix="${prefix}"]`] : [":not([prefix])", '[prefix=""]'],
     [`[lnClass="${lnClass}"]`],
@@ -303,15 +314,15 @@ function extRefIdentity(e) {
   return `${parentIdentity}>${cbPath} ${dataPath}${intAddr ? `@${intAddr}` : ""}`;
 }
 function extRefSelector(tagName, identity2) {
-  const [parentIdentity, myIdentity] = pathParts(identity2);
-  const parentSelectors = selector("Inputs", parentIdentity).split(",");
-  if (myIdentity.endsWith("]")) {
-    const [intAddr2] = myIdentity.split("[");
+  const [parentIdentity, childIdentity] = pathParts(identity2);
+  const parentSelectors = tags[tagName].parents.flatMap((parentTag) => selector(parentTag, parentIdentity).split(","));
+  if (childIdentity.endsWith("]")) {
+    const [intAddr2] = childIdentity.split("[");
     const intAddrSelectors2 = [`[intAddr="${intAddr2}"]`];
     return crossProduct(parentSelectors, [">"], [tagName], intAddrSelectors2).map((strings) => strings.join("")).join(",");
   }
   let iedName, ldInst, prefix, lnClass, lnInst, doName, daName, serviceType, srcCBName, srcLDInst, srcPrefix, srcLNClass, srcLNInst, intAddr;
-  if (!myIdentity.includes(":") && !myIdentity.includes("@")) {
+  if (!childIdentity.includes(":") && !childIdentity.includes("@")) {
     [
       iedName,
       ldInst,
@@ -320,8 +331,8 @@ function extRefSelector(tagName, identity2) {
       lnInst,
       doName,
       daName
-    ] = myIdentity.split(/[ /]/);
-  } else if (myIdentity.includes(":") && !myIdentity.includes("@")) {
+    ] = childIdentity.split(/[ /]/);
+  } else if (childIdentity.includes(":") && !childIdentity.includes("@")) {
     [
       serviceType,
       srcCBName,
@@ -336,8 +347,8 @@ function extRefSelector(tagName, identity2) {
       lnInst,
       doName,
       daName
-    ] = myIdentity.split(/[ /:]/);
-  } else if (!myIdentity.includes(":") && myIdentity.includes("@")) {
+    ] = childIdentity.split(/[ /:]/);
+  } else if (!childIdentity.includes(":") && childIdentity.includes("@")) {
     [
       iedName,
       ldInst,
@@ -347,7 +358,7 @@ function extRefSelector(tagName, identity2) {
       doName,
       daName,
       intAddr
-    ] = myIdentity.split(/[ /@]/);
+    ] = childIdentity.split(/[ /@]/);
   } else {
     [
       serviceType,
@@ -364,7 +375,7 @@ function extRefSelector(tagName, identity2) {
       doName,
       daName,
       intAddr
-    ] = myIdentity.split(/[ /:@]/);
+    ] = childIdentity.split(/[ /:@]/);
   }
   const [
     iedNameSelectors,
@@ -404,9 +415,11 @@ function lNIdentity(e) {
   return `${identity(e.parentElement)}>${prefix ?? ""} ${lnClass} ${inst}`;
 }
 function lNSelector(tagName, identity2) {
-  const [parentIdentity, myIdentity] = pathParts(identity2);
-  const parentSelectors = ["AccessPoint", "LDevice"].flatMap((parentTag) => selector(parentTag, parentIdentity).split(","));
-  const [prefix, lnClass, inst] = myIdentity.split(" ");
+  const [parentIdentity, childIdentity] = pathParts(identity2);
+  const parentSelectors = tags[tagName].parents.flatMap((parentTag) => selector(parentTag, parentIdentity).split(","));
+  const [prefix, lnClass, inst] = childIdentity.split(" ");
+  if (!lnClass)
+    return voidSelector;
   const [prefixSelectors, lnClassSelectors, instSelectors] = [
     prefix ? [`[prefix="${prefix}"]`] : [":not([prefix])", '[prefix=""]'],
     [`[lnClass="${lnClass}"]`],
@@ -426,9 +439,9 @@ function clientLNIdentity(e) {
   return `${identity(e.parentElement)}>${iedName} ${apRef ? apRef : ""} ${ldInst}/${prefix ?? ""} ${lnClass} ${lnInst}`;
 }
 function clientLNSelector(tagName, identity2) {
-  const [parentIdentity, myIdentity] = pathParts(identity2);
-  const parentSelectors = selector("RptEnabled", parentIdentity).split(",");
-  const [iedName, apRef, ldInst, prefix, lnClass, lnInst] = myIdentity.split(/[ /]/);
+  const [parentIdentity, childIdentity] = pathParts(identity2);
+  const parentSelectors = tags[tagName].parents.flatMap((parentTag) => selector(parentTag, parentIdentity).split(","));
+  const [iedName, apRef, ldInst, prefix, lnClass, lnInst] = childIdentity.split(/[ /]/);
   const [
     iedNameSelectors,
     apRefSelectors,
@@ -453,12 +466,15 @@ function ixNamingIdentity(e) {
 function ixNamingSelector(tagName, identity2, depth = -1) {
   if (depth === -1)
     depth = identity2.split(">").length;
-  const [parentIdentity, myIdentity] = pathParts(identity2);
-  const [name2] = myIdentity.split(" ");
-  const ix = myIdentity.match(/\[([0-9]*)\]/) ? myIdentity.match(/\[([0-9]*)\]/)[1] : "";
+  const [parentIdentity, childIdentity] = pathParts(identity2);
+  const [_0, name2, _1, ix] = childIdentity.match(/([^[]*)(\[([0-9]*)\])?/) ?? [];
+  if (!name2)
+    return voidSelector;
   if (depth === 0)
     return `${tagName}[name="${name2}"]`;
-  const parentSelectors = ["DOI", "SDI"].flatMap((parentTag) => parentTag === "SDI" ? ixNamingSelector(parentTag, parentIdentity, depth - 1).split(",") : selector(parentTag, parentIdentity).split(","));
+  const parentSelectors = tags[tagName].parents.flatMap((parentTag) => parentTag === "SDI" ? ixNamingSelector(parentTag, parentIdentity, depth - 1).split(",") : selector(parentTag, parentIdentity).split(",")).filter((selector2) => !selector2.startsWith(voidSelector));
+  if (parentSelectors.length === 0)
+    return voidSelector;
   const [nameSelectors, ixSelectors] = [
     [`[name="${name2}"]`],
     ix ? [`[ix="${ix}"]`] : ['[ix=""]', ":not([ix])"]
@@ -473,10 +489,10 @@ function valIdentity(e) {
   return `${identity(e.parentElement)}>${sGroup ? sGroup + "." : ""} ${index}`;
 }
 function valSelector(tagName, identity2) {
-  const [parentIdentity, myIdentity] = pathParts(identity2);
-  const [sGroup, indexText] = myIdentity.split(" ");
+  const [parentIdentity, childIdentity] = pathParts(identity2);
+  const [sGroup, indexText] = childIdentity.split(" ");
   const index = parseFloat(indexText);
-  const parentSelectors = ["DAI", "DA", "BDA"].flatMap((parentTag) => selector(parentTag, parentIdentity).split(","));
+  const parentSelectors = tags[tagName].parents.flatMap((parentTag) => selector(parentTag, parentIdentity).split(","));
   const [nameSelectors, ixSelectors] = [
     sGroup ? [`[sGroup="${sGroup}"]`] : [""],
     index ? [`:nth-child(${index + 1})`] : [""]
@@ -489,6 +505,8 @@ function connectedAPIdentity(e) {
 }
 function connectedAPSelector(tagName, identity2) {
   const [iedName, apName] = identity2.split(" ");
+  if (!iedName || !apName)
+    return voidSelector;
   return `${tagName}[iedName="${iedName}"][apName="${apName}"]`;
 }
 function controlBlockIdentity(e) {
@@ -497,6 +515,8 @@ function controlBlockIdentity(e) {
 }
 function controlBlockSelector(tagName, identity2) {
   const [ldInst, cbName] = identity2.split(" ");
+  if (!ldInst || !cbName)
+    return voidSelector;
   return `${tagName}[ldInst="${ldInst}"][cbName="${cbName}"]`;
 }
 function physConnIdentity(e) {
@@ -512,7 +532,7 @@ function physConnIdentity(e) {
 function physConnSelector(tagName, identity2) {
   const [parentIdentity, pcType] = pathParts(identity2);
   const [parentSelectors, typeSelectors] = [
-    selector("ConnectedAP", parentIdentity).split(","),
+    tags[tagName].parents.flatMap((parentTag) => selector(parentTag, parentIdentity).split(",")),
     pcType ? [`[type="${pcType}"]`] : [""]
   ];
   return crossProduct(parentSelectors, [">"], [tagName], typeSelectors).map((strings) => strings.join("")).join(",");
@@ -528,11 +548,11 @@ function pIdentity(e) {
   return `${identity(e.parentElement)}>${eType} [${index}]`;
 }
 function pSelector(tagName, identity2) {
-  const [parentIdentity, myIdentity] = pathParts(identity2);
-  const [type] = myIdentity.split(" ");
-  const index = myIdentity && myIdentity.match(/\[([0-9]+)\]/) && myIdentity.match(/\[([0-9]+)\]/)[1] ? parseFloat(myIdentity.match(/\[([0-9]+)\]/)[1]) : NaN;
+  const [parentIdentity, childIdentity] = pathParts(identity2);
+  const [type] = childIdentity.split(" ");
+  const index = childIdentity && childIdentity.match(/\[([0-9]+)\]/) && childIdentity.match(/\[([0-9]+)\]/)[1] ? parseFloat(childIdentity.match(/\[([0-9]+)\]/)[1]) : NaN;
   const [parentSelectors, typeSelectors, ixSelectors] = [
-    selector("Address", parentIdentity).split(","),
+    tags[tagName].parents.flatMap((parentTag) => selector(parentTag, parentIdentity).split(",")),
     [`[type="${type}"]`],
     index ? [`:nth-child(${index + 1})`] : [""]
   ];
@@ -549,104 +569,59 @@ function protNsIdentity(e) {
   return `${identity(e.parentElement)}>${e.getAttribute("type") || "8-MMS"}	${e.textContent}`;
 }
 function protNsSelector(tagName, identity2) {
-  const [parentIdentity, myIdentity] = pathParts(identity2);
-  const [type, value] = myIdentity.split("	");
+  const [parentIdentity, childIdentity] = pathParts(identity2);
+  const [type, value] = childIdentity.split("	");
   const [parentSelectors] = [
-    ["DAType", "DA"].flatMap((parentTag) => selector(parentTag, parentIdentity).split(","))
+    tags[tagName].parents.flatMap((parentTag) => selector(parentTag, parentIdentity).split(","))
   ];
   return crossProduct(parentSelectors, [">"], [tagName], [`[type="${type}"]`], [">"], [value]).map((strings) => strings.join("")).join(",");
 }
-export const specialTags = {
-  Hitem: {identity: hitemIdentity, selector: hitemSelector},
-  Terminal: {identity: terminalIdentity, selector: terminalSelector},
-  LNode: {identity: lNodeIdentity, selector: lNodeSelector},
-  KDC: {identity: kDCIdentity, selector: kDCSelector},
-  Association: {identity: associationIdentity, selector: associationSelector},
-  LDevice: {identity: lDeviceIdentity, selector: lDeviceSelector},
-  IEDName: {identity: iEDNameIdentity, selector: iEDNameSelector},
-  FCDA: {identity: fCDAIdentity, selector: fCDASelector},
-  ExtRef: {identity: extRefIdentity, selector: extRefSelector},
-  LN: {identity: lNIdentity, selector: lNSelector},
-  ClientLN: {identity: clientLNIdentity, selector: clientLNSelector},
-  DAI: {identity: ixNamingIdentity, selector: ixNamingSelector},
-  SDI: {identity: ixNamingIdentity, selector: ixNamingSelector},
-  Val: {identity: valIdentity, selector: valSelector},
-  ConnectedAP: {identity: connectedAPIdentity, selector: connectedAPSelector},
-  GSE: {identity: controlBlockIdentity, selector: controlBlockSelector},
-  SMV: {identity: controlBlockIdentity, selector: controlBlockSelector},
-  PhysConn: {identity: physConnIdentity, selector: physConnSelector},
-  P: {identity: pIdentity, selector: pSelector},
-  EnumVal: {identity: enumValIdentity, selector: enumValSelector},
-  ProtNs: {identity: protNsIdentity, selector: protNsSelector}
-};
+function sCLIdentity() {
+  return "";
+}
+function sCLSelector() {
+  return "SCL";
+}
+function namingIdentity(e) {
+  return e.parentElement.tagName === "SCL" ? e.getAttribute("name") : `${identity(e.parentElement)}>${e.getAttribute("name")}`;
+}
+function namingSelector(tagName, identity2, depth = -1) {
+  if (depth === -1)
+    depth = identity2.split(">").length;
+  const [parentIdentity, name2] = pathParts(identity2);
+  if (!name2)
+    return voidSelector;
+  if (depth === 0)
+    return `${tagName}[name="${name2}"]`;
+  const parents = tags[tagName].parents;
+  if (!parents)
+    return voidSelector;
+  const parentSelectors = parents.flatMap((parentTag) => tags[parentTag].selector === tags["Substation"].selector ? namingSelector(parentTag, parentIdentity, depth - 1).split(",") : selector(parentTag, parentIdentity).split(",")).filter((selector2) => !selector2.startsWith(voidSelector));
+  if (parentSelectors.length === 0)
+    return voidSelector;
+  return crossProduct(parentSelectors, [">"], [tagName], [`[name="${name2}"]`]).map((strings) => strings.join("")).join(",");
+}
 function singletonIdentity(e) {
   return identity(e.parentElement).toString();
 }
-export const singletonTags = {
-  AccessControl: ["LDevice"],
-  Address: ["ConnectedAP", "GSE", "SMV"],
-  Authentication: ["Server"],
-  BitRate: ["SubNetwork"],
-  ClientServices: ["Services"],
-  CommProt: ["Services"],
-  Communication: ["SCL"],
-  ConfDataSet: ["Services"],
-  ConfLdName: ["Services"],
-  ConfLNs: ["Services"],
-  ConfLogControl: ["Services"],
-  ConfReportControl: ["Services"],
-  ConfSG: ["SettingGroups"],
-  ConfSigRef: ["Services"],
-  DataObjectDirectory: ["Services"],
-  DataSetDirectory: ["Services"],
-  DataTypeTemplates: ["SCL"],
-  DynAssociation: ["Services"],
-  DynDataSet: ["Services"],
-  FileHandling: ["Services"],
-  GetCBValues: ["Services"],
-  GetDataObjectDefinition: ["Services"],
-  GetDataSetValue: ["Services"],
-  GetDirectory: ["Services"],
-  GOOSE: ["Services"],
-  GSEDir: ["Services"],
-  GSESettings: ["Services"],
-  GSSE: ["Services"],
-  Header: ["SCL"],
-  History: ["Header"],
-  Inputs: ["LN", "LN0"],
-  IssuerName: ["GOOSESecurity", "SMVSecurity"],
-  LN0: ["LDevice"],
-  LogSettings: ["Services"],
-  MaxTime: ["GSE"],
-  McSecurity: ["GSESettings", "SMVSettings", "ClientServices"],
-  MinTime: ["GSE"],
-  OptFields: ["ReportControl"],
-  Protocol: ["GSEControl", "SMVControl"],
-  ReadWrite: ["Services"],
-  RedProt: ["Services"],
-  ReportSettings: ["Services"],
-  RptEnabled: ["ReportControl"],
-  SamplesPerSec: ["SMVSettings"],
-  SecPerSamples: ["SMVSettings"],
-  Server: ["AccessPoint"],
-  ServerAt: ["AccessPoint"],
-  Services: ["IED", "AccessPoint"],
-  SetDataSetValue: ["Services"],
-  SettingControl: ["LN0"],
-  SettingGroups: ["Services"],
-  SGEdit: ["SettingGroups"],
-  SmpRate: ["SMVSettings"],
-  SmvOpts: ["SampledValueControl"],
-  SMVsc: ["Services"],
-  SMVSettings: ["Services"],
-  Subject: ["GOOSESecurity", "SMVSecurity"],
-  SupSubscription: ["Services"],
-  TimerActivatedControl: ["Services"],
-  TimeSyncProt: ["Services"],
-  TrgOps: ["ReportControl"],
-  ValueHandling: ["Services"],
-  Voltage: ["VoltageLevel"]
-};
+function singletonSelector(tagName, identity2) {
+  const parents = tags[tagName].parents;
+  if (!parents)
+    return voidSelector;
+  const parentSelectors = parents.flatMap((parentTag) => selector(parentTag, identity2).split(",")).filter((selector2) => !selector2.startsWith(voidSelector));
+  if (parentSelectors.length === 0)
+    return voidSelector;
+  return crossProduct(parentSelectors, [">"], [tagName]).map((strings) => strings.join("")).join(",");
+}
+function idNamingIdentity(e) {
+  return `#${e.id}`;
+}
+function idNamingSelector(tagName, identity2) {
+  const id = identity2.replace(/^#/, "");
+  if (!id)
+    return voidSelector;
+  return `${tagName}[id="${id}"]`;
+}
 const tAbstractConductingEquipment = [
   "TransformerWinding",
   "ConductingEquipment"
@@ -676,108 +651,1047 @@ const tAbstractDataAttribute = ["BDA", "DA"];
 const tControlWithIEDName = ["SampledValueControl", "GSEControl"];
 const tControlWithTriggerOpt = ["LogControl", "ReportControl"];
 const tControl = [...tControlWithIEDName, ...tControlWithTriggerOpt];
+const tControlBlock = ["GSE", "SMV"];
 const tUnNaming = [
+  "ConnectedAP",
+  "PhysConn",
   "SDO",
   "DO",
   "DAI",
   "SDI",
   "DOI",
+  "Inputs",
+  "RptEnabled",
+  "Server",
+  "ServerAt",
+  "SettingControl",
+  "Communication",
   "Log",
+  "LDevice",
   "DataSet",
   "AccessPoint",
   "IED",
+  "NeutralPoint",
   ...tControl,
+  ...tControlBlock,
   ...tAbstractDataAttribute
 ];
 const tAnyLN = ["LN0", "LN"];
-export const namingParents = {
-  SubNetwork: ["Communication"],
-  GOOSESecurity: ["AccessPoint"],
-  SMVSecurity: ["AccessPoint"],
-  ConnectivityNode: ["Bay", "Line"],
-  SubFunction: ["SubFunction", "Function"],
-  Function: [
-    "Bay",
-    "VoltageLevel",
-    "Substation",
-    ...tGeneralEquipmentContainer
-  ],
-  TapChanger: ["TransformerWinding"],
-  SubEquipment: [
-    "TapChanger",
-    "PowerTransformer",
-    ...tAbstractConductingEquipment
-  ],
-  Process: ["Process", "SCL"],
-  Line: ["Process", "SCL"],
-  EqSubFunction: [...tAbstractEqFuncSubFunc],
-  EqFunction: [
-    "GeneralEquipment",
-    "TapChanger",
-    "TransformerWinding",
-    "PowerTransformer",
-    "SubEquipment",
-    "ConductingEquipment"
-  ],
-  GeneralEquipment: [
-    "SubFunction",
-    "Function",
-    ...tGeneralEquipmentContainer,
-    ...tAbstractEqFuncSubFunc,
-    ...tEquipmentContainer
-  ],
-  PowerTransformer: [...tEquipmentContainer],
-  TransformerWinding: ["PowerTransformer"],
-  ConductingEquipment: ["Process", "Line", "SubFunction", "Function", "Bay"],
-  Bay: ["VoltageLevel"],
-  VoltageLevel: ["Substation"],
-  Substation: ["SCL", "Process"],
-  SDO: ["DOType"],
-  DO: ["LNodeType"],
-  DAI: ["DOI", "SDI"],
-  SDI: ["DOI", "SDI"],
-  DOI: [...tAnyLN],
-  Log: [...tAnyLN],
-  DataSet: [...tAnyLN],
-  AccessPoint: ["IED"],
-  IED: ["SCL"],
-  BDA: ["DAType"],
-  DA: ["DOType"],
-  SampledValueControl: ["LN0"],
-  GSEControl: ["LN0"],
-  LogControl: [...tAnyLN],
-  ReportControl: [...tAnyLN]
-};
-function namingSelector(tagName, identity2, depth = -1) {
-  if (depth === -1)
-    depth = identity2.split(">").length;
-  const [parentIdentity, name2] = pathParts(identity2);
-  if (depth === 0)
-    return `${tagName}[name="${name2}"]`;
-  const parents = namingParents[tagName];
-  if (!parents)
-    return ":not(*)";
-  const parentSelectors = parents.flatMap((parentTag) => namingParents[parentTag] ? namingSelector(parentTag, parentIdentity, depth - 1).split(",") : selector(parentTag, parentIdentity).split(","));
-  return crossProduct(parentSelectors, [">"], [tagName], [`[name="${name2}"]`]).map((strings) => strings.join("")).join(",");
+const tAnyContentFromOtherNamespace = [
+  "Text",
+  "Private",
+  "Hitem",
+  "AccessControl"
+];
+const tCert = ["Subject", "IssuerName"];
+const tDurationInMilliSec = ["MinTime", "MaxTime"];
+const tIDNaming = ["LNodeType", "DOType", "DAType", "EnumType"];
+const tServiceYesNo = [
+  "FileHandling",
+  "TimeSyncProt",
+  "CommProt",
+  "SGEdit",
+  "ConfSG",
+  "GetDirectory",
+  "GetDataObjectDefinition",
+  "DataObjectDirectory",
+  "GetDataSetValue",
+  "SetDataSetValue",
+  "DataSetDirectory",
+  "ReadWrite",
+  "TimerActivatedControl",
+  "GetCBValues",
+  "GSEDir",
+  "ConfLdName"
+];
+const tServiceWithMaxAndMaxAttributes = ["DynDataSet", "ConfDataSet"];
+const tServiceWithMax = [
+  "GSSE",
+  "GOOSE",
+  "ConfReportControl",
+  "SMVsc",
+  ...tServiceWithMaxAndMaxAttributes
+];
+const tServiceWithMaxNonZero = ["ConfLogControl", "ConfSigRef"];
+const tServiceSettings = [
+  "ReportSettings",
+  "LogSettings",
+  "GSESettings",
+  "SMVSettings"
+];
+const tBaseElement = ["SCL", ...tNaming, ...tUnNaming, ...tIDNaming];
+const sCLTags = [
+  ...tBaseElement,
+  ...tAnyContentFromOtherNamespace,
+  "Header",
+  "LNode",
+  "Val",
+  "Voltage",
+  "Services",
+  ...tCert,
+  ...tDurationInMilliSec,
+  "Association",
+  "FCDA",
+  "ClientLN",
+  "IEDName",
+  "ExtRef",
+  "Protocol",
+  ...tAnyLN,
+  ...tServiceYesNo,
+  "DynAssociation",
+  "SettingGroups",
+  ...tServiceWithMax,
+  ...tServiceWithMaxNonZero,
+  ...tServiceSettings,
+  "ConfLNs",
+  "ClientServices",
+  "SupSubscription",
+  "ValueHandling",
+  "RedProt",
+  "McSecurity",
+  "KDC",
+  "Address",
+  "P",
+  "ProtNs",
+  "EnumVal",
+  "Terminal",
+  "BitRate",
+  "Authentication",
+  "DataTypeTemplates",
+  "History",
+  "OptFields",
+  "SmvOpts",
+  "TrgOps",
+  "SamplesPerSec",
+  "SmpRate",
+  "SecPerSamples"
+];
+const tagSet = new Set(sCLTags);
+function isSCLTag(tag) {
+  return tagSet.has(tag);
 }
-function singletonSelector(tagName, identity2) {
-  const parents = singletonTags[tagName];
-  if (!parents)
-    return ":not(*)";
-  const parentSelectors = parents.flatMap((parentTag) => selector(parentTag, identity2).split(","));
-  return crossProduct(parentSelectors, [">"], [tagName]).map((strings) => strings.join("")).join(",");
+const tBaseNameSequence = ["Text", "Private"];
+const tNamingSequence = [...tBaseNameSequence];
+const tUnNamingSequence = [...tBaseNameSequence];
+const tIDNamingSequence = [...tBaseNameSequence];
+const tAbstractDataAttributeSequence = [...tUnNamingSequence, "Val"];
+const tLNodeContainerSequence = [...tNamingSequence, "LNode"];
+const tPowerSystemResourceSequence = [...tLNodeContainerSequence];
+const tEquipmentSequence = [...tPowerSystemResourceSequence];
+const tEquipmentContainerSequence = [
+  ...tPowerSystemResourceSequence,
+  "PowerTransformer",
+  "GeneralEquipment"
+];
+const tAbstractConductingEquipmentSequence = [
+  ...tEquipmentSequence,
+  "Terminal"
+];
+const tControlBlockSequence = [...tUnNamingSequence, "Address"];
+const tControlSequence = [...tNamingSequence];
+const tControlWithIEDNameSequence = [...tControlSequence, "IEDName"];
+const tAnyLNSequence = [
+  ...tUnNamingSequence,
+  "DataSet",
+  "ReportControl",
+  "LogControl",
+  "DOI",
+  "Inputs",
+  "Log"
+];
+const tGeneralEquipmentContainerSequence = [
+  ...tPowerSystemResourceSequence,
+  "GeneralEquipment",
+  "Function"
+];
+const tControlWithTriggerOptSequence = [...tControlSequence, "TrgOps"];
+const tAbstractEqFuncSubFuncSequence = [
+  ...tPowerSystemResourceSequence,
+  "GeneralEquipment",
+  "EqSubFunction"
+];
+export const tags = {
+  AccessControl: {
+    identity: singletonIdentity,
+    selector: singletonSelector,
+    parents: ["LDevice"],
+    children: []
+  },
+  AccessPoint: {
+    identity: namingIdentity,
+    selector: namingSelector,
+    parents: ["IED"],
+    children: [
+      ...tNamingSequence,
+      "Server",
+      "LN",
+      "ServerAt",
+      "Services",
+      "GOOSESecurity",
+      "SMVSecurity"
+    ]
+  },
+  Address: {
+    identity: singletonIdentity,
+    selector: singletonSelector,
+    parents: ["ConnectedAP", "GSE", "SMV"],
+    children: ["P"]
+  },
+  Association: {
+    identity: associationIdentity,
+    selector: associationSelector,
+    parents: ["Server"],
+    children: []
+  },
+  Authentication: {
+    identity: singletonIdentity,
+    selector: singletonSelector,
+    parents: ["Server"],
+    children: []
+  },
+  BDA: {
+    identity: namingIdentity,
+    selector: namingSelector,
+    parents: ["DAType"],
+    children: [...tAbstractDataAttributeSequence]
+  },
+  BitRate: {
+    identity: singletonIdentity,
+    selector: singletonSelector,
+    parents: ["SubNetwork"],
+    children: []
+  },
+  Bay: {
+    identity: namingIdentity,
+    selector: namingSelector,
+    parents: ["VoltageLevel"],
+    children: [
+      ...tEquipmentContainerSequence,
+      "ConductingEquipment",
+      "ConnectivityNode",
+      "Function"
+    ]
+  },
+  ClientLN: {
+    identity: clientLNIdentity,
+    selector: clientLNSelector,
+    parents: ["RptEnabled"],
+    children: []
+  },
+  ClientServices: {
+    identity: singletonIdentity,
+    selector: singletonSelector,
+    parents: ["Services"],
+    children: ["TimeSyncProt", "McSecurity"]
+  },
+  CommProt: {
+    identity: singletonIdentity,
+    selector: singletonSelector,
+    parents: ["Services"],
+    children: []
+  },
+  Communication: {
+    identity: singletonIdentity,
+    selector: singletonSelector,
+    parents: ["SCL"],
+    children: [...tUnNamingSequence, "SubNetwork"]
+  },
+  ConductingEquipment: {
+    identity: namingIdentity,
+    selector: namingSelector,
+    parents: ["Process", "Line", "SubFunction", "Function", "Bay"],
+    children: [...tAbstractConductingEquipmentSequence, "EqFunction"]
+  },
+  ConfDataSet: {
+    identity: singletonIdentity,
+    selector: singletonSelector,
+    parents: ["Services"],
+    children: []
+  },
+  ConfLdName: {
+    identity: singletonIdentity,
+    selector: singletonSelector,
+    parents: ["Services"],
+    children: []
+  },
+  ConfLNs: {
+    identity: singletonIdentity,
+    selector: singletonSelector,
+    parents: ["Services"],
+    children: []
+  },
+  ConfLogControl: {
+    identity: singletonIdentity,
+    selector: singletonSelector,
+    parents: ["Services"],
+    children: []
+  },
+  ConfReportControl: {
+    identity: singletonIdentity,
+    selector: singletonSelector,
+    parents: ["Services"],
+    children: []
+  },
+  ConfSG: {
+    identity: singletonIdentity,
+    selector: singletonSelector,
+    parents: ["SettingGroups"],
+    children: []
+  },
+  ConfSigRef: {
+    identity: singletonIdentity,
+    selector: singletonSelector,
+    parents: ["Services"],
+    children: []
+  },
+  ConnectedAP: {
+    identity: connectedAPIdentity,
+    selector: connectedAPSelector,
+    parents: ["SubNetwork"],
+    children: [...tUnNamingSequence, "Address", "GSE", "SMV", "PhysConn"]
+  },
+  ConnectivityNode: {
+    identity: namingIdentity,
+    selector: namingSelector,
+    parents: ["Bay", "Line"],
+    children: [...tLNodeContainerSequence]
+  },
+  DA: {
+    identity: namingIdentity,
+    selector: namingSelector,
+    parents: ["DOType"],
+    children: [...tAbstractDataAttributeSequence]
+  },
+  DAI: {
+    identity: ixNamingIdentity,
+    selector: ixNamingSelector,
+    parents: ["DOI", "SDI"],
+    children: [...tUnNamingSequence, "Val"]
+  },
+  DAType: {
+    identity: idNamingIdentity,
+    selector: idNamingSelector,
+    parents: ["DataTypeTemplates"],
+    children: [...tIDNamingSequence, "BDA", "ProtNs"]
+  },
+  DO: {
+    identity: namingIdentity,
+    selector: namingSelector,
+    parents: ["LNodeType"],
+    children: [...tUnNamingSequence]
+  },
+  DOI: {
+    identity: namingIdentity,
+    selector: namingSelector,
+    parents: [...tAnyLN],
+    children: [...tUnNamingSequence, "SDI", "DAI"]
+  },
+  DOType: {
+    identity: idNamingIdentity,
+    selector: idNamingSelector,
+    parents: ["DataTypeTemplates"],
+    children: [...tIDNamingSequence, "SDO", "DA"]
+  },
+  DataObjectDirectory: {
+    identity: singletonIdentity,
+    selector: singletonSelector,
+    parents: ["Services"],
+    children: []
+  },
+  DataSet: {
+    identity: namingIdentity,
+    selector: namingSelector,
+    parents: [...tAnyLN],
+    children: [...tNamingSequence, "FCDA"]
+  },
+  DataSetDirectory: {
+    identity: singletonIdentity,
+    selector: singletonSelector,
+    parents: ["Services"],
+    children: []
+  },
+  DataTypeTemplates: {
+    identity: singletonIdentity,
+    selector: singletonSelector,
+    parents: ["SCL"],
+    children: ["LNodeType", "DOType", "DAType", "EnumType"]
+  },
+  DynAssociation: {
+    identity: singletonIdentity,
+    selector: singletonSelector,
+    parents: ["Services"],
+    children: []
+  },
+  DynDataSet: {
+    identity: singletonIdentity,
+    selector: singletonSelector,
+    parents: ["Services"],
+    children: []
+  },
+  EnumType: {
+    identity: idNamingIdentity,
+    selector: idNamingSelector,
+    parents: ["DataTypeTemplates"],
+    children: [...tIDNamingSequence, "EnumVal"]
+  },
+  EnumVal: {
+    identity: enumValIdentity,
+    selector: enumValSelector,
+    parents: ["EnumType"],
+    children: []
+  },
+  EqFunction: {
+    identity: namingIdentity,
+    selector: namingSelector,
+    parents: [
+      "GeneralEquipment",
+      "TapChanger",
+      "TransformerWinding",
+      "PowerTransformer",
+      "SubEquipment",
+      "ConductingEquipment"
+    ],
+    children: [...tAbstractEqFuncSubFuncSequence]
+  },
+  EqSubFunction: {
+    identity: namingIdentity,
+    selector: namingSelector,
+    parents: ["EqSubFunction", "EqFunction"],
+    children: [...tAbstractEqFuncSubFuncSequence]
+  },
+  ExtRef: {
+    identity: extRefIdentity,
+    selector: extRefSelector,
+    parents: ["Inputs"],
+    children: []
+  },
+  FCDA: {
+    identity: fCDAIdentity,
+    selector: fCDASelector,
+    parents: ["DataSet"],
+    children: []
+  },
+  FileHandling: {
+    identity: singletonIdentity,
+    selector: singletonSelector,
+    parents: ["Services"],
+    children: []
+  },
+  Function: {
+    identity: namingIdentity,
+    selector: namingSelector,
+    parents: ["Bay", "VoltageLevel", "Substation", "Process", "Line"],
+    children: [
+      ...tPowerSystemResourceSequence,
+      "SubFunction",
+      "GeneralEquipment",
+      "ConductingEquipment"
+    ]
+  },
+  GeneralEquipment: {
+    identity: namingIdentity,
+    selector: namingSelector,
+    parents: [
+      "SubFunction",
+      "Function",
+      ...tGeneralEquipmentContainer,
+      ...tAbstractEqFuncSubFunc,
+      ...tEquipmentContainer
+    ],
+    children: [...tEquipmentSequence, "EqFunction"]
+  },
+  GetCBValues: {
+    identity: singletonIdentity,
+    selector: singletonSelector,
+    parents: ["Services"],
+    children: []
+  },
+  GetDataObjectDefinition: {
+    identity: singletonIdentity,
+    selector: singletonSelector,
+    parents: ["Services"],
+    children: []
+  },
+  GetDataSetValue: {
+    identity: singletonIdentity,
+    selector: singletonSelector,
+    parents: ["Services"],
+    children: []
+  },
+  GetDirectory: {
+    identity: singletonIdentity,
+    selector: singletonSelector,
+    parents: ["Services"],
+    children: []
+  },
+  GOOSE: {
+    identity: singletonIdentity,
+    selector: singletonSelector,
+    parents: ["Services"],
+    children: []
+  },
+  GOOSESecurity: {
+    identity: namingIdentity,
+    selector: namingSelector,
+    parents: ["AccessPoint"],
+    children: [...tNamingSequence, "Subject", "IssuerName"]
+  },
+  GSE: {
+    identity: controlBlockIdentity,
+    selector: controlBlockSelector,
+    parents: ["ConnectedAP"],
+    children: [...tControlBlockSequence, "MinTime", "MaxTime"]
+  },
+  GSEDir: {
+    identity: singletonIdentity,
+    selector: singletonSelector,
+    parents: ["Services"],
+    children: []
+  },
+  GSEControl: {
+    identity: namingIdentity,
+    selector: namingSelector,
+    parents: ["LN0"],
+    children: [...tControlWithIEDNameSequence, "Protocol"]
+  },
+  GSESettings: {
+    identity: singletonIdentity,
+    selector: singletonSelector,
+    parents: ["Services"],
+    children: []
+  },
+  GSSE: {
+    identity: singletonIdentity,
+    selector: singletonSelector,
+    parents: ["Services"],
+    children: []
+  },
+  Header: {
+    identity: singletonIdentity,
+    selector: singletonSelector,
+    parents: ["SCL"],
+    children: ["Text", "History"]
+  },
+  History: {
+    identity: singletonIdentity,
+    selector: singletonSelector,
+    parents: ["Header"],
+    children: ["Hitem"]
+  },
+  Hitem: {
+    identity: hitemIdentity,
+    selector: hitemSelector,
+    parents: ["History"],
+    children: []
+  },
+  IED: {
+    identity: namingIdentity,
+    selector: namingSelector,
+    parents: ["SCL"],
+    children: [...tUnNamingSequence, "Services", "AccessPoint", "KDC"]
+  },
+  IEDName: {
+    identity: iEDNameIdentity,
+    selector: iEDNameSelector,
+    parents: ["GSEControl", "SampledValueControl"],
+    children: []
+  },
+  Inputs: {
+    identity: singletonIdentity,
+    selector: singletonSelector,
+    parents: [...tAnyLN],
+    children: [...tUnNamingSequence, "ExtRef"]
+  },
+  IssuerName: {
+    identity: singletonIdentity,
+    selector: singletonSelector,
+    parents: ["GOOSESecurity", "SMVSecurity"],
+    children: []
+  },
+  KDC: {
+    identity: kDCIdentity,
+    selector: kDCSelector,
+    parents: ["IED"],
+    children: []
+  },
+  LDevice: {
+    identity: lDeviceIdentity,
+    selector: lDeviceSelector,
+    parents: ["Server"],
+    children: [...tUnNamingSequence, "LN0", "LN", "AccessControl"]
+  },
+  LN: {
+    identity: lNIdentity,
+    selector: lNSelector,
+    parents: ["AccessPoint", "LDevice"],
+    children: [...tAnyLNSequence]
+  },
+  LN0: {
+    identity: singletonIdentity,
+    selector: singletonSelector,
+    parents: ["LDevice"],
+    children: [
+      ...tAnyLNSequence,
+      "GSEControl",
+      "SampledValueControl",
+      "SettingControl"
+    ]
+  },
+  LNode: {
+    identity: lNodeIdentity,
+    selector: lNodeSelector,
+    parents: [...tLNodeContainer],
+    children: [...tUnNamingSequence]
+  },
+  LNodeType: {
+    identity: idNamingIdentity,
+    selector: idNamingSelector,
+    parents: ["DataTypeTemplates"],
+    children: [...tIDNamingSequence, "DO"]
+  },
+  Line: {
+    identity: namingIdentity,
+    selector: namingSelector,
+    parents: ["Process", "SCL"],
+    children: [
+      ...tGeneralEquipmentContainerSequence,
+      "Voltage",
+      "ConductingEquipment"
+    ]
+  },
+  Log: {
+    identity: namingIdentity,
+    selector: namingSelector,
+    parents: [...tAnyLN],
+    children: [...tUnNamingSequence]
+  },
+  LogControl: {
+    identity: namingIdentity,
+    selector: namingSelector,
+    parents: [...tAnyLN],
+    children: [...tControlWithTriggerOptSequence]
+  },
+  LogSettings: {
+    identity: singletonIdentity,
+    selector: singletonSelector,
+    parents: ["Services"],
+    children: []
+  },
+  MaxTime: {
+    identity: singletonIdentity,
+    selector: singletonSelector,
+    parents: ["GSE"],
+    children: []
+  },
+  McSecurity: {
+    identity: singletonIdentity,
+    selector: singletonSelector,
+    parents: ["GSESettings", "SMVSettings", "ClientServices"],
+    children: []
+  },
+  MinTime: {
+    identity: singletonIdentity,
+    selector: singletonSelector,
+    parents: ["GSE"],
+    children: []
+  },
+  NeutralPoint: {
+    identity: terminalIdentity,
+    selector: terminalSelector,
+    parents: ["TransformerWinding"],
+    children: [...tUnNamingSequence]
+  },
+  OptFields: {
+    identity: singletonIdentity,
+    selector: singletonSelector,
+    parents: ["ReportControl"],
+    children: []
+  },
+  P: {
+    identity: pIdentity,
+    selector: pSelector,
+    parents: ["Address", "PhysConn"],
+    children: []
+  },
+  PhysConn: {
+    identity: physConnIdentity,
+    selector: physConnSelector,
+    parents: ["ConnectedAP"],
+    children: [...tUnNamingSequence, "P"]
+  },
+  PowerTransformer: {
+    identity: namingIdentity,
+    selector: namingSelector,
+    parents: [...tEquipmentContainer],
+    children: [
+      ...tEquipmentSequence,
+      "TransformerWinding",
+      "SubEquipment",
+      "EqFunction"
+    ]
+  },
+  Private: {
+    identity: () => NaN,
+    selector: () => voidSelector,
+    parents: [],
+    children: []
+  },
+  Process: {
+    identity: namingIdentity,
+    selector: namingSelector,
+    parents: ["Process", "SCL"],
+    children: [
+      ...tGeneralEquipmentContainerSequence,
+      "ConductingEquipment",
+      "Substation",
+      "Line",
+      "Process"
+    ]
+  },
+  ProtNs: {
+    identity: protNsIdentity,
+    selector: protNsSelector,
+    parents: ["DAType", "DA"],
+    children: []
+  },
+  Protocol: {
+    identity: singletonIdentity,
+    selector: singletonSelector,
+    parents: ["GSEControl", "SampledValueControl"],
+    children: []
+  },
+  ReadWrite: {
+    identity: singletonIdentity,
+    selector: singletonSelector,
+    parents: ["Services"],
+    children: []
+  },
+  RedProt: {
+    identity: singletonIdentity,
+    selector: singletonSelector,
+    parents: ["Services"],
+    children: []
+  },
+  ReportControl: {
+    identity: namingIdentity,
+    selector: namingSelector,
+    parents: [...tAnyLN],
+    children: [...tControlWithTriggerOptSequence, "OptFields", "RptEnabled"]
+  },
+  ReportSettings: {
+    identity: singletonIdentity,
+    selector: singletonSelector,
+    parents: ["Services"],
+    children: []
+  },
+  RptEnabled: {
+    identity: singletonIdentity,
+    selector: singletonSelector,
+    parents: ["ReportControl"],
+    children: [...tUnNamingSequence, "ClientLN"]
+  },
+  SamplesPerSec: {
+    identity: singletonIdentity,
+    selector: singletonSelector,
+    parents: ["SMVSettings"],
+    children: []
+  },
+  SampledValueControl: {
+    identity: namingIdentity,
+    selector: namingSelector,
+    parents: ["LN0"],
+    children: [...tControlWithIEDNameSequence, "SmvOpts"]
+  },
+  SecPerSamples: {
+    identity: singletonIdentity,
+    selector: singletonSelector,
+    parents: ["SMVSettings"],
+    children: []
+  },
+  SCL: {
+    identity: sCLIdentity,
+    selector: sCLSelector,
+    parents: [],
+    children: [
+      ...tBaseNameSequence,
+      "Header",
+      "Substation",
+      "Communication",
+      "IED",
+      "DataTypeTemplates",
+      "Line",
+      "Process"
+    ]
+  },
+  SDI: {
+    identity: ixNamingIdentity,
+    selector: ixNamingSelector,
+    parents: ["DOI", "SDI"],
+    children: [...tUnNamingSequence, "SDI", "DAI"]
+  },
+  SDO: {
+    identity: namingIdentity,
+    selector: namingSelector,
+    parents: ["DOType"],
+    children: [...tNamingSequence]
+  },
+  Server: {
+    identity: singletonIdentity,
+    selector: singletonSelector,
+    parents: ["AccessPoint"],
+    children: [
+      ...tUnNamingSequence,
+      "Authentication",
+      "LDevice",
+      "Association"
+    ]
+  },
+  ServerAt: {
+    identity: singletonIdentity,
+    selector: singletonSelector,
+    parents: ["AccessPoint"],
+    children: [...tUnNamingSequence]
+  },
+  Services: {
+    identity: singletonIdentity,
+    selector: singletonSelector,
+    parents: ["IED", "AccessPoint"],
+    children: [
+      "DynAssociation",
+      "SettingGroups",
+      "GetDirectory",
+      "GetDataObjectDefinition",
+      "DataObjectDirectory",
+      "GetDataSetValue",
+      "SetDataSetValue",
+      "DataSetDirectory",
+      "ConfDataSet",
+      "DynDataSet",
+      "ReadWrite",
+      "TimerActivatedControl",
+      "ConfReportControl",
+      "GetCBValues",
+      "ConfLogControl",
+      "ReportSettings",
+      "LogSettings",
+      "GSESettings",
+      "SMVSettings",
+      "GSEDir",
+      "GOOSE",
+      "GSSE",
+      "SMVsc",
+      "FileHandling",
+      "ConfLNs",
+      "ClientServices",
+      "ConfLdName",
+      "SupSubscription",
+      "ConfSigRef",
+      "ValueHandling",
+      "RedProt",
+      "TimeSyncProt",
+      "CommProt"
+    ]
+  },
+  SetDataSetValue: {
+    identity: singletonIdentity,
+    selector: singletonSelector,
+    parents: ["Services"],
+    children: []
+  },
+  SettingControl: {
+    identity: singletonIdentity,
+    selector: singletonSelector,
+    parents: ["LN0"],
+    children: [...tUnNamingSequence]
+  },
+  SettingGroups: {
+    identity: singletonIdentity,
+    selector: singletonSelector,
+    parents: ["Services"],
+    children: ["SGEdit", "ConfSG"]
+  },
+  SGEdit: {
+    identity: singletonIdentity,
+    selector: singletonSelector,
+    parents: ["SettingGroups"],
+    children: []
+  },
+  SmpRate: {
+    identity: singletonIdentity,
+    selector: singletonSelector,
+    parents: ["SMVSettings"],
+    children: []
+  },
+  SMV: {
+    identity: controlBlockIdentity,
+    selector: controlBlockSelector,
+    parents: ["ConnectedAP"],
+    children: [...tControlBlockSequence]
+  },
+  SmvOpts: {
+    identity: singletonIdentity,
+    selector: singletonSelector,
+    parents: ["SampledValueControl"],
+    children: []
+  },
+  SMVsc: {
+    identity: singletonIdentity,
+    selector: singletonSelector,
+    parents: ["Services"],
+    children: []
+  },
+  SMVSecurity: {
+    identity: namingIdentity,
+    selector: namingSelector,
+    parents: ["AccessPoint"],
+    children: [...tNamingSequence, "Subject", "IssuerName"]
+  },
+  SMVSettings: {
+    identity: singletonIdentity,
+    selector: singletonSelector,
+    parents: ["Services"],
+    children: ["SmpRate", "SamplesPerSec", "SecPerSamples", "McSecurity"]
+  },
+  SubEquipment: {
+    identity: namingIdentity,
+    selector: namingSelector,
+    parents: [
+      "TapChanger",
+      "PowerTransformer",
+      ...tAbstractConductingEquipment
+    ],
+    children: [...tPowerSystemResourceSequence, "EqFunction"]
+  },
+  SubFunction: {
+    identity: namingIdentity,
+    selector: namingSelector,
+    parents: ["SubFunction", "Function"],
+    children: [
+      ...tPowerSystemResourceSequence,
+      "GeneralEquipment",
+      "ConductingEquipment",
+      "SubFunction"
+    ]
+  },
+  SubNetwork: {
+    identity: namingIdentity,
+    selector: namingSelector,
+    parents: ["Communication"],
+    children: [...tNamingSequence, "BitRate", "ConnectedAP"]
+  },
+  Subject: {
+    identity: singletonIdentity,
+    selector: singletonSelector,
+    parents: ["GOOSESecurity", "SMVSecurity"],
+    children: []
+  },
+  Substation: {
+    identity: namingIdentity,
+    selector: namingSelector,
+    parents: ["SCL"],
+    children: [...tEquipmentContainerSequence, "VoltageLevel", "Function"]
+  },
+  SupSubscription: {
+    identity: singletonIdentity,
+    selector: singletonSelector,
+    parents: ["Services"],
+    children: []
+  },
+  TapChanger: {
+    identity: namingIdentity,
+    selector: namingSelector,
+    parents: ["TransformerWinding"],
+    children: [...tPowerSystemResourceSequence, "SubEquipment", "EqFunction"]
+  },
+  Terminal: {
+    identity: terminalIdentity,
+    selector: terminalSelector,
+    parents: [...tEquipment],
+    children: [...tUnNamingSequence]
+  },
+  Text: {
+    identity: singletonIdentity,
+    selector: singletonSelector,
+    parents: sCLTags.filter((tag) => tag !== "Text" && tag !== "Private"),
+    children: []
+  },
+  TimerActivatedControl: {
+    identity: singletonIdentity,
+    selector: singletonSelector,
+    parents: ["Services"],
+    children: []
+  },
+  TimeSyncProt: {
+    identity: singletonIdentity,
+    selector: singletonSelector,
+    parents: ["Services", "ClientServices"],
+    children: []
+  },
+  TransformerWinding: {
+    identity: namingIdentity,
+    selector: namingSelector,
+    parents: ["PowerTransformer"],
+    children: [
+      ...tAbstractConductingEquipmentSequence,
+      "TapChanger",
+      "NeutralPoint",
+      "EqFunction"
+    ]
+  },
+  TrgOps: {
+    identity: singletonIdentity,
+    selector: singletonSelector,
+    parents: ["ReportControl"],
+    children: []
+  },
+  Val: {
+    identity: valIdentity,
+    selector: valSelector,
+    parents: ["DAI", "DA", "BDA"],
+    children: []
+  },
+  ValueHandling: {
+    identity: singletonIdentity,
+    selector: singletonSelector,
+    parents: ["Services"],
+    children: []
+  },
+  Voltage: {
+    identity: singletonIdentity,
+    selector: singletonSelector,
+    parents: ["VoltageLevel"],
+    children: []
+  },
+  VoltageLevel: {
+    identity: namingIdentity,
+    selector: namingSelector,
+    parents: ["Substation"],
+    children: [...tEquipmentContainerSequence, "Voltage", "Bay", "Function"]
+  }
+};
+export function getReference(parent, tag) {
+  if (tag === "LNode")
+    console.log(parent);
+  const parentTag = parent.tagName;
+  const children = Array.from(parent.children);
+  if (parentTag === "Services" || parentTag === "SettingGroups" || !isSCLTag(parentTag))
+    return children.find((child) => child.tagName === tag) ?? null;
+  const sequence = tags[parentTag]?.children ?? [];
+  let index = sequence.findIndex((element) => element === tag);
+  if (index < 0)
+    return null;
+  let nextSibling;
+  while (index < sequence.length && !nextSibling) {
+    nextSibling = children.find((child) => child.tagName === sequence[index]);
+    index++;
+  }
+  return nextSibling ?? null;
 }
 export function selector(tagName, identity2) {
   if (typeof identity2 !== "string")
-    return ":not(*)";
-  if (singletonTags[tagName])
-    return singletonSelector(tagName, identity2);
-  if (specialTags[tagName])
-    return specialTags[tagName]?.selector?.(tagName, identity2) ?? ":not(*)";
-  if (namingParents[tagName])
-    return namingSelector(tagName, identity2);
-  if (identity2.startsWith("#"))
-    return `${tagName}[id="${identity2.replace("#", "")}"]`;
+    return voidSelector;
+  if (isSCLTag(tagName))
+    return tags[tagName].selector(tagName, identity2);
   return tagName;
 }
 export function identity(e) {
@@ -785,17 +1699,9 @@ export function identity(e) {
     return NaN;
   if (e.closest("Private"))
     return NaN;
-  if (singletonTags[e.tagName])
-    return singletonIdentity(e);
-  const specialIdentity = specialTags[e.tagName]?.identity;
-  if (specialIdentity)
-    return specialIdentity(e);
-  if (e.id)
-    return `#${e.id}`;
-  if (e.hasAttribute("name") && e.parentElement)
-    return e.parentElement.tagName === "SCL" ? e.getAttribute("name") : `${identity(e.parentElement)}>${e.getAttribute("name")}`;
-  if (e.tagName === "SCL")
-    return "";
+  const tag = e.tagName;
+  if (isSCLTag(tag))
+    return tags[tag].identity(e);
   return NaN;
 }
 export function isSame(a, b) {
