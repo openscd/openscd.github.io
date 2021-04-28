@@ -100,8 +100,12 @@ export let WizardDialog = class extends LitElement {
   }
   updated(changedProperties) {
     if (changedProperties.has("wizard")) {
-      this.dialog?.show();
       this.pageIndex = 0;
+      while (this.wizard.findIndex((page) => page.initial) > this.pageIndex && dialogValid(this.dialog)) {
+        this.dialog?.close();
+        this.next();
+      }
+      this.dialog?.show();
     }
   }
   renderPage(page, index) {

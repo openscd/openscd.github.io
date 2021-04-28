@@ -31,14 +31,14 @@ export let Filterlist = class extends List {
     return this.items.some((item) => item instanceof CheckListItem);
   }
   get isAllSelected() {
-    return this.items.filter((item) => item instanceof CheckListItem).every((checkItem) => checkItem.selected);
+    return this.items.filter((item) => !item.disabled).filter((item) => item instanceof CheckListItem).every((checkItem) => checkItem.selected);
   }
   get isSomeSelected() {
-    return this.items.filter((item) => item instanceof CheckListItem).some((checkItem) => checkItem.selected);
+    return this.items.filter((item) => !item.disabled).filter((item) => item instanceof CheckListItem).some((checkItem) => checkItem.selected);
   }
   onCheckAll() {
     const select = !this.isAllSelected;
-    this.items.forEach((item) => item.selected = select);
+    this.items.filter((item) => !item.disabled).forEach((item) => item.selected = select);
   }
   onFilterInput() {
     this.items.forEach((item) => {
