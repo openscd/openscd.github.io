@@ -108,7 +108,8 @@ export function mergeWizard(sink, source, options) {
       primary: {
         label: get("merge.action"),
         icon: "merge_type",
-        action: mergeWizardAction(attrDiffs, childDiffs, sink, source, options)
+        action: mergeWizardAction(attrDiffs, childDiffs, sink, source, options),
+        auto: options?.auto?.(sink, source) ?? false
       },
       content: [
         html`

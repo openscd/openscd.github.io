@@ -64,7 +64,7 @@ export let WizardDialog = class extends LitElement {
       dialogInputs(this.dialog).map((wi) => wi.reportValidity());
     }
   }
-  async act(action, primary = false) {
+  async act(action, primary = true) {
     if (action === void 0)
       return false;
     if (primary)
@@ -79,10 +79,6 @@ export let WizardDialog = class extends LitElement {
     }
     const wizardActions = action(inputArray, this);
     if (wizardActions.length > 0) {
-      if (primary)
-        this.wizard[this.pageIndex].primary = void 0;
-      else
-        this.wizard[this.pageIndex].secondary = void 0;
       this.dispatchEvent(newWizardEvent());
     }
     wizardActions.forEach((wa) => isWizard(wa) ? this.dispatchEvent(newWizardEvent(wa())) : this.dispatchEvent(newActionEvent(wa)));
@@ -106,6 +102,9 @@ export let WizardDialog = class extends LitElement {
         this.next();
       }
       this.dialog?.show();
+    }
+    if (this.wizard[this.pageIndex]?.primary?.auto) {
+      this.updateComplete.then(() => this.act(this.wizard[this.pageIndex].primary.action));
     }
   }
   renderPage(page, index) {

@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">52% </span>
+                <span class="strong">48.15% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>13/25</span>
+                <span class='fraction'>13/27</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">37.5% </span>
+                <span class="strong">35.29% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>12/32</span>
+                <span class='fraction'>12/34</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">30% </span>
+                <span class="strong">25% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>3/10</span>
+                <span class='fraction'>3/12</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">52.17% </span>
+                <span class="strong">48% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>12/23</span>
+                <span class='fraction'>12/25</span>
             </div>
         
             
@@ -55,7 +55,7 @@
             Press <em>n</em> or <em>j</em> to go to the next uncovered block, <em>b</em>, <em>p</em> or <em>k</em> for the previous block.
         </p>
     </div>
-    <div class='status-line medium'></div>
+    <div class='status-line low'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -199,7 +199,16 @@
 <a name='L140'></a><a href='#L140'>140</a>
 <a name='L141'></a><a href='#L141'>141</a>
 <a name='L142'></a><a href='#L142'>142</a>
-<a name='L143'></a><a href='#L143'>143</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L143'></a><a href='#L143'>143</a>
+<a name='L144'></a><a href='#L144'>144</a>
+<a name='L145'></a><a href='#L145'>145</a>
+<a name='L146'></a><a href='#L146'>146</a>
+<a name='L147'></a><a href='#L147'>147</a>
+<a name='L148'></a><a href='#L148'>148</a>
+<a name='L149'></a><a href='#L149'>149</a>
+<a name='L150'></a><a href='#L150'>150</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -308,14 +317,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -323,10 +324,23 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -348,7 +362,9 @@ import {
   crossProduct,
   identity,
   newWizardEvent,
+  SCLTag,
   selector,
+  tags,
 } from '../foundation.js';
 import { Diff, mergeWizard } from '../wizards.js';
 &nbsp;
@@ -436,8 +452,8 @@ export default class UpdateSubstationPlugin extends LitElement {
           newWizardEvent(
             mergeWizard(
               // FIXME: doesn't work with multiple Substations!
-              this.doc.querySelector('Substation')!,
-              doc.querySelector('Substation')!,
+              this.doc.documentElement,
+              doc.documentElement,
               {
                 title: get('updatesubstation.title'),
                 selected: <span class="fstat-no" title="function not covered" >(d</span>iff: Diff&lt;Element | string&gt;): boolean =&gt;
@@ -447,7 +463,10 @@ export default class UpdateSubstationPlugin extends LitElement {
                           selector('LNode', identity(diff.theirs))
                         ) === null &amp;&amp;
                         isValidReference(doc, identity(diff.theirs))
-                      : true
+                      : diff.theirs.tagName === 'Substation' ||
+                        !tags['SCL'].children.includes(
+                          &lt;SCLTag&gt;diff.theirs.tagName
+                        )
                     : diff.theirs !== null,
                 disabled: <span class="fstat-no" title="function not covered" >(d</span>iff: Diff&lt;Element | string&gt;): boolean =&gt;
 <span class="cstat-no" title="statement not covered" >                  diff.theirs instanceof Element &amp;&amp;</span>
@@ -456,6 +475,7 @@ export default class UpdateSubstationPlugin extends LitElement {
                     selector('LNode', identity(diff.theirs))
                   ) !== null ||
                     !isValidReference(doc, identity(diff.theirs))),
+                auto: <span class="fstat-no" title="function not covered" >(): boolean =</span>&gt; <span class="cstat-no" title="statement not covered" >true,</span>
               }
             )
           )
@@ -470,9 +490,10 @@ export default class UpdateSubstationPlugin extends LitElement {
 &nbsp;
 <span class="fstat-no" title="function not covered" >  render(</span>): TemplateResult {
 <span class="cstat-no" title="statement not covered" >    return html`&lt;input @click=${<span class="fstat-no" title="function not covered" >(e</span>vent: MouseEvent) =&gt;</span>
-      ((&lt;HTMLInputElement&gt;<span class="cstat-no" title="statement not covered" >event.target).value = '')</span>} @change=${
-      this.updateSubstation
-    } id="update-substation-plugin-input" accept=".sed,.scd,.ssd,.iid,.cid" type="file"&gt;&lt;/input&gt;`;
+      ((&lt;HTMLInputElement&gt;<span class="cstat-no" title="statement not covered" >event.target).value = '')</span>} @change=${<span class="fstat-no" title="function not covered" >(e</span>: Event) =&gt;
+<span class="cstat-no" title="statement not covered" >      this.updateSubstation(</span>
+        e
+      )} id="update-substation-plugin-input" accept=".sed,.scd,.ssd,.iid,.cid" type="file"&gt;&lt;/input&gt;`;
   }
 &nbsp;
   static styles = css`
@@ -490,7 +511,7 @@ export default class UpdateSubstationPlugin extends LitElement {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Wed Apr 28 2021 07:00:25 GMT+0000 (Coordinated Universal Time)
+                at Wed Apr 28 2021 07:00:36 GMT+0000 (Coordinated Universal Time)
             </div>
         </div>
         <script src="../../prettify.js"></script>

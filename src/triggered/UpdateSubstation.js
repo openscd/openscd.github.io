@@ -15,7 +15,8 @@ import {
   crossProduct,
   identity,
   newWizardEvent,
-  selector
+  selector,
+  tags
 } from "../foundation.js";
 import {mergeWizard} from "../wizards.js";
 export function isValidReference(doc, identity2) {
@@ -59,10 +60,11 @@ export default class UpdateSubstationPlugin extends LitElement {
     if (file)
       file.text().then((text) => {
         const doc = new DOMParser().parseFromString(text, "application/xml");
-        document.querySelector("open-scd").dispatchEvent(newWizardEvent(mergeWizard(this.doc.querySelector("Substation"), doc.querySelector("Substation"), {
+        document.querySelector("open-scd").dispatchEvent(newWizardEvent(mergeWizard(this.doc.documentElement, doc.documentElement, {
           title: get("updatesubstation.title"),
-          selected: (diff) => diff.theirs instanceof Element ? diff.theirs.tagName === "LNode" ? this.doc.querySelector(selector("LNode", identity(diff.theirs))) === null && isValidReference(doc, identity(diff.theirs)) : true : diff.theirs !== null,
-          disabled: (diff) => diff.theirs instanceof Element && diff.theirs.tagName === "LNode" && (this.doc.querySelector(selector("LNode", identity(diff.theirs))) !== null || !isValidReference(doc, identity(diff.theirs)))
+          selected: (diff) => diff.theirs instanceof Element ? diff.theirs.tagName === "LNode" ? this.doc.querySelector(selector("LNode", identity(diff.theirs))) === null && isValidReference(doc, identity(diff.theirs)) : diff.theirs.tagName === "Substation" || !tags["SCL"].children.includes(diff.theirs.tagName) : diff.theirs !== null,
+          disabled: (diff) => diff.theirs instanceof Element && diff.theirs.tagName === "LNode" && (this.doc.querySelector(selector("LNode", identity(diff.theirs))) !== null || !isValidReference(doc, identity(diff.theirs))),
+          auto: () => true
         })));
       });
     this.pluginFileUI.onchange = null;
@@ -71,7 +73,7 @@ export default class UpdateSubstationPlugin extends LitElement {
     this.pluginFileUI.click();
   }
   render() {
-    return html`<input @click=${(event) => event.target.value = ""} @change=${this.updateSubstation} id="update-substation-plugin-input" accept=".sed,.scd,.ssd,.iid,.cid" type="file"></input>`;
+    return html`<input @click=${(event) => event.target.value = ""} @change=${(e) => this.updateSubstation(e)} id="update-substation-plugin-input" accept=".sed,.scd,.ssd,.iid,.cid" type="file"></input>`;
   }
 }
 UpdateSubstationPlugin.styles = css`
