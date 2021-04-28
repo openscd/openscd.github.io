@@ -197,7 +197,7 @@ export let OpenSCD = class extends Setting(Importing(Wizarding(Waiting(Validatin
               <mwc-radio-list-item left value="2003"
                 >Edition 1 (Schema 1.7)</mwc-radio-list-item
               >
-              <mwc-radio-list-item left value="2007B1"
+              <mwc-radio-list-item left value="2007B"
                 >Edition 2 (Schema 3.1)</mwc-radio-list-item
               >
               <mwc-radio-list-item left selected value="2007B4"
