@@ -11,26 +11,30 @@ var __decorate = (decorators, target, key, kind) => {
 };
 import {LitElement, html, property, css} from "../../_snowpack/pkg/lit-element.js";
 import {translate, get} from "../../_snowpack/pkg/lit-translate.js";
-import {selectors, styles} from "./communication/foundation.js";
 import {
   newWizardEvent,
   newActionEvent,
-  createElement
+  createElement,
+  getReference
 } from "../foundation.js";
+import {selectors, styles} from "./communication/foundation.js";
 import "./communication/subnetwork-editor.js";
-import {SubNetworkEditor} from "./communication/subnetwork-editor.js";
+import {subNetworkWizard} from "./communication/subnetwork-editor.js";
 export default class CommunicationPlugin extends LitElement {
+  createCommunication() {
+    this.dispatchEvent(newActionEvent({
+      new: {
+        parent: this.doc.documentElement,
+        element: createElement(this.doc, "Communication", {}),
+        reference: getReference(this.doc.documentElement, "Communication")
+      }
+    }));
+  }
   openCreateSubNetworkWizard() {
     if (!this.doc.querySelector(selectors.Communication))
-      this.dispatchEvent(newActionEvent({
-        new: {
-          parent: this.doc.documentElement,
-          element: createElement(this.doc, "Communication", {}),
-          reference: this.doc.querySelector(":root > IED") || this.doc.querySelector(":root > DataTypeTemplate") || null
-        }
-      }));
-    this.dispatchEvent(newWizardEvent(SubNetworkEditor.wizard({
-      parent: this.doc.documentElement.querySelector(selectors.Communication)
+      this.createCommunication();
+    this.dispatchEvent(newWizardEvent(subNetworkWizard({
+      parent: this.doc.querySelector("Communication")
     })));
   }
   render() {

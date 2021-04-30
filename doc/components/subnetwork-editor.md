@@ -19,6 +19,6 @@
 | `openConnectedAPwizard` | `(): void`             |
 | `openEditWizard`        | `(): void`             |
 | `remove`                | `(): void`             |
-| `renderBla`             | `(): TemplateResult[]` |
 | `renderHeader`          | `(): TemplateResult`   |
+| `renderIedContainer`    | `(): TemplateResult[]` |
 | `renderSubNetworkSpecs` | `(): TemplateResult`   |

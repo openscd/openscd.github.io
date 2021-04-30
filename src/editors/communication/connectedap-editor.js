@@ -16,13 +16,15 @@ import {
   property,
   css
 } from "../../../_snowpack/pkg/lit-element.js";
+import {ifDefined} from "../../../_snowpack/pkg/lit-html/directives/if-defined.js";
 import {translate, get} from "../../../_snowpack/pkg/lit-translate.js";
 import {
   newWizardEvent,
   newActionEvent,
   compareNames,
   getValue,
-  createElement
+  createElement,
+  getReference
 } from "../../foundation.js";
 import {
   getTypes,
@@ -51,12 +53,143 @@ function createAddressElement(inputs, parent, instType) {
   });
   return element;
 }
+function createConnectedApAction(parent) {
+  return (inputs, wizard) => {
+    const apValue = wizard.shadowRoot.querySelector("#apList").selected.map((item) => JSON.parse(item.value));
+    const actions = apValue.map((value) => ({
+      new: {
+        parent,
+        element: createElement(parent.ownerDocument, "ConnectedAP", {
+          iedName: value.iedName,
+          apName: value.apName
+        }),
+        reference: getReference(parent, "ConnectedAP")
+      }
+    }));
+    return actions;
+  };
+}
+function onFilterInput(evt) {
+  (evt.target.parentElement?.querySelector("mwc-list")).items.forEach((item) => {
+    item.value.toUpperCase().includes(evt.target.value.toUpperCase()) ? item.removeAttribute("style") : item.setAttribute("style", "display:none;");
+  });
+}
+function renderWizardPage(element) {
+  const doc = element.ownerDocument;
+  const accPoints = Array.from(doc.querySelectorAll(":root > IED")).sort(compareNames).flatMap((ied) => Array.from(ied.querySelectorAll(":root > IED > AccessPoint"))).map((accP) => {
+    return {
+      iedName: accP.parentElement.getAttribute("name"),
+      apName: accP.getAttribute("name")
+    };
+  });
+  const accPointDescription = accPoints.map((value) => {
+    return {
+      value,
+      connected: doc?.querySelector(`:root > Communication > SubNetwork > ConnectedAP[iedName="${value.iedName}"][apName="${value.apName}"]`) !== null
+    };
+  }).sort(compareListItemConnection);
+  if (accPointDescription.length)
+    return html` <filtered-list id="apList" multi
+      >${accPointDescription.map((item) => html`<mwc-check-list-item
+          value="${JSON.stringify(item.value)}"
+          twoline
+          ?disabled=${item.connected}
+          ><span>${item.value.apName}</span
+          ><span slot="secondary"
+            >${item.value.iedName}</span
+          ></mwc-check-list-item
+        >`)}
+    </filtered-list>`;
+  return html`<mwc-list-item disabled graphic="icon">
+    <span>${translate("lnode.wizard.placeholder")}</span>
+    <mwc-icon slot="graphic">info</mwc-icon>
+  </mwc-list-item>`;
+}
+export function createConnectedApWizard(element) {
+  return [
+    {
+      title: get("connectedap.wizard.title.connect"),
+      primary: {
+        icon: "save",
+        label: get("save"),
+        action: createConnectedApAction(element)
+      },
+      content: [renderWizardPage(element)]
+    }
+  ];
+}
+export function editConnectedApAction(parent) {
+  return (inputs, wizard) => {
+    const instType = wizard.shadowRoot?.querySelector("#instType")?.checked ?? false;
+    const newAddress = createAddressElement(inputs, parent, instType);
+    const complexAction = {
+      actions: [],
+      title: get("connectedap.action.addaddress", {
+        iedName: parent.getAttribute("iedName") ?? "",
+        apName: parent.getAttribute("apName") ?? ""
+      })
+    };
+    const oldAddress = parent.querySelector(selectors.Address);
+    if (oldAddress !== null && !isEqualAddress(oldAddress, newAddress)) {
+      complexAction.actions.push({
+        old: {
+          parent,
+          element: oldAddress,
+          reference: oldAddress.nextElementSibling
+        }
+      });
+      complexAction.actions.push({
+        new: {
+          parent,
+          element: newAddress,
+          reference: oldAddress.nextElementSibling
+        }
+      });
+    } else if (oldAddress === null)
+      complexAction.actions.push({
+        new: {
+          parent,
+          element: newAddress,
+          reference: getReference(parent, "Address")
+        }
+      });
+    return [complexAction];
+  };
+}
+function editConnectedApWizard(element) {
+  return [
+    {
+      title: get("connectedap.wizard.title.edit"),
+      primary: {
+        icon: "save",
+        label: get("save"),
+        action: editConnectedApAction(element)
+      },
+      content: [
+        html`<mwc-formfield
+            label="${translate("connectedap.wizard.addschemainsttype")}"
+          >
+            <mwc-checkbox
+              id="instType"
+              ?checked="${Array.from(element.querySelectorAll(selectors.Address + " > P")).filter((pType) => pType.getAttribute("xsi:type")).length > 0}"
+            ></mwc-checkbox> </mwc-formfield
+          >${getTypes(element).map((ptype) => html`<wizard-textfield
+                label="${ptype}"
+                pattern="${ifDefined(typePattern[ptype])}"
+                ?nullable=${typeNullable[ptype]}
+                .maybeValue=${element.querySelector(`:root > Communication > SubNetwork > ConnectedAP > Address > P[type="${ptype}"]`)?.innerHTML ?? null}
+                maxLength="${ifDefined(typeMaxLength[ptype])}"
+              ></wizard-textfield>`)}`
+      ]
+    }
+  ];
+}
 export let ConnectedAPEditor = class extends LitElement {
   get apName() {
     return this.element.getAttribute("apName") ?? null;
   }
   openEditWizard() {
-    this.dispatchEvent(newWizardEvent(ConnectedAPEditor.editWizard(this.element)));
+    this.dispatchEvent(newWizardEvent(editConnectedApWizard(this.element)));
   }
   remove() {
     if (this.element)
@@ -87,143 +220,6 @@ export let ConnectedAPEditor = class extends LitElement {
       </div>
       <h4>${this.apName}</h4>
     `;
-  }
-  static createAction(parent) {
-    return (inputs, wizard) => {
-      const apValue = wizard.shadowRoot.querySelector("#apList").selected.map((item) => JSON.parse(item.value));
-      const actions = apValue.map((value) => ({
-        new: {
-          parent,
-          element: createElement(parent.ownerDocument, "ConnectedAP", {
-            iedName: value.iedName,
-            apName: value.apName
-          }),
-          reference: null
-        }
-      }));
-      return actions;
-    };
-  }
-  static onFilterInput(evt) {
-    (evt.target.parentElement?.querySelector("mwc-list")).items.forEach((item) => {
-      item.value.toUpperCase().includes(evt.target.value.toUpperCase()) ? item.removeAttribute("style") : item.setAttribute("style", "display:none;");
-    });
-  }
-  static renderWizardPage(element) {
-    const doc = element.ownerDocument;
-    const accPoints = Array.from(doc.querySelectorAll(":root > IED")).sort(compareNames).flatMap((ied) => Array.from(ied.querySelectorAll(":root > IED > AccessPoint"))).map((accP) => {
-      return {
-        iedName: accP.parentElement.getAttribute("name"),
-        apName: accP.getAttribute("name")
-      };
-    });
-    const accPointDescription = accPoints.map((value) => {
-      return {
-        value,
-        connected: doc?.querySelector(`:root > Communication > SubNetwork > ConnectedAP[iedName="${value.iedName}"][apName="${value.apName}"]`) !== null
-      };
-    }).sort(compareListItemConnection);
-    if (accPointDescription.length)
-      return html`<mwc-textfield
-          label="${translate("filter")}"
-          iconTrailing="search"
-          outlined
-          @input=${ConnectedAPEditor.onFilterInput}
-        ></mwc-textfield>
-        <mwc-list id="apList" multi
-          >${accPointDescription.map((item) => html`<mwc-check-list-item
-              value="${JSON.stringify(item.value)}"
-              twoline
-              ?disabled=${item.connected}
-              ><span>${item.value.apName}</span
-              ><span slot="secondary"
-                >${item.value.iedName}</span
-              ></mwc-check-list-item
-            >`)}
-        </mwc-list>`;
-    return html`<mwc-list-item disabled graphic="icon">
-      <span>${translate("lnode.wizard.placeholder")}</span>
-      <mwc-icon slot="graphic">info</mwc-icon>
-    </mwc-list-item>`;
-  }
-  static createConnectedAP(element) {
-    return [
-      {
-        title: get("connectedap.wizard.title.connect"),
-        primary: {
-          icon: "save",
-          label: get("save"),
-          action: ConnectedAPEditor.createAction(element)
-        },
-        content: [ConnectedAPEditor.renderWizardPage(element)]
-      }
-    ];
-  }
-  static editAction(parent) {
-    return (inputs, wizard) => {
-      const instType = wizard.shadowRoot?.querySelector("#instType")?.checked ?? false;
-      const newAddress = createAddressElement(inputs, parent, instType);
-      const complexAction = {
-        actions: [],
-        title: get("connectedap.action.addaddress", {
-          iedName: parent.getAttribute("iedName") ?? "",
-          apName: parent.getAttribute("apName") ?? ""
-        })
-      };
-      const oldAddress = parent.querySelector(selectors.Address);
-      if (oldAddress !== null && !isEqualAddress(oldAddress, newAddress)) {
-        complexAction.actions.push({
-          old: {
-            parent,
-            element: oldAddress,
-            reference: oldAddress.nextElementSibling
-          }
-        });
-        complexAction.actions.push({
-          new: {
-            parent,
-            element: newAddress,
-            reference: oldAddress.nextElementSibling
-          }
-        });
-      } else if (oldAddress === null)
-        complexAction.actions.push({
-          new: {
-            parent,
-            element: newAddress,
-            reference: parent.firstElementChild
-          }
-        });
-      return [complexAction];
-    };
-  }
-  static editWizard(element) {
-    return [
-      {
-        title: get("connectedap.wizard.title.edit"),
-        primary: {
-          icon: "save",
-          label: get("save"),
-          action: ConnectedAPEditor.editAction(element)
-        },
-        content: [
-          html`<mwc-formfield
-              label="${translate("connectedap.wizard.addschemainsttype")}"
-            >
-              <mwc-checkbox
-                id="instType"
-                ?checked="${Array.from(element.querySelectorAll(selectors.Address + " > P")).filter((pType) => pType.getAttribute("xsi:type")).length > 0}"
-              ></mwc-checkbox> </mwc-formfield
-            >${getTypes(element).map((ptype) => html`<wizard-textfield
-                  label="${ptype}"
-                  pattern="${typePattern[ptype]}"
-                  nullable=${typeNullable[ptype]}
-                  .maybeValue=${element.querySelector(`:root > Communication > SubNetwork > ConnectedAP > Address > P[type="${ptype}"]`)?.innerHTML ?? null}
-                  maxLength="${typeMaxLength[ptype] ?? null}"
-                ></wizard-textfield>`)}`
-        ]
-      }
-    ];
   }
 };
 ConnectedAPEditor.styles = css`

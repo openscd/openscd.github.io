@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">90.91% </span>
+                <span class="strong">91.67% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>10/11</span>
+                <span class='fraction'>11/12</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">55.56% </span>
+                <span class="strong">66.67% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>5/9</span>
+                <span class='fraction'>4/6</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">80% </span>
+                <span class="strong">83.33% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>4/5</span>
+                <span class='fraction'>5/6</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">90.91% </span>
+                <span class="strong">91.67% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>10/11</span>
+                <span class='fraction'>11/12</span>
             </div>
         
             
@@ -141,7 +141,8 @@
 <a name='L82'></a><a href='#L82'>82</a>
 <a name='L83'></a><a href='#L83'>83</a>
 <a name='L84'></a><a href='#L84'>84</a>
-<a name='L85'></a><a href='#L85'>85</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L85'></a><a href='#L85'>85</a>
+<a name='L86'></a><a href='#L86'>86</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -149,22 +150,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -179,6 +164,23 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -228,16 +230,17 @@
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { LitElement, html, TemplateResult, property, css } from 'lit-element';
 import { translate, get } from 'lit-translate';
 &nbsp;
-import { selectors, styles } from './communication/foundation.js';
-&nbsp;
 import {
   newWizardEvent,
   newActionEvent,
   createElement,
+  getReference,
 } from '../foundation.js';
 &nbsp;
+import { selectors, styles } from './communication/foundation.js';
+&nbsp;
 import './communication/subnetwork-editor.js';
-import { SubNetworkEditor } from './communication/subnetwork-editor.js';
+import { subNetworkWizard } from './communication/subnetwork-editor.js';
 &nbsp;
 /** An editor [[`plugin`]] for editing the `Communication` section. */
 export default class CommunicationPlugin extends LitElement {
@@ -245,27 +248,27 @@ export default class CommunicationPlugin extends LitElement {
   @property()
   doc!: XMLDocument;
 &nbsp;
+  createCommunication(): void {
+    this.dispatchEvent(
+      newActionEvent({
+        new: {
+          parent: this.doc.documentElement,
+          element: createElement(this.doc, 'Communication', {}),
+          reference: getReference(this.doc.documentElement, 'Communication'),
+        },
+      })
+    );
+  }
+&nbsp;
   /** Opens a [[`WizardDialog`]] for creating a new `SubNetwork` element. */
   openCreateSubNetworkWizard(): void {
     <span class="missing-if-branch" title="else path not taken" >E</span>if (!this.doc.querySelector(selectors.Communication))
-      this.dispatchEvent(
-        newActionEvent({
-          new: {
-            parent: this.doc.documentElement,
-            element: createElement(this.doc, 'Communication', {}),
-            reference:
-              this.doc.querySelector(':root &gt; IED') ||
-<span class="branch-1 cbranch-no" title="branch not covered" >              this.doc.querySelector(':root &gt; DataTypeTemplate') </span>||
-<span class="branch-2 cbranch-no" title="branch not covered" >              null,</span>
-          },
-        })
-      );
+      this.createCommunication();
+&nbsp;
     this.dispatchEvent(
       newWizardEvent(
-        SubNetworkEditor.wizard({
-          parent: this.doc.documentElement.querySelector(
-            selectors.Communication
-          )!,
+        subNetworkWizard({
+          parent: this.doc.querySelector('Communication')!,
         })
       )
     );
@@ -316,7 +319,7 @@ export default class CommunicationPlugin extends LitElement {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Fri Apr 30 2021 08:39:49 GMT+0000 (Coordinated Universal Time)
+                at Fri Apr 30 2021 08:40:22 GMT+0000 (Coordinated Universal Time)
             </div>
         </div>
         <script src="../../prettify.js"></script>
