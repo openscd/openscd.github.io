@@ -211,14 +211,14 @@ export function Logging(Base) {
 
         <mwc-snackbar
           id="info"
-          timeoutMs="2000"
+          timeoutMs="4000"
           labelText="${this.history.slice().reverse().find((le) => le.kind === "info" || le.kind === "action")?.title ?? get("log.snackbar.placeholder")}"
         >
           <mwc-icon-button icon="close" slot="dismiss"></mwc-icon-button>
         </mwc-snackbar>
         <mwc-snackbar
           id="warning"
-          timeoutMs="5000"
+          timeoutMs="6000"
           labelText="${this.history.slice().reverse().find((le) => le.kind === "warning")?.title ?? get("log.snackbar.placeholder")}"
         >
           <mwc-button

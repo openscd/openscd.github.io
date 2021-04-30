@@ -372,19 +372,21 @@ export let OpenSCD = class extends Setting(Importing(Wizarding(Waiting(Validatin
       </mwc-dialog>
         
       ${this.doc ? until(this.editors[this.activeTab] && this.editors[this.activeTab].content(), html`<mwc-linear-progress indeterminate></mwc-linear-progress>`) : html`<div class="landing">
-          <mwc-icon-button 
-            class="landing_icon"
-            icon="create_new_folder"
-            @click=${() => this.openNewProjectWizard()}>
-          <div class="landing_label">${translate("menu.new")}</div>
-          </mwc-icon-button>
-          <mwc-icon-button 
-            class="landing_icon"
-            icon="folder_open" 
-            @click=${() => this.fileUI.click()}>
-            <div class="landing_label">${translate("menu.open")}</div>
-          </mwc-button>
-        </div>`}
+              <mwc-icon-button
+                class="landing_icon"
+                icon="create_new_folder"
+                @click=${() => this.openNewProjectWizard()}
+              >
+                <div class="landing_label">${translate("menu.new")}</div>
+              </mwc-icon-button>
+              <mwc-icon-button
+                class="landing_icon"
+                icon="folder_open"
+                @click=${() => this.fileUI.click()}
+              >
+                <div class="landing_label">${translate("menu.open")}</div>
+              </mwc-icon-button>
+            </div>`}
 
       <input id="file-input" type="file" accept=".scd,.ssd" @click=${(event) => event.target.value = ""} @change="${this.loadFile}"></input>
       <input id="ied-import" type="file" accept=".icd,.iid,.cid" @click=${(event) => event.target.value = ""} @change="${this.loadIEDFile}"></input>
