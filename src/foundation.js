@@ -1807,3 +1807,7 @@ export function findControlBlocks(extRef) {
   }));
   return controlBlocks;
 }
+export function getVersion(element) {
+  const header = Array.from(element.ownerDocument.getElementsByTagName("Header")).filter((item) => !item.closest("Private"));
+  return header[0].getAttribute("version") ?? "2003";
+}

@@ -2,6 +2,8 @@ import {LitElement} from "../../_snowpack/pkg/lit-element.js";
 import {get} from "../../_snowpack/pkg/lit-translate.js";
 import {
   createElement,
+  getReference,
+  getVersion,
   newActionEvent
 } from "../foundation.js";
 function getElementIndexOf(list, match) {
@@ -11,52 +13,52 @@ function getElementIndexOf(list, match) {
   return -1;
 }
 function addIEDName(extRef, gseControl) {
-  if (!extRef.parentElement?.parentElement?.getAttribute("lnClass"))
-    return null;
-  const ln = extRef.parentElement?.parentElement;
-  if (!ln.parentElement?.getAttribute("inst"))
-    return null;
-  const lDevice = ln.parentElement;
-  if (!lDevice.parentElement?.parentElement?.getAttribute("name"))
-    return null;
-  const accessPoint = lDevice.parentElement?.parentElement;
-  if (!accessPoint.parentElement?.getAttribute("name"))
-    return null;
-  const ied = accessPoint.parentElement;
-  if (Array.from(gseControl.querySelectorAll("IEDName")).filter((iedName2) => iedName2.getAttribute("apRef") === accessPoint.getAttribute("name") && iedName2.getAttribute("ldInst") === lDevice.getAttribute("inst") && iedName2.getAttribute("lnClass") === ln.getAttribute("lnClass") && iedName2.innerHTML === ied.getAttribute("name")).length !== 0)
-    return null;
-  const iedName = createElement(gseControl.ownerDocument, "IEDName", {
-    apRef: accessPoint.getAttribute("name"),
-    ldInst: lDevice.getAttribute("inst"),
-    lnClass: ln.getAttribute("lnClass")
-  });
-  iedName.innerHTML = ied.getAttribute("name");
-  return iedName;
+  const [ied, accPoint, lDevice, ln, ln0] = [
+    "IED",
+    "AccessPoint",
+    "LDevice",
+    "LN",
+    "LN0"
+  ].map((element) => extRef.closest(element));
+  const anyln = ln ? ln : ln0;
+  if (getVersion(extRef) === "2007" && Array.from(gseControl.getElementsByTagName("IEDName")).filter((item) => !item.closest("Private")).filter((iedName) => iedName.innerHTML === ied.getAttribute("name") && (iedName.getAttribute("apRef") ?? "") === (accPoint.getAttribute("name") ?? "") && (iedName.getAttribute("ldInst") ?? "") === (lDevice.getAttribute("inst") ?? "") && (iedName.getAttribute("prefix") ?? "") === (anyln.getAttribute("prefix") ?? "") && (iedName.getAttribute("lnClass") ?? "") === (anyln.getAttribute("lnClass") ?? "") && (iedName.getAttribute("lnInst") ?? "") === (anyln.getAttribute("inst") ?? "")).length === 0) {
+    const iedName = createElement(gseControl.ownerDocument, "IEDName", {
+      apRef: accPoint.getAttribute("name") ?? "",
+      ldInst: lDevice.getAttribute("inst") ?? "",
+      prefix: anyln.getAttribute("prefix") ?? "",
+      lnClass: anyln.getAttribute("lnClass") ?? "",
+      lnInst: anyln.getAttribute("inst") ?? ""
+    });
+    iedName.innerHTML = ied.getAttribute("name");
+    return iedName;
+  }
+  if (Array.from(gseControl.getElementsByTagName("IEDName")).filter((item) => !item.closest("Private")).filter((iedName) => iedName.innerHTML === ied.getAttribute("name")).length === 0) {
+    const iedName = createElement(gseControl.ownerDocument, "IEDName", {});
+    iedName.innerHTML = ied.getAttribute("name");
+    return iedName;
+  }
+  return null;
 }
 function getDestination(data, doc) {
-  if (!data.parentElement?.parentElement?.parentElement?.parentElement?.parentElement?.parentElement)
-    return [];
-  const sendIED = data.parentElement?.parentElement?.parentElement?.parentElement?.parentElement?.parentElement;
-  if (!sendIED.getAttribute("name"))
-    return [];
-  const base = `ExtRef[iedName="${sendIED.getAttribute("name")}"][ldInst="${data.getAttribute("ldInst")}"][lnClass="${data.getAttribute("lnClass")}"][lnInst="${data.getAttribute("lnInst")}"][doName="${data.getAttribute("doName")}"]`;
-  const prefix = data.getAttribute("prefix") ? `[prefix="${data.getAttribute("prefix")}"]` : "";
-  return Array.from(doc.querySelectorAll(`:root > IED > AccessPoint > Server > LDevice > LN0 > Inputs > ${base}${prefix}, 
-       :root > IED > AccessPoint > Server > LDevice > LN > Inputs > ${base}${prefix}`));
+  return Array.from(doc.getElementsByTagName("ExtRef")).filter((item) => !item.closest("Private")).filter((extRef) => (extRef.getAttribute("iedName") ?? "") === (data.closest("IED")?.getAttribute("name") ?? "") && (extRef.getAttribute("ldInst") ?? "") === (data.getAttribute("ldInst") ?? "") && (extRef.getAttribute("prefix") ?? "") === (data.getAttribute("prefix") ?? "") && (extRef.getAttribute("lnClass") ?? "") === (data.getAttribute("lnClass") ?? "") && (extRef.getAttribute("lnInst") ?? "") === (data.getAttribute("lnInst") ?? "") && (extRef.getAttribute("doName") ?? "") === (data.getAttribute("doName") ?? "") && (extRef.getAttribute("daName") ?? "") === (data.getAttribute("daName") ?? ""));
 }
 export function createMissingIEDNameSubscriberInfo(doc) {
-  const gseControlList = Array.from(doc.querySelectorAll(":root > IED > AccessPoint > Server > LDevice > LN0 > GSEControl"));
+  const controlList = Array.from(doc.querySelectorAll(":root > IED > AccessPoint > Server > LDevice > LN0 > GSEControl,:root > IED > AccessPoint > Server > LDevice > LN0 > SampledValueControl"));
   const simpleAction = [];
-  gseControlList.forEach((gseControl) => {
-    if (!gseControl.getAttribute("datSet") || !gseControl.parentElement)
+  controlList.forEach((controlBlock) => {
+    if (!controlBlock.getAttribute("datSet") || !controlBlock.parentElement)
       return simpleAction;
-    const ln0 = gseControl.parentElement;
-    const dataList = Array.from(ln0.querySelectorAll(`:root >  IED > AccessPoint > Server > LDevice > LN0 > DataSet[name="${gseControl.getAttribute("datSet")}"] > FCDA`));
+    const ln0 = controlBlock.parentElement;
+    const dataList = Array.from(ln0.querySelectorAll(`:root >  IED > AccessPoint > Server > LDevice > LN0 > DataSet[name="${controlBlock.getAttribute("datSet")}"] > FCDA`));
     const destList = dataList.flatMap((data) => getDestination(data, doc)).filter((dest) => dest !== null).filter((v, i, a) => a.indexOf(v) === i);
-    const iedNameList = destList.map((dest) => addIEDName(dest, gseControl)).filter((iedName) => iedName !== null).filter((v, i, a) => getElementIndexOf(a, v) === i);
+    const iedNameList = destList.map((dest) => addIEDName(dest, controlBlock)).filter((iedName) => iedName !== null).filter((v, i, a) => getElementIndexOf(a, v) === i);
     iedNameList.forEach((iedName) => {
       simpleAction.push({
-        new: {parent: gseControl, element: iedName, reference: null}
+        new: {
+          parent: controlBlock,
+          element: iedName,
+          reference: getReference(controlBlock, "IEDName")
+        }
       });
     });
   });
