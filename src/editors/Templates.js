@@ -11,7 +11,7 @@ var __decorate = (decorators, target, key, kind) => {
 };
 import {LitElement, html, property, css} from "../../_snowpack/pkg/lit-element.js";
 import {translate} from "../../_snowpack/pkg/lit-translate.js";
-import {newActionEvent, newWizardEvent} from "../foundation.js";
+import {getReference, newActionEvent, newWizardEvent} from "../foundation.js";
 import {styles} from "./templates/foundation.js";
 import "./templates/enum-type-editor.js";
 import {EnumTypeEditor} from "./templates/enum-type-editor.js";
@@ -23,7 +23,7 @@ export default class TemplatesPlugin extends LitElement {
         new: {
           parent: this.doc.documentElement,
           element: this.doc.createElement("DataTypeTemplates"),
-          reference: null
+          reference: getReference(this.doc.documentElement, "DataTypeTemplates")
         }
       }));
     this.dispatchEvent(newWizardEvent(EnumTypeEditor.wizard({
@@ -37,7 +37,7 @@ export default class TemplatesPlugin extends LitElement {
         new: {
           parent: this.doc.documentElement,
           element: this.doc.createElement("DataTypeTemplates"),
-          reference: null
+          reference: getReference(this.doc.documentElement, "DataTypeTemplates")
         }
       }));
   }

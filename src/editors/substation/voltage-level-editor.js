@@ -20,6 +20,7 @@ import {translate, get} from "../../../_snowpack/pkg/lit-translate.js";
 import {
   createElement,
   getMultiplier,
+  getReference,
   getValue,
   newActionEvent,
   newWizardEvent,
@@ -232,7 +233,7 @@ export let VoltageLevelEditor = class extends LitElement {
           new: {
             parent,
             element,
-            reference: null
+            reference: getReference(parent, "VoltageLevel")
           }
         }
       ];

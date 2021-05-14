@@ -19,6 +19,7 @@ import {
 import {translate, get} from "../../../_snowpack/pkg/lit-translate.js";
 import {
   createElement,
+  getReference,
   getValue,
   newActionEvent,
   newWizardEvent
@@ -128,7 +129,7 @@ export let BayEditor = class extends LitElement {
         new: {
           parent,
           element,
-          reference: null
+          reference: getReference(parent, "Bay")
         }
       };
       return [action];
@@ -177,7 +178,7 @@ export let BayEditor = class extends LitElement {
           html`<wizard-textfield
             label="desc"
             .maybeValue=${desc}
-            nullable="true"
+            nullable
             helper="${translate("bay.wizard.descHelper")}"
           ></wizard-textfield>`
         ]

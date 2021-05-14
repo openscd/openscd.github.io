@@ -3,6 +3,7 @@ import {get} from "../../_snowpack/pkg/lit-translate.js";
 import {
   createElement,
   findControlBlocks,
+  getReference,
   identity,
   newWizardEvent,
   pathParts,
@@ -96,7 +97,7 @@ function addClientLNAction(doc) {
             new: {
               parent: cb.querySelector("RptEnabled"),
               element,
-              reference: null
+              reference: getReference(cb.querySelector("RptEnabled"), "ClientLN")
             }
           });
         }

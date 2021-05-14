@@ -19,6 +19,7 @@ import {
 import {translate, get} from "../../../_snowpack/pkg/lit-translate.js";
 import {
   createElement,
+  getReference,
   getValue,
   newActionEvent,
   newWizardEvent
@@ -103,7 +104,7 @@ export let ConductingEquipmentEditor = class extends LitElement {
         new: {
           parent,
           element,
-          reference: null
+          reference: getReference(parent, "ConductingEquipment")
         }
       };
       return [action];

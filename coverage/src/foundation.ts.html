@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">86.83% </span>
+                <span class="strong">87.28% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>389/448</span>
+                <span class='fraction'>391/448</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">74.68% </span>
+                <span class="strong">75.45% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>292/391</span>
+                <span class='fraction'>295/391</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">93.71% </span>
+                <span class="strong">94.41% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>134/143</span>
+                <span class='fraction'>135/143</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">89.85% </span>
+                <span class="strong">90.1% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>354/394</span>
+                <span class='fraction'>355/394</span>
             </div>
         
             
@@ -3819,7 +3819,7 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">6716x</span>
+<span class="cline-any cline-yes">6742x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
@@ -4733,30 +4733,30 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">88x</span>
+<span class="cline-any cline-yes">114x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">88x</span>
-<span class="cline-any cline-yes">88x</span>
+<span class="cline-any cline-yes">114x</span>
+<span class="cline-any cline-yes">114x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">88x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">114x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">88x</span>
-<span class="cline-any cline-yes">311x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">88x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">88x</span>
-<span class="cline-any cline-yes">227x</span>
-<span class="cline-any cline-yes">126x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">113x</span>
+<span class="cline-any cline-yes">444x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">113x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">88x</span>
+<span class="cline-any cline-yes">113x</span>
+<span class="cline-any cline-yes">246x</span>
+<span class="cline-any cline-yes">171x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">113x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -4830,9 +4830,9 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1596x</span>
-<span class="cline-any cline-yes">1596x</span>
-<span class="cline-any cline-yes">1244x</span>
+<span class="cline-any cline-yes">1576x</span>
+<span class="cline-any cline-yes">1576x</span>
+<span class="cline-any cline-yes">1240x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -7194,12 +7194,12 @@ export function getReference(parent: Element, tag: SCLTag): Element | null {
   const parentTag = parent.tagName;
   const children = Array.from(parent.children);
 &nbsp;
-  <span class="missing-if-branch" title="if path not taken" >I</span>if (
+  if (
     parentTag === 'Services' ||
     parentTag === 'SettingGroups' ||
     !isSCLTag(parentTag)
   )
-<span class="cstat-no" title="statement not covered" >    return children.find(<span class="fstat-no" title="function not covered" >child </span>=&gt; <span class="cstat-no" title="statement not covered" >child.tagName === tag)</span> ?? null;</span>
+    return children.find(child =&gt; child.tagName === tag) ?? null;
 &nbsp;
   const sequence = tags[parentTag]?.children ?? <span class="branch-1 cbranch-no" title="branch not covered" >[];</span>
   let index = sequence.findIndex(element =&gt; element === tag);
@@ -7432,7 +7432,7 @@ declare global {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Mon May 03 2021 15:10:50 GMT+0000 (Coordinated Universal Time)
+                at Fri May 14 2021 14:21:08 GMT+0000 (Coordinated Universal Time)
             </div>
         </div>
         <script src="../prettify.js"></script>

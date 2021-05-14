@@ -19,6 +19,7 @@ import {
 import {translate, get} from "../../../_snowpack/pkg/lit-translate.js";
 import {
   createElement,
+  getReference,
   getValue,
   newActionEvent,
   newWizardEvent
@@ -105,7 +106,7 @@ export let SubstationEditor = class extends LitElement {
         new: {
           parent,
           element,
-          reference: null
+          reference: getReference(parent, "Substation")
         }
       };
       if (guess)
