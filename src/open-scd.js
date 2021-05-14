@@ -50,14 +50,13 @@ import {
 } from "./foundation.js";
 import {getTheme} from "./themes.js";
 import {Editing, newEmptySCD} from "./Editing.js";
-import {Importing} from "./Importing.js";
 import {Logging} from "./Logging.js";
 import {Setting} from "./Setting.js";
 import {Plugging, pluginIcons} from "./Plugging.js";
 import {Validating} from "./Validating.js";
 import {Waiting} from "./Waiting.js";
 import {Wizarding} from "./Wizarding.js";
-export let OpenSCD = class extends Setting(Importing(Wizarding(Waiting(Validating(Plugging(Editing(Logging(LitElement)))))))) {
+export let OpenSCD = class extends Setting(Wizarding(Waiting(Validating(Plugging(Editing(Logging(LitElement))))))) {
   constructor() {
     super();
     this.activeTab = 0;
@@ -71,17 +70,6 @@ export let OpenSCD = class extends Setting(Importing(Wizarding(Waiting(Validatin
   set src(value) {
     this.currentSrc = value;
     this.dispatchEvent(newPendingStateEvent(this.loadDoc(value)));
-  }
-  set srcIED(value) {
-    this.dispatchEvent(newPendingStateEvent(this.importIED(value, this.doc)));
-  }
-  async loadIEDFile(event) {
-    const file = event.target?.files?.item(0) ?? false;
-    if (file) {
-      const loaded = this.importIED(URL.createObjectURL(file), this.doc);
-      this.dispatchEvent(newPendingStateEvent(loaded));
-      await loaded;
-    }
   }
   async loadDoc(src) {
     this.reset();
@@ -248,12 +236,6 @@ export let OpenSCD = class extends Setting(Importing(Wizarding(Waiting(Validatin
         action: () => this.saveUI.show(),
         disabled: () => this.doc === null
       },
-      {
-        icon: "snippet_folder",
-        name: "menu.importIED",
-        action: () => this.iedImport.click(),
-        disabled: () => this.doc === null
-      },
       "divider",
       {
         icon: "undo",
@@ -389,7 +371,6 @@ export let OpenSCD = class extends Setting(Importing(Wizarding(Waiting(Validatin
             </div>`}
 
       <input id="file-input" type="file" accept=".scd,.ssd" @click=${(event) => event.target.value = ""} @change="${this.loadFile}"></input>
-      <input id="ied-import" type="file" accept=".icd,.iid,.cid" @click=${(event) => event.target.value = ""} @change="${this.loadIEDFile}"></input>
       ${super.render()}
       ${getTheme(this.settings.theme)}
     `;
@@ -428,7 +409,7 @@ OpenSCD.styles = css`
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      z-index: 1;
+      z-index: 99;
       pointer-events: none;
     }
 
@@ -482,17 +463,11 @@ __decorate([
   property({type: String})
 ], OpenSCD.prototype, "src", 1);
 __decorate([
-  property({type: String})
-], OpenSCD.prototype, "srcIED", 1);
-__decorate([
   query("#menu")
 ], OpenSCD.prototype, "menuUI", 2);
 __decorate([
   query("#file-input")
 ], OpenSCD.prototype, "fileUI", 2);
-__decorate([
-  query("#ied-import")
-], OpenSCD.prototype, "iedImport", 2);
 __decorate([
   query("#saveas")
 ], OpenSCD.prototype, "saveUI", 2);

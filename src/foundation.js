@@ -1670,8 +1670,6 @@ export const tags = {
   }
 };
 export function getReference(parent, tag) {
-  if (tag === "LNode")
-    console.log(parent);
   const parentTag = parent.tagName;
   const children = Array.from(parent.children);
   if (parentTag === "Services" || parentTag === "SettingGroups" || !isSCLTag(parentTag))

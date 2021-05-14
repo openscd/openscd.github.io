@@ -404,7 +404,6 @@ export function communicationMappingWizard(root) {
     if (!connections.has(key))
       connections.set(key, []);
     connections.get(key)?.push(element);
-    console.warn(key, element);
   });
   sourceRefs.forEach((element) => {
     const iedName = element.closest("IED")?.getAttribute("name") ?? "";

@@ -77,21 +77,6 @@
         Save as
       </span>
     </mwc-list-item>
-    <mwc-list-item
-      aria-disabled="true"
-      disabled=""
-      graphic="icon"
-      iconid="snippet_folder"
-      mwc-list-item=""
-      tabindex="-1"
-    >
-      <mwc-icon slot="graphic">
-        snippet_folder
-      </mwc-icon>
-      <span>
-        Import IED
-      </span>
-    </mwc-list-item>
     <li
       divider=""
       padded=""
@@ -328,11 +313,6 @@
 <input
   accept=".scd,.ssd"
   id="file-input"
-  type="file"
->
-<input
-  accept=".icd,.iid,.cid"
-  id="ied-import"
   type="file"
 >
 <mwc-dialog

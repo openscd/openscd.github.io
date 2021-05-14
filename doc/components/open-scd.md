@@ -3,7 +3,7 @@
 The `<open-scd>` custom element is the main entry point of the
 Open Substation Configuration Designer.
 
-**Mixins:** Setting, Importing, Wizarding, Waiting, Validating, Plugging, Editing, Logging
+**Mixins:** Setting, Wizarding, Waiting, Validating, Plugging, Editing, Logging
 
 ## Properties
 
@@ -21,7 +21,6 @@ Open Substation Configuration Designer.
 | `fileUI`             |                 |           | `HTMLInputElement`                      |                                                  |                                                  |
 | `handleKeyPress`     |                 |           |                                         |                                                  |                                                  |
 | `history`            | `history`       |           | `LogEntry[]`                            | []                                               | All [[`LogEntry`]]s received so far through [[`LogEvent`]]s. |
-| `iedImport`          |                 |           | `HTMLInputElement`                      |                                                  |                                                  |
 | `infoUI`             |                 |           | `Snackbar`                              |                                                  |                                                  |
 | `items`              |                 | readonly  | `InstalledPlugin[]`                     |                                                  |                                                  |
 | `languageUI`         |                 |           | `Select`                                |                                                  |                                                  |
@@ -40,7 +39,6 @@ Open Substation Configuration Designer.
 | `settings`           | `settings`      | readonly  | `Settings`                              |                                                  | Current [[`Settings`]] in `localStorage`, default to [[`defaults`]]. |
 | `settingsUI`         |                 |           | `Dialog`                                |                                                  |                                                  |
 | `src`                | `src`           |           | `string`                                |                                                  | The current file's URL. `blob:` URLs are *revoked after parsing*! |
-| `srcIED`             | `srcIED`        |           | `string`                                |                                                  |                                                  |
 | `undo`               |                 |           |                                         |                                                  |                                                  |
 | `validated`          | `validated`     |           | `Promise<ValidationResult>`             | "Promise.resolve({\n      file: 'untitled.scd',\n      valid: true,\n      code: 0,\n    })" |                                                  |
 | `waiting`            | `waiting`       |           | `boolean`                               | false                                            | Whether the element is currently waiting for some async work. |
@@ -53,7 +51,6 @@ Open Substation Configuration Designer.
 
 | Method             | Type                                             | Description                                      |
 |--------------------|--------------------------------------------------|--------------------------------------------------|
-| `importIED`        | `(src: string, doc: Document): Promise<void>`    | Loads and parses an `XMLDocument` after [[`srcIED`]] has changed. |
 | `performUpdate`    | `(): Promise<void>`                              |                                                  |
 | `redo`             | `(): boolean`                                    |                                                  |
 | `renderActionItem` | `(me: MenuItem \| "divider"): TemplateResult`    |                                                  |
