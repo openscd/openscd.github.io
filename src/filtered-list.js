@@ -19,7 +19,7 @@ import {
   property,
   query
 } from "../_snowpack/pkg/lit-element.js";
-export let Filterlist = class extends List {
+export let FilteredList = class extends List {
   constructor() {
     super();
     this.disableCheckAll = false;
@@ -75,7 +75,7 @@ export let Filterlist = class extends List {
       ${super.render()}`;
   }
 };
-Filterlist.styles = css`
+FilteredList.styles = css`
     ${List.styles}
 
     #tfcontainer {
@@ -103,22 +103,22 @@ Filterlist.styles = css`
   `;
 __decorate([
   property({type: String})
-], Filterlist.prototype, "searchFieldLabel", 2);
+], FilteredList.prototype, "searchFieldLabel", 2);
 __decorate([
   property({type: Boolean})
-], Filterlist.prototype, "disableCheckAll", 2);
+], FilteredList.prototype, "disableCheckAll", 2);
 __decorate([
   internalProperty()
-], Filterlist.prototype, "existCheckListItem", 1);
+], FilteredList.prototype, "existCheckListItem", 1);
 __decorate([
   internalProperty()
-], Filterlist.prototype, "isAllSelected", 1);
+], FilteredList.prototype, "isAllSelected", 1);
 __decorate([
   internalProperty()
-], Filterlist.prototype, "isSomeSelected", 1);
+], FilteredList.prototype, "isSomeSelected", 1);
 __decorate([
   query("mwc-textfield")
-], Filterlist.prototype, "searchField", 2);
-Filterlist = __decorate([
+], FilteredList.prototype, "searchField", 2);
+FilteredList = __decorate([
   customElement("filtered-list")
-], Filterlist);
+], FilteredList);

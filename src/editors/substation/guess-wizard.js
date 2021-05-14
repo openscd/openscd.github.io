@@ -65,9 +65,9 @@ function createBayElement(ied, ctlModelList) {
   return null;
 }
 function guessBasedOnCSWI(doc) {
-  return (inputs, wizard) => {
+  return (inputs, wizard, list) => {
     const actions = [];
-    const ctlModelList = wizard.shadowRoot.querySelector("#ctlModelList").selected.map((item) => item.value);
+    const ctlModelList = list.selected.map((item) => item.value);
     const root = doc.documentElement;
     const substation = root.querySelector(":root > Substation");
     const voltageLevel = createElement(doc, "VoltageLevel", {

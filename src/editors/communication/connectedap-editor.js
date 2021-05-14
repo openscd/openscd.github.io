@@ -54,8 +54,10 @@ function createAddressElement(inputs, parent, instType) {
   return element;
 }
 function createConnectedApAction(parent) {
-  return (inputs, wizard) => {
-    const apValue = wizard.shadowRoot.querySelector("#apList").selected.map((item) => JSON.parse(item.value));
+  return (inputs, wizard, list) => {
+    if (!list)
+      return [];
+    const apValue = list.selected.map((item) => JSON.parse(item.value));
     const actions = apValue.map((value) => ({
       new: {
         parent,
@@ -68,11 +70,6 @@ function createConnectedApAction(parent) {
     }));
     return actions;
   };
-}
-function onFilterInput(evt) {
-  (evt.target.parentElement?.querySelector("mwc-list")).items.forEach((item) => {
-    item.value.toUpperCase().includes(evt.target.value.toUpperCase()) ? item.removeAttribute("style") : item.setAttribute("style", "display:none;");
-  });
 }
 function renderWizardPage(element) {
   const doc = element.ownerDocument;

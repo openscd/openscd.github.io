@@ -65,8 +65,8 @@ function includesLNode(anyln, lnodes) {
   return lnodes.some((lnode) => isLNodeReference(anyln, lnode));
 }
 export function lNodeWizardAction(parent) {
-  return (inputs, wizard) => {
-    const selectedAnyLn = wizard.shadowRoot.querySelector("#lnList").items.filter((item) => item.selected).map((item) => item.value).map((identity2) => {
+  return (inputs, wizard, list) => {
+    const selectedAnyLn = list.items.filter((item) => item.selected).map((item) => item.value).map((identity2) => {
       return parent.ownerDocument.querySelector(selector("LN0", identity2)) ? parent.ownerDocument.querySelector(selector("LN0", identity2)) : parent.ownerDocument.querySelector(selector("LN", identity2));
     }).filter((item) => item !== null);
     const oldLNodes = Array.from(parent.getElementsByTagName("LNode")).filter((item) => !item.closest("Private"));

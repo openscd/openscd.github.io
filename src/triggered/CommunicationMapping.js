@@ -68,7 +68,7 @@ function hasClientLN(cb, identity2) {
   }
   return false;
 }
-function addClientLNAction(doc) {
+function addClientLnAction(doc) {
   return (inputs, wizard) => {
     const cbSelected = wizard.shadowRoot.querySelector("#sourcelist").selected;
     const selectedLNs = wizard.shadowRoot.querySelector("#sinklist").selected;
@@ -116,7 +116,7 @@ export function clientlnwizard(sourceIEDs, sinkIED) {
       primary: {
         label: get("connect"),
         icon: "",
-        action: addClientLNAction(sinkIED.ownerDocument)
+        action: addClientLnAction(sinkIED.ownerDocument)
       },
       secondary: {
         label: get("cancel"),
@@ -331,8 +331,8 @@ function findIEDNameTarget(iedName) {
   return ied.querySelector(selector2);
 }
 function disconnect(connections, root) {
-  return (inputs, wizard) => {
-    const items = wizard.shadowRoot.querySelector("filtered-list").index;
+  return (inputs, wizard, list) => {
+    const items = list.index;
     const actions = [];
     const selected = Array.from(items).map((index) => connections[index]);
     const selectedExtRefs = selected.filter((connection) => connection.tagName === "ExtRef");

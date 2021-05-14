@@ -71,13 +71,14 @@ export let WizardDialog = class extends LitElement {
       this.wizard[this.pageIndex].primary = void 0;
     else
       this.wizard[this.pageIndex].secondary = void 0;
-    const inputArray = Array.from(this.inputs);
+    const wizardInputs = Array.from(this.inputs);
+    const wizardList = this.dialog?.querySelector("filtered-list,mwc-list");
     if (!this.checkValidity()) {
       this.pageIndex = this.firstInvalidPage;
-      inputArray.map((wi) => wi.reportValidity());
+      wizardInputs.map((wi) => wi.reportValidity());
       return false;
     }
-    const wizardActions = action(inputArray, this);
+    const wizardActions = action(wizardInputs, this, wizardList);
     if (wizardActions.length > 0) {
       this.dispatchEvent(newWizardEvent());
     }
