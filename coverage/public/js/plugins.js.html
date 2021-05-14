@@ -3,15 +3,15 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for src/Wizarding.ts</title>
+    <title>Code coverage report for public/js/plugins.js</title>
     <meta charset="utf-8" />
-    <link rel="stylesheet" href="../prettify.css" />
-    <link rel="stylesheet" href="../base.css" />
-    <link rel="shortcut icon" type="image/x-icon" href="../favicon.png" />
+    <link rel="stylesheet" href="../../prettify.css" />
+    <link rel="stylesheet" href="../../base.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="../../favicon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <style type='text/css'>
         .coverage-summary .sorter {
-            background-image: url(../sort-arrow-sprite.png);
+            background-image: url(../../sort-arrow-sprite.png);
         }
     </style>
 </head>
@@ -19,34 +19,34 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../index.html">All files</a> / <a href="index.html">src</a> Wizarding.ts</h1>
+        <h1><a href="../../index.html">All files</a> / <a href="index.html">public/js</a> plugins.js</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>19/19</span>
+                <span class='fraction'>1/1</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>6/6</span>
+                <span class='fraction'>0/0</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>8/8</span>
+                <span class='fraction'>0/0</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>16/16</span>
+                <span class='fraction'>1/1</span>
             </div>
         
             
@@ -107,12 +107,7 @@
 <a name='L48'></a><a href='#L48'>48</a>
 <a name='L49'></a><a href='#L49'>49</a>
 <a name='L50'></a><a href='#L50'>50</a>
-<a name='L51'></a><a href='#L51'>51</a>
-<a name='L52'></a><a href='#L52'>52</a>
-<a name='L53'></a><a href='#L53'>53</a>
-<a name='L54'></a><a href='#L54'>54</a>
-<a name='L55'></a><a href='#L55'>55</a>
-<a name='L56'></a><a href='#L56'>56</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L51'></a><a href='#L51'>51</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -132,96 +127,86 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">353x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">6x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">709x</span>
-<span class="cline-any cline-yes">311x</span>
-<span class="cline-any cline-yes">294x</span>
-<span class="cline-any cline-yes">709x</span>
-<span class="cline-any cline-yes">709x</span>
-<span class="cline-any cline-yes">709x</span>
-<span class="cline-any cline-yes">709x</span>
-<span class="cline-any cline-yes">357x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">353x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">353x</span>
-<span class="cline-any cline-yes">353x</span>
-<span class="cline-any cline-yes">118x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1129x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { html, internalProperty, TemplateResult, query } from 'lit-element';
-import {
-  ifImplemented,
-  LitElementConstructor,
-  Mixin,
-  Wizard,
-  WizardEvent,
-} from './foundation.js';
-&nbsp;
-import './wizard-dialog.js';
-import { WizardDialog } from './wizard-dialog.js';
-&nbsp;
-/** `LitElement` mixin that adds a `workflow` property which [[`Wizard`]]s are
- * queued onto on incoming [[`WizardEvent`]]s, first come first displayed. */
-export type WizardingElement = Mixin&lt;typeof Wizarding&gt;;
-&nbsp;
-export function Wizarding&lt;TBase extends LitElementConstructor&gt;(Base: TBase) {
-  class WizardingElement extends Base {
-    /** FIFO queue of [[`Wizard`]]s to display. */
-    @internalProperty()
-    workflow: Wizard[] = [];
-&nbsp;
-    @query('wizard-dialog') wizardUI!: WizardDialog;
-&nbsp;
-    private onWizard(we: WizardEvent) {
-      if (we.detail.wizard === null) this.workflow.shift();
-      else if (we.detail.subwizard) this.workflow.unshift(we.detail.wizard);
-      else this.workflow.push(we.detail.wizard);
-      this.requestUpdate('workflow');
-      this.updateComplete.then(() =&gt;
-        this.wizardUI.updateComplete.then(() =&gt;
-          this.wizardUI.dialog?.updateComplete.then(() =&gt;
-            this.wizardUI.dialog?.focus()
-          )
-        )
-      );
-    }
-&nbsp;
-    constructor(...args: any[]) {
-      super(...args);
-&nbsp;
-      this.addEventListener('wizard', this.onWizard);
-      this.addEventListener('editor-action', () =&gt;
-        this.wizardUI.requestUpdate()
-      );
-    }
-&nbsp;
-    render(): TemplateResult {
-      return html`${ifImplemented(super.render())}
-        &lt;wizard-dialog .wizard=${this.workflow[0] ?? []}&gt;&lt;/wizard-dialog&gt;`;
-    }
-  }
-&nbsp;
-  return WizardingElement;
-}
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">export const officialPlugins = [
+  {
+    name: 'Substation',
+    src: '/src/editors/Substation.js',
+    icon: 'margin',
+    default: true,
+    kind: 'editor',
+  },
+  {
+    name: 'Communication',
+    src: '/src/editors/Communication.js',
+    icon: 'settings_ethernet',
+    default: true,
+    kind: 'editor',
+  },
+  {
+    name: 'Templates',
+    src: '/src/editors/Templates.js',
+    icon: 'copy_all',
+    default: true,
+    kind: 'editor',
+  },
+  {
+    name: 'Subscriber Update',
+    src: '/src/triggered/SubscriberInfo.js',
+    default: true,
+    kind: 'triggered',
+  },
+  {
+    name: 'Merge Project',
+    src: '/src/triggered/Merge.js',
+    icon: 'merge_type',
+    default: false,
+    kind: 'triggered',
+  },
+  {
+    name: 'Update Substation',
+    src: '/src/triggered/UpdateSubstation.js',
+    icon: 'merge_type',
+    default: true,
+    kind: 'triggered',
+  },
+  {
+    name: 'Communication Mapping',
+    src: '/src/triggered/CommunicationMapping.js',
+    icon: 'sync_alt',
+    default: true,
+    kind: 'triggered',
+  },
+];
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
@@ -232,14 +217,14 @@ export function Wizarding&lt;TBase extends LitElementConstructor&gt;(Base: TBase
                 at Fri May 14 2021 14:23:09 GMT+0000 (Coordinated Universal Time)
             </div>
         </div>
-        <script src="../prettify.js"></script>
+        <script src="../../prettify.js"></script>
         <script>
             window.onload = function () {
                 prettyPrint();
             };
         </script>
-        <script src="../sorter.js"></script>
-        <script src="../block-navigation.js"></script>
+        <script src="../../sorter.js"></script>
+        <script src="../../block-navigation.js"></script>
     </body>
 </html>
     

@@ -14,15 +14,24 @@ import {translate} from "../_snowpack/pkg/lit-translate.js";
 import wrapHtml from "../_snowpack/pkg/carehtml.js";
 const html = wrapHtml(litHtml);
 import {ifImplemented} from "./foundation.js";
+import {officialPlugins} from "../public/js/plugins.js";
 export const pluginIcons = {
   editor: "tab",
   triggered: "play_circle"
 };
-const officialPlugins = fetch("/public/json/plugins.json").then((res) => res.json());
 async function storeDefaultPlugins() {
-  localStorage.setItem("plugins", JSON.stringify(await officialPlugins.then((plugins) => plugins.map((plugin) => {
+  localStorage.setItem("externalPlugins", JSON.stringify([]));
+  localStorage.setItem("officialPlugins", JSON.stringify(await officialPlugins.map((plugin) => {
     return {...plugin, installed: plugin.default ?? false};
-  }))));
+  })));
+}
+function isNew(src) {
+  const installedOfficialPlugins = JSON.parse(localStorage.getItem("officialPlugins") ?? "[]");
+  return !installedOfficialPlugins.some((installedOfficialPlugin) => installedOfficialPlugin.src === src);
+}
+function isInstalled(src) {
+  const installedOfficialPlugins = JSON.parse(localStorage.getItem("officialPlugins") ?? "[]");
+  return installedOfficialPlugins.some((installedOfficialPlugin) => installedOfficialPlugin.src === src && installedOfficialPlugin.installed);
 }
 const loadedPlugins = new Map();
 export function Plugging(Base) {
@@ -33,22 +42,40 @@ export function Plugging(Base) {
     get items() {
       return this.plugins.filter((plugin) => plugin.installed && plugin.kind === "triggered").map((plugin) => this.addContent(plugin));
     }
-    setPlugins(indices) {
-      const newPlugins = this.plugins.map((plugin, index) => {
+    get plugins() {
+      return this.officialPlugins.concat(this.externalPlugins);
+    }
+    get officialPlugins() {
+      return officialPlugins.map((plugin) => {
+        return {
+          ...plugin,
+          installed: isNew(plugin.src) || isInstalled(plugin.src)
+        };
+      });
+    }
+    get externalPlugins() {
+      return JSON.parse(localStorage.getItem("externalPlugins") ?? "[]");
+    }
+    setOfficialPlugins(indices) {
+      const newPlugins = this.officialPlugins.map((plugin, index) => {
         return {...plugin, installed: indices.has(index)};
       });
-      localStorage.setItem("plugins", JSON.stringify(newPlugins));
+      localStorage.setItem("officialPlugins", JSON.stringify(newPlugins));
       this.requestUpdate();
     }
-    addPlugin(plugin) {
-      if (this.plugins.some((p) => p.src === plugin.src))
-        return;
-      const newPlugins = this.plugins;
-      newPlugins.push(plugin);
-      localStorage.setItem("plugins", JSON.stringify(newPlugins));
+    setExternalPlugins(indices) {
+      const newPlugins = this.externalPlugins.map((plugin, index) => {
+        return {...plugin, installed: indices.has(index)};
+      });
+      localStorage.setItem("externalPlugins", JSON.stringify(newPlugins));
+      this.requestUpdate();
     }
-    get plugins() {
-      return JSON.parse(localStorage.getItem("plugins") ?? "[]");
+    addExternalPlugin(plugin) {
+      if (this.externalPlugins.some((p) => p.src === plugin.src))
+        return;
+      const newPlugins = this.externalPlugins;
+      newPlugins.push(plugin);
+      localStorage.setItem("externalPlugins", JSON.stringify(newPlugins));
     }
     addContent(plugin) {
       return {
@@ -70,7 +97,7 @@ export function Plugging(Base) {
       const pluginKindList = this.pluginDownloadUI.querySelector("#pluginKindList");
       if (!(pluginSrcInput.checkValidity() && pluginNameInput.checkValidity() && pluginKindList.selected))
         return;
-      this.addPlugin({
+      this.addExternalPlugin({
         src: pluginSrcInput.value,
         name: pluginNameInput.value,
         kind: pluginKindList.selected.value,
@@ -82,7 +109,7 @@ export function Plugging(Base) {
     }
     constructor(...args) {
       super(...args);
-      if (localStorage.getItem("plugins") === null)
+      if (localStorage.getItem("officialPlugins") === null)
         storeDefaultPlugins().then(() => this.requestUpdate());
     }
     renderDownloadUI() {
@@ -145,12 +172,34 @@ export function Plugging(Base) {
           heading="${translate("plugins.heading")}"
         >
           <mwc-list
-            @selected=${(e) => this.setPlugins(e.detail.index)}
-            id="pluginList"
+            @selected=${(e) => this.setOfficialPlugins(e.detail.index)}
+            id="officialPluginList"
             activatable
             multi
           >
-            ${this.plugins.map((plugin) => html`<mwc-list-item
+            ${this.officialPlugins.map((plugin) => html`<mwc-list-item
+                  value="${plugin.src}"
+                  hasMeta
+                  graphic="icon"
+                  ?activated=${plugin.installed}
+                  ?selected=${plugin.installed}
+                >
+                  <mwc-icon slot="graphic"
+                    >${plugin.icon || pluginIcons[plugin.kind]}</mwc-icon
+                  >
+                  ${plugin.name}
+                  <mwc-icon slot="meta"
+                    >${pluginIcons[plugin.kind]}</mwc-icon
+                  ></mwc-list-item
+                >`)}
+          </mwc-list>
+          <mwc-list
+            @selected=${(e) => this.setExternalPlugins(e.detail.index)}
+            id="externalPluginList"
+            activatable
+            multi
+          >
+            ${this.externalPlugins.map((plugin) => html`<mwc-list-item
                   value="${plugin.src}"
                   hasMeta
                   graphic="icon"
@@ -200,8 +249,8 @@ export function Plugging(Base) {
     query("#pluginManager")
   ], PluggingElement.prototype, "pluginUI", 2);
   __decorate([
-    query("#pluginList")
-  ], PluggingElement.prototype, "pluginList", 2);
+    query("#officialPluginList")
+  ], PluggingElement.prototype, "officialPluginList", 2);
   __decorate([
     query("#pluginAdd")
   ], PluggingElement.prototype, "pluginDownloadUI", 2);
