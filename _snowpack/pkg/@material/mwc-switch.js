@@ -1,53 +1,15 @@
-import { _ as __decorate } from '../common/tslib.es6-f4316a58.js';
-import { p as property, q as query, a as queryAsync, i as internalProperty, e as eventOptions, c as css, b as customElement } from '../common/lit-element-7a71a97f.js';
-import { R as RippleHandlers } from '../common/ripple-handlers-580c686b.js';
-import { F as FormElement } from '../common/form-element-6f3539c9.js';
+import { a as __extends, b as __assign, _ as __decorate } from '../common/index-3b961e0a.js';
+import { p as property, q as query, a as queryAsync, i as internalProperty, e as eventOptions, c as css, b as customElement } from '../common/lit-element-20d2221c.js';
+import { R as RippleHandlers } from '../common/ripple-handlers-d87ebe58.js';
+import { a as ariaProperty } from '../common/aria-property-0d16a9b7.js';
+import { F as FormElement } from '../common/form-element-273bea67.js';
 import { o as observer } from '../common/observer-fa3d205e.js';
-import { M as MDCFoundation, a as addHasRemoveClass } from '../common/foundation-788d2208.js';
-import { h as html } from '../common/lit-html-ea288526.js';
-import '../common/render-aa9814af.js';
-import '../common/class-map-0a052906.js';
-import '../common/style-map-a83cef12.js';
-
-/*! *****************************************************************************
-Copyright (c) Microsoft Corporation.
-
-Permission to use, copy, modify, and/or distribute this software for any
-purpose with or without fee is hereby granted.
-
-THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH
-REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY
-AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT,
-INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM
-LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR
-OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
-PERFORMANCE OF THIS SOFTWARE.
-***************************************************************************** */
-/* global Reflect, Promise */
-
-var extendStatics = function(d, b) {
-    extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-    return extendStatics(d, b);
-};
-
-function __extends(d, b) {
-    extendStatics(d, b);
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-}
-
-var __assign = function() {
-    __assign = Object.assign || function __assign(t) {
-        for (var s, i = 1, n = arguments.length; i < n; i++) {
-            s = arguments[i];
-            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
-        }
-        return t;
-    };
-    return __assign.apply(this, arguments);
-};
+import { M as MDCFoundation, a as addHasRemoveClass } from '../common/foundation-68a89ff7.js';
+import { i as ifDefined } from '../common/if-defined-4f9ccd15.js';
+import { h as html } from '../common/lit-html-44a7bec9.js';
+import '../common/render-4f397355.js';
+import '../common/class-map-f3820f9a.js';
+import '../common/style-map-b311a692.js';
 
 /**
  * @license
@@ -120,7 +82,7 @@ var MDCSwitchFoundation = /** @class */ (function (_super) {
         get: function () {
             return strings;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(MDCSwitchFoundation, "cssClasses", {
@@ -128,7 +90,7 @@ var MDCSwitchFoundation = /** @class */ (function (_super) {
         get: function () {
             return cssClasses;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(MDCSwitchFoundation, "defaultAdapter", {
@@ -142,7 +104,7 @@ var MDCSwitchFoundation = /** @class */ (function (_super) {
                 setNativeControlAttr: function () { return undefined; },
             };
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     /** Sets the checked state of the switch. */
@@ -210,7 +172,7 @@ class SwitchBase extends FormElement {
     }
     renderRipple() {
         return this.shouldRenderRipple ? html `
-        <mwc-ripple 
+        <mwc-ripple
           .accent="${this.checked}"
           .disabled="${this.disabled}"
           unbounded>
@@ -243,6 +205,8 @@ class SwitchBase extends FormElement {
               id="basic-switch"
               class="mdc-switch__native-control"
               role="switch"
+              aria-label="${ifDefined(this.ariaLabel)}"
+              aria-labelledby="${ifDefined(this.ariaLabelledBy)}"
               @change="${this.changeHandler}"
               @focus="${this.handleRippleFocus}"
               @blur="${this.handleRippleBlur}"
@@ -295,6 +259,14 @@ __decorate([
         this.mdcFoundation.setDisabled(value);
     })
 ], SwitchBase.prototype, "disabled", void 0);
+__decorate([
+    ariaProperty,
+    property({ attribute: 'aria-label' })
+], SwitchBase.prototype, "ariaLabel", void 0);
+__decorate([
+    ariaProperty,
+    property({ attribute: 'aria-labelledby' })
+], SwitchBase.prototype, "ariaLabelledBy", void 0);
 __decorate([
     query('.mdc-switch')
 ], SwitchBase.prototype, "mdcRoot", void 0);

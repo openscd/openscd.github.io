@@ -24,12 +24,14 @@
     "@material/mwc-textfield": "./@material/mwc-textfield.js",
     "@material/mwc-top-app-bar-fixed": "./@material/mwc-top-app-bar-fixed.js",
     "carehtml": "./carehtml.js",
+    "fast-check": "./fast-check.js",
     "lit-element": "./lit-element.js",
     "lit-html": "./lit-html.js",
     "lit-html/directives/if-defined": "./lit-html/directives/if-defined.js",
     "lit-html/directives/repeat": "./lit-html/directives/repeat.js",
     "lit-html/directives/repeat.js": "./lit-html/directives/repeat.js",
     "lit-html/directives/until.js": "./lit-html/directives/until.js",
-    "lit-translate": "./lit-translate.js"
+    "lit-translate": "./lit-translate.js",
+    "tslib": "./tslib.js"
   }
 }

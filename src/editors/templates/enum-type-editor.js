@@ -21,7 +21,7 @@ import {
   getValue,
   newActionEvent,
   newWizardEvent,
-  restrictions
+  patterns
 } from "../../foundation.js";
 import {
   isCreateOptions,
@@ -110,7 +110,7 @@ export let EnumTypeEditor = class extends LitElement {
             required
             maxlength="127"
             minlength="1"
-            pattern="${restrictions.nmToken}"
+            pattern="${patterns.nmToken}"
             dialogInitialFocus
           ></wizard-textfield>`,
           html`<wizard-textfield
@@ -118,7 +118,7 @@ export let EnumTypeEditor = class extends LitElement {
             helper="${translate("scl.desc")}"
             .maybeValue=${null}
             nullable
-            pattern="${restrictions.normalizedString}"
+            pattern="${patterns.normalizedString}"
           ></wizard-textfield>`
         ]
       }
@@ -157,7 +157,7 @@ export let EnumTypeEditor = class extends LitElement {
             required
             maxlength="127"
             minlength="1"
-            pattern="${restrictions.nmToken}"
+            pattern="${patterns.nmToken}"
             dialogInitialFocus
           ></wizard-textfield>`,
           html`<wizard-textfield
@@ -165,7 +165,7 @@ export let EnumTypeEditor = class extends LitElement {
             helper="${translate("scl.desc")}"
             .maybeValue=${element.getAttribute("desc")}
             nullable
-            pattern="${restrictions.normalizedString}"
+            pattern="${patterns.normalizedString}"
           ></wizard-textfield>`,
           html`<mwc-button
               slot="graphic"
