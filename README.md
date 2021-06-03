@@ -1,4 +1,3 @@
-test change for jekyll
 # `OpenSCD`
 
 [![Build Status](https://travis-ci.org/openscd/open-scd.svg?branch=main)](https://travis-ci.org/openscd/open-scd)
