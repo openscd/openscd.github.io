@@ -23,15 +23,12 @@ export function Wizarding(Base) {
       this.addEventListener("editor-action", () => this.wizardUI.requestUpdate());
     }
     onWizard(we) {
-      const wizard = we.detail.wizard;
-      if (wizard?.length === 0)
-        return;
-      if (wizard === null)
+      if (we.detail.wizard === null)
         this.workflow.shift();
       else if (we.detail.subwizard)
-        this.workflow.unshift(wizard);
+        this.workflow.unshift(we.detail.wizard);
       else
-        this.workflow.push(wizard);
+        this.workflow.push(we.detail.wizard);
       this.requestUpdate("workflow");
       this.updateComplete.then(() => this.wizardUI.updateComplete.then(() => this.wizardUI.dialog?.updateComplete.then(() => this.wizardUI.dialog?.focus())));
     }

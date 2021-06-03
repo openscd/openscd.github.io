@@ -1,11 +1,10 @@
-import { _ as __decorate } from '../common/index-3b961e0a.js';
-import { p as property, L as LitElement, c as css, b as customElement } from '../common/lit-element-20d2221c.js';
-import { a as ariaProperty } from '../common/aria-property-0d16a9b7.js';
-import { c as classMap } from '../common/class-map-f3820f9a.js';
-import { i as ifDefined } from '../common/if-defined-4f9ccd15.js';
-import { s as styleMap } from '../common/style-map-b311a692.js';
-import { h as html } from '../common/lit-html-44a7bec9.js';
-import '../common/render-4f397355.js';
+import { _ as __decorate } from '../common/tslib.es6-f4316a58.js';
+import { p as property, L as LitElement, c as css, b as customElement } from '../common/lit-element-7a71a97f.js';
+import { c as classMap } from '../common/class-map-0a052906.js';
+import { i as ifDefined } from '../common/if-defined-c0cf727b.js';
+import { s as styleMap } from '../common/style-map-a83cef12.js';
+import { h as html } from '../common/lit-html-ea288526.js';
+import '../common/render-aa9814af.js';
 
 /** @soyCompatible */
 class CircularProgressBase extends LitElement {
@@ -15,6 +14,7 @@ class CircularProgressBase extends LitElement {
         this.progress = 0;
         this.density = 0;
         this.closed = false;
+        this.ariaLabel = '';
     }
     open() {
         this.closed = false;
@@ -32,7 +32,6 @@ class CircularProgressBase extends LitElement {
             'mdc-circular-progress--indeterminate': this.indeterminate,
         };
         const containerSideLength = 48 + this.density * 4;
-        /** @styleMap */
         const styles = {
             'width': `${containerSideLength}px`,
             'height': `${containerSideLength}px`,
@@ -42,7 +41,7 @@ class CircularProgressBase extends LitElement {
         class="mdc-circular-progress ${classMap(classes)}"
         style="${styleMap(styles)}"
         role="progressbar"
-        aria-label="${ifDefined(this.ariaLabel)}"
+        aria-label="${this.ariaLabel}"
         aria-valuemin="0"
         aria-valuemax="1"
         aria-valuenow="${ifDefined(this.indeterminate ? undefined : this.progress)}">
@@ -155,8 +154,7 @@ __decorate([
     property({ type: Boolean, reflect: true })
 ], CircularProgressBase.prototype, "closed", void 0);
 __decorate([
-    ariaProperty,
-    property({ type: String, attribute: 'aria-label' })
+    property({ type: String })
 ], CircularProgressBase.prototype, "ariaLabel", void 0);
 
 /**

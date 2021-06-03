@@ -40,7 +40,7 @@ NB: Use `maybeValue: string | null` instead of `value` if `nullable`!
 | `readOnly`                |                  |           | `boolean`                                        |           |                                                  |
 | `required`                |                  |           | `boolean`                                        |           |                                                  |
 | `reservedValues`          | `reservedValues` |           | `string[]`                                       | []        | Additional values that cause validation to fail. |
-| `ripple`                  |                  | readonly  | `Promise<RippleInterface \| null> \| undefined`  |           | Implement ripple getter for Ripple integration with mwc-formfield |
+| `ripple`                  |                  | readonly  | `RippleInterface \| Promise<RippleInterface \| null> \| undefined` |           | Implement ripple getter for Ripple integration with mwc-formfield |
 | `selectionEnd`            |                  | readonly  | `number \| null`                                 |           |                                                  |
 | `selectionStart`          |                  | readonly  | `number \| null`                                 |           |                                                  |
 | `size`                    |                  |           | `number \| null`                                 |           |                                                  |
@@ -63,7 +63,6 @@ NB: Use `maybeValue: string | null` instead of `value` if `nullable`!
 | `checkValidity`      | `(): boolean`                                    |
 | `click`              | `(): void`                                       |
 | `focus`              | `(): void`                                       |
-| `getUpdateComplete`  | `(): Promise<boolean>`                           |
 | `layout`             | `(): Promise<void>`                              |
 | `renderMulplierList` | `(): TemplateResult`                             |
 | `renderSwitch`       | `(): TemplateResult`                             |

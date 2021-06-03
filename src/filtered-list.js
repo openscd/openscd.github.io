@@ -17,8 +17,7 @@ import {
   html,
   internalProperty,
   property,
-  query,
-  unsafeCSS
+  query
 } from "../_snowpack/pkg/lit-element.js";
 export let FilteredList = class extends List {
   constructor() {
@@ -77,7 +76,7 @@ export let FilteredList = class extends List {
   }
 };
 FilteredList.styles = css`
-    ${unsafeCSS(List.styles)}
+    ${List.styles}
 
     #tfcontainer {
       display: flex;

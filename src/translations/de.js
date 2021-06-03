@@ -7,7 +7,6 @@ export const de = {
     value: "Wert",
     EnumVal: "Enum Wert",
     EnumType: "Enum Typ",
-    DAType: "Datenattribut Typ",
     Report: "Report",
     LN: "Logischer Knoten"
   },
@@ -18,12 +17,12 @@ export const de = {
     dark: "Dunkles Design"
   },
   menu: {
-    name: "Menü",
-    open: "Projekt öffnen",
+    name: "Men\xFC",
+    open: "Projekt \xF6ffnen",
     new: "Neues Projekt",
     importIED: "IED importieren",
     save: "Projekt speichern",
-    subscriberinfo: "Empfänger aktualisieren",
+    subscriberinfo: "Empf\xE4nger aktualisieren",
     validate: "Projekt validieren",
     viewLog: "Protokoll anzeigen"
   },
@@ -34,17 +33,17 @@ export const de = {
     readAbort: "{{ name }} Leseabbruch"
   },
   editing: {
-    created: "{{ name }} hinzugefügt",
+    created: "{{ name }} hinzugef\xFCgt",
     deleted: "{{ name }} entfernt",
     moved: "{{ name }} verschoben",
     updated: "{{ name }} bearbeitet",
     import: "{{name}} importiert",
     error: {
-      create: "Konnte {{ name }} nicht hinzufügen",
+      create: "Konnte {{ name }} nicht hinzuf\xFCgen",
       update: "Konnte {{ name }} nicht bearbeiten",
       move: "Konnte {{ name }} nicht verschieben",
       duplicate: "Konnte {{name}} nicht kopieren",
-      nameClash: '{{ parent }} enthält bereits ein {{ child }} Kind namens "{{ name }}"'
+      nameClash: '{{ parent }} enth\xE4lt bereits ein {{ child }} Kind namens "{{ name }}"'
     }
   },
   validating: {
@@ -61,7 +60,7 @@ export const de = {
   },
   log: {
     name: "Protokoll",
-    placeholder: "Hier werden Änderungen, Fehler und andere Meldungen angezeigt.",
+    placeholder: "Hier werden \xC4nderungen, Fehler und andere Meldungen angezeigt.",
     snackbar: {
       show: "Anzeigen",
       placeholder: "Keine Fehler"
@@ -70,13 +69,13 @@ export const de = {
   plugins: {
     heading: "Erweiterungen",
     editor: "Editor",
-    triggered: "Menüeintrag",
+    triggered: "Men\xFCeintrag",
     add: {
       heading: "Benutzerdefinierte Erweiterung",
-      warning: `Hier können Sie benutzerdefinierte Erweiterungen hinzufügen.
-                OpenSCD übernimm hierfür keine Gewähr.`,
+      warning: `Hier k\xF6nnen Sie benutzerdefinierte Erweiterungen hinzuf\xFCgen.
+                OpenSCD \xFCbernimm hierf\xFCr keine Gew\xE4hr.`,
       name: "Name",
-      nameHelper: "Lokaler Name der Erweiterung (frei wählbar)",
+      nameHelper: "Lokaler Name der Erweiterung (frei w\xE4hlbar)",
       src: "URL",
       srcHelper: "Die Erweiterungs-URL des Herstellers"
     }
@@ -88,12 +87,12 @@ export const de = {
       nameHelper: "Name der Schaltanlage",
       descHelper: "Beschreibung der Schaltanlage",
       title: {
-        add: "Schaltanlage hinzufügen",
+        add: "Schaltanlage hinzuf\xFCgen",
         edit: "Schaltanlage bearbeiten"
       }
     },
     action: {
-      addvoltagelevel: "Spannungsebene hinzufügen"
+      addvoltagelevel: "Spannungsebene hinzuf\xFCgen"
     }
   },
   voltagelevel: {
@@ -105,7 +104,7 @@ export const de = {
       numPhaseHelper: "Phasenanzahl",
       voltageHelper: "Nennspannung",
       title: {
-        add: "Spannungsebene hinzufügen",
+        add: "Spannungsebene hinzuf\xFCgen",
         edit: "Spannungsebene bearbeiten"
       }
     }
@@ -116,20 +115,20 @@ export const de = {
       nameHelper: "Feldname",
       descHelper: "Beschreibung des Feldes",
       title: {
-        add: "Feld hinzufügen",
+        add: "Feld hinzuf\xFCgen",
         edit: "Feld bearbeiten"
       }
     }
   },
   conductingequipment: {
-    name: "Primärelement",
+    name: "Prim\xE4relement",
     wizard: {
-      nameHelper: "Name des Primärelements",
-      descHelper: "Beschreibung des Primärelements",
-      typeHelper: "Type des Primärelements",
+      nameHelper: "Name des Prim\xE4relements",
+      descHelper: "Beschreibung des Prim\xE4relements",
+      typeHelper: "Type des Prim\xE4relements",
       title: {
-        add: "Primärelement hinzufügen",
-        edit: "Primärelement bearbeiten"
+        add: "Prim\xE4relement hinzuf\xFCgen",
+        edit: "Prim\xE4relement bearbeiten"
       }
     },
     unknownType: "Unbekannter Typ"
@@ -137,12 +136,12 @@ export const de = {
   templates: {
     name: "Data Type Templates",
     missing: "DataTypeTemplates fehlen",
-    add: "DataTypeTemplates hinzufügen"
+    add: "DataTypeTemplates hinzuf\xFCgen"
   },
   "enum-val": {
     wizard: {
       title: {
-        add: "EnumVal hinzufügen",
+        add: "EnumVal hinzuf\xFCgen",
         edit: "EnumVal bearbeiten"
       }
     }
@@ -150,40 +149,19 @@ export const de = {
   enum: {
     wizard: {
       title: {
-        add: "EnumType hinzufügen",
+        add: "EnumType hinzuf\xFCgen",
         edit: "EnumType bearbeiten"
       }
-    }
-  },
-  datype: {
-    wizard: {
-      title: {
-        add: "DAType hinzufügen",
-        edit: "DAType bearbeiten"
-      }
-    }
-  },
-  bda: {
-    wizard: {
-      title: {
-        add: "BDA hinzufügen",
-        edit: "BDA bearbeiten"
-      },
-      bType: "Basistyp",
-      type: "Typ",
-      sAddr: "Kurze Adresse",
-      valKind: "Art von Wert",
-      valImport: "Wert importierbar"
     }
   },
   lnode: {
     wizard: {
       title: {
         selectIEDs: "Auswahl IEDs",
-        selectLDs: "Auswahl logische Geräte",
+        selectLDs: "Auswahl logische Ger\xE4te",
         selectLNs: "Auswahl logische Knoten"
       },
-      placeholder: "Bitte laden Sie eine SCL-Datei, die IED-Elemente enthält."
+      placeholder: "Bitte laden Sie eine SCL-Datei, die IED-Elemente enth\xE4lt."
     },
     tooltip: "Referenz zu logischen Knoten erstellen"
   },
@@ -191,8 +169,8 @@ export const de = {
     wizard: {
       primary: "Inhalt erraten",
       title: "Auswahl Steuerungsmodel(ctlModel)",
-      description: `Schaltgeräten im Feld können oftmals bestimmten Steuerungsmodellen zugeordnet werden. 
- Damit wird die Abschätzung oftmals genauer.`
+      description: `Schaltger\xE4ten im Feld k\xF6nnen oftmals bestimmten Steuerungsmodellen zugeordnet werden. 
+ Damit wird die Absch\xE4tzung oftmals genauer.`
     }
   },
   merge: {
@@ -221,9 +199,9 @@ export const de = {
       nameHelper: "Name des Subnetzwerkes",
       descHelper: "Beschreibung des Subnetzwerkes",
       typeHelper: "Netzwerktyp (Bsp. 8-MMS)",
-      bitrateHelper: "Übertragungsrate",
+      bitrateHelper: "\xDCbertragungsrate",
       title: {
-        add: "Subnetzwerk hinzufügen",
+        add: "Subnetzwerk hinzuf\xFCgen",
         edit: "Subnetzwerk bearbeiten"
       }
     }
@@ -231,7 +209,7 @@ export const de = {
   connectedap: {
     name: "Schnittstelle",
     wizard: {
-      addschemainsttype: "XMLSchema-instance type hinzufügen",
+      addschemainsttype: "XMLSchema-instance type hinzuf\xFCgen",
       title: {
         connect: "Schnittstelle verbinden",
         edit: "Schnittstelle bearbeiten"
@@ -245,31 +223,31 @@ export const de = {
     subscriber: {
       description: "GOOSE Ziele aktualisieren: ",
       nonewitems: "keine neuen IEDName Elemente notwendig",
-      message: "{{updatenumber}} IEDName Element(e) hinzugefügt"
+      message: "{{updatenumber}} IEDName Element(e) hinzugef\xFCgt"
     },
     "comm-map": {
       wizard: {title: "Kommunikationszuordnung"},
       connectCB: "{{CbType}} verbinden",
       connectToIED: "Verbinden mit {{iedName}}",
-      sourceIED: "Quellgerät",
-      sinkIED: "Zielgerät"
+      sourceIED: "Quellger\xE4t",
+      sinkIED: "Zielger\xE4t"
     }
   },
   updatesubstation: {
     title: "Schaltanlage aktualisieren"
   },
-  add: "Hinzufügen",
+  add: "Hinzuf\xFCgen",
   remove: "Entfernen",
   edit: "Bearbeiten",
   move: "Verschieben",
   create: "Erstellen",
   save: "Speichern",
   saveAs: "Speichern unter",
-  reset: "Zurücksetzen",
+  reset: "Zur\xFCcksetzen",
   cancel: "Abbrechen",
-  close: "Schließen",
+  close: "Schlie\xDFen",
   filter: "Filter",
-  undo: "Rückgängig",
+  undo: "R\xFCckg\xE4ngig",
   redo: "Wiederholen",
   duplicate: "Klonen",
   connect: "Verbinden",

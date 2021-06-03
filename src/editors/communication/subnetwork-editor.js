@@ -22,7 +22,7 @@ import {
   newActionEvent,
   getValue,
   getMultiplier,
-  patterns,
+  restrictions,
   compareNames,
   createElement,
   getReference
@@ -190,7 +190,7 @@ export function subNetworkWizard(options) {
           .maybeValue=${type}
           nullable
           helper="${translate("subnetwork.wizard.typeHelper")}"
-          pattern="${patterns.normalizedString}"
+          pattern="${restrictions.normalizedString}"
         ></wizard-textfield>`,
         html`<wizard-textfield
           label="BitRate"
@@ -202,7 +202,7 @@ export function subNetworkWizard(options) {
           helper="${translate("subnetwork.wizard.bitrateHelper")}"
           required
           validationMessage="${translate("textfield.nonempty")}"
-          pattern="${patterns.decimal}"
+          pattern="${restrictions.decimal}"
         ></wizard-textfield>`
       ]
     }

@@ -1,13 +1,70 @@
-import { a as __extends, b as __assign, d as __read, _ as __decorate } from '../common/index-3b961e0a.js';
-import { q as query, e as eventOptions, c as css, b as customElement, p as property } from '../common/lit-element-20d2221c.js';
+import { _ as __decorate } from '../common/tslib.es6-f4316a58.js';
+import { q as query, e as eventOptions, c as css, b as customElement, p as property } from '../common/lit-element-7a71a97f.js';
 import { Tab } from './mwc-tab.js';
-import { M as MDCFoundation, B as BaseElement, a as addHasRemoveClass, m as matches } from '../common/foundation-68a89ff7.js';
-import { h as html } from '../common/lit-html-44a7bec9.js';
+import { M as MDCFoundation, B as BaseElement, a as addHasRemoveClass, m as matches } from '../common/foundation-788d2208.js';
+import { h as html } from '../common/lit-html-ea288526.js';
 import { o as observer } from '../common/observer-fa3d205e.js';
-import '../common/render-4f397355.js';
-import '../common/class-map-f3820f9a.js';
-import '../common/ripple-handlers-d87ebe58.js';
-import '../common/style-map-b311a692.js';
+import '../common/render-aa9814af.js';
+import '../common/class-map-0a052906.js';
+import '../common/ripple-handlers-580c686b.js';
+import '../common/style-map-a83cef12.js';
+
+/*! *****************************************************************************
+Copyright (c) Microsoft Corporation.
+
+Permission to use, copy, modify, and/or distribute this software for any
+purpose with or without fee is hereby granted.
+
+THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH
+REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY
+AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT,
+INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM
+LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR
+OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
+PERFORMANCE OF THIS SOFTWARE.
+***************************************************************************** */
+/* global Reflect, Promise */
+
+var extendStatics = function(d, b) {
+    extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return extendStatics(d, b);
+};
+
+function __extends(d, b) {
+    extendStatics(d, b);
+    function __() { this.constructor = d; }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+}
+
+var __assign = function() {
+    __assign = Object.assign || function __assign(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
+
+function __read(o, n) {
+    var m = typeof Symbol === "function" && o[Symbol.iterator];
+    if (!m) return o;
+    var i = m.call(o), r, ar = [], e;
+    try {
+        while ((n === void 0 || n-- > 0) && !(r = i.next()).done) ar.push(r.value);
+    }
+    catch (error) { e = { error: error }; }
+    finally {
+        try {
+            if (r && !r.done && (m = i["return"])) m.call(i);
+        }
+        finally { if (e) throw e.error; }
+    }
+    return ar;
+}
 
 /**
  * @license
@@ -305,14 +362,14 @@ var MDCTabScrollerFoundation = /** @class */ (function (_super) {
         get: function () {
             return cssClasses;
         },
-        enumerable: false,
+        enumerable: true,
         configurable: true
     });
     Object.defineProperty(MDCTabScrollerFoundation, "strings", {
         get: function () {
             return strings;
         },
-        enumerable: false,
+        enumerable: true,
         configurable: true
     });
     Object.defineProperty(MDCTabScrollerFoundation, "defaultAdapter", {
@@ -336,7 +393,7 @@ var MDCTabScrollerFoundation = /** @class */ (function (_super) {
             };
             // tslint:enable:object-literal-sort-keys
         },
-        enumerable: false,
+        enumerable: true,
         configurable: true
     });
     MDCTabScrollerFoundation.prototype.init = function () {
@@ -446,7 +503,7 @@ var MDCTabScrollerFoundation = /** @class */ (function (_super) {
         var matrixParams = match[1];
         // tslint:disable-next-line:ban-ts-ignore "Unused vars" should be a linter warning, not a compiler error.
         // @ts-ignore These unused variables should retain their semantic names for clarity.
-        var _a = __read(matrixParams.split(','), 6), a = _a[0], b = _a[1], c = _a[2], d = _a[3], tx = _a[4], ty = _a[5];
+        var _a = __read(matrixParams.split(','), 6); _a[0]; _a[1]; _a[2]; _a[3]; var tx = _a[4]; _a[5];
         return parseFloat(tx); // tslint:disable-line:ban
     };
     /**
@@ -711,6 +768,46 @@ TabScroller = __decorate([
     customElement('mwc-tab-scroller')
 ], TabScroller);
 
+/*! *****************************************************************************
+Copyright (c) Microsoft Corporation.
+
+Permission to use, copy, modify, and/or distribute this software for any
+purpose with or without fee is hereby granted.
+
+THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH
+REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY
+AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT,
+INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM
+LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR
+OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
+PERFORMANCE OF THIS SOFTWARE.
+***************************************************************************** */
+/* global Reflect, Promise */
+
+var extendStatics$1 = function(d, b) {
+    extendStatics$1 = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return extendStatics$1(d, b);
+};
+
+function __extends$1(d, b) {
+    extendStatics$1(d, b);
+    function __() { this.constructor = d; }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+}
+
+var __assign$1 = function() {
+    __assign$1 = Object.assign || function __assign(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign$1.apply(this, arguments);
+};
+
 /**
  * @license
  * Copyright 2018 Google Inc.
@@ -793,9 +890,9 @@ KEYCODE_MAP.set(numbers.HOME_KEYCODE, strings$1.HOME_KEY);
 KEYCODE_MAP.set(numbers.ENTER_KEYCODE, strings$1.ENTER_KEY);
 KEYCODE_MAP.set(numbers.SPACE_KEYCODE, strings$1.SPACE_KEY);
 var MDCTabBarFoundation = /** @class */ (function (_super) {
-    __extends(MDCTabBarFoundation, _super);
+    __extends$1(MDCTabBarFoundation, _super);
     function MDCTabBarFoundation(adapter) {
-        var _this = _super.call(this, __assign(__assign({}, MDCTabBarFoundation.defaultAdapter), adapter)) || this;
+        var _this = _super.call(this, __assign$1(__assign$1({}, MDCTabBarFoundation.defaultAdapter), adapter)) || this;
         _this.useAutomaticActivation_ = false;
         return _this;
     }
@@ -803,14 +900,14 @@ var MDCTabBarFoundation = /** @class */ (function (_super) {
         get: function () {
             return strings$1;
         },
-        enumerable: false,
+        enumerable: true,
         configurable: true
     });
     Object.defineProperty(MDCTabBarFoundation, "numbers", {
         get: function () {
             return numbers;
         },
-        enumerable: false,
+        enumerable: true,
         configurable: true
     });
     Object.defineProperty(MDCTabBarFoundation, "defaultAdapter", {
@@ -837,7 +934,7 @@ var MDCTabBarFoundation = /** @class */ (function (_super) {
             };
             // tslint:enable:object-literal-sort-keys
         },
-        enumerable: false,
+        enumerable: true,
         configurable: true
     });
     /**
@@ -1225,28 +1322,14 @@ class TabBarBase extends BaseElement {
         // This is necessary because the foundation/adapter synchronously addresses
         // the scroller element.
     }
-    // tslint:disable:ban-ts-ignore
     _getUpdateComplete() {
-        let superPromise;
-        // @ts-ignore
-        if (super._getUpdateComplete) {
-            // @ts-ignore
-            superPromise = super._getUpdateComplete();
-        }
-        else {
-            // @ts-ignore
-            superPromise = super.getUpdateComplete();
-        }
-        return superPromise.then(() => this.scrollerElement.updateComplete)
+        return super._getUpdateComplete()
+            .then(() => this.scrollerElement.updateComplete)
             .then(() => {
             if (this.mdcFoundation === undefined) {
                 this.createFoundation();
             }
         });
-    }
-    // tslint:enable:ban-ts-ignore
-    getUpdateComplete() {
-        return this._getUpdateComplete();
     }
     scrollIndexIntoView(index) {
         this.mdcFoundation.scrollIntoView(index);

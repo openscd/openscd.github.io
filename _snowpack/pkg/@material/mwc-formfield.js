@@ -1,11 +1,51 @@
-import { a as __extends, b as __assign, _ as __decorate } from '../common/index-3b961e0a.js';
-import { p as property, q as query, c as css, b as customElement } from '../common/lit-element-20d2221c.js';
-import { M as MDCFoundation, B as BaseElement, f as findAssignedElement } from '../common/foundation-68a89ff7.js';
-import { F as FormElement } from '../common/form-element-273bea67.js';
+import { _ as __decorate } from '../common/tslib.es6-f4316a58.js';
+import { p as property, q as query, c as css, b as customElement } from '../common/lit-element-7a71a97f.js';
+import { M as MDCFoundation, B as BaseElement, f as findAssignedElement } from '../common/foundation-788d2208.js';
+import { F as FormElement } from '../common/form-element-6f3539c9.js';
 import { o as observer } from '../common/observer-fa3d205e.js';
-import { c as classMap } from '../common/class-map-f3820f9a.js';
-import { h as html } from '../common/lit-html-44a7bec9.js';
-import '../common/render-4f397355.js';
+import { c as classMap } from '../common/class-map-0a052906.js';
+import { h as html } from '../common/lit-html-ea288526.js';
+import '../common/render-aa9814af.js';
+
+/*! *****************************************************************************
+Copyright (c) Microsoft Corporation.
+
+Permission to use, copy, modify, and/or distribute this software for any
+purpose with or without fee is hereby granted.
+
+THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH
+REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY
+AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT,
+INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM
+LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR
+OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
+PERFORMANCE OF THIS SOFTWARE.
+***************************************************************************** */
+/* global Reflect, Promise */
+
+var extendStatics = function(d, b) {
+    extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return extendStatics(d, b);
+};
+
+function __extends(d, b) {
+    extendStatics(d, b);
+    function __() { this.constructor = d; }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+}
+
+var __assign = function() {
+    __assign = Object.assign || function __assign(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
 
 /**
  * @license
@@ -71,14 +111,14 @@ var MDCFormFieldFoundation = /** @class */ (function (_super) {
         get: function () {
             return cssClasses;
         },
-        enumerable: false,
+        enumerable: true,
         configurable: true
     });
     Object.defineProperty(MDCFormFieldFoundation, "strings", {
         get: function () {
             return strings;
         },
-        enumerable: false,
+        enumerable: true,
         configurable: true
     });
     Object.defineProperty(MDCFormFieldFoundation, "defaultAdapter", {
@@ -90,7 +130,7 @@ var MDCFormFieldFoundation = /** @class */ (function (_super) {
                 registerInteractionHandler: function () { return undefined; },
             };
         },
-        enumerable: false,
+        enumerable: true,
         configurable: true
     });
     MDCFormFieldFoundation.prototype.init = function () {

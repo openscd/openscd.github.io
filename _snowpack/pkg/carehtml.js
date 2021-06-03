@@ -1,6 +1,4 @@
 const registeredElements = new Map();
-const cache = new Map();
-const CACHE_SEPARATOR = '$$carehtml_separator$$';
 
 function toDashCase(name) {
   const dashCaseLetters = [];
@@ -76,16 +74,7 @@ function transform(strings, values) {
   if (!mergeWithLastString) {
     newStrings.push(strings[strings.length - 1]);
   }
-
-  const cacheKey = newStrings.join(CACHE_SEPARATOR);
-  const cachedStrings = cache.get(cacheKey);
-  if (cachedStrings) {
-    result[0] = cachedStrings;
-  } else {
-    result[0] = newStrings;
-    cache.set(cacheKey, newStrings);
-  }
-
+  result[0] = newStrings;
   return result;
 }
 

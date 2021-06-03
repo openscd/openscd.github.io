@@ -23,7 +23,7 @@ import {
   getValue,
   newActionEvent,
   newWizardEvent,
-  patterns
+  restrictions
 } from "../../foundation.js";
 import {
   isCreateOptions,
@@ -159,7 +159,7 @@ export let EnumValEditor = class extends LitElement {
             label="value"
             helper="${translate("scl.value")}"
             .maybeValue=${value}
-            pattern="${patterns.normalizedString}"
+            pattern="${restrictions.normalizedString}"
             dialogInitialFocus
           ></wizard-textfield>`,
           html`<wizard-textfield
@@ -168,7 +168,7 @@ export let EnumValEditor = class extends LitElement {
             helper="${translate("scl.desc")}"
             .maybeValue=${desc}
             nullable
-            pattern="${patterns.normalizedString}"
+            pattern="${restrictions.normalizedString}"
           ></wizard-textfield>`
         ]
       }
