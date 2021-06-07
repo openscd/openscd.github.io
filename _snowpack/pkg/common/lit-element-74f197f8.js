@@ -1,5 +1,5 @@
-import { i as isTemplatePartActive, m as marker, T as Template, a as TemplateInstance, r as removeNodes } from './lit-html-44a7bec9.js';
-import { p as parts, r as render$1, t as templateCaches } from './render-4f397355.js';
+import { i as isTemplatePartActive, m as marker, T as Template, a as TemplateInstance, r as removeNodes } from './lit-html-ea288526.js';
+import { p as parts, r as render$1, t as templateCaches } from './render-aa9814af.js';
 
 /**
  * @license
@@ -442,7 +442,6 @@ const defaultConverter = {
                 return value === null ? null : Number(value);
             case Object:
             case Array:
-                // Type assert to adhere to Bazel's "must type assert JSON parse" rule.
                 return JSON.parse(value);
         }
         return value;
@@ -1007,29 +1006,8 @@ class UpdatingElement extends HTMLElement {
      *       await this._myChild.updateComplete;
      *     }
      *   }
-     * @deprecated Override `getUpdateComplete()` instead for forward
-     *     compatibility with `lit-element` 3.0 / `@lit/reactive-element`.
      */
     _getUpdateComplete() {
-        return this.getUpdateComplete();
-    }
-    /**
-     * Override point for the `updateComplete` promise.
-     *
-     * It is not safe to override the `updateComplete` getter directly due to a
-     * limitation in TypeScript which means it is not possible to call a
-     * superclass getter (e.g. `super.updateComplete.then(...)`) when the target
-     * language is ES5 (https://github.com/microsoft/TypeScript/issues/338).
-     * This method should be overridden instead. For example:
-     *
-     *   class MyElement extends LitElement {
-     *     async getUpdateComplete() {
-     *       await super.getUpdateComplete();
-     *       await this._myChild.updateComplete;
-     *     }
-     *   }
-     */
-    getUpdateComplete() {
         return this._updatePromise;
     }
     /**
@@ -1213,10 +1191,8 @@ function property(options) {
  *
  * Properties declared this way must not be used from HTML or HTML templating
  * systems, they're solely for properties internal to the element. These
- * properties may be renamed by optimization tools like the Closure Compiler.
+ * properties may be renamed by optimization tools like closure compiler.
  * @category Decorator
- * @deprecated `internalProperty` has been renamed to `state` in lit-element
- *     3.0. Please update to `state` now to be compatible with 3.0.
  */
 function internalProperty(options) {
     return property({ attribute: false, hasChanged: options === null || options === void 0 ? void 0 : options.hasChanged });
@@ -1260,8 +1236,7 @@ function query(selector, cache) {
             configurable: true,
         };
         if (cache) {
-            const prop = name !== undefined ? name : protoOrDescriptor.key;
-            const key = typeof prop === 'symbol' ? Symbol() : `__${prop}`;
+            const key = typeof name === 'symbol' ? Symbol() : `__${name}`;
             descriptor.get = function () {
                 if (this[key] === undefined) {
                     (this[key] =
@@ -1527,7 +1502,7 @@ const css = (strings, ...values) => {
 // This line will be used in regexes to search for LitElement usage.
 // TODO(justinfagnani): inject version number at build time
 (window['litElementVersions'] || (window['litElementVersions'] = []))
-    .push('2.5.1');
+    .push('2.4.0');
 /**
  * Sentinal value used to avoid calling lit-html's render function when
  * subclasses do not implement `render`
@@ -1627,7 +1602,7 @@ class LitElement extends UpdatingElement {
      * @returns {Element|DocumentFragment} Returns a node into which to render.
      */
     createRenderRoot() {
-        return this.attachShadow(this.constructor.shadowRootOptions);
+        return this.attachShadow({ mode: 'open' });
     }
     /**
      * Applies styling to the element shadowRoot using the [[`styles`]]
@@ -1734,7 +1709,5 @@ LitElement['finalized'] = true;
  * @nocollapse
  */
 LitElement.render = render;
-/** @nocollapse */
-LitElement.shadowRootOptions = { mode: 'open' };
 
 export { LitElement as L, queryAsync as a, customElement as b, css as c, queryAll as d, eventOptions as e, internalProperty as i, property as p, query as q, unsafeCSS as u };
