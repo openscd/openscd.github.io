@@ -1,4 +1,4 @@
-import { c as css } from './lit-element-7a71a97f.js';
+import { c as css } from './lit-element-20d2221c.js';
 
 /**
 @license
@@ -16,6 +16,6 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 */
-const style = css `:host(:not([twoline])){height:56px}:host(:not([left])) .mdc-list-item__meta{height:40px;width:40px}`;
+const style = css `:host(:not([twoline])){height:56px}:host(:not([left])) .mdc-deprecated-list-item__meta{height:40px;width:40px}`;
 
 export { style as s };

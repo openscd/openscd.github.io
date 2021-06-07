@@ -1139,7 +1139,7 @@ const defaultTemplateProcessor = new DefaultTemplateProcessor();
 // This line will be used in regexes to search for lit-html usage.
 // TODO(justinfagnani): inject version number at build time
 if (typeof window !== 'undefined') {
-    (window['litHtmlVersions'] || (window['litHtmlVersions'] = [])).push('1.3.0');
+    (window['litHtmlVersions'] || (window['litHtmlVersions'] = [])).push('1.4.1');
 }
 /**
  * Interprets a template literal as an HTML template that can efficiently

@@ -1,49 +1,9 @@
-import { _ as __decorate } from './tslib.es6-f4316a58.js';
-import { q as query, p as property, i as internalProperty, c as css, b as customElement } from './lit-element-7a71a97f.js';
-import { M as MDCFoundation, B as BaseElement } from './foundation-788d2208.js';
-import { c as classMap } from './class-map-0a052906.js';
-import { s as styleMap } from './style-map-a83cef12.js';
-import { h as html } from './lit-html-ea288526.js';
-
-/*! *****************************************************************************
-Copyright (c) Microsoft Corporation.
-
-Permission to use, copy, modify, and/or distribute this software for any
-purpose with or without fee is hereby granted.
-
-THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH
-REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY
-AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT,
-INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM
-LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR
-OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
-PERFORMANCE OF THIS SOFTWARE.
-***************************************************************************** */
-/* global Reflect, Promise */
-
-var extendStatics = function(d, b) {
-    extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-    return extendStatics(d, b);
-};
-
-function __extends(d, b) {
-    extendStatics(d, b);
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-}
-
-var __assign = function() {
-    __assign = Object.assign || function __assign(t) {
-        for (var s, i = 1, n = arguments.length; i < n; i++) {
-            s = arguments[i];
-            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
-        }
-        return t;
-    };
-    return __assign.apply(this, arguments);
-};
+import { a as __extends, b as __assign, _ as __decorate } from './tslib.es6-c8bbf354.js';
+import { q as query, p as property, i as internalProperty, c as css, b as customElement } from './lit-element-20d2221c.js';
+import { M as MDCFoundation, B as BaseElement, m as matches } from './foundation-68a89ff7.js';
+import { c as classMap } from './class-map-f3820f9a.js';
+import { s as styleMap } from './style-map-b311a692.js';
+import { h as html } from './lit-html-44a7bec9.js';
 
 /**
  * @license
@@ -90,7 +50,7 @@ var numbers = {
     FG_DEACTIVATION_MS: 150,
     INITIAL_ORIGIN_SCALE: 0.6,
     PADDING: 10,
-    TAP_DELAY_MS: 300,
+    TAP_DELAY_MS: 300, // Delay between touch and simulated mouse events on touch devices
 };
 
 /**
@@ -181,21 +141,21 @@ var MDCRippleFoundation = /** @class */ (function (_super) {
         get: function () {
             return cssClasses;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(MDCRippleFoundation, "strings", {
         get: function () {
             return strings;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(MDCRippleFoundation, "numbers", {
         get: function () {
             return numbers;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(MDCRippleFoundation, "defaultAdapter", {
@@ -219,7 +179,7 @@ var MDCRippleFoundation = /** @class */ (function (_super) {
                 updateCssVariable: function () { return undefined; },
             };
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     MDCRippleFoundation.prototype.init = function () {
@@ -604,7 +564,7 @@ class RippleBase extends BaseElement {
         this.mdcFoundationClass = MDCRippleFoundation;
     }
     get isActive() {
-        return (this.parentElement || this).matches(':active');
+        return matches(this.parentElement || this, ':active');
     }
     createAdapter() {
         return {
@@ -707,6 +667,17 @@ class RippleBase extends BaseElement {
         else {
             this.updateComplete.then(fn);
         }
+    }
+    update(changedProperties) {
+        if (changedProperties.has('disabled')) {
+            // stop hovering when ripple is disabled to prevent a stuck "hover" state
+            // When re-enabled, the outer component will get a `mouseenter` event on
+            // the first movement, which will call `startHover()`
+            if (this.disabled) {
+                this.endHover();
+            }
+        }
+        super.update(changedProperties);
     }
     /** @soyTemplate */
     render() {

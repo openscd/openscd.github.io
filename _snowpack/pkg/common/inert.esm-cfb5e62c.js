@@ -1160,10 +1160,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     node.appendChild(style);
   }
 
-  /** @type {!InertManager} */
-  var inertManager = new InertManager(document);
-
   if (!Element.prototype.hasOwnProperty('inert')) {
+    /** @type {!InertManager} */
+    var inertManager = new InertManager(document);
+
     Object.defineProperty(Element.prototype, 'inert', {
       enumerable: true,
       /** @this {!Element} */

@@ -1,70 +1,13 @@
-import { _ as __decorate } from '../common/tslib.es6-f4316a58.js';
-import { q as query, e as eventOptions, c as css, b as customElement, p as property } from '../common/lit-element-7a71a97f.js';
+import { a as __extends, d as __read, b as __assign, _ as __decorate } from '../common/tslib.es6-c8bbf354.js';
+import { q as query, e as eventOptions, c as css, b as customElement, p as property } from '../common/lit-element-20d2221c.js';
 import { Tab } from './mwc-tab.js';
-import { M as MDCFoundation, B as BaseElement, a as addHasRemoveClass, m as matches } from '../common/foundation-788d2208.js';
-import { h as html } from '../common/lit-html-ea288526.js';
+import { M as MDCFoundation, B as BaseElement, a as addHasRemoveClass, m as matches } from '../common/foundation-68a89ff7.js';
+import { h as html } from '../common/lit-html-44a7bec9.js';
 import { o as observer } from '../common/observer-fa3d205e.js';
-import '../common/render-aa9814af.js';
-import '../common/class-map-0a052906.js';
-import '../common/ripple-handlers-580c686b.js';
-import '../common/style-map-a83cef12.js';
-
-/*! *****************************************************************************
-Copyright (c) Microsoft Corporation.
-
-Permission to use, copy, modify, and/or distribute this software for any
-purpose with or without fee is hereby granted.
-
-THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH
-REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY
-AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT,
-INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM
-LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR
-OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
-PERFORMANCE OF THIS SOFTWARE.
-***************************************************************************** */
-/* global Reflect, Promise */
-
-var extendStatics = function(d, b) {
-    extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-    return extendStatics(d, b);
-};
-
-function __extends(d, b) {
-    extendStatics(d, b);
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-}
-
-var __assign = function() {
-    __assign = Object.assign || function __assign(t) {
-        for (var s, i = 1, n = arguments.length; i < n; i++) {
-            s = arguments[i];
-            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
-        }
-        return t;
-    };
-    return __assign.apply(this, arguments);
-};
-
-function __read(o, n) {
-    var m = typeof Symbol === "function" && o[Symbol.iterator];
-    if (!m) return o;
-    var i = m.call(o), r, ar = [], e;
-    try {
-        while ((n === void 0 || n-- > 0) && !(r = i.next()).done) ar.push(r.value);
-    }
-    catch (error) { e = { error: error }; }
-    finally {
-        try {
-            if (r && !r.done && (m = i["return"])) m.call(i);
-        }
-        finally { if (e) throw e.error; }
-    }
-    return ar;
-}
+import '../common/render-4f397355.js';
+import '../common/class-map-f3820f9a.js';
+import '../common/ripple-handlers-4f7a7100.js';
+import '../common/style-map-b311a692.js';
 
 /**
  * @license
@@ -93,7 +36,7 @@ var cssClasses = {
     SCROLL_AREA_SCROLL: 'mdc-tab-scroller__scroll-area--scroll',
     SCROLL_TEST: 'mdc-tab-scroller__test',
 };
-var strings = {
+var strings$1 = {
     AREA_SELECTOR: '.mdc-tab-scroller__scroll-area',
     CONTENT_SELECTOR: '.mdc-tab-scroller__scroll-content',
 };
@@ -362,14 +305,14 @@ var MDCTabScrollerFoundation = /** @class */ (function (_super) {
         get: function () {
             return cssClasses;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(MDCTabScrollerFoundation, "strings", {
         get: function () {
-            return strings;
+            return strings$1;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(MDCTabScrollerFoundation, "defaultAdapter", {
@@ -393,7 +336,7 @@ var MDCTabScrollerFoundation = /** @class */ (function (_super) {
             };
             // tslint:enable:object-literal-sort-keys
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     MDCTabScrollerFoundation.prototype.init = function () {
@@ -759,54 +702,14 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 */
-const style = css `.mdc-tab-scroller{overflow-y:hidden}.mdc-tab-scroller.mdc-tab-scroller--animating .mdc-tab-scroller__scroll-content{transition:250ms transform cubic-bezier(0.4, 0, 0.2, 1)}.mdc-tab-scroller__test{position:absolute;top:-9999px;width:100px;height:100px;overflow-x:scroll}.mdc-tab-scroller__scroll-area{-webkit-overflow-scrolling:touch;display:flex;overflow-x:hidden}.mdc-tab-scroller__scroll-area::-webkit-scrollbar,.mdc-tab-scroller__test::-webkit-scrollbar{display:none}.mdc-tab-scroller__scroll-area--scroll{overflow-x:scroll}.mdc-tab-scroller__scroll-content{position:relative;display:flex;flex:1 0 auto;transform:none;will-change:transform}.mdc-tab-scroller--align-start .mdc-tab-scroller__scroll-content{justify-content:flex-start}.mdc-tab-scroller--align-end .mdc-tab-scroller__scroll-content{justify-content:flex-end}.mdc-tab-scroller--align-center .mdc-tab-scroller__scroll-content{justify-content:center}.mdc-tab-scroller--animating .mdc-tab-scroller__scroll-area{-webkit-overflow-scrolling:auto}:host{display:flex}.mdc-tab-scroller{flex:1}`;
+const style$1 = css `.mdc-tab-scroller{overflow-y:hidden}.mdc-tab-scroller.mdc-tab-scroller--animating .mdc-tab-scroller__scroll-content{transition:250ms transform cubic-bezier(0.4, 0, 0.2, 1)}.mdc-tab-scroller__test{position:absolute;top:-9999px;width:100px;height:100px;overflow-x:scroll}.mdc-tab-scroller__scroll-area{-webkit-overflow-scrolling:touch;display:flex;overflow-x:hidden}.mdc-tab-scroller__scroll-area::-webkit-scrollbar,.mdc-tab-scroller__test::-webkit-scrollbar{display:none}.mdc-tab-scroller__scroll-area--scroll{overflow-x:scroll}.mdc-tab-scroller__scroll-content{position:relative;display:flex;flex:1 0 auto;transform:none;will-change:transform}.mdc-tab-scroller--align-start .mdc-tab-scroller__scroll-content{justify-content:flex-start}.mdc-tab-scroller--align-end .mdc-tab-scroller__scroll-content{justify-content:flex-end}.mdc-tab-scroller--align-center .mdc-tab-scroller__scroll-content{justify-content:center}.mdc-tab-scroller--animating .mdc-tab-scroller__scroll-area{-webkit-overflow-scrolling:auto}:host{display:flex}.mdc-tab-scroller{flex:1}`;
 
 let TabScroller = class TabScroller extends TabScrollerBase {
 };
-TabScroller.styles = style;
+TabScroller.styles = style$1;
 TabScroller = __decorate([
     customElement('mwc-tab-scroller')
 ], TabScroller);
-
-/*! *****************************************************************************
-Copyright (c) Microsoft Corporation.
-
-Permission to use, copy, modify, and/or distribute this software for any
-purpose with or without fee is hereby granted.
-
-THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH
-REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY
-AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT,
-INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM
-LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR
-OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
-PERFORMANCE OF THIS SOFTWARE.
-***************************************************************************** */
-/* global Reflect, Promise */
-
-var extendStatics$1 = function(d, b) {
-    extendStatics$1 = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-    return extendStatics$1(d, b);
-};
-
-function __extends$1(d, b) {
-    extendStatics$1(d, b);
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-}
-
-var __assign$1 = function() {
-    __assign$1 = Object.assign || function __assign(t) {
-        for (var s, i = 1, n = arguments.length; i < n; i++) {
-            s = arguments[i];
-            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
-        }
-        return t;
-    };
-    return __assign$1.apply(this, arguments);
-};
 
 /**
  * @license
@@ -830,7 +733,7 @@ var __assign$1 = function() {
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-var strings$1 = {
+var strings = {
     ARROW_LEFT_KEY: 'ArrowLeft',
     ARROW_RIGHT_KEY: 'ArrowRight',
     END_KEY: 'End',
@@ -875,39 +778,39 @@ var numbers = {
  */
 var ACCEPTABLE_KEYS = new Set();
 // IE11 has no support for new Set with iterable so we need to initialize this by hand
-ACCEPTABLE_KEYS.add(strings$1.ARROW_LEFT_KEY);
-ACCEPTABLE_KEYS.add(strings$1.ARROW_RIGHT_KEY);
-ACCEPTABLE_KEYS.add(strings$1.END_KEY);
-ACCEPTABLE_KEYS.add(strings$1.HOME_KEY);
-ACCEPTABLE_KEYS.add(strings$1.ENTER_KEY);
-ACCEPTABLE_KEYS.add(strings$1.SPACE_KEY);
+ACCEPTABLE_KEYS.add(strings.ARROW_LEFT_KEY);
+ACCEPTABLE_KEYS.add(strings.ARROW_RIGHT_KEY);
+ACCEPTABLE_KEYS.add(strings.END_KEY);
+ACCEPTABLE_KEYS.add(strings.HOME_KEY);
+ACCEPTABLE_KEYS.add(strings.ENTER_KEY);
+ACCEPTABLE_KEYS.add(strings.SPACE_KEY);
 var KEYCODE_MAP = new Map();
 // IE11 has no support for new Map with iterable so we need to initialize this by hand
-KEYCODE_MAP.set(numbers.ARROW_LEFT_KEYCODE, strings$1.ARROW_LEFT_KEY);
-KEYCODE_MAP.set(numbers.ARROW_RIGHT_KEYCODE, strings$1.ARROW_RIGHT_KEY);
-KEYCODE_MAP.set(numbers.END_KEYCODE, strings$1.END_KEY);
-KEYCODE_MAP.set(numbers.HOME_KEYCODE, strings$1.HOME_KEY);
-KEYCODE_MAP.set(numbers.ENTER_KEYCODE, strings$1.ENTER_KEY);
-KEYCODE_MAP.set(numbers.SPACE_KEYCODE, strings$1.SPACE_KEY);
+KEYCODE_MAP.set(numbers.ARROW_LEFT_KEYCODE, strings.ARROW_LEFT_KEY);
+KEYCODE_MAP.set(numbers.ARROW_RIGHT_KEYCODE, strings.ARROW_RIGHT_KEY);
+KEYCODE_MAP.set(numbers.END_KEYCODE, strings.END_KEY);
+KEYCODE_MAP.set(numbers.HOME_KEYCODE, strings.HOME_KEY);
+KEYCODE_MAP.set(numbers.ENTER_KEYCODE, strings.ENTER_KEY);
+KEYCODE_MAP.set(numbers.SPACE_KEYCODE, strings.SPACE_KEY);
 var MDCTabBarFoundation = /** @class */ (function (_super) {
-    __extends$1(MDCTabBarFoundation, _super);
+    __extends(MDCTabBarFoundation, _super);
     function MDCTabBarFoundation(adapter) {
-        var _this = _super.call(this, __assign$1(__assign$1({}, MDCTabBarFoundation.defaultAdapter), adapter)) || this;
+        var _this = _super.call(this, __assign(__assign({}, MDCTabBarFoundation.defaultAdapter), adapter)) || this;
         _this.useAutomaticActivation_ = false;
         return _this;
     }
     Object.defineProperty(MDCTabBarFoundation, "strings", {
         get: function () {
-            return strings$1;
+            return strings;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(MDCTabBarFoundation, "numbers", {
         get: function () {
             return numbers;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(MDCTabBarFoundation, "defaultAdapter", {
@@ -934,7 +837,7 @@ var MDCTabBarFoundation = /** @class */ (function (_super) {
             };
             // tslint:enable:object-literal-sort-keys
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     /**
@@ -1027,9 +930,9 @@ var MDCTabBarFoundation = /** @class */ (function (_super) {
     MDCTabBarFoundation.prototype.determineTargetFromKey_ = function (origin, key) {
         var isRTL = this.isRTL_();
         var maxIndex = this.adapter.getTabListLength() - 1;
-        var shouldGoToEnd = key === strings$1.END_KEY;
-        var shouldDecrement = key === strings$1.ARROW_LEFT_KEY && !isRTL || key === strings$1.ARROW_RIGHT_KEY && isRTL;
-        var shouldIncrement = key === strings$1.ARROW_RIGHT_KEY && !isRTL || key === strings$1.ARROW_LEFT_KEY && isRTL;
+        var shouldGoToEnd = key === strings.END_KEY;
+        var shouldDecrement = key === strings.ARROW_LEFT_KEY && !isRTL || key === strings.ARROW_RIGHT_KEY && isRTL;
+        var shouldIncrement = key === strings.ARROW_RIGHT_KEY && !isRTL || key === strings.ARROW_LEFT_KEY && isRTL;
         var index = origin;
         if (shouldGoToEnd) {
             index = maxIndex;
@@ -1166,7 +1069,7 @@ var MDCTabBarFoundation = /** @class */ (function (_super) {
         return KEYCODE_MAP.get(evt.keyCode);
     };
     MDCTabBarFoundation.prototype.isActivationKey_ = function (key) {
-        return key === strings$1.SPACE_KEY || key === strings$1.ENTER_KEY;
+        return key === strings.SPACE_KEY || key === strings.ENTER_KEY;
     };
     /**
      * Returns whether a given index is inclusively between the ends
@@ -1322,14 +1225,28 @@ class TabBarBase extends BaseElement {
         // This is necessary because the foundation/adapter synchronously addresses
         // the scroller element.
     }
+    // tslint:disable:ban-ts-ignore
     _getUpdateComplete() {
-        return super._getUpdateComplete()
-            .then(() => this.scrollerElement.updateComplete)
+        let superPromise;
+        // @ts-ignore
+        if (super._getUpdateComplete) {
+            // @ts-ignore
+            superPromise = super._getUpdateComplete();
+        }
+        else {
+            // @ts-ignore
+            superPromise = super.getUpdateComplete();
+        }
+        return superPromise.then(() => this.scrollerElement.updateComplete)
             .then(() => {
             if (this.mdcFoundation === undefined) {
                 this.createFoundation();
             }
         });
+    }
+    // tslint:enable:ban-ts-ignore
+    getUpdateComplete() {
+        return this._getUpdateComplete();
     }
     scrollIndexIntoView(index) {
         this.mdcFoundation.scrollIntoView(index);
@@ -1374,11 +1291,11 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 */
-const style$1 = css `.mdc-tab-bar{width:100%}.mdc-tab{height:48px}.mdc-tab--stacked{height:72px}:host{display:block}.mdc-tab-bar{flex:1}mwc-tab{--mdc-tab-height: 48px;--mdc-tab-stacked-height: 72px}`;
+const style = css `.mdc-tab-bar{width:100%}.mdc-tab{height:48px}.mdc-tab--stacked{height:72px}:host{display:block}.mdc-tab-bar{flex:1}mwc-tab{--mdc-tab-height: 48px;--mdc-tab-stacked-height: 72px}`;
 
 let TabBar = class TabBar extends TabBarBase {
 };
-TabBar.styles = style$1;
+TabBar.styles = style;
 TabBar = __decorate([
     customElement('mwc-tab-bar')
 ], TabBar);

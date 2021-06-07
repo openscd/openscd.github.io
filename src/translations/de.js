@@ -7,6 +7,7 @@ export const de = {
     value: "Wert",
     EnumVal: "Enum Wert",
     EnumType: "Enum Typ",
+    DAType: "Datenattribut Typ",
     Report: "Report",
     LN: "Logischer Knoten"
   },
@@ -152,6 +153,27 @@ export const de = {
         add: "EnumType hinzuf\xFCgen",
         edit: "EnumType bearbeiten"
       }
+    }
+  },
+  datype: {
+    wizard: {
+      title: {
+        add: "DAType hinzuf\xFCgen",
+        edit: "DAType bearbeiten"
+      }
+    }
+  },
+  bda: {
+    wizard: {
+      title: {
+        add: "BDA hinzuf\xFCgen",
+        edit: "BDA bearbeiten"
+      },
+      bType: "Basistyp",
+      type: "Typ",
+      sAddr: "Kurze Adresse",
+      valKind: "Art von Wert",
+      valImport: "Wert importierbar"
     }
   },
   lnode: {

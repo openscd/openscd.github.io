@@ -1,12 +1,13 @@
-import { _ as __decorate } from '../common/tslib.es6-f4316a58.js';
-import { p as property, q as query, a as queryAsync, i as internalProperty, e as eventOptions, L as LitElement, b as customElement } from '../common/lit-element-7a71a97f.js';
-import { R as RippleHandlers } from '../common/ripple-handlers-580c686b.js';
-import { h as html } from '../common/lit-html-ea288526.js';
-import { s as style } from '../common/mwc-icon-button-css-825f0bdf.js';
-import '../common/render-aa9814af.js';
-import '../common/foundation-788d2208.js';
-import '../common/class-map-0a052906.js';
-import '../common/style-map-a83cef12.js';
+import { _ as __decorate } from '../common/tslib.es6-c8bbf354.js';
+import { p as property, q as query, a as queryAsync, i as internalProperty, e as eventOptions, L as LitElement, b as customElement } from '../common/lit-element-20d2221c.js';
+import { R as RippleHandlers } from '../common/ripple-handlers-4f7a7100.js';
+import { a as ariaProperty } from '../common/aria-property-0d16a9b7.js';
+import { h as html } from '../common/lit-html-44a7bec9.js';
+import { s as style } from '../common/mwc-icon-button-css-65dc3925.js';
+import '../common/render-4f397355.js';
+import '../common/foundation-68a89ff7.js';
+import '../common/class-map-f3820f9a.js';
+import '../common/style-map-b311a692.js';
 
 /** @soyCompatible */
 class IconButtonBase extends LitElement {
@@ -14,7 +15,6 @@ class IconButtonBase extends LitElement {
         super(...arguments);
         this.disabled = false;
         this.icon = '';
-        this.label = '';
         this.shouldRenderRipple = false;
         this.rippleHandlers = new RippleHandlers(() => {
             this.shouldRenderRipple = true;
@@ -48,7 +48,7 @@ class IconButtonBase extends LitElement {
     render() {
         return html `<button
         class="mdc-icon-button"
-        aria-label="${this.label || this.icon}"
+        aria-label="${this.ariaLabel || this.icon}"
         ?disabled="${this.disabled}"
         @focus="${this.handleRippleFocus}"
         @blur="${this.handleRippleBlur}"
@@ -57,12 +57,12 @@ class IconButtonBase extends LitElement {
         @mouseleave="${this.handleRippleMouseLeave}"
         @touchstart="${this.handleRippleTouchStart}"
         @touchend="${this.handleRippleDeactivate}"
-        @touchcancel="${this.handleRippleDeactivate}">
-      ${this.renderRipple()}
+        @touchcancel="${this.handleRippleDeactivate}"
+    >${this.renderRipple()}
     <i class="material-icons">${this.icon}</i>
-    <span class="default-slot-container">
-        <slot></slot>
-    </span>
+    <span
+      ><slot></slot
+    ></span>
   </button>`;
     }
     handleRippleMouseDown(event) {
@@ -99,8 +99,9 @@ __decorate([
     property({ type: String })
 ], IconButtonBase.prototype, "icon", void 0);
 __decorate([
-    property({ type: String })
-], IconButtonBase.prototype, "label", void 0);
+    ariaProperty,
+    property({ type: String, attribute: 'aria-label' })
+], IconButtonBase.prototype, "ariaLabel", void 0);
 __decorate([
     query('button')
 ], IconButtonBase.prototype, "buttonElement", void 0);

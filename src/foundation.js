@@ -1744,7 +1744,7 @@ const nameStartChar = "[:_A-Za-z]|[\xC0-\xD6]|[\xD8-\xF6]|[\xF8-\u02FF]|[\u0370-
 const nameChar = nameStartChar + "|[.0-9-]|\xB7|[\u0300-\u036F]|[\u203F-\u2040]";
 const name = nameStartChar + "(" + nameChar + ")*";
 const nmToken = "(" + nameChar + ")+";
-export const restrictions = {
+export const patterns = {
   string: "([	-\n]|[\r]|[ -~]|[\x85]|[\xA0-\uD7FF]|[\uE000-\uFFFD]|[\u{10000}\\-\u{10FFFF}])*",
   normalizedString: "([ -~]|[\x85]|[\xA0-\uD7FF]|[\uE000-\uFFFD]|[\u{10000}\\-\u{10FFFF}])*",
   name,
@@ -1752,7 +1752,8 @@ export const restrictions = {
   names: name + "( " + name + ")*",
   nmTokens: nmToken + "( " + nmToken + ")*",
   decimal: "((-|\\+)?([0-9]+(\\.[0-9]*)?|\\.[0-9]+))",
-  unsigned: "\\+?([0-9]+(\\.[0-9]*)?|\\.[0-9]+)"
+  unsigned: "\\+?([0-9]+(\\.[0-9]*)?|\\.[0-9]+)",
+  alphanumeric: "[a-z][0-9,A-Z,a-z]*"
 };
 export function compareNames(a, b) {
   if (typeof a === "string" && typeof b === "string")
@@ -1804,6 +1805,9 @@ export function findControlBlocks(extRef) {
     return cbTags.flatMap((tag) => Array.from(anyLN.getElementsByTagName(tag))).filter((cb) => cb.getAttribute("datSet") === dsName);
   }));
   return controlBlocks;
+}
+export function isPublic(element) {
+  return !element.closest("Private");
 }
 export function getVersion(element) {
   const header = Array.from(element.ownerDocument.getElementsByTagName("Header")).filter((item) => !item.closest("Private"));

@@ -1,10 +1,10 @@
-import { _ as __decorate } from './tslib.es6-f4316a58.js';
-import { p as property, q as query, c as css, b as customElement } from './lit-element-7a71a97f.js';
+import { _ as __decorate } from './tslib.es6-c8bbf354.js';
+import { p as property, q as query, c as css, b as customElement } from './lit-element-20d2221c.js';
 import '../@material/mwc-list/mwc-list-item.js';
-import { M as MDCFoundation, f as findAssignedElement, B as BaseElement, i as isNodeElement, d as doesElementContainFocus, b as deepActiveElementPath } from './foundation-788d2208.js';
+import { M as MDCFoundation, f as findAssignedElement, B as BaseElement, i as isNodeElement, d as doesElementContainFocus, b as deepActiveElementPath } from './foundation-68a89ff7.js';
 import { o as observer } from './observer-fa3d205e.js';
-import { i as ifDefined } from './if-defined-c0cf727b.js';
-import { h as html } from './lit-html-ea288526.js';
+import { i as ifDefined } from './if-defined-4f9ccd15.js';
+import { h as html } from './lit-html-44a7bec9.js';
 
 /**
  * @license
@@ -46,6 +46,7 @@ var KEY = {
     ARROW_DOWN: 'ArrowDown',
     DELETE: 'Delete',
     ESCAPE: 'Escape',
+    TAB: 'Tab',
 };
 var normalizedKeys = new Set();
 // IE11 has no support for new Map with iterable so we need to initialize this
@@ -63,6 +64,7 @@ normalizedKeys.add(KEY.ARROW_RIGHT);
 normalizedKeys.add(KEY.ARROW_DOWN);
 normalizedKeys.add(KEY.DELETE);
 normalizedKeys.add(KEY.ESCAPE);
+normalizedKeys.add(KEY.TAB);
 var KEY_CODE = {
     BACKSPACE: 8,
     ENTER: 13,
@@ -77,6 +79,7 @@ var KEY_CODE = {
     ARROW_DOWN: 40,
     DELETE: 46,
     ESCAPE: 27,
+    TAB: 9,
 };
 var mappedKeyCodes = new Map();
 // IE11 has no support for new Map with iterable so we need to initialize this
@@ -94,6 +97,7 @@ mappedKeyCodes.set(KEY_CODE.ARROW_RIGHT, KEY.ARROW_RIGHT);
 mappedKeyCodes.set(KEY_CODE.ARROW_DOWN, KEY.ARROW_DOWN);
 mappedKeyCodes.set(KEY_CODE.DELETE, KEY.DELETE);
 mappedKeyCodes.set(KEY_CODE.ESCAPE, KEY.ESCAPE);
+mappedKeyCodes.set(KEY_CODE.TAB, KEY.TAB);
 var navigationKeys = new Set();
 // IE11 has no support for new Set with iterable so we need to initialize this
 // by hand.
@@ -144,6 +148,7 @@ function normalizeKey(evt) {
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
+var _a, _b;
 var cssClasses = {
     LIST_ITEM_ACTIVATED_CLASS: 'mdc-list-item--activated',
     LIST_ITEM_CLASS: 'mdc-list-item',
@@ -153,6 +158,23 @@ var cssClasses = {
     LIST_ITEM_PRIMARY_TEXT_CLASS: 'mdc-list-item__primary-text',
     ROOT: 'mdc-list',
 };
+(_a = {},
+    _a["" + cssClasses.LIST_ITEM_ACTIVATED_CLASS] = 'mdc-list-item--activated',
+    _a["" + cssClasses.LIST_ITEM_CLASS] = 'mdc-list-item',
+    _a["" + cssClasses.LIST_ITEM_DISABLED_CLASS] = 'mdc-list-item--disabled',
+    _a["" + cssClasses.LIST_ITEM_SELECTED_CLASS] = 'mdc-list-item--selected',
+    _a["" + cssClasses.LIST_ITEM_PRIMARY_TEXT_CLASS] = 'mdc-list-item__primary-text',
+    _a["" + cssClasses.ROOT] = 'mdc-list',
+    _a);
+var deprecatedClassNameMap = (_b = {},
+    _b["" + cssClasses.LIST_ITEM_ACTIVATED_CLASS] = 'mdc-deprecated-list-item--activated',
+    _b["" + cssClasses.LIST_ITEM_CLASS] = 'mdc-deprecated-list-item',
+    _b["" + cssClasses.LIST_ITEM_DISABLED_CLASS] = 'mdc-deprecated-list-item--disabled',
+    _b["" + cssClasses.LIST_ITEM_SELECTED_CLASS] = 'mdc-deprecated-list-item--selected',
+    _b["" + cssClasses.LIST_ITEM_TEXT_CLASS] = 'mdc-deprecated-list-item__text',
+    _b["" + cssClasses.LIST_ITEM_PRIMARY_TEXT_CLASS] = 'mdc-deprecated-list-item__primary-text',
+    _b["" + cssClasses.ROOT] = 'mdc-deprecated-list',
+    _b);
 var strings = {
     ACTION_EVENT: 'MDCList:action',
     ARIA_CHECKED: 'aria-checked',
@@ -164,11 +186,15 @@ var strings = {
     ARIA_ORIENTATION_HORIZONTAL: 'horizontal',
     ARIA_ROLE_CHECKBOX_SELECTOR: '[role="checkbox"]',
     ARIA_SELECTED: 'aria-selected',
+    ARIA_INTERACTIVE_ROLES_SELECTOR: '[role="listbox"], [role="menu"]',
+    ARIA_MULTI_SELECTABLE_SELECTOR: '[aria-multiselectable="true"]',
     CHECKBOX_RADIO_SELECTOR: 'input[type="checkbox"], input[type="radio"]',
     CHECKBOX_SELECTOR: 'input[type="checkbox"]',
-    CHILD_ELEMENTS_TO_TOGGLE_TABINDEX: "\n    ." + cssClasses.LIST_ITEM_CLASS + " button:not(:disabled),\n    ." + cssClasses.LIST_ITEM_CLASS + " a\n  ",
-    FOCUSABLE_CHILD_ELEMENTS: "\n    ." + cssClasses.LIST_ITEM_CLASS + " button:not(:disabled),\n    ." + cssClasses.LIST_ITEM_CLASS + " a,\n    ." + cssClasses.LIST_ITEM_CLASS + " input[type=\"radio\"]:not(:disabled),\n    ." + cssClasses.LIST_ITEM_CLASS + " input[type=\"checkbox\"]:not(:disabled)\n  ",
+    CHILD_ELEMENTS_TO_TOGGLE_TABINDEX: "\n    ." + cssClasses.LIST_ITEM_CLASS + " button:not(:disabled),\n    ." + cssClasses.LIST_ITEM_CLASS + " a,\n    ." + deprecatedClassNameMap[cssClasses.LIST_ITEM_CLASS] + " button:not(:disabled),\n    ." + deprecatedClassNameMap[cssClasses.LIST_ITEM_CLASS] + " a\n  ",
+    DEPRECATED_SELECTOR: '.mdc-deprecated-list',
+    FOCUSABLE_CHILD_ELEMENTS: "\n    ." + cssClasses.LIST_ITEM_CLASS + " button:not(:disabled),\n    ." + cssClasses.LIST_ITEM_CLASS + " a,\n    ." + cssClasses.LIST_ITEM_CLASS + " input[type=\"radio\"]:not(:disabled),\n    ." + cssClasses.LIST_ITEM_CLASS + " input[type=\"checkbox\"]:not(:disabled),\n    ." + deprecatedClassNameMap[cssClasses.LIST_ITEM_CLASS] + " button:not(:disabled),\n    ." + deprecatedClassNameMap[cssClasses.LIST_ITEM_CLASS] + " a,\n    ." + deprecatedClassNameMap[cssClasses.LIST_ITEM_CLASS] + " input[type=\"radio\"]:not(:disabled),\n    ." + deprecatedClassNameMap[cssClasses.LIST_ITEM_CLASS] + " input[type=\"checkbox\"]:not(:disabled)\n  ",
     RADIO_SELECTOR: 'input[type="radio"]',
+    SELECTED_ITEM_SELECTOR: '[aria-selected="true"], [aria-current="true"]',
 };
 var numbers = {
     UNSET_INDEX: -1,
@@ -191,12 +217,15 @@ var numbers = {
  See the License for the specific language governing permissions and
  limitations under the License.
  */
+const integerSort = (a, b) => {
+    return a - b;
+};
 const findIndexDiff = (oldSet, newSet) => {
     const oldArr = Array.from(oldSet);
     const newArr = Array.from(newSet);
     const diff = { added: [], removed: [] };
-    const oldSorted = oldArr.sort();
-    const newSorted = newArr.sort();
+    const oldSorted = oldArr.sort(integerSort);
+    const newSorted = newArr.sort(integerSort);
     let i = 0;
     let j = 0;
     while (i < oldSorted.length || j < newSorted.length) {
@@ -290,7 +319,7 @@ class MDCListFoundation extends MDCFoundation {
             // set to first sorted number in set
             if (isIndexSet(currentIndex)) {
                 if (currentIndex.size) {
-                    const vals = Array.from(currentIndex).sort();
+                    const vals = Array.from(currentIndex).sort(integerSort);
                     this.selectedIndex_ = vals[0];
                 }
                 else {
@@ -377,8 +406,8 @@ class MDCListFoundation extends MDCFoundation {
         if (currentIndex === -1) {
             currentIndex = listItemIndex;
             if (currentIndex < 0) {
-                // If this event doesn't have a mdc-list-item ancestor from the
-                // current list (not from a sublist), return early.
+                // If this event doesn't have a mdc-deprecated-list-item ancestor from
+                // the current list (not from a sublist), return early.
                 return;
             }
         }
@@ -685,6 +714,9 @@ const isListItem = (element) => {
 function clearAndCreateItemsReadyPromise() {
     const oldResolver = this.itemsReadyResolver;
     this.itemsReady = new Promise((res) => {
+        // TODO(b/175626389): Type '(value: never[] | PromiseLike<never[]>) => void'
+        // is not assignable to type '(value?: never[] | PromiseLike<never[]> |
+        // undefined) => void'.
         return this.itemsReadyResolver = res;
     });
     oldResolver();
@@ -719,9 +751,24 @@ class ListBase extends BaseElement {
             debouncedFunction(updateItems);
         };
     }
+    // tslint:disable:ban-ts-ignore
     async _getUpdateComplete() {
-        await super._getUpdateComplete();
+        let result = false;
+        // @ts-ignore
+        if (super._getUpdateComplete) {
+            // @ts-ignore
+            await super._getUpdateComplete();
+        }
+        else {
+            // @ts-ignore
+            result = await super.getUpdateComplete();
+        }
         await this.itemsReady;
+        return result;
+    }
+    // tslint:enable:ban-ts-ignore
+    async getUpdateComplete() {
+        return this._getUpdateComplete();
     }
     get assignedElements() {
         const slot = this.slotElement;
@@ -798,7 +845,7 @@ class ListBase extends BaseElement {
           tabindex=${tabindex}
           role="${ifDefined(role)}"
           aria-label="${ifDefined(ariaLabel)}"
-          class="mdc-list"
+          class="mdc-deprecated-list"
           @keydown=${this.onKeydown}
           @focusin=${this.onFocusIn}
           @focusout=${this.onFocusOut}
@@ -1073,7 +1120,7 @@ __decorate([
     property({ type: String })
 ], ListBase.prototype, "emptyMessage", void 0);
 __decorate([
-    query('.mdc-list')
+    query('.mdc-deprecated-list')
 ], ListBase.prototype, "mdcRoot", void 0);
 __decorate([
     query('slot')
@@ -1156,7 +1203,7 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 */
-const style = css `@keyframes mdc-ripple-fg-radius-in{from{animation-timing-function:cubic-bezier(0.4, 0, 0.2, 1);transform:translate(var(--mdc-ripple-fg-translate-start, 0)) scale(1)}to{transform:translate(var(--mdc-ripple-fg-translate-end, 0)) scale(var(--mdc-ripple-fg-scale, 1))}}@keyframes mdc-ripple-fg-opacity-in{from{animation-timing-function:linear;opacity:0}to{opacity:var(--mdc-ripple-fg-opacity, 0)}}@keyframes mdc-ripple-fg-opacity-out{from{animation-timing-function:linear;opacity:var(--mdc-ripple-fg-opacity, 0)}to{opacity:0}}:host{display:block}.mdc-list{-moz-osx-font-smoothing:grayscale;-webkit-font-smoothing:antialiased;font-family:Roboto, sans-serif;font-family:var(--mdc-typography-subtitle1-font-family, var(--mdc-typography-font-family, Roboto, sans-serif));font-size:1rem;font-size:var(--mdc-typography-subtitle1-font-size, 1rem);line-height:1.75rem;line-height:var(--mdc-typography-subtitle1-line-height, 1.75rem);font-weight:400;font-weight:var(--mdc-typography-subtitle1-font-weight, 400);letter-spacing:0.009375em;letter-spacing:var(--mdc-typography-subtitle1-letter-spacing, 0.009375em);text-decoration:inherit;text-decoration:var(--mdc-typography-subtitle1-text-decoration, inherit);text-transform:inherit;text-transform:var(--mdc-typography-subtitle1-text-transform, inherit);line-height:1.5rem;margin:0;padding:8px 0;list-style-type:none;color:rgba(0, 0, 0, 0.87);color:var(--mdc-theme-text-primary-on-background, rgba(0, 0, 0, 0.87));padding:var(--mdc-list-vertical-padding, 8px) 0}.mdc-list:focus{outline:none}.mdc-list-item{height:48px}.mdc-list--dense{padding-top:4px;padding-bottom:4px;font-size:.812rem}.mdc-list ::slotted([divider]){height:0;margin:0;border:none;border-bottom-width:1px;border-bottom-style:solid;border-bottom-color:rgba(0, 0, 0, 0.12)}.mdc-list ::slotted([divider][padded]){margin:0 var(--mdc-list-side-padding, 16px)}.mdc-list ::slotted([divider][inset]){margin-left:var(--mdc-list-inset-margin, 72px);margin-right:0;width:calc(100% - var(--mdc-list-inset-margin, 72px))}.mdc-list-group[dir=rtl] .mdc-list ::slotted([divider][inset]),[dir=rtl] .mdc-list-group .mdc-list ::slotted([divider][inset]){margin-left:0;margin-right:var(--mdc-list-inset-margin, 72px)}.mdc-list ::slotted([divider][inset][padded]){width:calc(100% - var(--mdc-list-inset-margin, 72px) - var(--mdc-list-side-padding, 16px))}.mdc-list--dense ::slotted([mwc-list-item]){height:40px}.mdc-list--dense ::slotted([mwc-list]){--mdc-list-item-graphic-size: 20px}.mdc-list--two-line.mdc-list--dense ::slotted([mwc-list-item]),.mdc-list--avatar-list.mdc-list--dense ::slotted([mwc-list-item]){height:60px}.mdc-list--avatar-list.mdc-list--dense ::slotted([mwc-list]){--mdc-list-item-graphic-size: 36px}:host([noninteractive]){pointer-events:none;cursor:default}.mdc-list--dense ::slotted(.mdc-list-item__primary-text){display:block;margin-top:0;line-height:normal;margin-bottom:-20px}.mdc-list--dense ::slotted(.mdc-list-item__primary-text)::before{display:inline-block;width:0;height:24px;content:"";vertical-align:0}.mdc-list--dense ::slotted(.mdc-list-item__primary-text)::after{display:inline-block;width:0;height:20px;content:"";vertical-align:-20px}`;
+const style = css `@keyframes mdc-ripple-fg-radius-in{from{animation-timing-function:cubic-bezier(0.4, 0, 0.2, 1);transform:translate(var(--mdc-ripple-fg-translate-start, 0)) scale(1)}to{transform:translate(var(--mdc-ripple-fg-translate-end, 0)) scale(var(--mdc-ripple-fg-scale, 1))}}@keyframes mdc-ripple-fg-opacity-in{from{animation-timing-function:linear;opacity:0}to{opacity:var(--mdc-ripple-fg-opacity, 0)}}@keyframes mdc-ripple-fg-opacity-out{from{animation-timing-function:linear;opacity:var(--mdc-ripple-fg-opacity, 0)}to{opacity:0}}:host{display:block}.mdc-deprecated-list{-moz-osx-font-smoothing:grayscale;-webkit-font-smoothing:antialiased;font-family:Roboto, sans-serif;font-family:var(--mdc-typography-subtitle1-font-family, var(--mdc-typography-font-family, Roboto, sans-serif));font-size:1rem;font-size:var(--mdc-typography-subtitle1-font-size, 1rem);line-height:1.75rem;line-height:var(--mdc-typography-subtitle1-line-height, 1.75rem);font-weight:400;font-weight:var(--mdc-typography-subtitle1-font-weight, 400);letter-spacing:0.009375em;letter-spacing:var(--mdc-typography-subtitle1-letter-spacing, 0.009375em);text-decoration:inherit;text-decoration:var(--mdc-typography-subtitle1-text-decoration, inherit);text-transform:inherit;text-transform:var(--mdc-typography-subtitle1-text-transform, inherit);line-height:1.5rem;margin:0;padding:8px 0;list-style-type:none;color:rgba(0, 0, 0, 0.87);color:var(--mdc-theme-text-primary-on-background, rgba(0, 0, 0, 0.87));padding:var(--mdc-list-vertical-padding, 8px) 0}.mdc-deprecated-list:focus{outline:none}.mdc-deprecated-list-item{height:48px}.mdc-deprecated-list--dense{padding-top:4px;padding-bottom:4px;font-size:.812rem}.mdc-deprecated-list ::slotted([divider]){height:0;margin:0;border:none;border-bottom-width:1px;border-bottom-style:solid;border-bottom-color:rgba(0, 0, 0, 0.12)}.mdc-deprecated-list ::slotted([divider][padded]){margin:0 var(--mdc-list-side-padding, 16px)}.mdc-deprecated-list ::slotted([divider][inset]){margin-left:var(--mdc-list-inset-margin, 72px);margin-right:0;width:calc( 100% - var(--mdc-list-inset-margin, 72px) )}[dir=rtl] .mdc-deprecated-list ::slotted([divider][inset]),.mdc-deprecated-list ::slotted([divider][inset])[dir=rtl]{margin-left:0;margin-right:var(--mdc-list-inset-margin, 72px)}.mdc-deprecated-list ::slotted([divider][inset][padded]){width:calc( 100% - var(--mdc-list-inset-margin, 72px) - var(--mdc-list-side-padding, 16px) )}.mdc-deprecated-list--dense ::slotted([mwc-list-item]){height:40px}.mdc-deprecated-list--dense ::slotted([mwc-list]){--mdc-list-item-graphic-size: 20px}.mdc-deprecated-list--two-line.mdc-deprecated-list--dense ::slotted([mwc-list-item]),.mdc-deprecated-list--avatar-list.mdc-deprecated-list--dense ::slotted([mwc-list-item]){height:60px}.mdc-deprecated-list--avatar-list.mdc-deprecated-list--dense ::slotted([mwc-list]){--mdc-list-item-graphic-size: 36px}:host([noninteractive]){pointer-events:none;cursor:default}.mdc-deprecated-list--dense ::slotted(.mdc-deprecated-list-item__primary-text){display:block;margin-top:0;line-height:normal;margin-bottom:-20px}.mdc-deprecated-list--dense ::slotted(.mdc-deprecated-list-item__primary-text)::before{display:inline-block;width:0;height:24px;content:"";vertical-align:0}.mdc-deprecated-list--dense ::slotted(.mdc-deprecated-list-item__primary-text)::after{display:inline-block;width:0;height:20px;content:"";vertical-align:-20px}`;
 
 /**
 @license

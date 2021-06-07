@@ -1,4 +1,4 @@
-import { L as LitElement } from './lit-element-7a71a97f.js';
+import { L as LitElement } from './lit-element-20d2221c.js';
 
 /**
  * @license
@@ -216,7 +216,7 @@ var MDCFoundation = /** @class */ (function () {
             // CSS class the foundation class needs as a property. e.g. {ACTIVE: 'mdc-component--active'}
             return {};
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(MDCFoundation, "strings", {
@@ -225,7 +225,7 @@ var MDCFoundation = /** @class */ (function () {
             // semantic strings as constants. e.g. {ARIA_ROLE: 'tablist'}
             return {};
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(MDCFoundation, "numbers", {
@@ -234,7 +234,7 @@ var MDCFoundation = /** @class */ (function () {
             // of its semantic numbers as constants. e.g. {ANIMATION_DELAY_MS: 350}
             return {};
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(MDCFoundation, "defaultAdapter", {
@@ -244,7 +244,7 @@ var MDCFoundation = /** @class */ (function () {
             // validation.
             return {};
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     MDCFoundation.prototype.init = function () {

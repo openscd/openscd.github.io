@@ -1,16 +1,17 @@
-import { _ as __decorate } from '../../common/tslib.es6-f4316a58.js';
-import { q as query, p as property, b as customElement } from '../../common/lit-element-7a71a97f.js';
+import { _ as __decorate } from '../../common/tslib.es6-c8bbf354.js';
+import { q as query, p as property, b as customElement } from '../../common/lit-element-20d2221c.js';
 import '../mwc-checkbox.js';
-import { c as classMap } from '../../common/class-map-0a052906.js';
-import { L as ListItemBase, s as style } from '../../common/mwc-list-item-css-eb7dd805.js';
-import { h as html } from '../../common/lit-html-ea288526.js';
-import { s as style$1 } from '../../common/mwc-control-list-item-css-8b232d1c.js';
-import '../../common/render-aa9814af.js';
-import '../../common/ripple-handlers-580c686b.js';
-import '../../common/foundation-788d2208.js';
-import '../../common/style-map-a83cef12.js';
-import '../../common/form-element-6f3539c9.js';
-import '../../common/if-defined-c0cf727b.js';
+import { c as classMap } from '../../common/class-map-f3820f9a.js';
+import { L as ListItemBase, s as style } from '../../common/mwc-list-item-css-4ad48171.js';
+import { h as html } from '../../common/lit-html-44a7bec9.js';
+import { s as style$1 } from '../../common/mwc-control-list-item-css-e3107f09.js';
+import '../../common/render-4f397355.js';
+import '../../common/ripple-handlers-4f7a7100.js';
+import '../../common/foundation-68a89ff7.js';
+import '../../common/style-map-b311a692.js';
+import '../../common/aria-property-0d16a9b7.js';
+import '../../common/form-element-273bea67.js';
+import '../../common/if-defined-4f9ccd15.js';
 import '../../common/observer-fa3d205e.js';
 
 /**
@@ -37,8 +38,8 @@ class CheckListItemBase extends ListItemBase {
     }
     render() {
         const checkboxClasses = {
-            'mdc-list-item__graphic': this.left,
-            'mdc-list-item__meta': !this.left,
+            'mdc-deprecated-list-item__graphic': this.left,
+            'mdc-deprecated-list-item__meta': !this.left,
         };
         const text = this.renderText();
         const graphic = this.graphic && this.graphic !== 'control' && !this.left ?

@@ -1,11 +1,11 @@
-import { _ as __decorate } from './tslib.es6-f4316a58.js';
-import { q as query, p as property, i as internalProperty, c as css, b as customElement } from './lit-element-7a71a97f.js';
-import { c as cssClasses$2 } from './mwc-list-e002af9f.js';
-import { M as MDCFoundation, B as BaseElement, a as addHasRemoveClass, d as doesElementContainFocus, b as deepActiveElementPath } from './foundation-788d2208.js';
+import { a as __extends, c as __values, b as __assign, _ as __decorate } from './tslib.es6-c8bbf354.js';
+import { q as query, p as property, i as internalProperty, c as css, b as customElement } from './lit-element-20d2221c.js';
+import { c as cssClasses$2 } from './mwc-list-cc1220bf.js';
+import { M as MDCFoundation, B as BaseElement, a as addHasRemoveClass, d as doesElementContainFocus, b as deepActiveElementPath } from './foundation-68a89ff7.js';
 import { o as observer } from './observer-fa3d205e.js';
-import { c as classMap } from './class-map-0a052906.js';
-import { s as styleMap } from './style-map-a83cef12.js';
-import { h as html } from './lit-html-ea288526.js';
+import { c as classMap } from './class-map-f3820f9a.js';
+import { s as styleMap } from './style-map-b311a692.js';
+import { h as html } from './lit-html-44a7bec9.js';
 
 /**
  * @license
@@ -29,7 +29,7 @@ import { h as html } from './lit-html-ea288526.js';
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-var cssClasses = {
+var cssClasses$1 = {
     ANCHOR: 'mdc-menu-surface--anchor',
     ANIMATING_CLOSED: 'mdc-menu-surface--animating-closed',
     ANIMATING_OPEN: 'mdc-menu-surface--animating-open',
@@ -39,16 +39,21 @@ var cssClasses = {
     ROOT: 'mdc-menu-surface',
 };
 // tslint:disable:object-literal-sort-keys
-var strings = {
+var strings$1 = {
     CLOSED_EVENT: 'MDCMenuSurface:closed',
+    CLOSING_EVENT: 'MDCMenuSurface:closing',
     OPENED_EVENT: 'MDCMenuSurface:opened',
     FOCUSABLE_ELEMENTS: [
-        'button:not(:disabled)', '[href]:not([aria-disabled="true"])', 'input:not(:disabled)',
-        'select:not(:disabled)', 'textarea:not(:disabled)', '[tabindex]:not([tabindex="-1"]):not([aria-disabled="true"])',
+        'button:not(:disabled)',
+        '[href]:not([aria-disabled="true"])',
+        'input:not(:disabled)',
+        'select:not(:disabled)',
+        'textarea:not(:disabled)',
+        '[tabindex]:not([tabindex="-1"]):not([aria-disabled="true"])',
     ].join(', '),
 };
 // tslint:enable:object-literal-sort-keys
-var numbers = {
+var numbers$1 = {
     /** Total duration of menu-surface open animation. */
     TRANSITION_OPEN_DURATION: 120,
     /** Total duration of menu-surface close animation. */
@@ -87,58 +92,6 @@ var Corner;
     Corner[Corner["BOTTOM_END"] = 13] = "BOTTOM_END";
 })(Corner || (Corner = {}));
 
-/*! *****************************************************************************
-Copyright (c) Microsoft Corporation.
-
-Permission to use, copy, modify, and/or distribute this software for any
-purpose with or without fee is hereby granted.
-
-THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH
-REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY
-AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT,
-INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM
-LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR
-OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
-PERFORMANCE OF THIS SOFTWARE.
-***************************************************************************** */
-/* global Reflect, Promise */
-
-var extendStatics = function(d, b) {
-    extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-    return extendStatics(d, b);
-};
-
-function __extends(d, b) {
-    extendStatics(d, b);
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-}
-
-var __assign = function() {
-    __assign = Object.assign || function __assign(t) {
-        for (var s, i = 1, n = arguments.length; i < n; i++) {
-            s = arguments[i];
-            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
-        }
-        return t;
-    };
-    return __assign.apply(this, arguments);
-};
-
-function __values(o) {
-    var s = typeof Symbol === "function" && Symbol.iterator, m = s && o[s], i = 0;
-    if (m) return m.call(o);
-    if (o && typeof o.length === "number") return {
-        next: function () {
-            if (o && i >= o.length) o = void 0;
-            return { value: o && o[i++], done: !o };
-        }
-    };
-    throw new TypeError(s ? "Object is not iterable." : "Symbol.iterator is not defined.");
-}
-
 /**
  * @license
  * Copyright 2018 Google Inc.
@@ -169,6 +122,8 @@ var MDCMenuSurfaceFoundation = /** @class */ (function (_super) {
         _this.isQuickOpen = false;
         _this.isHoistedElement = false;
         _this.isFixedPosition = false;
+        _this.isHorizontallyCenteredOnViewport = false;
+        _this.maxHeight = 0;
         _this.openAnimationEndTimerId = 0;
         _this.closeAnimationEndTimerId = 0;
         _this.animationRequestId = 0;
@@ -194,30 +149,30 @@ var MDCMenuSurfaceFoundation = /** @class */ (function (_super) {
     }
     Object.defineProperty(MDCMenuSurfaceFoundation, "cssClasses", {
         get: function () {
-            return cssClasses;
+            return cssClasses$1;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(MDCMenuSurfaceFoundation, "strings", {
         get: function () {
-            return strings;
+            return strings$1;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(MDCMenuSurfaceFoundation, "numbers", {
         get: function () {
-            return numbers;
+            return numbers$1;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(MDCMenuSurfaceFoundation, "Corner", {
         get: function () {
             return Corner;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(MDCMenuSurfaceFoundation, "defaultAdapter", {
@@ -246,10 +201,11 @@ var MDCMenuSurfaceFoundation = /** @class */ (function (_super) {
                 restoreFocus: function () { return undefined; },
                 notifyClose: function () { return undefined; },
                 notifyOpen: function () { return undefined; },
+                notifyClosing: function () { return undefined; },
             };
             // tslint:enable:object-literal-sort-keys
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     MDCMenuSurfaceFoundation.prototype.init = function () {
@@ -301,8 +257,20 @@ var MDCMenuSurfaceFoundation = /** @class */ (function (_super) {
         this.position.x = this.isFinite(x) ? x : 0;
         this.position.y = this.isFinite(y) ? y : 0;
     };
+    /** Sets whether menu-surface should be horizontally centered to viewport. */
+    MDCMenuSurfaceFoundation.prototype.setIsHorizontallyCenteredOnViewport = function (isCentered) {
+        this.isHorizontallyCenteredOnViewport = isCentered;
+    };
     MDCMenuSurfaceFoundation.prototype.setQuickOpen = function (quickOpen) {
         this.isQuickOpen = quickOpen;
+    };
+    /**
+     * Sets maximum menu-surface height on open.
+     * @param maxHeight The desired max-height. Set to 0 (default) to
+     *     automatically calculate max height based on available viewport space.
+     */
+    MDCMenuSurfaceFoundation.prototype.setMaxHeight = function (maxHeight) {
+        this.maxHeight = maxHeight;
     };
     MDCMenuSurfaceFoundation.prototype.isOpen = function () {
         return this.isSurfaceOpen;
@@ -333,7 +301,7 @@ var MDCMenuSurfaceFoundation = /** @class */ (function (_super) {
                     _this.openAnimationEndTimerId = 0;
                     _this.adapter.removeClass(MDCMenuSurfaceFoundation.cssClasses.ANIMATING_OPEN);
                     _this.adapter.notifyOpen();
-                }, numbers.TRANSITION_OPEN_DURATION);
+                }, numbers$1.TRANSITION_OPEN_DURATION);
             });
             this.isSurfaceOpen = true;
         }
@@ -347,6 +315,7 @@ var MDCMenuSurfaceFoundation = /** @class */ (function (_super) {
         if (!this.isSurfaceOpen) {
             return;
         }
+        this.adapter.notifyClosing();
         if (this.isQuickOpen) {
             this.isSurfaceOpen = false;
             if (!skipRestoreFocus) {
@@ -355,22 +324,21 @@ var MDCMenuSurfaceFoundation = /** @class */ (function (_super) {
             this.adapter.removeClass(MDCMenuSurfaceFoundation.cssClasses.OPEN);
             this.adapter.removeClass(MDCMenuSurfaceFoundation.cssClasses.IS_OPEN_BELOW);
             this.adapter.notifyClose();
+            return;
         }
-        else {
-            this.adapter.addClass(MDCMenuSurfaceFoundation.cssClasses.ANIMATING_CLOSED);
-            requestAnimationFrame(function () {
-                _this.adapter.removeClass(MDCMenuSurfaceFoundation.cssClasses.OPEN);
-                _this.adapter.removeClass(MDCMenuSurfaceFoundation.cssClasses.IS_OPEN_BELOW);
-                _this.closeAnimationEndTimerId = setTimeout(function () {
-                    _this.closeAnimationEndTimerId = 0;
-                    _this.adapter.removeClass(MDCMenuSurfaceFoundation.cssClasses.ANIMATING_CLOSED);
-                    _this.adapter.notifyClose();
-                }, numbers.TRANSITION_CLOSE_DURATION);
-            });
-            this.isSurfaceOpen = false;
-            if (!skipRestoreFocus) {
-                this.maybeRestoreFocus();
-            }
+        this.adapter.addClass(MDCMenuSurfaceFoundation.cssClasses.ANIMATING_CLOSED);
+        requestAnimationFrame(function () {
+            _this.adapter.removeClass(MDCMenuSurfaceFoundation.cssClasses.OPEN);
+            _this.adapter.removeClass(MDCMenuSurfaceFoundation.cssClasses.IS_OPEN_BELOW);
+            _this.closeAnimationEndTimerId = setTimeout(function () {
+                _this.closeAnimationEndTimerId = 0;
+                _this.adapter.removeClass(MDCMenuSurfaceFoundation.cssClasses.ANIMATING_CLOSED);
+                _this.adapter.notifyClose();
+            }, numbers$1.TRANSITION_CLOSE_DURATION);
+        });
+        this.isSurfaceOpen = false;
+        if (!skipRestoreFocus) {
+            this.maybeRestoreFocus();
         }
     };
     /** Handle clicks and close if not within menu-surface element. */
@@ -405,7 +373,7 @@ var MDCMenuSurfaceFoundation = /** @class */ (function (_super) {
             _a[verticalAlignment] = verticalOffset,
             _a);
         // Center align when anchor width is comparable or greater than menu surface, otherwise keep corner.
-        if (anchorSize.width / surfaceSize.width > numbers.ANCHOR_TO_MENU_SURFACE_WIDTH_RATIO) {
+        if (anchorSize.width / surfaceSize.width > numbers$1.ANCHOR_TO_MENU_SURFACE_WIDTH_RATIO) {
             horizontalAlignment = 'center';
         }
         // If the menu-surface has been hoisted to the body, it's no longer relative to the anchor element
@@ -450,6 +418,7 @@ var MDCMenuSurfaceFoundation = /** @class */ (function (_super) {
                 right: viewportSize.width - anchorRect.right,
                 bottom: viewportSize.height - anchorRect.bottom,
                 left: anchorRect.left,
+                // tslint:enable:object-literal-sort-keys
             },
             viewportSize: viewportSize,
             windowScroll: windowScroll,
@@ -470,8 +439,8 @@ var MDCMenuSurfaceFoundation = /** @class */ (function (_super) {
         var availableTop;
         var availableBottom;
         if (isAnchoredToBottom) {
-            availableTop = viewportDistance.top - MARGIN_TO_EDGE + anchorSize.height +
-                this.anchorMargin.bottom;
+            availableTop =
+                viewportDistance.top - MARGIN_TO_EDGE + this.anchorMargin.bottom;
             availableBottom =
                 viewportDistance.bottom - MARGIN_TO_EDGE - this.anchorMargin.bottom;
         }
@@ -482,7 +451,7 @@ var MDCMenuSurfaceFoundation = /** @class */ (function (_super) {
                 anchorSize.height - this.anchorMargin.top;
         }
         var isAvailableBottom = availableBottom - surfaceSize.height > 0;
-        if (!isAvailableBottom && availableTop >= availableBottom) {
+        if (!isAvailableBottom && availableTop > availableBottom) {
             // Attach bottom side of surface to the anchor.
             corner = this.setBit(corner, CornerBit.BOTTOM);
         }
@@ -534,6 +503,9 @@ var MDCMenuSurfaceFoundation = /** @class */ (function (_super) {
      * @return Maximum height of the menu surface, based on available space. 0 indicates should not be set.
      */
     MDCMenuSurfaceFoundation.prototype.getMenuSurfaceMaxHeight = function (corner) {
+        if (this.maxHeight > 0) {
+            return this.maxHeight;
+        }
         var viewportDistance = this.measurements.viewportDistance;
         var maxHeight = 0;
         var isBottomAligned = this.hasBit(corner, CornerBit.BOTTOM);
@@ -605,12 +577,17 @@ var MDCMenuSurfaceFoundation = /** @class */ (function (_super) {
     /** Calculates the offsets for positioning the menu-surface when the menu-surface has been hoisted to the body. */
     MDCMenuSurfaceFoundation.prototype.adjustPositionForHoistedElement = function (position) {
         var e_1, _a;
-        var _b = this.measurements, windowScroll = _b.windowScroll, viewportDistance = _b.viewportDistance;
+        var _b = this.measurements, windowScroll = _b.windowScroll, viewportDistance = _b.viewportDistance, surfaceSize = _b.surfaceSize, viewportSize = _b.viewportSize;
         var props = Object.keys(position);
         try {
             for (var props_1 = __values(props), props_1_1 = props_1.next(); !props_1_1.done; props_1_1 = props_1.next()) {
                 var prop = props_1_1.value;
                 var value = position[prop] || 0;
+                if (this.isHorizontallyCenteredOnViewport &&
+                    (prop === 'left' || prop === 'right')) {
+                    position[prop] = (viewportSize.width - surfaceSize.width) / 2;
+                    continue;
+                }
                 // Hoisted surfaces need to have the anchor elements location on the page added to the
                 // position properties for proper alignment on the body.
                 value += viewportDistance[prop];
@@ -700,6 +677,7 @@ class MenuSurfaceBase extends BaseElement {
         // must be defined before open or else race condition in foundation occurs.
         this.quick = false;
         this.open = false;
+        this.stayOpenOnBodyClick = false;
         this.bitwiseCorner = Corner.TOP_START;
         this.previousMenuCorner = null;
         // must be defined before observer of anchor corner for initialization
@@ -746,6 +724,10 @@ class MenuSurfaceBase extends BaseElement {
                 const init = { bubbles: true, composed: true };
                 const ev = new CustomEvent('closed', init);
                 this.open = false;
+                this.mdcRoot.dispatchEvent(ev);
+            }, notifyClosing: () => {
+                const init = { bubbles: true, composed: true };
+                const ev = new CustomEvent('closing', init);
                 this.mdcRoot.dispatchEvent(ev);
             }, notifyOpen: () => {
                 const init = { bubbles: true, composed: true };
@@ -829,6 +811,9 @@ class MenuSurfaceBase extends BaseElement {
         }
     }
     onBodyClick(evt) {
+        if (this.stayOpenOnBodyClick) {
+            return;
+        }
         const path = evt.composedPath();
         if (path.indexOf(this) === -1) {
             this.close();
@@ -870,7 +855,7 @@ __decorate([
     property({ type: Boolean }),
     observer(function (isFixed) {
         if (this.mdcFoundation && !this.absolute) {
-            this.mdcFoundation.setIsHoisted(isFixed);
+            this.mdcFoundation.setFixedPosition(isFixed);
         }
     })
 ], MenuSurfaceBase.prototype, "fixed", void 0);
@@ -914,6 +899,9 @@ __decorate([
         }
     })
 ], MenuSurfaceBase.prototype, "open", void 0);
+__decorate([
+    property({ type: Boolean })
+], MenuSurfaceBase.prototype, "stayOpenOnBodyClick", void 0);
 __decorate([
     internalProperty(),
     observer(function (value) {
@@ -992,7 +980,7 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 */
-const style = css `.mdc-menu-surface{display:none;position:absolute;box-sizing:border-box;max-width:calc(100vw - 32px);max-height:calc(100vh - 32px);margin:0;padding:0;transform:scale(1);transform-origin:top left;opacity:0;overflow:auto;will-change:transform,opacity;z-index:8;transition:opacity .03s linear,transform .12s cubic-bezier(0, 0, 0.2, 1),height 250ms cubic-bezier(0, 0, 0.2, 1);box-shadow:0px 5px 5px -3px rgba(0, 0, 0, 0.2),0px 8px 10px 1px rgba(0, 0, 0, 0.14),0px 3px 14px 2px rgba(0,0,0,.12);background-color:#fff;background-color:var(--mdc-theme-surface, #fff);color:#000;color:var(--mdc-theme-on-surface, #000);border-radius:4px;border-radius:var(--mdc-shape-medium, 4px);transform-origin-left:top left;transform-origin-right:top right}.mdc-menu-surface:focus{outline:none}.mdc-menu-surface--open{display:inline-block;transform:scale(1);opacity:1}.mdc-menu-surface--animating-open{display:inline-block;transform:scale(0.8);opacity:0}.mdc-menu-surface--animating-closed{display:inline-block;opacity:0;transition:opacity .075s linear}[dir=rtl] .mdc-menu-surface,.mdc-menu-surface[dir=rtl]{transform-origin-left:top right;transform-origin-right:top left}.mdc-menu-surface--anchor{position:relative;overflow:visible}.mdc-menu-surface--fixed{position:fixed}.mdc-menu-surface--fullwidth{width:100%}:host(:not([open])){display:none}.mdc-menu-surface{z-index:8;z-index:var(--mdc-menu-z-index, 8);max-height:calc(100vh - 32px);max-height:var(--mdc-menu-max-height, calc(100vh - 32px))}`;
+const style$1 = css `.mdc-menu-surface{display:none;position:absolute;box-sizing:border-box;max-width:calc(100vw - 32px);max-width:var(--mdc-menu-max-width, calc(100vw - 32px));max-height:calc(100vh - 32px);max-height:var(--mdc-menu-max-height, calc(100vh - 32px));margin:0;padding:0;transform:scale(1);transform-origin:top left;opacity:0;overflow:auto;will-change:transform,opacity;z-index:8;transition:opacity .03s linear,transform .12s cubic-bezier(0, 0, 0.2, 1),height 250ms cubic-bezier(0, 0, 0.2, 1);box-shadow:0px 5px 5px -3px rgba(0, 0, 0, 0.2),0px 8px 10px 1px rgba(0, 0, 0, 0.14),0px 3px 14px 2px rgba(0,0,0,.12);background-color:#fff;background-color:var(--mdc-theme-surface, #fff);color:#000;color:var(--mdc-theme-on-surface, #000);border-radius:4px;border-radius:var(--mdc-shape-medium, 4px);transform-origin-left:top left;transform-origin-right:top right}.mdc-menu-surface:focus{outline:none}.mdc-menu-surface--open{display:inline-block;transform:scale(1);opacity:1}.mdc-menu-surface--animating-open{display:inline-block;transform:scale(0.8);opacity:0}.mdc-menu-surface--animating-closed{display:inline-block;opacity:0;transition:opacity .075s linear}[dir=rtl] .mdc-menu-surface,.mdc-menu-surface[dir=rtl]{transform-origin-left:top right;transform-origin-right:top left}.mdc-menu-surface--anchor{position:relative;overflow:visible}.mdc-menu-surface--fixed{position:fixed}.mdc-menu-surface--fullwidth{width:100%}:host(:not([open])){display:none}.mdc-menu-surface{z-index:8;z-index:var(--mdc-menu-z-index, 8);min-width:112px;min-width:var(--mdc-menu-min-width, 112px)}`;
 
 /**
 @license
@@ -1012,7 +1000,7 @@ limitations under the License.
 */
 let MenuSurface = class MenuSurface extends MenuSurfaceBase {
 };
-MenuSurface.styles = style;
+MenuSurface.styles = style$1;
 MenuSurface = __decorate([
     customElement('mwc-menu-surface')
 ], MenuSurface);
@@ -1039,19 +1027,19 @@ MenuSurface = __decorate([
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-var cssClasses$1 = {
+var cssClasses = {
     MENU_SELECTED_LIST_ITEM: 'mdc-menu-item--selected',
     MENU_SELECTION_GROUP: 'mdc-menu__selection-group',
     ROOT: 'mdc-menu',
 };
-var strings$1 = {
+var strings = {
     ARIA_CHECKED_ATTR: 'aria-checked',
     ARIA_DISABLED_ATTR: 'aria-disabled',
     CHECKBOX_SELECTOR: 'input[type="checkbox"]',
-    LIST_SELECTOR: '.mdc-list',
+    LIST_SELECTOR: '.mdc-list,.mdc-deprecated-list',
     SELECTED_EVENT: 'MDCMenu:selected',
 };
-var numbers$1 = {
+var numbers = {
     FOCUS_ROOT_INDEX: -1,
 };
 var DefaultFocusState;
@@ -1061,46 +1049,6 @@ var DefaultFocusState;
     DefaultFocusState[DefaultFocusState["FIRST_ITEM"] = 2] = "FIRST_ITEM";
     DefaultFocusState[DefaultFocusState["LAST_ITEM"] = 3] = "LAST_ITEM";
 })(DefaultFocusState || (DefaultFocusState = {}));
-
-/*! *****************************************************************************
-Copyright (c) Microsoft Corporation.
-
-Permission to use, copy, modify, and/or distribute this software for any
-purpose with or without fee is hereby granted.
-
-THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH
-REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY
-AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT,
-INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM
-LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR
-OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
-PERFORMANCE OF THIS SOFTWARE.
-***************************************************************************** */
-/* global Reflect, Promise */
-
-var extendStatics$1 = function(d, b) {
-    extendStatics$1 = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-    return extendStatics$1(d, b);
-};
-
-function __extends$1(d, b) {
-    extendStatics$1(d, b);
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-}
-
-var __assign$1 = function() {
-    __assign$1 = Object.assign || function __assign(t) {
-        for (var s, i = 1, n = arguments.length; i < n; i++) {
-            s = arguments[i];
-            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
-        }
-        return t;
-    };
-    return __assign$1.apply(this, arguments);
-};
 
 /**
  * @license
@@ -1125,32 +1073,32 @@ var __assign$1 = function() {
  * THE SOFTWARE.
  */
 var MDCMenuFoundation = /** @class */ (function (_super) {
-    __extends$1(MDCMenuFoundation, _super);
+    __extends(MDCMenuFoundation, _super);
     function MDCMenuFoundation(adapter) {
-        var _this = _super.call(this, __assign$1(__assign$1({}, MDCMenuFoundation.defaultAdapter), adapter)) || this;
+        var _this = _super.call(this, __assign(__assign({}, MDCMenuFoundation.defaultAdapter), adapter)) || this;
         _this.closeAnimationEndTimerId_ = 0;
         _this.defaultFocusState_ = DefaultFocusState.LIST_ROOT;
         return _this;
     }
     Object.defineProperty(MDCMenuFoundation, "cssClasses", {
         get: function () {
-            return cssClasses$1;
+            return cssClasses;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(MDCMenuFoundation, "strings", {
         get: function () {
-            return strings$1;
+            return strings;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(MDCMenuFoundation, "numbers", {
         get: function () {
-            return numbers$1;
+            return numbers;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(MDCMenuFoundation, "defaultAdapter", {
@@ -1176,7 +1124,7 @@ var MDCMenuFoundation = /** @class */ (function (_super) {
             };
             // tslint:enable:object-literal-sort-keys
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     MDCMenuFoundation.prototype.destroy = function () {
@@ -1245,11 +1193,11 @@ var MDCMenuFoundation = /** @class */ (function (_super) {
         }
         var prevSelectedIndex = this.adapter.getSelectedSiblingOfItemAtIndex(index);
         if (prevSelectedIndex >= 0) {
-            this.adapter.removeAttributeFromElementAtIndex(prevSelectedIndex, strings$1.ARIA_CHECKED_ATTR);
-            this.adapter.removeClassFromElementAtIndex(prevSelectedIndex, cssClasses$1.MENU_SELECTED_LIST_ITEM);
+            this.adapter.removeAttributeFromElementAtIndex(prevSelectedIndex, strings.ARIA_CHECKED_ATTR);
+            this.adapter.removeClassFromElementAtIndex(prevSelectedIndex, cssClasses.MENU_SELECTED_LIST_ITEM);
         }
-        this.adapter.addClassToElementAtIndex(index, cssClasses$1.MENU_SELECTED_LIST_ITEM);
-        this.adapter.addAttributeToElementAtIndex(index, strings$1.ARIA_CHECKED_ATTR, 'true');
+        this.adapter.addClassToElementAtIndex(index, cssClasses.MENU_SELECTED_LIST_ITEM);
+        this.adapter.addAttributeToElementAtIndex(index, strings.ARIA_CHECKED_ATTR, 'true');
     };
     /**
      * Sets the enabled state to isEnabled for the menu item at the given index.
@@ -1260,11 +1208,11 @@ var MDCMenuFoundation = /** @class */ (function (_super) {
         this.validatedIndex_(index);
         if (isEnabled) {
             this.adapter.removeClassFromElementAtIndex(index, cssClasses$2.LIST_ITEM_DISABLED_CLASS);
-            this.adapter.addAttributeToElementAtIndex(index, strings$1.ARIA_DISABLED_ATTR, 'false');
+            this.adapter.addAttributeToElementAtIndex(index, strings.ARIA_DISABLED_ATTR, 'false');
         }
         else {
             this.adapter.addClassToElementAtIndex(index, cssClasses$2.LIST_ITEM_DISABLED_CLASS);
-            this.adapter.addAttributeToElementAtIndex(index, strings$1.ARIA_DISABLED_ATTR, 'true');
+            this.adapter.addAttributeToElementAtIndex(index, strings.ARIA_DISABLED_ATTR, 'true');
         }
     };
     MDCMenuFoundation.prototype.validatedIndex_ = function (index) {
@@ -1304,6 +1252,7 @@ class MenuBase extends BaseElement {
         this.forceGroupSelection = false;
         this.fullwidth = false;
         this.menuCorner = 'START';
+        this.stayOpenOnBodyClick = false;
         this.defaultFocus = 'LIST_ROOT';
         this._listUpdateComplete = null;
     }
@@ -1350,6 +1299,7 @@ class MenuBase extends BaseElement {
           .fixed=${this.fixed}
           .fullwidth=${this.fullwidth}
           .menuCorner=${this.menuCorner}
+          ?stayOpenOnBodyClick=${this.stayOpenOnBodyClick}
           class="mdc-menu mdc-menu-surface"
           @closed=${this.onClosed}
           @opened=${this.onOpened}
@@ -1358,7 +1308,7 @@ class MenuBase extends BaseElement {
           rootTabbable
           .innerRole=${this.innerRole}
           .multi=${this.multi}
-          class="mdc-list"
+          class="mdc-deprecated-list"
           .itemRoles=${itemRoles}
           .wrapFocus=${this.wrapFocus}
           .activatable=${this.activatable}
@@ -1518,9 +1468,24 @@ class MenuBase extends BaseElement {
     onClosed() {
         this.open = false;
     }
+    // tslint:disable:ban-ts-ignore
     async _getUpdateComplete() {
+        let result = false;
         await this._listUpdateComplete;
-        await super._getUpdateComplete();
+        // @ts-ignore
+        if (super._getUpdateComplete) {
+            // @ts-ignore
+            await super._getUpdateComplete();
+        }
+        else {
+            // @ts-ignore
+            result = await super.getUpdateComplete();
+        }
+        return result;
+    }
+    // tslint:enable:ban-ts-ignore
+    getUpdateComplete() {
+        return this._getUpdateComplete();
     }
     async firstUpdated() {
         super.firstUpdated();
@@ -1614,6 +1579,9 @@ __decorate([
     property({ type: String })
 ], MenuBase.prototype, "menuCorner", void 0);
 __decorate([
+    property({ type: Boolean })
+], MenuBase.prototype, "stayOpenOnBodyClick", void 0);
+__decorate([
     property({ type: String }),
     observer(function (value) {
         if (this.mdcFoundation) {
@@ -1638,7 +1606,7 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 */
-const style$1 = css `mwc-list ::slotted([mwc-list-item]:not([twoline])){height:var(--mdc-menu-item-height, 48px)}mwc-list{max-width:var(--mdc-menu-max-width, auto);min-width:var(--mdc-menu-min-width, auto)}`;
+const style = css `mwc-list ::slotted([mwc-list-item]:not([twoline])){height:var(--mdc-menu-item-height, 48px)}`;
 
 /**
 @license
@@ -1658,7 +1626,7 @@ limitations under the License.
 */
 let Menu = class Menu extends MenuBase {
 };
-Menu.styles = style$1;
+Menu.styles = style;
 Menu = __decorate([
     customElement('mwc-menu')
 ], Menu);

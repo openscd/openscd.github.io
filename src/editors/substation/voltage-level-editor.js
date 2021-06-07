@@ -24,7 +24,7 @@ import {
   getValue,
   newActionEvent,
   newWizardEvent,
-  restrictions
+  patterns
 } from "../../foundation.js";
 import {
   isCreateOptions,
@@ -305,7 +305,7 @@ export let VoltageLevelEditor = class extends LitElement {
             suffix="Hz"
             required
             validationMessage="${translate("textfield.nonempty")}"
-            pattern="${restrictions.unsigned}"
+            pattern="${patterns.unsigned}"
           ></wizard-textfield>`,
           html`<wizard-textfield
             label="numPhases"
@@ -329,7 +329,7 @@ export let VoltageLevelEditor = class extends LitElement {
             helper="${translate("voltagelevel.wizard.voltageHelper")}"
             required
             validationMessage="${translate("textfield.nonempty")}"
-            pattern="${restrictions.decimal}"
+            pattern="${patterns.decimal}"
           ></wizard-textfield>`
         ]
       }
