@@ -8,6 +8,7 @@ export const de = {
     EnumVal: "Enum Wert",
     EnumType: "Enum Typ",
     DAType: "Datenattribut Typ",
+    DOType: "Datenobjekt Typ",
     Report: "Report",
     LN: "Logischer Knoten"
   },
