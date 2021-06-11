@@ -17,7 +17,9 @@ import {ifImplemented} from "./foundation.js";
 import {officialPlugins} from "../public/js/plugins.js";
 export const pluginIcons = {
   editor: "tab",
-  triggered: "play_circle"
+  triggered: "play_circle",
+  loader: "folder_open",
+  saver: "save"
 };
 async function storeDefaultPlugins() {
   localStorage.setItem("externalPlugins", JSON.stringify([]));
@@ -39,7 +41,13 @@ export function Plugging(Base) {
     get editors() {
       return this.plugins.filter((plugin) => plugin.installed && plugin.kind === "editor").map((plugin) => this.addContent(plugin));
     }
-    get items() {
+    get loaders() {
+      return this.plugins.filter((plugin) => plugin.installed && plugin.kind === "loader").map((plugin) => this.addContent(plugin));
+    }
+    get savers() {
+      return this.plugins.filter((plugin) => plugin.installed && plugin.kind === "saver").map((plugin) => this.addContent(plugin));
+    }
+    get triggered() {
       return this.plugins.filter((plugin) => plugin.installed && plugin.kind === "triggered").map((plugin) => this.addContent(plugin));
     }
     get plugins() {
@@ -87,6 +95,7 @@ export function Plugging(Base) {
           return html`<${loadedPlugins.get(plugin.src)}
             .doc=${this.doc}
             .docName=${this.docName}
+            .docId=${this.docId}
           ></${loadedPlugins.get(plugin.src)}>`;
         }
       };

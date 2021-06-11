@@ -34,7 +34,9 @@ export function Editing(Base) {
       super(...args);
       this.doc = null;
       this.docName = "";
+      this.docId = "";
       this.addEventListener("editor-action", this.onAction);
+      this.addEventListener("open-doc", this.onOpenDoc);
     }
     checkCreateValidity(create) {
       if (create.checkValidity !== void 0)
@@ -185,6 +187,15 @@ export function Editing(Base) {
         if (element instanceof LitElement)
           element.requestUpdate();
     }
+    onOpenDoc(event) {
+      this.doc = event.detail.doc;
+      this.docName = event.detail.docName;
+      this.docId = event.detail.docId ?? "";
+      this.dispatchEvent(newLogEvent({
+        kind: "info",
+        title: get("openSCD.loaded", {name: this.docName})
+      }));
+    }
   }
   __decorate([
     property()
@@ -192,5 +203,8 @@ export function Editing(Base) {
   __decorate([
     property({type: String})
   ], EditingElement.prototype, "docName", 2);
+  __decorate([
+    property({type: String})
+  ], EditingElement.prototype, "docId", 2);
   return EditingElement;
 }

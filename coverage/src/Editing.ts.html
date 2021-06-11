@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">92.11% </span>
+                <span class="strong">92.77% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>70/76</span>
+                <span class='fraction'>77/83</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">83.33% </span>
+                <span class="strong">83.82% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>55/66</span>
+                <span class='fraction'>57/68</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">95.24% </span>
+                <span class="strong">95.45% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>20/21</span>
+                <span class='fraction'>21/22</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">96.61% </span>
+                <span class="strong">96.92% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>57/59</span>
+                <span class='fraction'>63/65</span>
             </div>
         
             
@@ -323,7 +323,25 @@
 <a name='L264'></a><a href='#L264'>264</a>
 <a name='L265'></a><a href='#L265'>265</a>
 <a name='L266'></a><a href='#L266'>266</a>
-<a name='L267'></a><a href='#L267'>267</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L267'></a><a href='#L267'>267</a>
+<a name='L268'></a><a href='#L268'>268</a>
+<a name='L269'></a><a href='#L269'>269</a>
+<a name='L270'></a><a href='#L270'>270</a>
+<a name='L271'></a><a href='#L271'>271</a>
+<a name='L272'></a><a href='#L272'>272</a>
+<a name='L273'></a><a href='#L273'>273</a>
+<a name='L274'></a><a href='#L274'>274</a>
+<a name='L275'></a><a href='#L275'>275</a>
+<a name='L276'></a><a href='#L276'>276</a>
+<a name='L277'></a><a href='#L277'>277</a>
+<a name='L278'></a><a href='#L278'>278</a>
+<a name='L279'></a><a href='#L279'>279</a>
+<a name='L280'></a><a href='#L280'>280</a>
+<a name='L281'></a><a href='#L281'>281</a>
+<a name='L282'></a><a href='#L282'>282</a>
+<a name='L283'></a><a href='#L283'>283</a>
+<a name='L284'></a><a href='#L284'>284</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -372,6 +390,8 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">222x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">222x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -581,8 +601,22 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">222x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">222x</span>
 <span class="cline-any cline-yes">222x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -606,6 +640,7 @@ import {
   Mixin,
   Move,
   newLogEvent,
+  OpenDocEvent,
   SimpleAction,
   Update,
 } from './foundation.js';
@@ -642,6 +677,8 @@ export function Editing&lt;TBase extends LitElementConstructor&gt;(Base: TBase) 
     doc: XMLDocument | null = null;
     /** The name of the current [[`doc`]] */
     @property({ type: String }) docName = '';
+    /** The UUID of the current [[`doc`]] */
+    @property({ type: String }) docId = '';
 &nbsp;
     private checkCreateValidity(create: Create): boolean {
       <span class="missing-if-branch" title="if path not taken" >I</span>if (create.checkValidity !== undefined) <span class="cstat-no" title="statement not covered" >return create.checkValidity();</span>
@@ -846,10 +883,24 @@ export function Editing&lt;TBase extends LitElementConstructor&gt;(Base: TBase) 
         if (element instanceof LitElement) element.requestUpdate();
     }
 &nbsp;
+    private onOpenDoc(event: OpenDocEvent) {
+      this.doc = event.detail.doc;
+      this.docName = event.detail.docName;
+      this.docId = event.detail.docId ?? '';
+&nbsp;
+      this.dispatchEvent(
+        newLogEvent({
+          kind: 'info',
+          title: get('openSCD.loaded', { name: this.docName }),
+        })
+      );
+    }
+&nbsp;
     constructor(...args: any[]) {
       super(...args);
 &nbsp;
       this.addEventListener('editor-action', this.onAction);
+      this.addEventListener('open-doc', this.onOpenDoc);
     }
   }
 &nbsp;
@@ -862,7 +913,7 @@ export function Editing&lt;TBase extends LitElementConstructor&gt;(Base: TBase) 
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Mon Jun 07 2021 11:45:04 GMT+0000 (Coordinated Universal Time)
+                at Fri Jun 11 2021 15:26:02 GMT+0000 (Coordinated Universal Time)
             </div>
         </div>
         <script src="../prettify.js"></script>

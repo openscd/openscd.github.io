@@ -96,6 +96,14 @@ export function newPendingStateEvent(promise, eventInitDict) {
     detail: {promise, ...eventInitDict?.detail}
   });
 }
+export function newOpenDocEvent(doc, docName, eventInitDict) {
+  return new CustomEvent("open-doc", {
+    bubbles: true,
+    composed: true,
+    ...eventInitDict,
+    detail: {doc, docName, ...eventInitDict?.detail}
+  });
+}
 export function referencePath(element) {
   let path = "";
   let nextParent = element.parentElement;
@@ -323,15 +331,7 @@ function extRefSelector(tagName, identity2) {
   }
   let iedName, ldInst, prefix, lnClass, lnInst, doName, daName, serviceType, srcCBName, srcLDInst, srcPrefix, srcLNClass, srcLNInst, intAddr;
   if (!childIdentity.includes(":") && !childIdentity.includes("@")) {
-    [
-      iedName,
-      ldInst,
-      prefix,
-      lnClass,
-      lnInst,
-      doName,
-      daName
-    ] = childIdentity.split(/[ /]/);
+    [iedName, ldInst, prefix, lnClass, lnInst, doName, daName] = childIdentity.split(/[ /]/);
   } else if (childIdentity.includes(":") && !childIdentity.includes("@")) {
     [
       serviceType,
@@ -349,16 +349,7 @@ function extRefSelector(tagName, identity2) {
       daName
     ] = childIdentity.split(/[ /:]/);
   } else if (!childIdentity.includes(":") && childIdentity.includes("@")) {
-    [
-      iedName,
-      ldInst,
-      prefix,
-      lnClass,
-      lnInst,
-      doName,
-      daName,
-      intAddr
-    ] = childIdentity.split(/[ /@]/);
+    [iedName, ldInst, prefix, lnClass, lnInst, doName, daName, intAddr] = childIdentity.split(/[ /@]/);
   } else {
     [
       serviceType,

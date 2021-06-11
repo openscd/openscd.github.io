@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>PendingStateDetail | open-scd</title>
+	<title>OpenDocDetail | open-scd</title>
 	<meta name="description" content="Documentation for open-scd">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -58,10 +58,10 @@
 					<a href="../modules/foundation.html">foundation</a>
 				</li>
 				<li>
-					<a href="foundation.pendingstatedetail.html">PendingStateDetail</a>
+					<a href="foundation.opendocdetail.html">OpenDocDetail</a>
 				</li>
 			</ul>
-			<h1>Interface PendingStateDetail</h1>
+			<h1>Interface OpenDocDetail</h1>
 		</div>
 	</div>
 </header>
@@ -71,7 +71,7 @@
 			<section class="tsd-panel tsd-comment">
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p>Represents some work pending completion, upon which <code>promise</code> resolves.</p>
+						<p>Represents a document to be opened.</p>
 					</div>
 				</div>
 			</section>
@@ -79,7 +79,7 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">PendingStateDetail</span>
+						<span class="target">OpenDocDetail</span>
 					</li>
 				</ul>
 			</section>
@@ -90,7 +90,9 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="foundation.pendingstatedetail.html#promise" class="tsd-kind-icon">promise</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="foundation.opendocdetail.html#doc" class="tsd-kind-icon">doc</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="foundation.opendocdetail.html#docid" class="tsd-kind-icon">doc<wbr>Id</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="foundation.opendocdetail.html#docname" class="tsd-kind-icon">doc<wbr>Name</a></li>
 							</ul>
 						</section>
 					</div>
@@ -99,12 +101,32 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="promise" class="tsd-anchor"></a>
-					<h3>promise</h3>
-					<div class="tsd-signature tsd-kind-icon">promise<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></div>
+					<a name="doc" class="tsd-anchor"></a>
+					<h3>doc</h3>
+					<div class="tsd-signature tsd-kind-icon">doc<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">XMLDocument</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/943595e/src/foundation.ts#L249">src/foundation.ts:249</a></li>
+							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/943595e/src/foundation.ts#L266">src/foundation.ts:266</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="docid" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> doc<wbr>Id</h3>
+					<div class="tsd-signature tsd-kind-icon">doc<wbr>Id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/943595e/src/foundation.ts#L268">src/foundation.ts:268</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="docname" class="tsd-anchor"></a>
+					<h3>doc<wbr>Name</h3>
+					<div class="tsd-signature tsd-kind-icon">doc<wbr>Name<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/943595e/src/foundation.ts#L267">src/foundation.ts:267</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -126,10 +148,16 @@
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-interface tsd-parent-kind-module">
-						<a href="foundation.pendingstatedetail.html" class="tsd-kind-icon">Pending<wbr>State<wbr>Detail</a>
+						<a href="foundation.opendocdetail.html" class="tsd-kind-icon">Open<wbr>Doc<wbr>Detail</a>
 						<ul>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="foundation.pendingstatedetail.html#promise" class="tsd-kind-icon">promise</a>
+								<a href="foundation.opendocdetail.html#doc" class="tsd-kind-icon">doc</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="foundation.opendocdetail.html#docid" class="tsd-kind-icon">doc<wbr>Id</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="foundation.opendocdetail.html#docname" class="tsd-kind-icon">doc<wbr>Name</a>
 							</li>
 						</ul>
 					</li>

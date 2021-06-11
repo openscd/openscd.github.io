@@ -15,15 +15,15 @@ Open Substation Configuration Designer.
 | `currentAction`      | `currentAction` |           | `number`                                | -1                                               | Index of the last [[`EditorAction`]] applied.    |
 | `darkThemeUI`        |                 |           | `Switch`                                |                                                  |                                                  |
 | `doc`                | `doc`           |           | `XMLDocument \| null`                   | null                                             | The `XMLDocument` to be edited                   |
+| `docId`              | `docId`         |           | `string`                                | ""                                               | The UUID of the current [[`doc`]]                |
 | `docName`            | `docName`       |           | `string`                                | ""                                               | The name of the current [[`doc`]]                |
 | `editors`            |                 | readonly  | `InstalledPlugin[]`                     |                                                  |                                                  |
 | `errorUI`            |                 |           | `Snackbar`                              |                                                  |                                                  |
-| `fileUI`             |                 |           | `HTMLInputElement`                      |                                                  |                                                  |
 | `handleKeyPress`     |                 |           |                                         |                                                  |                                                  |
 | `history`            | `history`       |           | `LogEntry[]`                            | []                                               | All [[`LogEntry`]]s received so far through [[`LogEvent`]]s. |
 | `infoUI`             |                 |           | `Snackbar`                              |                                                  |                                                  |
-| `items`              |                 | readonly  | `InstalledPlugin[]`                     |                                                  |                                                  |
 | `languageUI`         |                 |           | `Select`                                |                                                  |                                                  |
+| `loaders`            |                 | readonly  | `InstalledPlugin[]`                     |                                                  |                                                  |
 | `logUI`              |                 |           | `Dialog`                                |                                                  |                                                  |
 | `menu`               |                 | readonly  | `(MenuItem \| "divider")[]`             |                                                  |                                                  |
 | `menuUI`             |                 |           | `Drawer`                                |                                                  |                                                  |
@@ -35,10 +35,13 @@ Open Substation Configuration Designer.
 | `pluginUI`           |                 |           | `Dialog`                                |                                                  |                                                  |
 | `previousAction`     |                 | readonly  | `number`                                |                                                  |                                                  |
 | `redo`               |                 |           |                                         |                                                  |                                                  |
+| `reset`              |                 |           |                                         |                                                  |                                                  |
 | `saveUI`             |                 |           | `Dialog`                                |                                                  |                                                  |
+| `savers`             |                 | readonly  | `InstalledPlugin[]`                     |                                                  |                                                  |
 | `settings`           | `settings`      | readonly  | `Settings`                              |                                                  | Current [[`Settings`]] in `localStorage`, default to [[`defaults`]]. |
 | `settingsUI`         |                 |           | `Dialog`                                |                                                  |                                                  |
 | `src`                | `src`           |           | `string`                                |                                                  | The current file's URL. `blob:` URLs are *revoked after parsing*! |
+| `triggered`          |                 | readonly  | `InstalledPlugin[]`                     |                                                  |                                                  |
 | `undo`               |                 |           |                                         |                                                  |                                                  |
 | `validated`          | `validated`     |           | `Promise<ValidationResult>`             | "Promise.resolve({\n      file: 'untitled.scd',\n      valid: true,\n      code: 0,\n    })" |                                                  |
 | `waiting`            | `waiting`       |           | `boolean`                               | false                                            | Whether the element is currently waiting for some async work. |

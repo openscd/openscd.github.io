@@ -32,8 +32,10 @@ export function Logging(Base) {
       this.currentAction = -1;
       this.undo = this.undo.bind(this);
       this.redo = this.redo.bind(this);
+      this.reset = this.reset.bind(this);
       this.onLog = this.onLog.bind(this);
       this.addEventListener("log", this.onLog);
+      this.addEventListener("open-doc", this.reset);
     }
     get canUndo() {
       return this.currentAction >= 0;

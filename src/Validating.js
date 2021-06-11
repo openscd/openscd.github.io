@@ -11,7 +11,9 @@ var __decorate = (decorators, target, key, kind) => {
 };
 import {property} from "../_snowpack/pkg/lit-element.js";
 import {get} from "../_snowpack/pkg/lit-translate.js";
-import {newLogEvent} from "./foundation.js";
+import {
+  newLogEvent
+} from "./foundation.js";
 import {
   getSchema,
   isLoadSchemaResult,
@@ -21,13 +23,14 @@ import {
 const validators = {};
 export function Validating(Base) {
   class ValidatingElement extends Base {
-    constructor() {
-      super(...arguments);
+    constructor(...args) {
+      super(...args);
       this.validated = Promise.resolve({
         file: "untitled.scd",
         valid: true,
         code: 0
       });
+      this.addEventListener("open-doc", (event) => this.validate(event.detail.doc, {fileName: event.detail.docName}));
     }
     async validate(doc, {
       version = "2007",
