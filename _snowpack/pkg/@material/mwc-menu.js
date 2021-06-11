@@ -1,6 +1,6 @@
 import '../common/tslib.es6-c8bbf354.js';
 import '../common/lit-element-74f197f8.js';
-export { M as Menu } from '../common/mwc-menu-12f2711b.js';
+export { M as Menu } from '../common/mwc-menu-a9793211.js';
 export { a as createSetFromIndex, i as isEventMulti, b as isIndexSet } from '../common/mwc-list-42fa28ff.js';
 import '../common/lit-html-ea288526.js';
 import '../common/render-aa9814af.js';

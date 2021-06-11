@@ -33,7 +33,7 @@ var numbers = {
     // This should stay in sync with $mdc-notched-outline-padding * 2.
     NOTCH_ELEMENT_PADDING: 8,
 };
-var cssClasses$2 = {
+var cssClasses = {
     NO_LABEL: 'mdc-notched-outline--no-label',
     OUTLINE_NOTCHED: 'mdc-notched-outline--notched',
     OUTLINE_UPGRADED: 'mdc-notched-outline--upgraded',
@@ -75,7 +75,7 @@ var MDCNotchedOutlineFoundation = /** @class */ (function (_super) {
     });
     Object.defineProperty(MDCNotchedOutlineFoundation, "cssClasses", {
         get: function () {
-            return cssClasses$2;
+            return cssClasses;
         },
         enumerable: false,
         configurable: true
@@ -348,7 +348,7 @@ var MDCFloatingLabelFoundation = /** @class */ (function (_super) {
     return MDCFloatingLabelFoundation;
 }(MDCFoundation));
 
-const createAdapter$1 = (labelElement) => {
+const createAdapter = (labelElement) => {
     return {
         addClass: (className) => labelElement.classList.add(className),
         removeClass: (className) => labelElement.classList.remove(className),
@@ -361,17 +361,17 @@ const createAdapter$1 = (labelElement) => {
         },
     };
 };
-const partToFoundationMap$1 = new WeakMap();
+const partToFoundationMap = new WeakMap();
 const floatingLabel = directive((label) => (part) => {
-    const lastFoundation = partToFoundationMap$1.get(part);
+    const lastFoundation = partToFoundationMap.get(part);
     if (!lastFoundation) {
         const labelElement = part.committer.element;
         labelElement.classList.add('mdc-floating-label');
-        const adapter = createAdapter$1(labelElement);
+        const adapter = createAdapter(labelElement);
         const foundation = new MDCFloatingLabelFoundation(adapter);
         foundation.init();
         part.setValue(foundation);
-        partToFoundationMap$1.set(part, { label, foundation });
+        partToFoundationMap.set(part, { label, foundation });
     }
 });
 
@@ -397,7 +397,7 @@ const floatingLabel = directive((label) => (part) => {
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-var cssClasses = {
+var cssClasses$2 = {
     LINE_RIPPLE_ACTIVE: 'mdc-line-ripple--active',
     LINE_RIPPLE_DEACTIVATING: 'mdc-line-ripple--deactivating',
 };
@@ -433,7 +433,7 @@ var MDCLineRippleFoundation = /** @class */ (function (_super) {
     }
     Object.defineProperty(MDCLineRippleFoundation, "cssClasses", {
         get: function () {
-            return cssClasses;
+            return cssClasses$2;
         },
         enumerable: false,
         configurable: true
@@ -464,30 +464,30 @@ var MDCLineRippleFoundation = /** @class */ (function (_super) {
         this.adapter.deregisterEventHandler('transitionend', this.transitionEndHandler_);
     };
     MDCLineRippleFoundation.prototype.activate = function () {
-        this.adapter.removeClass(cssClasses.LINE_RIPPLE_DEACTIVATING);
-        this.adapter.addClass(cssClasses.LINE_RIPPLE_ACTIVE);
+        this.adapter.removeClass(cssClasses$2.LINE_RIPPLE_DEACTIVATING);
+        this.adapter.addClass(cssClasses$2.LINE_RIPPLE_ACTIVE);
     };
     MDCLineRippleFoundation.prototype.setRippleCenter = function (xCoordinate) {
         this.adapter.setStyle('transform-origin', xCoordinate + "px center");
     };
     MDCLineRippleFoundation.prototype.deactivate = function () {
-        this.adapter.addClass(cssClasses.LINE_RIPPLE_DEACTIVATING);
+        this.adapter.addClass(cssClasses$2.LINE_RIPPLE_DEACTIVATING);
     };
     MDCLineRippleFoundation.prototype.handleTransitionEnd = function (evt) {
         // Wait for the line ripple to be either transparent or opaque
         // before emitting the animation end event
-        var isDeactivating = this.adapter.hasClass(cssClasses.LINE_RIPPLE_DEACTIVATING);
+        var isDeactivating = this.adapter.hasClass(cssClasses$2.LINE_RIPPLE_DEACTIVATING);
         if (evt.propertyName === 'opacity') {
             if (isDeactivating) {
-                this.adapter.removeClass(cssClasses.LINE_RIPPLE_ACTIVE);
-                this.adapter.removeClass(cssClasses.LINE_RIPPLE_DEACTIVATING);
+                this.adapter.removeClass(cssClasses$2.LINE_RIPPLE_ACTIVE);
+                this.adapter.removeClass(cssClasses$2.LINE_RIPPLE_DEACTIVATING);
             }
         }
     };
     return MDCLineRippleFoundation;
 }(MDCFoundation));
 
-const createAdapter = (lineElement) => {
+const createAdapter$1 = (lineElement) => {
     return {
         addClass: (className) => lineElement.classList.add(className),
         removeClass: (className) => lineElement.classList.remove(className),
@@ -501,17 +501,17 @@ const createAdapter = (lineElement) => {
         },
     };
 };
-const partToFoundationMap = new WeakMap();
+const partToFoundationMap$1 = new WeakMap();
 const lineRipple = directive(() => (part) => {
-    const lastFoundation = partToFoundationMap.get(part);
+    const lastFoundation = partToFoundationMap$1.get(part);
     if (!lastFoundation) {
         const lineElement = part.committer.element;
         lineElement.classList.add('mdc-line-ripple');
-        const adapter = createAdapter(lineElement);
+        const adapter = createAdapter$1(lineElement);
         const foundation = new MDCLineRippleFoundation(adapter);
         foundation.init();
         part.setValue(foundation);
-        partToFoundationMap.set(part, foundation);
+        partToFoundationMap$1.set(part, foundation);
     }
 });
 

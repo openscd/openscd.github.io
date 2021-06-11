@@ -7,10 +7,20 @@ export const de = {
     value: "Wert",
     EnumVal: "Enum Wert",
     EnumType: "Enum Typ",
+    DA: "Datenattribut",
+    DO: "Datenobjekt",
     DAType: "Datenattribut Typ",
     DOType: "Datenobjekt Typ",
+    CDC: " Datenklasse nach 7-3",
     Report: "Report",
-    LN: "Logischer Knoten"
+    LN: "Logischer Knoten",
+    bType: "Basic type",
+    type: "Type",
+    sAddr: "Short address",
+    valKind: "Value kind",
+    valImport: "Import value",
+    fc: "Funktionale Einschr\xE4nkung",
+    LNodeType: "Logischer Knoten Type"
   },
   settings: {
     name: "Einstellungen",
@@ -169,12 +179,32 @@ export const de = {
       title: {
         add: "BDA hinzuf\xFCgen",
         edit: "BDA bearbeiten"
+      }
+    }
+  },
+  da: {
+    wizard: {
+      title: {
+        add: "Add DA",
+        edit: "Edit DA"
+      }
+    }
+  },
+  sdo: {
+    wizard: {
+      title: {
+        add: "SDO hinzuf\xFCgen",
+        edit: "SDO bearbeiten"
+      }
+    }
+  },
+  dotype: {
+    wizard: {
+      title: {
+        add: "DOType hinzuf\xFCgen",
+        edit: "DOType bearbeiten"
       },
-      bType: "Basistyp",
-      type: "Typ",
-      sAddr: "Kurze Adresse",
-      valKind: "Art von Wert",
-      valImport: "Wert importierbar"
+      enums: "Standard Enumerations"
     }
   },
   lnode: {

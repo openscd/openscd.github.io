@@ -352,8 +352,10 @@
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external"><a href="editors_templates.default.html#msgetregioncontent" class="tsd-kind-icon">ms<wbr>Get<wbr>Region<wbr>Content</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external"><a href="editors_templates.default.html#normalize" class="tsd-kind-icon">normalize</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="editors_templates.default.html#opencreatedatypewizard" class="tsd-kind-icon">open<wbr>CreateDAType<wbr>Wizard</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="editors_templates.default.html#opencreatedotypewizard" class="tsd-kind-icon">open<wbr>CreateDOType<wbr>Wizard</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="editors_templates.default.html#opencreateenumwizard" class="tsd-kind-icon">open<wbr>Create<wbr>Enum<wbr>Wizard</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="editors_templates.default.html#opendatypewizard" class="tsd-kind-icon">openDAType<wbr>Wizard</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="editors_templates.default.html#opendotypewizard" class="tsd-kind-icon">openDOType<wbr>Wizard</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-protected tsd-is-external"><a href="editors_templates.default.html#performupdate" class="tsd-kind-icon">perform<wbr>Update</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external"><a href="editors_templates.default.html#prepend" class="tsd-kind-icon">prepend</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-inherited tsd-is-external"><a href="editors_templates.default.html#queryselector" class="tsd-kind-icon">query<wbr>Selector</a></li>
@@ -922,7 +924,7 @@
 					<div class="tsd-signature tsd-kind-icon">doc<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">XMLDocument</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/943595e/src/editors/Templates.ts#L33">src/editors/Templates.ts:33</a></li>
+							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/3441cad/src/editors/Templates.ts#L38">src/editors/Templates.ts:38</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -3126,7 +3128,7 @@
 					<aside class="tsd-sources">
 						<p>Overrides LitElement.styles</p>
 						<ul>
-							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/943595e/src/editors/Templates.ts#L192">src/editors/Templates.ts:192</a></li>
+							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/3441cad/src/editors/Templates.ts#L253">src/editors/Templates.ts:253</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -3808,7 +3810,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/943595e/src/editors/Templates.ts#L68">src/editors/Templates.ts:68</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/3441cad/src/editors/Templates.ts#L89">src/editors/Templates.ts:89</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -4828,14 +4830,26 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/943595e/src/editors/Templates.ts#L41">src/editors/Templates.ts:41</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/3441cad/src/editors/Templates.ts#L63">src/editors/Templates.ts:63</a></li>
 								</ul>
 							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Opens a <a href="wizard_dialog.wizarddialog.html"><code>WizardDialog</code></a> for creating a new <code>Substation</code> element.</p>
-								</div>
-							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="opencreatedotypewizard" class="tsd-anchor"></a>
+					<h3>open<wbr>CreateDOType<wbr>Wizard</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">open<wbr>CreateDOType<wbr>Wizard<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/3441cad/src/editors/Templates.ts#L40">src/editors/Templates.ts:40</a></li>
+								</ul>
+							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
 					</ul>
@@ -4850,14 +4864,9 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/943595e/src/editors/Templates.ts#L55">src/editors/Templates.ts:55</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/3441cad/src/editors/Templates.ts#L76">src/editors/Templates.ts:76</a></li>
 								</ul>
 							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Opens a <a href="wizard_dialog.wizarddialog.html"><code>WizardDialog</code></a> for creating a new <code>Substation</code> element.</p>
-								</div>
-							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
 					</ul>
@@ -4872,7 +4881,30 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/943595e/src/editors/Templates.ts#L35">src/editors/Templates.ts:35</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/3441cad/src/editors/Templates.ts#L58">src/editors/Templates.ts:58</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>identity: <span class="tsd-signature-type">string</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="opendotypewizard" class="tsd-anchor"></a>
+					<h3>openDOType<wbr>Wizard</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">openDOType<wbr>Wizard<span class="tsd-signature-symbol">(</span>identity<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/3441cad/src/editors/Templates.ts#L53">src/editors/Templates.ts:53</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -5354,7 +5386,7 @@
 							<aside class="tsd-sources">
 								<p>Overrides LitElement.render</p>
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/943595e/src/editors/Templates.ts#L84">src/editors/Templates.ts:84</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/3441cad/src/editors/Templates.ts#L105">src/editors/Templates.ts:105</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">TemplateResult</span></h4>
@@ -7000,10 +7032,16 @@
 								<a href="editors_templates.default.html#opencreatedatypewizard" class="tsd-kind-icon">open<wbr>CreateDAType<wbr>Wizard</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="editors_templates.default.html#opencreatedotypewizard" class="tsd-kind-icon">open<wbr>CreateDOType<wbr>Wizard</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="editors_templates.default.html#opencreateenumwizard" class="tsd-kind-icon">open<wbr>Create<wbr>Enum<wbr>Wizard</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="editors_templates.default.html#opendatypewizard" class="tsd-kind-icon">openDAType<wbr>Wizard</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="editors_templates.default.html#opendotypewizard" class="tsd-kind-icon">openDOType<wbr>Wizard</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-protected tsd-is-external">
 								<a href="editors_templates.default.html#performupdate" class="tsd-kind-icon">perform<wbr>Update</a>

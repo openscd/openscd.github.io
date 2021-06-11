@@ -24,9 +24,22 @@ import {
   createDATypeWizard,
   dATypeWizard
 } from "./templates/datype-wizards.js";
+import {
+  createDOTypeWizard,
+  dOTypeWizard
+} from "./templates/dotype-wizards.js";
 import {EnumTypeEditor} from "./templates/enum-type-editor.js";
 const templates = fetch("public/xml/templates.scd").then((response) => response.text()).then((str) => new DOMParser().parseFromString(str, "application/xml"));
 export default class TemplatesPlugin extends LitElement {
+  async openCreateDOTypeWizard() {
+    this.createDataTypeTemplates();
+    this.dispatchEvent(newWizardEvent(createDOTypeWizard(this.doc.querySelector(":root > DataTypeTemplates"), await templates)));
+  }
+  openDOTypeWizard(identity2) {
+    const wizard = dOTypeWizard(identity2, this.doc);
+    if (wizard)
+      this.dispatchEvent(newWizardEvent(wizard));
+  }
   openDATypeWizard(identity2) {
     const wizard = dATypeWizard(identity2, this.doc);
     if (wizard)
@@ -70,14 +83,42 @@ export default class TemplatesPlugin extends LitElement {
       <div id="containerTemplates">
         <section tabindex="0">
           <h1>
-            ${translate("scl.DOType")}
+            ${translate("scl.LNodeType")}
             <nav>
               <abbr title="${translate("add")}">
                 <mwc-icon-button icon="playlist_add"></mwc-icon-button>
               </abbr>
             </nav>
           </h1>
-          <filtered-list id="dotypelist">
+          <filtered-list id="lnodetype">
+            ${Array.from(this.doc.querySelectorAll(":root > DataTypeTemplates > LNodeType") ?? []).map((lnodetype) => html`<mwc-list-item
+              twoline
+              value="${identity(lnodetype)}"
+              tabindex="0"
+              hasMeta
+              ><span>${lnodetype.getAttribute("id")}</span
+              ><span slot="secondary">${lnodetype.getAttribute("lnClass")}</span></span><span slot="meta"
+                >${lnodetype.querySelectorAll("DO").length}</span
+              ></mwc-list-item
+            >`)}
+          </filtered-list>
+        </section>
+        <section tabindex="0">
+          <h1>
+            ${translate("scl.DOType")}
+            <nav>
+              <abbr title="${translate("add")}">
+                <mwc-icon-button
+                  icon="playlist_add"
+                  @click=${() => this.openCreateDOTypeWizard()}
+                ></mwc-icon-button>
+              </abbr>
+            </nav>
+          </h1>
+          <filtered-list
+            id="dotypelist"
+            @selected=${(e) => this.openDOTypeWizard(e.target.selected.value)}
+          >
             ${Array.from(this.doc.querySelectorAll(":root > DataTypeTemplates > DOType") ?? []).map((dotype) => html`<mwc-list-item
                   twoline
                   value="${identity(dotype)}"

@@ -27,14 +27,19 @@ export function updateIDNamingAction(element) {
 export function addReferencedDataTypes(element, parent) {
   const templates = element.closest("DataTypeTemplates");
   const ids = Array.from(parent.querySelectorAll(allDataTypeSelector)).filter(isPublic).map((type) => type.getAttribute("id"));
-  const types = Array.from(element.children).map((child) => child.getAttribute("type")).filter((type) => type).filter((type) => !ids.includes(type));
-  const adjacents = types.map((type) => templates.querySelector(`LNodeType[id="${type}"],DOType[id="${type}"],DAType[id="${type}"],EnumType[id="${type}"]`)).filter(isPublic);
+  const types = new Set(Array.from(element.children).map((child) => child.getAttribute("type")).filter((type) => type !== null).filter((type) => !ids.includes(type)));
+  const adjacents = [];
+  types.forEach((type) => {
+    const adjacent = templates.querySelector(`LNodeType[id="${type}"],DOType[id="${type}"],DAType[id="${type}"],EnumType[id="${type}"]`);
+    if (adjacent !== null && isPublic(adjacent))
+      adjacents.push(adjacent);
+  });
   const actions = [];
   adjacents.flatMap((adjacent) => addReferencedDataTypes(adjacent, parent)).forEach((action) => actions.push(action));
   adjacents.forEach((adjacent) => actions.push({
     new: {
       parent,
-      element: adjacent,
+      element: adjacent.cloneNode(true),
       reference: getReference(parent, adjacent.tagName)
     }
   }));
@@ -83,6 +88,20 @@ export const predefinedBasicTypeEnum = [
   "OptFlds",
   "SvOptFlds",
   "EntryID"
+];
+export const functionalConstraintEnum = [
+  "ST",
+  "MX",
+  "SP",
+  "SV",
+  "CF",
+  "DC",
+  "SG",
+  "SE",
+  "SR",
+  "OR",
+  "BL",
+  "EX"
 ];
 export const valKindEnum = [null, "Spec", "Conf", "RO", "Set"];
 export const styles = css`

@@ -7,10 +7,20 @@ export const en = {
     value: "Value",
     EnumVal: "Enum Value",
     EnumType: "Enum Type",
+    DA: "Data attribute",
+    DO: "Data object",
     DAType: "Data Attribute Type",
     DOType: "Data Object Type",
+    CDC: "Common data class",
     Report: "Report",
-    LN: "Logical Node"
+    LN: "Logical Node",
+    bType: "Basic type",
+    type: "Type",
+    sAddr: "Short address",
+    valKind: "Value kind",
+    valImport: "Import value",
+    fc: "Function contraint",
+    LNodeType: "Logical Node Type"
   },
   settings: {
     name: "Settings",
@@ -169,12 +179,32 @@ export const en = {
       title: {
         add: "Add BDA",
         edit: "Edit BDA"
+      }
+    }
+  },
+  da: {
+    wizard: {
+      title: {
+        add: "Add DA",
+        edit: "Edit DA"
+      }
+    }
+  },
+  sdo: {
+    wizard: {
+      title: {
+        add: "Add SDO",
+        edit: "Edit SDO"
+      }
+    }
+  },
+  dotype: {
+    wizard: {
+      title: {
+        add: "Add DOType",
+        edit: "Edit DOType"
       },
-      bType: "Basic type",
-      type: "Type",
-      sAddr: "Short address",
-      valKind: "Value kind",
-      valImport: "Import value"
+      enums: "Default enumerations"
     }
   },
   lnode: {
