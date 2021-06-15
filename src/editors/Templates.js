@@ -29,8 +29,21 @@ import {
   dOTypeWizard
 } from "./templates/dotype-wizards.js";
 import {EnumTypeEditor} from "./templates/enum-type-editor.js";
+import {
+  createLNodeTypeWizard,
+  lNodeTypeWizard
+} from "./templates/lnodetype-wizard.js";
 const templates = fetch("public/xml/templates.scd").then((response) => response.text()).then((str) => new DOMParser().parseFromString(str, "application/xml"));
 export default class TemplatesPlugin extends LitElement {
+  async openCreateLNodeTypeWizard() {
+    this.createDataTypeTemplates();
+    this.dispatchEvent(newWizardEvent(createLNodeTypeWizard(this.doc.querySelector(":root > DataTypeTemplates"), await templates)));
+  }
+  openLNodeTypeWizard(identity2) {
+    const wizard = lNodeTypeWizard(identity2, this.doc);
+    if (wizard)
+      this.dispatchEvent(newWizardEvent(wizard));
+  }
   async openCreateDOTypeWizard() {
     this.createDataTypeTemplates();
     this.dispatchEvent(newWizardEvent(createDOTypeWizard(this.doc.querySelector(":root > DataTypeTemplates"), await templates)));
@@ -86,11 +99,17 @@ export default class TemplatesPlugin extends LitElement {
             ${translate("scl.LNodeType")}
             <nav>
               <abbr title="${translate("add")}">
-                <mwc-icon-button icon="playlist_add"></mwc-icon-button>
+                <mwc-icon-button
+                  icon="playlist_add"
+                  @click=${() => this.openCreateLNodeTypeWizard()}
+                ></mwc-icon-button>
               </abbr>
             </nav>
           </h1>
-          <filtered-list id="lnodetype">
+          <filtered-list
+            id="lnodetypelist"
+            @selected=${(e) => this.openLNodeTypeWizard(e.target.selected.value)}
+          >
             ${Array.from(this.doc.querySelectorAll(":root > DataTypeTemplates > LNodeType") ?? []).map((lnodetype) => html`<mwc-list-item
               twoline
               value="${identity(lnodetype)}"

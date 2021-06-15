@@ -16,6 +16,7 @@ import {
   allDataTypeSelector,
   buildListFromStringArray,
   predefinedBasicTypeEnum,
+  unifyCreateActionArray,
   updateIDNamingAction,
   valKindEnum
 } from "./foundation.js";
@@ -155,7 +156,7 @@ function bDAWizard(options) {
           .maybeValue=${name}
           helper="${translate("scl.name")}"
           required
-          pattern="${patterns.alphanumeric}"
+          pattern="${patterns.alphanumericFirstLowerCase}"
           dialogInitialFocus
         >
           ></wizard-textfield
@@ -332,7 +333,7 @@ function addPredefinedDAType(parent, templates) {
         reference: getReference(parent, element.tagName)
       }
     });
-    return actions;
+    return unifyCreateActionArray(actions);
   };
 }
 export function createDATypeWizard(parent, templates) {

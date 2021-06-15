@@ -24,6 +24,16 @@ export function updateIDNamingAction(element) {
     return [{old: {element}, new: {element: newElement}}];
   };
 }
+function containsCreateAction(actions, newAction) {
+  return !actions.some((action) => action.new.parent === newAction.new.parent && action.new.element.getAttribute("id") === newAction.new.element.getAttribute("id"));
+}
+export function unifyCreateActionArray(actions) {
+  const uniqueActions = [];
+  for (const action of actions)
+    if (containsCreateAction(uniqueActions, action))
+      uniqueActions.push(action);
+  return uniqueActions;
+}
 export function addReferencedDataTypes(element, parent) {
   const templates = element.closest("DataTypeTemplates");
   const ids = Array.from(parent.querySelectorAll(allDataTypeSelector)).filter(isPublic).map((type) => type.getAttribute("id"));
@@ -36,13 +46,15 @@ export function addReferencedDataTypes(element, parent) {
   });
   const actions = [];
   adjacents.flatMap((adjacent) => addReferencedDataTypes(adjacent, parent)).forEach((action) => actions.push(action));
-  adjacents.forEach((adjacent) => actions.push({
-    new: {
-      parent,
-      element: adjacent.cloneNode(true),
-      reference: getReference(parent, adjacent.tagName)
-    }
-  }));
+  adjacents.forEach((adjacent) => {
+    actions.push({
+      new: {
+        parent,
+        element: adjacent.cloneNode(true),
+        reference: getReference(parent, adjacent.tagName)
+      }
+    });
+  });
   return actions;
 }
 export function buildListFromStringArray(list, selected) {

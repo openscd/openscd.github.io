@@ -17,6 +17,7 @@ import {
   buildListFromStringArray,
   functionalConstraintEnum,
   predefinedBasicTypeEnum,
+  unifyCreateActionArray,
   valKindEnum
 } from "./foundation.js";
 function updateSDoAction(element) {
@@ -108,7 +109,7 @@ function sDOWizard(options) {
           .maybeValue=${name}
           helper="${translate("scl.name")}"
           required
-          pattern="${patterns.alphanumeric}"
+          pattern="${patterns.alphanumericFirstLowerCase}"
           dialogInitialFocus
         >
           ></wizard-textfield
@@ -274,7 +275,7 @@ function dAWizard(options) {
           .maybeValue=${name}
           helper="${translate("scl.name")}"
           required
-          pattern="${patterns.alphanumeric}"
+          pattern="${patterns.alphanumericFirstLowerCase}"
           dialogInitialFocus
         >
           ></wizard-textfield
@@ -372,7 +373,7 @@ function addPredefinedDOType(parent, templates) {
         reference: getReference(parent, element.tagName)
       }
     });
-    return actions;
+    return unifyCreateActionArray(actions);
   };
 }
 export function createDOTypeWizard(parent, templates) {

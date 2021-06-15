@@ -20,7 +20,10 @@ export const de = {
     valKind: "Value kind",
     valImport: "Import value",
     fc: "Funktionale Einschr\xE4nkung",
-    LNodeType: "Logischer Knoten Type"
+    LNodeType: "Logischer Knoten Type",
+    lnClass: "Klasse logischer Knoten",
+    accessControl: "Zugriffskontrolle",
+    transient: "Datenpunkt transient"
   },
   settings: {
     name: "Einstellungen",
@@ -198,6 +201,14 @@ export const de = {
       }
     }
   },
+  do: {
+    wizard: {
+      title: {
+        add: "DO hinzuf\xFCgen",
+        edit: "DO bearbeiten"
+      }
+    }
+  },
   dotype: {
     wizard: {
       title: {
@@ -205,6 +216,14 @@ export const de = {
         edit: "DOType bearbeiten"
       },
       enums: "Standard Enumerations"
+    }
+  },
+  lnodetype: {
+    wizard: {
+      title: {
+        add: "LNodeType hinzuf\xFCgen",
+        edit: "LNodeType bearbeiten"
+      }
     }
   },
   lnode: {

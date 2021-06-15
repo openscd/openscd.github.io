@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>editors/substation/conducting-equipment-types | open-scd</title>
+	<title>editors/templates/lnodetype-wizard | open-scd</title>
 	<meta name="description" content="Documentation for open-scd">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -55,10 +55,10 @@
 					<a href="../modules.html">open-scd</a>
 				</li>
 				<li>
-					<a href="editors_substation_conducting_equipment_types.html">editors/substation/conducting-equipment-types</a>
+					<a href="editors_templates_lnodetype_wizard.html">editors/templates/lnodetype-wizard</a>
 				</li>
 			</ul>
-			<h1>Module editors/substation/conducting-equipment-types</h1>
+			<h1>Module editors/templates/lnodetype-wizard</h1>
 		</div>
 	</div>
 </header>
@@ -70,30 +70,30 @@
 				<section class="tsd-panel tsd-index-panel">
 					<div class="tsd-index-content">
 						<section class="tsd-index-section ">
-							<h3>Variables</h3>
+							<h3>Type aliases</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-variable tsd-parent-kind-module"><a href="editors_substation_conducting_equipment_types.html#types" class="tsd-kind-icon">types</a></li>
+								<li class="tsd-kind-type-alias tsd-parent-kind-module"><a href="editors_templates_lnodetype_wizard.html#wizardoptions" class="tsd-kind-icon">Wizard<wbr>Options</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
 							<h3>Functions</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-function tsd-parent-kind-module"><a href="editors_substation_conducting_equipment_types.html#typeicon" class="tsd-kind-icon">type<wbr>Icon</a></li>
-								<li class="tsd-kind-function tsd-parent-kind-module"><a href="editors_substation_conducting_equipment_types.html#typename" class="tsd-kind-icon">type<wbr>Name</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module"><a href="editors_templates_lnodetype_wizard.html#createlnodetypewizard" class="tsd-kind-icon">createLNode<wbr>Type<wbr>Wizard</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module"><a href="editors_templates_lnodetype_wizard.html#lnodetypewizard" class="tsd-kind-icon">l<wbr>Node<wbr>Type<wbr>Wizard</a></li>
 							</ul>
 						</section>
 					</div>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
-				<h2>Variables</h2>
-				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-module">
-					<a name="types" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagConst">Const</span> types</h3>
-					<div class="tsd-signature tsd-kind-icon">types<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Partial</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = ...</span></div>
+				<h2>Type aliases</h2>
+				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-module">
+					<a name="wizardoptions" class="tsd-anchor"></a>
+					<h3>Wizard<wbr>Options</h3>
+					<div class="tsd-signature tsd-kind-icon">Wizard<wbr>Options<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">UpdateOptions</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">CreateOptions</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/48a3753/src/editors/substation/conducting-equipment-types.ts#L36">src/editors/substation/conducting-equipment-types.ts:36</a></li>
+							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/48a3753/src/editors/templates/lnodetype-wizard.ts#L40">src/editors/templates/lnodetype-wizard.ts:40</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -101,48 +101,54 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Functions</h2>
 				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
-					<a name="typeicon" class="tsd-anchor"></a>
-					<h3>type<wbr>Icon</h3>
+					<a name="createlnodetypewizard" class="tsd-anchor"></a>
+					<h3>createLNode<wbr>Type<wbr>Wizard</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
-						<li class="tsd-signature tsd-kind-icon">type<wbr>Icon<span class="tsd-signature-symbol">(</span>condEq<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Element</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">TemplateResult</span></li>
+						<li class="tsd-signature tsd-kind-icon">createLNode<wbr>Type<wbr>Wizard<span class="tsd-signature-symbol">(</span>parent<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Element</span>, templates<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Document</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="foundation.html#wizard" class="tsd-signature-type" data-tsd-kind="Type alias">Wizard</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/48a3753/src/editors/substation/conducting-equipment-types.ts#L20">src/editors/substation/conducting-equipment-types.ts:20</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/48a3753/src/editors/templates/lnodetype-wizard.ts#L285">src/editors/templates/lnodetype-wizard.ts:285</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>condEq: <span class="tsd-signature-type">Element</span></h5>
+									<h5>parent: <span class="tsd-signature-type">Element</span></h5>
+								</li>
+								<li>
+									<h5>templates: <span class="tsd-signature-type">Document</span></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">TemplateResult</span></h4>
+							<h4 class="tsd-returns-title">Returns <a href="foundation.html#wizard" class="tsd-signature-type" data-tsd-kind="Type alias">Wizard</a></h4>
 						</li>
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
-					<a name="typename" class="tsd-anchor"></a>
-					<h3>type<wbr>Name</h3>
+					<a name="lnodetypewizard" class="tsd-anchor"></a>
+					<h3>l<wbr>Node<wbr>Type<wbr>Wizard</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
-						<li class="tsd-signature tsd-kind-icon">type<wbr>Name<span class="tsd-signature-symbol">(</span>condEq<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Element</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
+						<li class="tsd-signature tsd-kind-icon">l<wbr>Node<wbr>Type<wbr>Wizard<span class="tsd-signature-symbol">(</span>lNodeTypeIdentity<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, doc<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">XMLDocument</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="foundation.html#wizard" class="tsd-signature-type" data-tsd-kind="Type alias">Wizard</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/48a3753/src/editors/substation/conducting-equipment-types.ts#L24">src/editors/substation/conducting-equipment-types.ts:24</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/48a3753/src/editors/templates/lnodetype-wizard.ts#L363">src/editors/templates/lnodetype-wizard.ts:363</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>condEq: <span class="tsd-signature-type">Element</span></h5>
+									<h5>lNodeTypeIdentity: <span class="tsd-signature-type">string</span></h5>
+								</li>
+								<li>
+									<h5>doc: <span class="tsd-signature-type">XMLDocument</span></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
+							<h4 class="tsd-returns-title">Returns <a href="foundation.html#wizard" class="tsd-signature-type" data-tsd-kind="Type alias">Wizard</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -155,20 +161,20 @@
 						<a href="../modules.html">Exports</a>
 					</li>
 					<li class="current tsd-kind-module">
-						<a href="editors_substation_conducting_equipment_types.html">editors/substation/conducting-<wbr>equipment-<wbr>types</a>
+						<a href="editors_templates_lnodetype_wizard.html">editors/templates/lnodetype-<wbr>wizard</a>
 					</li>
 				</ul>
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
-					<li class=" tsd-kind-variable tsd-parent-kind-module">
-						<a href="editors_substation_conducting_equipment_types.html#types" class="tsd-kind-icon">types</a>
+					<li class=" tsd-kind-type-alias tsd-parent-kind-module">
+						<a href="editors_templates_lnodetype_wizard.html#wizardoptions" class="tsd-kind-icon">Wizard<wbr>Options</a>
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-module">
-						<a href="editors_substation_conducting_equipment_types.html#typeicon" class="tsd-kind-icon">type<wbr>Icon</a>
+						<a href="editors_templates_lnodetype_wizard.html#createlnodetypewizard" class="tsd-kind-icon">createLNode<wbr>Type<wbr>Wizard</a>
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-module">
-						<a href="editors_substation_conducting_equipment_types.html#typename" class="tsd-kind-icon">type<wbr>Name</a>
+						<a href="editors_templates_lnodetype_wizard.html#lnodetypewizard" class="tsd-kind-icon">l<wbr>Node<wbr>Type<wbr>Wizard</a>
 					</li>
 				</ul>
 			</nav>
