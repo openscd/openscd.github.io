@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>wizards | open-scd</title>
+	<title>CreateOptions | open-scd</title>
 	<meta name="description" content="Documentation for open-scd">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -55,84 +55,51 @@
 					<a href="../modules.html">open-scd</a>
 				</li>
 				<li>
-					<a href="wizards.html">wizards</a>
+					<a href="../modules/editors_templates_foundation.html">editors/templates/foundation</a>
+				</li>
+				<li>
+					<a href="editors_templates_foundation.createoptions.html">CreateOptions</a>
 				</li>
 			</ul>
-			<h1>Module wizards</h1>
+			<h1>Interface CreateOptions</h1>
 		</div>
 	</div>
 </header>
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-hierarchy">
+				<h3>Hierarchy</h3>
+				<ul class="tsd-hierarchy">
+					<li>
+						<span class="target">CreateOptions</span>
+					</li>
+				</ul>
+			</section>
 			<section class="tsd-panel-group tsd-index-group">
 				<h2>Index</h2>
 				<section class="tsd-panel tsd-index-panel">
 					<div class="tsd-index-content">
 						<section class="tsd-index-section ">
-							<h3>Type aliases</h3>
+							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter"><a href="wizards.html#diff" class="tsd-kind-icon">Diff</a></li>
-							</ul>
-						</section>
-						<section class="tsd-index-section ">
-							<h3>Functions</h3>
-							<ul class="tsd-index-list">
-								<li class="tsd-kind-function tsd-parent-kind-module"><a href="wizards.html#mergewizard" class="tsd-kind-icon">merge<wbr>Wizard</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="editors_templates_foundation.createoptions.html#parent" class="tsd-kind-icon">parent</a></li>
 							</ul>
 						</section>
 					</div>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
-				<h2>Type aliases</h2>
-				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter">
-					<a name="diff" class="tsd-anchor"></a>
-					<h3>Diff</h3>
-					<div class="tsd-signature tsd-kind-icon">Diff&lt;T&gt;<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{ </span>ours<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">; </span>theirs<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">{ </span>ours<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol">; </span>theirs<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">{ </span>ours<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">; </span>theirs<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol"> }</span></div>
+				<h2>Properties</h2>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="parent" class="tsd-anchor"></a>
+					<h3>parent</h3>
+					<div class="tsd-signature tsd-kind-icon">parent<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Element</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/e53033d/src/wizards.ts#L24">src/wizards.ts:24</a></li>
+							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/e53033d/src/editors/templates/foundation.ts#L20">src/editors/templates/foundation.ts:20</a></li>
 						</ul>
 					</aside>
-					<h4 class="tsd-type-parameters-title">Type parameters</h4>
-					<ul class="tsd-type-parameters">
-						<li>
-							<h4>T</h4>
-						</li>
-					</ul>
-				</section>
-			</section>
-			<section class="tsd-panel-group tsd-member-group ">
-				<h2>Functions</h2>
-				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
-					<a name="mergewizard" class="tsd-anchor"></a>
-					<h3>merge<wbr>Wizard</h3>
-					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
-						<li class="tsd-signature tsd-kind-icon">merge<wbr>Wizard<span class="tsd-signature-symbol">(</span>sink<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Element</span>, source<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Element</span>, options<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">MergeOptions</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="foundation.html#wizard" class="tsd-signature-type" data-tsd-kind="Type alias">Wizard</a></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/e53033d/src/wizards.ts#L109">src/wizards.ts:109</a></li>
-								</ul>
-							</aside>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>sink: <span class="tsd-signature-type">Element</span></h5>
-								</li>
-								<li>
-									<h5>source: <span class="tsd-signature-type">Element</span></h5>
-								</li>
-								<li>
-									<h5><span class="tsd-flag ts-flagOptional">Optional</span> options: <span class="tsd-signature-type">MergeOptions</span></h5>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <a href="foundation.html#wizard" class="tsd-signature-type" data-tsd-kind="Type alias">Wizard</a></h4>
-						</li>
-					</ul>
 				</section>
 			</section>
 		</div>
@@ -143,17 +110,59 @@
 						<a href="../modules.html">Exports</a>
 					</li>
 					<li class="current tsd-kind-module">
-						<a href="wizards.html">wizards</a>
+						<a href="../modules/editors_templates_foundation.html">editors/templates/foundation</a>
 					</li>
 				</ul>
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
-					<li class=" tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter">
-						<a href="wizards.html#diff" class="tsd-kind-icon">Diff</a>
+				</ul>
+				<ul class="current">
+					<li class="current tsd-kind-interface tsd-parent-kind-module">
+						<a href="editors_templates_foundation.createoptions.html" class="tsd-kind-icon">Create<wbr>Options</a>
+						<ul>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="editors_templates_foundation.createoptions.html#parent" class="tsd-kind-icon">parent</a>
+							</li>
+						</ul>
+					</li>
+				</ul>
+				<ul class="after-current">
+					<li class=" tsd-kind-interface tsd-parent-kind-module">
+						<a href="editors_templates_foundation.updateoptions.html" class="tsd-kind-icon">Update<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-parent-kind-module">
+						<a href="../modules/editors_templates_foundation.html#wizardoptions" class="tsd-kind-icon">Wizard<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-variable tsd-parent-kind-module">
+						<a href="../modules/editors_templates_foundation.html#alldatatypeselector" class="tsd-kind-icon">all<wbr>Data<wbr>Type<wbr>Selector</a>
+					</li>
+					<li class=" tsd-kind-variable tsd-parent-kind-module">
+						<a href="../modules/editors_templates_foundation.html#functionalconstraintenum" class="tsd-kind-icon">functional<wbr>Constraint<wbr>Enum</a>
+					</li>
+					<li class=" tsd-kind-variable tsd-parent-kind-module">
+						<a href="../modules/editors_templates_foundation.html#predefinedbasictypeenum" class="tsd-kind-icon">predefined<wbr>Basic<wbr>Type<wbr>Enum</a>
+					</li>
+					<li class=" tsd-kind-variable tsd-parent-kind-module">
+						<a href="../modules/editors_templates_foundation.html#styles" class="tsd-kind-icon">styles</a>
+					</li>
+					<li class=" tsd-kind-variable tsd-parent-kind-module">
+						<a href="../modules/editors_templates_foundation.html#valkindenum" class="tsd-kind-icon">val<wbr>Kind<wbr>Enum</a>
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-module">
-						<a href="wizards.html#mergewizard" class="tsd-kind-icon">merge<wbr>Wizard</a>
+						<a href="../modules/editors_templates_foundation.html#addreferenceddatatypes" class="tsd-kind-icon">add<wbr>Referenced<wbr>Data<wbr>Types</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-module">
+						<a href="../modules/editors_templates_foundation.html#buildlistfromstringarray" class="tsd-kind-icon">build<wbr>List<wbr>From<wbr>String<wbr>Array</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-module">
+						<a href="../modules/editors_templates_foundation.html#iscreateoptions" class="tsd-kind-icon">is<wbr>Create<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-module">
+						<a href="../modules/editors_templates_foundation.html#unifycreateactionarray" class="tsd-kind-icon">unify<wbr>Create<wbr>Action<wbr>Array</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-module">
+						<a href="../modules/editors_templates_foundation.html#updateidnamingaction" class="tsd-kind-icon">updateIDNaming<wbr>Action</a>
 					</li>
 				</ul>
 			</nav>
@@ -174,6 +183,7 @@
 			<ul class="tsd-legend">
 				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
 				<li class="tsd-kind-interface tsd-has-type-parameter"><span class="tsd-kind-icon">Interface with type parameter</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
 			</ul>
 			<ul class="tsd-legend">
 				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
