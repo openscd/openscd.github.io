@@ -19,7 +19,8 @@ export const pluginIcons = {
   editor: "tab",
   triggered: "play_circle",
   loader: "folder_open",
-  saver: "save"
+  saver: "save",
+  validator: "rule_folder"
 };
 async function storeDefaultPlugins() {
   localStorage.setItem("externalPlugins", JSON.stringify([]));
@@ -49,6 +50,9 @@ export function Plugging(Base) {
     }
     get triggered() {
       return this.plugins.filter((plugin) => plugin.installed && plugin.kind === "triggered").map((plugin) => this.addContent(plugin));
+    }
+    get validators() {
+      return this.plugins.filter((plugin) => plugin.installed && plugin.kind === "validator").map((plugin) => this.addContent(plugin));
     }
     get plugins() {
       return this.officialPlugins.concat(this.externalPlugins);

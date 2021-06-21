@@ -1,3 +1,11 @@
+export function newEmptySCD(id, versionId) {
+  const {version, revision, release} = supportedAttributes[versionId];
+  const markup = `<?xml version="1.0" encoding="UTF-8"?>
+    <SCL xmlns="http://www.iec.ch/61850/2003/SCL" ${version ? `version="${version}"` : ""} ${revision ? `revision="${revision}"` : ""} ${release ? `release="${release}"` : ""}>
+      <Header id="${id}"/>
+    </SCL>`;
+  return new DOMParser().parseFromString(markup, "application/xml");
+}
 export function isValidationError(msg) {
   return typeof msg !== "string" && msg.file !== void 0 && msg.valid === void 0 && msg.loaded === void 0;
 }

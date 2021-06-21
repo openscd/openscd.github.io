@@ -17,17 +17,9 @@ import {
   isMove,
   isSimple,
   isUpdate,
-  newLogEvent
+  newLogEvent,
+  newValidateEvent
 } from "./foundation.js";
-import {supportedAttributes} from "./schemas.js";
-export function newEmptySCD(id, versionId) {
-  const {version, revision, release} = supportedAttributes[versionId];
-  const markup = `<?xml version="1.0" encoding="UTF-8"?>
-    <SCL xmlns="http://www.iec.ch/61850/2003/SCL" ${version ? `version="${version}"` : ""} ${revision ? `revision="${revision}"` : ""} ${release ? `release="${release}"` : ""}>
-      <Header id="${id}"/>
-    </SCL>`;
-  return new DOMParser().parseFromString(markup, "application/xml");
-}
 export function Editing(Base) {
   class EditingElement extends Base {
     constructor(...args) {
@@ -187,10 +179,12 @@ export function Editing(Base) {
         if (element instanceof LitElement)
           element.requestUpdate();
     }
-    onOpenDoc(event) {
+    async onOpenDoc(event) {
       this.doc = event.detail.doc;
       this.docName = event.detail.docName;
       this.docId = event.detail.docId ?? "";
+      await this.updateComplete;
+      this.dispatchEvent(newValidateEvent());
       this.dispatchEvent(newLogEvent({
         kind: "info",
         title: get("openSCD.loaded", {name: this.docName})
@@ -198,7 +192,7 @@ export function Editing(Base) {
     }
   }
   __decorate([
-    property()
+    property({attribute: false})
   ], EditingElement.prototype, "doc", 2);
   __decorate([
     property({type: String})
