@@ -67,10 +67,6 @@ export let WizardDialog = class extends LitElement {
   async act(action, primary = true) {
     if (action === void 0)
       return false;
-    if (primary)
-      this.wizard[this.pageIndex].primary = void 0;
-    else
-      this.wizard[this.pageIndex].secondary = void 0;
     const wizardInputs = Array.from(this.inputs);
     const wizardList = this.dialog?.querySelector("filtered-list,mwc-list");
     if (!this.checkValidity()) {
@@ -80,6 +76,10 @@ export let WizardDialog = class extends LitElement {
     }
     const wizardActions = action(wizardInputs, this, wizardList);
     if (wizardActions.length > 0) {
+      if (primary)
+        this.wizard[this.pageIndex].primary = void 0;
+      else
+        this.wizard[this.pageIndex].secondary = void 0;
       this.dispatchEvent(newWizardEvent());
     }
     wizardActions.forEach((wa) => isWizard(wa) ? this.dispatchEvent(newWizardEvent(wa())) : this.dispatchEvent(newActionEvent(wa)));
