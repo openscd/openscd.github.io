@@ -115,7 +115,7 @@ OpenSCD.styles = css`
     }
 
     mwc-dialog {
-      --mdc-dialog-max-width: 92vw;
+      --mdc-dialog-max-width: 98vw;
     }
 
     mwc-dialog > form {

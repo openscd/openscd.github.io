@@ -91,6 +91,7 @@ function eNumValWizard(options) {
   return [
     {
       title,
+      element: enumval ?? void 0,
       primary: {
         icon: "",
         label: "Save",
@@ -198,6 +199,7 @@ export function eNumTypeEditWizard(eNumTypeIdentity, doc) {
   return [
     {
       title: get("enum.wizard.title.edit"),
+      element: enumtype,
       primary: {
         icon: "",
         label: get("save"),

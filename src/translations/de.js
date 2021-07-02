@@ -29,7 +29,8 @@ export const de = {
     title: "Einstellungen",
     language: "Sprache",
     languages: {de: "Deutsch", en: "Englisch (English)"},
-    dark: "Dunkles Design"
+    dark: "Dunkles Design",
+    mode: "Profimodus"
   },
   menu: {
     title: "Men\xFC",
@@ -307,6 +308,9 @@ export const de = {
   },
   updatesubstation: {
     title: "Schaltanlage aktualisieren"
+  },
+  code: {
+    log: "Element im XML Editor angepasst:  {{id}}"
   },
   add: "Hinzuf\xFCgen",
   new: "Neu",

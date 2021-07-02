@@ -132,7 +132,8 @@ export let SubstationEditor = class extends LitElement {
       action,
       name,
       desc,
-      guessable
+      guessable,
+      element
     ] = isCreateOptions(options) ? [
       get("substation.wizard.title.add"),
       get("add"),
@@ -140,7 +141,8 @@ export let SubstationEditor = class extends LitElement {
       SubstationEditor.createAction(options.parent),
       "",
       "",
-      options.parent.querySelector(":root > IED")
+      options.parent.querySelector(":root > IED"),
+      void 0
     ] : [
       get("substation.wizard.title.edit"),
       get("save"),
@@ -148,11 +150,13 @@ export let SubstationEditor = class extends LitElement {
       updateNamingAction(options.element),
       options.element.getAttribute("name"),
       options.element.getAttribute("desc"),
-      false
+      false,
+      options.element
     ];
     return [
       {
         title: heading,
+        element,
         primary: {
           icon: actionIcon,
           label: actionName,

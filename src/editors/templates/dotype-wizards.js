@@ -101,6 +101,7 @@ function sDOWizard(options) {
   return [
     {
       title,
+      element: sdo ?? void 0,
       primary: {icon: "", label: get("save"), action},
       content: [
         deleteButton,
@@ -267,6 +268,7 @@ function dAWizard(options) {
   return [
     {
       title,
+      element: da ?? void 0,
       primary: {icon: "", label: get("save"), action},
       content: [
         deleteButton,
@@ -450,6 +452,7 @@ export function dOTypeWizard(dOTypeIdentity, doc) {
   return [
     {
       title: get("dotype.wizard.title.edit"),
+      element: dotype,
       primary: {
         icon: "",
         label: get("save"),

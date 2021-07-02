@@ -8,6 +8,7 @@ A wizard style dialog consisting of several pages commiting some
 | Property     | Attribute | Modifiers | Type                      | Default | Description                                      |
 |--------------|-----------|-----------|---------------------------|---------|--------------------------------------------------|
 | `act`        |           |           |                           |         |                                                  |
+| `code`       |           | readonly  | `boolean`                 |         |                                                  |
 | `dialog`     |           | readonly  | `Dialog \| undefined`     |         | The `Dialog` showing the active [[`WizardPage`]]. |
 | `dialogs`    |           |           | `NodeListOf<Dialog>`      |         |                                                  |
 | `inputs`     |           |           | `NodeListOf<WizardInput>` |         |                                                  |

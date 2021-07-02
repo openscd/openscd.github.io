@@ -125,6 +125,7 @@ function dOWizard(options) {
   return [
     {
       title,
+      element: DO ?? void 0,
       primary: {icon: "", label: get("save"), action},
       content: [
         deleteButton,
@@ -273,6 +274,7 @@ export function lNodeTypeWizard(lNodeTypeIdentity, doc) {
   return [
     {
       title: get("lnodetype.wizard.title.edit"),
+      element: lnodetype,
       primary: {
         icon: "",
         label: get("save"),

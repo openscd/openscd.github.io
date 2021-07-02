@@ -7,7 +7,7 @@
 | Property  | Attribute | Modifiers | Type             |
 |-----------|-----------|-----------|------------------|
 | `desc`    | `desc`    | readonly  | `string \| null` |
-| `element` | `element` |           | `Element`        |
+| `element` |           |           | `Element`        |
 | `name`    | `name`    | readonly  | `string`         |
 
 ## Methods

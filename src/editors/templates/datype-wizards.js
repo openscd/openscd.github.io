@@ -148,6 +148,7 @@ function bDAWizard(options) {
   return [
     {
       title,
+      element: bda ?? void 0,
       primary: {icon: "", label: get("save"), action},
       content: [
         deleteButton,
@@ -229,6 +230,7 @@ export function dATypeWizard(dATypeIdentity, doc) {
   return [
     {
       title: get("datype.wizard.title.edit"),
+      element: datype ?? void 0,
       primary: {
         icon: "",
         label: get("save"),

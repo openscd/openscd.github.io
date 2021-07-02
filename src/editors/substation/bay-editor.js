@@ -136,31 +136,27 @@ export let BayEditor = class extends LitElement {
     };
   }
   static wizard(options) {
-    const [
-      heading,
-      actionName,
-      actionIcon,
-      action,
-      name,
-      desc
-    ] = isCreateOptions(options) ? [
+    const [heading, actionName, actionIcon, action, name, desc, element] = isCreateOptions(options) ? [
       get("bay.wizard.title.add"),
       get("add"),
       "add",
       BayEditor.createAction(options.parent),
       "",
-      ""
+      "",
+      void 0
     ] : [
       get("bay.wizard.title.edit"),
       get("save"),
       "edit",
       updateNamingAction(options.element),
       options.element.getAttribute("name"),
-      options.element.getAttribute("desc")
+      options.element.getAttribute("desc"),
+      options.element
     ];
     return [
       {
         title: heading,
+        element,
         primary: {
           icon: actionIcon,
           label: actionName,
@@ -202,7 +198,7 @@ BayEditor.styles = css`
     }
   `;
 __decorate([
-  property()
+  property({attribute: false})
 ], BayEditor.prototype, "element", 2);
 __decorate([
   property({type: String})

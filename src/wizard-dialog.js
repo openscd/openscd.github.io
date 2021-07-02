@@ -18,20 +18,55 @@ import {
   internalProperty,
   html
 } from "../_snowpack/pkg/lit-element.js";
-import {translate} from "../_snowpack/pkg/lit-translate.js";
+import {get, translate} from "../_snowpack/pkg/lit-translate.js";
 import {Dialog} from "../_snowpack/pkg/@material/mwc-dialog.js";
+import "../_snowpack/pkg/ace-custom-element.js";
 import "./wizard-textfield.js";
 import {
   newActionEvent,
   newWizardEvent,
   wizardInputSelector,
-  isWizard
+  isWizard,
+  checkValidity,
+  reportValidity,
+  identity
 } from "./foundation.js";
 function dialogInputs(dialog) {
   return Array.from(dialog?.querySelectorAll(wizardInputSelector) ?? []);
 }
 function dialogValid(dialog) {
-  return dialogInputs(dialog).every((wi) => wi.checkValidity());
+  return dialogInputs(dialog).every(checkValidity);
+}
+function codeAction(element) {
+  return (inputs) => {
+    const text = inputs[0].value;
+    if (!text || !element.parentElement)
+      return [];
+    const desc = {
+      parent: element.parentElement,
+      reference: element.nextElementSibling,
+      element
+    };
+    const del = {
+      old: desc,
+      checkValidity: () => true
+    };
+    const cre = {
+      new: {
+        ...desc,
+        element: new DOMParser().parseFromString(text, "application/xml").documentElement
+      },
+      checkValidity: () => true
+    };
+    return [
+      {
+        actions: [del, cre],
+        title: get("code.log", {
+          id: identity(element)
+        })
+      }
+    ];
+  };
 }
 export let WizardDialog = class extends LitElement {
   constructor() {
@@ -44,8 +79,11 @@ export let WizardDialog = class extends LitElement {
   get dialog() {
     return this.dialogs[this.pageIndex];
   }
+  get code() {
+    return (this.dialog?.querySelector("mwc-icon-button-toggle")?.on ?? false) && localStorage.getItem("mode") === "pro";
+  }
   checkValidity() {
-    return Array.from(this.inputs).every((wi) => wi.checkValidity());
+    return Array.from(this.inputs).every(checkValidity);
   }
   get firstInvalidPage() {
     return Array.from(this.dialogs).findIndex((dialog) => !dialogValid(dialog));
@@ -61,7 +99,7 @@ export let WizardDialog = class extends LitElement {
     } else {
       this.dialog?.show();
       await this.dialog?.updateComplete;
-      dialogInputs(this.dialog).map((wi) => wi.reportValidity());
+      dialogInputs(this.dialog).map(reportValidity);
     }
   }
   async act(action, primary = true) {
@@ -71,7 +109,7 @@ export let WizardDialog = class extends LitElement {
     const wizardList = this.dialog?.querySelector("filtered-list,mwc-list");
     if (!this.checkValidity()) {
       this.pageIndex = this.firstInvalidPage;
-      wizardInputs.map((wi) => wi.reportValidity());
+      wizardInputs.map(reportValidity);
       return false;
     }
     const wizardActions = action(wizardInputs, this, wizardList);
@@ -115,7 +153,22 @@ export let WizardDialog = class extends LitElement {
       heading=${page.title}
       @closed=${this.onClosed}
     >
-      <div id="wizard-content">${page.content}</div>
+      ${page.element && localStorage.getItem("mode") === "pro" ? html`<mwc-icon-button-toggle
+            onicon="code"
+            officon="code_off"
+            @click=${() => this.requestUpdate()}
+          ></mwc-icon-button-toggle>` : ""}
+      <div id="wizard-content">
+        ${this.code && page.element ? html`<ace-editor
+              base-path="/public/ace"
+              wrap
+              soft-tabs
+              style="width: 80vw; height: calc(100vh - 240px);"
+              theme="ace/theme/solarized_${localStorage.getItem("theme")}"
+              mode="ace/mode/xml"
+              value="${new XMLSerializer().serializeToString(page.element)}"
+            ></ace-editor>` : page.content}
+      </div>
       ${index > 0 ? html`<mwc-button
             slot="secondaryAction"
             dialogAction="prev"
@@ -133,7 +186,14 @@ export let WizardDialog = class extends LitElement {
             label="${translate("cancel")}"
             style="--mdc-theme-primary: var(--mdc-theme-error)"
           ></mwc-button>`}
-      ${page.primary ? html`<mwc-button
+      ${this.code && page.element ? html`<mwc-button
+            slot="primaryAction"
+            @click=${() => this.act(codeAction(page.element))}
+            icon="code"
+            label="${translate("save")}"
+            trailingIcon
+            dialogInitialFocus
+          ></mwc-button>` : page.primary ? html`<mwc-button
             slot="primaryAction"
             @click=${() => this.act(page.primary?.action)}
             icon="${page.primary.icon}"
@@ -156,6 +216,17 @@ export let WizardDialog = class extends LitElement {
 WizardDialog.styles = css`
     mwc-dialog {
       --mdc-dialog-max-width: 92vw;
+    }
+
+    mwc-dialog > mwc-icon-button-toggle {
+      position: absolute;
+      top: 8px;
+      right: 14px;
+      color: var(--base00);
+    }
+
+    mwc-dialog > mwc-icon-button-toggle[on] {
+      color: var(--mdc-theme-primary);
     }
 
     #wizard-content {

@@ -250,7 +250,8 @@ export let VoltageLevelEditor = class extends LitElement {
       nomFreq,
       numPhases,
       Voltage,
-      multiplier
+      multiplier,
+      element
     ] = isCreateOptions(options) ? [
       get("voltagelevel.wizard.title.add"),
       get("add"),
@@ -261,7 +262,8 @@ export let VoltageLevelEditor = class extends LitElement {
       initial.nomFreq,
       initial.numPhases,
       initial.Voltage,
-      initial.multiplier
+      initial.multiplier,
+      void 0
     ] : [
       get("voltagelevel.wizard.title.edit"),
       get("save"),
@@ -272,11 +274,13 @@ export let VoltageLevelEditor = class extends LitElement {
       options.element.getAttribute("nomFreq"),
       options.element.getAttribute("numPhases"),
       options.element.querySelector("VoltageLevel > Voltage")?.textContent?.trim() ?? null,
-      options.element.querySelector("VoltageLevel > Voltage")?.getAttribute("multiplier") ?? null
+      options.element.querySelector("VoltageLevel > Voltage")?.getAttribute("multiplier") ?? null,
+      options.element
     ];
     return [
       {
         title: heading,
+        element,
         primary: {
           icon: actionIcon,
           label: actionName,

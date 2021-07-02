@@ -140,7 +140,8 @@ export function subNetworkWizard(options) {
     desc,
     type,
     BitRate,
-    multiplier
+    multiplier,
+    element
   ] = isCreateOptions(options) ? [
     get("subnetwork.wizard.title.add"),
     get("add"),
@@ -150,7 +151,8 @@ export function subNetworkWizard(options) {
     "",
     initial.type,
     initial.bitrate,
-    initial.multiplier
+    initial.multiplier,
+    void 0
   ] : [
     get("subnetwork.wizard.title.edit"),
     get("save"),
@@ -160,11 +162,13 @@ export function subNetworkWizard(options) {
     options.element.getAttribute("desc"),
     options.element.getAttribute("type"),
     options.element.querySelector("SubNetwork > BitRate")?.textContent?.trim() ?? null,
-    options.element.querySelector("SubNetwork > BitRate")?.getAttribute("multiplier") ?? null
+    options.element.querySelector("SubNetwork > BitRate")?.getAttribute("multiplier") ?? null,
+    options.element
   ];
   return [
     {
       title: heading,
+      element,
       primary: {
         icon: actionIcon,
         label: actionName,

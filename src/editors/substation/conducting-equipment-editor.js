@@ -118,7 +118,8 @@ export let ConductingEquipmentEditor = class extends LitElement {
       action,
       name,
       desc,
-      reservedNames
+      reservedNames,
+      element
     ] = isCreateOptions(options) ? [
       get("conductingequipment.wizard.title.add"),
       get("add"),
@@ -126,7 +127,8 @@ export let ConductingEquipmentEditor = class extends LitElement {
       ConductingEquipmentEditor.createAction(options.parent),
       "",
       "",
-      Array.from(options.parent.querySelectorAll(selectors.ConductingEquipment)).map((condEq) => condEq.getAttribute("name") ?? "")
+      Array.from(options.parent.querySelectorAll(selectors.ConductingEquipment)).map((condEq) => condEq.getAttribute("name") ?? ""),
+      void 0
     ] : [
       get("conductingequipment.wizard.title.edit"),
       get("save"),
@@ -134,11 +136,13 @@ export let ConductingEquipmentEditor = class extends LitElement {
       updateNamingAction(options.element),
       options.element.getAttribute("name"),
       options.element.getAttribute("desc"),
-      Array.from(options.element.parentNode.querySelectorAll(selectors.ConductingEquipment)).map((condEq) => condEq.getAttribute("name") ?? "").filter((name2) => name2 !== options.element.getAttribute("name"))
+      Array.from(options.element.parentNode.querySelectorAll(selectors.ConductingEquipment)).map((condEq) => condEq.getAttribute("name") ?? "").filter((name2) => name2 !== options.element.getAttribute("name")),
+      options.element
     ];
     return [
       {
         title: heading,
+        element,
         primary: {
           icon: actionIcon,
           label: actionName,

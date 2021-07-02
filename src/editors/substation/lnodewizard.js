@@ -146,11 +146,13 @@ export function editlNode(element) {
   return [
     {
       title: get("lnode.wizard.title.selectIEDs"),
+      element,
       content: [renderIEDPage(element)]
     },
     {
       initial: Array.from(element.children).some((child) => child.tagName === "LNode"),
       title: get("lnode.wizard.title.selectLNs"),
+      element,
       primary: {
         icon: "save",
         label: get("save"),

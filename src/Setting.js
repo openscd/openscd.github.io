@@ -13,13 +13,18 @@ import {html, property, query} from "../_snowpack/pkg/lit-element.js";
 import {registerTranslateConfig, translate, use} from "../_snowpack/pkg/lit-translate.js";
 import {ifImplemented} from "./foundation.js";
 import {languages, loader} from "./translations/loader.js";
-export const defaults = {language: "en", theme: "light"};
+export const defaults = {
+  language: "en",
+  theme: "light",
+  mode: "safe"
+};
 export function Setting(Base) {
   class SettingElement extends Base {
     get settings() {
       return {
         language: this.getSetting("language"),
-        theme: this.getSetting("theme")
+        theme: this.getSetting("theme"),
+        mode: this.getSetting("mode")
       };
     }
     getSetting(setting) {
@@ -27,6 +32,7 @@ export function Setting(Base) {
     }
     setSetting(setting, value) {
       localStorage.setItem(setting, value);
+      this.shadowRoot?.querySelector("wizard-dialog")?.requestUpdate();
       this.requestUpdate();
     }
     onClosing(ae) {
@@ -36,6 +42,7 @@ export function Setting(Base) {
       } else if (ae.detail?.action === "save") {
         this.setSetting("language", this.languageUI.value);
         this.setSetting("theme", this.darkThemeUI.checked ? "dark" : "light");
+        this.setSetting("mode", this.modeUI.checked ? "pro" : "safe");
         this.requestUpdate("settings");
       }
     }
@@ -58,7 +65,7 @@ export function Setting(Base) {
         >
           <form>
             <mwc-select
-              naturalMenuWidth
+              fixedMenuPosition
               id="language"
               icon="language"
               label="${translate("settings.language")}"
@@ -74,6 +81,12 @@ export function Setting(Base) {
               <mwc-switch
                 id="dark"
                 ?checked=${this.settings.theme === "dark"}
+              ></mwc-switch>
+            </mwc-formfield>
+            <mwc-formfield label="${translate("settings.mode")}">
+              <mwc-switch
+                id="mode"
+                ?checked=${this.settings.mode === "pro"}
               ></mwc-switch>
             </mwc-formfield>
           </form>
@@ -110,5 +123,8 @@ export function Setting(Base) {
   __decorate([
     query("#dark")
   ], SettingElement.prototype, "darkThemeUI", 2);
+  __decorate([
+    query("#mode")
+  ], SettingElement.prototype, "modeUI", 2);
   return SettingElement;
 }

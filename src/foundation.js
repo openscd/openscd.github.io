@@ -1,4 +1,5 @@
 import {directive} from "../_snowpack/pkg/lit-html.js";
+import {Select} from "../_snowpack/pkg/@material/mwc-select.js";
 import {WizardTextField} from "./wizard-textfield.js";
 export function isCreate(action) {
   return action.old === void 0 && action.new?.parent !== void 0 && action.new?.element !== void 0 && action.new?.reference !== void 0;
@@ -56,15 +57,27 @@ export function newActionEvent(action, eventInitDict) {
     detail: {action, ...eventInitDict?.detail}
   });
 }
-export const wizardInputSelector = "wizard-textfield, mwc-select";
+export const wizardInputSelector = "wizard-textfield, ace-editor, mwc-select";
 export function isWizard(wizardAction) {
   return typeof wizardAction === "function";
+}
+export function checkValidity(input) {
+  if (input instanceof WizardTextField || input instanceof Select)
+    return input.checkValidity();
+  else
+    return true;
+}
+export function reportValidity(input) {
+  if (input instanceof WizardTextField || input instanceof Select)
+    return input.reportValidity();
+  else
+    return true;
 }
 export function getValue(input) {
   if (input instanceof WizardTextField)
     return input.maybeValue;
   else
-    return input.value;
+    return input.value ?? null;
 }
 export function getMultiplier(input) {
   if (input instanceof WizardTextField)
