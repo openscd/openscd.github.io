@@ -1,7 +1,7 @@
 import {html, LitElement} from "../../_snowpack/pkg/lit-element.js";
 import {newWizardEvent} from "../foundation.js";
 import {openSCDIcon} from "../icons.js";
-import additionInfo from "../../package.json.proxy.js";
+import additionInfo from "../../manifest.json.proxy.js";
 export function aboutBoxWizard() {
   return [
     {
