@@ -106,7 +106,7 @@ export function mergeWizard(sink, source, options) {
         tag: sink.tagName
       }),
       primary: {
-        label: get("merge.action"),
+        label: get("merge.title"),
         icon: "merge_type",
         action: mergeWizardAction(attrDiffs, childDiffs, sink, source, options),
         auto: options?.auto?.(sink, source) ?? false

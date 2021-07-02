@@ -72,8 +72,8 @@
 						<section class="tsd-index-section ">
 							<h3>Type aliases</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-type-alias tsd-parent-kind-module"><a href="plugging.html#installedplugin" class="tsd-kind-icon">Installed<wbr>Plugin</a></li>
 								<li class="tsd-kind-type-alias tsd-parent-kind-module"><a href="plugging.html#pluggingelement" class="tsd-kind-icon">Plugging<wbr>Element</a></li>
+								<li class="tsd-kind-type-alias tsd-parent-kind-module"><a href="plugging.html#plugin" class="tsd-kind-icon">Plugin</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
@@ -94,22 +94,12 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Type aliases</h2>
 				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-module">
-					<a name="installedplugin" class="tsd-anchor"></a>
-					<h3>Installed<wbr>Plugin</h3>
-					<div class="tsd-signature tsd-kind-icon">Installed<wbr>Plugin<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">AvailablePlugin</span><span class="tsd-signature-symbol"> &amp; </span><span class="tsd-signature-symbol">{ </span>content<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TemplateResult</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">; </span>installed<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">true</span><span class="tsd-signature-symbol"> }</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/4397f9e/src/Plugging.ts#L27">src/Plugging.ts:27</a></li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-module">
 					<a name="pluggingelement" class="tsd-anchor"></a>
 					<h3>Plugging<wbr>Element</h3>
 					<div class="tsd-signature tsd-kind-icon">Plugging<wbr>Element<span class="tsd-signature-symbol">:</span> <a href="foundation.html#mixin" class="tsd-signature-type" data-tsd-kind="Type alias">Mixin</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">typeof </span><a href="plugging.html#plugging-1" class="tsd-signature-type" data-tsd-kind="Function">Plugging</a><span class="tsd-signature-symbol">&gt;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/4397f9e/src/Plugging.ts#L74">src/Plugging.ts:74</a></li>
+							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/8c6499a/src/Plugging.ts#L82">src/Plugging.ts:82</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -118,16 +108,70 @@
 						</div>
 					</div>
 				</section>
+				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-module">
+					<a name="plugin" class="tsd-anchor"></a>
+					<h3>Plugin</h3>
+					<div class="tsd-signature tsd-kind-icon">Plugin<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{ </span>content<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TemplateResult</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">; </span>icon<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>installed<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">; </span>kind<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">PluginKind</span><span class="tsd-signature-symbol">; </span>name<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>official<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">; </span>position<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">MenuPosition</span><span class="tsd-signature-symbol">; </span>requireDoc<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">; </span>src<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> }</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/8c6499a/src/Plugging.ts#L23">src/Plugging.ts:23</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter">
+								<h5>content<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TemplateResult</span><span class="tsd-signature-symbol">&gt;</span></h5>
+								<ul class="tsd-parameters">
+									<li class="tsd-parameter-signature">
+										<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-type-literal">
+											<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TemplateResult</span><span class="tsd-signature-symbol">&gt;</span></li>
+										</ul>
+										<ul class="tsd-descriptions">
+											<li class="tsd-description">
+												<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TemplateResult</span><span class="tsd-signature-symbol">&gt;</span></h4>
+											</li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+							<li class="tsd-parameter">
+								<h5><span class="tsd-flag ts-flagOptional">Optional</span> icon<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span></h5>
+							</li>
+							<li class="tsd-parameter">
+								<h5>installed<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></h5>
+							</li>
+							<li class="tsd-parameter">
+								<h5>kind<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">PluginKind</span></h5>
+							</li>
+							<li class="tsd-parameter">
+								<h5>name<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></h5>
+							</li>
+							<li class="tsd-parameter">
+								<h5><span class="tsd-flag ts-flagOptional">Optional</span> official<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span></h5>
+							</li>
+							<li class="tsd-parameter">
+								<h5><span class="tsd-flag ts-flagOptional">Optional</span> position<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">MenuPosition</span></h5>
+							</li>
+							<li class="tsd-parameter">
+								<h5><span class="tsd-flag ts-flagOptional">Optional</span> require<wbr>Doc<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span></h5>
+							</li>
+							<li class="tsd-parameter">
+								<h5>src<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></h5>
+							</li>
+						</ul>
+					</div>
+				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Variables</h2>
 				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-module">
 					<a name="pluginicons" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagConst">Const</span> plugin<wbr>Icons</h3>
-					<div class="tsd-signature tsd-kind-icon">plugin<wbr>Icons<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">PluginKind</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = ...</span></div>
+					<div class="tsd-signature tsd-kind-icon">plugin<wbr>Icons<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">PluginKind</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">MenuPosition</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = ...</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/4397f9e/src/Plugging.ts#L32">src/Plugging.ts:32</a></li>
+							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/8c6499a/src/Plugging.ts#L35">src/Plugging.ts:35</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -144,7 +188,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/4397f9e/src/Plugging.ts#L78">src/Plugging.ts:78</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/8c6499a/src/Plugging.ts#L84">src/Plugging.ts:84</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-type-parameters-title">Type parameters</h4>
@@ -179,10 +223,10 @@
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
 					<li class=" tsd-kind-type-alias tsd-parent-kind-module">
-						<a href="plugging.html#installedplugin" class="tsd-kind-icon">Installed<wbr>Plugin</a>
+						<a href="plugging.html#pluggingelement" class="tsd-kind-icon">Plugging<wbr>Element</a>
 					</li>
 					<li class=" tsd-kind-type-alias tsd-parent-kind-module">
-						<a href="plugging.html#pluggingelement" class="tsd-kind-icon">Plugging<wbr>Element</a>
+						<a href="plugging.html#plugin" class="tsd-kind-icon">Plugin</a>
 					</li>
 					<li class=" tsd-kind-variable tsd-parent-kind-module">
 						<a href="plugging.html#pluginicons" class="tsd-kind-icon">plugin<wbr>Icons</a>

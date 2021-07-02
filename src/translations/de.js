@@ -26,19 +26,13 @@ export const de = {
     transient: "Datenpunkt transient"
   },
   settings: {
-    name: "Einstellungen",
+    title: "Einstellungen",
     language: "Sprache",
     languages: {de: "Deutsch", en: "Englisch (English)"},
     dark: "Dunkles Design"
   },
   menu: {
-    name: "Men\xFC",
-    open: "Projekt \xF6ffnen",
-    new: "Neues Projekt",
-    importIED: "IED importieren",
-    save: "Projekt speichern",
-    subscriberinfo: "Empf\xE4nger aktualisieren",
-    validate: "Projekt validieren",
+    title: "Men\xFC",
     viewLog: "Protokoll anzeigen"
   },
   openSCD: {
@@ -61,7 +55,8 @@ export const de = {
       nameClash: '{{ parent }} enth\xE4lt bereits ein {{ child }} Kind namens "{{ name }}"'
     }
   },
-  validating: {
+  validate: {
+    title: "Projekt validieren",
     valid: "{{ name }} erfolgreich validiert",
     invalid: "{{ name }} Validierung fehlgeschlagen",
     fatal: "Fataler Validierungsfehler",
@@ -84,11 +79,16 @@ export const de = {
   plugins: {
     heading: "Erweiterungen",
     editor: "Editor",
-    triggered: "Men\xFCeintrag",
+    menu: "Men\xFCeintrag",
+    requireDoc: "Ben\xF6tigt Dokument",
+    top: "oben",
+    middle: "mittig",
+    bottom: "unten",
+    validator: "Validator",
     add: {
       heading: "Benutzerdefinierte Erweiterung",
       warning: `Hier k\xF6nnen Sie benutzerdefinierte Erweiterungen hinzuf\xFCgen.
-                OpenSCD \xFCbernimm hierf\xFCr keine Gew\xE4hr.`,
+                OpenSCD \xFCbernimmt hierf\xFCr keine Gew\xE4hr.`,
       name: "Name",
       nameHelper: "Lokaler Name der Erweiterung (frei w\xE4hlbar)",
       src: "URL",
@@ -246,12 +246,13 @@ export const de = {
     }
   },
   merge: {
-    action: "Vereinigen",
+    title: "Vereinigen",
     defaultTitle: "{{ tag }} {{ source }} mit {{ sink }} vereinigen",
     log: "{{ tag }} {{ source }} mit {{ sink }} vereinigt",
     children: "Kindelemente"
   },
   import: {
+    title: "IEDs importieren",
     log: {
       successful: "IED {{name}} geladen",
       parsererror: "Parser Fehler",
@@ -291,30 +292,31 @@ export const de = {
       addaddress: "Adressfeld bearbeitet ({{iedName}} - {{apName}})"
     }
   },
-  transform: {
-    subscriber: {
-      description: "GOOSE Ziele aktualisieren: ",
-      nonewitems: "keine neuen IEDName Elemente notwendig",
-      message: "{{updatenumber}} IEDName Element(e) hinzugef\xFCgt"
-    },
-    "comm-map": {
-      wizard: {title: "Kommunikationszuordnung"},
-      connectCB: "{{CbType}} verbinden",
-      connectToIED: "Verbinden mit {{iedName}}",
-      sourceIED: "Quellger\xE4t",
-      sinkIED: "Zielger\xE4t"
-    }
+  subscriber: {
+    title: "Subscriber Update",
+    description: "GOOSE Ziele aktualisieren: ",
+    nonewitems: "keine neuen IEDName Elemente notwendig",
+    message: "{{updatenumber}} IEDName Element(e) hinzugef\xFCgt"
+  },
+  commMap: {
+    title: "Kommunikationszuordnung",
+    connectCB: "{{CbType}} verbinden",
+    connectToIED: "Verbinden mit {{iedName}}",
+    sourceIED: "Quellger\xE4t",
+    sinkIED: "Zielger\xE4t"
   },
   updatesubstation: {
     title: "Schaltanlage aktualisieren"
   },
   add: "Hinzuf\xFCgen",
+  new: "Neu",
   remove: "Entfernen",
   edit: "Bearbeiten",
   move: "Verschieben",
   create: "Erstellen",
   save: "Speichern",
   saveAs: "Speichern unter",
+  open: "\xD6ffnen",
   reset: "Zur\xFCcksetzen",
   cancel: "Abbrechen",
   close: "Schlie\xDFen",

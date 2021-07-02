@@ -53,7 +53,7 @@ export function Setting(Base) {
       return html`${ifImplemented(super.render())}
         <mwc-dialog
           id="settings"
-          heading="${translate("settings.name")}"
+          heading="${translate("settings.title")}"
           @closing=${this.onClosing}
         >
           <form>

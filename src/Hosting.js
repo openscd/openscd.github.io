@@ -28,39 +28,39 @@ export function Hosting(Base) {
       });
     }
     get menu() {
-      const triggered = [];
-      const loaders = [];
-      const savers = [];
+      const topMenu = [];
+      const middleMenu = [];
+      const bottomMenu = [];
       const validators = [];
-      this.triggered.forEach((plugin) => triggered.push({
-        icon: plugin.icon || pluginIcons["triggered"],
+      this.topMenu.forEach((plugin) => topMenu.push({
+        icon: plugin.icon || pluginIcons["menu"],
         name: plugin.name,
         action: (ae) => {
-          this.dispatchEvent(newPendingStateEvent(ae.target.items[ae.detail.index].lastElementChild.trigger()));
+          this.dispatchEvent(newPendingStateEvent(ae.target.items[ae.detail.index].lastElementChild.run()));
         },
-        disabled: () => this.doc === null,
+        disabled: () => plugin.requireDoc && this.doc === null,
         content: plugin.content,
-        kind: "triggered"
+        kind: "top"
       }));
-      this.loaders.forEach((plugin) => loaders.push({
-        icon: plugin.icon || pluginIcons["loader"],
+      this.middleMenu.forEach((plugin) => middleMenu.push({
+        icon: plugin.icon || pluginIcons["menu"],
         name: plugin.name,
         action: (ae) => {
-          this.dispatchEvent(newPendingStateEvent(ae.target.items[ae.detail.index].lastElementChild.load()));
+          this.dispatchEvent(newPendingStateEvent(ae.target.items[ae.detail.index].lastElementChild.run()));
         },
-        disabled: () => false,
+        disabled: () => plugin.requireDoc && this.doc === null,
         content: plugin.content,
-        kind: "loader"
+        kind: "middle"
       }));
-      this.savers.forEach((plugin) => savers.push({
-        icon: plugin.icon || pluginIcons["saver"],
+      this.bottomMenu.forEach((plugin) => bottomMenu.push({
+        icon: plugin.icon || pluginIcons["menu"],
         name: plugin.name,
         action: (ae) => {
-          this.dispatchEvent(newPendingStateEvent(ae.target.items[ae.detail.index].lastElementChild.save()));
+          this.dispatchEvent(newPendingStateEvent(ae.target.items[ae.detail.index].lastElementChild.run()));
         },
-        disabled: () => this.doc === null,
+        disabled: () => plugin.requireDoc && this.doc === null,
         content: plugin.content,
-        kind: "saver"
+        kind: "middle"
       }));
       this.validators.forEach((plugin) => validators.push({
         icon: plugin.icon || pluginIcons["validator"],
@@ -72,12 +72,13 @@ export function Hosting(Base) {
         content: plugin.content,
         kind: "validator"
       }));
-      if (triggered.length > 0)
-        triggered.push("divider");
+      if (middleMenu.length > 0)
+        middleMenu.push("divider");
+      if (bottomMenu.length > 0)
+        bottomMenu.push("divider");
       return [
         "divider",
-        ...loaders,
-        ...savers,
+        ...topMenu,
         "divider",
         {
           icon: "undo",
@@ -104,13 +105,14 @@ export function Hosting(Base) {
           kind: "static"
         },
         "divider",
-        ...triggered,
+        ...middleMenu,
         {
           icon: "settings",
-          name: "settings.name",
+          name: "settings.title",
           action: () => this.settingsUI.show(),
           kind: "static"
         },
+        ...bottomMenu,
         {
           icon: "extension",
           name: "plugins.heading",
@@ -158,7 +160,7 @@ export function Hosting(Base) {
           type="modal"
           id="menu"
         >
-          <span slot="title">${translate("menu.name")}</span>
+          <span slot="title">${translate("menu.title")}</span>
           ${this.docName ? html`<span slot="subtitle">${this.docName}</span>` : ""}
           <mwc-list
             wrapFocus
@@ -185,7 +187,7 @@ export function Hosting(Base) {
         </mwc-drawer>
 
         ${this.doc ? until(this.editors[this.activeTab] && this.editors[this.activeTab].content(), html`<mwc-linear-progress indeterminate></mwc-linear-progress>`) : html`<div class="landing">
-              ${this.menu.filter((mi) => mi !== "divider").map((mi, index) => mi.kind === "loader" ? html`
+              ${this.menu.filter((mi) => mi !== "divider").map((mi, index) => mi.kind === "top" && !mi.disabled?.() ? html`
                         <mwc-icon-button
                           class="landing_icon"
                           icon="${mi.icon}"
