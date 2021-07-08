@@ -223,9 +223,12 @@ export const en = {
     wizard: {
       title: {
         add: "Add LNodeType",
-        edit: "Edit LNodeType"
+        edit: "Edit LNodeType",
+        select: "Select Data Objects"
       }
-    }
+    },
+    autoimport: "Use LN class from OpenSCD template",
+    missinglnclass: "Missing pre-defined LN class"
   },
   lnode: {
     wizard: {
@@ -329,5 +332,6 @@ export const en = {
   redo: "Redo",
   duplicate: "Clone",
   connect: "Connect",
-  disconnect: "Disconnect"
+  disconnect: "Disconnect",
+  next: "Next"
 };

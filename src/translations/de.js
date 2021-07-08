@@ -223,9 +223,12 @@ export const de = {
     wizard: {
       title: {
         add: "LNodeType hinzuf\xFCgen",
-        edit: "LNodeType bearbeiten"
+        edit: "LNodeType bearbeiten",
+        select: "Data Objects ausw\xE4hlen"
       }
-    }
+    },
+    autoimport: "Vordefinierte OpenSCD LN Klasse verwenden",
+    missinglnclass: "Vordefinierte LN Klasse fehlt"
   },
   lnode: {
     wizard: {
@@ -329,5 +332,6 @@ export const de = {
   redo: "Wiederholen",
   duplicate: "Klonen",
   connect: "Verbinden",
-  disconnect: "Trennen"
+  disconnect: "Trennen",
+  next: "Weiter"
 };
