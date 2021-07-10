@@ -2,8 +2,10 @@ import {html, render} from "../../../_snowpack/pkg/lit-html.js";
 import {get, translate} from "../../../_snowpack/pkg/lit-translate.js";
 import {
   createElement,
+  getChildElementsByTagName,
   getReference,
   identity,
+  isPublic,
   referencePath,
   selector
 } from "../../foundation.js";
@@ -69,7 +71,7 @@ export function lNodeWizardAction(parent) {
     const selectedAnyLn = list.items.filter((item) => item.selected).map((item) => item.value).map((identity2) => {
       return parent.ownerDocument.querySelector(selector("LN0", identity2)) ? parent.ownerDocument.querySelector(selector("LN0", identity2)) : parent.ownerDocument.querySelector(selector("LN", identity2));
     }).filter((item) => item !== null);
-    const oldLNodes = Array.from(parent.getElementsByTagName("LNode")).filter((item) => !item.closest("Private"));
+    const oldLNodes = getChildElementsByTagName(parent, "LNode").filter(isPublic);
     const deleteActions = oldLNodes.filter((lnode) => !includesAnyLN(selectedAnyLn, lnode)).map((lnode) => deleteAction(parent, lnode));
     const createActions = selectedAnyLn.filter((anyln) => !includesLNode(anyln, oldLNodes)).map((anyln) => createAction(parent, anyln));
     return deleteActions.concat(createActions);

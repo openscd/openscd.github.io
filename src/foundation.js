@@ -1827,3 +1827,6 @@ export function getVersion(element) {
   const header = Array.from(element.ownerDocument.getElementsByTagName("Header")).filter((item) => !item.closest("Private"));
   return header[0].getAttribute("version") ?? "2003";
 }
+export function getChildElementsByTagName(element, tag) {
+  return Array.from(element.children).filter((element2) => element2.tagName === tag);
+}
