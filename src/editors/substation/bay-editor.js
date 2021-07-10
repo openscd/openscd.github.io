@@ -16,25 +16,12 @@ import {
   LitElement,
   property
 } from "../../../_snowpack/pkg/lit-element.js";
-import {translate, get} from "../../../_snowpack/pkg/lit-translate.js";
-import {
-  createElement,
-  getReference,
-  getValue,
-  newActionEvent,
-  newWizardEvent
-} from "../../foundation.js";
-import {
-  isCreateOptions,
-  startMove,
-  styles,
-  updateNamingAction,
-  cloneElement
-} from "./foundation.js";
+import {translate} from "../../../_snowpack/pkg/lit-translate.js";
+import {newActionEvent, newWizardEvent} from "../../foundation.js";
+import {startMove, styles, cloneElement} from "./foundation.js";
 import "./conducting-equipment-editor.js";
-import {ConductingEquipmentEditor} from "./conducting-equipment-editor.js";
-import {editlNode} from "./lnodewizard.js";
 import {VoltageLevelEditor} from "./voltage-level-editor.js";
+import {wizards} from "../../wizards/wizard-library.js";
 export let BayEditor = class extends LitElement {
   get name() {
     return this.element.getAttribute("name") ?? "";
@@ -43,16 +30,19 @@ export let BayEditor = class extends LitElement {
     return this.element.getAttribute("desc") ?? null;
   }
   openEditWizard() {
-    this.dispatchEvent(newWizardEvent(BayEditor.wizard({element: this.element})));
+    const wizard = wizards["Bay"].edit(this.element);
+    if (wizard)
+      this.dispatchEvent(newWizardEvent(wizard));
   }
   openConductingEquipmentWizard() {
-    if (!this.element)
-      return;
-    const event = newWizardEvent(ConductingEquipmentEditor.wizard({parent: this.element}));
-    this.dispatchEvent(event);
+    const wizard = wizards["ConductingEquipment"].create(this.element);
+    if (wizard)
+      this.dispatchEvent(newWizardEvent(wizard));
   }
   openLNodeWizard() {
-    this.dispatchEvent(newWizardEvent(editlNode(this.element)));
+    const wizard = wizards["LNode"].edit(this.element);
+    if (wizard)
+      this.dispatchEvent(newWizardEvent(wizard));
   }
   remove() {
     if (this.element)
@@ -116,70 +106,6 @@ export let BayEditor = class extends LitElement {
             ></conducting-equipment-editor>`)}
       </div>
     </section> `;
-  }
-  static createAction(parent) {
-    return (inputs) => {
-      const name = getValue(inputs.find((i) => i.label === "name"));
-      const desc = getValue(inputs.find((i) => i.label === "desc"));
-      const element = createElement(parent.ownerDocument, "Bay", {
-        name,
-        desc
-      });
-      const action = {
-        new: {
-          parent,
-          element,
-          reference: getReference(parent, "Bay")
-        }
-      };
-      return [action];
-    };
-  }
-  static wizard(options) {
-    const [heading, actionName, actionIcon, action, name, desc, element] = isCreateOptions(options) ? [
-      get("bay.wizard.title.add"),
-      get("add"),
-      "add",
-      BayEditor.createAction(options.parent),
-      "",
-      "",
-      void 0
-    ] : [
-      get("bay.wizard.title.edit"),
-      get("save"),
-      "edit",
-      updateNamingAction(options.element),
-      options.element.getAttribute("name"),
-      options.element.getAttribute("desc"),
-      options.element
-    ];
-    return [
-      {
-        title: heading,
-        element,
-        primary: {
-          icon: actionIcon,
-          label: actionName,
-          action
-        },
-        content: [
-          html`<wizard-textfield
-            label="name"
-            .maybeValue=${name}
-            helper="${translate("bay.wizard.nameHelper")}"
-            required
-            validationMessage="${translate("textfield.required")}"
-            dialogInitialFocus
-          ></wizard-textfield>`,
-          html`<wizard-textfield
-            label="desc"
-            .maybeValue=${desc}
-            nullable
-            helper="${translate("bay.wizard.descHelper")}"
-          ></wizard-textfield>`
-        ]
-      }
-    ];
   }
 };
 BayEditor.styles = css`

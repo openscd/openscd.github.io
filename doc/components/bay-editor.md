@@ -12,10 +12,10 @@
 
 ## Methods
 
-| Method                          | Type                 |
-|---------------------------------|----------------------|
-| `openConductingEquipmentWizard` | `(): void`           |
-| `openEditWizard`                | `(): void`           |
-| `openLNodeWizard`               | `(): void`           |
-| `remove`                        | `(): void`           |
-| `renderHeader`                  | `(): TemplateResult` |
+| Method                          | Type                 | Description                                      |
+|---------------------------------|----------------------|--------------------------------------------------|
+| `openConductingEquipmentWizard` | `(): void`           |                                                  |
+| `openEditWizard`                | `(): void`           |                                                  |
+| `openLNodeWizard`               | `(): void`           | Opens a [[`WizardDialog`]] for editing `LNode` connections. |
+| `remove`                        | `(): void`           |                                                  |
+| `renderHeader`                  | `(): TemplateResult` |                                                  |

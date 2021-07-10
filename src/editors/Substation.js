@@ -12,12 +12,14 @@ var __decorate = (decorators, target, key, kind) => {
 import {LitElement, html, property, css} from "../../_snowpack/pkg/lit-element.js";
 import {translate, get} from "../../_snowpack/pkg/lit-translate.js";
 import {newWizardEvent} from "../foundation.js";
+import {wizards} from "../wizards/wizard-library.js";
 import {selectors, styles} from "./substation/foundation.js";
 import "./substation/substation-editor.js";
-import {SubstationEditor} from "./substation/substation-editor.js";
 export default class SubstationPlugin extends LitElement {
   openCreateSubstationWizard() {
-    this.dispatchEvent(newWizardEvent(SubstationEditor.wizard({parent: this.doc.documentElement})));
+    const wizard = wizards["Substation"].create(this.doc.documentElement);
+    if (wizard)
+      this.dispatchEvent(newWizardEvent(wizard));
   }
   render() {
     if (!this.doc?.querySelector(selectors.Substation))

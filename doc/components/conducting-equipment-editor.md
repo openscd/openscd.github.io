@@ -12,8 +12,8 @@
 
 ## Methods
 
-| Method            | Type       |
-|-------------------|------------|
-| `openEditWizard`  | `(): void` |
-| `openLNodeWizard` | `(): void` |
-| `remove`          | `(): void` |
+| Method            | Type       | Description                                      |
+|-------------------|------------|--------------------------------------------------|
+| `openEditWizard`  | `(): void` |                                                  |
+| `openLNodeWizard` | `(): void` | Opens a [[`WizardDialog`]] for editing `LNode` connections. |
+| `remove`          | `(): void` |                                                  |

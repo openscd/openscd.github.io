@@ -1,5 +1,5 @@
-import {html, render} from "../../../_snowpack/pkg/lit-html.js";
-import {get, translate} from "../../../_snowpack/pkg/lit-translate.js";
+import {html, render} from "../../_snowpack/pkg/lit-html.js";
+import {get, translate} from "../../_snowpack/pkg/lit-translate.js";
 import {
   createElement,
   getChildElementsByTagName,
@@ -8,8 +8,8 @@ import {
   isPublic,
   referencePath,
   selector
-} from "../../foundation.js";
-import {List} from "../../../_snowpack/pkg/@material/mwc-list.js";
+} from "../foundation.js";
+import {List} from "../../_snowpack/pkg/@material/mwc-list.js";
 const preferredLn = {
   CBR: ["CSWI", "CILO", "XCBR"],
   DIS: ["CSWI", "CILO", "XSWI"],
@@ -144,7 +144,7 @@ function renderIEDPage(element) {
       <mwc-icon slot="graphic">info</mwc-icon>
     </mwc-list-item>`;
 }
-export function editlNode(element) {
+export function lNodeWizard(element) {
   return [
     {
       title: get("lnode.wizard.title.selectIEDs"),

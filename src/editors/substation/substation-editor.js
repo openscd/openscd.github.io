@@ -16,24 +16,11 @@ import {
   LitElement,
   property
 } from "../../../_snowpack/pkg/lit-element.js";
-import {translate, get} from "../../../_snowpack/pkg/lit-translate.js";
-import {
-  createElement,
-  getReference,
-  getValue,
-  newActionEvent,
-  newWizardEvent
-} from "../../foundation.js";
-import {
-  isCreateOptions,
-  selectors,
-  styles,
-  updateNamingAction
-} from "./foundation.js";
+import {translate} from "../../../_snowpack/pkg/lit-translate.js";
+import {newActionEvent, newWizardEvent} from "../../foundation.js";
+import {selectors, styles} from "./foundation.js";
 import "./voltage-level-editor.js";
-import {VoltageLevelEditor} from "./voltage-level-editor.js";
-import {editlNode} from "./lnodewizard.js";
-import {guessVoltageLevel} from "./guess-wizard.js";
+import {wizards} from "../../wizards/wizard-library.js";
 export let SubstationEditor = class extends LitElement {
   get name() {
     return this.element.getAttribute("name") ?? "";
@@ -42,13 +29,19 @@ export let SubstationEditor = class extends LitElement {
     return this.element.getAttribute("desc");
   }
   openEditWizard() {
-    this.dispatchEvent(newWizardEvent(SubstationEditor.wizard({element: this.element})));
+    const wizard = wizards["Substation"].edit(this.element);
+    if (wizard)
+      this.dispatchEvent(newWizardEvent(wizard));
   }
   openVoltageLevelWizard() {
-    this.dispatchEvent(newWizardEvent(VoltageLevelEditor.wizard({parent: this.element})));
+    const wizard = wizards["VoltageLevel"].create(this.element);
+    if (wizard)
+      this.dispatchEvent(newWizardEvent(wizard));
   }
   openLNodeWizard() {
-    this.dispatchEvent(newWizardEvent(editlNode(this.element)));
+    const wizard = wizards["LNode"].edit(this.element);
+    if (wizard)
+      this.dispatchEvent(newWizardEvent(wizard));
   }
   remove() {
     this.dispatchEvent(newActionEvent({
@@ -92,28 +85,6 @@ export let SubstationEditor = class extends LitElement {
       </h1>
     `;
   }
-  static createAction(parent) {
-    return (inputs, wizard) => {
-      const name = getValue(inputs.find((i) => i.label === "name"));
-      const desc = getValue(inputs.find((i) => i.label === "desc"));
-      const guess = wizard.shadowRoot?.querySelector("mwc-checkbox")?.checked;
-      parent.ownerDocument.createElement("Substation");
-      const element = createElement(parent.ownerDocument, "Substation", {
-        name,
-        desc
-      });
-      const action = {
-        new: {
-          parent,
-          element,
-          reference: getReference(parent, "Substation")
-        }
-      };
-      if (guess)
-        wizard.dispatchEvent(newWizardEvent(guessVoltageLevel(parent.ownerDocument)));
-      return [action];
-    };
-  }
   render() {
     return html`
       <section tabindex="0">
@@ -123,66 +94,6 @@ export let SubstationEditor = class extends LitElement {
             ></voltage-level-editor>`)}
       </section>
     `;
-  }
-  static wizard(options) {
-    const [
-      heading,
-      actionName,
-      actionIcon,
-      action,
-      name,
-      desc,
-      guessable,
-      element
-    ] = isCreateOptions(options) ? [
-      get("substation.wizard.title.add"),
-      get("add"),
-      "add",
-      SubstationEditor.createAction(options.parent),
-      "",
-      "",
-      options.parent.querySelector(":root > IED"),
-      void 0
-    ] : [
-      get("substation.wizard.title.edit"),
-      get("save"),
-      "edit",
-      updateNamingAction(options.element),
-      options.element.getAttribute("name"),
-      options.element.getAttribute("desc"),
-      false,
-      options.element
-    ];
-    return [
-      {
-        title: heading,
-        element,
-        primary: {
-          icon: actionIcon,
-          label: actionName,
-          action
-        },
-        content: [
-          html`<wizard-textfield
-            label="name"
-            .maybeValue=${name}
-            helper="${translate("substation.wizard.nameHelper")}"
-            required
-            validationMessage="${translate("textfield.required")}"
-            dialogInitialFocus
-          ></wizard-textfield>`,
-          html`<wizard-textfield
-            label="desc"
-            .maybeValue=${desc}
-            nullable
-            helper="${translate("substation.wizard.descHelper")}"
-          ></wizard-textfield>`,
-          guessable ? html`<mwc-formfield label="${translate("guess.wizard.primary")}">
-                <mwc-checkbox></mwc-checkbox>
-              </mwc-formfield>` : html``
-        ]
-      }
-    ];
   }
 };
 SubstationEditor.styles = css`

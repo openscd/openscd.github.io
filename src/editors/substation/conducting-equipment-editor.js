@@ -16,23 +16,11 @@ import {
   LitElement,
   property
 } from "../../../_snowpack/pkg/lit-element.js";
-import {translate, get} from "../../../_snowpack/pkg/lit-translate.js";
-import {
-  createElement,
-  getReference,
-  getValue,
-  newActionEvent,
-  newWizardEvent
-} from "../../foundation.js";
-import {
-  isCreateOptions,
-  selectors,
-  startMove,
-  updateNamingAction
-} from "./foundation.js";
-import {typeIcon, typeName, types} from "./conducting-equipment-types.js";
-import {editlNode} from "./lnodewizard.js";
+import {newActionEvent, newWizardEvent} from "../../foundation.js";
+import {startMove} from "./foundation.js";
 import {BayEditor} from "./bay-editor.js";
+import {typeIcon} from "./conducting-equipment-types.js";
+import {wizards} from "../../wizards/wizard-library.js";
 export let ConductingEquipmentEditor = class extends LitElement {
   get name() {
     return this.element.getAttribute("name") ?? "";
@@ -41,10 +29,14 @@ export let ConductingEquipmentEditor = class extends LitElement {
     return this.element.getAttribute("desc") ?? "";
   }
   openEditWizard() {
-    this.dispatchEvent(newWizardEvent(ConductingEquipmentEditor.wizard({element: this.element})));
+    const wizard = wizards["ConductingEquipment"].edit(this.element);
+    if (wizard)
+      this.dispatchEvent(newWizardEvent(wizard));
   }
   openLNodeWizard() {
-    this.dispatchEvent(newWizardEvent(editlNode(this.element)));
+    const wizard = wizards["LNode"].edit(this.element);
+    if (wizard)
+      this.dispatchEvent(newWizardEvent(wizard));
   }
   remove() {
     if (this.element)
@@ -87,107 +79,6 @@ export let ConductingEquipmentEditor = class extends LitElement {
       </div>
       <h4>${this.name}</h4>
     `;
-  }
-  static createAction(parent) {
-    return (inputs) => {
-      const name = getValue(inputs.find((i) => i.label === "name"));
-      const desc = getValue(inputs.find((i) => i.label === "desc"));
-      const proxyType = getValue(inputs.find((i) => i.label === "type"));
-      const type = proxyType === "ERS" ? "DIS" : proxyType;
-      const element = createElement(parent.ownerDocument, "ConductingEquipment", {name, type, desc});
-      if (proxyType === "ERS")
-        element.appendChild(createElement(parent.ownerDocument, "Terminal", {
-          name: "T1",
-          cNodeName: "grounded"
-        }));
-      const action = {
-        new: {
-          parent,
-          element,
-          reference: getReference(parent, "ConductingEquipment")
-        }
-      };
-      return [action];
-    };
-  }
-  static wizard(options) {
-    const [
-      heading,
-      actionName,
-      actionIcon,
-      action,
-      name,
-      desc,
-      reservedNames,
-      element
-    ] = isCreateOptions(options) ? [
-      get("conductingequipment.wizard.title.add"),
-      get("add"),
-      "add",
-      ConductingEquipmentEditor.createAction(options.parent),
-      "",
-      "",
-      Array.from(options.parent.querySelectorAll(selectors.ConductingEquipment)).map((condEq) => condEq.getAttribute("name") ?? ""),
-      void 0
-    ] : [
-      get("conductingequipment.wizard.title.edit"),
-      get("save"),
-      "edit",
-      updateNamingAction(options.element),
-      options.element.getAttribute("name"),
-      options.element.getAttribute("desc"),
-      Array.from(options.element.parentNode.querySelectorAll(selectors.ConductingEquipment)).map((condEq) => condEq.getAttribute("name") ?? "").filter((name2) => name2 !== options.element.getAttribute("name")),
-      options.element
-    ];
-    return [
-      {
-        title: heading,
-        element,
-        primary: {
-          icon: actionIcon,
-          label: actionName,
-          action
-        },
-        content: [
-          ConductingEquipmentEditor.renderTypeSelector(options),
-          html`<wizard-textfield
-            label="name"
-            .maybeValue=${name}
-            helper="${translate("conductingequipment.wizard.nameHelper")}"
-            required
-            validationMessage="${translate("textfield.required")}"
-            dialogInitialFocus
-            .reservedValues=${reservedNames}
-          ></wizard-textfield>`,
-          html`<wizard-textfield
-            label="desc"
-            .maybeValue=${desc}
-            nullable
-            helper="${translate("conductingequipment.wizard.descHelper")}"
-          ></wizard-textfield>`
-        ]
-      }
-    ];
-  }
-  static renderTypeSelector(options) {
-    return isCreateOptions(options) ? html`<mwc-select
-          style="--mdc-menu-max-height: 196px;"
-          required
-          label="type"
-          helper="${translate("conductingequipment.wizard.typeHelper")}"
-          validationMessage="${translate("textfield.required")}"
-        >
-          ${Object.keys(types).map((v) => html`<mwc-list-item value="${v}">${types[v]}</mwc-list-item>`)}
-        </mwc-select>` : html`<mwc-select
-          label="type"
-          helper="${translate("conductingequipment.wizard.typeHelper")}"
-          validationMessage="${translate("textfield.required")}"
-          disabled
-        >
-          <mwc-list-item selected value="0"
-            >${typeName(options.element)}</mwc-list-item
-          >
-        </mwc-select>`;
   }
 };
 ConductingEquipmentEditor.styles = css`
