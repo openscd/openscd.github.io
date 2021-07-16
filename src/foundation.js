@@ -57,7 +57,7 @@ export function newActionEvent(action, eventInitDict) {
     detail: {action, ...eventInitDict?.detail}
   });
 }
-export const wizardInputSelector = "wizard-textfield, ace-editor, mwc-select";
+export const wizardInputSelector = "wizard-textfield, mwc-textfield, ace-editor, mwc-select";
 export function isWizard(wizardAction) {
   return typeof wizardAction === "function";
 }
