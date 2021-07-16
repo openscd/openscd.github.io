@@ -29,7 +29,9 @@
     "lit-html": "./lit-html.js",
     "lit-html/directives/if-defined": "./lit-html/directives/if-defined.js",
     "lit-html/directives/repeat": "./lit-html/directives/repeat.js",
+    "lit-html/directives/unsafe-html": "./lit-html/directives/unsafe-html.js",
     "lit-html/directives/until": "./lit-html/directives/until.js",
-    "lit-translate": "./lit-translate.js"
+    "lit-translate": "./lit-translate.js",
+    "marked": "./marked.js"
   }
 }
