@@ -30,16 +30,16 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">96.67% </span>
+                <span class="strong">96.88% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>29/30</span>
+                <span class='fraction'>31/32</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">96% </span>
+                <span class="strong">95.83% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>24/25</span>
+                <span class='fraction'>23/24</span>
             </div>
         
             
@@ -374,10 +374,7 @@
 <a name='L315'></a><a href='#L315'>315</a>
 <a name='L316'></a><a href='#L316'>316</a>
 <a name='L317'></a><a href='#L317'>317</a>
-<a name='L318'></a><a href='#L318'>318</a>
-<a name='L319'></a><a href='#L319'>319</a>
-<a name='L320'></a><a href='#L320'>320</a>
-<a name='L321'></a><a href='#L321'>321</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L318'></a><a href='#L318'>318</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -398,7 +395,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -475,10 +471,10 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">96x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">92x</span>
@@ -524,9 +520,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">51x</span>
 <span class="cline-any cline-yes">51x</span>
-<span class="cline-any cline-yes">51x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">51x</span>
 <span class="cline-any cline-yes">51x</span>
 <span class="cline-any cline-yes">51x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -572,7 +566,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">145x</span>
-<span class="cline-any cline-yes">580x</span>
+<span class="cline-any cline-yes">725x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -722,6 +716,7 @@ const icons = {
   warning: 'warning',
   error: 'report',
   action: 'history',
+  reset: 'none',
 };
 &nbsp;
 /**
@@ -731,8 +726,6 @@ const icons = {
  * For [[`EditorAction`]] entries, also sets `currentAction` to the index of
  * the committed action, allowing the user to go to `previousAction` with
  * `undo()` if `canUndo` and to go to `nextAction` with `redo()` if `canRedo`.
- *
- * Also provides a `reset()` method resetting the history and `currentAction`.
  *
  * Renders the `history` to `logUI` and the latest `'error'` [[`LogEntry`]] to
  * `messageUI`.
@@ -794,19 +787,19 @@ export function Logging&lt;TBase extends LitElementConstructor&gt;(Base: TBase) 
       return true;
     }
 &nbsp;
-    /** Resets the history to an empty state. */
-    reset(): void {
-      this.history = [];
-      this.currentAction = -1;
-    }
-&nbsp;
     private onLog(le: LogEvent): void {
+      if (le.detail.kind === 'reset') {
+        this.history = [];
+        this.currentAction = -1;
+        return;
+      }
+&nbsp;
       const entry: LogEntry = {
         time: new Date(),
         ...le.detail,
       };
 &nbsp;
-      if (entry.kind == 'action') {
+      if (entry.kind === 'action') {
         if (entry.action.derived) return;
         entry.action.derived = true;
         if (this.nextAction !== -1) this.history.splice(this.nextAction);
@@ -844,11 +837,9 @@ export function Logging&lt;TBase extends LitElementConstructor&gt;(Base: TBase) 
 &nbsp;
       this.undo = this.undo.bind(this);
       this.redo = this.redo.bind(this);
-      this.reset = this.reset.bind(this);
 &nbsp;
       this.onLog = this.onLog.bind(this);
       this.addEventListener('log', this.onLog);
-      this.addEventListener('open-doc', this.reset);
     }
 &nbsp;
     renderLogEntry(
@@ -1024,7 +1015,7 @@ export function Logging&lt;TBase extends LitElementConstructor&gt;(Base: TBase) 
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Thu Jul 15 2021 08:21:59 GMT+0000 (Coordinated Universal Time)
+                at Fri Jul 16 2021 09:55:14 GMT+0000 (Coordinated Universal Time)
             </div>
         </div>
         <script src="../prettify.js"></script>

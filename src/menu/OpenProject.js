@@ -10,7 +10,7 @@ var __decorate = (decorators, target, key, kind) => {
   return result;
 };
 import {css, html, LitElement, query} from "../../_snowpack/pkg/lit-element.js";
-import {newOpenDocEvent} from "../foundation.js";
+import {newLogEvent, newOpenDocEvent} from "../foundation.js";
 export default class OpenProjectPlugin extends LitElement {
   async openDoc(event) {
     const file = event.target?.files?.item(0) ?? false;
@@ -19,6 +19,7 @@ export default class OpenProjectPlugin extends LitElement {
     const text = await file.text();
     const docName = file.name;
     const doc = new DOMParser().parseFromString(text, "application/xml");
+    document.querySelector("open-scd").dispatchEvent(newLogEvent({kind: "reset"}));
     document.querySelector("open-scd").dispatchEvent(newOpenDocEvent(doc, docName));
     this.pluginFileUI.onchange = null;
   }

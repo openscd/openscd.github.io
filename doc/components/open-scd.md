@@ -38,7 +38,6 @@ Open Substation Configuration Designer.
 | `pluginUI`         |                 |           | `Dialog`                                |                                 |                                                  |
 | `previousAction`   |                 | readonly  | `number`                                |                                 |                                                  |
 | `redo`             |                 |           |                                         |                                 |                                                  |
-| `reset`            |                 |           |                                         |                                 |                                                  |
 | `settings`         | `settings`      | readonly  | `Settings`                              |                                 | Current [[`Settings`]] in `localStorage`, default to [[`defaults`]]. |
 | `settingsUI`       |                 |           | `Dialog`                                |                                 |                                                  |
 | `src`              | `src`           |           | `string`                                |                                 | The current file's URL. `blob:` URLs are *revoked after parsing*! |
@@ -65,6 +64,5 @@ Open Substation Configuration Designer.
 | `renderMenuItem`   | `(me: MenuItem \| "divider"): TemplateResult`    |                                                  |
 | `renderPluginKind` | `(type: "editor" \| "menu" \| "validator" \| "top" \| "middle" \| "bottom", plugins: Plugin[]): TemplateResult` |                                                  |
 | `renderPluginUI`   | `(): TemplateResult`                             |                                                  |
-| `reset`            | `(): void`                                       | Resets the history to an empty state.            |
 | `setSetting`       | `<T extends "language" \| "theme" \| "mode">(setting: T, value: Settings[T]): void` | Update the `value` of `setting`, storing to `localStorage`. |
 | `undo`             | `(): boolean`                                    |                                                  |

@@ -22,7 +22,8 @@ const icons = {
   info: "info",
   warning: "warning",
   error: "report",
-  action: "history"
+  action: "history",
+  reset: "none"
 };
 export function Logging(Base) {
   class LoggingElement extends Base {
@@ -32,10 +33,8 @@ export function Logging(Base) {
       this.currentAction = -1;
       this.undo = this.undo.bind(this);
       this.redo = this.redo.bind(this);
-      this.reset = this.reset.bind(this);
       this.onLog = this.onLog.bind(this);
       this.addEventListener("log", this.onLog);
-      this.addEventListener("open-doc", this.reset);
     }
     get canUndo() {
       return this.currentAction >= 0;
@@ -68,16 +67,17 @@ export function Logging(Base) {
       this.currentAction = this.nextAction;
       return true;
     }
-    reset() {
-      this.history = [];
-      this.currentAction = -1;
-    }
     onLog(le) {
+      if (le.detail.kind === "reset") {
+        this.history = [];
+        this.currentAction = -1;
+        return;
+      }
       const entry = {
         time: new Date(),
         ...le.detail
       };
-      if (entry.kind == "action") {
+      if (entry.kind === "action") {
         if (entry.action.derived)
           return;
         entry.action.derived = true;

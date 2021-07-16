@@ -1,6 +1,7 @@
 import {html, LitElement} from "../../_snowpack/pkg/lit-element.js";
 import {get} from "../../_snowpack/pkg/lit-translate.js";
 import {
+  newLogEvent,
   newOpenDocEvent,
   newWizardEvent
 } from "../foundation.js";
@@ -9,6 +10,7 @@ export default class NewProjectPlugin extends LitElement {
   createNewProject(inputs, wizard) {
     const docName = inputs[0].value?.match(/\.s[sc]d$/i) ? inputs[0].value : inputs[0].value + ".scd";
     const version = wizard.shadowRoot.querySelector("mwc-list").selected.value;
+    document.querySelector("open-scd")?.dispatchEvent(newLogEvent({kind: "reset"}));
     document.querySelector("open-scd")?.dispatchEvent(newOpenDocEvent(newEmptySCD(docName.slice(0, -4), version), docName));
     return [{actions: [], title: "", derived: true}];
   }

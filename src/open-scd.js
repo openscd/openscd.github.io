@@ -86,11 +86,11 @@ export let OpenSCD = class extends Hosting(Setting(Wizarding(Waiting(Plugging(Ed
     if (ctrlAnd("m"))
       this.menuUI.open = !this.menuUI.open;
     if (ctrlAnd("o"))
-      this.menuUI.querySelector("mwc-list-item.loader")?.click();
+      this.menuUI.querySelector('mwc-list-item[iconid="folder_open"]')?.click();
+    if (ctrlAnd("O"))
+      this.menuUI.querySelector('mwc-list-item[iconid="create_new_folder"]')?.click();
     if (ctrlAnd("s"))
-      this.menuUI.querySelector("mwc-list-item.saver")?.click();
-    if (ctrlAnd("S"))
-      this.menuUI.querySelector("mwc-list-item.saver + mwc-list-item.saver")?.click();
+      this.menuUI.querySelector('mwc-list-item[iconid="save"]')?.click();
     if (ctrlAnd("P"))
       this.pluginUI.show();
     if (handled)

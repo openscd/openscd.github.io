@@ -43,6 +43,8 @@ export const iconColors = {
   action: "--blue"
 };
 export function getFilterIcon(type, state) {
+  if (type === "reset")
+    return html``;
   return html`<svg
     slot="${state ? "onIcon" : "offIcon"}"
     style="color:var(${state ? iconColors[type] : "--mwc-theme-on-background"})"
