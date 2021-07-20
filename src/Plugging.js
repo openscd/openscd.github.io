@@ -24,7 +24,7 @@ export const pluginIcons = {
   middle: "play_circle",
   bottom: "play_circle"
 };
-function storeDefaultPlugins() {
+function resetPlugins() {
   localStorage.setItem("plugins", JSON.stringify(officialPlugins.map((plugin) => {
     return {
       src: plugin.src,
@@ -75,16 +75,16 @@ export function Plugging(Base) {
     get plugins() {
       return this.storedPlugins.map((plugin) => {
         if (!plugin.official)
-          return this.addContent(plugin);
+          return plugin;
         const officialPlugin = officialPlugins.find((needle) => needle.src === plugin.src);
-        return this.addContent({
+        return {
           ...officialPlugin,
           ...plugin
-        });
+        };
       }).sort(compareNeedsDoc).sort(menuCompare);
     }
     get storedPlugins() {
-      return JSON.parse(localStorage.getItem("plugins") ?? "[]");
+      return JSON.parse(localStorage.getItem("plugins") ?? "[]", (key, value) => value.src ? this.addContent(value) : value);
     }
     setPlugins(indices) {
       const newPlugins = this.plugins.map((plugin, index) => {
@@ -92,6 +92,21 @@ export function Plugging(Base) {
       });
       localStorage.setItem("plugins", JSON.stringify(newPlugins));
       this.requestUpdate();
+    }
+    updatePlugins() {
+      const stored = this.storedPlugins;
+      const officialStored = stored.filter((p) => p.official);
+      const newOfficial = officialPlugins.filter((p) => !officialStored.find((o) => o.src === p.src)).map((plugin) => {
+        return {
+          src: plugin.src,
+          installed: plugin.default ?? false,
+          official: true
+        };
+      });
+      const oldOfficial = officialStored.filter((p) => !officialPlugins.find((o) => p.src === o.src));
+      const newPlugins = stored.filter((p) => !oldOfficial.find((o) => p.src === o.src));
+      newOfficial.map((p) => newPlugins.push(p));
+      localStorage.setItem("plugins", JSON.stringify(newPlugins));
     }
     addExternalPlugin(plugin) {
       if (this.storedPlugins.some((p) => p.src === plugin.src))
@@ -136,8 +151,7 @@ export function Plugging(Base) {
     }
     constructor(...args) {
       super(...args);
-      if (localStorage.getItem("officialPlugins") === null)
-        storeDefaultPlugins();
+      this.updatePlugins();
       this.requestUpdate();
     }
     renderDownloadUI() {
@@ -287,7 +301,7 @@ export function Plugging(Base) {
             icon="refresh"
             label="${translate("reset")}"
             @click=${async () => {
-        storeDefaultPlugins();
+        resetPlugins();
         this.requestUpdate();
       }}
             style="--mdc-theme-primary: var(--mdc-theme-error)"
