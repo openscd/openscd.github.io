@@ -212,10 +212,18 @@ function createNewLNodeType(parent, element) {
     return actions;
   };
 }
-function compareDOTypeId(id, cdc) {
-  if (id.includes(cdc))
-    return 1;
-  return 0;
+function doComparator(name) {
+  return (a, b) => {
+    const idA = a.getAttribute("id") ?? "";
+    const idB = b.getAttribute("id") ?? "";
+    const aHasName = idA.includes(name);
+    const bHasName = idB.includes(name);
+    if (!aHasName && bHasName)
+      return 1;
+    if (aHasName && !bHasName)
+      return -1;
+    return idA.localeCompare(idB);
+  };
 }
 function createLNodeTypeHelperWizard(parent, element, allDo) {
   return [
@@ -229,7 +237,7 @@ function createLNodeTypeHelperWizard(parent, element, allDo) {
       content: allDo.map((DO) => {
         const presCond = DO.getAttribute("presCond");
         const name = DO.getAttribute("name") ?? "";
-        const validDOTypes = Array.from(parent.closest("DataTypeTemplates").querySelectorAll(`DOType[cdc="${DO.getAttribute("type")}"]`)).sort((a, b) => compareDOTypeId(b.getAttribute("id") ?? "", name));
+        const validDOTypes = Array.from(parent.closest("DataTypeTemplates").querySelectorAll(`DOType[cdc="${DO.getAttribute("type")}"]`)).sort(doComparator(name));
         return html`<mwc-select
           fixedMenuPosition
           naturalMenuWidth
