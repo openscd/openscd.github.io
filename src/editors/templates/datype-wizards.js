@@ -120,7 +120,7 @@ function bDAWizard(options) {
         old: {
           parent: bda.parentElement,
           element: bda,
-          reference: bda.nextElementSibling
+          reference: bda.nextSibling
         }
       }));
     }}
@@ -247,7 +247,7 @@ export function dATypeWizard(dATypeIdentity, doc) {
             old: {
               parent: datype.parentElement,
               element: datype,
-              reference: datype.nextElementSibling
+              reference: datype.nextSibling
             }
           }));
         }}

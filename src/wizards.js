@@ -43,7 +43,7 @@ function mergeWizardAction(attrDiffs, childDiffs, sink, source, options) {
             old: {
               parent,
               element: diff.ours,
-              reference: diff.ours.nextElementSibling
+              reference: diff.ours.nextSibling
             }
           });
         else {

@@ -132,7 +132,7 @@ function getVoltageAction(oldVoltage, Voltage, multiplier, voltageLevel) {
       old: {
         parent: voltageLevel,
         element: oldVoltage,
-        reference: oldVoltage.nextElementSibling
+        reference: oldVoltage.nextSibling
       }
     };
   const newVoltage = oldVoltage.cloneNode(false);

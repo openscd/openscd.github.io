@@ -132,14 +132,14 @@ export function editConnectedApAction(parent) {
         old: {
           parent,
           element: oldAddress,
-          reference: oldAddress.nextElementSibling
+          reference: oldAddress.nextSibling
         }
       });
       complexAction.actions.push({
         new: {
           parent,
           element: newAddress,
-          reference: oldAddress.nextElementSibling
+          reference: oldAddress.nextSibling
         }
       });
     } else if (oldAddress === null)
@@ -195,7 +195,7 @@ export let ConnectedAPEditor = class extends LitElement {
         old: {
           parent: this.element.parentElement,
           element: this.element,
-          reference: this.element.nextElementSibling
+          reference: this.element.nextSibling
         }
       }));
   }

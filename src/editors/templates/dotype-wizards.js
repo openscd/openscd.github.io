@@ -81,7 +81,7 @@ function sDOWizard(options) {
         old: {
           parent: sdo.parentElement,
           element: sdo,
-          reference: sdo.nextElementSibling
+          reference: sdo.nextSibling
         }
       }));
     }}
@@ -238,7 +238,7 @@ function dAWizard(options) {
         old: {
           parent: da.parentElement,
           element: da,
-          reference: da.nextElementSibling
+          reference: da.nextSibling
         }
       }));
     }}
@@ -469,7 +469,7 @@ export function dOTypeWizard(dOTypeIdentity, doc) {
             old: {
               parent: dotype.parentElement,
               element: dotype,
-              reference: dotype.nextElementSibling
+              reference: dotype.nextSibling
             }
           }));
         }}

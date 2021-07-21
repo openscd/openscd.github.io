@@ -44,7 +44,7 @@ function codeAction(element) {
       return [];
     const desc = {
       parent: element.parentElement,
-      reference: element.nextElementSibling,
+      reference: element.nextSibling,
       element
     };
     const del = {

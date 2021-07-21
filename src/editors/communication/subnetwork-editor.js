@@ -49,7 +49,7 @@ function getBitRateAction(oldBitRate, BitRate, multiplier, SubNetwork) {
       old: {
         parent: SubNetwork,
         element: oldBitRate,
-        reference: oldBitRate.nextElementSibling
+        reference: oldBitRate.nextSibling
       }
     };
   const newBitRate = oldBitRate.cloneNode(false);
@@ -243,7 +243,7 @@ export let SubNetworkEditor = class extends LitElement {
         old: {
           parent: this.element.parentElement,
           element: this.element,
-          reference: this.element.nextElementSibling
+          reference: this.element.nextSibling
         }
       }));
   }

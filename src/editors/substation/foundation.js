@@ -34,7 +34,7 @@ export function cloneElement(editor) {
     new: {
       parent,
       element: clone,
-      reference: element.nextElementSibling
+      reference: element.nextSibling
     }
   }));
 }
@@ -66,7 +66,7 @@ export function startMove(editor, Child, Parent) {
         old: {
           element: editor.element,
           parent: editor.element.parentElement,
-          reference: editor.element.nextElementSibling
+          reference: editor.element.nextSibling
         },
         new: destination
       }));

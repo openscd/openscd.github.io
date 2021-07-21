@@ -101,7 +101,7 @@ function dOWizard(options) {
         old: {
           parent: DO.parentElement,
           element: DO,
-          reference: DO.nextElementSibling
+          reference: DO.nextSibling
         }
       }));
     }}
@@ -409,7 +409,7 @@ export function lNodeTypeWizard(lNodeTypeIdentity, doc) {
             old: {
               parent: lnodetype.parentElement,
               element: lnodetype,
-              reference: lnodetype.nextElementSibling
+              reference: lnodetype.nextSibling
             }
           }));
         }}

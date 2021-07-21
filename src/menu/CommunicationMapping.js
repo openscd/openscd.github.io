@@ -273,7 +273,7 @@ function disconnectExtRefs(extRefs) {
         old: {
           parent: extRef.parentElement,
           element: extRef,
-          reference: extRef.nextElementSibling
+          reference: extRef.nextSibling
         }
       });
     }
@@ -304,7 +304,7 @@ function disconnectExtRefs(extRefs) {
         old: {
           parent: iedName.parentElement,
           element: iedName,
-          reference: iedName.nextElementSibling
+          reference: iedName.nextSibling
         }
       });
   });
@@ -343,7 +343,7 @@ function disconnect(connections, root) {
         old: {
           parent: clientLN.parentElement,
           element: clientLN,
-          reference: clientLN.nextElementSibling
+          reference: clientLN.nextSibling
         }
       });
     });
