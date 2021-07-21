@@ -72,4 +72,4 @@ NB: Use `maybeValue: string | null` instead of `value` if `nullable`!
 | `select`             | `(): void`                                       |
 | `setAriaLabel`       | `(label: string): void`                          |
 | `setCustomValidity`  | `(message: string): void`                        |
-| `setSelectionRange`  | `(selectionStart: number, selectionEnd: number, selectionDirection?: "none" \| "forward" \| "backward" \| undefined): void` |
+| `setSelectionRange`  | `(selectionStart: number, selectionEnd: number, selectionDirection?: "forward" \| "backward" \| "none" \| undefined): void` |

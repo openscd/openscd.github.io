@@ -22,8 +22,7 @@ const icons = {
   info: "info",
   warning: "warning",
   error: "report",
-  action: "history",
-  reset: "none"
+  action: "history"
 };
 export function Logging(Base) {
   class LoggingElement extends Base {
