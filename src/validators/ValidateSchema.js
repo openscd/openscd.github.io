@@ -22,7 +22,7 @@ const validators = {};
 export default class ValidateSchema extends LitElement {
   async getValidator(xsd, xsdName) {
     if (!window.Worker)
-      throw new Error(get("validate.fatal"));
+      throw new Error(get("validator.schema.fatal"));
     if (validators[xsdName])
       return validators[xsdName];
     const worker = new Worker("public/js/worker.js");
@@ -41,7 +41,7 @@ export default class ValidateSchema extends LitElement {
           if (e.data.loaded)
             resolve(validate);
           else
-            reject(get("validate.loadEror", {name: e.data.file}));
+            reject(get("validator.schema.loadEror", {name: e.data.file}));
         } else if (isValidationError(e.data)) {
           const parts = e.data.message.split(": ", 2);
           const description = parts[1] ? parts[1] : parts[0];
@@ -53,7 +53,7 @@ export default class ValidateSchema extends LitElement {
           }));
         } else if (!isValidationResult(e.data)) {
           document.querySelector("open-scd").dispatchEvent(newLogEvent({
-            title: get("validate.fatal"),
+            title: get("validator.schema.fatal"),
             kind: "error",
             message: e.data
           }));
@@ -77,13 +77,13 @@ export default class ValidateSchema extends LitElement {
     if (!result.valid) {
       document.querySelector("open-scd").dispatchEvent(newLogEvent({
         kind: "warning",
-        title: get("validate.invalid", {name: result.file})
+        title: get("validator.schema.invalid", {name: result.file})
       }));
-      throw new Error(get("validate.invalid", {name: result.file}));
+      throw new Error(get("validator.schema.invalid", {name: result.file}));
     }
     document.querySelector("open-scd").dispatchEvent(newLogEvent({
       kind: "info",
-      title: get("validate.valid", {name: result.file})
+      title: get("validator.schema.valid", {name: result.file})
     }));
   }
 }

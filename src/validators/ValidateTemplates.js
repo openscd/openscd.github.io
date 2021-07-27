@@ -10,6 +10,7 @@ var __decorate = (decorators, target, key, kind) => {
   return result;
 };
 import {LitElement, property} from "../../_snowpack/pkg/lit-element.js";
+import {get} from "../../_snowpack/pkg/lit-translate.js";
 import {identity, newLogEvent} from "../foundation.js";
 const iec6185074 = fetch("public/xml/IEC_61850-7-4_2007B3.nsd").then((response) => response.text()).then((str) => new DOMParser().parseFromString(str, "application/xml"));
 const iec6185073 = fetch("public/xml/IEC_61850-7-3_2007B3.nsd").then((response) => response.text()).then((str) => new DOMParser().parseFromString(str, "application/xml"));
@@ -23,11 +24,16 @@ async function validateCoOperStructure(oper) {
   const datype = oper.closest("DataTypeTemplates")?.querySelector(`DAType[id="${type}"]`) ?? null;
   const nsd81 = await iec6185081;
   const errors = [];
-  const mendatoryDAs = Array.from(nsd81.querySelectorAll(`ServiceConstructedAttributes > ServiceConstructedAttribute[name="Oper"] > SubDataAttribute[presCond="M"]`)).map((data) => data.getAttribute("name"));
-  for (const mendatoryDA of mendatoryDAs)
-    if (datype && !datype.querySelector(`BDA[name="${mendatoryDA}"]`))
+  const mandatoryBDAs = Array.from(nsd81.querySelectorAll(`ServiceConstructedAttributes > ServiceConstructedAttribute[name="Oper"] > SubDataAttribute[presCond="M"]`)).map((data) => data.getAttribute("name"));
+  for (const mandatoryBDA of mandatoryBDAs)
+    if (datype && !datype.querySelector(`BDA[name="${mandatoryBDA}"]`))
       errors.push({
-        title: `Data structure SBOw is missing mandatory data ${mendatoryDA}`,
+        title: get("validator.templates.mandatoryChild", {
+          tag: "DAType",
+          id: type,
+          childTag: "BDA",
+          childId: mandatoryBDA
+        }),
         kind: "error",
         message: `${identity(datype)}`
       });
@@ -40,11 +46,16 @@ async function validateCoSBOwStructure(sbow) {
   const datype = sbow.closest("DataTypeTemplates")?.querySelector(`DAType[id="${type}"]`) ?? null;
   const nsd81 = await iec6185081;
   const errors = [];
-  const mendatoryDAs = Array.from(nsd81.querySelectorAll(`ServiceConstructedAttributes > ServiceConstructedAttribute[name="SBOw"] > SubDataAttribute[presCond="M"]`)).map((data) => data.getAttribute("name"));
-  for (const mendatoryDA of mendatoryDAs)
-    if (datype && !datype.querySelector(`BDA[name="${mendatoryDA}"]`))
+  const mandatoryBDAs = Array.from(nsd81.querySelectorAll(`ServiceConstructedAttributes > ServiceConstructedAttribute[name="SBOw"] > SubDataAttribute[presCond="M"]`)).map((data) => data.getAttribute("name"));
+  for (const mandatoryBDA of mandatoryBDAs)
+    if (datype && !datype.querySelector(`BDA[name="${mandatoryBDA}"]`))
       errors.push({
-        title: `Data structure SBOw is missing mandatory data ${mendatoryDA}`,
+        title: get("validator.templates.mandatoryChild", {
+          tag: "SBOw",
+          id: type,
+          childTag: "BDA",
+          childId: mandatoryBDA
+        }),
         kind: "error",
         message: `${identity(datype)}`
       });
@@ -57,11 +68,16 @@ async function validateCoCancelStructure(cancel) {
   const datype = cancel.closest("DataTypeTemplates")?.querySelector(`DAType[id="${type}"]`) ?? null;
   const nsd81 = await iec6185081;
   const errors = [];
-  const mendatoryDAs = Array.from(nsd81.querySelectorAll(`ServiceConstructedAttributes > ServiceConstructedAttribute[name="Cancel"] > SubDataAttribute[presCond="M"]`)).map((data) => data.getAttribute("name"));
-  for (const mendatoryDA of mendatoryDAs)
-    if (datype && !datype.querySelector(`BDA[name="${mendatoryDA}"]`))
+  const mandatoryBDAs = Array.from(nsd81.querySelectorAll(`ServiceConstructedAttributes > ServiceConstructedAttribute[name="Cancel"] > SubDataAttribute[presCond="M"]`)).map((data) => data.getAttribute("name"));
+  for (const mandatoryBDA of mandatoryBDAs)
+    if (datype && !datype.querySelector(`BDA[name="${mandatoryBDA}"]`))
       errors.push({
-        title: `Data structure Cancel is missing mandatory data ${mendatoryDA}`,
+        title: get("validator.templates.mandatoryChild", {
+          tag: "DAType",
+          id: type,
+          childTag: "BDA",
+          childId: mandatoryBDA
+        }),
         kind: "error",
         message: `${identity(datype)}`
       });
@@ -69,7 +85,7 @@ async function validateCoCancelStructure(cancel) {
 }
 function missingCoDataToLog(reference, type) {
   return {
-    title: `Controlable data objects ${type} is missing`,
+    title: get("validator.templates.missingCoDO", {type}),
     kind: "error",
     message: `${reference}`
   };
@@ -78,7 +94,7 @@ export async function validateControlCDC(dotype) {
   if (dotype.getAttribute("cdc") && !serviceCDCs.includes(dotype.getAttribute("cdc")))
     return [];
   let errors = [];
-  const ctlModel = dotype.querySelector('DA[name="ctlModel"] > Val')?.innerHTML;
+  const ctlModel = dotype.querySelector('DA[name="ctlModel"] > Val')?.textContent?.trim();
   const oper = dotype.querySelector('DA[fc="CO"][name="Oper"][bType="Struct"]');
   const sbo = dotype.querySelector('DA[fc="CO"][name="SBO"][bType="ObjRef"]');
   const cancel = dotype.querySelector('DA[fc="CO"][name="Cancel"][bType="Struct"]');
@@ -91,12 +107,25 @@ export async function validateControlCDC(dotype) {
     errors = cancel ? await validateCoCancelStructure(cancel) : [missingCoDataToLog(identity(dotype), "Cancel")];
     if (!sbo)
       errors.push(missingCoDataToLog(identity(dotype), "SBO"));
-  } else if (ctlModel !== "status-only") {
+  } else if (ctlModel === "direct-with-normal-security" || ctlModel === "direct-with-enhanced-security") {
     errors = oper ? await validateCoOperStructure(oper) : [missingCoDataToLog(identity(dotype), "Oper")];
+  } else if (ctlModel !== "status-only") {
+    return [
+      {
+        title: get("validator.templates.missingCtlModelDef", {
+          tag: "DOType",
+          id: dotype.id || "UNIDENTIFIABLE",
+          childTag: "ctlModel",
+          childId: "Val"
+        }),
+        kind: "warning",
+        message: identity(dotype) || "UNIDENTIFIABLE"
+      }
+    ];
   }
   return errors;
 }
-async function getMendatorySubDataAttributes(datype) {
+async function getMandatorySubDAs(datype) {
   const parentDAs = Array.from(datype.closest("DataTypeTemplates").querySelectorAll(`DOType > DA[type="${datype.getAttribute("id")}"]`)) ?? [];
   const nsd = await iec6185073;
   const dataAttributes = parentDAs.map((parentDA) => {
@@ -107,19 +136,23 @@ async function getMendatorySubDataAttributes(datype) {
   return Array.from(nsd.querySelectorAll(`ConstructedAttributes > ConstructedAttribute[name="${type[0]}"] > SubDataAttribute[presCond="M"]`)) ?? [];
 }
 export async function validateMandatorySubDAs(datype) {
-  const mandatorysubdas = await (await getMendatorySubDataAttributes(datype)).map((DA) => DA.getAttribute("name"));
-  const errors = [];
-  mandatorysubdas.forEach((mandatorysubda) => {
-    if (!datype.querySelector(`BDA[name="${mandatorysubda}"]`))
-      errors.push({
-        title: `The element DA ${mandatorysubda} is mendatory DAType ${datype.getAttribute("id")}`,
-        kind: "error",
-        message: `${datype}`
-      });
+  const mandatorySubDAs = await getMandatorySubDAs(datype);
+  const subDANames = mandatorySubDAs.map((DA) => DA.getAttribute("name") ?? "NONAME");
+  const missingDANames = subDANames.filter((da) => !datype.querySelector(`BDA[name="${da}"]`));
+  return missingDANames.map((da) => {
+    return {
+      title: get("validator.templates.mandatoryChild", {
+        tag: "DAType",
+        id: datype.getAttribute("id") ?? "",
+        childTag: "DA",
+        childId: da
+      }),
+      kind: "error",
+      message: `${datype}`
+    };
   });
-  return errors;
 }
-async function getMendatoryDataAttribute(base) {
+async function getMandatoryDataAttribute(base) {
   const nsd = await iec6185073;
   const cdc = nsd.querySelector(`CDC[name="${base}"]`);
   if (!cdc)
@@ -131,11 +164,16 @@ export async function validateMandatoryDAs(dotype) {
   const cdc = dotype.getAttribute("cdc");
   if (!cdc)
     return [];
-  const mandatorydas = await (await getMendatoryDataAttribute(cdc)).map((DA) => DA.getAttribute("name"));
+  const mandatorydas = (await getMandatoryDataAttribute(cdc)).map((DA) => DA.getAttribute("name"));
   mandatorydas.forEach((mandatoryda) => {
     if (!dotype.querySelector(`DA[name="${mandatoryda}"]`))
       errors.push({
-        title: `The element DA ${mandatoryda} is mendatory in Common Data Class ${cdc}`,
+        title: get("validator.templates.mandatoryChild", {
+          tag: "Common Data Class",
+          id: cdc,
+          childTag: "DA",
+          childId: mandatoryda
+        }),
         kind: "error",
         message: `${identity(dotype)}`
       });
@@ -148,7 +186,7 @@ function getAdjacentClass(nsd, base) {
   const adjacents = getAdjacentClass(nsd, nsd.querySelector(`LNClass[name="${base}"], AbstractLNClass[name="${base}"]`)?.getAttribute("base") ?? "");
   return Array.from(nsd.querySelectorAll(`LNClass[name="${base}"], AbstractLNClass[name="${base}"]`)).concat(adjacents);
 }
-async function getAllDataObject(base) {
+async function getAllDataObjects(base) {
   const lnodeclasses = getAdjacentClass(await iec6185074, base);
   return lnodeclasses.flatMap((lnodeclass) => Array.from(lnodeclass.querySelectorAll("DataObject")));
 }
@@ -157,7 +195,7 @@ export async function validateDoCDCSetting(lnodetype) {
   const lnClass = lnodetype.getAttribute("lnClass");
   if (!lnClass)
     return [];
-  const alldos = await getAllDataObject(lnClass);
+  const alldos = await getAllDataObjects(lnClass);
   for (const DO of alldos) {
     const type = lnodetype.querySelector(`DO[name="${DO.getAttribute("name")}"]`)?.getAttribute("type");
     if (!type)
@@ -165,7 +203,12 @@ export async function validateDoCDCSetting(lnodetype) {
     const dOType = lnodetype.closest("DataTypeTemplates")?.querySelector(`DOType[id="${type}"]`);
     if (!dOType) {
       errors.push({
-        title: `Cannot validate data object ${DO.getAttribute("name")} in LNodeType ${lnClass}`,
+        title: get("validator.templates.cannotValidate", {
+          tag: "LNodeType",
+          id: lnClass,
+          childTag: "DO",
+          childId: DO.getAttribute("name") || "UNNAMED"
+        }),
         kind: "warning",
         message: `${identity(lnodetype)}`
       });
@@ -173,14 +216,19 @@ export async function validateDoCDCSetting(lnodetype) {
     }
     if (dOType.getAttribute("cdc") !== DO.getAttribute("type"))
       errors.push({
-        title: `The element DOs ${DO.getAttribute("name")} class definition ${dOType.getAttribute("cdc")} is expected to be ${DO.getAttribute("type")}`,
+        title: get("validator.templates.mandatoryChild", {
+          tag: "DOType",
+          id: dOType.getAttribute("cdc") || "UNCLASSIFIED",
+          childTag: "DO",
+          childId: DO.getAttribute("type") || "UNTYPED"
+        }),
         kind: "error",
         message: `${identity(dOType)} > ${DO.getAttribute("name")}`
       });
   }
   return errors;
 }
-async function getMendatoryDataObject(base) {
+async function getMandatoryDataObject(base) {
   const lnodeclasses = getAdjacentClass(await iec6185074, base);
   return lnodeclasses.flatMap((lnodeclass) => Array.from(lnodeclass.querySelectorAll('DataObject[presCond="M"]')));
 }
@@ -189,11 +237,16 @@ export async function validateMandatoryDOs(lnodetype) {
   const lnClass = lnodetype.getAttribute("lnClass");
   if (!lnClass)
     return [];
-  const mandatorydos = await (await getMendatoryDataObject(lnClass)).map((DO) => DO.getAttribute("name"));
+  const mandatorydos = await (await getMandatoryDataObject(lnClass)).map((DO) => DO.getAttribute("name"));
   mandatorydos.forEach((mandatorydo) => {
     if (!lnodetype.querySelector(`DO[name="${mandatorydo}"]`))
       errors.push({
-        title: `The element DO ${mandatorydo} is mendatory in LN Class ${lnClass}`,
+        title: get("validator.templates.mandatoryChild", {
+          tag: "lnClass",
+          id: lnClass,
+          childTag: "DO",
+          childId: mandatorydo
+        }),
         kind: "error",
         message: `${identity(lnodetype)} > ${mandatorydo}`
       });
@@ -227,7 +280,7 @@ export default class ValidateTemplates extends LitElement {
   }
 }
 __decorate([
-  property()
+  property({attribute: false})
 ], ValidateTemplates.prototype, "doc", 2);
 __decorate([
   property()
