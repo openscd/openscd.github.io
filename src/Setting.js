@@ -16,7 +16,8 @@ import {languages, loader} from "./translations/loader.js";
 export const defaults = {
   language: "en",
   theme: "light",
-  mode: "safe"
+  mode: "safe",
+  showieds: "off"
 };
 export function Setting(Base) {
   class SettingElement extends Base {
@@ -24,7 +25,8 @@ export function Setting(Base) {
       return {
         language: this.getSetting("language"),
         theme: this.getSetting("theme"),
-        mode: this.getSetting("mode")
+        mode: this.getSetting("mode"),
+        showieds: this.getSetting("showieds")
       };
     }
     getSetting(setting) {
@@ -43,6 +45,7 @@ export function Setting(Base) {
         this.setSetting("language", this.languageUI.value);
         this.setSetting("theme", this.darkThemeUI.checked ? "dark" : "light");
         this.setSetting("mode", this.modeUI.checked ? "pro" : "safe");
+        this.setSetting("showieds", this.showiedsUI.checked ? "on" : "off");
         this.requestUpdate("settings");
       }
     }
@@ -89,6 +92,12 @@ export function Setting(Base) {
                 ?checked=${this.settings.mode === "pro"}
               ></mwc-switch>
             </mwc-formfield>
+            <mwc-formfield label="${translate("settings.showieds")}">
+              <mwc-switch
+                id="showieds"
+                ?checked=${this.settings.showieds === "on"}
+              ></mwc-switch>
+            </mwc-formfield>
           </form>
           <mwc-button slot="secondaryAction" dialogAction="close">
             ${translate("cancel")}
@@ -126,5 +135,8 @@ export function Setting(Base) {
   __decorate([
     query("#mode")
   ], SettingElement.prototype, "modeUI", 2);
+  __decorate([
+    query("#showieds")
+  ], SettingElement.prototype, "showiedsUI", 2);
   return SettingElement;
 }

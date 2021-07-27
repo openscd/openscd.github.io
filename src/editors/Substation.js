@@ -10,11 +10,10 @@ var __decorate = (decorators, target, key, kind) => {
   return result;
 };
 import {LitElement, html, property, css} from "../../_snowpack/pkg/lit-element.js";
-import {translate, get} from "../../_snowpack/pkg/lit-translate.js";
+import {get} from "../../_snowpack/pkg/lit-translate.js";
 import {newWizardEvent} from "../foundation.js";
 import {wizards} from "../wizards/wizard-library.js";
-import {selectors, styles} from "./substation/foundation.js";
-import "./substation/substation-editor.js";
+import "../zeroline-pane.js";
 export default class SubstationPlugin extends LitElement {
   openCreateSubstationWizard() {
     const wizard = wizards["Substation"].create(this.doc.documentElement);
@@ -22,26 +21,18 @@ export default class SubstationPlugin extends LitElement {
       this.dispatchEvent(newWizardEvent(wizard));
   }
   render() {
-    if (!this.doc?.querySelector(selectors.Substation))
-      return html`<h1>
-        <span style="color: var(--base1)"
-          >${translate("substation.missing")}</span
-        >
-        <mwc-fab
-          extended
-          icon="add"
-          label="${get("substation.wizard.title.add")}"
-          @click=${() => this.openCreateSubstationWizard()}
-        ></mwc-fab>
-      </h1>`;
-    return html`
-      ${Array.from(this.doc.querySelectorAll(selectors.Substation) ?? []).map((substation) => html`<substation-editor .element=${substation}></substation-editor>`)}
-    `;
+    return html` <zeroline-pane .doc=${this.doc}></zeroline-pane>
+      ${!this.doc?.querySelector(":root > Substation") ? html`<h1>
+            <mwc-fab
+              extended
+              icon="add"
+              label="${get("substation.wizard.title.add")}"
+              @click=${() => this.openCreateSubstationWizard()}
+            ></mwc-fab>
+          </h1>` : html``}`;
   }
 }
 SubstationPlugin.styles = css`
-    ${styles}
-
     mwc-fab {
       position: fixed;
       bottom: 32px;

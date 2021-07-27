@@ -28,7 +28,7 @@ function render(name, desc, guessable) {
         </mwc-formfield>` : html``
   ];
 }
-function createAction(parent) {
+export function createAction(parent) {
   return (inputs, wizard) => {
     const name = getValue(inputs.find((i) => i.label === "name"));
     const desc = getValue(inputs.find((i) => i.label === "desc"));
@@ -51,6 +51,7 @@ function createAction(parent) {
   };
 }
 export function substationCreateWizard(parent) {
+  const guessable = parent.querySelector("Substation") === null;
   return [
     {
       title: get("substation.wizard.title.add"),
@@ -60,7 +61,7 @@ export function substationCreateWizard(parent) {
         label: get("add"),
         action: createAction(parent)
       },
-      content: render("", "", true)
+      content: render("", "", guessable)
     }
   ];
 }

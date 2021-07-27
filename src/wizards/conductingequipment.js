@@ -1,6 +1,6 @@
 import {html} from "../../_snowpack/pkg/lit-element.js";
 import {get, translate} from "../../_snowpack/pkg/lit-translate.js";
-import {updateNamingAction} from "../editors/substation/foundation.js";
+import {updateNamingAction} from "../zeroline/foundation.js";
 import {
   createElement,
   getReference,
@@ -81,7 +81,7 @@ function render(name, desc, option, type, reservedNames) {
     ></wizard-textfield>`
   ];
 }
-function createAction(parent) {
+export function createAction(parent) {
   return (inputs) => {
     const name = getValue(inputs.find((i) => i.label === "name"));
     const desc = getValue(inputs.find((i) => i.label === "desc"));

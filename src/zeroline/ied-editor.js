@@ -15,77 +15,25 @@ import {
   html,
   LitElement,
   property
-} from "../../../_snowpack/pkg/lit-element.js";
-import {newActionEvent, newWizardEvent} from "../../foundation.js";
-import {startMove} from "./foundation.js";
-import {BayEditor} from "./bay-editor.js";
-import {typeIcon} from "./conducting-equipment-types.js";
-import {wizards} from "../../wizards/wizard-library.js";
-export let ConductingEquipmentEditor = class extends LitElement {
+} from "../../_snowpack/pkg/lit-element.js";
+export let IedEditor = class extends LitElement {
   get name() {
     return this.element.getAttribute("name") ?? "";
-  }
-  get desc() {
-    return this.element.getAttribute("desc") ?? "";
-  }
-  openEditWizard() {
-    const wizard = wizards["ConductingEquipment"].edit(this.element);
-    if (wizard)
-      this.dispatchEvent(newWizardEvent(wizard));
-  }
-  openLNodeWizard() {
-    const wizard = wizards["LNode"].edit(this.element);
-    if (wizard)
-      this.dispatchEvent(newWizardEvent(wizard));
-  }
-  remove() {
-    if (this.element)
-      this.dispatchEvent(newActionEvent({
-        old: {
-          parent: this.element.parentElement,
-          element: this.element,
-          reference: this.element.nextSibling
-        }
-      }));
   }
   render() {
     return html`
       <div id="container" tabindex="0">
-        ${typeIcon(this.element)}
-        <mwc-fab
-          mini
-          class="menu-item left"
-          @click="${() => this.openLNodeWizard()}"
-          icon="account_tree"
-        ></mwc-fab>
-        <mwc-fab
-          mini
-          class="menu-item up"
-          icon="edit"
-          @click="${() => this.openEditWizard()}}"
-        ></mwc-fab>
-        <mwc-fab
-          mini
-          class="menu-item right"
-          @click="${() => startMove(this, ConductingEquipmentEditor, BayEditor)}"
-          icon="forward"
-        ></mwc-fab>
-        <mwc-fab
-          mini
-          class="menu-item down"
-          icon="delete"
-          @click="${() => this.remove()}}"
-        ></mwc-fab>
+        <mwc-icon class="icon">developer_board</mwc-icon>
       </div>
       <h4>${this.name}</h4>
     `;
   }
 };
-ConductingEquipmentEditor.styles = css`
+IedEditor.styles = css`
     #container {
       color: var(--mdc-theme-on-surface);
-      width: 64px;
-      height: 64px;
+      width: 50px;
+      height: 50px;
       margin: auto;
       position: relative;
       transition: all 200ms linear;
@@ -95,27 +43,36 @@ ConductingEquipmentEditor.styles = css`
       outline: none;
     }
 
-    #container > svg {
+    .icon {
       color: var(--mdc-theme-on-surface);
-      width: 64px;
-      height: 64px;
+      --mdc-icon-size: 50px;
       transition: transform 150ms linear, box-shadow 200ms linear;
       outline-color: var(--mdc-theme-primary);
       outline-style: solid;
       outline-width: 0px;
     }
 
-    #container:focus > svg {
+    #container > .icon {
+      color: var(--mdc-theme-on-surface);
+      width: 50px;
+      height: 50px;
+      transition: transform 150ms linear, box-shadow 200ms linear;
+      outline-color: var(--mdc-theme-primary);
+      outline-style: solid;
+      outline-width: 0px;
+    }
+
+    #container:focus > .icon {
       box-shadow: 0 8px 10px 1px rgba(0, 0, 0, 0.14),
         0 3px 14px 2px rgba(0, 0, 0, 0.12), 0 5px 5px -3px rgba(0, 0, 0, 0.2);
     }
 
-    #container:hover > svg {
+    #container:hover > .icom {
       outline: 2px dashed var(--mdc-theme-primary);
       transition: transform 200ms linear, box-shadow 250ms linear;
     }
 
-    #container:focus-within > svg {
+    #container:focus-within > .icon {
       outline: 2px solid var(--mdc-theme-primary);
       background: var(--mdc-theme-on-primary);
       transform: scale(0.8);
@@ -168,6 +125,7 @@ ConductingEquipmentEditor.styles = css`
       opacity: 1;
       transition: opacity 200ms linear;
       text-align: center;
+      direction: rtl;
     }
 
     :host(.moving) #container,
@@ -177,13 +135,10 @@ ConductingEquipmentEditor.styles = css`
   `;
 __decorate([
   property({type: Element})
-], ConductingEquipmentEditor.prototype, "element", 2);
+], IedEditor.prototype, "element", 2);
 __decorate([
   property({type: String})
-], ConductingEquipmentEditor.prototype, "name", 1);
-__decorate([
-  property({type: String})
-], ConductingEquipmentEditor.prototype, "desc", 1);
-ConductingEquipmentEditor = __decorate([
-  customElement("conducting-equipment-editor")
-], ConductingEquipmentEditor);
+], IedEditor.prototype, "name", 1);
+IedEditor = __decorate([
+  customElement("ied-editor")
+], IedEditor);

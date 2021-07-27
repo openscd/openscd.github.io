@@ -1,11 +1,11 @@
 import {html} from "../../_snowpack/pkg/lit-html.js";
 import {get, translate} from "../../_snowpack/pkg/lit-translate.js";
-import {updateNamingAction} from "../editors/substation/foundation.js";
 import {
   createElement,
   getReference,
   getValue
 } from "../foundation.js";
+import {updateNamingAction} from "../zeroline/foundation.js";
 function render(name, desc) {
   return [
     html`<wizard-textfield

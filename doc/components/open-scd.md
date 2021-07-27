@@ -40,6 +40,7 @@ Open Substation Configuration Designer.
 | `redo`             |                 |           |                                         |                                 |                                                  |
 | `settings`         | `settings`      | readonly  | `Settings`                              |                                 | Current [[`Settings`]] in `localStorage`, default to [[`defaults`]]. |
 | `settingsUI`       |                 |           | `Dialog`                                |                                 |                                                  |
+| `showiedsUI`       |                 |           | `Switch`                                |                                 |                                                  |
 | `src`              | `src`           |           | `string`                                |                                 | The current file's URL. `blob:` URLs are *revoked after parsing*! |
 | `topMenu`          |                 | readonly  | `Plugin[]`                              |                                 |                                                  |
 | `undo`             |                 |           |                                         |                                 |                                                  |
@@ -64,5 +65,5 @@ Open Substation Configuration Designer.
 | `renderMenuItem`   | `(me: MenuItem \| "divider"): TemplateResult`    |                                                  |
 | `renderPluginKind` | `(type: "editor" \| "menu" \| "validator" \| "top" \| "middle" \| "bottom", plugins: Plugin[]): TemplateResult` |                                                  |
 | `renderPluginUI`   | `(): TemplateResult`                             |                                                  |
-| `setSetting`       | `<T extends "language" \| "theme" \| "mode">(setting: T, value: Settings[T]): void` | Update the `value` of `setting`, storing to `localStorage`. |
+| `setSetting`       | `<T extends "language" \| "theme" \| "mode" \| "showieds">(setting: T, value: Settings[T]): void` | Update the `value` of `setting`, storing to `localStorage`. |
 | `undo`             | `(): boolean`                                    |                                                  |

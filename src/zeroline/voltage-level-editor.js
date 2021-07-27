@@ -15,14 +15,22 @@ import {
   html,
   property,
   css
-} from "../../../_snowpack/pkg/lit-element.js";
-import {translate} from "../../../_snowpack/pkg/lit-translate.js";
-import {newActionEvent, newWizardEvent} from "../../foundation.js";
+} from "../../_snowpack/pkg/lit-element.js";
+import {translate} from "../../_snowpack/pkg/lit-translate.js";
 import {selectors, startMove, styles, cloneElement} from "./foundation.js";
 import "./bay-editor.js";
 import {SubstationEditor} from "./substation-editor.js";
-import {wizards} from "../../wizards/wizard-library.js";
+import {wizards} from "../wizards/wizard-library.js";
+import {newActionEvent, newWizardEvent} from "../foundation.js";
+import {until} from "../../_snowpack/pkg/lit-html/directives/until.js";
 export let VoltageLevelEditor = class extends LitElement {
+  constructor() {
+    super(...arguments);
+    this.readonly = false;
+    this.getAttachedIeds = async () => {
+      return [];
+    };
+  }
   get name() {
     return this.element.getAttribute("name") ?? "";
   }
@@ -63,55 +71,66 @@ export let VoltageLevelEditor = class extends LitElement {
         }
       }));
   }
+  async renderIedContainer() {
+    const ieds = await this.getAttachedIeds?.(this.element);
+    return ieds?.length ? html`<div id="iedcontainer">
+          ${ieds.map((ied) => html`<ied-editor .element=${ied}></ied-editor>`)}
+        </div>` : html``;
+  }
   renderHeader() {
     return html`<h2>
       ${this.name} ${this.desc === null ? "" : html`&mdash;`} ${this.desc}
       ${this.voltage === null ? "" : html`(${this.voltage})`}
-      <abbr title="${translate("add")}">
-        <mwc-icon-button
-          icon="playlist_add"
-          @click=${() => this.openBayWizard()}
-        ></mwc-icon-button>
-      </abbr>
-      <nav>
-        <abbr title="${translate("lnode.tooltip")}">
-          <mwc-icon-button
-            icon="account_tree"
-            @click=${() => this.openLNodeWizard()}
-          ></mwc-icon-button>
-        </abbr>
-        <abbr title="${translate("duplicate")}">
-          <mwc-icon-button
-            icon="content_copy"
-            @click=${() => cloneElement(this)}
-          ></mwc-icon-button>
-        </abbr>
-        <abbr title="${translate("edit")}">
-          <mwc-icon-button
-            icon="edit"
-            @click=${() => this.openEditWizard()}
-          ></mwc-icon-button>
-        </abbr>
-        <abbr title="${translate("move")}">
-          <mwc-icon-button
-            icon="forward"
-            @click=${() => startMove(this, VoltageLevelEditor, SubstationEditor)}
-          ></mwc-icon-button>
-        </abbr>
-        <abbr title="${translate("remove")}">
-          <mwc-icon-button
-            icon="delete"
-            @click=${() => this.remove()}
-          ></mwc-icon-button>
-        </abbr>
-      </nav>
+      ${this.readonly ? html`` : html`<abbr title="${translate("add")}">
+              <mwc-icon-button
+                icon="playlist_add"
+                @click=${() => this.openBayWizard()}
+              ></mwc-icon-button>
+            </abbr>
+            <nav>
+              <abbr title="${translate("lnode.tooltip")}">
+                <mwc-icon-button
+                  icon="account_tree"
+                  @click=${() => this.openLNodeWizard()}
+                ></mwc-icon-button>
+              </abbr>
+              <abbr title="${translate("duplicate")}">
+                <mwc-icon-button
+                  icon="content_copy"
+                  @click=${() => cloneElement(this)}
+                ></mwc-icon-button>
+              </abbr>
+              <abbr title="${translate("edit")}">
+                <mwc-icon-button
+                  icon="edit"
+                  @click=${() => this.openEditWizard()}
+                ></mwc-icon-button>
+              </abbr>
+              <abbr title="${translate("move")}">
+                <mwc-icon-button
+                  icon="forward"
+                  @click=${() => startMove(this, VoltageLevelEditor, SubstationEditor)}
+                ></mwc-icon-button>
+              </abbr>
+              <abbr title="${translate("remove")}">
+                <mwc-icon-button
+                  icon="delete"
+                  @click=${() => this.remove()}
+                ></mwc-icon-button>
+              </abbr>
+            </nav>`}
     </h2>`;
   }
   render() {
     return html`<section tabindex="0">
       ${this.renderHeader()}
+      ${until(this.renderIedContainer(), html`<span>${translate("zeroline.iedsloading")}</span>`)}
       <div id="bayContainer">
-        ${Array.from(this.element?.querySelectorAll(selectors.Bay) ?? []).map((bay) => html`<bay-editor .element=${bay}></bay-editor>`)}
+        ${Array.from(this.element?.querySelectorAll(selectors.Bay) ?? []).map((bay) => html`<bay-editor
+            .element=${bay}
+            .getAttachedIeds=${this.getAttachedIeds}
+            ?readonly=${this.readonly}
+          ></bay-editor>`)}
       </div>
     </section>`;
   }
@@ -141,6 +160,9 @@ __decorate([
   property()
 ], VoltageLevelEditor.prototype, "element", 2);
 __decorate([
+  property({type: Boolean})
+], VoltageLevelEditor.prototype, "readonly", 2);
+__decorate([
   property()
 ], VoltageLevelEditor.prototype, "name", 1);
 __decorate([
@@ -149,6 +171,9 @@ __decorate([
 __decorate([
   property()
 ], VoltageLevelEditor.prototype, "voltage", 1);
+__decorate([
+  property({attribute: false})
+], VoltageLevelEditor.prototype, "getAttachedIeds", 2);
 VoltageLevelEditor = __decorate([
   customElement("voltage-level-editor")
 ], VoltageLevelEditor);

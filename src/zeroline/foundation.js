@@ -1,10 +1,56 @@
-import {css} from "../../../_snowpack/pkg/lit-element.js";
+import {css} from "../../_snowpack/pkg/lit-element.js";
 import {
   getValue,
-  newActionEvent
-} from "../../foundation.js";
-export function isCreateOptions(options) {
-  return options.parent !== void 0;
+  newActionEvent,
+  isPublic
+} from "../foundation.js";
+function containsReference(element, iedName) {
+  return Array.from(element.getElementsByTagName("LNode")).filter(isPublic).some((lnode) => lnode.getAttribute("iedName") === iedName);
+}
+function isReferencedItself(element, iedName) {
+  return Array.from(element.children).some((child) => child.tagName === "LNode" && child.getAttribute("iedName") === iedName);
+}
+function hasReferencedChildren(element, iedName) {
+  const threshold = element.tagName === "Bay" ? 0 : 1;
+  return Array.from(element.children).filter((child) => containsReference(child, iedName)).length > threshold;
+}
+function hasOurs(element, iedName) {
+  return Array.from(element.getElementsByTagName("LNode")).filter(isPublic).some((lnode) => lnode.getAttribute("iedName") === iedName);
+}
+function getOurs(element, iedName) {
+  return Array.from(element.getElementsByTagName("LNode")).filter(isPublic).filter((lnode) => lnode.getAttribute("iedName") === iedName);
+}
+function hasTheirs(element, iedName) {
+  const ours = getOurs(element, iedName);
+  const scl = element.closest("SCL");
+  return Array.from(scl.getElementsByTagName("LNode")).filter(isPublic).filter((lnode) => lnode.getAttribute("iedName") === iedName).some((lnode) => !ours.includes(lnode));
+}
+export async function attachedIeds(element, remainingIeds) {
+  await new Promise(requestAnimationFrame);
+  const attachedIeds2 = [];
+  for (const ied of remainingIeds) {
+    const iedName = ied.getAttribute("name");
+    if (element.tagName === "SCL") {
+      if (!hasOurs(element, iedName) || hasReferencedChildren(element, iedName))
+        attachedIeds2.push(ied);
+      continue;
+    }
+    if (hasTheirs(element, iedName))
+      continue;
+    if (hasReferencedChildren(element, iedName) || isReferencedItself(element, iedName))
+      attachedIeds2.push(ied);
+  }
+  for (const ied of attachedIeds2) {
+    remainingIeds.delete(ied);
+  }
+  return attachedIeds2;
+}
+export function getAttachedIeds(doc) {
+  return async (element) => {
+    const ieds = new Set(Array.from(doc.querySelectorAll("IED")).filter(isPublic));
+    await new Promise(requestAnimationFrame);
+    return await attachedIeds(element, ieds);
+  };
 }
 export function updateNamingAction(element) {
   return (inputs) => {
@@ -142,5 +188,13 @@ export const styles = css`
   abbr {
     text-decoration: none;
     border-bottom: none;
+  }
+
+  #iedcontainer {
+    display: grid;
+    grid-gap: 12px;
+    padding: 8px 12px 16px;
+    box-sizing: border-box;
+    grid-template-columns: repeat(auto-fit, minmax(64px, auto));
   }
 `;

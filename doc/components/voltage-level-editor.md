@@ -4,19 +4,22 @@
 
 ## Properties
 
-| Property  | Attribute | Modifiers | Type             |
-|-----------|-----------|-----------|------------------|
-| `desc`    | `desc`    | readonly  | `string \| null` |
-| `element` | `element` |           | `Element`        |
-| `name`    | `name`    | readonly  | `string`         |
-| `voltage` | `voltage` | readonly  | `string \| null` |
+| Property          | Attribute  | Modifiers | Type                                             | Default                              |
+|-------------------|------------|-----------|--------------------------------------------------|--------------------------------------|
+| `desc`            | `desc`     | readonly  | `string \| null`                                 |                                      |
+| `element`         | `element`  |           | `Element`                                        |                                      |
+| `getAttachedIeds` |            |           | `((element: Element) => Promise<Element[]>) \| undefined` | "async () => {\n    return [];\n  }" |
+| `name`            | `name`     | readonly  | `string`                                         |                                      |
+| `readonly`        | `readonly` |           | `boolean`                                        | false                                |
+| `voltage`         | `voltage`  | readonly  | `string \| null`                                 |                                      |
 
 ## Methods
 
-| Method            | Type                 | Description                                      |
-|-------------------|----------------------|--------------------------------------------------|
-| `openBayWizard`   | `(): void`           |                                                  |
-| `openEditWizard`  | `(): void`           |                                                  |
-| `openLNodeWizard` | `(): void`           | Opens a [[`WizardDialog`]] for editing `LNode` connections. |
-| `remove`          | `(): void`           |                                                  |
-| `renderHeader`    | `(): TemplateResult` |                                                  |
+| Method               | Type                          | Description                                      |
+|----------------------|-------------------------------|--------------------------------------------------|
+| `openBayWizard`      | `(): void`                    |                                                  |
+| `openEditWizard`     | `(): void`                    |                                                  |
+| `openLNodeWizard`    | `(): void`                    | Opens a [[`WizardDialog`]] for editing `LNode` connections. |
+| `remove`             | `(): void`                    |                                                  |
+| `renderHeader`       | `(): TemplateResult`          |                                                  |
+| `renderIedContainer` | `(): Promise<TemplateResult>` |                                                  |
