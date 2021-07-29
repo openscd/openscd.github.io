@@ -21577,4 +21577,4 @@ __decorate([
 ], AceEditor.prototype, "basePath", void 0);
 customElements.define('ace-editor', AceEditor);
 
-export default AceEditor;
+export { AceEditor as default };

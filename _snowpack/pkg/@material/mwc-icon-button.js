@@ -1,6 +1,6 @@
 import { _ as __decorate } from '../common/tslib.es6-c8bbf354.js';
 import { p as property, q as query, a as queryAsync, i as internalProperty, e as eventOptions, L as LitElement, b as customElement } from '../common/lit-element-74f197f8.js';
-import { R as RippleHandlers } from '../common/ripple-handlers-0717dbef.js';
+import { R as RippleHandlers } from '../common/ripple-handlers-4224bc9a.js';
 import { a as ariaProperty } from '../common/aria-property-0d16a9b7.js';
 import { h as html } from '../common/lit-html-ea288526.js';
 import { s as style } from '../common/mwc-icon-button-css-a8ee8565.js';

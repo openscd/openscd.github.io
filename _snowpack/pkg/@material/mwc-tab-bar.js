@@ -1,4 +1,4 @@
-import { a as __extends, d as __read, b as __assign, _ as __decorate } from '../common/tslib.es6-c8bbf354.js';
+import { a as __extends, b as __assign, d as __read, _ as __decorate } from '../common/tslib.es6-c8bbf354.js';
 import { q as query, e as eventOptions, c as css, b as customElement, p as property } from '../common/lit-element-74f197f8.js';
 import { Tab } from './mwc-tab.js';
 import { M as MDCFoundation, B as BaseElement, a as addHasRemoveClass, m as matches } from '../common/foundation-4a2d7e81.js';
@@ -6,7 +6,7 @@ import { h as html } from '../common/lit-html-ea288526.js';
 import { o as observer } from '../common/observer-fa3d205e.js';
 import '../common/render-aa9814af.js';
 import '../common/class-map-0a052906.js';
-import '../common/ripple-handlers-0717dbef.js';
+import '../common/ripple-handlers-4224bc9a.js';
 import '../common/style-map-a83cef12.js';
 
 /**
@@ -36,7 +36,7 @@ var cssClasses = {
     SCROLL_AREA_SCROLL: 'mdc-tab-scroller__scroll-area--scroll',
     SCROLL_TEST: 'mdc-tab-scroller__test',
 };
-var strings = {
+var strings$1 = {
     AREA_SELECTOR: '.mdc-tab-scroller__scroll-area',
     CONTENT_SELECTOR: '.mdc-tab-scroller__scroll-content',
 };
@@ -310,7 +310,7 @@ var MDCTabScrollerFoundation = /** @class */ (function (_super) {
     });
     Object.defineProperty(MDCTabScrollerFoundation, "strings", {
         get: function () {
-            return strings;
+            return strings$1;
         },
         enumerable: false,
         configurable: true
@@ -603,11 +603,13 @@ var MDCTabScrollerFoundation = /** @class */ (function (_super) {
     };
     return MDCTabScrollerFoundation;
 }(MDCFoundation));
+// tslint:disable-next-line:no-default-export Needed for backward compatibility with MDC Web v0.44.0 and earlier.
+var MDCTabScrollerFoundation$1 = MDCTabScrollerFoundation;
 
 class TabScrollerBase extends BaseElement {
     constructor() {
         super(...arguments);
-        this.mdcFoundationClass = MDCTabScrollerFoundation;
+        this.mdcFoundationClass = MDCTabScrollerFoundation$1;
         this._scrollbarHeight = -1;
     }
     _handleInteraction() {
@@ -702,11 +704,11 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 */
-const style = css `.mdc-tab-scroller{overflow-y:hidden}.mdc-tab-scroller.mdc-tab-scroller--animating .mdc-tab-scroller__scroll-content{transition:250ms transform cubic-bezier(0.4, 0, 0.2, 1)}.mdc-tab-scroller__test{position:absolute;top:-9999px;width:100px;height:100px;overflow-x:scroll}.mdc-tab-scroller__scroll-area{-webkit-overflow-scrolling:touch;display:flex;overflow-x:hidden}.mdc-tab-scroller__scroll-area::-webkit-scrollbar,.mdc-tab-scroller__test::-webkit-scrollbar{display:none}.mdc-tab-scroller__scroll-area--scroll{overflow-x:scroll}.mdc-tab-scroller__scroll-content{position:relative;display:flex;flex:1 0 auto;transform:none;will-change:transform}.mdc-tab-scroller--align-start .mdc-tab-scroller__scroll-content{justify-content:flex-start}.mdc-tab-scroller--align-end .mdc-tab-scroller__scroll-content{justify-content:flex-end}.mdc-tab-scroller--align-center .mdc-tab-scroller__scroll-content{justify-content:center}.mdc-tab-scroller--animating .mdc-tab-scroller__scroll-area{-webkit-overflow-scrolling:auto}:host{display:flex}.mdc-tab-scroller{flex:1}`;
+const style$1 = css `.mdc-tab-scroller{overflow-y:hidden}.mdc-tab-scroller.mdc-tab-scroller--animating .mdc-tab-scroller__scroll-content{transition:250ms transform cubic-bezier(0.4, 0, 0.2, 1)}.mdc-tab-scroller__test{position:absolute;top:-9999px;width:100px;height:100px;overflow-x:scroll}.mdc-tab-scroller__scroll-area{-webkit-overflow-scrolling:touch;display:flex;overflow-x:hidden}.mdc-tab-scroller__scroll-area::-webkit-scrollbar,.mdc-tab-scroller__test::-webkit-scrollbar{display:none}.mdc-tab-scroller__scroll-area--scroll{overflow-x:scroll}.mdc-tab-scroller__scroll-content{position:relative;display:flex;flex:1 0 auto;transform:none;will-change:transform}.mdc-tab-scroller--align-start .mdc-tab-scroller__scroll-content{justify-content:flex-start}.mdc-tab-scroller--align-end .mdc-tab-scroller__scroll-content{justify-content:flex-end}.mdc-tab-scroller--align-center .mdc-tab-scroller__scroll-content{justify-content:center}.mdc-tab-scroller--animating .mdc-tab-scroller__scroll-area{-webkit-overflow-scrolling:auto}:host{display:flex}.mdc-tab-scroller{flex:1}`;
 
 let TabScroller = class TabScroller extends TabScrollerBase {
 };
-TabScroller.styles = style;
+TabScroller.styles = style$1;
 TabScroller = __decorate([
     customElement('mwc-tab-scroller')
 ], TabScroller);
@@ -733,7 +735,7 @@ TabScroller = __decorate([
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-var strings$1 = {
+var strings = {
     ARROW_LEFT_KEY: 'ArrowLeft',
     ARROW_RIGHT_KEY: 'ArrowRight',
     END_KEY: 'End',
@@ -778,20 +780,20 @@ var numbers = {
  */
 var ACCEPTABLE_KEYS = new Set();
 // IE11 has no support for new Set with iterable so we need to initialize this by hand
-ACCEPTABLE_KEYS.add(strings$1.ARROW_LEFT_KEY);
-ACCEPTABLE_KEYS.add(strings$1.ARROW_RIGHT_KEY);
-ACCEPTABLE_KEYS.add(strings$1.END_KEY);
-ACCEPTABLE_KEYS.add(strings$1.HOME_KEY);
-ACCEPTABLE_KEYS.add(strings$1.ENTER_KEY);
-ACCEPTABLE_KEYS.add(strings$1.SPACE_KEY);
+ACCEPTABLE_KEYS.add(strings.ARROW_LEFT_KEY);
+ACCEPTABLE_KEYS.add(strings.ARROW_RIGHT_KEY);
+ACCEPTABLE_KEYS.add(strings.END_KEY);
+ACCEPTABLE_KEYS.add(strings.HOME_KEY);
+ACCEPTABLE_KEYS.add(strings.ENTER_KEY);
+ACCEPTABLE_KEYS.add(strings.SPACE_KEY);
 var KEYCODE_MAP = new Map();
 // IE11 has no support for new Map with iterable so we need to initialize this by hand
-KEYCODE_MAP.set(numbers.ARROW_LEFT_KEYCODE, strings$1.ARROW_LEFT_KEY);
-KEYCODE_MAP.set(numbers.ARROW_RIGHT_KEYCODE, strings$1.ARROW_RIGHT_KEY);
-KEYCODE_MAP.set(numbers.END_KEYCODE, strings$1.END_KEY);
-KEYCODE_MAP.set(numbers.HOME_KEYCODE, strings$1.HOME_KEY);
-KEYCODE_MAP.set(numbers.ENTER_KEYCODE, strings$1.ENTER_KEY);
-KEYCODE_MAP.set(numbers.SPACE_KEYCODE, strings$1.SPACE_KEY);
+KEYCODE_MAP.set(numbers.ARROW_LEFT_KEYCODE, strings.ARROW_LEFT_KEY);
+KEYCODE_MAP.set(numbers.ARROW_RIGHT_KEYCODE, strings.ARROW_RIGHT_KEY);
+KEYCODE_MAP.set(numbers.END_KEYCODE, strings.END_KEY);
+KEYCODE_MAP.set(numbers.HOME_KEYCODE, strings.HOME_KEY);
+KEYCODE_MAP.set(numbers.ENTER_KEYCODE, strings.ENTER_KEY);
+KEYCODE_MAP.set(numbers.SPACE_KEYCODE, strings.SPACE_KEY);
 var MDCTabBarFoundation = /** @class */ (function (_super) {
     __extends(MDCTabBarFoundation, _super);
     function MDCTabBarFoundation(adapter) {
@@ -801,7 +803,7 @@ var MDCTabBarFoundation = /** @class */ (function (_super) {
     }
     Object.defineProperty(MDCTabBarFoundation, "strings", {
         get: function () {
-            return strings$1;
+            return strings;
         },
         enumerable: false,
         configurable: true
@@ -930,9 +932,9 @@ var MDCTabBarFoundation = /** @class */ (function (_super) {
     MDCTabBarFoundation.prototype.determineTargetFromKey_ = function (origin, key) {
         var isRTL = this.isRTL_();
         var maxIndex = this.adapter.getTabListLength() - 1;
-        var shouldGoToEnd = key === strings$1.END_KEY;
-        var shouldDecrement = key === strings$1.ARROW_LEFT_KEY && !isRTL || key === strings$1.ARROW_RIGHT_KEY && isRTL;
-        var shouldIncrement = key === strings$1.ARROW_RIGHT_KEY && !isRTL || key === strings$1.ARROW_LEFT_KEY && isRTL;
+        var shouldGoToEnd = key === strings.END_KEY;
+        var shouldDecrement = key === strings.ARROW_LEFT_KEY && !isRTL || key === strings.ARROW_RIGHT_KEY && isRTL;
+        var shouldIncrement = key === strings.ARROW_RIGHT_KEY && !isRTL || key === strings.ARROW_LEFT_KEY && isRTL;
         var index = origin;
         if (shouldGoToEnd) {
             index = maxIndex;
@@ -1069,7 +1071,7 @@ var MDCTabBarFoundation = /** @class */ (function (_super) {
         return KEYCODE_MAP.get(evt.keyCode);
     };
     MDCTabBarFoundation.prototype.isActivationKey_ = function (key) {
-        return key === strings$1.SPACE_KEY || key === strings$1.ENTER_KEY;
+        return key === strings.SPACE_KEY || key === strings.ENTER_KEY;
     };
     /**
      * Returns whether a given index is inclusively between the ends
@@ -1117,11 +1119,13 @@ var MDCTabBarFoundation = /** @class */ (function (_super) {
     };
     return MDCTabBarFoundation;
 }(MDCFoundation));
+// tslint:disable-next-line:no-default-export Needed for backward compatibility with MDC Web v0.44.0 and earlier.
+var MDCTabBarFoundation$1 = MDCTabBarFoundation;
 
 class TabBarBase extends BaseElement {
     constructor() {
         super(...arguments);
-        this.mdcFoundationClass = MDCTabBarFoundation;
+        this.mdcFoundationClass = MDCTabBarFoundation$1;
         this.activeIndex = 0;
         this._previousActiveIndex = -1;
     }
@@ -1216,7 +1220,7 @@ class TabBarBase extends BaseElement {
                 // Synchronize the tabs `activeIndex` to the foundation.
                 // This is needed when a tab is changed via a click, for example.
                 this.activeIndex = index;
-                this.dispatchEvent(new CustomEvent(MDCTabBarFoundation.strings.TAB_ACTIVATED_EVENT, { detail: { index }, bubbles: true, cancelable: true }));
+                this.dispatchEvent(new CustomEvent(MDCTabBarFoundation$1.strings.TAB_ACTIVATED_EVENT, { detail: { index }, bubbles: true, cancelable: true }));
             },
         };
     }
@@ -1291,11 +1295,11 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 */
-const style$1 = css `.mdc-tab-bar{width:100%}.mdc-tab{height:48px}.mdc-tab--stacked{height:72px}:host{display:block}.mdc-tab-bar{flex:1}mwc-tab{--mdc-tab-height: 48px;--mdc-tab-stacked-height: 72px}`;
+const style = css `.mdc-tab-bar{width:100%}.mdc-tab{height:48px}.mdc-tab--stacked{height:72px}:host{display:block}.mdc-tab-bar{flex:1}mwc-tab{--mdc-tab-height: 48px;--mdc-tab-stacked-height: 72px}`;
 
 let TabBar = class TabBar extends TabBarBase {
 };
-TabBar.styles = style$1;
+TabBar.styles = style;
 TabBar = __decorate([
     customElement('mwc-tab-bar')
 ], TabBar);

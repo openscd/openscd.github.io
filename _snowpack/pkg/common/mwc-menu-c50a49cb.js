@@ -1,6 +1,6 @@
-import { a as __extends, c as __values, b as __assign, _ as __decorate } from './tslib.es6-c8bbf354.js';
+import { a as __extends, b as __assign, c as __values, _ as __decorate } from './tslib.es6-c8bbf354.js';
 import { q as query, p as property, i as internalProperty, c as css, b as customElement } from './lit-element-74f197f8.js';
-import { c as cssClasses$2 } from './mwc-list-42fa28ff.js';
+import { c as cssClasses$2 } from './mwc-list-0ff18df6.js';
 import { M as MDCFoundation, B as BaseElement, a as addHasRemoveClass, d as doesElementContainFocus, b as deepActiveElementPath } from './foundation-4a2d7e81.js';
 import { o as observer } from './observer-fa3d205e.js';
 import { c as classMap } from './class-map-0a052906.js';
@@ -29,7 +29,7 @@ import { h as html } from './lit-html-ea288526.js';
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-var cssClasses = {
+var cssClasses$1 = {
     ANCHOR: 'mdc-menu-surface--anchor',
     ANIMATING_CLOSED: 'mdc-menu-surface--animating-closed',
     ANIMATING_OPEN: 'mdc-menu-surface--animating-open',
@@ -39,7 +39,7 @@ var cssClasses = {
     ROOT: 'mdc-menu-surface',
 };
 // tslint:disable:object-literal-sort-keys
-var strings = {
+var strings$1 = {
     CLOSED_EVENT: 'MDCMenuSurface:closed',
     CLOSING_EVENT: 'MDCMenuSurface:closing',
     OPENED_EVENT: 'MDCMenuSurface:opened',
@@ -53,7 +53,7 @@ var strings = {
     ].join(', '),
 };
 // tslint:enable:object-literal-sort-keys
-var numbers = {
+var numbers$1 = {
     /** Total duration of menu-surface open animation. */
     TRANSITION_OPEN_DURATION: 120,
     /** Total duration of menu-surface close animation. */
@@ -149,21 +149,21 @@ var MDCMenuSurfaceFoundation = /** @class */ (function (_super) {
     }
     Object.defineProperty(MDCMenuSurfaceFoundation, "cssClasses", {
         get: function () {
-            return cssClasses;
+            return cssClasses$1;
         },
         enumerable: false,
         configurable: true
     });
     Object.defineProperty(MDCMenuSurfaceFoundation, "strings", {
         get: function () {
-            return strings;
+            return strings$1;
         },
         enumerable: false,
         configurable: true
     });
     Object.defineProperty(MDCMenuSurfaceFoundation, "numbers", {
         get: function () {
-            return numbers;
+            return numbers$1;
         },
         enumerable: false,
         configurable: true
@@ -301,7 +301,7 @@ var MDCMenuSurfaceFoundation = /** @class */ (function (_super) {
                     _this.openAnimationEndTimerId = 0;
                     _this.adapter.removeClass(MDCMenuSurfaceFoundation.cssClasses.ANIMATING_OPEN);
                     _this.adapter.notifyOpen();
-                }, numbers.TRANSITION_OPEN_DURATION);
+                }, numbers$1.TRANSITION_OPEN_DURATION);
             });
             this.isSurfaceOpen = true;
         }
@@ -334,7 +334,7 @@ var MDCMenuSurfaceFoundation = /** @class */ (function (_super) {
                 _this.closeAnimationEndTimerId = 0;
                 _this.adapter.removeClass(MDCMenuSurfaceFoundation.cssClasses.ANIMATING_CLOSED);
                 _this.adapter.notifyClose();
-            }, numbers.TRANSITION_CLOSE_DURATION);
+            }, numbers$1.TRANSITION_CLOSE_DURATION);
         });
         this.isSurfaceOpen = false;
         if (!skipRestoreFocus) {
@@ -373,7 +373,7 @@ var MDCMenuSurfaceFoundation = /** @class */ (function (_super) {
             _a[verticalAlignment] = verticalOffset,
             _a);
         // Center align when anchor width is comparable or greater than menu surface, otherwise keep corner.
-        if (anchorSize.width / surfaceSize.width > numbers.ANCHOR_TO_MENU_SURFACE_WIDTH_RATIO) {
+        if (anchorSize.width / surfaceSize.width > numbers$1.ANCHOR_TO_MENU_SURFACE_WIDTH_RATIO) {
             horizontalAlignment = 'center';
         }
         // If the menu-surface has been hoisted to the body, it's no longer relative to the anchor element
@@ -648,6 +648,8 @@ var MDCMenuSurfaceFoundation = /** @class */ (function (_super) {
     };
     return MDCMenuSurfaceFoundation;
 }(MDCFoundation));
+// tslint:disable-next-line:no-default-export Needed for backward compatibility with MDC Web v0.44.0 and earlier.
+var MDCMenuSurfaceFoundation$1 = MDCMenuSurfaceFoundation;
 
 // tslint:disable:no-bitwise
 // required for closure compiler
@@ -668,7 +670,7 @@ const stringToCorner = {
 class MenuSurfaceBase extends BaseElement {
     constructor() {
         super(...arguments);
-        this.mdcFoundationClass = MDCMenuSurfaceFoundation;
+        this.mdcFoundationClass = MDCMenuSurfaceFoundation$1;
         this.absolute = false;
         this.fullwidth = false;
         this.fixed = false;
@@ -980,7 +982,7 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 */
-const style = css `.mdc-menu-surface{display:none;position:absolute;box-sizing:border-box;max-width:calc(100vw - 32px);max-width:var(--mdc-menu-max-width, calc(100vw - 32px));max-height:calc(100vh - 32px);max-height:var(--mdc-menu-max-height, calc(100vh - 32px));margin:0;padding:0;transform:scale(1);transform-origin:top left;opacity:0;overflow:auto;will-change:transform,opacity;z-index:8;transition:opacity .03s linear,transform .12s cubic-bezier(0, 0, 0.2, 1),height 250ms cubic-bezier(0, 0, 0.2, 1);box-shadow:0px 5px 5px -3px rgba(0, 0, 0, 0.2),0px 8px 10px 1px rgba(0, 0, 0, 0.14),0px 3px 14px 2px rgba(0,0,0,.12);background-color:#fff;background-color:var(--mdc-theme-surface, #fff);color:#000;color:var(--mdc-theme-on-surface, #000);border-radius:4px;border-radius:var(--mdc-shape-medium, 4px);transform-origin-left:top left;transform-origin-right:top right}.mdc-menu-surface:focus{outline:none}.mdc-menu-surface--open{display:inline-block;transform:scale(1);opacity:1}.mdc-menu-surface--animating-open{display:inline-block;transform:scale(0.8);opacity:0}.mdc-menu-surface--animating-closed{display:inline-block;opacity:0;transition:opacity .075s linear}[dir=rtl] .mdc-menu-surface,.mdc-menu-surface[dir=rtl]{transform-origin-left:top right;transform-origin-right:top left}.mdc-menu-surface--anchor{position:relative;overflow:visible}.mdc-menu-surface--fixed{position:fixed}.mdc-menu-surface--fullwidth{width:100%}:host(:not([open])){display:none}.mdc-menu-surface{z-index:8;z-index:var(--mdc-menu-z-index, 8);min-width:112px;min-width:var(--mdc-menu-min-width, 112px)}`;
+const style$1 = css `.mdc-menu-surface{display:none;position:absolute;box-sizing:border-box;max-width:calc(100vw - 32px);max-width:var(--mdc-menu-max-width, calc(100vw - 32px));max-height:calc(100vh - 32px);max-height:var(--mdc-menu-max-height, calc(100vh - 32px));margin:0;padding:0;transform:scale(1);transform-origin:top left;opacity:0;overflow:auto;will-change:transform,opacity;z-index:8;transition:opacity .03s linear,transform .12s cubic-bezier(0, 0, 0.2, 1),height 250ms cubic-bezier(0, 0, 0.2, 1);box-shadow:0px 5px 5px -3px rgba(0, 0, 0, 0.2),0px 8px 10px 1px rgba(0, 0, 0, 0.14),0px 3px 14px 2px rgba(0,0,0,.12);background-color:#fff;background-color:var(--mdc-theme-surface, #fff);color:#000;color:var(--mdc-theme-on-surface, #000);border-radius:4px;border-radius:var(--mdc-shape-medium, 4px);transform-origin-left:top left;transform-origin-right:top right}.mdc-menu-surface:focus{outline:none}.mdc-menu-surface--open{display:inline-block;transform:scale(1);opacity:1}.mdc-menu-surface--animating-open{display:inline-block;transform:scale(0.8);opacity:0}.mdc-menu-surface--animating-closed{display:inline-block;opacity:0;transition:opacity .075s linear}[dir=rtl] .mdc-menu-surface,.mdc-menu-surface[dir=rtl]{transform-origin-left:top right;transform-origin-right:top left}.mdc-menu-surface--anchor{position:relative;overflow:visible}.mdc-menu-surface--fixed{position:fixed}.mdc-menu-surface--fullwidth{width:100%}:host(:not([open])){display:none}.mdc-menu-surface{z-index:8;z-index:var(--mdc-menu-z-index, 8);min-width:112px;min-width:var(--mdc-menu-min-width, 112px)}`;
 
 /**
 @license
@@ -1000,7 +1002,7 @@ limitations under the License.
 */
 let MenuSurface = class MenuSurface extends MenuSurfaceBase {
 };
-MenuSurface.styles = style;
+MenuSurface.styles = style$1;
 MenuSurface = __decorate([
     customElement('mwc-menu-surface')
 ], MenuSurface);
@@ -1027,19 +1029,19 @@ MenuSurface = __decorate([
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-var cssClasses$1 = {
+var cssClasses = {
     MENU_SELECTED_LIST_ITEM: 'mdc-menu-item--selected',
     MENU_SELECTION_GROUP: 'mdc-menu__selection-group',
     ROOT: 'mdc-menu',
 };
-var strings$1 = {
+var strings = {
     ARIA_CHECKED_ATTR: 'aria-checked',
     ARIA_DISABLED_ATTR: 'aria-disabled',
     CHECKBOX_SELECTOR: 'input[type="checkbox"]',
     LIST_SELECTOR: '.mdc-list,.mdc-deprecated-list',
     SELECTED_EVENT: 'MDCMenu:selected',
 };
-var numbers$1 = {
+var numbers = {
     FOCUS_ROOT_INDEX: -1,
 };
 var DefaultFocusState;
@@ -1082,21 +1084,21 @@ var MDCMenuFoundation = /** @class */ (function (_super) {
     }
     Object.defineProperty(MDCMenuFoundation, "cssClasses", {
         get: function () {
-            return cssClasses$1;
+            return cssClasses;
         },
         enumerable: false,
         configurable: true
     });
     Object.defineProperty(MDCMenuFoundation, "strings", {
         get: function () {
-            return strings$1;
+            return strings;
         },
         enumerable: false,
         configurable: true
     });
     Object.defineProperty(MDCMenuFoundation, "numbers", {
         get: function () {
-            return numbers$1;
+            return numbers;
         },
         enumerable: false,
         configurable: true
@@ -1193,11 +1195,11 @@ var MDCMenuFoundation = /** @class */ (function (_super) {
         }
         var prevSelectedIndex = this.adapter.getSelectedSiblingOfItemAtIndex(index);
         if (prevSelectedIndex >= 0) {
-            this.adapter.removeAttributeFromElementAtIndex(prevSelectedIndex, strings$1.ARIA_CHECKED_ATTR);
-            this.adapter.removeClassFromElementAtIndex(prevSelectedIndex, cssClasses$1.MENU_SELECTED_LIST_ITEM);
+            this.adapter.removeAttributeFromElementAtIndex(prevSelectedIndex, strings.ARIA_CHECKED_ATTR);
+            this.adapter.removeClassFromElementAtIndex(prevSelectedIndex, cssClasses.MENU_SELECTED_LIST_ITEM);
         }
-        this.adapter.addClassToElementAtIndex(index, cssClasses$1.MENU_SELECTED_LIST_ITEM);
-        this.adapter.addAttributeToElementAtIndex(index, strings$1.ARIA_CHECKED_ATTR, 'true');
+        this.adapter.addClassToElementAtIndex(index, cssClasses.MENU_SELECTED_LIST_ITEM);
+        this.adapter.addAttributeToElementAtIndex(index, strings.ARIA_CHECKED_ATTR, 'true');
     };
     /**
      * Sets the enabled state to isEnabled for the menu item at the given index.
@@ -1208,11 +1210,11 @@ var MDCMenuFoundation = /** @class */ (function (_super) {
         this.validatedIndex_(index);
         if (isEnabled) {
             this.adapter.removeClassFromElementAtIndex(index, cssClasses$2.LIST_ITEM_DISABLED_CLASS);
-            this.adapter.addAttributeToElementAtIndex(index, strings$1.ARIA_DISABLED_ATTR, 'false');
+            this.adapter.addAttributeToElementAtIndex(index, strings.ARIA_DISABLED_ATTR, 'false');
         }
         else {
             this.adapter.addClassToElementAtIndex(index, cssClasses$2.LIST_ITEM_DISABLED_CLASS);
-            this.adapter.addAttributeToElementAtIndex(index, strings$1.ARIA_DISABLED_ATTR, 'true');
+            this.adapter.addAttributeToElementAtIndex(index, strings.ARIA_DISABLED_ATTR, 'true');
         }
     };
     MDCMenuFoundation.prototype.validatedIndex_ = function (index) {
@@ -1224,6 +1226,8 @@ var MDCMenuFoundation = /** @class */ (function (_super) {
     };
     return MDCMenuFoundation;
 }(MDCFoundation));
+// tslint:disable-next-line:no-default-export Needed for backward compatibility with MDC Web v0.44.0 and earlier.
+var MDCMenuFoundation$1 = MDCMenuFoundation;
 
 /**
  * @fires selected {SelectedDetail}
@@ -1235,7 +1239,7 @@ var MDCMenuFoundation = /** @class */ (function (_super) {
 class MenuBase extends BaseElement {
     constructor() {
         super(...arguments);
-        this.mdcFoundationClass = MDCMenuFoundation;
+        this.mdcFoundationClass = MDCMenuFoundation$1;
         this.listElement_ = null;
         this.anchor = null;
         this.open = false;
@@ -1606,7 +1610,7 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 */
-const style$1 = css `mwc-list ::slotted([mwc-list-item]:not([twoline])){height:var(--mdc-menu-item-height, 48px)}`;
+const style = css `mwc-list ::slotted([mwc-list-item]:not([twoline])){height:var(--mdc-menu-item-height, 48px)}`;
 
 /**
 @license
@@ -1626,7 +1630,7 @@ limitations under the License.
 */
 let Menu = class Menu extends MenuBase {
 };
-Menu.styles = style$1;
+Menu.styles = style;
 Menu = __decorate([
     customElement('mwc-menu')
 ], Menu);

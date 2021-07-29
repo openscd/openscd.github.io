@@ -1,11 +1,11 @@
 import { a as __extends, b as __assign, _ as __decorate } from '../../common/tslib.es6-c8bbf354.js';
 import { q as query, p as property, i as internalProperty, a as queryAsync, e as eventOptions, c as css, b as customElement } from '../../common/lit-element-74f197f8.js';
 import { s as style$2 } from '../../common/mwc-control-list-item-css-1327bbf4.js';
-import { L as ListItemBase, s as style$1 } from '../../common/mwc-list-item-css-391189a8.js';
+import { L as ListItemBase, s as style$1 } from '../../common/mwc-list-item-css-cc39e58b.js';
 import { a as ariaProperty } from '../../common/aria-property-0d16a9b7.js';
 import { F as FormElement } from '../../common/form-element-0231bfad.js';
 import { o as observer } from '../../common/observer-fa3d205e.js';
-import { R as RippleHandlers } from '../../common/ripple-handlers-0717dbef.js';
+import { R as RippleHandlers } from '../../common/ripple-handlers-4224bc9a.js';
 import { M as MDCFoundation, a as addHasRemoveClass } from '../../common/foundation-4a2d7e81.js';
 import { c as classMap } from '../../common/class-map-0a052906.js';
 import { i as ifDefined } from '../../common/if-defined-c0cf727b.js';
@@ -412,6 +412,8 @@ var MDCRadioFoundation = /** @class */ (function (_super) {
     };
     return MDCRadioFoundation;
 }(MDCFoundation));
+// tslint:disable-next-line:no-default-export Needed for backward compatibility with MDC Web v0.44.0 and earlier.
+var MDCRadioFoundation$1 = MDCRadioFoundation;
 
 /**
  * @fires checked
@@ -431,7 +433,7 @@ class RadioBase extends FormElement {
          * @see https://material.io/design/usability/accessibility.html
          */
         this.reducedTouchTarget = false;
-        this.mdcFoundationClass = MDCRadioFoundation;
+        this.mdcFoundationClass = MDCRadioFoundation$1;
         /**
          * input's tabindex is updated based on checked status.
          * Tab navigation will be removed from unchecked radios.

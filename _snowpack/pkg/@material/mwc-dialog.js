@@ -549,6 +549,8 @@ var MDCDialogFoundation = /** @class */ (function (_super) {
     };
     return MDCDialogFoundation;
 }(MDCFoundation));
+// tslint:disable-next-line:no-default-export Needed for backward compatibility with MDC Web v0.44.0 and earlier.
+var MDCDialogFoundation$1 = MDCDialogFoundation;
 
 /**
  * @license
@@ -620,7 +622,7 @@ class DialogBase extends BaseElement {
         this.actionAttribute = 'dialogAction';
         this.initialFocusAttribute = 'dialogInitialFocus';
         this.initialSupressDefaultPressSelector = '';
-        this.mdcFoundationClass = MDCDialogFoundation;
+        this.mdcFoundationClass = MDCDialogFoundation$1;
         this.boundHandleClick = null;
         this.boundHandleKeydown = null;
         this.boundHandleDocumentKeydown = null;

@@ -1,6 +1,6 @@
 import { _ as __decorate } from '../common/tslib.es6-c8bbf354.js';
 import { a as queryAsync, p as property, i as internalProperty, e as eventOptions, L as LitElement, c as css, b as customElement } from '../common/lit-element-74f197f8.js';
-import { R as RippleHandlers } from '../common/ripple-handlers-0717dbef.js';
+import { R as RippleHandlers } from '../common/ripple-handlers-4224bc9a.js';
 import { c as classMap } from '../common/class-map-0a052906.js';
 import { h as html } from '../common/lit-html-ea288526.js';
 import '../common/render-aa9814af.js';

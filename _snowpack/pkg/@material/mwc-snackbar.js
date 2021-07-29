@@ -252,6 +252,8 @@ var MDCSnackbarFoundation = /** @class */ (function (_super) {
     };
     return MDCSnackbarFoundation;
 }(MDCFoundation));
+// tslint:disable-next-line:no-default-export Needed for backward compatibility with MDC Web v0.44.0 and earlier.
+var MDCSnackbarFoundation$1 = MDCSnackbarFoundation;
 
 /**
 @license
@@ -269,8 +271,8 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 */
-const { ARIA_LIVE_LABEL_TEXT_ATTR } = MDCSnackbarFoundation.strings;
-const { ARIA_LIVE_DELAY_MS } = MDCSnackbarFoundation.numbers;
+const { ARIA_LIVE_LABEL_TEXT_ATTR } = MDCSnackbarFoundation$1.strings;
+const { ARIA_LIVE_DELAY_MS } = MDCSnackbarFoundation$1.numbers;
 /**
  * Maps an accessibleLabel container part to its label element and the timeoutID
  * of the task that restores its text content from ::before back to textContent.
@@ -390,11 +392,11 @@ const accessibleSnackbarLabel = directive((labelText, isOpen) => (part) => {
     }, ARIA_LIVE_DELAY_MS);
 });
 
-const { OPENING_EVENT, OPENED_EVENT, CLOSING_EVENT, CLOSED_EVENT, } = MDCSnackbarFoundation.strings;
+const { OPENING_EVENT, OPENED_EVENT, CLOSING_EVENT, CLOSED_EVENT, } = MDCSnackbarFoundation$1.strings;
 class SnackbarBase extends BaseElement {
     constructor() {
         super(...arguments);
-        this.mdcFoundationClass = MDCSnackbarFoundation;
+        this.mdcFoundationClass = MDCSnackbarFoundation$1;
         this.open = false;
         this.timeoutMs = 5000;
         this.closeOnEscape = false;

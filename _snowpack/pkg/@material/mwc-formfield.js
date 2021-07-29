@@ -108,6 +108,8 @@ var MDCFormFieldFoundation = /** @class */ (function (_super) {
     };
     return MDCFormFieldFoundation;
 }(MDCFoundation));
+// tslint:disable-next-line:no-default-export Needed for backward compatibility with MDC Web v0.44.0 and earlier.
+var MDCFormFieldFoundation$1 = MDCFormFieldFoundation;
 
 /**
  * @license
@@ -132,7 +134,7 @@ class FormfieldBase extends BaseElement {
         this.spaceBetween = false;
         this.nowrap = false;
         this.label = '';
-        this.mdcFoundationClass = MDCFormFieldFoundation;
+        this.mdcFoundationClass = MDCFormFieldFoundation$1;
     }
     createAdapter() {
         return {

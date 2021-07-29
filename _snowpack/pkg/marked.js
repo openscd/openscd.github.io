@@ -3000,4 +3000,4 @@ var marked = createCommonjsModule(function (module, exports) {
 })));
 });
 
-export default marked;
+export { marked as default };

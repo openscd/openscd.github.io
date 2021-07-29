@@ -305,6 +305,8 @@ var MDCTopAppBarFoundation = /** @class */ (function (_super) {
     };
     return MDCTopAppBarFoundation;
 }(MDCTopAppBarBaseFoundation));
+// tslint:disable-next-line:no-default-export Needed for backward compatibility with MDC Web v0.44.0 and earlier.
+var MDCTopAppBarFoundation$1 = MDCTopAppBarFoundation;
 
 const passiveEventOptionsIfSupported = supportsPassiveEventListener ? { passive: true } : undefined;
 class TopAppBarBaseBase extends BaseElement {
@@ -409,7 +411,7 @@ __decorate([
 class TopAppBarBase extends TopAppBarBaseBase {
     constructor() {
         super(...arguments);
-        this.mdcFoundationClass = MDCTopAppBarFoundation;
+        this.mdcFoundationClass = MDCTopAppBarFoundation$1;
         this.prominent = false;
         this.dense = false;
         this.handleResize = () => {
@@ -500,6 +502,8 @@ var MDCFixedTopAppBarFoundation = /** @class */ (function (_super) {
     };
     return MDCFixedTopAppBarFoundation;
 }(MDCTopAppBarFoundation));
+// tslint:disable-next-line:no-default-export Needed for backward compatibility with MDC Web v0.44.0 and earlier.
+var MDCFixedTopAppBarFoundation$1 = MDCFixedTopAppBarFoundation;
 
 /**
 @license
@@ -520,7 +524,7 @@ limitations under the License.
 class TopAppBarFixedBase extends TopAppBarBase {
     constructor() {
         super(...arguments);
-        this.mdcFoundationClass = MDCFixedTopAppBarFoundation;
+        this.mdcFoundationClass = MDCFixedTopAppBarFoundation$1;
     }
     barClasses() {
         return Object.assign(Object.assign({}, super.barClasses()), { 'mdc-top-app-bar--fixed': true });

@@ -1,6 +1,6 @@
 import { a as __extends, b as __assign, _ as __decorate } from '../common/tslib.es6-c8bbf354.js';
 import { q as query, p as property, i as internalProperty, e as eventOptions, c as css, b as customElement } from '../common/lit-element-74f197f8.js';
-import { f as floatingLabel, l as lineRipple } from '../common/mwc-line-ripple-directive-f8a16b68.js';
+import { f as floatingLabel, l as lineRipple } from '../common/mwc-line-ripple-directive-1317bcac.js';
 import { F as FormElement } from '../common/form-element-0231bfad.js';
 import { o as observer } from '../common/observer-fa3d205e.js';
 import { M as MDCFoundation, a as addHasRemoveClass } from '../common/foundation-4a2d7e81.js';
@@ -601,6 +601,8 @@ var MDCTextFieldFoundation = /** @class */ (function (_super) {
     };
     return MDCTextFieldFoundation;
 }(MDCFoundation));
+// tslint:disable-next-line:no-default-export Needed for backward compatibility with MDC Web v0.44.0 and earlier.
+var MDCTextFieldFoundation$1 = MDCTextFieldFoundation;
 
 /**
  * @license
@@ -702,7 +704,7 @@ const createValidityObj = (customValidity = {}) => {
 class TextFieldBase extends FormElement {
     constructor() {
         super(...arguments);
-        this.mdcFoundationClass = MDCTextFieldFoundation;
+        this.mdcFoundationClass = MDCTextFieldFoundation$1;
         this.value = '';
         this.type = 'text';
         this.placeholder = '';

@@ -1,9 +1,9 @@
 import { a as __extends, b as __assign, _ as __decorate } from '../common/tslib.es6-c8bbf354.js';
 import { q as query, p as property, i as internalProperty, e as eventOptions, c as css, b as customElement } from '../common/lit-element-74f197f8.js';
-import { f as floatingLabel, l as lineRipple } from '../common/mwc-line-ripple-directive-f8a16b68.js';
-import { C as Corner } from '../common/mwc-menu-a9793211.js';
+import { f as floatingLabel, l as lineRipple } from '../common/mwc-line-ripple-directive-1317bcac.js';
+import { C as Corner } from '../common/mwc-menu-c50a49cb.js';
 import './mwc-icon.js';
-import { n as numbers$1, d as normalizeKey, K as KEY } from '../common/mwc-list-42fa28ff.js';
+import { n as numbers$1, d as normalizeKey, K as KEY } from '../common/mwc-list-0ff18df6.js';
 import { F as FormElement } from '../common/form-element-0231bfad.js';
 import { o as observer } from '../common/observer-fa3d205e.js';
 import { M as MDCFoundation, a as addHasRemoveClass, i as isNodeElement } from '../common/foundation-4a2d7e81.js';
@@ -13,8 +13,8 @@ import { i as ifDefined } from '../common/if-defined-c0cf727b.js';
 import '../common/render-aa9814af.js';
 import '../common/style-map-a83cef12.js';
 import './mwc-list/mwc-list-item.js';
-import '../common/mwc-list-item-css-391189a8.js';
-import '../common/ripple-handlers-0717dbef.js';
+import '../common/mwc-list-item-css-cc39e58b.js';
+import '../common/ripple-handlers-4224bc9a.js';
 
 /**
  * @license
@@ -835,6 +835,8 @@ var MDCSelectFoundation = /** @class */ (function (_super) {
     };
     return MDCSelectFoundation;
 }(MDCFoundation));
+// tslint:disable-next-line:no-default-export Needed for backward compatibility with MDC Web v0.44.0 and earlier.
+var MDCSelectFoundation$1 = MDCSelectFoundation;
 
 const createValidityObj = (customValidity = {}) => {
     /*
@@ -870,7 +872,7 @@ const createValidityObj = (customValidity = {}) => {
 class SelectBase extends FormElement {
     constructor() {
         super(...arguments);
-        this.mdcFoundationClass = MDCSelectFoundation;
+        this.mdcFoundationClass = MDCSelectFoundation$1;
         this.disabled = false;
         this.outlined = false;
         this.label = '';

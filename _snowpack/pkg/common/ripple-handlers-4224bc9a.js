@@ -540,6 +540,8 @@ var MDCRippleFoundation = /** @class */ (function (_super) {
     };
     return MDCRippleFoundation;
 }(MDCFoundation));
+// tslint:disable-next-line:no-default-export Needed for backward compatibility with MDC Web v0.44.0 and earlier.
+var MDCRippleFoundation$1 = MDCRippleFoundation;
 
 /** @soyCompatible */
 class RippleBase extends BaseElement {
@@ -561,7 +563,7 @@ class RippleBase extends BaseElement {
         this.translateEnd = '';
         this.leftPos = '';
         this.topPos = '';
-        this.mdcFoundationClass = MDCRippleFoundation;
+        this.mdcFoundationClass = MDCRippleFoundation$1;
     }
     get isActive() {
         return matches(this.parentElement || this, ':active');

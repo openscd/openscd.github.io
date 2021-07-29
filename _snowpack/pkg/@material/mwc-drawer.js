@@ -229,6 +229,8 @@ var MDCDismissibleDrawerFoundation = /** @class */ (function (_super) {
     };
     return MDCDismissibleDrawerFoundation;
 }(MDCFoundation));
+// tslint:disable-next-line:no-default-export Needed for backward compatibility with MDC Web v0.44.0 and earlier.
+var MDCDismissibleDrawerFoundation$1 = MDCDismissibleDrawerFoundation;
 
 /**
  * @license
@@ -278,6 +280,8 @@ var MDCModalDrawerFoundation = /** @class */ (function (_super) {
     };
     return MDCModalDrawerFoundation;
 }(MDCDismissibleDrawerFoundation));
+// tslint:disable-next-line:no-default-export Needed for backward compatibility with MDC Web v0.44.0 and earlier.
+var MDCModalDrawerFoundation$1 = MDCModalDrawerFoundation;
 
 /**
 @license
@@ -305,8 +309,8 @@ class DrawerBase extends BaseElement {
         this.type = '';
     }
     get mdcFoundationClass() {
-        return this.type === 'modal' ? MDCModalDrawerFoundation :
-            MDCDismissibleDrawerFoundation;
+        return this.type === 'modal' ? MDCModalDrawerFoundation$1 :
+            MDCDismissibleDrawerFoundation$1;
     }
     createAdapter() {
         return Object.assign(Object.assign({}, addHasRemoveClass(this.mdcRoot)), { elementHasClass: (element, className) => element.classList.contains(className), saveFocus: () => {
@@ -334,7 +338,7 @@ class DrawerBase extends BaseElement {
             } });
     }
     _handleScrimClick() {
-        if (this.mdcFoundation instanceof MDCModalDrawerFoundation) {
+        if (this.mdcFoundation instanceof MDCModalDrawerFoundation$1) {
             this.mdcFoundation.handleScrimClick();
         }
     }

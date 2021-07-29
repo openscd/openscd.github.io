@@ -1,6 +1,6 @@
 import { _ as __decorate } from '../common/tslib.es6-c8bbf354.js';
 import { q as query, p as property, i as internalProperty, a as queryAsync, e as eventOptions, c as css, b as customElement } from '../common/lit-element-74f197f8.js';
-import { R as RippleHandlers } from '../common/ripple-handlers-0717dbef.js';
+import { R as RippleHandlers } from '../common/ripple-handlers-4224bc9a.js';
 import { a as ariaProperty } from '../common/aria-property-0d16a9b7.js';
 import { F as FormElement } from '../common/form-element-0231bfad.js';
 import { c as classMap } from '../common/class-map-0a052906.js';

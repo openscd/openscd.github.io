@@ -1,6 +1,6 @@
 import { a as __extends, b as __assign, _ as __decorate } from '../common/tslib.es6-c8bbf354.js';
 import { p as property, q as query, a as queryAsync, i as internalProperty, e as eventOptions, c as css, b as customElement } from '../common/lit-element-74f197f8.js';
-import { R as RippleHandlers } from '../common/ripple-handlers-0717dbef.js';
+import { R as RippleHandlers } from '../common/ripple-handlers-4224bc9a.js';
 import { a as ariaProperty } from '../common/aria-property-0d16a9b7.js';
 import { F as FormElement } from '../common/form-element-0231bfad.js';
 import { o as observer } from '../common/observer-fa3d205e.js';
@@ -143,6 +143,8 @@ var MDCSwitchFoundation = /** @class */ (function (_super) {
     };
     return MDCSwitchFoundation;
 }(MDCFoundation));
+// tslint:disable-next-line:no-default-export Needed for backward compatibility with MDC Web v0.44.0 and earlier.
+var MDCSwitchFoundation$1 = MDCSwitchFoundation;
 
 class SwitchBase extends FormElement {
     constructor() {
@@ -150,7 +152,7 @@ class SwitchBase extends FormElement {
         this.checked = false;
         this.disabled = false;
         this.shouldRenderRipple = false;
-        this.mdcFoundationClass = MDCSwitchFoundation;
+        this.mdcFoundationClass = MDCSwitchFoundation$1;
         this.rippleHandlers = new RippleHandlers(() => {
             this.shouldRenderRipple = true;
             return this.ripple;

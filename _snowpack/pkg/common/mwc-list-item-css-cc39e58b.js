@@ -1,5 +1,5 @@
 import { _ as __decorate } from './tslib.es6-c8bbf354.js';
-import { R as RippleHandlers } from './ripple-handlers-0717dbef.js';
+import { R as RippleHandlers } from './ripple-handlers-4224bc9a.js';
 import { o as observer } from './observer-fa3d205e.js';
 import { q as query, a as queryAsync, p as property, i as internalProperty, L as LitElement, c as css } from './lit-element-74f197f8.js';
 import { c as classMap } from './class-map-0a052906.js';
