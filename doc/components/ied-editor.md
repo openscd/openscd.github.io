@@ -4,7 +4,14 @@
 
 ## Properties
 
-| Property  | Attribute | Modifiers | Type      |
-|-----------|-----------|-----------|-----------|
-| `element` | `element` |           | `Element` |
-| `name`    | `name`    | readonly  | `string`  |
+| Property        | Attribute | Modifiers | Type      |
+|-----------------|-----------|-----------|-----------|
+| `connectReport` |           |           | `Fab`     |
+| `element`       | `element` |           | `Element` |
+| `name`          | `name`    | readonly  | `string`  |
+
+## Methods
+
+| Method                     | Type       |
+|----------------------------|------------|
+| `openCommunicationMapping` | `(): void` |

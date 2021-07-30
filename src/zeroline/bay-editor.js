@@ -16,7 +16,6 @@ import {
   LitElement,
   property
 } from "../../_snowpack/pkg/lit-element.js";
-import {until} from "../../_snowpack/pkg/lit-html/directives/until.js";
 import {translate} from "../../_snowpack/pkg/lit-translate.js";
 import {startMove, styles, cloneElement} from "./foundation.js";
 import {newActionEvent, newWizardEvent} from "../foundation.js";
@@ -27,7 +26,7 @@ export let BayEditor = class extends LitElement {
   constructor() {
     super(...arguments);
     this.readonly = false;
-    this.getAttachedIeds = async () => {
+    this.getAttachedIeds = () => {
       return [];
     };
   }
@@ -62,8 +61,8 @@ export let BayEditor = class extends LitElement {
         }
       }));
   }
-  async renderIedContainer() {
-    const ieds = await this.getAttachedIeds?.(this.element);
+  renderIedContainer() {
+    const ieds = this.getAttachedIeds?.(this.element) ?? [];
     return ieds?.length ? html`<div id="iedcontainer">
           ${ieds.map((ied) => html`<ied-editor .element=${ied}></ied-editor>`)}
         </div>` : html``;
@@ -115,7 +114,7 @@ export let BayEditor = class extends LitElement {
     return html`<section tabindex="0">
       ${this.renderHeader()}
       <div>
-        ${until(this.renderIedContainer(), html`<span>${translate("zeroline.iedsloading")}</span>`)}
+        ${this.renderIedContainer()}
         <div id="ceContainer">
           ${Array.from(this.element?.querySelectorAll(":root > Substation > VoltageLevel > Bay > ConductingEquipment") ?? []).map((voltageLevel) => html`<conducting-equipment-editor
                 .element=${voltageLevel}

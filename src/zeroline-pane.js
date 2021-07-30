@@ -14,15 +14,16 @@ import {
   html,
   property,
   customElement,
-  css
+  css,
+  query
 } from "../_snowpack/pkg/lit-element.js";
-import {until} from "../_snowpack/pkg/lit-html/directives/until.js";
 import {translate} from "../_snowpack/pkg/lit-translate.js";
 import {isPublic, newWizardEvent} from "./foundation.js";
-import {getAttachedIeds, styles} from "./zeroline/foundation.js";
+import {getAttachedIeds} from "./zeroline/foundation.js";
 import "./zeroline/substation-editor.js";
 import "./zeroline/ied-editor.js";
 import {wizards} from "./wizards/wizard-library.js";
+import {communicationMappingWizard} from "./wizards/commmap-wizards.js";
 function shouldShowIEDs() {
   return localStorage.getItem("showieds") === "on";
 }
@@ -33,7 +34,12 @@ export let ZerolinePane = class extends LitElement {
   constructor() {
     super(...arguments);
     this.readonly = false;
-    this.getAttachedIeds = async () => [];
+    this.getAttachedIeds = () => [];
+  }
+  openCommunicationMapping() {
+    const wizard = communicationMappingWizard(this.doc);
+    if (wizard)
+      this.dispatchEvent(newWizardEvent(wizard));
   }
   openCreateSubstationWizard() {
     const wizard = wizards["Substation"].create(this.doc.documentElement);
@@ -41,18 +47,15 @@ export let ZerolinePane = class extends LitElement {
       this.dispatchEvent(newWizardEvent(wizard));
   }
   toggleShowIEDs() {
-    console.warn(shouldShowIEDs());
     if (shouldShowIEDs())
       setShowIEDs("off");
     else
       setShowIEDs("on");
-    console.log(shouldShowIEDs());
     this.requestUpdate();
   }
-  async renderIedContainer() {
-    this.getAttachedIeds = shouldShowIEDs() ? getAttachedIeds(this.doc) : async () => [];
-    const ieds = await this.getAttachedIeds?.(this.doc.documentElement);
-    await new Promise(requestAnimationFrame);
+  renderIedContainer() {
+    this.getAttachedIeds = shouldShowIEDs() ? getAttachedIeds(this.doc) : () => [];
+    const ieds = this.getAttachedIeds?.(this.doc.documentElement) ?? [];
     return ieds.length ? html`<div id="iedcontainer">
           ${ieds.map((ied) => html`<ied-editor .element=${ied}></ied-editor>`)}
         </div>` : html``;
@@ -77,9 +80,16 @@ export let ZerolinePane = class extends LitElement {
             offIcon="developer_board_off"
           ></mwc-icon-button-toggle>
         </abbr>
+        <abbr title="${translate("zeroline.commmap")}">
+          <mwc-icon-button
+            id="commmap"
+            icon="link"
+            @click=${() => this.openCommunicationMapping()}
+          ></mwc-icon-button>
+        </abbr>
       </nav>
         </h1>
-      ${until(this.renderIedContainer(), html`<span>loading ieds...</span>`)}
+      ${this.renderIedContainer()}
       ${this.doc?.querySelector(":root > Substation") ? html`<section tabindex="0">
               ${Array.from(this.doc.querySelectorAll("Substation") ?? []).filter(isPublic).map((substation) => html`<substation-editor
                       .element=${substation}
@@ -94,7 +104,37 @@ export let ZerolinePane = class extends LitElement {
   }
 };
 ZerolinePane.styles = css`
-    ${styles}
+    h1,
+    h3 {
+      color: var(--mdc-theme-on-surface);
+      font-family: 'Roboto', sans-serif;
+      font-weight: 300;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      margin: 0px;
+      line-height: 48px;
+      padding-left: 0.3em;
+      transition: background-color 150ms linear;
+    }
+
+    h1 > nav,
+    h1 > abbr > mwc-icon-button {
+      float: right;
+    }
+
+    abbr {
+      text-decoration: none;
+      border-bottom: none;
+    }
+
+    #iedcontainer {
+      display: grid;
+      grid-gap: 12px;
+      padding: 8px 12px 16px;
+      box-sizing: border-box;
+      grid-template-columns: repeat(auto-fit, minmax(64px, auto));
+    }
   `;
 __decorate([
   property({attribute: false})
@@ -105,6 +145,12 @@ __decorate([
 __decorate([
   property({attribute: false})
 ], ZerolinePane.prototype, "getAttachedIeds", 2);
+__decorate([
+  query("#commmap")
+], ZerolinePane.prototype, "commmap", 2);
+__decorate([
+  query("#showieds")
+], ZerolinePane.prototype, "showieds", 2);
 ZerolinePane = __decorate([
   customElement("zeroline-pane")
 ], ZerolinePane);

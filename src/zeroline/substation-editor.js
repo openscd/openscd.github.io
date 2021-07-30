@@ -16,17 +16,16 @@ import {
   LitElement,
   property
 } from "../../_snowpack/pkg/lit-element.js";
-import {until} from "../../_snowpack/pkg/lit-html/directives/until.js";
 import {translate} from "../../_snowpack/pkg/lit-translate.js";
 import {newActionEvent, newWizardEvent} from "../foundation.js";
 import {wizards} from "../wizards/wizard-library.js";
-import {selectors, styles} from "./foundation.js";
+import {cloneElement, selectors, startMove, styles} from "./foundation.js";
 import "./voltage-level-editor.js";
 export let SubstationEditor = class extends LitElement {
   constructor() {
     super(...arguments);
     this.readonly = false;
-    this.getAttachedIeds = async () => {
+    this.getAttachedIeds = () => {
       return [];
     };
   }
@@ -60,8 +59,8 @@ export let SubstationEditor = class extends LitElement {
       }
     }));
   }
-  async renderIedContainer() {
-    const ieds = await this.getAttachedIeds?.(this.element);
+  renderIedContainer() {
+    const ieds = this.getAttachedIeds?.(this.element) ?? [];
     return ieds?.length ? html`<div id="iedcontainer">
           ${ieds.map((ied) => html`<ied-editor .element=${ied}></ied-editor>`)}
         </div>` : html``;
@@ -83,10 +82,22 @@ export let SubstationEditor = class extends LitElement {
                         @click=${() => this.openLNodeWizard()}
                       ></mwc-icon-button>
                     </abbr>
+                    <abbr title="${translate("duplicate")}">
+                      <mwc-icon-button
+                        icon="content_copy"
+                        @click=${() => cloneElement(this)}
+                      ></mwc-icon-button>
+                    </abbr>
                     <abbr title="${translate("edit")}">
                       <mwc-icon-button
                         icon="edit"
                         @click=${() => this.openEditWizard()}
+                      ></mwc-icon-button>
+                    </abbr>
+                    <abbr title="${translate("move")}">
+                      <mwc-icon-button
+                        icon="forward"
+                        @click=${() => startMove(this, SubstationEditor, SubstationEditor)}
                       ></mwc-icon-button>
                     </abbr>
                     <abbr title="${translate("remove")}">
@@ -103,8 +114,7 @@ export let SubstationEditor = class extends LitElement {
   render() {
     return html`
       <section tabindex="0">
-        ${this.renderHeader()}
-        ${until(this.renderIedContainer(), html`<span>${translate("zeroline.iedsloading")}</span>`)}
+        ${this.renderHeader()} ${this.renderIedContainer()}
         ${Array.from(this.element.querySelectorAll(selectors.VoltageLevel)).map((voltageLevel) => html`<voltage-level-editor
               .element=${voltageLevel}
               .getAttachedIeds=${this.getAttachedIeds}

@@ -25,8 +25,7 @@ function hasTheirs(element, iedName) {
   const scl = element.closest("SCL");
   return Array.from(scl.getElementsByTagName("LNode")).filter(isPublic).filter((lnode) => lnode.getAttribute("iedName") === iedName).some((lnode) => !ours.includes(lnode));
 }
-export async function attachedIeds(element, remainingIeds) {
-  await new Promise(requestAnimationFrame);
+export function attachedIeds(element, remainingIeds) {
   const attachedIeds2 = [];
   for (const ied of remainingIeds) {
     const iedName = ied.getAttribute("name");
@@ -46,10 +45,9 @@ export async function attachedIeds(element, remainingIeds) {
   return attachedIeds2;
 }
 export function getAttachedIeds(doc) {
-  return async (element) => {
+  return (element) => {
     const ieds = new Set(Array.from(doc.querySelectorAll("IED")).filter(isPublic));
-    await new Promise(requestAnimationFrame);
-    return await attachedIeds(element, ieds);
+    return attachedIeds(element, ieds);
   };
 }
 export function updateNamingAction(element) {

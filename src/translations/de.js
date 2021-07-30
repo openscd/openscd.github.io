@@ -45,7 +45,7 @@ export const de = {
   },
   zeroline: {
     iedsloading: "IEDs werden geladen...",
-    showieds: "IEDs anzeigen/ausblenden"
+    commmap: "Kommunikationszuordnung"
   },
   editing: {
     created: "{{ name }} hinzugef\xFCgt",
@@ -315,9 +315,9 @@ export const de = {
     nonewitems: "keine neuen IEDName Elemente notwendig",
     message: "{{updatenumber}} IEDName Element(e) hinzugef\xFCgt"
   },
-  commMap: {
+  commmap: {
     title: "Kommunikationszuordnung",
-    connectCB: "{{CbType}} verbinden",
+    connectCB: "{{cbType}} verbinden",
     connectToIED: "Verbinden mit {{iedName}}",
     sourceIED: "Quellger\xE4t",
     sinkIED: "Zielger\xE4t"

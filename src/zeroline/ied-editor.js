@@ -14,16 +14,32 @@ import {
   customElement,
   html,
   LitElement,
-  property
+  property,
+  query
 } from "../../_snowpack/pkg/lit-element.js";
+import {newWizardEvent} from "../foundation.js";
+import {createClientLnWizard} from "../wizards/clientln.js";
 export let IedEditor = class extends LitElement {
   get name() {
     return this.element.getAttribute("name") ?? "";
+  }
+  openCommunicationMapping() {
+    const sendingIeds = Array.from(this.element.closest("SCL")?.querySelectorAll("IED") ?? []);
+    const wizard = createClientLnWizard(sendingIeds, this.element);
+    if (wizard)
+      this.dispatchEvent(newWizardEvent(wizard));
   }
   render() {
     return html`
       <div id="container" tabindex="0">
         <mwc-icon class="icon">developer_board</mwc-icon>
+        <mwc-fab
+          id="connectreport"
+          mini
+          class="menu-item right"
+          @click="${() => this.openCommunicationMapping()}"
+          icon="add_link"
+        ></mwc-fab>
       </div>
       <h4>${this.name}</h4>
     `;
@@ -37,6 +53,7 @@ IedEditor.styles = css`
       margin: auto;
       position: relative;
       transition: all 200ms linear;
+      user-select: none;
     }
 
     #container:focus {
@@ -67,7 +84,7 @@ IedEditor.styles = css`
         0 3px 14px 2px rgba(0, 0, 0, 0.12), 0 5px 5px -3px rgba(0, 0, 0, 0.2);
     }
 
-    #container:hover > .icom {
+    #container:hover > .icon {
       outline: 2px dashed var(--mdc-theme-primary);
       transition: transform 200ms linear, box-shadow 250ms linear;
     }
@@ -84,8 +101,8 @@ IedEditor.styles = css`
       transition: transform 200ms cubic-bezier(0.4, 0, 0.2, 1),
         opacity 200ms linear;
       position: absolute;
-      top: 8px;
-      left: 8px;
+      top: 2px;
+      left: 2px;
       pointer-events: none;
       z-index: 1;
       opacity: 0;
@@ -99,19 +116,19 @@ IedEditor.styles = css`
     }
 
     #container:focus-within > .menu-item.up {
-      transform: translate(0px, -52px);
+      transform: translate(0px, -60px);
     }
 
     #container:focus-within > .menu-item.down {
-      transform: translate(0px, 52px);
+      transform: translate(0px, 60px);
     }
 
     #container:focus-within > .menu-item.right {
-      transform: translate(52px, 0px);
+      transform: translate(60px, 0px);
     }
 
     #container:focus-within > .menu-item.left {
-      transform: translate(-52px, 0px);
+      transform: translate(-60px, 0px);
     }
 
     h4 {
@@ -139,6 +156,9 @@ __decorate([
 __decorate([
   property({type: String})
 ], IedEditor.prototype, "name", 1);
+__decorate([
+  query("#connectreport")
+], IedEditor.prototype, "connectReport", 2);
 IedEditor = __decorate([
   customElement("ied-editor")
 ], IedEditor);

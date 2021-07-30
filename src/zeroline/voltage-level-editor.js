@@ -22,12 +22,11 @@ import "./bay-editor.js";
 import {SubstationEditor} from "./substation-editor.js";
 import {wizards} from "../wizards/wizard-library.js";
 import {newActionEvent, newWizardEvent} from "../foundation.js";
-import {until} from "../../_snowpack/pkg/lit-html/directives/until.js";
 export let VoltageLevelEditor = class extends LitElement {
   constructor() {
     super(...arguments);
     this.readonly = false;
-    this.getAttachedIeds = async () => {
+    this.getAttachedIeds = () => {
       return [];
     };
   }
@@ -71,8 +70,8 @@ export let VoltageLevelEditor = class extends LitElement {
         }
       }));
   }
-  async renderIedContainer() {
-    const ieds = await this.getAttachedIeds?.(this.element);
+  renderIedContainer() {
+    const ieds = this.getAttachedIeds?.(this.element) ?? [];
     return ieds?.length ? html`<div id="iedcontainer">
           ${ieds.map((ied) => html`<ied-editor .element=${ied}></ied-editor>`)}
         </div>` : html``;
@@ -123,8 +122,7 @@ export let VoltageLevelEditor = class extends LitElement {
   }
   render() {
     return html`<section tabindex="0">
-      ${this.renderHeader()}
-      ${until(this.renderIedContainer(), html`<span>${translate("zeroline.iedsloading")}</span>`)}
+      ${this.renderHeader()} ${this.renderIedContainer()}
       <div id="bayContainer">
         ${Array.from(this.element?.querySelectorAll(selectors.Bay) ?? []).map((bay) => html`<bay-editor
             .element=${bay}
