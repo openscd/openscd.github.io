@@ -42,6 +42,7 @@ import "../_snowpack/pkg/@material/mwc-top-app-bar-fixed.js";
 import "./filtered-list.js";
 import "./wizard-dialog.js";
 import "./wizard-textfield.js";
+import "./wizard-select.js";
 import "./finder-pane.js";
 import {newOpenDocEvent, newPendingStateEvent} from "./foundation.js";
 import {getTheme} from "./themes.js";

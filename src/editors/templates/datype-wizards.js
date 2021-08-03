@@ -1,11 +1,9 @@
 import {html} from "../../../_snowpack/pkg/lit-element.js";
 import {get, translate} from "../../../_snowpack/pkg/lit-translate.js";
 import {
-  createElement,
   getReference,
   getValue,
   identity,
-  isPublic,
   newActionEvent,
   newWizardEvent,
   patterns,
@@ -14,219 +12,16 @@ import {
 import {
   addReferencedDataTypes,
   allDataTypeSelector,
-  buildListFromStringArray,
-  predefinedBasicTypeEnum,
   unifyCreateActionArray,
-  updateIDNamingAction,
-  valKindEnum
+  updateIDNamingAction
 } from "./foundation.js";
-function updateBDaAction(element) {
-  return (inputs) => {
-    const name = getValue(inputs.find((i) => i.label === "name"));
-    const desc = getValue(inputs.find((i) => i.label === "desc"));
-    const bType = getValue(inputs.find((i) => i.label === "bType"));
-    const type = bType === "Enum" || bType === "Struct" ? getValue(inputs.find((i) => i.label === "type")) : null;
-    const sAddr = getValue(inputs.find((i) => i.label === "sAddr"));
-    const valKind = getValue(inputs.find((i) => i.label === "valKind")) !== "" ? getValue(inputs.find((i) => i.label === "valKind")) : null;
-    const valImport = getValue(inputs.find((i) => i.label === "valImport")) !== "" ? getValue(inputs.find((i) => i.label === "valImport")) : null;
-    const actions = [];
-    if (name === element.getAttribute("name") && desc === element.getAttribute("desc") && bType === element.getAttribute("bType") && type === element.getAttribute("type") && sAddr === element.getAttribute("sAddr") && valKind === element.getAttribute("valKind") && valImport === element.getAttribute("valImprot")) {
-      return [];
-    }
-    const newElement = element.cloneNode(false);
-    newElement.setAttribute("name", name);
-    if (desc === null)
-      newElement.removeAttribute("desc");
-    else
-      newElement.setAttribute("desc", desc);
-    newElement.setAttribute("bType", bType);
-    if (type === null)
-      newElement.removeAttribute("type");
-    else
-      newElement.setAttribute("type", type);
-    if (sAddr === null)
-      newElement.removeAttribute("sAddr");
-    else
-      newElement.setAttribute("sAddr", sAddr);
-    if (valKind === null)
-      newElement.removeAttribute("valKind");
-    else
-      newElement.setAttribute("valKind", valKind);
-    if (valImport === null)
-      newElement.removeAttribute("valImport");
-    else
-      newElement.setAttribute("valImport", valImport);
-    actions.push({
-      old: {element},
-      new: {element: newElement}
-    });
-    return actions;
-  };
-}
-function createBDaAction(parent) {
-  return (inputs) => {
-    const name = getValue(inputs.find((i) => i.label === "name"));
-    const desc = getValue(inputs.find((i) => i.label === "desc"));
-    const bType = getValue(inputs.find((i) => i.label === "bType"));
-    const type = bType === "Enum" || bType === "Struct" ? getValue(inputs.find((i) => i.label === "type")) : null;
-    const sAddr = getValue(inputs.find((i) => i.label === "sAddr"));
-    const valKind = getValue(inputs.find((i) => i.label === "valKind")) !== "" ? getValue(inputs.find((i) => i.label === "valKind")) : null;
-    const valImport = getValue(inputs.find((i) => i.label === "valImport")) !== "" ? getValue(inputs.find((i) => i.label === "valImport")) : null;
-    const actions = [];
-    const element = createElement(parent.ownerDocument, "BDA", {
-      name,
-      desc,
-      bType,
-      type,
-      sAddr,
-      valKind,
-      valImport
-    });
-    actions.push({
-      new: {
-        parent,
-        element,
-        reference: getReference(parent, element.tagName)
-      }
-    });
-    return actions;
-  };
-}
-function bDAWizard(options) {
-  const doc = options.doc ? options.doc : options.parent.ownerDocument;
-  const bda = Array.from(doc.querySelectorAll(selector("BDA", options.identity ?? NaN))).find(isPublic) ?? null;
-  const [
-    title,
-    action,
-    type,
-    deleteButton,
-    name,
-    desc,
-    bTypeList,
-    sAddr,
-    valKindList,
-    valImportList
-  ] = bda ? [
-    get("bda.wizard.title.edit"),
-    updateBDaAction(bda),
-    bda.getAttribute("type"),
-    html`<mwc-button
-          icon="delete"
-          trailingIcon
-          label="${translate("delete")}"
-          @click=${(e) => {
-      e.target.dispatchEvent(newWizardEvent());
-      e.target.dispatchEvent(newActionEvent({
-        old: {
-          parent: bda.parentElement,
-          element: bda,
-          reference: bda.nextSibling
-        }
-      }));
-    }}
-          fullwidth
-        ></mwc-button> `,
-    bda.getAttribute("name"),
-    bda.getAttribute("desc"),
-    buildListFromStringArray(predefinedBasicTypeEnum, bda.getAttribute("bType")),
-    bda.getAttribute("sAddr"),
-    buildListFromStringArray(valKindEnum, bda.getAttribute("valKind")),
-    buildListFromStringArray([null, "true", "false"], bda.getAttribute("valImport"))
-  ] : [
-    get("bda.wizard.title.add"),
-    createBDaAction(options.parent),
-    null,
-    html``,
-    "",
-    null,
-    buildListFromStringArray(predefinedBasicTypeEnum, "Struct"),
-    null,
-    buildListFromStringArray(valKindEnum, null),
-    buildListFromStringArray([null, "true", "false"], null)
-  ];
-  const types = Array.from(doc.querySelectorAll("DAType, EnumType")).filter(isPublic).filter((type2) => type2.getAttribute("id"));
-  return [
-    {
-      title,
-      element: bda ?? void 0,
-      primary: {icon: "", label: get("save"), action},
-      content: [
-        deleteButton,
-        html`<wizard-textfield
-          label="name"
-          .maybeValue=${name}
-          helper="${translate("scl.name")}"
-          required
-          pattern="${patterns.alphanumericFirstLowerCase}"
-          dialogInitialFocus
-        >
-          ></wizard-textfield
-        >`,
-        html`<wizard-textfield
-          label="desc"
-          helper="${translate("scl.desc")}"
-          .maybeValue=${desc}
-          nullable
-          pattern="${patterns.normalizedString}"
-        ></wizard-textfield>`,
-        html`<mwc-select
-          fixedMenuPosition
-          label="bType"
-          helper="${translate("scl.bType")}"
-          required
-          @selected=${(e) => {
-          const bTypeOriginal = bda?.getAttribute("bType") ?? "";
-          const bType = e.target.selected.value;
-          const typeUI = e.target.parentElement.querySelector('mwc-select[label="type"]');
-          Array.from(typeUI.children).forEach((child) => {
-            child.disabled = !child.classList.contains(bType);
-            child.noninteractive = !child.classList.contains(bType);
-            child.style.display = !child.classList.contains(bType) ? "none" : "";
-            child.selected = bTypeOriginal === bType ? child.value === type : child.classList.contains(bType);
-          });
-          typeUI.disabled = !(bType === "Enum" || bType === "Struct");
-          typeUI.requestUpdate();
-        }}
-          >${bTypeList}</mwc-select
-        >`,
-        html`<mwc-select
-          fixedMenuPosition
-          label="type"
-          helper="${translate("scl.type")}"
-          >${types.map((dataType) => html`<mwc-list-item
-                class="${dataType.tagName === "EnumType" ? "Enum" : "Struct"}"
-                value=${dataType.id}
-                ?selected=${dataType.id === type}
-                >${dataType.id}</mwc-list-item
-              >`)}</mwc-select
-        >`,
-        html`<wizard-textfield
-          label="sAddr"
-          helper="${translate("scl.sAddr")}"
-          .maybeValue=${sAddr}
-          nullable
-          pattern="${patterns.normalizedString}"
-        ></wizard-textfield>`,
-        html`<mwc-select
-          label="valKind"
-          helper="${translate("scl.valKind")}"
-          fixedMenuPosition
-          >${valKindList}</mwc-select
-        >`,
-        html`<mwc-select
-          fixedMenuPosition
-          label="valImport"
-          helper="${translate("scl.valImport")}"
-          >${valImportList}</mwc-select
-        >`
-      ]
-    }
-  ];
-}
-export function dATypeWizard(dATypeIdentity, doc) {
+import {createBDAWizard, editBDAWizard} from "../../wizards/bda.js";
+export function editDaTypeWizard(dATypeIdentity, doc) {
   const datype = doc.querySelector(selector("DAType", dATypeIdentity));
   if (!datype)
     return void 0;
+  const id = datype.getAttribute("id");
+  const desc = datype.getAttribute("desc");
   return [
     {
       title: get("datype.wizard.title.edit"),
@@ -256,7 +51,7 @@ export function dATypeWizard(dATypeIdentity, doc) {
         html`<wizard-textfield
           label="id"
           helper="${translate("scl.id")}"
-          .maybeValue=${datype.getAttribute("id")}
+          .maybeValue=${id}
           required
           maxlength="127"
           minlength="1"
@@ -266,7 +61,7 @@ export function dATypeWizard(dATypeIdentity, doc) {
         html`<wizard-textfield
           label="desc"
           helper="${translate("scl.desc")}"
-          .maybeValue=${datype.getAttribute("desc")}
+          .maybeValue=${desc}
           nullable
           pattern="${patterns.normalizedString}"
         ></wizard-textfield>`,
@@ -276,23 +71,18 @@ export function dATypeWizard(dATypeIdentity, doc) {
             trailingIcon
             label="${translate("scl.DA")}"
             @click=${(e) => {
-          const wizard = bDAWizard({
-            parent: datype
-          });
-          if (wizard)
-            e.target.dispatchEvent(newWizardEvent(wizard));
+          if (datype)
+            e.target.dispatchEvent(newWizardEvent(createBDAWizard(datype)));
           e.target.dispatchEvent(newWizardEvent());
         }}
           ></mwc-button>
           <mwc-list
             style="margin-top: 0px;"
             @selected=${(e) => {
-          const wizard = bDAWizard({
-            identity: e.target.selected.value,
-            doc
-          });
-          if (wizard)
-            e.target.dispatchEvent(newWizardEvent(wizard));
+          const bdaIdentity = e.target.selected.value;
+          const bda = doc.querySelector(selector("BDA", bdaIdentity));
+          if (bda)
+            e.target.dispatchEvent(newWizardEvent(editBDAWizard(bda)));
           e.target.dispatchEvent(newWizardEvent());
         }}
           >

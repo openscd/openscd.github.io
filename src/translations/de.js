@@ -23,7 +23,11 @@ export const de = {
     LNodeType: "Logischer Knoten Type",
     lnClass: "Klasse logischer Knoten",
     accessControl: "Zugriffskontrolle",
-    transient: "Datenpunkt transient"
+    transient: "Datenpunkt transient",
+    Val: "Standardwert",
+    dchg: "Deten\xE4nderung ist Ausl\xF6ser",
+    qchg: "Qualit\xE4tsanderung ist Ausl\xF6ser",
+    dupd: "Datenupdate ist Ausl\xF6ser"
   },
   settings: {
     title: "Einstellungen",

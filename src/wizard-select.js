@@ -16,7 +16,6 @@ import {
   property,
   query
 } from "../_snowpack/pkg/lit-element.js";
-import {get} from "../_snowpack/pkg/lit-translate.js";
 import {Select} from "../_snowpack/pkg/@material/mwc-select.js";
 export let WizardSelect = class extends Select {
   constructor() {
@@ -68,11 +67,8 @@ export let WizardSelect = class extends Select {
     await super.firstUpdated();
   }
   checkValidity() {
-    if (this.reservedValues && this.reservedValues.some((array) => array === this.value)) {
-      this.setCustomValidity(get("textfield.unique"));
-      return false;
-    }
-    this.setCustomValidity("");
+    if (this.nullable && !this.nullSwitch?.checked)
+      return true;
     return super.checkValidity();
   }
   renderSwitch() {

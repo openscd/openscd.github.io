@@ -1,6 +1,7 @@
 import {directive} from "../_snowpack/pkg/lit-html.js";
 import {Select} from "../_snowpack/pkg/@material/mwc-select.js";
 import {WizardTextField} from "./wizard-textfield.js";
+import {WizardSelect} from "./wizard-select.js";
 export function isCreate(action) {
   return action.old === void 0 && action.new?.parent !== void 0 && action.new?.element !== void 0 && action.new?.reference !== void 0;
 }
@@ -57,7 +58,7 @@ export function newActionEvent(action, eventInitDict) {
     detail: {action, ...eventInitDict?.detail}
   });
 }
-export const wizardInputSelector = "wizard-textfield, mwc-textfield, ace-editor, mwc-select";
+export const wizardInputSelector = "wizard-textfield, mwc-textfield, ace-editor, mwc-select,wizard-select";
 export function isWizard(wizardAction) {
   return typeof wizardAction === "function";
 }
@@ -74,7 +75,7 @@ export function reportValidity(input) {
     return true;
 }
 export function getValue(input) {
-  if (input instanceof WizardTextField)
+  if (input instanceof WizardTextField || input instanceof WizardSelect)
     return input.maybeValue;
   else
     return input.value ?? null;
