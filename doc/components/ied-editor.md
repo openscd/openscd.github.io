@@ -15,3 +15,4 @@
 | Method                     | Type       |
 |----------------------------|------------|
 | `openCommunicationMapping` | `(): void` |
+| `openGseControlSelection`  | `(): void` |

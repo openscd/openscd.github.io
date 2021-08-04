@@ -44,7 +44,7 @@ const pTypes2007B3 = [
   "IP-IGMPv3Sr",
   "IP-ClassOfTraffic"
 ];
-const pTypesGSESMV = [
+export const pTypesGSESMV = [
   "MAC-Address",
   "APPID",
   "VLAN-ID",
@@ -86,7 +86,7 @@ const typeBase = {
   OSI: "[0-9A-F]+",
   OSId: "[0-9]+",
   OSIAPi: "[0-9,]+",
-  MAC: "[0-9,A-F]{2}\\-[0-9,A-F]{2}\\-[0-9,A-F]{2}\\-[0-9,A-F]{2}\\-[0-9,A-F]{2}\\-[0-9,A-F]",
+  MAC: "([0-9A-F]{2}-){5}[0-9A-F]{2}",
   APPID: "[0-9A-F]{4}",
   VLANp: "[0-7]",
   VLANid: "[0-9A-F]{3}",

@@ -27,7 +27,11 @@ export const de = {
     Val: "Standardwert",
     dchg: "Deten\xE4nderung ist Ausl\xF6ser",
     qchg: "Qualit\xE4tsanderung ist Ausl\xF6ser",
-    dupd: "Datenupdate ist Ausl\xF6ser"
+    dupd: "Datenupdate ist Ausl\xF6ser",
+    fixedOffs: "Fester Offset",
+    securityEnabled: "Aktive Sicherungsma\xDFnahmen",
+    DataSet: "Datensetz",
+    Communication: "Kommunikation"
   },
   settings: {
     title: "Einstellungen",
@@ -41,6 +45,13 @@ export const de = {
     title: "Men\xFC",
     viewLog: "Protokoll anzeigen"
   },
+  wizard: {
+    title: {
+      select: "{{tagName}} ausw\xE4hlen",
+      edit: "{{tagName}} bearbeiten",
+      add: "{{tagName}} hinzuf\xFCgen"
+    }
+  },
   openSCD: {
     loading: "Lade Projekt {{ name }}",
     loaded: "{{ name }} geladen",
@@ -49,7 +60,8 @@ export const de = {
   },
   zeroline: {
     iedsloading: "IEDs werden geladen...",
-    commmap: "Kommunikationszuordnung"
+    commmap: "Kommunikationszuordnung",
+    gsecontrol: "GOOSEs anzeigen"
   },
   editing: {
     created: "{{ name }} hinzugef\xFCgt",
@@ -311,6 +323,11 @@ export const de = {
     },
     action: {
       addaddress: "Adressfeld bearbeitet ({{iedName}} - {{apName}})"
+    }
+  },
+  gse: {
+    action: {
+      addaddress: "GSE bearbeitet ({{identity}})"
     }
   },
   subscriber: {

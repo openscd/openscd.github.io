@@ -24,6 +24,8 @@ import "./zeroline/substation-editor.js";
 import "./zeroline/ied-editor.js";
 import {wizards} from "./wizards/wizard-library.js";
 import {communicationMappingWizard} from "./wizards/commmap-wizards.js";
+import {selectGseControlWizard} from "./wizards/gsecontrol.js";
+import {gooseIcon} from "./icons.js";
 function shouldShowIEDs() {
   return localStorage.getItem("showieds") === "on";
 }
@@ -46,6 +48,11 @@ export let ZerolinePane = class extends LitElement {
     if (wizard)
       this.dispatchEvent(newWizardEvent(wizard));
   }
+  openGseControlSelection() {
+    const wizard = selectGseControlWizard(this.doc.documentElement);
+    if (wizard)
+      this.dispatchEvent(newWizardEvent(wizard));
+  }
   toggleShowIEDs() {
     if (shouldShowIEDs())
       setShowIEDs("off");
@@ -61,46 +68,54 @@ export let ZerolinePane = class extends LitElement {
         </div>` : html``;
   }
   render() {
-    return html`
-      <h1>
-          ${html`<abbr title="${translate("add")}">
+    return html` <h1>
+        <nav>
+          <abbr title="${translate("add")}">
             <mwc-icon-button
+              id="createsubstation"
               icon="playlist_add"
               @click=${() => this.openCreateSubstationWizard()}
             ></mwc-icon-button>
-          </abbr> `}
-          </nav>
-          <nav>
-        <abbr title="${translate("zeroline.showieds")}">
-          <mwc-icon-button-toggle
-            ?on=${shouldShowIEDs()}
-            @click=${() => this.toggleShowIEDs()}
-            id="showieds"
-            onIcon="developer_board"
-            offIcon="developer_board_off"
-          ></mwc-icon-button-toggle>
-        </abbr>
-        <abbr title="${translate("zeroline.commmap")}">
-          <mwc-icon-button
-            id="commmap"
-            icon="link"
-            @click=${() => this.openCommunicationMapping()}
-          ></mwc-icon-button>
-        </abbr>
-      </nav>
-        </h1>
+          </abbr>
+        </nav>
+        <nav>
+          <abbr title="${translate("zeroline.commmap")}">
+            <mwc-icon-button-toggle
+              ?on=${shouldShowIEDs()}
+              @click=${() => this.toggleShowIEDs()}
+              id="showieds"
+              onIcon="developer_board"
+              offIcon="developer_board_off"
+            ></mwc-icon-button-toggle>
+          </abbr>
+          <abbr title="${translate("zeroline.commmap")}">
+            <mwc-icon-button
+              id="commmap"
+              icon="link"
+              @click=${() => this.openCommunicationMapping()}
+            ></mwc-icon-button>
+          </abbr>
+          <abbr title="${translate("zeroline.gsecontrol")}"
+            ><mwc-icon-button
+              id="gsecontrol"
+              @click="${() => this.openGseControlSelection()}"
+              >${gooseIcon}</mwc-icon-button
+            ></abbr
+          >
+        </nav>
+      </h1>
       ${this.renderIedContainer()}
       ${this.doc?.querySelector(":root > Substation") ? html`<section tabindex="0">
-              ${Array.from(this.doc.querySelectorAll("Substation") ?? []).filter(isPublic).map((substation) => html`<substation-editor
-                      .element=${substation}
-                      .getAttachedIeds=${this.getAttachedIeds}
-                      ?readonly=${this.readonly}
-                    ></substation-editor>`)}
-            </section>` : html`<h1>
-              <span style="color: var(--base1)"
-                >${translate("substation.missing")}</span
-              >
-            </h1>`}`;
+            ${Array.from(this.doc.querySelectorAll("Substation") ?? []).filter(isPublic).map((substation) => html`<substation-editor
+                    .element=${substation}
+                    .getAttachedIeds=${this.getAttachedIeds}
+                    ?readonly=${this.readonly}
+                  ></substation-editor>`)}
+          </section>` : html`<h1>
+            <span style="color: var(--base1)"
+              >${translate("substation.missing")}</span
+            >
+          </h1>`}`;
   }
 };
 ZerolinePane.styles = css`
@@ -151,6 +166,12 @@ __decorate([
 __decorate([
   query("#showieds")
 ], ZerolinePane.prototype, "showieds", 2);
+__decorate([
+  query("#gsecontrol")
+], ZerolinePane.prototype, "gsecontrol", 2);
+__decorate([
+  query("#createsubstation")
+], ZerolinePane.prototype, "createsubstation", 2);
 ZerolinePane = __decorate([
   customElement("zeroline-pane")
 ], ZerolinePane);

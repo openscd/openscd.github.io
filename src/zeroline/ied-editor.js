@@ -19,6 +19,8 @@ import {
 } from "../../_snowpack/pkg/lit-element.js";
 import {newWizardEvent} from "../foundation.js";
 import {createClientLnWizard} from "../wizards/clientln.js";
+import {selectGseControlWizard} from "../wizards/gsecontrol.js";
+import {gooseIcon} from "../icons.js";
 export let IedEditor = class extends LitElement {
   get name() {
     return this.element.getAttribute("name") ?? "";
@@ -26,6 +28,11 @@ export let IedEditor = class extends LitElement {
   openCommunicationMapping() {
     const sendingIeds = Array.from(this.element.closest("SCL")?.querySelectorAll("IED") ?? []);
     const wizard = createClientLnWizard(sendingIeds, this.element);
+    if (wizard)
+      this.dispatchEvent(newWizardEvent(wizard));
+  }
+  openGseControlSelection() {
+    const wizard = selectGseControlWizard(this.element);
     if (wizard)
       this.dispatchEvent(newWizardEvent(wizard));
   }
@@ -40,6 +47,13 @@ export let IedEditor = class extends LitElement {
           @click="${() => this.openCommunicationMapping()}"
           icon="add_link"
         ></mwc-fab>
+        <mwc-fab
+          id="connectreport"
+          mini
+          class="menu-item left"
+          @click="${() => this.openGseControlSelection()}"
+          ><mwc-icon slot="icon">${gooseIcon}</mwc-icon></mwc-fab
+        >
       </div>
       <h4>${this.name}</h4>
     `;

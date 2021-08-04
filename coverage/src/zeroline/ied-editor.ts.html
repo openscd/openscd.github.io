@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">76.47% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>13/13</span>
+                <span class='fraction'>13/17</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">50% </span>
+                <span class="strong">37.5% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>3/6</span>
+                <span class='fraction'>3/8</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">66.67% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>4/4</span>
+                <span class='fraction'>4/6</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">78.57% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>11/11</span>
+                <span class='fraction'>11/14</span>
             </div>
         
             
@@ -55,7 +55,7 @@
             Press <em>n</em> or <em>j</em> to go to the next uncovered block, <em>b</em>, <em>p</em> or <em>k</em> for the previous block.
         </p>
     </div>
-    <div class='status-line high'></div>
+    <div class='status-line medium'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -214,7 +214,23 @@
 <a name='L155'></a><a href='#L155'>155</a>
 <a name='L156'></a><a href='#L156'>156</a>
 <a name='L157'></a><a href='#L157'>157</a>
-<a name='L158'></a><a href='#L158'>158</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L158'></a><a href='#L158'>158</a>
+<a name='L159'></a><a href='#L159'>159</a>
+<a name='L160'></a><a href='#L160'>160</a>
+<a name='L161'></a><a href='#L161'>161</a>
+<a name='L162'></a><a href='#L162'>162</a>
+<a name='L163'></a><a href='#L163'>163</a>
+<a name='L164'></a><a href='#L164'>164</a>
+<a name='L165'></a><a href='#L165'>165</a>
+<a name='L166'></a><a href='#L166'>166</a>
+<a name='L167'></a><a href='#L167'>167</a>
+<a name='L168'></a><a href='#L168'>168</a>
+<a name='L169'></a><a href='#L169'>169</a>
+<a name='L170'></a><a href='#L170'>170</a>
+<a name='L171'></a><a href='#L171'>171</a>
+<a name='L172'></a><a href='#L172'>172</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -250,6 +266,11 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">54x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -258,6 +279,13 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -384,6 +412,8 @@ import { newWizardEvent } from '../foundation.js';
 import { createClientLnWizard } from '../wizards/clientln.js';
 &nbsp;
 import { Fab } from '@material/mwc-fab';
+import { selectGseControlWizard } from '../wizards/gsecontrol.js';
+import { gooseIcon } from '../icons.js';
 &nbsp;
 /** [[`SubstationEditor`]] subeditor for a `ConductingEquipment` element. */
 @customElement('ied-editor')
@@ -406,6 +436,11 @@ export class IedEditor extends LitElement {
     <span class="missing-if-branch" title="else path not taken" >E</span>if (wizard) this.dispatchEvent(newWizardEvent(wizard));
   }
 &nbsp;
+<span class="fstat-no" title="function not covered" >  openGseControlSelection(</span>): void {
+    const wizard = <span class="cstat-no" title="statement not covered" >selectGseControlWizard(this.element);</span>
+<span class="cstat-no" title="statement not covered" >    if (wizard) <span class="cstat-no" title="statement not covered" >this.dispatchEvent(newWizardEvent(wizard));</span></span>
+  }
+&nbsp;
   render(): TemplateResult {
     return html`
       &lt;div id="container" tabindex="0"&gt;
@@ -417,6 +452,13 @@ export class IedEditor extends LitElement {
           @click="${() =&gt; this.openCommunicationMapping()}"
           icon="add_link"
         &gt;&lt;/mwc-fab&gt;
+        &lt;mwc-fab
+          id="connectreport"
+          mini
+          class="menu-item left"
+          @click="${<span class="fstat-no" title="function not covered" >() =</span>&gt; <span class="cstat-no" title="statement not covered" >this.openGseControlSelection()}</span>"
+          &gt;&lt;mwc-icon slot="icon"&gt;${gooseIcon}&lt;/mwc-icon&gt;&lt;/mwc-fab
+        &gt;
       &lt;/div&gt;
       &lt;h4&gt;${this.name}&lt;/h4&gt;
     `;
@@ -535,7 +577,7 @@ export class IedEditor extends LitElement {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Tue Aug 03 2021 12:44:59 GMT+0000 (Coordinated Universal Time)
+                at Wed Aug 04 2021 06:07:06 GMT+0000 (Coordinated Universal Time)
             </div>
         </div>
         <script src="../../prettify.js"></script>

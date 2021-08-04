@@ -17,7 +17,7 @@ export const patterns = {
   restrName1stU: "[a-z][0-9A-Za-z]*",
   abstractDataAttributeName: "((T)|(Test)|(Check)|(SIUnit)|(Open)|(SBO)|(SBOw)|(Cancel)|[a-z][0-9A-Za-z]*)"
 };
-export const maxLenght = {
+export const maxLength = {
   cbName: 32,
   abstracDaName: 60
 };

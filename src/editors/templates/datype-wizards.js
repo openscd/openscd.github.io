@@ -35,7 +35,7 @@ export function editDaTypeWizard(dATypeIdentity, doc) {
         html`<mwc-button
           icon="delete"
           trailingIcon
-          label="${translate("delete")}"
+          label="${translate("remove")}"
           @click=${(e) => {
           e.target.dispatchEvent(newWizardEvent());
           e.target.dispatchEvent(newActionEvent({

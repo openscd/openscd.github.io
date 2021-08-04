@@ -137,7 +137,7 @@ export function editDAWizard(element) {
   const deleteButton = html`<mwc-button
     icon="delete"
     trailingIcon
-    label="${translate("delete")}"
+    label="${translate("remove")}"
     @click=${(e) => {
     e.target.dispatchEvent(newWizardEvent());
     e.target.dispatchEvent(newActionEvent({

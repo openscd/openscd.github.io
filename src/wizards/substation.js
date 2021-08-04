@@ -50,7 +50,7 @@ export function createAction(parent) {
     return [action];
   };
 }
-export function substationCreateWizard(parent) {
+export function createSubstationWizard(parent) {
   const guessable = parent.querySelector("Substation") === null;
   return [
     {

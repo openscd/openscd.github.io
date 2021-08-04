@@ -1,7 +1,7 @@
 import {html, render} from "../../_snowpack/pkg/lit-html.js";
 import {translate} from "../../_snowpack/pkg/lit-translate.js";
 import {createElement} from "../foundation.js";
-import {maxLenght, patterns} from "./foundation/limits.js";
+import {maxLength, patterns} from "./foundation/limits.js";
 import {predefinedBasicTypeEnum, valKindEnum} from "./foundation/enums.js";
 function selectType(e, data, Val) {
   const typeSelected = e.target.selected?.value;
@@ -9,7 +9,7 @@ function selectType(e, data, Val) {
   if (selectedBType !== "Enum")
     return;
   const enumVals = Array.from(data.querySelectorAll(`EnumType[id="${typeSelected}"] > EnumVal`)).map((enumval) => html`<mwc-list-item
-        value="${enumval.textContent?.trim()}"
+        value="${enumval.textContent?.trim() ?? ""}"
         ?selected=${enumval.textContent?.trim() === Val}
         >${enumval.textContent?.trim()}</mwc-list-item
       >`);
@@ -56,7 +56,7 @@ export function wizardContent(name, desc, bType, types, type, sAddr, valKind, va
       helper="${translate("scl.name")}"
       required
       pattern="${patterns.abstractDataAttributeName}"
-      maxLength="${maxLenght.abstracDaName}"
+      maxLength="${maxLength.abstracDaName}"
       dialogInitialFocus
     >
       ></wizard-textfield
@@ -125,7 +125,7 @@ export function wizardContent(name, desc, bType, types, type, sAddr, valKind, va
       .maybeValue=${Val}
       helper="${translate("scl.Val")}"
       nullable
-      >${Array.from(data.querySelectorAll(`EnumType > EnumVal[id="${type}"]`)).map((enumVal) => html`<mwc-list-item value="${enumVal.textContent?.trim()}"
+      >${Array.from(data.querySelectorAll(`EnumType > EnumVal[id="${type}"]`)).map((enumVal) => html`<mwc-list-item value="${enumVal.textContent?.trim() ?? ""}"
             >${enumVal.textContent?.trim()}</mwc-list-item
           >`)}</wizard-select
     >`,
