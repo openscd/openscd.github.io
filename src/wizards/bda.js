@@ -1,6 +1,7 @@
 import {html} from "../../_snowpack/pkg/lit-html.js";
 import {get, translate} from "../../_snowpack/pkg/lit-translate.js";
 import {
+  cloneElement,
   createElement,
   getReference,
   getValue,
@@ -25,29 +26,15 @@ export function updateBDaAction(element) {
     if (name === element.getAttribute("name") && desc === element.getAttribute("desc") && bType === element.getAttribute("bType") && type === element.getAttribute("type") && sAddr === element.getAttribute("sAddr") && valKind === element.getAttribute("valKind") && valImport === element.getAttribute("valImprot")) {
       bdaAction = null;
     } else {
-      const newElement = element.cloneNode(false);
-      newElement.setAttribute("name", name);
-      if (desc === null)
-        newElement.removeAttribute("desc");
-      else
-        newElement.setAttribute("desc", desc);
-      newElement.setAttribute("bType", bType);
-      if (type === null)
-        newElement.removeAttribute("type");
-      else
-        newElement.setAttribute("type", type);
-      if (sAddr === null)
-        newElement.removeAttribute("sAddr");
-      else
-        newElement.setAttribute("sAddr", sAddr);
-      if (valKind === null)
-        newElement.removeAttribute("valKind");
-      else
-        newElement.setAttribute("valKind", valKind);
-      if (valImport === null)
-        newElement.removeAttribute("valImport");
-      else
-        newElement.setAttribute("valImport", valImport);
+      const newElement = cloneElement(element, {
+        name,
+        desc,
+        bType,
+        type,
+        sAddr,
+        valKind,
+        valImport
+      });
       bdaAction = {old: {element}, new: {element: newElement}};
     }
     if (Val === (element.querySelector("Val")?.textContent?.trim() ?? null)) {

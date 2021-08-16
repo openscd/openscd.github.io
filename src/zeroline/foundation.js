@@ -1,6 +1,5 @@
 import {css} from "../../_snowpack/pkg/lit-element.js";
 import {
-  getValue,
   newActionEvent,
   isPublic
 } from "../foundation.js";
@@ -50,22 +49,7 @@ export function getAttachedIeds(doc) {
     return attachedIeds(element, ieds);
   };
 }
-export function updateNamingAction(element) {
-  return (inputs) => {
-    const name = getValue(inputs.find((i) => i.label === "name"));
-    const desc = getValue(inputs.find((i) => i.label === "desc"));
-    if (name === element.getAttribute("name") && desc === element.getAttribute("desc"))
-      return [];
-    const newElement = element.cloneNode(false);
-    newElement.setAttribute("name", name);
-    if (desc === null)
-      newElement.removeAttribute("desc");
-    else
-      newElement.setAttribute("desc", desc);
-    return [{old: {element}, new: {element: newElement}}];
-  };
-}
-export function cloneElement(editor) {
+export function cloneSubstationElement(editor) {
   const element = editor.element;
   const parent = element.parentElement;
   const num = parent.querySelectorAll(`${element.tagName}[name^="${element.getAttribute("name") ?? ""}"]`).length;

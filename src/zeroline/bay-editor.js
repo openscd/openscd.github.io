@@ -17,7 +17,7 @@ import {
   property
 } from "../../_snowpack/pkg/lit-element.js";
 import {translate} from "../../_snowpack/pkg/lit-translate.js";
-import {startMove, styles, cloneElement} from "./foundation.js";
+import {startMove, styles, cloneSubstationElement} from "./foundation.js";
 import {newActionEvent, newWizardEvent} from "../foundation.js";
 import {wizards} from "../wizards/wizard-library.js";
 import {VoltageLevelEditor} from "./voltage-level-editor.js";
@@ -86,7 +86,7 @@ export let BayEditor = class extends LitElement {
               <abbr title="${translate("duplicate")}">
                 <mwc-icon-button
                   icon="content_copy"
-                  @click=${() => cloneElement(this)}
+                  @click=${() => cloneSubstationElement(this)}
                 ></mwc-icon-button>
               </abbr>
               <abbr title="${translate("edit")}">

@@ -1,6 +1,7 @@
 import {html} from "../../../_snowpack/pkg/lit-element.js";
 import {get, translate} from "../../../_snowpack/pkg/lit-translate.js";
 import {
+  cloneElement,
   createElement,
   getReference,
   getValue,
@@ -24,30 +25,17 @@ function updateDoAction(element) {
     const type = getValue(inputs.find((i) => i.label === "type"));
     const accessControl = getValue(inputs.find((i) => i.label === "accessControl"));
     const transient = getValue(inputs.find((i) => i.label === "transient")) !== "" ? getValue(inputs.find((i) => i.label === "transient")) : null;
-    const actions = [];
     if (name === element.getAttribute("name") && desc === element.getAttribute("desc") && type === element.getAttribute("type") && accessControl === element.getAttribute("accessControl") && transient === element.getAttribute("transient")) {
       return [];
     }
-    const newElement = element.cloneNode(false);
-    newElement.setAttribute("name", name);
-    if (desc === null)
-      newElement.removeAttribute("desc");
-    else
-      newElement.setAttribute("desc", desc);
-    newElement.setAttribute("type", type);
-    if (accessControl === null)
-      newElement.removeAttribute("accessControl");
-    else
-      newElement.setAttribute("accessControl", accessControl);
-    if (transient === null)
-      newElement.removeAttribute("transient");
-    else
-      newElement.setAttribute("transient", transient);
-    actions.push({
-      old: {element},
-      new: {element: newElement}
+    const newElement = cloneElement(element, {
+      name,
+      desc,
+      type,
+      accessControl,
+      transient
     });
-    return actions;
+    return [{old: {element}, new: {element: newElement}}];
   };
 }
 function createDoAction(parent) {
@@ -383,13 +371,7 @@ function updateLNodeTypeAction(element) {
     const lnClass = getValue(inputs.find((i) => i.label === "lnClass"));
     if (id === element.getAttribute("id") && desc === element.getAttribute("desc") && lnClass == element.getAttribute("lnClass"))
       return [];
-    const newElement = element.cloneNode(false);
-    newElement.setAttribute("id", id);
-    if (desc === null)
-      newElement.removeAttribute("desc");
-    else
-      newElement.setAttribute("desc", desc);
-    newElement.setAttribute("lnClass", lnClass);
+    const newElement = cloneElement(element, {id, desc, lnClass});
     return [{old: {element}, new: {element: newElement}}];
   };
 }

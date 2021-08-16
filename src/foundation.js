@@ -1747,6 +1747,16 @@ export function createElement(doc, tag, attrs) {
   Object.entries(attrs).filter(([_, value]) => value !== null).forEach(([name2, value]) => element.setAttribute(name2, value));
   return element;
 }
+export function cloneElement(element, attrs) {
+  const newElement = element.cloneNode(false);
+  Object.entries(attrs).forEach(([name2, value]) => {
+    if (value === null)
+      newElement.removeAttribute(name2);
+    else
+      newElement.setAttribute(name2, value);
+  });
+  return newElement;
+}
 export const ifImplemented = directive((rendered) => (part) => {
   if (Object.keys(rendered).length)
     part.setValue(rendered);

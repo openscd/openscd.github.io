@@ -25,7 +25,8 @@ import {
   patterns,
   compareNames,
   createElement,
-  getReference
+  getReference,
+  cloneElement
 } from "../../foundation.js";
 import {styles, isCreateOptions} from "./foundation.js";
 import "./connectedap-editor.js";
@@ -52,12 +53,8 @@ function getBitRateAction(oldBitRate, BitRate, multiplier, SubNetwork) {
         reference: oldBitRate.nextSibling
       }
     };
-  const newBitRate = oldBitRate.cloneNode(false);
+  const newBitRate = cloneElement(oldBitRate, {multiplier});
   newBitRate.textContent = BitRate;
-  if (multiplier === null)
-    newBitRate.removeAttribute("multiplier");
-  else
-    newBitRate.setAttribute("multiplier", multiplier);
   return {
     old: {element: oldBitRate},
     new: {element: newBitRate}
@@ -75,16 +72,7 @@ export function updateSubNetworkAction(element) {
     if (name === element.getAttribute("name") && desc === element.getAttribute("desc") && type === element.getAttribute("type")) {
       subNetworkAction = null;
     } else {
-      const newElement = element.cloneNode(false);
-      newElement.setAttribute("name", name);
-      if (desc === null)
-        newElement.removeAttribute("desc");
-      else
-        newElement.setAttribute("desc", desc);
-      if (type === null)
-        newElement.removeAttribute("type");
-      else
-        newElement.setAttribute("type", type);
+      const newElement = cloneElement(element, {name, desc, type});
       subNetworkAction = {old: {element}, new: {element: newElement}};
     }
     if (BitRate === (element.querySelector("SubNetwork > BitRate")?.textContent?.trim() ?? null) && multiplier === (element.querySelector("SubNetwork > BitRate")?.getAttribute("multiplier") ?? null)) {

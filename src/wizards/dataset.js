@@ -1,6 +1,7 @@
 import {html} from "../../_snowpack/pkg/lit-element.js";
 import {get, translate} from "../../_snowpack/pkg/lit-translate.js";
 import {
+  cloneElement,
   getValue,
   identity
 } from "../foundation.js";
@@ -11,21 +12,12 @@ export function updateDataSetAction(element) {
     const oldName = element.getAttribute("name");
     if (name === oldName && desc === element.getAttribute("desc"))
       return [];
-    const newElement = element.cloneNode(false);
-    newElement.setAttribute("name", name);
-    if (desc === null)
-      newElement.removeAttribute("desc");
-    else
-      newElement.setAttribute("desc", desc);
+    const newElement = cloneElement(element, {name, desc});
     const dataSetUpdateAction = [
-      {
-        old: {element},
-        new: {element: newElement}
-      }
+      {old: {element}, new: {element: newElement}}
     ];
     const cbUpdateAction = name !== oldName ? Array.from(element.parentElement?.querySelectorAll(`ReportControlBock[datSet=${oldName}], GSEControl[datSet=${oldName}],SampledValueControl[datSet=${oldName}] `) ?? []).map((cb) => {
-      const newCb = cb.cloneNode(false);
-      newCb.setAttribute("datSet", name);
+      const newCb = cloneElement(element, {datSet: name});
       return {old: {element: cb}, new: {element: newCb}};
     }) : [];
     return dataSetUpdateAction.concat(cbUpdateAction);

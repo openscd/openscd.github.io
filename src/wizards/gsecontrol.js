@@ -1,6 +1,7 @@
 import {html} from "../../_snowpack/pkg/lit-element.js";
 import {get, translate} from "../../_snowpack/pkg/lit-translate.js";
 import {
+  cloneElement,
   getValue,
   identity,
   isPublic,
@@ -107,27 +108,16 @@ export function updateGseControlAction(element) {
     const appID = getValue(inputs.find((i) => i.label === "appID"));
     const fixedOffs = getValue(inputs.find((i) => i.label === "fixedOffs"));
     const securityEnabled = getValue(inputs.find((i) => i.label === "securityEnabled"));
-    if (name === element.getAttribute("name") && desc === element.getAttribute("desc") && type === element.getAttribute("type") && appID === element.getAttribute("appID") && fixedOffs === element.getAttribute("numPhases") && securityEnabled === element.getAttribute("securityEnabled"))
+    if (name === element.getAttribute("name") && desc === element.getAttribute("desc") && type === element.getAttribute("type") && appID === element.getAttribute("appID") && fixedOffs === element.getAttribute("fixedOffs") && securityEnabled === element.getAttribute("securityEnabled"))
       return [];
-    const newElement = element.cloneNode(false);
-    newElement.setAttribute("name", name);
-    if (desc === null)
-      newElement.removeAttribute("desc");
-    else
-      newElement.setAttribute("desc", desc);
-    newElement.setAttribute("appID", appID);
-    if (type === null)
-      newElement.removeAttribute("type");
-    else
-      newElement.setAttribute("type", type);
-    if (fixedOffs === null)
-      newElement.removeAttribute("fixedOffs");
-    else
-      newElement.setAttribute("fixedOffs", fixedOffs);
-    if (securityEnabled === null)
-      newElement.removeAttribute("securityEnabled");
-    else
-      newElement.setAttribute("securityEnabled", securityEnabled);
+    const newElement = cloneElement(element, {
+      name,
+      desc,
+      type,
+      appID,
+      fixedOffs,
+      securityEnabled
+    });
     return [{old: {element}, new: {element: newElement}}];
   };
 }

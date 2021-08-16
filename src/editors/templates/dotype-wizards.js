@@ -1,6 +1,7 @@
 import {html} from "../../../_snowpack/pkg/lit-html.js";
 import {get, translate} from "../../../_snowpack/pkg/lit-translate.js";
 import {
+  cloneElement,
   createElement,
   getReference,
   getValue,
@@ -26,17 +27,8 @@ function updateSDoAction(element) {
     if (name === element.getAttribute("name") && desc === element.getAttribute("desc") && type === element.getAttribute("type")) {
       return [];
     }
-    const newElement = element.cloneNode(false);
-    newElement.setAttribute("name", name);
-    if (desc === null)
-      newElement.removeAttribute("desc");
-    else
-      newElement.setAttribute("desc", desc);
-    newElement.setAttribute("type", type);
-    actions.push({
-      old: {element},
-      new: {element: newElement}
-    });
+    const newElement = cloneElement(element, {name, desc, type});
+    actions.push({old: {element}, new: {element: newElement}});
     return actions;
   };
 }
@@ -219,13 +211,7 @@ function updateDOTypeAction(element) {
     const cdc = getValue(inputs.find((i) => i.label === "CDC"));
     if (id === element.getAttribute("id") && desc === element.getAttribute("desc") && cdc == element.getAttribute("cdc"))
       return [];
-    const newElement = element.cloneNode(false);
-    newElement.setAttribute("id", id);
-    if (desc === null)
-      newElement.removeAttribute("desc");
-    else
-      newElement.setAttribute("desc", desc);
-    newElement.setAttribute("cdc", cdc);
+    const newElement = cloneElement(element, {id, desc, cdc});
     return [{old: {element}, new: {element: newElement}}];
   };
 }

@@ -1,6 +1,7 @@
 import {html} from "../../../_snowpack/pkg/lit-element.js";
 import {get, translate} from "../../../_snowpack/pkg/lit-translate.js";
 import {
+  cloneElement,
   createElement,
   getReference,
   getValue,
@@ -45,12 +46,7 @@ function updateEnumValAction(element) {
     const ord = getValue(inputs.find((i) => i.label === "ord")) || element.getAttribute("ord") || nextOrd(element.parentElement);
     if (value === element.textContent && desc === element.getAttribute("desc") && ord === element.getAttribute("ord"))
       return [];
-    const newElement = element.cloneNode(false);
-    if (desc === null)
-      newElement.removeAttribute("desc");
-    else
-      newElement.setAttribute("desc", desc);
-    newElement.setAttribute("ord", ord);
+    const newElement = cloneElement(element, {desc, ord});
     newElement.textContent = value;
     return [{old: {element}, new: {element: newElement}}];
   };

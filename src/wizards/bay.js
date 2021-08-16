@@ -5,7 +5,7 @@ import {
   getReference,
   getValue
 } from "../foundation.js";
-import {updateNamingAction} from "../zeroline/foundation.js";
+import {updateNamingAction} from "./foundation/actions.js";
 function render(name, desc) {
   return [
     html`<wizard-textfield

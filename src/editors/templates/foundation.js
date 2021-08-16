@@ -1,6 +1,7 @@
 import {css, html} from "../../../_snowpack/pkg/lit-element.js";
 import {ifDefined} from "../../../_snowpack/pkg/lit-html/directives/if-defined.js";
 import {
+  cloneElement,
   getReference,
   getValue,
   isPublic
@@ -15,12 +16,7 @@ export function updateIDNamingAction(element) {
     const desc = getValue(inputs.find((i) => i.label === "desc"));
     if (id === element.getAttribute("id") && desc === element.getAttribute("desc"))
       return [];
-    const newElement = element.cloneNode(false);
-    newElement.setAttribute("id", id);
-    if (desc === null)
-      newElement.removeAttribute("desc");
-    else
-      newElement.setAttribute("desc", desc);
+    const newElement = cloneElement(element, {id, desc});
     return [{old: {element}, new: {element: newElement}}];
   };
 }

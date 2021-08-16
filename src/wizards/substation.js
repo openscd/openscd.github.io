@@ -1,12 +1,13 @@
 import {html} from "../../_snowpack/pkg/lit-element.js";
 import {get, translate} from "../../_snowpack/pkg/lit-translate.js";
-import {guessVoltageLevel} from "../editors/substation/guess-wizard.js";
 import {
   createElement,
   getReference,
   getValue,
   newWizardEvent
 } from "../foundation.js";
+import {updateNamingAction} from "./foundation/actions.js";
+import {guessVoltageLevel} from "../editors/substation/guess-wizard.js";
 function render(name, desc, guessable) {
   return [
     html`<wizard-textfield
@@ -64,21 +65,6 @@ export function createSubstationWizard(parent) {
       content: render("", "", guessable)
     }
   ];
-}
-function updateNamingAction(element) {
-  return (inputs) => {
-    const name = getValue(inputs.find((i) => i.label === "name"));
-    const desc = getValue(inputs.find((i) => i.label === "desc"));
-    if (name === element.getAttribute("name") && desc === element.getAttribute("desc"))
-      return [];
-    const newElement = element.cloneNode(false);
-    newElement.setAttribute("name", name);
-    if (desc === null)
-      newElement.removeAttribute("desc");
-    else
-      newElement.setAttribute("desc", desc);
-    return [{old: {element}, new: {element: newElement}}];
-  };
 }
 export function substationEditWizard(element) {
   return [

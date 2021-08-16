@@ -23,16 +23,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">94.06% </span>
+                <span class="strong">95.6% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>95/101</span>
+                <span class='fraction'>87/91</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">80.7% </span>
+                <span class="strong">83.02% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>46/57</span>
+                <span class='fraction'>44/53</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">97.53% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>79/81</span>
+                <span class='fraction'>73/73</span>
             </div>
         
             
@@ -485,17 +485,8 @@
 <a name='L426'></a><a href='#L426'>426</a>
 <a name='L427'></a><a href='#L427'>427</a>
 <a name='L428'></a><a href='#L428'>428</a>
-<a name='L429'></a><a href='#L429'>429</a>
-<a name='L430'></a><a href='#L430'>430</a>
-<a name='L431'></a><a href='#L431'>431</a>
-<a name='L432'></a><a href='#L432'>432</a>
-<a name='L433'></a><a href='#L433'>433</a>
-<a name='L434'></a><a href='#L434'>434</a>
-<a name='L435'></a><a href='#L435'>435</a>
-<a name='L436'></a><a href='#L436'>436</a>
-<a name='L437'></a><a href='#L437'>437</a>
-<a name='L438'></a><a href='#L438'>438</a>
-<a name='L439'></a><a href='#L439'>439</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L429'></a><a href='#L429'>429</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -548,13 +539,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -795,10 +779,6 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -937,6 +917,7 @@
 import { get, translate } from 'lit-translate';
 &nbsp;
 import {
+  cloneElement,
   Create,
   createElement,
   EditorAction,
@@ -984,15 +965,8 @@ function updateSDoAction(element: Element): WizardActor {
       return [];
     }
 &nbsp;
-    const newElement = &lt;Element&gt;element.cloneNode(false);
-    newElement.setAttribute('name', name);
-    <span class="missing-if-branch" title="else path not taken" >E</span>if (desc === null) newElement.removeAttribute('desc');
-    else <span class="cstat-no" title="statement not covered" >newElement.setAttribute('desc', desc);</span>
-    newElement.setAttribute('type', type);
-    actions.push({
-      old: { element },
-      new: { element: newElement },
-    });
+    const newElement = cloneElement(element, { name, desc, type });
+    actions.push({ old: { element }, new: { element: newElement } });
 &nbsp;
     return actions;
   };
@@ -1232,11 +1206,7 @@ function updateDOTypeAction(element: Element): WizardActor {
     )
       return [];
 &nbsp;
-    const newElement = &lt;Element&gt;element.cloneNode(false);
-    newElement.setAttribute('id', id);
-    <span class="missing-if-branch" title="else path not taken" >E</span>if (desc === null) newElement.removeAttribute('desc');
-    else <span class="cstat-no" title="statement not covered" >newElement.setAttribute('desc', desc);</span>
-    newElement.setAttribute('cdc', cdc);
+    const newElement = cloneElement(element, { id, desc, cdc });
 &nbsp;
     return [{ old: { element }, new: { element: newElement } }];
   };
@@ -1378,7 +1348,7 @@ export function dOTypeWizard(
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Mon Aug 16 2021 15:41:02 GMT+0000 (Coordinated Universal Time)
+                at Mon Aug 16 2021 15:50:52 GMT+0000 (Coordinated Universal Time)
             </div>
         </div>
         <script src="../../../prettify.js"></script>

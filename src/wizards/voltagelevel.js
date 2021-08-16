@@ -1,6 +1,7 @@
 import {html} from "../../_snowpack/pkg/lit-html.js";
 import {get, translate} from "../../_snowpack/pkg/lit-translate.js";
 import {
+  cloneElement,
   createElement,
   getMultiplier,
   getReference,
@@ -135,12 +136,8 @@ function getVoltageAction(oldVoltage, Voltage, multiplier, voltageLevel) {
         reference: oldVoltage.nextSibling
       }
     };
-  const newVoltage = oldVoltage.cloneNode(false);
+  const newVoltage = cloneElement(oldVoltage, {multiplier});
   newVoltage.textContent = Voltage;
-  if (multiplier === null)
-    newVoltage.removeAttribute("multiplier");
-  else
-    newVoltage.setAttribute("multiplier", multiplier);
   return {
     old: {element: oldVoltage},
     new: {element: newVoltage}
@@ -159,20 +156,12 @@ export function updateAction(element) {
     if (name === element.getAttribute("name") && desc === element.getAttribute("desc") && nomFreq === element.getAttribute("nomFreq") && numPhases === element.getAttribute("numPhases")) {
       voltageLevelAction = null;
     } else {
-      const newElement = element.cloneNode(false);
-      newElement.setAttribute("name", name);
-      if (desc === null)
-        newElement.removeAttribute("desc");
-      else
-        newElement.setAttribute("desc", desc);
-      if (nomFreq === null)
-        newElement.removeAttribute("nomFreq");
-      else
-        newElement.setAttribute("nomFreq", nomFreq);
-      if (numPhases === null)
-        newElement.removeAttribute("numPhases");
-      else
-        newElement.setAttribute("numPhases", numPhases);
+      const newElement = cloneElement(element, {
+        name,
+        desc,
+        nomFreq,
+        numPhases
+      });
       voltageLevelAction = {old: {element}, new: {element: newElement}};
     }
     if (Voltage === (element.querySelector("VoltageLevel > Voltage")?.textContent?.trim() ?? null) && multiplier === (element.querySelector("VoltageLevel > Voltage")?.getAttribute("multiplier") ?? null)) {
