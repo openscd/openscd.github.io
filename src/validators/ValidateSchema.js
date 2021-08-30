@@ -11,7 +11,7 @@ var __decorate = (decorators, target, key, kind) => {
 };
 import {LitElement, property} from "../../_snowpack/pkg/lit-element.js";
 import {get} from "../../_snowpack/pkg/lit-translate.js";
-import {newLogEvent} from "../foundation.js";
+import {newIssueEvent, newLogEvent} from "../foundation.js";
 import {
   getSchema,
   isLoadSchemaResult,
@@ -20,7 +20,7 @@ import {
 } from "../schemas.js";
 const validators = {};
 export default class ValidateSchema extends LitElement {
-  async getValidator(xsd, xsdName) {
+  async getValidator(xsd, xsdName, statusNumber) {
     if (!window.Worker)
       throw new Error(get("validator.schema.fatal"));
     if (validators[xsdName])
@@ -46,9 +46,10 @@ export default class ValidateSchema extends LitElement {
           const parts = e.data.message.split(": ", 2);
           const description = parts[1] ? parts[1] : parts[0];
           const qualifiedTag = parts[1] ? " (" + parts[0] + ")" : "";
-          document.querySelector("open-scd").dispatchEvent(newLogEvent({
+          document.querySelector("open-scd").dispatchEvent(newIssueEvent({
             title: description,
-            kind: e.data.level > 1 ? "error" : "warning",
+            validatorId: this.pluginId,
+            statusNumber,
             message: e.data.file + ":" + e.data.line + " " + e.data.node + " " + e.data.part + qualifiedTag
           }));
         } else if (!isValidationResult(e.data)) {
@@ -62,7 +63,7 @@ export default class ValidateSchema extends LitElement {
       worker.postMessage({content: xsd, name: xsdName});
     });
   }
-  async validate() {
+  async validate(indentity, statusNumber) {
     const fileName = this.docName;
     let version = "2007";
     let revision = "B";
@@ -73,7 +74,7 @@ export default class ValidateSchema extends LitElement {
         this.doc.documentElement.getAttribute("revision") ?? "",
         this.doc.documentElement.getAttribute("release") ?? ""
       ];
-    const result = await this.getValidator(getSchema(version, revision, release), "SCL" + version + revision + release + ".xsd").then((validator) => validator(new XMLSerializer().serializeToString(this.doc), fileName));
+    const result = await this.getValidator(getSchema(version, revision, release), "SCL" + version + revision + release + ".xsd", statusNumber).then((validator) => validator(new XMLSerializer().serializeToString(this.doc), fileName));
     if (!result.valid) {
       document.querySelector("open-scd").dispatchEvent(newLogEvent({
         kind: "warning",
@@ -93,3 +94,6 @@ __decorate([
 __decorate([
   property()
 ], ValidateSchema.prototype, "docName", 2);
+__decorate([
+  property()
+], ValidateSchema.prototype, "pluginId", 2);

@@ -63,7 +63,6 @@ NB: Use `maybeValue: string | null` instead of `value` if `nullable`!
 | `checkValidity`      | `(): boolean`                                    |
 | `click`              | `(): void`                                       |
 | `focus`              | `(): void`                                       |
-| `getUpdateComplete`  | `(): Promise<boolean>`                           |
 | `layout`             | `(): Promise<void>`                              |
 | `renderMulplierList` | `(): TemplateResult`                             |
 | `renderSwitch`       | `(): TemplateResult`                             |

@@ -94,4 +94,4 @@ function wrap(html) {
   return (strings, ...values) => html.apply(null, transform(strings, values));
 }
 
-export { wrap as default };
+export default wrap;

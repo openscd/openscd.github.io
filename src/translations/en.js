@@ -43,7 +43,8 @@ export const en = {
   },
   menu: {
     title: "Menu",
-    viewLog: "View log"
+    viewLog: "View log",
+    viewDiag: "View diagnostics"
   },
   wizard: {
     title: {
@@ -90,6 +91,11 @@ export const en = {
       show: "Show",
       placeholder: "No errors"
     }
+  },
+  diag: {
+    name: "Diagnostics",
+    zeroissues: "No errors found in the project",
+    placeholder: "Issues found during validation will show up here"
   },
   plugins: {
     heading: "Extensions",

@@ -1,14 +1,15 @@
-import { _ as __decorate } from '../common/tslib.es6-c8bbf354.js';
-import { s as style } from '../common/mwc-icon-button-css-a8ee8565.js';
-import { q as query, p as property, a as queryAsync, i as internalProperty, e as eventOptions, L as LitElement, b as customElement } from '../common/lit-element-74f197f8.js';
-import { R as RippleHandlers } from '../common/ripple-handlers-4224bc9a.js';
-import { a as ariaProperty } from '../common/aria-property-0d16a9b7.js';
-import { c as classMap } from '../common/class-map-0a052906.js';
-import { i as ifDefined } from '../common/if-defined-c0cf727b.js';
-import { h as html } from '../common/lit-html-ea288526.js';
-import '../common/render-aa9814af.js';
-import '../common/foundation-4a2d7e81.js';
-import '../common/style-map-a83cef12.js';
+import { _ as __decorate } from '../common/index-9005815a.js';
+import { s as styles } from '../common/mwc-icon-button.css-af012567.js';
+import { q as query, p as property, a as queryAsync, s as state, e as eventOptions, L as LitElement, b as customElement } from '../common/lit-element-63d74f47.js';
+import { R as RippleHandlers } from '../common/ripple-handlers-12c14ae0.js';
+import { a as ariaProperty } from '../common/aria-property-c2d6d3d3.js';
+import { c as classMap } from '../common/class-map-f3820f9a.js';
+import { i as ifDefined } from '../common/if-defined-4f9ccd15.js';
+import { h as html } from '../common/lit-html-44a7bec9.js';
+import '../common/render-4f397355.js';
+import '../common/ponyfill-4ccc5f83.js';
+import '../common/foundation-d8050818.js';
+import '../common/style-map-b311a692.js';
 
 /** @soyCompatible */
 class IconButtonToggleBase extends LitElement {
@@ -143,7 +144,7 @@ __decorate([
     queryAsync('mwc-ripple')
 ], IconButtonToggleBase.prototype, "ripple", void 0);
 __decorate([
-    internalProperty()
+    state()
 ], IconButtonToggleBase.prototype, "shouldRenderRipple", void 0);
 __decorate([
     eventOptions({ passive: true })
@@ -153,24 +154,13 @@ __decorate([
 ], IconButtonToggleBase.prototype, "handleRippleTouchStart", null);
 
 /**
-@license
-Copyright 2019 Google Inc. All Rights Reserved.
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-    http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-*/
+ * @license
+ * Copyright 2019 Google LLC
+ * SPDX-License-Identifier: Apache-2.0
+ */
 let IconButtonToggle = class IconButtonToggle extends IconButtonToggleBase {
 };
-IconButtonToggle.styles = style;
+IconButtonToggle.styles = [styles];
 IconButtonToggle = __decorate([
     customElement('mwc-icon-button-toggle')
 ], IconButtonToggle);

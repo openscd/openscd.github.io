@@ -125,6 +125,7 @@ export function Plugging(Base) {
             .doc=${this.doc}
             .docName=${this.docName}
             .docId=${this.docId}
+            .pluginId=${plugin.src}
           ></${loadedPlugins.get(plugin.src)}>`;
         }
       };

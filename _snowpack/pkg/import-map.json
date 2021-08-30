@@ -13,6 +13,7 @@
     "@material/mwc-linear-progress": "./@material/mwc-linear-progress.js",
     "@material/mwc-list": "./@material/mwc-list.js",
     "@material/mwc-list/mwc-check-list-item": "./@material/mwc-list/mwc-check-list-item.js",
+    "@material/mwc-list/mwc-list-base": "./@material/mwc-list/mwc-list-base.js",
     "@material/mwc-list/mwc-list-item": "./@material/mwc-list/mwc-list-item.js",
     "@material/mwc-list/mwc-radio-list-item": "./@material/mwc-list/mwc-radio-list-item.js",
     "@material/mwc-menu": "./@material/mwc-menu.js",
@@ -25,6 +26,7 @@
     "@material/mwc-top-app-bar-fixed": "./@material/mwc-top-app-bar-fixed.js",
     "ace-custom-element": "./ace-custom-element.js",
     "carehtml": "./carehtml.js",
+    "fast-check": "./fast-check.js",
     "lit-element": "./lit-element.js",
     "lit-html": "./lit-html.js",
     "lit-html/directives/if-defined": "./lit-html/directives/if-defined.js",
@@ -32,6 +34,7 @@
     "lit-html/directives/unsafe-html": "./lit-html/directives/unsafe-html.js",
     "lit-html/directives/until": "./lit-html/directives/until.js",
     "lit-translate": "./lit-translate.js",
-    "marked": "./marked.js"
+    "marked": "./marked.js",
+    "tslib": "./tslib.js"
   }
 }

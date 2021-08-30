@@ -11,12 +11,25 @@ var __decorate = (decorators, target, key, kind) => {
 };
 import {LitElement, property} from "../../_snowpack/pkg/lit-element.js";
 import {get} from "../../_snowpack/pkg/lit-translate.js";
-import {identity, newLogEvent} from "../foundation.js";
+import {
+  identity,
+  newIssueEvent
+} from "../foundation.js";
 const iec6185074 = fetch("public/xml/IEC_61850-7-4_2007B3.nsd").then((response) => response.text()).then((str) => new DOMParser().parseFromString(str, "application/xml"));
 const iec6185073 = fetch("public/xml/IEC_61850-7-3_2007B3.nsd").then((response) => response.text()).then((str) => new DOMParser().parseFromString(str, "application/xml"));
 const iec6185072 = fetch("public/xml/IEC_61850-7-2_2007B3.nsd").then((response) => response.text()).then((str) => new DOMParser().parseFromString(str, "application/xml"));
 const iec6185081 = fetch("public/xml/IEC_61850-8-1_2003A2.nsd").then((response) => response.text()).then((str) => new DOMParser().parseFromString(str, "application/xml"));
 const serviceCDCs = ["SPC", "DPC", "INC", "ENC", "BSC", "ISC", "APC", "BAC"];
+function dispatch(detail, statusNumber, validatorId) {
+  const title = detail.title;
+  const message = detail.message;
+  document.querySelector("open-scd")?.dispatchEvent(newIssueEvent({
+    validatorId,
+    statusNumber,
+    title,
+    message
+  }));
+}
 async function validateCoOperStructure(oper) {
   const type = oper.getAttribute("type");
   if (!type)
@@ -34,7 +47,6 @@ async function validateCoOperStructure(oper) {
           childTag: "BDA",
           childId: mandatoryBDA
         }),
-        kind: "error",
         message: `${identity(datype)}`
       });
   return errors;
@@ -56,7 +68,6 @@ async function validateCoSBOwStructure(sbow) {
           childTag: "BDA",
           childId: mandatoryBDA
         }),
-        kind: "error",
         message: `${identity(datype)}`
       });
   return errors;
@@ -78,7 +89,6 @@ async function validateCoCancelStructure(cancel) {
           childTag: "BDA",
           childId: mandatoryBDA
         }),
-        kind: "error",
         message: `${identity(datype)}`
       });
   return errors;
@@ -86,7 +96,6 @@ async function validateCoCancelStructure(cancel) {
 function missingCoDataToLog(reference, type) {
   return {
     title: get("validator.templates.missingCoDO", {type}),
-    kind: "error",
     message: `${reference}`
   };
 }
@@ -118,7 +127,6 @@ export async function validateControlCDC(dotype) {
           childTag: "ctlModel",
           childId: "Val"
         }),
-        kind: "warning",
         message: identity(dotype) || "UNIDENTIFIABLE"
       }
     ];
@@ -147,7 +155,6 @@ export async function validateMandatorySubDAs(datype) {
         childTag: "DA",
         childId: da
       }),
-      kind: "error",
       message: `${datype}`
     };
   });
@@ -174,7 +181,6 @@ export async function validateMandatoryDAs(dotype) {
           childTag: "DA",
           childId: mandatoryda
         }),
-        kind: "error",
         message: `${identity(dotype)}`
       });
   });
@@ -209,7 +215,6 @@ export async function validateDoCDCSetting(lnodetype) {
           childTag: "DO",
           childId: DO.getAttribute("name") || "UNNAMED"
         }),
-        kind: "warning",
         message: `${identity(lnodetype)}`
       });
       continue;
@@ -222,7 +227,6 @@ export async function validateDoCDCSetting(lnodetype) {
           childTag: "DO",
           childId: DO.getAttribute("type") || "UNTYPED"
         }),
-        kind: "error",
         message: `${identity(dOType)} > ${DO.getAttribute("name")}`
       });
   }
@@ -247,34 +251,33 @@ export async function validateMandatoryDOs(lnodetype) {
           childTag: "DO",
           childId: mandatorydo
         }),
-        kind: "error",
         message: `${identity(lnodetype)} > ${mandatorydo}`
       });
   });
   return errors;
 }
 export default class ValidateTemplates extends LitElement {
-  async validate() {
+  async validate(identity2, statusNumber) {
     const promises = [];
     for (const lnodetype of Array.from(this.doc.querySelectorAll("LNodeType"))) {
       promises.push(validateMandatoryDOs(lnodetype).then((errors) => {
-        errors.forEach((error) => document.querySelector("open-scd")?.dispatchEvent(newLogEvent(error)));
+        errors.forEach((error) => dispatch(error, statusNumber, this.pluginId));
       }));
       promises.push(validateDoCDCSetting(lnodetype).then((errors) => {
-        errors.forEach((error) => document.querySelector("open-scd")?.dispatchEvent(newLogEvent(error)));
+        errors.forEach((error) => dispatch(error, statusNumber, this.pluginId));
       }));
     }
     for (const dotype of Array.from(this.doc.querySelectorAll("DOType"))) {
       promises.push(validateMandatoryDAs(dotype).then((errors) => {
-        errors.forEach((error) => document.querySelector("open-scd")?.dispatchEvent(newLogEvent(error)));
+        errors.forEach((error) => dispatch(error, statusNumber, this.pluginId));
       }));
       promises.push(validateControlCDC(dotype).then((errors) => {
-        errors.forEach((error) => document.querySelector("open-scd")?.dispatchEvent(newLogEvent(error)));
+        errors.forEach((error) => dispatch(error, statusNumber, this.pluginId));
       }));
     }
     for (const datype of Array.from(this.doc.querySelectorAll("DAType")))
       promises.push(validateMandatorySubDAs(datype).then((errors) => {
-        errors.forEach((error) => document.querySelector("open-scd")?.dispatchEvent(newLogEvent(error)));
+        errors.forEach((error) => dispatch(error, statusNumber, this.pluginId));
       }));
     await Promise.allSettled(promises);
   }
@@ -285,3 +288,6 @@ __decorate([
 __decorate([
   property()
 ], ValidateTemplates.prototype, "docName", 2);
+__decorate([
+  property()
+], ValidateTemplates.prototype, "pluginId", 2);

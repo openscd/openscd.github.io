@@ -1,27 +1,16 @@
-import { a as __extends, b as __assign, _ as __decorate } from '../common/tslib.es6-c8bbf354.js';
-import { c as css, q as query, p as property, b as customElement } from '../common/lit-element-74f197f8.js';
-import { M as MDCFoundation, B as BaseElement, a as addHasRemoveClass, s as supportsPassiveEventListener } from '../common/foundation-4a2d7e81.js';
-import { c as classMap } from '../common/class-map-0a052906.js';
-import { h as html } from '../common/lit-html-ea288526.js';
-import '../common/render-aa9814af.js';
+import { a as __extends, b as __assign, _ as __decorate } from '../common/index-9005815a.js';
+import { c as css, q as query, p as property, b as customElement } from '../common/lit-element-63d74f47.js';
+import { M as MDCFoundation, B as BaseElement, a as addHasRemoveClass, s as supportsPassiveEventListener } from '../common/foundation-d8050818.js';
+import { c as classMap } from '../common/class-map-f3820f9a.js';
+import { h as html } from '../common/lit-html-44a7bec9.js';
+import '../common/render-4f397355.js';
 
 /**
-@license
-Copyright 2018 Google Inc. All Rights Reserved.
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-    http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-*/
-const style = css `.mdc-top-app-bar{background-color:#6200ee;background-color:var(--mdc-theme-primary, #6200ee);color:white;display:flex;position:fixed;flex-direction:column;justify-content:space-between;box-sizing:border-box;width:100%;z-index:4}.mdc-top-app-bar .mdc-top-app-bar__action-item,.mdc-top-app-bar .mdc-top-app-bar__navigation-icon{color:#fff;color:var(--mdc-theme-on-primary, #fff)}.mdc-top-app-bar .mdc-top-app-bar__action-item::before,.mdc-top-app-bar .mdc-top-app-bar__action-item::after,.mdc-top-app-bar .mdc-top-app-bar__navigation-icon::before,.mdc-top-app-bar .mdc-top-app-bar__navigation-icon::after{background-color:#fff;background-color:var(--mdc-ripple-color, var(--mdc-theme-on-primary, #fff))}.mdc-top-app-bar .mdc-top-app-bar__action-item:hover::before,.mdc-top-app-bar .mdc-top-app-bar__action-item.mdc-ripple-surface--hover::before,.mdc-top-app-bar .mdc-top-app-bar__navigation-icon:hover::before,.mdc-top-app-bar .mdc-top-app-bar__navigation-icon.mdc-ripple-surface--hover::before{opacity:0.08;opacity:var(--mdc-ripple-hover-opacity, 0.08)}.mdc-top-app-bar .mdc-top-app-bar__action-item.mdc-ripple-upgraded--background-focused::before,.mdc-top-app-bar .mdc-top-app-bar__action-item:not(.mdc-ripple-upgraded):focus::before,.mdc-top-app-bar .mdc-top-app-bar__navigation-icon.mdc-ripple-upgraded--background-focused::before,.mdc-top-app-bar .mdc-top-app-bar__navigation-icon:not(.mdc-ripple-upgraded):focus::before{transition-duration:75ms;opacity:0.24;opacity:var(--mdc-ripple-focus-opacity, 0.24)}.mdc-top-app-bar .mdc-top-app-bar__action-item:not(.mdc-ripple-upgraded)::after,.mdc-top-app-bar .mdc-top-app-bar__navigation-icon:not(.mdc-ripple-upgraded)::after{transition:opacity 150ms linear}.mdc-top-app-bar .mdc-top-app-bar__action-item:not(.mdc-ripple-upgraded):active::after,.mdc-top-app-bar .mdc-top-app-bar__navigation-icon:not(.mdc-ripple-upgraded):active::after{transition-duration:75ms;opacity:0.24;opacity:var(--mdc-ripple-press-opacity, 0.24)}.mdc-top-app-bar .mdc-top-app-bar__action-item.mdc-ripple-upgraded,.mdc-top-app-bar .mdc-top-app-bar__navigation-icon.mdc-ripple-upgraded{--mdc-ripple-fg-opacity: var(--mdc-ripple-press-opacity, 0.24)}.mdc-top-app-bar__row{display:flex;position:relative;box-sizing:border-box;width:100%;height:64px}.mdc-top-app-bar__section{display:inline-flex;flex:1 1 auto;align-items:center;min-width:0;padding:8px 12px;z-index:1}.mdc-top-app-bar__section--align-start{justify-content:flex-start;order:-1}.mdc-top-app-bar__section--align-end{justify-content:flex-end;order:1}.mdc-top-app-bar__title{-moz-osx-font-smoothing:grayscale;-webkit-font-smoothing:antialiased;font-family:Roboto, sans-serif;font-family:var(--mdc-typography-headline6-font-family, var(--mdc-typography-font-family, Roboto, sans-serif));font-size:1.25rem;font-size:var(--mdc-typography-headline6-font-size, 1.25rem);line-height:2rem;line-height:var(--mdc-typography-headline6-line-height, 2rem);font-weight:500;font-weight:var(--mdc-typography-headline6-font-weight, 500);letter-spacing:0.0125em;letter-spacing:var(--mdc-typography-headline6-letter-spacing, 0.0125em);text-decoration:inherit;text-decoration:var(--mdc-typography-headline6-text-decoration, inherit);text-transform:inherit;text-transform:var(--mdc-typography-headline6-text-transform, inherit);padding-left:20px;padding-right:0;text-overflow:ellipsis;white-space:nowrap;overflow:hidden;z-index:1}[dir=rtl] .mdc-top-app-bar__title,.mdc-top-app-bar__title[dir=rtl]{padding-left:0;padding-right:20px}.mdc-top-app-bar--short-collapsed{border-top-left-radius:0;border-top-right-radius:0;border-bottom-right-radius:24px;border-bottom-left-radius:0}[dir=rtl] .mdc-top-app-bar--short-collapsed,.mdc-top-app-bar--short-collapsed[dir=rtl]{border-top-left-radius:0;border-top-right-radius:0;border-bottom-right-radius:0;border-bottom-left-radius:24px}.mdc-top-app-bar--short{top:0;right:auto;left:0;width:100%;transition:width 250ms cubic-bezier(0.4, 0, 0.2, 1)}[dir=rtl] .mdc-top-app-bar--short,.mdc-top-app-bar--short[dir=rtl]{right:0;left:auto}.mdc-top-app-bar--short .mdc-top-app-bar__row{height:56px}.mdc-top-app-bar--short .mdc-top-app-bar__section{padding:4px}.mdc-top-app-bar--short .mdc-top-app-bar__title{transition:opacity 200ms cubic-bezier(0.4, 0, 0.2, 1);opacity:1}.mdc-top-app-bar--short-collapsed{box-shadow:0px 2px 4px -1px rgba(0, 0, 0, 0.2),0px 4px 5px 0px rgba(0, 0, 0, 0.14),0px 1px 10px 0px rgba(0,0,0,.12);width:56px;transition:width 300ms cubic-bezier(0.4, 0, 0.2, 1)}.mdc-top-app-bar--short-collapsed .mdc-top-app-bar__title{display:none}.mdc-top-app-bar--short-collapsed .mdc-top-app-bar__action-item{transition:padding 150ms cubic-bezier(0.4, 0, 0.2, 1)}.mdc-top-app-bar--short-collapsed.mdc-top-app-bar--short-has-action-item{width:112px}.mdc-top-app-bar--short-collapsed.mdc-top-app-bar--short-has-action-item .mdc-top-app-bar__section--align-end{padding-left:0;padding-right:12px}[dir=rtl] .mdc-top-app-bar--short-collapsed.mdc-top-app-bar--short-has-action-item .mdc-top-app-bar__section--align-end,.mdc-top-app-bar--short-collapsed.mdc-top-app-bar--short-has-action-item .mdc-top-app-bar__section--align-end[dir=rtl]{padding-left:12px;padding-right:0}.mdc-top-app-bar--dense .mdc-top-app-bar__row{height:48px}.mdc-top-app-bar--dense .mdc-top-app-bar__section{padding:0 4px}.mdc-top-app-bar--dense .mdc-top-app-bar__title{padding-left:12px;padding-right:0}[dir=rtl] .mdc-top-app-bar--dense .mdc-top-app-bar__title,.mdc-top-app-bar--dense .mdc-top-app-bar__title[dir=rtl]{padding-left:0;padding-right:12px}.mdc-top-app-bar--prominent .mdc-top-app-bar__row{height:128px}.mdc-top-app-bar--prominent .mdc-top-app-bar__title{align-self:flex-end;padding-bottom:2px}.mdc-top-app-bar--prominent .mdc-top-app-bar__action-item,.mdc-top-app-bar--prominent .mdc-top-app-bar__navigation-icon{align-self:flex-start}.mdc-top-app-bar--fixed{transition:box-shadow 200ms linear}.mdc-top-app-bar--fixed-scrolled{box-shadow:0px 2px 4px -1px rgba(0, 0, 0, 0.2),0px 4px 5px 0px rgba(0, 0, 0, 0.14),0px 1px 10px 0px rgba(0,0,0,.12);transition:box-shadow 200ms linear}.mdc-top-app-bar--dense.mdc-top-app-bar--prominent .mdc-top-app-bar__row{height:96px}.mdc-top-app-bar--dense.mdc-top-app-bar--prominent .mdc-top-app-bar__section{padding:0 12px}.mdc-top-app-bar--dense.mdc-top-app-bar--prominent .mdc-top-app-bar__title{padding-left:20px;padding-right:0;padding-bottom:9px}[dir=rtl] .mdc-top-app-bar--dense.mdc-top-app-bar--prominent .mdc-top-app-bar__title,.mdc-top-app-bar--dense.mdc-top-app-bar--prominent .mdc-top-app-bar__title[dir=rtl]{padding-left:0;padding-right:20px}.mdc-top-app-bar--fixed-adjust{padding-top:64px}.mdc-top-app-bar--dense-fixed-adjust{padding-top:48px}.mdc-top-app-bar--short-fixed-adjust{padding-top:56px}.mdc-top-app-bar--prominent-fixed-adjust{padding-top:128px}.mdc-top-app-bar--dense-prominent-fixed-adjust{padding-top:96px}@media(max-width: 599px){.mdc-top-app-bar__row{height:56px}.mdc-top-app-bar__section{padding:4px}.mdc-top-app-bar--short{transition:width 200ms cubic-bezier(0.4, 0, 0.2, 1)}.mdc-top-app-bar--short-collapsed{transition:width 250ms cubic-bezier(0.4, 0, 0.2, 1)}.mdc-top-app-bar--short-collapsed .mdc-top-app-bar__section--align-end{padding-left:0;padding-right:12px}[dir=rtl] .mdc-top-app-bar--short-collapsed .mdc-top-app-bar__section--align-end,.mdc-top-app-bar--short-collapsed .mdc-top-app-bar__section--align-end[dir=rtl]{padding-left:12px;padding-right:0}.mdc-top-app-bar--prominent .mdc-top-app-bar__title{padding-bottom:6px}.mdc-top-app-bar--fixed-adjust{padding-top:56px}}:host{display:block}.mdc-top-app-bar{color:#fff;color:var(--mdc-theme-on-primary, #fff);width:100%;width:var(--mdc-top-app-bar-width, 100%)}.mdc-top-app-bar--prominent #navigation ::slotted(*),.mdc-top-app-bar--prominent #actions ::slotted(*){align-self:flex-start}#navigation ::slotted(*),#actions ::slotted(*){--mdc-icon-button-ripple-opacity: 0.24}.mdc-top-app-bar--short-collapsed #actions ::slotted(*){transition:padding 150ms cubic-bezier(0.4, 0, 0.2, 1)}.mdc-top-app-bar__section--align-center{justify-content:center}.mdc-top-app-bar__section--align-center .mdc-top-app-bar__title{padding-left:0;padding-right:0}.center-title .mdc-top-app-bar__section--align-start,.center-title .mdc-top-app-bar__section--align-end{flex-basis:0}.mdc-top-app-bar--dense.mdc-top-app-bar--prominent .mdc-top-app-bar__section--align-center .mdc-top-app-bar__title{padding-left:0;padding-right:0}.mdc-top-app-bar--fixed-scrolled{box-shadow:var(--mdc-top-app-bar-fixed-box-shadow, 0px 2px 4px -1px rgba(0, 0, 0, 0.2), 0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12))}`;
+ * @license
+ * Copyright 2021 Google LLC
+ * SPDX-LIcense-Identifier: Apache-2.0
+ */
+const styles = css `.mdc-top-app-bar{background-color:#6200ee;background-color:var(--mdc-theme-primary, #6200ee);color:white;display:flex;position:fixed;flex-direction:column;justify-content:space-between;box-sizing:border-box;width:100%;z-index:4}.mdc-top-app-bar .mdc-top-app-bar__action-item,.mdc-top-app-bar .mdc-top-app-bar__navigation-icon{color:#fff;color:var(--mdc-theme-on-primary, #fff)}.mdc-top-app-bar .mdc-top-app-bar__action-item::before,.mdc-top-app-bar .mdc-top-app-bar__action-item::after,.mdc-top-app-bar .mdc-top-app-bar__navigation-icon::before,.mdc-top-app-bar .mdc-top-app-bar__navigation-icon::after{background-color:#fff;background-color:var(--mdc-ripple-color, var(--mdc-theme-on-primary, #fff))}.mdc-top-app-bar .mdc-top-app-bar__action-item:hover::before,.mdc-top-app-bar .mdc-top-app-bar__action-item.mdc-ripple-surface--hover::before,.mdc-top-app-bar .mdc-top-app-bar__navigation-icon:hover::before,.mdc-top-app-bar .mdc-top-app-bar__navigation-icon.mdc-ripple-surface--hover::before{opacity:0.08;opacity:var(--mdc-ripple-hover-opacity, 0.08)}.mdc-top-app-bar .mdc-top-app-bar__action-item.mdc-ripple-upgraded--background-focused::before,.mdc-top-app-bar .mdc-top-app-bar__action-item:not(.mdc-ripple-upgraded):focus::before,.mdc-top-app-bar .mdc-top-app-bar__navigation-icon.mdc-ripple-upgraded--background-focused::before,.mdc-top-app-bar .mdc-top-app-bar__navigation-icon:not(.mdc-ripple-upgraded):focus::before{transition-duration:75ms;opacity:0.24;opacity:var(--mdc-ripple-focus-opacity, 0.24)}.mdc-top-app-bar .mdc-top-app-bar__action-item:not(.mdc-ripple-upgraded)::after,.mdc-top-app-bar .mdc-top-app-bar__navigation-icon:not(.mdc-ripple-upgraded)::after{transition:opacity 150ms linear}.mdc-top-app-bar .mdc-top-app-bar__action-item:not(.mdc-ripple-upgraded):active::after,.mdc-top-app-bar .mdc-top-app-bar__navigation-icon:not(.mdc-ripple-upgraded):active::after{transition-duration:75ms;opacity:0.24;opacity:var(--mdc-ripple-press-opacity, 0.24)}.mdc-top-app-bar .mdc-top-app-bar__action-item.mdc-ripple-upgraded,.mdc-top-app-bar .mdc-top-app-bar__navigation-icon.mdc-ripple-upgraded{--mdc-ripple-fg-opacity:var(--mdc-ripple-press-opacity, 0.24)}.mdc-top-app-bar__row{display:flex;position:relative;box-sizing:border-box;width:100%;height:64px}.mdc-top-app-bar__section{display:inline-flex;flex:1 1 auto;align-items:center;min-width:0;padding:8px 12px;z-index:1}.mdc-top-app-bar__section--align-start{justify-content:flex-start;order:-1}.mdc-top-app-bar__section--align-end{justify-content:flex-end;order:1}.mdc-top-app-bar__title{-moz-osx-font-smoothing:grayscale;-webkit-font-smoothing:antialiased;font-family:Roboto, sans-serif;font-family:var(--mdc-typography-headline6-font-family, var(--mdc-typography-font-family, Roboto, sans-serif));font-size:1.25rem;font-size:var(--mdc-typography-headline6-font-size, 1.25rem);line-height:2rem;line-height:var(--mdc-typography-headline6-line-height, 2rem);font-weight:500;font-weight:var(--mdc-typography-headline6-font-weight, 500);letter-spacing:0.0125em;letter-spacing:var(--mdc-typography-headline6-letter-spacing, 0.0125em);text-decoration:inherit;text-decoration:var(--mdc-typography-headline6-text-decoration, inherit);text-transform:inherit;text-transform:var(--mdc-typography-headline6-text-transform, inherit);padding-left:20px;padding-right:0;text-overflow:ellipsis;white-space:nowrap;overflow:hidden;z-index:1}[dir=rtl] .mdc-top-app-bar__title,.mdc-top-app-bar__title[dir=rtl]{padding-left:0;padding-right:20px}.mdc-top-app-bar--short-collapsed{border-top-left-radius:0;border-top-right-radius:0;border-bottom-right-radius:24px;border-bottom-left-radius:0}[dir=rtl] .mdc-top-app-bar--short-collapsed,.mdc-top-app-bar--short-collapsed[dir=rtl]{border-top-left-radius:0;border-top-right-radius:0;border-bottom-right-radius:0;border-bottom-left-radius:24px}.mdc-top-app-bar--short{top:0;right:auto;left:0;width:100%;transition:width 250ms cubic-bezier(0.4, 0, 0.2, 1)}[dir=rtl] .mdc-top-app-bar--short,.mdc-top-app-bar--short[dir=rtl]{right:0;left:auto}.mdc-top-app-bar--short .mdc-top-app-bar__row{height:56px}.mdc-top-app-bar--short .mdc-top-app-bar__section{padding:4px}.mdc-top-app-bar--short .mdc-top-app-bar__title{transition:opacity 200ms cubic-bezier(0.4, 0, 0.2, 1);opacity:1}.mdc-top-app-bar--short-collapsed{box-shadow:0px 2px 4px -1px rgba(0, 0, 0, 0.2),0px 4px 5px 0px rgba(0, 0, 0, 0.14),0px 1px 10px 0px rgba(0,0,0,.12);width:56px;transition:width 300ms cubic-bezier(0.4, 0, 0.2, 1)}.mdc-top-app-bar--short-collapsed .mdc-top-app-bar__title{display:none}.mdc-top-app-bar--short-collapsed .mdc-top-app-bar__action-item{transition:padding 150ms cubic-bezier(0.4, 0, 0.2, 1)}.mdc-top-app-bar--short-collapsed.mdc-top-app-bar--short-has-action-item{width:112px}.mdc-top-app-bar--short-collapsed.mdc-top-app-bar--short-has-action-item .mdc-top-app-bar__section--align-end{padding-left:0;padding-right:12px}[dir=rtl] .mdc-top-app-bar--short-collapsed.mdc-top-app-bar--short-has-action-item .mdc-top-app-bar__section--align-end,.mdc-top-app-bar--short-collapsed.mdc-top-app-bar--short-has-action-item .mdc-top-app-bar__section--align-end[dir=rtl]{padding-left:12px;padding-right:0}.mdc-top-app-bar--dense .mdc-top-app-bar__row{height:48px}.mdc-top-app-bar--dense .mdc-top-app-bar__section{padding:0 4px}.mdc-top-app-bar--dense .mdc-top-app-bar__title{padding-left:12px;padding-right:0}[dir=rtl] .mdc-top-app-bar--dense .mdc-top-app-bar__title,.mdc-top-app-bar--dense .mdc-top-app-bar__title[dir=rtl]{padding-left:0;padding-right:12px}.mdc-top-app-bar--prominent .mdc-top-app-bar__row{height:128px}.mdc-top-app-bar--prominent .mdc-top-app-bar__title{align-self:flex-end;padding-bottom:2px}.mdc-top-app-bar--prominent .mdc-top-app-bar__action-item,.mdc-top-app-bar--prominent .mdc-top-app-bar__navigation-icon{align-self:flex-start}.mdc-top-app-bar--fixed{transition:box-shadow 200ms linear}.mdc-top-app-bar--fixed-scrolled{box-shadow:0px 2px 4px -1px rgba(0, 0, 0, 0.2),0px 4px 5px 0px rgba(0, 0, 0, 0.14),0px 1px 10px 0px rgba(0,0,0,.12);transition:box-shadow 200ms linear}.mdc-top-app-bar--dense.mdc-top-app-bar--prominent .mdc-top-app-bar__row{height:96px}.mdc-top-app-bar--dense.mdc-top-app-bar--prominent .mdc-top-app-bar__section{padding:0 12px}.mdc-top-app-bar--dense.mdc-top-app-bar--prominent .mdc-top-app-bar__title{padding-left:20px;padding-right:0;padding-bottom:9px}[dir=rtl] .mdc-top-app-bar--dense.mdc-top-app-bar--prominent .mdc-top-app-bar__title,.mdc-top-app-bar--dense.mdc-top-app-bar--prominent .mdc-top-app-bar__title[dir=rtl]{padding-left:0;padding-right:20px}.mdc-top-app-bar--fixed-adjust{padding-top:64px}.mdc-top-app-bar--dense-fixed-adjust{padding-top:48px}.mdc-top-app-bar--short-fixed-adjust{padding-top:56px}.mdc-top-app-bar--prominent-fixed-adjust{padding-top:128px}.mdc-top-app-bar--dense-prominent-fixed-adjust{padding-top:96px}@media(max-width: 599px){.mdc-top-app-bar__row{height:56px}.mdc-top-app-bar__section{padding:4px}.mdc-top-app-bar--short{transition:width 200ms cubic-bezier(0.4, 0, 0.2, 1)}.mdc-top-app-bar--short-collapsed{transition:width 250ms cubic-bezier(0.4, 0, 0.2, 1)}.mdc-top-app-bar--short-collapsed .mdc-top-app-bar__section--align-end{padding-left:0;padding-right:12px}[dir=rtl] .mdc-top-app-bar--short-collapsed .mdc-top-app-bar__section--align-end,.mdc-top-app-bar--short-collapsed .mdc-top-app-bar__section--align-end[dir=rtl]{padding-left:12px;padding-right:0}.mdc-top-app-bar--prominent .mdc-top-app-bar__title{padding-bottom:6px}.mdc-top-app-bar--fixed-adjust{padding-top:56px}}:host{display:block}.mdc-top-app-bar{color:#fff;color:var(--mdc-theme-on-primary, #fff);width:100%;width:var(--mdc-top-app-bar-width, 100%)}.mdc-top-app-bar--prominent #navigation ::slotted(*),.mdc-top-app-bar--prominent #actions ::slotted(*){align-self:flex-start}#navigation ::slotted(*),#actions ::slotted(*){--mdc-icon-button-ripple-opacity: 0.24}.mdc-top-app-bar--short-collapsed #actions ::slotted(*){transition:padding 150ms cubic-bezier(0.4, 0, 0.2, 1)}.mdc-top-app-bar__section--align-center{justify-content:center}.mdc-top-app-bar__section--align-center .mdc-top-app-bar__title{padding-left:0;padding-right:0}.center-title .mdc-top-app-bar__section--align-start,.center-title .mdc-top-app-bar__section--align-end{flex-basis:0}.mdc-top-app-bar--dense.mdc-top-app-bar--prominent .mdc-top-app-bar__section--align-center .mdc-top-app-bar__title{padding-left:0;padding-right:0}.mdc-top-app-bar--fixed-scrolled{box-shadow:var(--mdc-top-app-bar-fixed-box-shadow, 0px 2px 4px -1px rgba(0, 0, 0, 0.2), 0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12))}`;
 
 /**
  * @license
@@ -175,29 +164,30 @@ var MDCTopAppBarFoundation = /** @class */ (function (_super) {
         /**
          * Indicates if the top app bar was docked in the previous scroll handler iteration.
          */
-        _this.wasDocked_ = true;
+        _this.wasDocked = true;
         /**
          * Indicates if the top app bar is docked in the fully shown position.
          */
-        _this.isDockedShowing_ = true;
+        _this.isDockedShowing = true;
         /**
          * Variable for current scroll position of the top app bar
          */
-        _this.currentAppBarOffsetTop_ = 0;
+        _this.currentAppBarOffsetTop = 0;
         /**
          * Used to prevent the top app bar from being scrolled out of view during resize events
          */
-        _this.isCurrentlyBeingResized_ = false;
+        _this.isCurrentlyBeingResized = false;
         /**
          * The timeout that's used to throttle the resize events
          */
-        _this.resizeThrottleId_ = INITIAL_VALUE;
+        _this.resizeThrottleId = INITIAL_VALUE;
         /**
-         * The timeout that's used to debounce toggling the isCurrentlyBeingResized_ variable after a resize
+         * The timeout that's used to debounce toggling the isCurrentlyBeingResized
+         * variable after a resize
          */
-        _this.resizeDebounceId_ = INITIAL_VALUE;
-        _this.lastScrollPosition_ = _this.adapter.getViewportScrollY();
-        _this.topAppBarHeight_ = _this.adapter.getTopAppBarHeight();
+        _this.resizeDebounceId = INITIAL_VALUE;
+        _this.lastScrollPosition = _this.adapter.getViewportScrollY();
+        _this.topAppBarHeight = _this.adapter.getTopAppBarHeight();
         return _this;
     }
     MDCTopAppBarFoundation.prototype.destroy = function () {
@@ -210,19 +200,20 @@ var MDCTopAppBarFoundation = /** @class */ (function (_super) {
      */
     MDCTopAppBarFoundation.prototype.handleTargetScroll = function () {
         var currentScrollPosition = Math.max(this.adapter.getViewportScrollY(), 0);
-        var diff = currentScrollPosition - this.lastScrollPosition_;
-        this.lastScrollPosition_ = currentScrollPosition;
-        // If the window is being resized the lastScrollPosition_ needs to be updated but the
-        // current scroll of the top app bar should stay in the same position.
-        if (!this.isCurrentlyBeingResized_) {
-            this.currentAppBarOffsetTop_ -= diff;
-            if (this.currentAppBarOffsetTop_ > 0) {
-                this.currentAppBarOffsetTop_ = 0;
+        var diff = currentScrollPosition - this.lastScrollPosition;
+        this.lastScrollPosition = currentScrollPosition;
+        // If the window is being resized the lastScrollPosition needs to be updated
+        // but the current scroll of the top app bar should stay in the same
+        // position.
+        if (!this.isCurrentlyBeingResized) {
+            this.currentAppBarOffsetTop -= diff;
+            if (this.currentAppBarOffsetTop > 0) {
+                this.currentAppBarOffsetTop = 0;
             }
-            else if (Math.abs(this.currentAppBarOffsetTop_) > this.topAppBarHeight_) {
-                this.currentAppBarOffsetTop_ = -this.topAppBarHeight_;
+            else if (Math.abs(this.currentAppBarOffsetTop) > this.topAppBarHeight) {
+                this.currentAppBarOffsetTop = -this.topAppBarHeight;
             }
-            this.moveTopAppBar_();
+            this.moveTopAppBar();
         }
     };
     /**
@@ -232,42 +223,42 @@ var MDCTopAppBarFoundation = /** @class */ (function (_super) {
     MDCTopAppBarFoundation.prototype.handleWindowResize = function () {
         var _this = this;
         // Throttle resize events 10 p/s
-        if (!this.resizeThrottleId_) {
-            this.resizeThrottleId_ = setTimeout(function () {
-                _this.resizeThrottleId_ = INITIAL_VALUE;
-                _this.throttledResizeHandler_();
+        if (!this.resizeThrottleId) {
+            this.resizeThrottleId = setTimeout(function () {
+                _this.resizeThrottleId = INITIAL_VALUE;
+                _this.throttledResizeHandler();
             }, numbers.DEBOUNCE_THROTTLE_RESIZE_TIME_MS);
         }
-        this.isCurrentlyBeingResized_ = true;
-        if (this.resizeDebounceId_) {
-            clearTimeout(this.resizeDebounceId_);
+        this.isCurrentlyBeingResized = true;
+        if (this.resizeDebounceId) {
+            clearTimeout(this.resizeDebounceId);
         }
-        this.resizeDebounceId_ = setTimeout(function () {
+        this.resizeDebounceId = setTimeout(function () {
             _this.handleTargetScroll();
-            _this.isCurrentlyBeingResized_ = false;
-            _this.resizeDebounceId_ = INITIAL_VALUE;
+            _this.isCurrentlyBeingResized = false;
+            _this.resizeDebounceId = INITIAL_VALUE;
         }, numbers.DEBOUNCE_THROTTLE_RESIZE_TIME_MS);
     };
     /**
      * Function to determine if the DOM needs to update.
      */
-    MDCTopAppBarFoundation.prototype.checkForUpdate_ = function () {
-        var offscreenBoundaryTop = -this.topAppBarHeight_;
-        var hasAnyPixelsOffscreen = this.currentAppBarOffsetTop_ < 0;
-        var hasAnyPixelsOnscreen = this.currentAppBarOffsetTop_ > offscreenBoundaryTop;
+    MDCTopAppBarFoundation.prototype.checkForUpdate = function () {
+        var offscreenBoundaryTop = -this.topAppBarHeight;
+        var hasAnyPixelsOffscreen = this.currentAppBarOffsetTop < 0;
+        var hasAnyPixelsOnscreen = this.currentAppBarOffsetTop > offscreenBoundaryTop;
         var partiallyShowing = hasAnyPixelsOffscreen && hasAnyPixelsOnscreen;
         // If it's partially showing, it can't be docked.
         if (partiallyShowing) {
-            this.wasDocked_ = false;
+            this.wasDocked = false;
         }
         else {
             // Not previously docked and not partially showing, it's now docked.
-            if (!this.wasDocked_) {
-                this.wasDocked_ = true;
+            if (!this.wasDocked) {
+                this.wasDocked = true;
                 return true;
             }
-            else if (this.isDockedShowing_ !== hasAnyPixelsOnscreen) {
-                this.isDockedShowing_ = hasAnyPixelsOnscreen;
+            else if (this.isDockedShowing !== hasAnyPixelsOnscreen) {
+                this.isDockedShowing = hasAnyPixelsOnscreen;
                 return true;
             }
         }
@@ -276,12 +267,12 @@ var MDCTopAppBarFoundation = /** @class */ (function (_super) {
     /**
      * Function to move the top app bar if needed.
      */
-    MDCTopAppBarFoundation.prototype.moveTopAppBar_ = function () {
-        if (this.checkForUpdate_()) {
+    MDCTopAppBarFoundation.prototype.moveTopAppBar = function () {
+        if (this.checkForUpdate()) {
             // Once the top app bar is fully hidden we use the max potential top app bar height as our offset
             // so the top app bar doesn't show if the window resizes and the new height > the old height.
-            var offset = this.currentAppBarOffsetTop_;
-            if (Math.abs(offset) >= this.topAppBarHeight_) {
+            var offset = this.currentAppBarOffsetTop;
+            if (Math.abs(offset) >= this.topAppBarHeight) {
                 offset = -numbers.MAX_TOP_APP_BAR_HEIGHT;
             }
             this.adapter.setStyle('top', offset + 'px');
@@ -291,22 +282,20 @@ var MDCTopAppBarFoundation = /** @class */ (function (_super) {
      * Throttled function that updates the top app bar scrolled values if the
      * top app bar height changes.
      */
-    MDCTopAppBarFoundation.prototype.throttledResizeHandler_ = function () {
+    MDCTopAppBarFoundation.prototype.throttledResizeHandler = function () {
         var currentHeight = this.adapter.getTopAppBarHeight();
-        if (this.topAppBarHeight_ !== currentHeight) {
-            this.wasDocked_ = false;
+        if (this.topAppBarHeight !== currentHeight) {
+            this.wasDocked = false;
             // Since the top app bar has a different height depending on the screen width, this
             // will ensure that the top app bar remains in the correct location if
             // completely hidden and a resize makes the top app bar a different height.
-            this.currentAppBarOffsetTop_ -= this.topAppBarHeight_ - currentHeight;
-            this.topAppBarHeight_ = currentHeight;
+            this.currentAppBarOffsetTop -= this.topAppBarHeight - currentHeight;
+            this.topAppBarHeight = currentHeight;
         }
         this.handleTargetScroll();
     };
     return MDCTopAppBarFoundation;
 }(MDCTopAppBarBaseFoundation));
-// tslint:disable-next-line:no-default-export Needed for backward compatibility with MDC Web v0.44.0 and earlier.
-var MDCTopAppBarFoundation$1 = MDCTopAppBarFoundation;
 
 const passiveEventOptionsIfSupported = supportsPassiveEventListener ? { passive: true } : undefined;
 class TopAppBarBaseBase extends BaseElement {
@@ -411,7 +400,7 @@ __decorate([
 class TopAppBarBase extends TopAppBarBaseBase {
     constructor() {
         super(...arguments);
-        this.mdcFoundationClass = MDCTopAppBarFoundation$1;
+        this.mdcFoundationClass = MDCTopAppBarFoundation;
         this.prominent = false;
         this.dense = false;
         this.handleResize = () => {
@@ -478,7 +467,7 @@ var MDCFixedTopAppBarFoundation = /** @class */ (function (_super) {
         /**
          * State variable for the previous scroll iteration top app bar state
          */
-        _this.wasScrolled_ = false;
+        _this.wasScrolled = false;
         return _this;
     }
     /**
@@ -488,43 +477,30 @@ var MDCFixedTopAppBarFoundation = /** @class */ (function (_super) {
     MDCFixedTopAppBarFoundation.prototype.handleTargetScroll = function () {
         var currentScroll = this.adapter.getViewportScrollY();
         if (currentScroll <= 0) {
-            if (this.wasScrolled_) {
+            if (this.wasScrolled) {
                 this.adapter.removeClass(cssClasses.FIXED_SCROLLED_CLASS);
-                this.wasScrolled_ = false;
+                this.wasScrolled = false;
             }
         }
         else {
-            if (!this.wasScrolled_) {
+            if (!this.wasScrolled) {
                 this.adapter.addClass(cssClasses.FIXED_SCROLLED_CLASS);
-                this.wasScrolled_ = true;
+                this.wasScrolled = true;
             }
         }
     };
     return MDCFixedTopAppBarFoundation;
 }(MDCTopAppBarFoundation));
-// tslint:disable-next-line:no-default-export Needed for backward compatibility with MDC Web v0.44.0 and earlier.
-var MDCFixedTopAppBarFoundation$1 = MDCFixedTopAppBarFoundation;
 
 /**
-@license
-Copyright 2019 Google Inc. All Rights Reserved.
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-    http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-*/
+ * @license
+ * Copyright 2019 Google LLC
+ * SPDX-License-Identifier: Apache-2.0
+ */
 class TopAppBarFixedBase extends TopAppBarBase {
     constructor() {
         super(...arguments);
-        this.mdcFoundationClass = MDCFixedTopAppBarFoundation$1;
+        this.mdcFoundationClass = MDCFixedTopAppBarFoundation;
     }
     barClasses() {
         return Object.assign(Object.assign({}, super.barClasses()), { 'mdc-top-app-bar--fixed': true });
@@ -539,7 +515,7 @@ class TopAppBarFixedBase extends TopAppBarBase {
 
 let TopAppBarFixed = class TopAppBarFixed extends TopAppBarFixedBase {
 };
-TopAppBarFixed.styles = style;
+TopAppBarFixed.styles = [styles];
 TopAppBarFixed = __decorate([
     customElement('mwc-top-app-bar-fixed')
 ], TopAppBarFixed);

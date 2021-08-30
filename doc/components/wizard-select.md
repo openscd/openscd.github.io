@@ -39,7 +39,6 @@ NB: Use `maybeValue: string | null` instead of `value` if `nullable`!
 | `checkValidity`     | `(): boolean`                                    |
 | `click`             | `(): void`                                       |
 | `focus`             | `(): void`                                       |
-| `getUpdateComplete` | `(): Promise<boolean>`                           |
 | `layout`            | `(updateItems?: boolean \| undefined): Promise<void>` |
 | `layoutOptions`     | `(): Promise<void>`                              |
 | `renderSwitch`      | `(): TemplateResult`                             |

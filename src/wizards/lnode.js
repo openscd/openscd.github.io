@@ -9,7 +9,7 @@ import {
   referencePath,
   selector
 } from "../foundation.js";
-import {List} from "../../_snowpack/pkg/@material/mwc-list.js";
+import {ListBase} from "../../_snowpack/pkg/@material/mwc-list/mwc-list-base.js";
 const preferredLn = {
   CBR: ["CSWI", "CILO", "XCBR"],
   DIS: ["CSWI", "CILO", "XSWI"],
@@ -81,7 +81,7 @@ function getListContainer(target, selector2) {
   return target.parentElement?.parentElement?.nextElementSibling?.querySelector(selector2) ?? null;
 }
 function onIEDSelect(evt, parent) {
-  if (!(evt.target instanceof List))
+  if (!(evt.target instanceof ListBase))
     return;
   const lnList = getListContainer(evt.target, "#lnList");
   if (lnList === null)

@@ -9,7 +9,12 @@ var __decorate = (decorators, target, key, kind) => {
     __defProp(target, key, result);
   return result;
 };
-import {html, property, query} from "../_snowpack/pkg/lit-element.js";
+import {
+  html,
+  internalProperty,
+  property,
+  query
+} from "../_snowpack/pkg/lit-element.js";
 import {ifDefined} from "../_snowpack/pkg/lit-html/directives/if-defined.js";
 import {
   ifImplemented,
@@ -24,16 +29,25 @@ const icons = {
   error: "report",
   action: "history"
 };
+function getPluginName(src) {
+  const plugin = JSON.parse(localStorage.getItem("plugins") ?? "[]").find((p) => p.src === src);
+  if (!plugin)
+    return src;
+  const name = plugin.name;
+  return name || src;
+}
 export function Logging(Base) {
   class LoggingElement extends Base {
     constructor(...args) {
       super(...args);
       this.history = [];
       this.currentAction = -1;
+      this.diagnoses = new Map();
       this.undo = this.undo.bind(this);
       this.redo = this.redo.bind(this);
       this.onLog = this.onLog.bind(this);
       this.addEventListener("log", this.onLog);
+      this.addEventListener("issue", this.onIssue);
     }
     get canUndo() {
       return this.currentAction >= 0;
@@ -51,6 +65,21 @@ export function Logging(Base) {
       if (index >= 0)
         index += this.currentAction + 1;
       return index;
+    }
+    onIssue(de) {
+      const issues = this.diagnoses.get(de.detail.validatorId);
+      if (issues && issues[0].statusNumber > de.detail.statusNumber)
+        return;
+      else if (issues && issues[0].statusNumber === de.detail.statusNumber)
+        issues.push(de.detail);
+      else if (issues && issues[0].statusNumber !== de.detail.statusNumber) {
+        issues.length = 0;
+        issues?.push(de.detail);
+      } else
+        this.diagnoses.set(de.detail.validatorId, [de.detail]);
+      this.lastIssue = de.detail;
+      this.issueUI.close();
+      this.issueUI.show();
     }
     undo() {
       if (!this.canUndo)
@@ -136,6 +165,37 @@ export function Logging(Base) {
           <mwc-icon slot="graphic">info</mwc-icon>
         </mwc-list-item>`;
     }
+    renderIssueEntry(issue) {
+      return html` <abbr title="${issue.title + "\n" + issue.message}"
+        ><mwc-list-item ?twoline=${!!issue.message}>
+          <span> ${issue.title}</span>
+          <span slot="secondary">${issue.message}</span>
+        </mwc-list-item></abbr
+      >`;
+    }
+    renderValidatorsIssues(issues) {
+      if (issues.length === 0)
+        return [html``];
+      return [
+        html`<mwc-list-item noninteractive
+          >${getPluginName(issues[0].validatorId)}</mwc-list-item
+        >`,
+        html`<li divider padded role="separator"></li>`,
+        ...issues.map((issue) => this.renderIssueEntry(issue))
+      ];
+    }
+    renderIssues() {
+      const issueItems = [];
+      this.diagnoses.forEach((issues) => {
+        this.renderValidatorsIssues(issues).forEach((issueItem) => issueItems.push(issueItem));
+      });
+      return issueItems.length ? issueItems : html`<mwc-list-item disabled graphic="icon">
+            <span
+              >${translate(this.history.length ? "diag.zeroissues" : "diag.placeholder")}</span
+            >
+            <mwc-icon slot="graphic">info</mwc-icon>
+          </mwc-list-item>`;
+    }
     renderFilterButtons() {
       return Object.keys(icons).map((kind) => html`<mwc-icon-button-toggle id="${kind}filter" on
           >${getFilterIcon(kind, false)}
@@ -210,6 +270,15 @@ export function Logging(Base) {
           >
         </mwc-dialog>
 
+        <mwc-dialog id="diagnostic" heading="${translate("diag.name")}">
+          <filtered-list id="content" wrapFocus
+            >${this.renderIssues()}</filtered-list
+          >
+          <mwc-button slot="primaryAction" dialogaction="close"
+            >${translate("close")}</mwc-button
+          >
+        </mwc-dialog>
+
         <mwc-snackbar
           id="info"
           timeoutMs="4000"
@@ -224,7 +293,7 @@ export function Logging(Base) {
         >
           <mwc-button
             slot="action"
-            icon="rule"
+            icon="history"
             @click=${() => this.logUI.show()}
             >${translate("log.snackbar.show")}</mwc-button
           >
@@ -237,8 +306,21 @@ export function Logging(Base) {
         >
           <mwc-button
             slot="action"
-            icon="rule"
+            icon="history"
             @click=${() => this.logUI.show()}
+            >${translate("log.snackbar.show")}</mwc-button
+          >
+          <mwc-icon-button icon="close" slot="dismiss"></mwc-icon-button>
+        </mwc-snackbar>
+        <mwc-snackbar
+          id="issue"
+          timeoutMs="10000"
+          labelText="${this.lastIssue?.title ?? get("log.snackbar.placeholder")}"
+        >
+          <mwc-button
+            slot="action"
+            icon="rule"
+            @click=${() => this.diagnosticUI.show()}
             >${translate("log.snackbar.show")}</mwc-button
           >
           <mwc-icon-button icon="close" slot="dismiss"></mwc-icon-button>
@@ -252,8 +334,17 @@ export function Logging(Base) {
     property({type: Number})
   ], LoggingElement.prototype, "currentAction", 2);
   __decorate([
+    property()
+  ], LoggingElement.prototype, "diagnoses", 2);
+  __decorate([
+    internalProperty()
+  ], LoggingElement.prototype, "lastIssue", 2);
+  __decorate([
     query("#log")
   ], LoggingElement.prototype, "logUI", 2);
+  __decorate([
+    query("#diagnostic")
+  ], LoggingElement.prototype, "diagnosticUI", 2);
   __decorate([
     query("#error")
   ], LoggingElement.prototype, "errorUI", 2);
@@ -263,5 +354,8 @@ export function Logging(Base) {
   __decorate([
     query("#info")
   ], LoggingElement.prototype, "infoUI", 2);
+  __decorate([
+    query("#issue")
+  ], LoggingElement.prototype, "issueUI", 2);
   return LoggingElement;
 }

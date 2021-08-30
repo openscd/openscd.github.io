@@ -11,6 +11,7 @@ var __decorate = (decorators, target, key, kind) => {
 };
 import {List} from "../_snowpack/pkg/@material/mwc-list.js";
 import {CheckListItem} from "../_snowpack/pkg/@material/mwc-list/mwc-check-list-item.js";
+import {ListBase} from "../_snowpack/pkg/@material/mwc-list/mwc-list-base.js";
 import {
   css,
   customElement,
@@ -20,7 +21,7 @@ import {
   query,
   unsafeCSS
 } from "../_snowpack/pkg/lit-element.js";
-export let FilteredList = class extends List {
+export let FilteredList = class extends ListBase {
   constructor() {
     super();
     this.disableCheckAll = false;

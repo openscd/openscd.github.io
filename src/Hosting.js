@@ -9,7 +9,12 @@ var __decorate = (decorators, target, key, kind) => {
     __defProp(target, key, result);
   return result;
 };
-import {html, property, query} from "../_snowpack/pkg/lit-element.js";
+import {
+  html,
+  internalProperty,
+  property,
+  query
+} from "../_snowpack/pkg/lit-element.js";
 import {until} from "../_snowpack/pkg/lit-html/directives/until.js";
 import {translate} from "../_snowpack/pkg/lit-translate.js";
 import {newPendingStateEvent} from "./foundation.js";
@@ -20,9 +25,10 @@ export function Hosting(Base) {
       super(...args);
       this.activeTab = 0;
       this.validated = Promise.resolve();
+      this.statusNumber = 0;
       this.addEventListener("validate", async (e) => {
         this.validated = Promise.allSettled(this.menuUI.querySelector("mwc-list").items.filter((item) => item.className === "validator").map((item) => {
-          const promise = item.lastElementChild.validate(e.detail.identity);
+          const promise = item.lastElementChild.validate(e.detail.identity, ++this.statusNumber);
           return promise;
         }));
       });
@@ -66,7 +72,7 @@ export function Hosting(Base) {
         icon: plugin.icon || pluginIcons["validator"],
         name: plugin.name,
         action: (ae) => {
-          this.dispatchEvent(newPendingStateEvent(ae.target.items[ae.detail.index].lastElementChild.validate("")));
+          this.dispatchEvent(newPendingStateEvent(ae.target.items[ae.detail.index].lastElementChild.validate("", ++this.statusNumber)));
         },
         disabled: () => this.doc === null,
         content: plugin.content,
@@ -98,10 +104,17 @@ export function Hosting(Base) {
         },
         ...validators,
         {
-          icon: "rule",
+          icon: "history",
           name: "menu.viewLog",
           actionItem: true,
           action: () => this.logUI.show(),
+          kind: "static"
+        },
+        {
+          icon: "rule",
+          name: "menu.viewDiag",
+          actionItem: true,
+          action: () => this.diagnosticUI.show(),
           kind: "static"
         },
         "divider",
@@ -206,6 +219,9 @@ export function Hosting(Base) {
   __decorate([
     property({attribute: false})
   ], HostingElement.prototype, "validated", 2);
+  __decorate([
+    internalProperty()
+  ], HostingElement.prototype, "statusNumber", 2);
   __decorate([
     query("#menu")
   ], HostingElement.prototype, "menuUI", 2);

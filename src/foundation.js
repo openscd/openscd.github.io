@@ -102,6 +102,14 @@ export function newLogEvent(detail, eventInitDict) {
     detail: {...detail, ...eventInitDict?.detail}
   });
 }
+export function newIssueEvent(detail, eventInitDict) {
+  return new CustomEvent("issue", {
+    bubbles: true,
+    composed: true,
+    ...eventInitDict,
+    detail: {...detail, ...eventInitDict?.detail}
+  });
+}
 export function newPendingStateEvent(promise, eventInitDict) {
   return new CustomEvent("pending-state", {
     bubbles: true,
@@ -1763,13 +1771,13 @@ export const ifImplemented = directive((rendered) => (part) => {
   else
     part.setValue("");
 });
-const nameStartChar = "[:_A-Za-z]|[\xC0-\xD6]|[\xD8-\xF6]|[\xF8-\u02FF]|[\u0370-\u037D]|[\u037F-\u1FFF]|[\u200C-\u200D]|[\u2070-\u218F]|[\u2C00-\u2FEF]|[\u3001-\uD7FF]|[\uF900-\uFDCF]|[\uFDF0-\uFFFD]|[\u{10000}\\-\u{EFFFF}]";
-const nameChar = nameStartChar + "|[.0-9-]|\xB7|[\u0300-\u036F]|[\u203F-\u2040]";
+const nameStartChar = "[:_A-Za-z]|[À-Ö]|[Ø-ö]|[ø-˿]|[Ͱ-ͽ]|[Ϳ-῿]|[‌-‍]|[⁰-↏]|[Ⰰ-⿯]|[、-퟿]|[豈-﷏]|[ﷰ-�]|[𐀀\\-󯿿]";
+const nameChar = nameStartChar + "|[.0-9-]|·|[̀-ͯ]|[‿-⁀]";
 const name = nameStartChar + "(" + nameChar + ")*";
 const nmToken = "(" + nameChar + ")+";
 export const patterns = {
-  string: "([	-\n]|[\r]|[ -~]|[\x85]|[\xA0-\uD7FF]|[\uE000-\uFFFD]|[\u{10000}\\-\u{10FFFF}])*",
-  normalizedString: "([ -~]|[\x85]|[\xA0-\uD7FF]|[\uE000-\uFFFD]|[\u{10000}\\-\u{10FFFF}])*",
+  string: "([	-\n]|[\r]|[ -~]|[]|[ -퟿]|[-�]|[𐀀\\-􏿿])*",
+  normalizedString: "([ -~]|[]|[ -퟿]|[-�]|[𐀀\\-􏿿])*",
   name,
   nmToken,
   names: name + "( " + name + ")*",

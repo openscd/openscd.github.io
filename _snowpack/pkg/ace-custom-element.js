@@ -2383,7 +2383,7 @@ function calcRangeOrientation(range, cursor) {
 
 ace.define("ace/tooltip",["require","exports","module","ace/lib/oop","ace/lib/dom"], function(require, exports, module) {
 
-require("./lib/oop");
+var oop = require("./lib/oop");
 var dom = require("./lib/dom");
 function Tooltip (parentNode) {
     this.isOpen = false;
@@ -3674,7 +3674,7 @@ ace.define("ace/config",["require","exports","module","ace/lib/lang","ace/lib/oo
 "no use strict";
 
 var lang = require("./lib/lang");
-require("./lib/oop");
+var oop = require("./lib/oop");
 var net = require("./lib/net");
 var AppConfig = require("./lib/app_config").AppConfig;
 
@@ -6675,7 +6675,7 @@ var Mode = function() {
         var iterator = new TokenIterator(session, cursor.row, cursor.column);
         var token = iterator.getCurrentToken();
 
-        session.selection;
+        var sel = session.selection;
         var initialRange = session.selection.toOrientedRange();
         var startRow, colDiff;
 
@@ -7538,7 +7538,7 @@ exports.BackgroundTokenizer = BackgroundTokenizer;
 ace.define("ace/search_highlight",["require","exports","module","ace/lib/lang","ace/lib/oop","ace/range"], function(require, exports, module) {
 
 var lang = require("./lib/lang");
-require("./lib/oop");
+var oop = require("./lib/oop");
 var Range = require("./range").Range;
 
 var SearchHighlight = function(regExp, clazz, type) {
@@ -14762,7 +14762,7 @@ function rearrangeUndoStack(stack, pos) {
 
 var Range = require("./range").Range;
 var cmp = Range.comparePoints;
-Range.comparePoints;
+var comparePoints = Range.comparePoints;
 
 
 
@@ -21577,4 +21577,4 @@ __decorate([
 ], AceEditor.prototype, "basePath", void 0);
 customElements.define('ace-editor', AceEditor);
 
-export { AceEditor as default };
+export default AceEditor;

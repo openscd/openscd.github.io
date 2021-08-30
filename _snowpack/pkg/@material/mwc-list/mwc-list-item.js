@@ -1,33 +1,23 @@
-import { _ as __decorate } from '../../common/tslib.es6-c8bbf354.js';
-import { b as customElement } from '../../common/lit-element-74f197f8.js';
-import { s as style, L as ListItemBase } from '../../common/mwc-list-item-css-cc39e58b.js';
-import '../../common/lit-html-ea288526.js';
-import '../../common/render-aa9814af.js';
-import '../../common/ripple-handlers-4224bc9a.js';
-import '../../common/foundation-4a2d7e81.js';
-import '../../common/class-map-0a052906.js';
-import '../../common/style-map-a83cef12.js';
-import '../../common/observer-fa3d205e.js';
+import { _ as __decorate } from '../../common/index-9005815a.js';
+import { b as customElement } from '../../common/lit-element-63d74f47.js';
+import { L as ListItemBase, s as styles } from '../../common/mwc-list-item.css-05dbf1bd.js';
+import '../../common/lit-html-44a7bec9.js';
+import '../../common/render-4f397355.js';
+import '../../common/ripple-handlers-12c14ae0.js';
+import '../../common/ponyfill-4ccc5f83.js';
+import '../../common/foundation-d8050818.js';
+import '../../common/class-map-f3820f9a.js';
+import '../../common/style-map-b311a692.js';
+import '../../common/observer-2c150244.js';
 
 /**
-@license
-Copyright 2020 Google Inc. All Rights Reserved.
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-    http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-*/
+ * @license
+ * Copyright 2020 Google LLC
+ * SPDX-License-Identifier: Apache-2.0
+ */
 let ListItem = class ListItem extends ListItemBase {
 };
-ListItem.styles = style;
+ListItem.styles = [styles];
 ListItem = __decorate([
     customElement('mwc-list-item')
 ], ListItem);

@@ -1,13 +1,14 @@
-import { a as __extends, b as __assign, d as __read, _ as __decorate } from '../common/tslib.es6-c8bbf354.js';
-import { q as query, e as eventOptions, c as css, b as customElement, p as property } from '../common/lit-element-74f197f8.js';
+import { a as __extends, b as __assign, d as __read, _ as __decorate } from '../common/index-9005815a.js';
+import { q as query, e as eventOptions, c as css, b as customElement, p as property } from '../common/lit-element-63d74f47.js';
 import { Tab } from './mwc-tab.js';
-import { M as MDCFoundation, B as BaseElement, a as addHasRemoveClass, m as matches } from '../common/foundation-4a2d7e81.js';
-import { h as html } from '../common/lit-html-ea288526.js';
-import { o as observer } from '../common/observer-fa3d205e.js';
-import '../common/render-aa9814af.js';
-import '../common/class-map-0a052906.js';
-import '../common/ripple-handlers-4224bc9a.js';
-import '../common/style-map-a83cef12.js';
+import { m as matches } from '../common/ponyfill-4ccc5f83.js';
+import { M as MDCFoundation, B as BaseElement, a as addHasRemoveClass } from '../common/foundation-d8050818.js';
+import { h as html } from '../common/lit-html-44a7bec9.js';
+import { o as observer } from '../common/observer-2c150244.js';
+import '../common/render-4f397355.js';
+import '../common/class-map-f3820f9a.js';
+import '../common/ripple-handlers-12c14ae0.js';
+import '../common/style-map-b311a692.js';
 
 /**
  * @license
@@ -36,7 +37,7 @@ var cssClasses = {
     SCROLL_AREA_SCROLL: 'mdc-tab-scroller__scroll-area--scroll',
     SCROLL_TEST: 'mdc-tab-scroller__test',
 };
-var strings$1 = {
+var strings = {
     AREA_SELECTOR: '.mdc-tab-scroller__scroll-area',
     CONTENT_SELECTOR: '.mdc-tab-scroller__scroll-content',
 };
@@ -99,14 +100,14 @@ var MDCTabScrollerRTLDefault = /** @class */ (function (_super) {
     }
     MDCTabScrollerRTLDefault.prototype.getScrollPositionRTL = function () {
         var currentScrollLeft = this.adapter.getScrollAreaScrollLeft();
-        var right = this.calculateScrollEdges_().right;
+        var right = this.calculateScrollEdges().right;
         // Scroll values on most browsers are ints instead of floats so we round
         return Math.round(right - currentScrollLeft);
     };
     MDCTabScrollerRTLDefault.prototype.scrollToRTL = function (scrollX) {
-        var edges = this.calculateScrollEdges_();
+        var edges = this.calculateScrollEdges();
         var currentScrollLeft = this.adapter.getScrollAreaScrollLeft();
-        var clampedScrollLeft = this.clampScrollValue_(edges.right - scrollX);
+        var clampedScrollLeft = this.clampScrollValue(edges.right - scrollX);
         return {
             finalScrollPosition: clampedScrollLeft,
             scrollDelta: clampedScrollLeft - currentScrollLeft,
@@ -114,7 +115,7 @@ var MDCTabScrollerRTLDefault = /** @class */ (function (_super) {
     };
     MDCTabScrollerRTLDefault.prototype.incrementScrollRTL = function (scrollX) {
         var currentScrollLeft = this.adapter.getScrollAreaScrollLeft();
-        var clampedScrollLeft = this.clampScrollValue_(currentScrollLeft - scrollX);
+        var clampedScrollLeft = this.clampScrollValue(currentScrollLeft - scrollX);
         return {
             finalScrollPosition: clampedScrollLeft,
             scrollDelta: clampedScrollLeft - currentScrollLeft,
@@ -123,7 +124,7 @@ var MDCTabScrollerRTLDefault = /** @class */ (function (_super) {
     MDCTabScrollerRTLDefault.prototype.getAnimatingScrollPosition = function (scrollX) {
         return scrollX;
     };
-    MDCTabScrollerRTLDefault.prototype.calculateScrollEdges_ = function () {
+    MDCTabScrollerRTLDefault.prototype.calculateScrollEdges = function () {
         var contentWidth = this.adapter.getScrollContentOffsetWidth();
         var rootWidth = this.adapter.getScrollAreaOffsetWidth();
         return {
@@ -131,8 +132,8 @@ var MDCTabScrollerRTLDefault = /** @class */ (function (_super) {
             right: contentWidth - rootWidth,
         };
     };
-    MDCTabScrollerRTLDefault.prototype.clampScrollValue_ = function (scrollX) {
-        var edges = this.calculateScrollEdges_();
+    MDCTabScrollerRTLDefault.prototype.clampScrollValue = function (scrollX) {
+        var edges = this.calculateScrollEdges();
         return Math.min(Math.max(edges.left, scrollX), edges.right);
     };
     return MDCTabScrollerRTLDefault;
@@ -171,7 +172,7 @@ var MDCTabScrollerRTLNegative = /** @class */ (function (_super) {
     };
     MDCTabScrollerRTLNegative.prototype.scrollToRTL = function (scrollX) {
         var currentScrollLeft = this.adapter.getScrollAreaScrollLeft();
-        var clampedScrollLeft = this.clampScrollValue_(-scrollX);
+        var clampedScrollLeft = this.clampScrollValue(-scrollX);
         return {
             finalScrollPosition: clampedScrollLeft,
             scrollDelta: clampedScrollLeft - currentScrollLeft,
@@ -179,7 +180,7 @@ var MDCTabScrollerRTLNegative = /** @class */ (function (_super) {
     };
     MDCTabScrollerRTLNegative.prototype.incrementScrollRTL = function (scrollX) {
         var currentScrollLeft = this.adapter.getScrollAreaScrollLeft();
-        var clampedScrollLeft = this.clampScrollValue_(currentScrollLeft - scrollX);
+        var clampedScrollLeft = this.clampScrollValue(currentScrollLeft - scrollX);
         return {
             finalScrollPosition: clampedScrollLeft,
             scrollDelta: clampedScrollLeft - currentScrollLeft,
@@ -188,7 +189,7 @@ var MDCTabScrollerRTLNegative = /** @class */ (function (_super) {
     MDCTabScrollerRTLNegative.prototype.getAnimatingScrollPosition = function (scrollX, translateX) {
         return scrollX - translateX;
     };
-    MDCTabScrollerRTLNegative.prototype.calculateScrollEdges_ = function () {
+    MDCTabScrollerRTLNegative.prototype.calculateScrollEdges = function () {
         var contentWidth = this.adapter.getScrollContentOffsetWidth();
         var rootWidth = this.adapter.getScrollAreaOffsetWidth();
         return {
@@ -196,8 +197,8 @@ var MDCTabScrollerRTLNegative = /** @class */ (function (_super) {
             right: 0,
         };
     };
-    MDCTabScrollerRTLNegative.prototype.clampScrollValue_ = function (scrollX) {
-        var edges = this.calculateScrollEdges_();
+    MDCTabScrollerRTLNegative.prototype.clampScrollValue = function (scrollX) {
+        var edges = this.calculateScrollEdges();
         return Math.max(Math.min(edges.right, scrollX), edges.left);
     };
     return MDCTabScrollerRTLNegative;
@@ -237,7 +238,7 @@ var MDCTabScrollerRTLReverse = /** @class */ (function (_super) {
     };
     MDCTabScrollerRTLReverse.prototype.scrollToRTL = function (scrollX) {
         var currentScrollLeft = this.adapter.getScrollAreaScrollLeft();
-        var clampedScrollLeft = this.clampScrollValue_(scrollX);
+        var clampedScrollLeft = this.clampScrollValue(scrollX);
         return {
             finalScrollPosition: clampedScrollLeft,
             scrollDelta: currentScrollLeft - clampedScrollLeft,
@@ -245,7 +246,7 @@ var MDCTabScrollerRTLReverse = /** @class */ (function (_super) {
     };
     MDCTabScrollerRTLReverse.prototype.incrementScrollRTL = function (scrollX) {
         var currentScrollLeft = this.adapter.getScrollAreaScrollLeft();
-        var clampedScrollLeft = this.clampScrollValue_(currentScrollLeft + scrollX);
+        var clampedScrollLeft = this.clampScrollValue(currentScrollLeft + scrollX);
         return {
             finalScrollPosition: clampedScrollLeft,
             scrollDelta: currentScrollLeft - clampedScrollLeft,
@@ -254,7 +255,7 @@ var MDCTabScrollerRTLReverse = /** @class */ (function (_super) {
     MDCTabScrollerRTLReverse.prototype.getAnimatingScrollPosition = function (scrollX, translateX) {
         return scrollX + translateX;
     };
-    MDCTabScrollerRTLReverse.prototype.calculateScrollEdges_ = function () {
+    MDCTabScrollerRTLReverse.prototype.calculateScrollEdges = function () {
         var contentWidth = this.adapter.getScrollContentOffsetWidth();
         var rootWidth = this.adapter.getScrollAreaOffsetWidth();
         return {
@@ -262,8 +263,8 @@ var MDCTabScrollerRTLReverse = /** @class */ (function (_super) {
             right: 0,
         };
     };
-    MDCTabScrollerRTLReverse.prototype.clampScrollValue_ = function (scrollX) {
-        var edges = this.calculateScrollEdges_();
+    MDCTabScrollerRTLReverse.prototype.clampScrollValue = function (scrollX) {
+        var edges = this.calculateScrollEdges();
         return Math.min(Math.max(edges.right, scrollX), edges.left);
     };
     return MDCTabScrollerRTLReverse;
@@ -298,7 +299,7 @@ var MDCTabScrollerFoundation = /** @class */ (function (_super) {
         /**
          * Controls whether we should handle the transitionend and interaction events during the animation.
          */
-        _this.isAnimating_ = false;
+        _this.isAnimating = false;
         return _this;
     }
     Object.defineProperty(MDCTabScrollerFoundation, "cssClasses", {
@@ -310,7 +311,7 @@ var MDCTabScrollerFoundation = /** @class */ (function (_super) {
     });
     Object.defineProperty(MDCTabScrollerFoundation, "strings", {
         get: function () {
-            return strings$1;
+            return strings;
         },
         enumerable: false,
         configurable: true
@@ -350,10 +351,10 @@ var MDCTabScrollerFoundation = /** @class */ (function (_super) {
      * Computes the current visual scroll position
      */
     MDCTabScrollerFoundation.prototype.getScrollPosition = function () {
-        if (this.isRTL_()) {
-            return this.computeCurrentScrollPositionRTL_();
+        if (this.isRTL()) {
+            return this.computeCurrentScrollPositionRTL();
         }
-        var currentTranslateX = this.calculateCurrentTranslateX_();
+        var currentTranslateX = this.calculateCurrentTranslateX();
         var scrollLeft = this.adapter.getScrollAreaScrollLeft();
         return scrollLeft - currentTranslateX;
     };
@@ -362,11 +363,11 @@ var MDCTabScrollerFoundation = /** @class */ (function (_super) {
      */
     MDCTabScrollerFoundation.prototype.handleInteraction = function () {
         // Early exit if we aren't animating
-        if (!this.isAnimating_) {
+        if (!this.isAnimating) {
             return;
         }
         // Prevent other event listeners from handling this event
-        this.stopScrollAnimation_();
+        this.stopScrollAnimation();
     };
     /**
      * Handles the transitionend event
@@ -374,11 +375,11 @@ var MDCTabScrollerFoundation = /** @class */ (function (_super) {
     MDCTabScrollerFoundation.prototype.handleTransitionEnd = function (evt) {
         // Early exit if we aren't animating or the event was triggered by a different element.
         var evtTarget = evt.target;
-        if (!this.isAnimating_ ||
+        if (!this.isAnimating ||
             !this.adapter.eventTargetMatchesSelector(evtTarget, MDCTabScrollerFoundation.strings.CONTENT_SELECTOR)) {
             return;
         }
-        this.isAnimating_ = false;
+        this.isAnimating = false;
         this.adapter.removeClass(MDCTabScrollerFoundation.cssClasses.ANIMATING);
     };
     /**
@@ -390,7 +391,7 @@ var MDCTabScrollerFoundation = /** @class */ (function (_super) {
         if (scrollXIncrement === 0) {
             return;
         }
-        this.animate_(this.getIncrementScrollOperation_(scrollXIncrement));
+        this.animate(this.getIncrementScrollOperation(scrollXIncrement));
     };
     /**
      * Increment the scroll value by the scrollXIncrement without animation.
@@ -401,35 +402,36 @@ var MDCTabScrollerFoundation = /** @class */ (function (_super) {
         if (scrollXIncrement === 0) {
             return;
         }
-        var operation = this.getIncrementScrollOperation_(scrollXIncrement);
+        var operation = this.getIncrementScrollOperation(scrollXIncrement);
         if (operation.scrollDelta === 0) {
             return;
         }
-        this.stopScrollAnimation_();
+        this.stopScrollAnimation();
         this.adapter.setScrollAreaScrollLeft(operation.finalScrollPosition);
     };
     /**
      * Scrolls to the given scrollX value
      */
     MDCTabScrollerFoundation.prototype.scrollTo = function (scrollX) {
-        if (this.isRTL_()) {
-            return this.scrollToRTL_(scrollX);
+        if (this.isRTL()) {
+            this.scrollToImplRTL(scrollX);
+            return;
         }
-        this.scrollTo_(scrollX);
+        this.scrollToImpl(scrollX);
     };
     /**
      * @return Browser-specific {@link MDCTabScrollerRTL} instance.
      */
     MDCTabScrollerFoundation.prototype.getRTLScroller = function () {
-        if (!this.rtlScrollerInstance_) {
-            this.rtlScrollerInstance_ = this.rtlScrollerFactory_();
+        if (!this.rtlScrollerInstance) {
+            this.rtlScrollerInstance = this.rtlScrollerFactory();
         }
-        return this.rtlScrollerInstance_;
+        return this.rtlScrollerInstance;
     };
     /**
      * @return translateX value from a CSS matrix transform function string.
      */
-    MDCTabScrollerFoundation.prototype.calculateCurrentTranslateX_ = function () {
+    MDCTabScrollerFoundation.prototype.calculateCurrentTranslateX = function () {
         var transformValue = this.adapter.getScrollContentStyleValue('transform');
         // Early exit if no transform is present
         if (transformValue === 'none') {
@@ -446,22 +448,22 @@ var MDCTabScrollerFoundation = /** @class */ (function (_super) {
         var matrixParams = match[1];
         // tslint:disable-next-line:ban-ts-ignore "Unused vars" should be a linter warning, not a compiler error.
         // @ts-ignore These unused variables should retain their semantic names for clarity.
-        var _a = __read(matrixParams.split(','), 6); _a[0]; _a[1]; _a[2]; _a[3]; var tx = _a[4]; _a[5];
+        var _a = __read(matrixParams.split(','), 6), a = _a[0], b = _a[1], c = _a[2], d = _a[3], tx = _a[4], ty = _a[5];
         return parseFloat(tx); // tslint:disable-line:ban
     };
     /**
      * Calculates a safe scroll value that is > 0 and < the max scroll value
      * @param scrollX The distance to scroll
      */
-    MDCTabScrollerFoundation.prototype.clampScrollValue_ = function (scrollX) {
-        var edges = this.calculateScrollEdges_();
+    MDCTabScrollerFoundation.prototype.clampScrollValue = function (scrollX) {
+        var edges = this.calculateScrollEdges();
         return Math.min(Math.max(edges.left, scrollX), edges.right);
     };
-    MDCTabScrollerFoundation.prototype.computeCurrentScrollPositionRTL_ = function () {
-        var translateX = this.calculateCurrentTranslateX_();
+    MDCTabScrollerFoundation.prototype.computeCurrentScrollPositionRTL = function () {
+        var translateX = this.calculateCurrentTranslateX();
         return this.getRTLScroller().getScrollPositionRTL(translateX);
     };
-    MDCTabScrollerFoundation.prototype.calculateScrollEdges_ = function () {
+    MDCTabScrollerFoundation.prototype.calculateScrollEdges = function () {
         var contentWidth = this.adapter.getScrollContentOffsetWidth();
         var rootWidth = this.adapter.getScrollAreaOffsetWidth();
         return {
@@ -473,11 +475,11 @@ var MDCTabScrollerFoundation = /** @class */ (function (_super) {
      * Internal scroll method
      * @param scrollX The new scroll position
      */
-    MDCTabScrollerFoundation.prototype.scrollTo_ = function (scrollX) {
+    MDCTabScrollerFoundation.prototype.scrollToImpl = function (scrollX) {
         var currentScrollX = this.getScrollPosition();
-        var safeScrollX = this.clampScrollValue_(scrollX);
+        var safeScrollX = this.clampScrollValue(scrollX);
         var scrollDelta = safeScrollX - currentScrollX;
-        this.animate_({
+        this.animate({
             finalScrollPosition: safeScrollX,
             scrollDelta: scrollDelta,
         });
@@ -486,22 +488,22 @@ var MDCTabScrollerFoundation = /** @class */ (function (_super) {
      * Internal RTL scroll method
      * @param scrollX The new scroll position
      */
-    MDCTabScrollerFoundation.prototype.scrollToRTL_ = function (scrollX) {
+    MDCTabScrollerFoundation.prototype.scrollToImplRTL = function (scrollX) {
         var animation = this.getRTLScroller().scrollToRTL(scrollX);
-        this.animate_(animation);
+        this.animate(animation);
     };
     /**
      * Internal method to compute the increment scroll operation values.
      * @param scrollX The desired scroll position increment
      * @return MDCTabScrollerAnimation with the sanitized values for performing the scroll operation.
      */
-    MDCTabScrollerFoundation.prototype.getIncrementScrollOperation_ = function (scrollX) {
-        if (this.isRTL_()) {
+    MDCTabScrollerFoundation.prototype.getIncrementScrollOperation = function (scrollX) {
+        if (this.isRTL()) {
             return this.getRTLScroller().incrementScrollRTL(scrollX);
         }
         var currentScrollX = this.getScrollPosition();
         var targetScrollX = scrollX + currentScrollX;
-        var safeScrollX = this.clampScrollValue_(targetScrollX);
+        var safeScrollX = this.clampScrollValue(targetScrollX);
         var scrollDelta = safeScrollX - currentScrollX;
         return {
             finalScrollPosition: safeScrollX,
@@ -512,13 +514,13 @@ var MDCTabScrollerFoundation = /** @class */ (function (_super) {
      * Animates the tab scrolling
      * @param animation The animation to apply
      */
-    MDCTabScrollerFoundation.prototype.animate_ = function (animation) {
+    MDCTabScrollerFoundation.prototype.animate = function (animation) {
         var _this = this;
         // Early exit if translateX is 0, which means there's no animation to perform
         if (animation.scrollDelta === 0) {
             return;
         }
-        this.stopScrollAnimation_();
+        this.stopScrollAnimation();
         // This animation uses the FLIP approach.
         // Read more here: https://aerotwist.com/blog/flip-your-animations/
         this.adapter.setScrollAreaScrollLeft(animation.finalScrollPosition);
@@ -529,14 +531,14 @@ var MDCTabScrollerFoundation = /** @class */ (function (_super) {
             _this.adapter.addClass(MDCTabScrollerFoundation.cssClasses.ANIMATING);
             _this.adapter.setScrollContentStyleProperty('transform', 'none');
         });
-        this.isAnimating_ = true;
+        this.isAnimating = true;
     };
     /**
      * Stops scroll animation
      */
-    MDCTabScrollerFoundation.prototype.stopScrollAnimation_ = function () {
-        this.isAnimating_ = false;
-        var currentScrollPosition = this.getAnimatingScrollPosition_();
+    MDCTabScrollerFoundation.prototype.stopScrollAnimation = function () {
+        this.isAnimating = false;
+        var currentScrollPosition = this.getAnimatingScrollPosition();
         this.adapter.removeClass(MDCTabScrollerFoundation.cssClasses.ANIMATING);
         this.adapter.setScrollContentStyleProperty('transform', 'translateX(0px)');
         this.adapter.setScrollAreaScrollLeft(currentScrollPosition);
@@ -544,10 +546,10 @@ var MDCTabScrollerFoundation = /** @class */ (function (_super) {
     /**
      * Gets the current scroll position during animation
      */
-    MDCTabScrollerFoundation.prototype.getAnimatingScrollPosition_ = function () {
-        var currentTranslateX = this.calculateCurrentTranslateX_();
+    MDCTabScrollerFoundation.prototype.getAnimatingScrollPosition = function () {
+        var currentTranslateX = this.calculateCurrentTranslateX();
         var scrollLeft = this.adapter.getScrollAreaScrollLeft();
-        if (this.isRTL_()) {
+        if (this.isRTL()) {
             return this.getRTLScroller().getAnimatingScrollPosition(scrollLeft, currentTranslateX);
         }
         return scrollLeft - currentTranslateX;
@@ -555,7 +557,7 @@ var MDCTabScrollerFoundation = /** @class */ (function (_super) {
     /**
      * Determines the RTL Scroller to use
      */
-    MDCTabScrollerFoundation.prototype.rtlScrollerFactory_ = function () {
+    MDCTabScrollerFoundation.prototype.rtlScrollerFactory = function () {
         // Browsers have three different implementations of scrollLeft in RTL mode,
         // dependent on the browser. The behavior is based off the max LTR
         // scrollLeft value and 0.
@@ -598,18 +600,16 @@ var MDCTabScrollerFoundation = /** @class */ (function (_super) {
         }
         return new MDCTabScrollerRTLDefault(this.adapter);
     };
-    MDCTabScrollerFoundation.prototype.isRTL_ = function () {
+    MDCTabScrollerFoundation.prototype.isRTL = function () {
         return this.adapter.getScrollContentStyleValue('direction') === 'rtl';
     };
     return MDCTabScrollerFoundation;
 }(MDCFoundation));
-// tslint:disable-next-line:no-default-export Needed for backward compatibility with MDC Web v0.44.0 and earlier.
-var MDCTabScrollerFoundation$1 = MDCTabScrollerFoundation;
 
 class TabScrollerBase extends BaseElement {
     constructor() {
         super(...arguments);
-        this.mdcFoundationClass = MDCTabScrollerFoundation$1;
+        this.mdcFoundationClass = MDCTabScrollerFoundation;
         this._scrollbarHeight = -1;
     }
     _handleInteraction() {
@@ -689,26 +689,15 @@ __decorate([
 ], TabScrollerBase.prototype, "_handleInteraction", null);
 
 /**
-@license
-Copyright 2018 Google Inc. All Rights Reserved.
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-    http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-*/
-const style$1 = css `.mdc-tab-scroller{overflow-y:hidden}.mdc-tab-scroller.mdc-tab-scroller--animating .mdc-tab-scroller__scroll-content{transition:250ms transform cubic-bezier(0.4, 0, 0.2, 1)}.mdc-tab-scroller__test{position:absolute;top:-9999px;width:100px;height:100px;overflow-x:scroll}.mdc-tab-scroller__scroll-area{-webkit-overflow-scrolling:touch;display:flex;overflow-x:hidden}.mdc-tab-scroller__scroll-area::-webkit-scrollbar,.mdc-tab-scroller__test::-webkit-scrollbar{display:none}.mdc-tab-scroller__scroll-area--scroll{overflow-x:scroll}.mdc-tab-scroller__scroll-content{position:relative;display:flex;flex:1 0 auto;transform:none;will-change:transform}.mdc-tab-scroller--align-start .mdc-tab-scroller__scroll-content{justify-content:flex-start}.mdc-tab-scroller--align-end .mdc-tab-scroller__scroll-content{justify-content:flex-end}.mdc-tab-scroller--align-center .mdc-tab-scroller__scroll-content{justify-content:center}.mdc-tab-scroller--animating .mdc-tab-scroller__scroll-area{-webkit-overflow-scrolling:auto}:host{display:flex}.mdc-tab-scroller{flex:1}`;
+ * @license
+ * Copyright 2021 Google LLC
+ * SPDX-LIcense-Identifier: Apache-2.0
+ */
+const styles = css `.mdc-tab-scroller{overflow-y:hidden}.mdc-tab-scroller.mdc-tab-scroller--animating .mdc-tab-scroller__scroll-content{transition:250ms transform cubic-bezier(0.4, 0, 0.2, 1)}.mdc-tab-scroller__test{position:absolute;top:-9999px;width:100px;height:100px;overflow-x:scroll}.mdc-tab-scroller__scroll-area{-webkit-overflow-scrolling:touch;display:flex;overflow-x:hidden}.mdc-tab-scroller__scroll-area::-webkit-scrollbar,.mdc-tab-scroller__test::-webkit-scrollbar{display:none}.mdc-tab-scroller__scroll-area--scroll{overflow-x:scroll}.mdc-tab-scroller__scroll-content{position:relative;display:flex;flex:1 0 auto;transform:none;will-change:transform}.mdc-tab-scroller--align-start .mdc-tab-scroller__scroll-content{justify-content:flex-start}.mdc-tab-scroller--align-end .mdc-tab-scroller__scroll-content{justify-content:flex-end}.mdc-tab-scroller--align-center .mdc-tab-scroller__scroll-content{justify-content:center}.mdc-tab-scroller--animating .mdc-tab-scroller__scroll-area{-webkit-overflow-scrolling:auto}:host{display:flex}.mdc-tab-scroller{flex:1}`;
 
 let TabScroller = class TabScroller extends TabScrollerBase {
 };
-TabScroller.styles = style$1;
+TabScroller.styles = [styles];
 TabScroller = __decorate([
     customElement('mwc-tab-scroller')
 ], TabScroller);
@@ -735,7 +724,7 @@ TabScroller = __decorate([
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-var strings = {
+var strings$1 = {
     ARROW_LEFT_KEY: 'ArrowLeft',
     ARROW_RIGHT_KEY: 'ArrowRight',
     END_KEY: 'End',
@@ -780,30 +769,30 @@ var numbers = {
  */
 var ACCEPTABLE_KEYS = new Set();
 // IE11 has no support for new Set with iterable so we need to initialize this by hand
-ACCEPTABLE_KEYS.add(strings.ARROW_LEFT_KEY);
-ACCEPTABLE_KEYS.add(strings.ARROW_RIGHT_KEY);
-ACCEPTABLE_KEYS.add(strings.END_KEY);
-ACCEPTABLE_KEYS.add(strings.HOME_KEY);
-ACCEPTABLE_KEYS.add(strings.ENTER_KEY);
-ACCEPTABLE_KEYS.add(strings.SPACE_KEY);
+ACCEPTABLE_KEYS.add(strings$1.ARROW_LEFT_KEY);
+ACCEPTABLE_KEYS.add(strings$1.ARROW_RIGHT_KEY);
+ACCEPTABLE_KEYS.add(strings$1.END_KEY);
+ACCEPTABLE_KEYS.add(strings$1.HOME_KEY);
+ACCEPTABLE_KEYS.add(strings$1.ENTER_KEY);
+ACCEPTABLE_KEYS.add(strings$1.SPACE_KEY);
 var KEYCODE_MAP = new Map();
 // IE11 has no support for new Map with iterable so we need to initialize this by hand
-KEYCODE_MAP.set(numbers.ARROW_LEFT_KEYCODE, strings.ARROW_LEFT_KEY);
-KEYCODE_MAP.set(numbers.ARROW_RIGHT_KEYCODE, strings.ARROW_RIGHT_KEY);
-KEYCODE_MAP.set(numbers.END_KEYCODE, strings.END_KEY);
-KEYCODE_MAP.set(numbers.HOME_KEYCODE, strings.HOME_KEY);
-KEYCODE_MAP.set(numbers.ENTER_KEYCODE, strings.ENTER_KEY);
-KEYCODE_MAP.set(numbers.SPACE_KEYCODE, strings.SPACE_KEY);
+KEYCODE_MAP.set(numbers.ARROW_LEFT_KEYCODE, strings$1.ARROW_LEFT_KEY);
+KEYCODE_MAP.set(numbers.ARROW_RIGHT_KEYCODE, strings$1.ARROW_RIGHT_KEY);
+KEYCODE_MAP.set(numbers.END_KEYCODE, strings$1.END_KEY);
+KEYCODE_MAP.set(numbers.HOME_KEYCODE, strings$1.HOME_KEY);
+KEYCODE_MAP.set(numbers.ENTER_KEYCODE, strings$1.ENTER_KEY);
+KEYCODE_MAP.set(numbers.SPACE_KEYCODE, strings$1.SPACE_KEY);
 var MDCTabBarFoundation = /** @class */ (function (_super) {
     __extends(MDCTabBarFoundation, _super);
     function MDCTabBarFoundation(adapter) {
         var _this = _super.call(this, __assign(__assign({}, MDCTabBarFoundation.defaultAdapter), adapter)) || this;
-        _this.useAutomaticActivation_ = false;
+        _this.useAutomaticActivation = false;
         return _this;
     }
     Object.defineProperty(MDCTabBarFoundation, "strings", {
         get: function () {
-            return strings;
+            return strings$1;
         },
         enumerable: false,
         configurable: true
@@ -847,11 +836,11 @@ var MDCTabBarFoundation = /** @class */ (function (_super) {
      * See https://www.w3.org/TR/wai-aria-practices/#tabpanel for examples.
      */
     MDCTabBarFoundation.prototype.setUseAutomaticActivation = function (useAutomaticActivation) {
-        this.useAutomaticActivation_ = useAutomaticActivation;
+        this.useAutomaticActivation = useAutomaticActivation;
     };
     MDCTabBarFoundation.prototype.activateTab = function (index) {
         var previousActiveIndex = this.adapter.getPreviousActiveTabIndex();
-        if (!this.indexIsInRange_(index) || index === previousActiveIndex) {
+        if (!this.indexIsInRange(index) || index === previousActiveIndex) {
             return;
         }
         var previousClientRect;
@@ -866,30 +855,30 @@ var MDCTabBarFoundation = /** @class */ (function (_super) {
     };
     MDCTabBarFoundation.prototype.handleKeyDown = function (evt) {
         // Get the key from the event
-        var key = this.getKeyFromEvent_(evt);
+        var key = this.getKeyFromEvent(evt);
         // Early exit if the event key isn't one of the keyboard navigation keys
         if (key === undefined) {
             return;
         }
         // Prevent default behavior for movement keys, but not for activation keys, since :active is used to apply ripple
-        if (!this.isActivationKey_(key)) {
+        if (!this.isActivationKey(key)) {
             evt.preventDefault();
         }
-        if (this.useAutomaticActivation_) {
-            if (this.isActivationKey_(key)) {
+        if (this.useAutomaticActivation) {
+            if (this.isActivationKey(key)) {
                 return;
             }
-            var index = this.determineTargetFromKey_(this.adapter.getPreviousActiveTabIndex(), key);
+            var index = this.determineTargetFromKey(this.adapter.getPreviousActiveTabIndex(), key);
             this.adapter.setActiveTab(index);
             this.scrollIntoView(index);
         }
         else {
             var focusedTabIndex = this.adapter.getFocusedTabIndex();
-            if (this.isActivationKey_(key)) {
+            if (this.isActivationKey(key)) {
                 this.adapter.setActiveTab(focusedTabIndex);
             }
             else {
-                var index = this.determineTargetFromKey_(focusedTabIndex, key);
+                var index = this.determineTargetFromKey(focusedTabIndex, key);
                 this.adapter.focusTabAtIndex(index);
                 this.scrollIntoView(index);
             }
@@ -907,34 +896,37 @@ var MDCTabBarFoundation = /** @class */ (function (_super) {
      */
     MDCTabBarFoundation.prototype.scrollIntoView = function (index) {
         // Early exit if the index is out of range
-        if (!this.indexIsInRange_(index)) {
+        if (!this.indexIsInRange(index)) {
             return;
         }
         // Always scroll to 0 if scrolling to the 0th index
         if (index === 0) {
-            return this.adapter.scrollTo(0);
+            this.adapter.scrollTo(0);
+            return;
         }
         // Always scroll to the max value if scrolling to the Nth index
         // MDCTabScroller.scrollTo() will never scroll past the max possible value
         if (index === this.adapter.getTabListLength() - 1) {
-            return this.adapter.scrollTo(this.adapter.getScrollContentWidth());
+            this.adapter.scrollTo(this.adapter.getScrollContentWidth());
+            return;
         }
-        if (this.isRTL_()) {
-            return this.scrollIntoViewRTL_(index);
+        if (this.isRTL()) {
+            this.scrollIntoViewImplRTL(index);
+            return;
         }
-        this.scrollIntoView_(index);
+        this.scrollIntoViewImpl(index);
     };
     /**
      * Private method for determining the index of the destination tab based on what key was pressed
      * @param origin The original index from which to determine the destination
      * @param key The name of the key
      */
-    MDCTabBarFoundation.prototype.determineTargetFromKey_ = function (origin, key) {
-        var isRTL = this.isRTL_();
+    MDCTabBarFoundation.prototype.determineTargetFromKey = function (origin, key) {
+        var isRTL = this.isRTL();
         var maxIndex = this.adapter.getTabListLength() - 1;
-        var shouldGoToEnd = key === strings.END_KEY;
-        var shouldDecrement = key === strings.ARROW_LEFT_KEY && !isRTL || key === strings.ARROW_RIGHT_KEY && isRTL;
-        var shouldIncrement = key === strings.ARROW_RIGHT_KEY && !isRTL || key === strings.ARROW_LEFT_KEY && isRTL;
+        var shouldGoToEnd = key === strings$1.END_KEY;
+        var shouldDecrement = key === strings$1.ARROW_LEFT_KEY && !isRTL || key === strings$1.ARROW_RIGHT_KEY && isRTL;
+        var shouldIncrement = key === strings$1.ARROW_RIGHT_KEY && !isRTL || key === strings$1.ARROW_LEFT_KEY && isRTL;
         var index = origin;
         if (shouldGoToEnd) {
             index = maxIndex;
@@ -963,7 +955,7 @@ var MDCTabBarFoundation = /** @class */ (function (_super) {
      * @param scrollPosition The current scroll position
      * @param barWidth The width of the Tab Bar
      */
-    MDCTabBarFoundation.prototype.calculateScrollIncrement_ = function (index, nextIndex, scrollPosition, barWidth) {
+    MDCTabBarFoundation.prototype.calculateScrollIncrement = function (index, nextIndex, scrollPosition, barWidth) {
         var nextTabDimensions = this.adapter.getTabDimensionsAtIndex(nextIndex);
         var relativeContentLeft = nextTabDimensions.contentLeft - scrollPosition - barWidth;
         var relativeContentRight = nextTabDimensions.contentRight - scrollPosition;
@@ -982,7 +974,7 @@ var MDCTabBarFoundation = /** @class */ (function (_super) {
      * @param barWidth The width of the Tab Bar
      * @param scrollContentWidth The width of the scroll content
      */
-    MDCTabBarFoundation.prototype.calculateScrollIncrementRTL_ = function (index, nextIndex, scrollPosition, barWidth, scrollContentWidth) {
+    MDCTabBarFoundation.prototype.calculateScrollIncrementRTL = function (index, nextIndex, scrollPosition, barWidth, scrollContentWidth) {
         var nextTabDimensions = this.adapter.getTabDimensionsAtIndex(nextIndex);
         var relativeContentLeft = scrollContentWidth - nextTabDimensions.contentLeft - scrollPosition;
         var relativeContentRight = scrollContentWidth - nextTabDimensions.contentRight - scrollPosition - barWidth;
@@ -1000,7 +992,7 @@ var MDCTabBarFoundation = /** @class */ (function (_super) {
      * @param scrollPosition The current scroll position
      * @param barWidth The width of the tab bar
      */
-    MDCTabBarFoundation.prototype.findAdjacentTabIndexClosestToEdge_ = function (index, tabDimensions, scrollPosition, barWidth) {
+    MDCTabBarFoundation.prototype.findAdjacentTabIndexClosestToEdge = function (index, tabDimensions, scrollPosition, barWidth) {
         /**
          * Tabs are laid out in the Tab Scroller like this:
          *
@@ -1046,7 +1038,7 @@ var MDCTabBarFoundation = /** @class */ (function (_super) {
      * @param barWidth The width of the tab bar
      * @param scrollContentWidth The width of the scroller content
      */
-    MDCTabBarFoundation.prototype.findAdjacentTabIndexClosestToEdgeRTL_ = function (index, tabDimensions, scrollPosition, barWidth, scrollContentWidth) {
+    MDCTabBarFoundation.prototype.findAdjacentTabIndexClosestToEdgeRTL = function (index, tabDimensions, scrollPosition, barWidth, scrollContentWidth) {
         var rootLeft = scrollContentWidth - tabDimensions.rootLeft - barWidth - scrollPosition;
         var rootRight = scrollContentWidth - tabDimensions.rootRight - scrollPosition;
         var rootDelta = rootLeft + rootRight;
@@ -1064,68 +1056,66 @@ var MDCTabBarFoundation = /** @class */ (function (_super) {
      * Returns the key associated with a keydown event
      * @param evt The keydown event
      */
-    MDCTabBarFoundation.prototype.getKeyFromEvent_ = function (evt) {
+    MDCTabBarFoundation.prototype.getKeyFromEvent = function (evt) {
         if (ACCEPTABLE_KEYS.has(evt.key)) {
             return evt.key;
         }
         return KEYCODE_MAP.get(evt.keyCode);
     };
-    MDCTabBarFoundation.prototype.isActivationKey_ = function (key) {
-        return key === strings.SPACE_KEY || key === strings.ENTER_KEY;
+    MDCTabBarFoundation.prototype.isActivationKey = function (key) {
+        return key === strings$1.SPACE_KEY || key === strings$1.ENTER_KEY;
     };
     /**
      * Returns whether a given index is inclusively between the ends
      * @param index The index to test
      */
-    MDCTabBarFoundation.prototype.indexIsInRange_ = function (index) {
+    MDCTabBarFoundation.prototype.indexIsInRange = function (index) {
         return index >= 0 && index < this.adapter.getTabListLength();
     };
     /**
      * Returns the view's RTL property
      */
-    MDCTabBarFoundation.prototype.isRTL_ = function () {
+    MDCTabBarFoundation.prototype.isRTL = function () {
         return this.adapter.isRTL();
     };
     /**
      * Scrolls the tab at the given index into view for left-to-right user agents.
      * @param index The index of the tab to scroll into view
      */
-    MDCTabBarFoundation.prototype.scrollIntoView_ = function (index) {
+    MDCTabBarFoundation.prototype.scrollIntoViewImpl = function (index) {
         var scrollPosition = this.adapter.getScrollPosition();
         var barWidth = this.adapter.getOffsetWidth();
         var tabDimensions = this.adapter.getTabDimensionsAtIndex(index);
-        var nextIndex = this.findAdjacentTabIndexClosestToEdge_(index, tabDimensions, scrollPosition, barWidth);
-        if (!this.indexIsInRange_(nextIndex)) {
+        var nextIndex = this.findAdjacentTabIndexClosestToEdge(index, tabDimensions, scrollPosition, barWidth);
+        if (!this.indexIsInRange(nextIndex)) {
             return;
         }
-        var scrollIncrement = this.calculateScrollIncrement_(index, nextIndex, scrollPosition, barWidth);
+        var scrollIncrement = this.calculateScrollIncrement(index, nextIndex, scrollPosition, barWidth);
         this.adapter.incrementScroll(scrollIncrement);
     };
     /**
      * Scrolls the tab at the given index into view in RTL
      * @param index The tab index to make visible
      */
-    MDCTabBarFoundation.prototype.scrollIntoViewRTL_ = function (index) {
+    MDCTabBarFoundation.prototype.scrollIntoViewImplRTL = function (index) {
         var scrollPosition = this.adapter.getScrollPosition();
         var barWidth = this.adapter.getOffsetWidth();
         var tabDimensions = this.adapter.getTabDimensionsAtIndex(index);
         var scrollWidth = this.adapter.getScrollContentWidth();
-        var nextIndex = this.findAdjacentTabIndexClosestToEdgeRTL_(index, tabDimensions, scrollPosition, barWidth, scrollWidth);
-        if (!this.indexIsInRange_(nextIndex)) {
+        var nextIndex = this.findAdjacentTabIndexClosestToEdgeRTL(index, tabDimensions, scrollPosition, barWidth, scrollWidth);
+        if (!this.indexIsInRange(nextIndex)) {
             return;
         }
-        var scrollIncrement = this.calculateScrollIncrementRTL_(index, nextIndex, scrollPosition, barWidth, scrollWidth);
+        var scrollIncrement = this.calculateScrollIncrementRTL(index, nextIndex, scrollPosition, barWidth, scrollWidth);
         this.adapter.incrementScroll(scrollIncrement);
     };
     return MDCTabBarFoundation;
 }(MDCFoundation));
-// tslint:disable-next-line:no-default-export Needed for backward compatibility with MDC Web v0.44.0 and earlier.
-var MDCTabBarFoundation$1 = MDCTabBarFoundation;
 
 class TabBarBase extends BaseElement {
     constructor() {
         super(...arguments);
-        this.mdcFoundationClass = MDCTabBarFoundation$1;
+        this.mdcFoundationClass = MDCTabBarFoundation;
         this.activeIndex = 0;
         this._previousActiveIndex = -1;
     }
@@ -1220,7 +1210,7 @@ class TabBarBase extends BaseElement {
                 // Synchronize the tabs `activeIndex` to the foundation.
                 // This is needed when a tab is changed via a click, for example.
                 this.activeIndex = index;
-                this.dispatchEvent(new CustomEvent(MDCTabBarFoundation$1.strings.TAB_ACTIVATED_EVENT, { detail: { index }, bubbles: true, cancelable: true }));
+                this.dispatchEvent(new CustomEvent(MDCTabBarFoundation.strings.TAB_ACTIVATED_EVENT, { detail: { index }, bubbles: true, cancelable: true }));
             },
         };
     }
@@ -1229,28 +1219,13 @@ class TabBarBase extends BaseElement {
         // This is necessary because the foundation/adapter synchronously addresses
         // the scroller element.
     }
-    // tslint:disable:ban-ts-ignore
-    _getUpdateComplete() {
-        let superPromise;
-        // @ts-ignore
-        if (super._getUpdateComplete) {
-            // @ts-ignore
-            superPromise = super._getUpdateComplete();
+    async getUpdateComplete() {
+        const result = await super.getUpdateComplete();
+        await this.scrollerElement.updateComplete;
+        if (this.mdcFoundation === undefined) {
+            this.createFoundation();
         }
-        else {
-            // @ts-ignore
-            superPromise = super.getUpdateComplete();
-        }
-        return superPromise.then(() => this.scrollerElement.updateComplete)
-            .then(() => {
-            if (this.mdcFoundation === undefined) {
-                this.createFoundation();
-            }
-        });
-    }
-    // tslint:enable:ban-ts-ignore
-    getUpdateComplete() {
-        return this._getUpdateComplete();
+        return result;
     }
     scrollIndexIntoView(index) {
         this.mdcFoundation.scrollIntoView(index);
@@ -1280,26 +1255,15 @@ __decorate([
 ], TabBarBase.prototype, "activeIndex", void 0);
 
 /**
-@license
-Copyright 2018 Google Inc. All Rights Reserved.
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-    http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-*/
-const style = css `.mdc-tab-bar{width:100%}.mdc-tab{height:48px}.mdc-tab--stacked{height:72px}:host{display:block}.mdc-tab-bar{flex:1}mwc-tab{--mdc-tab-height: 48px;--mdc-tab-stacked-height: 72px}`;
+ * @license
+ * Copyright 2021 Google LLC
+ * SPDX-LIcense-Identifier: Apache-2.0
+ */
+const styles$1 = css `.mdc-tab-bar{width:100%}.mdc-tab{height:48px}.mdc-tab--stacked{height:72px}:host{display:block}.mdc-tab-bar{flex:1}mwc-tab{--mdc-tab-height: 48px;--mdc-tab-stacked-height: 72px}`;
 
 let TabBar = class TabBar extends TabBarBase {
 };
-TabBar.styles = style;
+TabBar.styles = [styles$1];
 TabBar = __decorate([
     customElement('mwc-tab-bar')
 ], TabBar);

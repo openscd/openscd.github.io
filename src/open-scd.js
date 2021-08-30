@@ -87,6 +87,8 @@ export let OpenSCD = class extends Hosting(Setting(Wizarding(Waiting(Plugging(Ed
       this.undo();
     if (ctrlAnd("l"))
       this.logUI.open ? this.logUI.close() : this.logUI.show();
+    if (ctrlAnd("d"))
+      this.diagnosticUI.open ? this.diagnosticUI.close() : this.diagnosticUI.show();
     if (ctrlAnd("m"))
       this.menuUI.open = !this.menuUI.open;
     if (ctrlAnd("o"))
