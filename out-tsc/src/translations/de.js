@@ -42,6 +42,7 @@ export const de = {
         showieds: 'Zeige IEDs im Substation-Editor',
     },
     menu: {
+        new: 'Neues projekt',
         title: 'Menü',
         viewLog: 'Protokoll anzeigen',
         viewDiag: 'Daignose anzeigen',
