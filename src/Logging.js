@@ -27,7 +27,8 @@ const icons = {
   info: "info",
   warning: "warning",
   error: "report",
-  action: "history"
+  action: "history",
+  sclhistory: "history_toggle_off"
 };
 function getPluginName(src) {
   const plugin = JSON.parse(localStorage.getItem("plugins") ?? "[]").find((p) => p.src === src);
@@ -48,6 +49,7 @@ export function Logging(Base) {
       this.onLog = this.onLog.bind(this);
       this.addEventListener("log", this.onLog);
       this.addEventListener("issue", this.onIssue);
+      this.addEventListener("open-doc", this.onLoadHistoryFromDoc);
     }
     get canUndo() {
       return this.currentAction >= 0;
@@ -65,6 +67,36 @@ export function Logging(Base) {
       if (index >= 0)
         index += this.currentAction + 1;
       return index;
+    }
+    convertToDate(when) {
+      const convertedTime = new Date(when ?? "");
+      if (!isNaN(convertedTime.getTime())) {
+        return convertedTime;
+      }
+      return null;
+    }
+    createMessage(who, why) {
+      let message = who;
+      if (message !== null && why !== null) {
+        message += " : " + why;
+      } else if (why !== null) {
+        message = why;
+      }
+      return message ?? void 0;
+    }
+    createSclHistoryEntry(who, what, why, when) {
+      return {
+        kind: "sclhistory",
+        title: what ?? "UNDEFINED",
+        message: this.createMessage(who, why),
+        time: this.convertToDate(when)
+      };
+    }
+    async onLoadHistoryFromDoc(event) {
+      const doc = event.detail.doc;
+      Array.from(doc.querySelectorAll(":root > Header > History > Hitem")).forEach((historyItem) => {
+        this.history.push(this.createSclHistoryEntry(historyItem.getAttribute("who"), historyItem.getAttribute("what"), historyItem.getAttribute("why"), historyItem.getAttribute("when")));
+      });
     }
     onIssue(de) {
       const issues = this.diagnoses.get(de.detail.validatorId);
@@ -144,7 +176,7 @@ export function Logging(Base) {
         >
           <span>
             <!-- FIXME: replace tt with mwc-chip asap -->
-            <tt>${entry.time.toLocaleTimeString()}</tt>
+            <tt>${entry.time?.toLocaleString()}</tt>
             ${entry.title}</span
           >
           <span slot="secondary">${entry.message}</span>
@@ -197,7 +229,9 @@ export function Logging(Base) {
           </mwc-list-item>`;
     }
     renderFilterButtons() {
-      return Object.keys(icons).map((kind) => html`<mwc-icon-button-toggle id="${kind}filter" on
+      return Object.keys(icons).map((kind) => html`<mwc-icon-button-toggle
+          id="${kind}filter"
+          ?on=${kind !== "sclhistory"}
           >${getFilterIcon(kind, false)}
           ${getFilterIcon(kind, true)}</mwc-icon-button-toggle
         >`);
@@ -219,10 +253,14 @@ export function Logging(Base) {
           #log > mwc-icon-button-toggle:nth-child(4) {
             right: 158px;
           }
+          #log > mwc-icon-button-toggle:nth-child(5) {
+            right: 206px;
+          }
           #content mwc-list-item.info,
           #content mwc-list-item.warning,
           #content mwc-list-item.error,
-          #content mwc-list-item.action {
+          #content mwc-list-item.action,
+          #content mwc-list-item.sclhistory {
             display: none;
           }
           #infofilter[on] ~ #content mwc-list-item.info {
@@ -235,6 +273,9 @@ export function Logging(Base) {
             display: flex;
           }
           #actionfilter[on] ~ #content mwc-list-item.action {
+            display: flex;
+          }
+          #sclhistoryfilter[on] ~ #content mwc-list-item.sclhistory {
             display: flex;
           }
 

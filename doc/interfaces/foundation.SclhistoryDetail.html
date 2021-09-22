@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>CreateOptions | open-scd</title>
+	<title>SclhistoryDetail | open-scd</title>
 	<meta name="description" content="Documentation for open-scd">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -55,24 +55,36 @@
 					<a href="../modules.html">open-scd</a>
 				</li>
 				<li>
-					<a href="../modules/editors_templates_foundation.html">editors/templates/foundation</a>
+					<a href="../modules/foundation.html">foundation</a>
 				</li>
 				<li>
-					<a href="editors_templates_foundation.CreateOptions.html">CreateOptions</a>
+					<a href="foundation.SclhistoryDetail.html">SclhistoryDetail</a>
 				</li>
 			</ul>
-			<h1>Interface CreateOptions</h1>
+			<h1>Interface SclhistoryDetail</h1>
 		</div>
 	</div>
 </header>
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-comment">
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>A <a href="../modules/foundation.html#LogEntry"><code>LogEntry</code></a> create from the HItem Line (History) of the SCD File</p>
+					</div>
+				</div>
+			</section>
 			<section class="tsd-panel tsd-hierarchy">
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">CreateOptions</span>
+						<a href="foundation.LogDetailBase.html" class="tsd-signature-type" data-tsd-kind="Interface">LogDetailBase</a>
+						<ul class="tsd-hierarchy">
+							<li>
+								<span class="target">SclhistoryDetail</span>
+							</li>
+						</ul>
 					</li>
 				</ul>
 			</section>
@@ -83,7 +95,9 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="editors_templates_foundation.CreateOptions.html#parent" class="tsd-kind-icon">parent</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="foundation.SclhistoryDetail.html#kind" class="tsd-kind-icon">kind</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="foundation.SclhistoryDetail.html#message" class="tsd-kind-icon">message</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="foundation.SclhistoryDetail.html#title" class="tsd-kind-icon">title</a></li>
 							</ul>
 						</section>
 					</div>
@@ -92,12 +106,34 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="parent" class="tsd-anchor"></a>
-					<h3>parent</h3>
-					<div class="tsd-signature tsd-kind-icon">parent<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Element</span></div>
+					<a name="kind" class="tsd-anchor"></a>
+					<h3>kind</h3>
+					<div class="tsd-signature tsd-kind-icon">kind<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">&quot;sclhistory&quot;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/51c3662/src/editors/templates/foundation.ts#L21">src/editors/templates/foundation.ts:21</a></li>
+							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/51c3662/src/foundation.ts#L256">src/foundation.ts:256</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+					<a name="message" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> message</h3>
+					<div class="tsd-signature tsd-kind-icon">message<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from <a href="foundation.LogDetailBase.html">LogDetailBase</a>.<a href="foundation.LogDetailBase.html#message">message</a></p>
+						<ul>
+							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/51c3662/src/foundation.ts#L242">src/foundation.ts:242</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+					<a name="title" class="tsd-anchor"></a>
+					<h3>title</h3>
+					<div class="tsd-signature tsd-kind-icon">title<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from <a href="foundation.LogDetailBase.html">LogDetailBase</a>.<a href="foundation.LogDetailBase.html#title">title</a></p>
+						<ul>
+							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/51c3662/src/foundation.ts#L241">src/foundation.ts:241</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -110,7 +146,7 @@
 						<a href="../modules.html">Modules</a>
 					</li>
 					<li class="current tsd-kind-module">
-						<a href="../modules/editors_templates_foundation.html">editors/templates/foundation</a>
+						<a href="../modules/foundation.html">foundation</a>
 					</li>
 				</ul>
 			</nav>
@@ -119,42 +155,21 @@
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-interface tsd-parent-kind-module">
-						<a href="editors_templates_foundation.CreateOptions.html" class="tsd-kind-icon">Create<wbr>Options</a>
+						<a href="foundation.SclhistoryDetail.html" class="tsd-kind-icon">Sclhistory<wbr>Detail</a>
 						<ul>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="editors_templates_foundation.CreateOptions.html#parent" class="tsd-kind-icon">parent</a>
+								<a href="foundation.SclhistoryDetail.html#kind" class="tsd-kind-icon">kind</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+								<a href="foundation.SclhistoryDetail.html#message" class="tsd-kind-icon">message</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+								<a href="foundation.SclhistoryDetail.html#title" class="tsd-kind-icon">title</a>
 							</li>
 						</ul>
 					</li>
 				</ul>
 				<ul class="after-current">
-					<li class=" tsd-kind-interface tsd-parent-kind-module">
-						<a href="editors_templates_foundation.UpdateOptions.html" class="tsd-kind-icon">Update<wbr>Options</a>
-					</li>
-					<li class=" tsd-kind-type-alias tsd-parent-kind-module">
-						<a href="../modules/editors_templates_foundation.html#WizardOptions" class="tsd-kind-icon">Wizard<wbr>Options</a>
-					</li>
-					<li class=" tsd-kind-variable tsd-parent-kind-module">
-						<a href="../modules/editors_templates_foundation.html#allDataTypeSelector" class="tsd-kind-icon">all<wbr>Data<wbr>Type<wbr>Selector</a>
-					</li>
-					<li class=" tsd-kind-variable tsd-parent-kind-module">
-						<a href="../modules/editors_templates_foundation.html#styles" class="tsd-kind-icon">styles</a>
-					</li>
-					<li class=" tsd-kind-function tsd-parent-kind-module">
-						<a href="../modules/editors_templates_foundation.html#addReferencedDataTypes" class="tsd-kind-icon">add<wbr>Referenced<wbr>Data<wbr>Types</a>
-					</li>
-					<li class=" tsd-kind-function tsd-parent-kind-module">
-						<a href="../modules/editors_templates_foundation.html#buildListFromStringArray" class="tsd-kind-icon">build<wbr>List<wbr>From<wbr>String<wbr>Array</a>
-					</li>
-					<li class=" tsd-kind-function tsd-parent-kind-module">
-						<a href="../modules/editors_templates_foundation.html#isCreateOptions" class="tsd-kind-icon">is<wbr>Create<wbr>Options</a>
-					</li>
-					<li class=" tsd-kind-function tsd-parent-kind-module">
-						<a href="../modules/editors_templates_foundation.html#unifyCreateActionArray" class="tsd-kind-icon">unify<wbr>Create<wbr>Action<wbr>Array</a>
-					</li>
-					<li class=" tsd-kind-function tsd-parent-kind-module">
-						<a href="../modules/editors_templates_foundation.html#updateIDNamingAction" class="tsd-kind-icon">updateIDNaming<wbr>Action</a>
-					</li>
 				</ul>
 			</nav>
 		</div>

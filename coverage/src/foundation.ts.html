@@ -2612,7 +2612,18 @@
 <a name='L2553'></a><a href='#L2553'>2553</a>
 <a name='L2554'></a><a href='#L2554'>2554</a>
 <a name='L2555'></a><a href='#L2555'>2555</a>
-<a name='L2556'></a><a href='#L2556'>2556</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L2556'></a><a href='#L2556'>2556</a>
+<a name='L2557'></a><a href='#L2557'>2557</a>
+<a name='L2558'></a><a href='#L2558'>2558</a>
+<a name='L2559'></a><a href='#L2559'>2559</a>
+<a name='L2560'></a><a href='#L2560'>2560</a>
+<a name='L2561'></a><a href='#L2561'>2561</a>
+<a name='L2562'></a><a href='#L2562'>2562</a>
+<a name='L2563'></a><a href='#L2563'>2563</a>
+<a name='L2564'></a><a href='#L2564'>2564</a>
+<a name='L2565'></a><a href='#L2565'>2565</a>
+<a name='L2566'></a><a href='#L2566'>2566</a>
+<a name='L2567'></a><a href='#L2567'>2567</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -2870,7 +2881,17 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">300x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">301x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -2888,6 +2909,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">63x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -2951,7 +2973,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">12x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -5009,9 +5031,9 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2057x</span>
-<span class="cline-any cline-yes">2057x</span>
-<span class="cline-any cline-yes">1769x</span>
+<span class="cline-any cline-yes">2084x</span>
+<span class="cline-any cline-yes">2084x</span>
+<span class="cline-any cline-yes">1788x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -5397,7 +5419,13 @@ export function newWizardEvent(
 &nbsp;
 type InfoEntryKind = 'info' | 'warning' | 'error';
 &nbsp;
-export type LogEntryType = 'info' | 'warning' | 'error' | 'action' | 'reset';
+export type LogEntryType =
+  | 'info'
+  | 'warning'
+  | 'error'
+  | 'action'
+  | 'reset'
+  | 'sclhistory';
 &nbsp;
 /** The basic information contained in each [[`LogEntry`]]. */
 export interface LogDetailBase {
@@ -5413,6 +5441,10 @@ export interface CommitDetail extends LogDetailBase {
 export interface InfoDetail extends LogDetailBase {
   kind: InfoEntryKind;
   cause?: LogEntry;
+}
+/** A [[`LogEntry`]] create from the HItem Line (History) of the SCD File */
+export interface SclhistoryDetail extends LogDetailBase {
+  kind: 'sclhistory';
 }
 &nbsp;
 export interface ResetDetail {
@@ -5452,13 +5484,14 @@ export function newIssueEvent(
 &nbsp;
 /** [[`LogEntry`]]s are timestamped upon being committed to the `history`. */
 interface Timestamped {
-  time: Date;
+  time: Date | null;
 }
 &nbsp;
 export type CommitEntry = Timestamped &amp; CommitDetail;
 export type InfoEntry = Timestamped &amp; InfoDetail;
+export type SclhistoryEntry = Timestamped &amp; SclhistoryDetail;
 &nbsp;
-export type LogEntry = InfoEntry | CommitEntry;
+export type LogEntry = InfoEntry | CommitEntry | SclhistoryEntry;
 &nbsp;
 /** Represents some work pending completion, upon which `promise` resolves. */
 export interface PendingStateDetail {
@@ -7729,7 +7762,7 @@ declare global {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Mon Sep 13 2021 10:47:52 GMT+0000 (Coordinated Universal Time)
+                at Wed Sep 22 2021 05:43:42 GMT+0000 (Coordinated Universal Time)
             </div>
         </div>
         <script src="../prettify.js"></script>
