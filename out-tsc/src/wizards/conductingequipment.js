@@ -18,7 +18,7 @@ const types = {
     EFN: 'Earth Fault Neutralizer',
     FAN: 'Fan',
     GIL: 'Gas Insulated Line',
-    GEN: 'Genarator',
+    GEN: 'Generator',
     IFL: 'Infeeding Line',
     MOT: 'Motor',
     RES: 'Neutral Resistor',
