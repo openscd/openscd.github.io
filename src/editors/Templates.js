@@ -12,6 +12,7 @@ var __decorate = (decorators, target, key, kind) => {
 import {LitElement, html, property, css} from "../../_snowpack/pkg/lit-element.js";
 import {translate} from "../../_snowpack/pkg/lit-translate.js";
 import {
+  createElement,
   getReference,
   identity,
   newActionEvent,
@@ -79,7 +80,7 @@ export default class TemplatesPlugin extends LitElement {
       this.dispatchEvent(newActionEvent({
         new: {
           parent: this.doc.documentElement,
-          element: this.doc.createElement("DataTypeTemplates"),
+          element: createElement(this.doc, "DataTypeTemplates", {}),
           reference: getReference(this.doc.documentElement, "DataTypeTemplates")
         }
       }));
