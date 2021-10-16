@@ -18,7 +18,11 @@ import {
 } from "../../_snowpack/pkg/lit-element.js";
 import {translate} from "../../_snowpack/pkg/lit-translate.js";
 import {startMove, styles, cloneSubstationElement} from "./foundation.js";
-import {newActionEvent, newWizardEvent} from "../foundation.js";
+import {
+  getChildElementsByTagName,
+  newActionEvent,
+  newWizardEvent
+} from "../foundation.js";
 import {wizards} from "../wizards/wizard-library.js";
 import {VoltageLevelEditor} from "./voltage-level-editor.js";
 import "./conducting-equipment-editor.js";
@@ -30,19 +34,8 @@ export let BayEditor = class extends LitElement {
       return [];
     };
   }
-  get name() {
-    return this.element.getAttribute("name") ?? "";
-  }
-  get desc() {
-    return this.element.getAttribute("desc") ?? null;
-  }
   openEditWizard() {
     const wizard = wizards["Bay"].edit(this.element);
-    if (wizard)
-      this.dispatchEvent(newWizardEvent(wizard));
-  }
-  openConductingEquipmentWizard() {
-    const wizard = wizards["ConductingEquipment"].create(this.element);
     if (wizard)
       this.dispatchEvent(newWizardEvent(wizard));
   }
@@ -63,74 +56,54 @@ export let BayEditor = class extends LitElement {
   }
   renderIedContainer() {
     const ieds = this.getAttachedIeds?.(this.element) ?? [];
-    return ieds?.length ? html`<div id="iedcontainer">
+    return ieds?.length ? html`<div slot="container" id="iedcontainer">
           ${ieds.map((ied) => html`<ied-editor .element=${ied}></ied-editor>`)}
         </div>` : html``;
   }
-  renderHeader() {
-    return html`<h3>
-      ${this.name} ${this.desc === null ? "" : html`&mdash;`} ${this.desc}
-      ${this.readonly ? html`` : html`<abbr title="${translate("add")}">
-              <mwc-icon-button
-                icon="playlist_add"
-                @click=${() => this.openConductingEquipmentWizard()}
-              ></mwc-icon-button>
-            </abbr>
-            <nav>
-              <abbr title="${translate("lnode.tooltip")}">
-                <mwc-icon-button
-                  icon="account_tree"
-                  @click="${() => this.openLNodeWizard()}"
-                ></mwc-icon-button>
-              </abbr>
-              <abbr title="${translate("duplicate")}">
-                <mwc-icon-button
-                  icon="content_copy"
-                  @click=${() => cloneSubstationElement(this)}
-                ></mwc-icon-button>
-              </abbr>
-              <abbr title="${translate("edit")}">
-                <mwc-icon-button
-                  icon="edit"
-                  @click=${() => this.openEditWizard()}
-                ></mwc-icon-button>
-              </abbr>
-              <abbr title="${translate("move")}">
-                <mwc-icon-button
-                  icon="forward"
-                  @click=${() => startMove(this, BayEditor, VoltageLevelEditor)}
-                ></mwc-icon-button>
-              </abbr>
-              <abbr title="${translate("remove")}">
-                <mwc-icon-button
-                  icon="delete"
-                  @click=${() => this.remove()}
-                ></mwc-icon-button>
-              </abbr>
-            </nav>`}
-    </h3>`;
-  }
   render() {
-    return html`<section tabindex="0">
-      ${this.renderHeader()}
-      <div>
-        ${this.renderIedContainer()}
-        <div id="ceContainer">
-          ${Array.from(this.element?.querySelectorAll(":root > Substation > VoltageLevel > Bay > ConductingEquipment") ?? []).map((voltageLevel) => html`<conducting-equipment-editor
-                .element=${voltageLevel}
-                ?readonly=${this.readonly}
-              ></conducting-equipment-editor>`)}
-        </div>
+    return html`<editor-container .element=${this.element} nomargin>
+      <abbr slot="header" title="${translate("lnode.tooltip")}">
+        <mwc-icon-button
+          icon="account_tree"
+          @click="${() => this.openLNodeWizard()}"
+        ></mwc-icon-button>
+      </abbr>
+      <abbr slot="header" title="${translate("duplicate")}">
+        <mwc-icon-button
+          icon="content_copy"
+          @click=${() => cloneSubstationElement(this)}
+        ></mwc-icon-button>
+      </abbr>
+      <abbr slot="header" title="${translate("edit")}">
+        <mwc-icon-button
+          icon="edit"
+          @click=${() => this.openEditWizard()}
+        ></mwc-icon-button>
+      </abbr>
+      <abbr slot="header" title="${translate("move")}">
+        <mwc-icon-button
+          icon="forward"
+          @click=${() => startMove(this, BayEditor, VoltageLevelEditor)}
+        ></mwc-icon-button>
+      </abbr>
+      <abbr slot="header" title="${translate("remove")}">
+        <mwc-icon-button
+          icon="delete"
+          @click=${() => this.remove()}
+        ></mwc-icon-button>
+      </abbr>
+      ${this.renderIedContainer()}
+      <div slot="container" id="ceContainer">
+        ${Array.from(getChildElementsByTagName(this.element, "ConductingEquipment")).map((voltageLevel) => html`<conducting-equipment-editor
+              .element=${voltageLevel}
+              ?readonly=${this.readonly}
+            ></conducting-equipment-editor>`)}
       </div>
-    </section> `;
+    </editor-container> `;
   }
 };
 BayEditor.styles = css`
     ${styles}
-
-    section {
-      margin: 0px;
-    }
 
     #ceContainer {
       display: grid;
@@ -146,12 +119,6 @@ __decorate([
 __decorate([
   property({type: Boolean})
 ], BayEditor.prototype, "readonly", 2);
-__decorate([
-  property({type: String})
-], BayEditor.prototype, "name", 1);
-__decorate([
-  property({type: String})
-], BayEditor.prototype, "desc", 1);
 __decorate([
   property({attribute: false})
 ], BayEditor.prototype, "getAttachedIeds", 2);

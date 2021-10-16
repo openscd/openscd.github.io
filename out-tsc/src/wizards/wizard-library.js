@@ -3,7 +3,7 @@ import { createConductingEquipmentWizard, editConductingEquipmentWizard, } from 
 import { lNodeWizard } from './lnode.js';
 import { createSubstationWizard, substationEditWizard } from './substation.js';
 import { voltageLevelCreateWizard, voltageLevelEditWizard, } from './voltagelevel.js';
-function emptyWizard() {
+export function emptyWizard() {
     return;
 }
 export const wizards = {

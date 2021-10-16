@@ -4,21 +4,17 @@
 
 ## Properties
 
-| Property          | Attribute  | Modifiers | Type                                             | Default                        | Description                                      |
-|-------------------|------------|-----------|--------------------------------------------------|--------------------------------|--------------------------------------------------|
-| `desc`            | `desc`     | readonly  | `string \| null`                                 |                                | [[element \| `element.desc`]]                    |
-| `element`         |            |           | `Element`                                        |                                | The edited `Element`, a common property of all Substation subeditors. |
-| `getAttachedIeds` |            |           | `((element: Element) => Element[]) \| undefined` | "() => {\n    return [];\n  }" |                                                  |
-| `name`            | `name`     | readonly  | `string`                                         |                                | [[element \| `element.name`]]                    |
-| `readonly`        | `readonly` |           | `boolean`                                        | false                          |                                                  |
+| Property          | Attribute  | Type                                             | Default                        | Description                                      |
+|-------------------|------------|--------------------------------------------------|--------------------------------|--------------------------------------------------|
+| `element`         |            | `Element`                                        |                                | The edited `Element`, a common property of all Substation subeditors. |
+| `getAttachedIeds` |            | `((element: Element) => Element[]) \| undefined` | "() => {\n    return [];\n  }" |                                                  |
+| `readonly`        | `readonly` | `boolean`                                        | false                          |                                                  |
 
 ## Methods
 
-| Method                   | Type                 | Description                                      |
-|--------------------------|----------------------|--------------------------------------------------|
-| `openEditWizard`         | `(): void`           | Opens a [[`WizardDialog`]] for editing [[`element`]]. |
-| `openLNodeWizard`        | `(): void`           | Opens a [[`WizardDialog`]] for editing `LNode` connections. |
-| `openVoltageLevelWizard` | `(): void`           | Opens a [[`WizardDialog`]] for adding a new `VoltageLevel`. |
-| `remove`                 | `(): void`           | Deletes [[`element`]].                           |
-| `renderHeader`           | `(): TemplateResult` |                                                  |
-| `renderIedContainer`     | `(): TemplateResult` |                                                  |
+| Method               | Type                 | Description                                      |
+|----------------------|----------------------|--------------------------------------------------|
+| `openEditWizard`     | `(): void`           | Opens a [[`WizardDialog`]] for editing [[`element`]]. |
+| `openLNodeWizard`    | `(): void`           | Opens a [[`WizardDialog`]] for editing `LNode` connections. |
+| `remove`             | `(): void`           | Deletes [[`element`]].                           |
+| `renderIedContainer` | `(): TemplateResult` |                                                  |

@@ -4,21 +4,17 @@
 
 ## Properties
 
-| Property          | Attribute  | Modifiers | Type                                             | Default                        |
-|-------------------|------------|-----------|--------------------------------------------------|--------------------------------|
-| `desc`            | `desc`     | readonly  | `string \| null`                                 |                                |
-| `element`         |            |           | `Element`                                        |                                |
-| `getAttachedIeds` |            |           | `((element: Element) => Element[]) \| undefined` | "() => {\n    return [];\n  }" |
-| `name`            | `name`     | readonly  | `string`                                         |                                |
-| `readonly`        | `readonly` |           | `boolean`                                        | false                          |
+| Property          | Attribute  | Type                                             | Default                        |
+|-------------------|------------|--------------------------------------------------|--------------------------------|
+| `element`         |            | `Element`                                        |                                |
+| `getAttachedIeds` |            | `((element: Element) => Element[]) \| undefined` | "() => {\n    return [];\n  }" |
+| `readonly`        | `readonly` | `boolean`                                        | false                          |
 
 ## Methods
 
-| Method                          | Type                 | Description                                      |
-|---------------------------------|----------------------|--------------------------------------------------|
-| `openConductingEquipmentWizard` | `(): void`           |                                                  |
-| `openEditWizard`                | `(): void`           |                                                  |
-| `openLNodeWizard`               | `(): void`           | Opens a [[`WizardDialog`]] for editing `LNode` connections. |
-| `remove`                        | `(): void`           |                                                  |
-| `renderHeader`                  | `(): TemplateResult` |                                                  |
-| `renderIedContainer`            | `(): TemplateResult` |                                                  |
+| Method               | Type                 | Description                                      |
+|----------------------|----------------------|--------------------------------------------------|
+| `openEditWizard`     | `(): void`           |                                                  |
+| `openLNodeWizard`    | `(): void`           | Opens a [[`WizardDialog`]] for editing `LNode` connections. |
+| `remove`             | `(): void`           |                                                  |
+| `renderIedContainer` | `(): TemplateResult` |                                                  |

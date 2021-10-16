@@ -2,11 +2,11 @@ var VoltageLevelEditor_1;
 import { __decorate } from "../../../_snowpack/pkg/tslib.js";
 import { LitElement, customElement, html, property, css, } from '../../../_snowpack/pkg/lit-element.js';
 import { translate } from '../../../_snowpack/pkg/lit-translate.js';
-import { selectors, startMove, styles, cloneSubstationElement, } from './foundation.js';
-import './bay-editor.js';
+import { selectors, startMove, cloneSubstationElement, styles, } from './foundation.js';
+import { newActionEvent, newWizardEvent } from '../foundation.js';
 import { SubstationEditor } from './substation-editor.js';
 import { wizards } from '../wizards/wizard-library.js';
-import { newActionEvent, newWizardEvent } from '../foundation.js';
+import './bay-editor.js';
 /** [[`Substation`]] subeditor for a `VoltageLevel` element. */
 let VoltageLevelEditor = VoltageLevelEditor_1 = class VoltageLevelEditor extends LitElement {
     constructor() {
@@ -15,12 +15,6 @@ let VoltageLevelEditor = VoltageLevelEditor_1 = class VoltageLevelEditor extends
         this.getAttachedIeds = () => {
             return [];
         };
-    }
-    get name() {
-        return this.element.getAttribute('name') ?? '';
-    }
-    get desc() {
-        return this.element.getAttribute('desc') ?? null;
     }
     get voltage() {
         const V = this.element.querySelector(selectors.VoltageLevel + ' > Voltage');
@@ -31,13 +25,14 @@ let VoltageLevelEditor = VoltageLevelEditor_1 = class VoltageLevelEditor extends
         const u = m === null ? 'V' : ' ' + m + 'V';
         return v ? v + u : null;
     }
+    get header() {
+        const name = this.element.getAttribute('name') ?? '';
+        const desc = this.element.getAttribute('desc');
+        return `${name} ${desc === null ? '' : '-'} ${desc}
+    ${this.voltage === null ? '' : `(${this.voltage})`}`;
+    }
     openEditWizard() {
         const wizard = wizards['VoltageLevel'].edit(this.element);
-        if (wizard)
-            this.dispatchEvent(newWizardEvent(wizard));
-    }
-    openBayWizard() {
-        const wizard = wizards['Bay'].create(this.element);
         if (wizard)
             this.dispatchEvent(newWizardEvent(wizard));
     }
@@ -60,76 +55,59 @@ let VoltageLevelEditor = VoltageLevelEditor_1 = class VoltageLevelEditor extends
     renderIedContainer() {
         const ieds = this.getAttachedIeds?.(this.element) ?? [];
         return ieds?.length
-            ? html `<div id="iedcontainer">
+            ? html `<div id="iedcontainer" slot="container">
           ${ieds.map(ied => html `<ied-editor .element=${ied}></ied-editor>`)}
         </div>`
             : html ``;
     }
-    renderHeader() {
-        return html `<h2>
-      ${this.name} ${this.desc === null ? '' : html `&mdash;`} ${this.desc}
-      ${this.voltage === null ? '' : html `(${this.voltage})`}
-      ${this.readonly
-            ? html ``
-            : html `<abbr title="${translate('add')}">
-              <mwc-icon-button
-                icon="playlist_add"
-                @click=${() => this.openBayWizard()}
-              ></mwc-icon-button>
-            </abbr>
-            <nav>
-              <abbr title="${translate('lnode.tooltip')}">
-                <mwc-icon-button
-                  icon="account_tree"
-                  @click=${() => this.openLNodeWizard()}
-                ></mwc-icon-button>
-              </abbr>
-              <abbr title="${translate('duplicate')}">
-                <mwc-icon-button
-                  icon="content_copy"
-                  @click=${() => cloneSubstationElement(this)}
-                ></mwc-icon-button>
-              </abbr>
-              <abbr title="${translate('edit')}">
-                <mwc-icon-button
-                  icon="edit"
-                  @click=${() => this.openEditWizard()}
-                ></mwc-icon-button>
-              </abbr>
-              <abbr title="${translate('move')}">
-                <mwc-icon-button
-                  icon="forward"
-                  @click=${() => startMove(this, VoltageLevelEditor_1, SubstationEditor)}
-                ></mwc-icon-button>
-              </abbr>
-              <abbr title="${translate('remove')}">
-                <mwc-icon-button
-                  icon="delete"
-                  @click=${() => this.remove()}
-                ></mwc-icon-button>
-              </abbr>
-            </nav>`}
-    </h2>`;
-    }
     render() {
-        return html `<section tabindex="0">
-      ${this.renderHeader()} ${this.renderIedContainer()}
-      <div id="bayContainer">
+        return html `<editor-container
+      .element=${this.element}
+      header="${this.header}"
+    >
+      <abbr slot="header" title="${translate('lnode.tooltip')}">
+        <mwc-icon-button
+          icon="account_tree"
+          @click=${() => this.openLNodeWizard()}
+        ></mwc-icon-button>
+      </abbr>
+      <abbr slot="header" title="${translate('duplicate')}">
+        <mwc-icon-button
+          icon="content_copy"
+          @click=${() => cloneSubstationElement(this)}
+        ></mwc-icon-button>
+      </abbr>
+      <abbr slot="header" title="${translate('edit')}">
+        <mwc-icon-button
+          icon="edit"
+          @click=${() => this.openEditWizard()}
+        ></mwc-icon-button>
+      </abbr>
+      <abbr slot="header" title="${translate('move')}">
+        <mwc-icon-button
+          icon="forward"
+          @click=${() => startMove(this, VoltageLevelEditor_1, SubstationEditor)}
+        ></mwc-icon-button>
+      </abbr>
+      <abbr slot="header" title="${translate('remove')}">
+        <mwc-icon-button
+          icon="delete"
+          @click=${() => this.remove()}
+        ></mwc-icon-button>
+      </abbr>
+      ${this.renderIedContainer()}
+      <div id="bayContainer" slot="container">
         ${Array.from(this.element?.querySelectorAll(selectors.Bay) ?? []).map(bay => html `<bay-editor
             .element=${bay}
             .getAttachedIeds=${this.getAttachedIeds}
             ?readonly=${this.readonly}
           ></bay-editor>`)}
       </div>
-    </section>`;
+    </editor-container>`;
     }
 };
 VoltageLevelEditor.styles = css `
     ${styles}
-
-    section {
-      background-color: var(--mdc-theme-on-primary);
-    }
 
     #bayContainer {
       display: grid;
@@ -153,13 +131,10 @@ __decorate([
 ], VoltageLevelEditor.prototype, "readonly", void 0);
 __decorate([
     property()
-], VoltageLevelEditor.prototype, "name", null);
-__decorate([
-    property()
-], VoltageLevelEditor.prototype, "desc", null);
-__decorate([
-    property()
 ], VoltageLevelEditor.prototype, "voltage", null);
+__decorate([
+    property({ type: String })
+], VoltageLevelEditor.prototype, "header", null);
 __decorate([
     property({ attribute: false })
 ], VoltageLevelEditor.prototype, "getAttachedIeds", void 0);

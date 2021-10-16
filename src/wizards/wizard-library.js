@@ -9,7 +9,7 @@ import {
   voltageLevelCreateWizard,
   voltageLevelEditWizard
 } from "./voltagelevel.js";
-function emptyWizard() {
+export function emptyWizard() {
   return;
 }
 export const wizards = {

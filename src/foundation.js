@@ -1847,5 +1847,7 @@ export function getVersion(element) {
   return header[0].getAttribute("version") ?? "2003";
 }
 export function getChildElementsByTagName(element, tag) {
+  if (!element || !tag)
+    return [];
   return Array.from(element.children).filter((element2) => element2.tagName === tag);
 }
