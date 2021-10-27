@@ -175,6 +175,7 @@ export function Editing(Base) {
           action: event.detail.action
         }));
       }
+      this.dispatchEvent(newValidateEvent());
       for (const element of event.composedPath())
         if (element instanceof LitElement)
           element.requestUpdate();

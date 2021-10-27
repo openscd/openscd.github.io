@@ -20,7 +20,7 @@ import {
 } from "../schemas.js";
 const validators = {};
 export default class ValidateSchema extends LitElement {
-  async getValidator(xsd, xsdName, statusNumber) {
+  async getValidator(xsd, xsdName) {
     if (!window.Worker)
       throw new Error(get("validator.schema.fatal"));
     if (validators[xsdName])
@@ -49,7 +49,6 @@ export default class ValidateSchema extends LitElement {
           document.querySelector("open-scd").dispatchEvent(newIssueEvent({
             title: description,
             validatorId: this.pluginId,
-            statusNumber,
             message: e.data.file + ":" + e.data.line + " " + e.data.node + " " + e.data.part + qualifiedTag
           }));
         } else if (!isValidationResult(e.data)) {
@@ -63,7 +62,7 @@ export default class ValidateSchema extends LitElement {
       worker.postMessage({content: xsd, name: xsdName});
     });
   }
-  async validate(indentity, statusNumber) {
+  async validate() {
     const fileName = this.docName;
     let version = "2007";
     let revision = "B";
@@ -74,7 +73,7 @@ export default class ValidateSchema extends LitElement {
         this.doc.documentElement.getAttribute("revision") ?? "",
         this.doc.documentElement.getAttribute("release") ?? ""
       ];
-    const result = await this.getValidator(getSchema(version, revision, release), "SCL" + version + revision + release + ".xsd", statusNumber).then((validator) => validator(new XMLSerializer().serializeToString(this.doc), fileName));
+    const result = await this.getValidator(getSchema(version, revision, release), "SCL" + version + revision + release + ".xsd").then((validator) => validator(new XMLSerializer().serializeToString(this.doc), fileName));
     if (!result.valid) {
       document.querySelector("open-scd").dispatchEvent(newLogEvent({
         kind: "warning",
@@ -84,6 +83,10 @@ export default class ValidateSchema extends LitElement {
     }
     document.querySelector("open-scd").dispatchEvent(newLogEvent({
       kind: "info",
+      title: get("validator.schema.valid", {name: result.file})
+    }));
+    document.querySelector("open-scd").dispatchEvent(newIssueEvent({
+      validatorId: this.pluginId,
       title: get("validator.schema.valid", {name: result.file})
     }));
   }

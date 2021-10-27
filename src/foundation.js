@@ -118,12 +118,11 @@ export function newPendingStateEvent(promise, eventInitDict) {
     detail: {promise, ...eventInitDict?.detail}
   });
 }
-export function newValidateEvent(identity2 = "", eventInitDict) {
+export function newValidateEvent(eventInitDict) {
   return new CustomEvent("validate", {
     bubbles: true,
     composed: true,
-    ...eventInitDict,
-    detail: {identity: identity2, ...eventInitDict?.detail}
+    ...eventInitDict
   });
 }
 export function newOpenDocEvent(doc, docName, eventInitDict) {

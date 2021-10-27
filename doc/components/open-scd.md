@@ -27,7 +27,7 @@ Open Substation Configuration Designer.
 | `infoUI`           |                 |           | `Snackbar`                              |                                    |                                                  |
 | `issueUI`          |                 |           | `Snackbar`                              |                                    |                                                  |
 | `languageUI`       |                 |           | `Select`                                |                                    |                                                  |
-| `lastIssue`        |                 |           | `IssueDetail`                           |                                    |                                                  |
+| `latestIssue`      |                 |           | `IssueDetail`                           |                                    |                                                  |
 | `logUI`            |                 |           | `Dialog`                                |                                    |                                                  |
 | `menu`             |                 | readonly  | `(MenuItem \| "divider")[]`             |                                    |                                                  |
 | `menuEntries`      |                 | readonly  | `Plugin[]`                              |                                    |                                                  |
@@ -46,10 +46,9 @@ Open Substation Configuration Designer.
 | `settingsUI`       |                 |           | `Dialog`                                |                                    |                                                  |
 | `showiedsUI`       |                 |           | `Switch`                                |                                    |                                                  |
 | `src`              | `src`           |           | `string`                                |                                    | The current file's URL. `blob:` URLs are *revoked after parsing*! |
-| `statusNumber`     |                 |           | `number`                                | 0                                  |                                                  |
 | `topMenu`          |                 | readonly  | `Plugin[]`                              |                                    |                                                  |
 | `undo`             |                 |           |                                         |                                    |                                                  |
-| `validated`        |                 |           | `Promise<unknown>`                      | "Promise.resolve()"                |                                                  |
+| `validated`        |                 |           | `Promise<void>`                         | "Promise.resolve()"                |                                                  |
 | `validators`       |                 | readonly  | `Plugin[]`                              |                                    |                                                  |
 | `waiting`          | `waiting`       |           | `boolean`                               | false                              | Whether the element is currently waiting for some async work. |
 | `warningUI`        |                 |           | `Snackbar`                              |                                    |                                                  |

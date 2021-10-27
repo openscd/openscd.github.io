@@ -89,17 +89,11 @@ export function Logging(Base) {
         }
         onIssue(de) {
             const issues = this.diagnoses.get(de.detail.validatorId);
-            if (issues && issues[0].statusNumber > de.detail.statusNumber)
-                return;
-            else if (issues && issues[0].statusNumber === de.detail.statusNumber)
-                issues.push(de.detail);
-            else if (issues && issues[0].statusNumber !== de.detail.statusNumber) {
-                issues.length = 0;
-                issues?.push(de.detail);
-            }
-            else
+            if (!issues)
                 this.diagnoses.set(de.detail.validatorId, [de.detail]);
-            this.lastIssue = de.detail;
+            else
+                issues?.push(de.detail);
+            this.latestIssue = de.detail;
             this.issueUI.close();
             this.issueUI.show();
         }
@@ -214,9 +208,7 @@ export function Logging(Base) {
             return issueItems.length
                 ? issueItems
                 : html `<mwc-list-item disabled graphic="icon">
-            <span
-              >${translate(this.history.length ? 'diag.zeroissues' : 'diag.placeholder')}</span
-            >
+            <span>${translate('diag.placeholder')}</span>
             <mwc-icon slot="graphic">info</mwc-icon>
           </mwc-list-item>`;
         }
@@ -360,7 +352,7 @@ export function Logging(Base) {
         <mwc-snackbar
           id="issue"
           timeoutMs="10000"
-          labelText="${this.lastIssue?.title ??
+          labelText="${this.latestIssue?.title ??
                 get('log.snackbar.placeholder')}"
         >
           <mwc-button
@@ -384,7 +376,7 @@ export function Logging(Base) {
     ], LoggingElement.prototype, "diagnoses", void 0);
     __decorate([
         internalProperty()
-    ], LoggingElement.prototype, "lastIssue", void 0);
+    ], LoggingElement.prototype, "latestIssue", void 0);
     __decorate([
         query('#log')
     ], LoggingElement.prototype, "logUI", void 0);

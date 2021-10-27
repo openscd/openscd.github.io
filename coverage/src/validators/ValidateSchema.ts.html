@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">90% </span>
+                <span class="strong">90.24% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>36/40</span>
+                <span class='fraction'>37/41</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">94.59% </span>
+                <span class="strong">94.74% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>35/37</span>
+                <span class='fraction'>36/38</span>
             </div>
         
             
@@ -212,10 +212,6 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -258,7 +254,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -289,7 +284,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -301,6 +295,12 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
@@ -338,11 +338,7 @@ export default class ValidateSchema extends LitElement {
   @property()
   pluginId!: string;
 &nbsp;
-  private async getValidator(
-    xsd: string,
-    xsdName: string,
-    statusNumber: number
-  ): Promise&lt;Validator&gt; {
+  private async getValidator(xsd: string, xsdName: string): Promise&lt;Validator&gt; {
     <span class="missing-if-branch" title="if path not taken" >I</span>if (!window.Worker) <span class="cstat-no" title="statement not covered" >throw new Error(get('validator.schema.fatal'));</span>
     <span class="missing-if-branch" title="if path not taken" >I</span>if (validators[xsdName]) <span class="cstat-no" title="statement not covered" >return validators[xsdName]!;</span>
 &nbsp;
@@ -374,7 +370,6 @@ export default class ValidateSchema extends LitElement {
             newIssueEvent({
               title: description,
               validatorId: this.pluginId,
-              statusNumber,
               message:
                 e.data.file +
                 ':' +
@@ -400,7 +395,7 @@ export default class ValidateSchema extends LitElement {
     });
   }
 &nbsp;
-  async validate(indentity: string, statusNumber: number): Promise&lt;void&gt; {
+  async validate(): Promise&lt;void&gt; {
     const fileName = this.docName;
     let version = '2007';
     let revision = 'B';
@@ -414,8 +409,7 @@ export default class ValidateSchema extends LitElement {
       ];
     const result = await this.getValidator(
       getSchema(version, revision, release),
-      'SCL' + version + revision + release + '.xsd',
-      statusNumber
+      'SCL' + version + revision + release + '.xsd'
     ).then(validator =&gt;
       validator(new XMLSerializer().serializeToString(this.doc), fileName)
     );
@@ -436,6 +430,12 @@ export default class ValidateSchema extends LitElement {
         title: get('validator.schema.valid', { name: result.file }),
       })
     );
+    document.querySelector('open-scd')!.dispatchEvent(
+      newIssueEvent({
+        validatorId: this.pluginId,
+        title: get('validator.schema.valid', { name: result.file }),
+      })
+    );
   }
 }
 &nbsp;</pre></td></tr></table></pre>
@@ -445,7 +445,7 @@ export default class ValidateSchema extends LitElement {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Mon Oct 18 2021 22:11:05 GMT+0000 (Coordinated Universal Time)
+                at Wed Oct 27 2021 06:41:00 GMT+0000 (Coordinated Universal Time)
             </div>
         </div>
         <script src="../../prettify.js"></script>

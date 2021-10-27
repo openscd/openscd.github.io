@@ -1,5 +1,5 @@
 import { __decorate } from "../../_snowpack/pkg/tslib.js";
-import { html, internalProperty, property, query, } from '../../_snowpack/pkg/lit-element.js';
+import { html, property, query } from '../../_snowpack/pkg/lit-element.js';
 import { until } from '../../_snowpack/pkg/lit-html/directives/until.js';
 import { translate } from '../../_snowpack/pkg/lit-translate.js';
 import { newPendingStateEvent } from './foundation.js';
@@ -11,15 +11,19 @@ export function Hosting(Base) {
             /** The currently active editor tab. */
             this.activeTab = 0;
             this.validated = Promise.resolve();
-            this.statusNumber = 0;
-            this.addEventListener('validate', async (e) => {
+            this.shouldValidate = false;
+            this.addEventListener('validate', async () => {
+                this.shouldValidate = true;
+                await this.validated;
+                if (!this.shouldValidate)
+                    return;
+                this.diagnoses.clear();
+                this.shouldValidate = false;
                 this.validated = Promise.allSettled(this.menuUI
                     .querySelector('mwc-list')
                     .items.filter(item => item.className === 'validator')
-                    .map(item => {
-                    const promise = item.lastElementChild.validate(e.detail.identity, ++this.statusNumber);
-                    return promise;
-                }));
+                    .map(item => item.lastElementChild.validate())).then();
+                this.dispatchEvent(newPendingStateEvent(this.validated));
             });
         }
         get menu() {
@@ -61,7 +65,9 @@ export function Hosting(Base) {
                 icon: plugin.icon || pluginIcons['validator'],
                 name: plugin.name,
                 action: ae => {
-                    this.dispatchEvent(newPendingStateEvent((ae.target.items[ae.detail.index].lastElementChild).validate('', ++this.statusNumber)));
+                    if (this.diagnoses.get(plugin.src))
+                        this.diagnoses.get(plugin.src).length = 0;
+                    this.dispatchEvent(newPendingStateEvent((ae.target.items[ae.detail.index].lastElementChild).validate()));
                 },
                 disabled: () => this.doc === null,
                 content: plugin.content,
@@ -221,9 +227,6 @@ export function Hosting(Base) {
     __decorate([
         property({ attribute: false })
     ], HostingElement.prototype, "validated", void 0);
-    __decorate([
-        internalProperty()
-    ], HostingElement.prototype, "statusNumber", void 0);
     __decorate([
         query('#menu')
     ], HostingElement.prototype, "menuUI", void 0);
