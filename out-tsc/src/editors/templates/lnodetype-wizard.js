@@ -165,7 +165,7 @@ function getAllDataObjects(nsd74, base) {
 }
 function createNewLNodeType(parent, element) {
     return (_, wizard) => {
-        const selected = Array.from(wizard.shadowRoot.querySelectorAll('mwc-select')).filter(select => select.value);
+        const selected = Array.from(wizard.shadowRoot.querySelectorAll('wizard-select')).filter(select => select.maybeValue);
         const actions = [];
         selected.forEach(select => {
             const DO = createElement(parent.ownerDocument, 'DO', {
@@ -219,14 +219,16 @@ function createLNodeTypeHelperWizard(parent, element, allDo) {
                 const validDOTypes = Array.from(parent
                     .closest('DataTypeTemplates')
                     .querySelectorAll(`DOType[cdc="${DO.getAttribute('type')}"]`)).sort(doComparator(name));
-                return html `<mwc-select
+                return html `<wizard-select
           fixedMenuPosition
           naturalMenuWidth
           label="${name}"
           ?required=${presCond === 'M'}
+          ?nullable=${presCond !== 'M'}
+          .maybeValue=${null}
           >${validDOTypes.map(doType => html `<mwc-list-item value="${doType.getAttribute('id')}"
                 >${doType.getAttribute('id')}</mwc-list-item
-              >`)}</mwc-select
+              >`)}</wizard-select
         >`;
             }),
         },
