@@ -1,8 +1,9 @@
 import { html } from '../../../../_snowpack/pkg/lit-html.js';
 import { get, translate } from '../../../../_snowpack/pkg/lit-translate.js';
-import { cloneElement, createElement, getReference, getValue, identity, isPublic, newActionEvent, newWizardEvent, patterns, selector, } from '../../foundation.js';
+import { cloneElement, createElement, getReference, getValue, identity, isPublic, newActionEvent, newWizardEvent, selector, } from '../../foundation.js';
 import { addReferencedDataTypes, allDataTypeSelector, unifyCreateActionArray, } from './foundation.js';
 import { createDaWizard, editDAWizard } from '../../wizards/da.js';
+import { patterns } from '../../wizards/foundation/limits.js';
 function updateSDoAction(element) {
     return (inputs) => {
         const name = getValue(inputs.find(i => i.label === 'name'));
@@ -92,7 +93,7 @@ function sDOWizard(options) {
           .maybeValue=${name}
           helper="${translate('scl.name')}"
           required
-          pattern="${patterns.alphanumericFirstLowerCase}"
+          pattern="${patterns.tRestrName1stL}"
           dialogInitialFocus
         >
           ></wizard-textfield
@@ -128,6 +129,7 @@ function addPredefinedDOType(parent, templates) {
         if (existId)
             return [];
         const desc = getValue(inputs.find(i => i.label === 'desc'));
+        const cdc = getValue(inputs.find(i => i.label === 'cdc'));
         const values = inputs.find(i => i.label === 'values');
         const selectedElement = values.selected
             ? templates.querySelector(`DOType[id="${values.selected.value}"]`)
@@ -136,6 +138,7 @@ function addPredefinedDOType(parent, templates) {
             ? selectedElement.cloneNode(true)
             : parent.ownerDocument.createElement('DOType');
         element.setAttribute('id', id);
+        element.setAttribute('cdc', cdc);
         if (desc)
             element.setAttribute('desc', desc);
         const actions = [];
@@ -150,6 +153,15 @@ function addPredefinedDOType(parent, templates) {
         });
         return unifyCreateActionArray(actions);
     };
+}
+function onSelectTemplateDOType(e, templates) {
+    const cdcUI = (e.target.parentElement.querySelector('wizard-textfield[label="cdc"]'));
+    const doTypeId = e.target.value;
+    const cdc = templates.querySelector(`DOType[id="${doTypeId}"]`)?.getAttribute('cdc') ??
+        null;
+    if (cdc)
+        cdcUI.value = cdc;
+    cdcUI.disabled = true;
 }
 export function createDOTypeWizard(parent, templates) {
     return [
@@ -167,6 +179,7 @@ export function createDOTypeWizard(parent, templates) {
           icon="playlist_add_check"
           label="values"
           helper="${translate('dotype.wizard.enums')}"
+          @selected=${(e) => onSelectTemplateDOType(e, templates)}
         >
           ${Array.from(templates.querySelectorAll('DOType')).map(datype => html `<mwc-list-item
                 graphic="icon"
@@ -196,6 +209,12 @@ export function createDOTypeWizard(parent, templates) {
           .maybeValue=${null}
           nullable
           pattern="${patterns.normalizedString}"
+        ></wizard-textfield>`,
+                html `<wizard-textfield
+          label="cdc"
+          helper="${translate('scl.cdc')}"
+          required
+          pattern="${patterns.cdc}"
         ></wizard-textfield>`,
             ],
         },
