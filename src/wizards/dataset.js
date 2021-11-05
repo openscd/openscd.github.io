@@ -3,8 +3,10 @@ import {get, translate} from "../../_snowpack/pkg/lit-translate.js";
 import {
   cloneElement,
   getValue,
-  identity
+  identity,
+  newWizardEvent
 } from "../foundation.js";
+import {wizards} from "./wizard-library.js";
 export function updateDataSetAction(element) {
   return (inputs) => {
     const name = inputs.find((i) => i.label === "name").value;
@@ -51,6 +53,17 @@ export function editDataSetWizard(element) {
           required
         >
         </wizard-textfield>`,
+        html`<mwc-button
+          icon="add"
+          label="${translate("wizard.title.add", {tagName: "FCDA"})}"
+          @click=${(e) => {
+          const wizard = wizards["FCDA"].create(element);
+          if (wizard) {
+            e.target?.dispatchEvent(newWizardEvent(wizard));
+            e.target?.dispatchEvent(newWizardEvent());
+          }
+        }}
+        ></mwc-button>`,
         html`<filtered-list multi
           >${Array.from(element.querySelectorAll("FCDA")).map((fcda) => html`<mwc-check-list-item value="${identity(fcda)}"
                 >${identity(fcda).split(">")[4]}</mwc-check-list-item

@@ -462,7 +462,8 @@ class MapArbitrary$1 extends NextArbitrary {
         const mappedValue = this.mapper(sourceValue);
         if (v.hasToBeCloned &&
             ((typeof mappedValue === 'object' && mappedValue !== null) || typeof mappedValue === 'function') &&
-            Object.isExtensible(mappedValue)) {
+            Object.isExtensible(mappedValue) &&
+            !hasCloneMethod(mappedValue)) {
             Object.defineProperty(mappedValue, cloneMethod, { get: () => () => this.mapperWithCloneIfNeeded(v)[0] });
         }
         return [mappedValue, sourceValue];
@@ -2897,7 +2898,7 @@ class ArrayArbitrary extends NextArbitrary {
 }
 
 function maxLengthFromMinLength(minLength) {
-    return 2 * minLength + 10;
+    return Math.min(2 * minLength + 10, 0x7fffffff);
 }
 
 function array(arb, ...args) {
@@ -3708,20 +3709,22 @@ function mapToConstant(...entries) {
 const lowerCaseMapper = { num: 26, build: (v) => String.fromCharCode(v + 0x61) };
 const upperCaseMapper = { num: 26, build: (v) => String.fromCharCode(v + 0x41) };
 const numericMapper = { num: 10, build: (v) => String.fromCharCode(v + 0x30) };
-const percentCharArb = fullUnicode().map((c) => {
+function percentCharArbMapper(c) {
     const encoded = encodeURIComponent(c);
     return c !== encoded ? encoded : `%${c.charCodeAt(0).toString(16)}`;
-});
-const buildLowerAlphaArb = (others) => mapToConstant(lowerCaseMapper, { num: others.length, build: (v) => others[v] });
-const buildLowerAlphaNumericArb = (others) => mapToConstant(lowerCaseMapper, numericMapper, { num: others.length, build: (v) => others[v] });
-const buildAlphaNumericArb = (others) => mapToConstant(lowerCaseMapper, upperCaseMapper, numericMapper, { num: others.length, build: (v) => others[v] });
-const buildAlphaNumericPercentArb = (others) => frequency({
-    weight: 10,
-    arbitrary: buildAlphaNumericArb(others),
-}, {
-    weight: 1,
-    arbitrary: percentCharArb,
-});
+}
+function percentCharArbUnmapper(value) {
+    if (typeof value !== 'string') {
+        throw new Error('Unsupported');
+    }
+    const decoded = decodeURIComponent(value);
+    return decoded;
+}
+const percentCharArb = convertFromNext(convertToNext(fullUnicode()).map(percentCharArbMapper, percentCharArbUnmapper));
+const buildLowerAlphaArbitrary = (others) => mapToConstant(lowerCaseMapper, { num: others.length, build: (v) => others[v] });
+const buildLowerAlphaNumericArbitrary = (others) => mapToConstant(lowerCaseMapper, numericMapper, { num: others.length, build: (v) => others[v] });
+const buildAlphaNumericArbitrary = (others) => mapToConstant(lowerCaseMapper, upperCaseMapper, numericMapper, { num: others.length, build: (v) => others[v] });
+const buildAlphaNumericPercentArbitrary = (others) => frequency({ weight: 10, arbitrary: buildAlphaNumericArbitrary(others) }, { weight: 1, arbitrary: percentCharArb });
 
 function extractOptionConstraints(constraints) {
     if (typeof constraints === 'number')
@@ -3812,32 +3815,69 @@ function filterInvalidSubdomainLabel(subdomainLabel) {
         subdomainLabel[2] !== '-' ||
         subdomainLabel[3] !== '-');
 }
+
+function toSubdomainLabelMapper([f, d]) {
+    return d === null ? f : `${f}${d[0]}${d[1]}`;
+}
+function toSubdomainLabelUnmapper(value) {
+    if (typeof value !== 'string' || value.length === 0) {
+        throw new Error('Unsupported');
+    }
+    if (value.length === 1) {
+        return [value[0], null];
+    }
+    return [value[0], [value.substring(1, value.length - 1), value[value.length - 1]]];
+}
 function subdomainLabel() {
-    const alphaNumericArb = buildLowerAlphaNumericArb([]);
-    const alphaNumericHyphenArb = buildLowerAlphaNumericArb(['-']);
-    return tuple(alphaNumericArb, option(tuple(stringOf(alphaNumericHyphenArb, { maxLength: 61 }), alphaNumericArb)))
-        .map(([f, d]) => (d === null ? f : `${f}${d[0]}${d[1]}`))
-        .filter(filterInvalidSubdomainLabel);
+    const alphaNumericArb = buildLowerAlphaNumericArbitrary([]);
+    const alphaNumericHyphenArb = buildLowerAlphaNumericArbitrary(['-']);
+    return convertFromNext(convertToNext(tuple(alphaNumericArb, option(tuple(stringOf(alphaNumericHyphenArb, { maxLength: 61 }), alphaNumericArb))))
+        .map(toSubdomainLabelMapper, toSubdomainLabelUnmapper)
+        .filter(filterInvalidSubdomainLabel));
+}
+function labelsMapper(elements) {
+    return `${elements[0].join('.')}.${elements[1]}`;
+}
+function labelsUnmapper(value) {
+    if (typeof value !== 'string') {
+        throw new Error('Unsupported type');
+    }
+    const lastDotIndex = value.lastIndexOf('.');
+    return [value.substring(0, lastDotIndex).split('.'), value.substring(lastDotIndex + 1)];
 }
 function domain() {
-    const alphaNumericArb = buildLowerAlphaArb([]);
+    const alphaNumericArb = buildLowerAlphaArbitrary([]);
     const publicSuffixArb = stringOf(alphaNumericArb, { minLength: 2, maxLength: 10 });
-    return (tuple(array(subdomainLabel(), { minLength: 1, maxLength: 5 }), publicSuffixArb)
-        .map(([mid, ext]) => `${mid.join('.')}.${ext}`)
+    return convertFromNext(convertToNext(tuple(array(subdomainLabel(), { minLength: 1, maxLength: 5 }), publicSuffixArb))
+        .map(labelsMapper, labelsUnmapper)
         .filter((d) => d.length <= 255));
 }
-function hostUserInfo() {
-    const others = ['-', '.', '_', '~', '!', '$', '&', "'", '(', ')', '*', '+', ',', ';', '=', ':'];
-    return stringOf(buildAlphaNumericPercentArb(others));
-}
 
+function dotMapper(a) {
+    return a.join('.');
+}
+function dotUnmapper(value) {
+    if (typeof value !== 'string') {
+        throw new Error('Unsupported');
+    }
+    return value.split('.');
+}
+function atMapper(data) {
+    return `${data[0]}@${data[1]}`;
+}
+function atUnmapper(value) {
+    if (typeof value !== 'string') {
+        throw new Error('Unsupported');
+    }
+    return value.split('@', 2);
+}
 function emailAddress() {
     const others = ['!', '#', '$', '%', '&', "'", '*', '+', '-', '/', '=', '?', '^', '_', '`', '{', '|', '}', '~'];
-    const atextArb = buildLowerAlphaNumericArb(others);
-    const localPartArb = array(stringOf(atextArb, { minLength: 1, maxLength: 10 }), { minLength: 1, maxLength: 5 })
-        .map((a) => a.join('.'))
-        .filter((lp) => lp.length <= 64);
-    return tuple(localPartArb, domain()).map(([lp, d]) => `${lp}@${d}`);
+    const atextArb = buildLowerAlphaNumericArbitrary(others);
+    const localPartArb = convertFromNext(convertToNext(array(stringOf(atextArb, { minLength: 1, maxLength: 10 }), { minLength: 1, maxLength: 5 }))
+        .map(dotMapper, dotUnmapper)
+        .filter((lp) => lp.length <= 64));
+    return convertFromNext(convertToNext(tuple(localPartArb, domain())).map(atMapper, atUnmapper));
 }
 
 const Zero64 = { sign: 1, data: [0, 0] };
@@ -4123,11 +4163,17 @@ function indexToDouble(index) {
     const significand = 1 + ((postIndexHigh & 0xfffff) * 2 ** 32 + index.data[1]) * Number.EPSILON;
     return significand * 2 ** exponent;
 }
+
 function safeDoubleToIndex(d, constraintsLabel) {
     if (Number.isNaN(d)) {
         throw new Error('fc.doubleNext constraints.' + constraintsLabel + ' must be a 32-bit float');
     }
     return doubleToIndex(d);
+}
+function unmapperDoubleToIndex(value) {
+    if (typeof value !== 'number')
+        throw new Error('Unsupported type');
+    return doubleToIndex(value);
 }
 function doubleNext(constraints = {}) {
     const { noDefaultInfinity = false, noNaN = false, min = noDefaultInfinity ? -Number.MAX_VALUE : Number.NEGATIVE_INFINITY, max = noDefaultInfinity ? Number.MAX_VALUE : Number.POSITIVE_INFINITY, } = constraints;
@@ -4137,17 +4183,57 @@ function doubleNext(constraints = {}) {
         throw new Error('fc.doubleNext constraints.min must be smaller or equal to constraints.max');
     }
     if (noNaN) {
-        return arrayInt64(minIndex, maxIndex).map(indexToDouble);
+        return convertFromNext(convertToNext(arrayInt64(minIndex, maxIndex)).map(indexToDouble, unmapperDoubleToIndex));
     }
     const positiveMaxIdx = isStrictlyPositive64(maxIndex);
     const minIndexWithNaN = positiveMaxIdx ? minIndex : substract64(minIndex, Unit64);
     const maxIndexWithNaN = positiveMaxIdx ? add64(maxIndex, Unit64) : maxIndex;
-    return arrayInt64(minIndexWithNaN, maxIndexWithNaN).map((index) => {
+    return convertFromNext(convertToNext(arrayInt64(minIndexWithNaN, maxIndexWithNaN)).map((index) => {
         if (isStrictlySmaller64(maxIndex, index) || isStrictlySmaller64(index, minIndex))
             return Number.NaN;
         else
             return indexToDouble(index);
-    });
+    }, (value) => {
+        if (typeof value !== 'number')
+            throw new Error('Unsupported type');
+        if (Number.isNaN(value))
+            return !isEqual64(maxIndex, maxIndexWithNaN) ? maxIndexWithNaN : minIndexWithNaN;
+        return doubleToIndex(value);
+    }));
+}
+
+function next(n) {
+    return integer(0, (1 << n) - 1);
+}
+const doubleFactor = Math.pow(2, 27);
+const doubleDivisor = Math.pow(2, -53);
+const doubleInternal = () => {
+    return tuple(next(26), next(27)).map((v) => (v[0] * doubleFactor + v[1]) * doubleDivisor);
+};
+function double(...args) {
+    if (typeof args[0] === 'object') {
+        if (args[0].next) {
+            return doubleNext(args[0]);
+        }
+        const min = args[0].min !== undefined ? args[0].min : 0;
+        const max = args[0].max !== undefined ? args[0].max : 1;
+        return (doubleInternal()
+            .map((v) => min + v * (max - min))
+            .filter((g) => g !== max || g === min));
+    }
+    else {
+        const a = args[0];
+        const b = args[1];
+        if (a === undefined)
+            return doubleInternal();
+        if (b === undefined)
+            return (doubleInternal()
+                .map((v) => v * a)
+                .filter((g) => g !== a || g === 0));
+        return (doubleInternal()
+            .map((v) => a + v * (b - a))
+            .filter((g) => g !== b || g === a));
+    }
 }
 
 const MAX_VALUE_32 = 2 ** 127 * (1 + (2 ** 23 - 1) / 2 ** 23);
@@ -4205,6 +4291,7 @@ function indexToFloat(index) {
     const significand = 1 + (postIndex & 0x7fffff) / 0x800000;
     return significand * 2 ** exponent;
 }
+
 function safeFloatToIndex(f, constraintsLabel) {
     const conversionTrick = 'you can convert any double to a 32-bit float by using `new Float32Array([myDouble])[0]`';
     const errorMessage = 'fc.floatNext constraints.' + constraintsLabel + ' must be a 32-bit float - ' + conversionTrick;
@@ -4217,6 +4304,11 @@ function safeFloatToIndex(f, constraintsLabel) {
     }
     return index;
 }
+function unmapperFloatToIndex(value) {
+    if (typeof value !== 'number')
+        throw new Error('Unsupported type');
+    return floatToIndex(value);
+}
 function floatNext(constraints = {}) {
     const { noDefaultInfinity = false, noNaN = false, min = noDefaultInfinity ? -MAX_VALUE_32 : Number.NEGATIVE_INFINITY, max = noDefaultInfinity ? MAX_VALUE_32 : Number.POSITIVE_INFINITY, } = constraints;
     const minIndex = safeFloatToIndex(min, 'min');
@@ -4225,23 +4317,29 @@ function floatNext(constraints = {}) {
         throw new Error('fc.floatNext constraints.min must be smaller or equal to constraints.max');
     }
     if (noNaN) {
-        return integer({ min: minIndex, max: maxIndex }).map(indexToFloat);
+        return convertFromNext(convertToNext(integer({ min: minIndex, max: maxIndex })).map(indexToFloat, unmapperFloatToIndex));
     }
     const minIndexWithNaN = maxIndex > 0 ? minIndex : minIndex - 1;
     const maxIndexWithNaN = maxIndex > 0 ? maxIndex + 1 : maxIndex;
-    return integer({ min: minIndexWithNaN, max: maxIndexWithNaN }).map((index) => {
+    return convertFromNext(convertToNext(integer({ min: minIndexWithNaN, max: maxIndexWithNaN })).map((index) => {
         if (index > maxIndex || index < minIndex)
             return Number.NaN;
         else
             return indexToFloat(index);
-    });
+    }, (value) => {
+        if (typeof value !== 'number')
+            throw new Error('Unsupported type');
+        if (Number.isNaN(value))
+            return maxIndex !== maxIndexWithNaN ? maxIndexWithNaN : minIndexWithNaN;
+        return floatToIndex(value);
+    }));
 }
 
-function next(n) {
+function next$1(n) {
     return integer(0, (1 << n) - 1);
 }
 const floatInternal = () => {
-    return next(24).map((v) => v / (1 << 24));
+    return next$1(24).map((v) => v / (1 << 24));
 };
 function float(...args) {
     if (typeof args[0] === 'object') {
@@ -4264,36 +4362,6 @@ function float(...args) {
                 .map((v) => v * a)
                 .filter((g) => g !== a || g === 0));
         return (floatInternal()
-            .map((v) => a + v * (b - a))
-            .filter((g) => g !== b || g === a));
-    }
-}
-const doubleFactor = Math.pow(2, 27);
-const doubleDivisor = Math.pow(2, -53);
-const doubleInternal = () => {
-    return tuple(next(26), next(27)).map((v) => (v[0] * doubleFactor + v[1]) * doubleDivisor);
-};
-function double(...args) {
-    if (typeof args[0] === 'object') {
-        if (args[0].next) {
-            return doubleNext(args[0]);
-        }
-        const min = args[0].min !== undefined ? args[0].min : 0;
-        const max = args[0].max !== undefined ? args[0].max : 1;
-        return (doubleInternal()
-            .map((v) => min + v * (max - min))
-            .filter((g) => g !== max || g === min));
-    }
-    else {
-        const a = args[0];
-        const b = args[1];
-        if (a === undefined)
-            return doubleInternal();
-        if (b === undefined)
-            return (doubleInternal()
-                .map((v) => v * a)
-                .filter((g) => g !== a || g === 0));
-        return (doubleInternal()
             .map((v) => a + v * (b - a))
             .filter((g) => g !== b || g === a));
     }
@@ -4818,26 +4886,36 @@ function computeNextFlags(flags, nextSize) {
     }
     return nFlags;
 }
+function computeTogglePositions(chars, toggleCase) {
+    const positions = [];
+    for (let idx = 0; idx !== chars.length; ++idx) {
+        if (toggleCase(chars[idx]) !== chars[idx])
+            positions.push(idx);
+    }
+    return positions;
+}
+function computeFlagsFromChars(untoggledChars, toggledChars, togglePositions) {
+    let flags = BigInt(0);
+    for (let idx = 0, mask = BigInt(1); idx !== togglePositions.length; ++idx, mask <<= BigInt(1)) {
+        if (untoggledChars[togglePositions[idx]] !== toggledChars[togglePositions[idx]]) {
+            flags |= mask;
+        }
+    }
+    return flags;
+}
+function applyFlagsOnChars(chars, flags, togglePositions, toggleCase) {
+    for (let idx = 0, mask = BigInt(1); idx !== togglePositions.length; ++idx, mask <<= BigInt(1)) {
+        if (flags & mask)
+            chars[togglePositions[idx]] = toggleCase(chars[togglePositions[idx]]);
+    }
+}
+
 class MixedCaseArbitrary extends NextArbitrary {
-    constructor(stringArb, toggleCase) {
+    constructor(stringArb, toggleCase, untoggleAll) {
         super();
         this.stringArb = stringArb;
         this.toggleCase = toggleCase;
-    }
-    computeTogglePositions(chars) {
-        const positions = [];
-        for (let idx = 0; idx !== chars.length; ++idx) {
-            if (this.toggleCase(chars[idx]) !== chars[idx])
-                positions.push(idx);
-        }
-        return positions;
-    }
-    applyFlagsOnChars(chars, flags, togglePositions) {
-        for (let idx = 0, mask = BigInt(1); idx !== togglePositions.length; ++idx, mask <<= BigInt(1)) {
-            if (flags & mask)
-                chars[togglePositions[idx]] = this.toggleCase(chars[togglePositions[idx]]);
-        }
-        return chars;
+        this.untoggleAll = untoggleAll;
     }
     buildContextFor(rawStringNextValue, flagsNextValue) {
         return {
@@ -4850,39 +4928,67 @@ class MixedCaseArbitrary extends NextArbitrary {
     generate(mrng, biasFactor) {
         const rawStringNextValue = this.stringArb.generate(mrng, biasFactor);
         const chars = [...rawStringNextValue.value];
-        const togglePositions = this.computeTogglePositions(chars);
+        const togglePositions = computeTogglePositions(chars, this.toggleCase);
         const flagsArb = convertToNext(bigUintN(togglePositions.length));
         const flagsNextValue = flagsArb.generate(mrng, undefined);
-        this.applyFlagsOnChars(chars, flagsNextValue.value, togglePositions);
+        applyFlagsOnChars(chars, flagsNextValue.value, togglePositions, this.toggleCase);
         return new NextValue(chars.join(''), this.buildContextFor(rawStringNextValue, flagsNextValue));
     }
     canShrinkWithoutContext(value) {
-        return false;
-    }
-    shrink(_value, context) {
-        if (context === undefined) {
-            return Stream.nil();
+        if (typeof value !== 'string') {
+            return false;
         }
-        const contextSafe = context;
+        return this.untoggleAll !== undefined
+            ? this.stringArb.canShrinkWithoutContext(this.untoggleAll(value))
+            :
+                this.stringArb.canShrinkWithoutContext(value);
+    }
+    shrink(value, context) {
+        let contextSafe;
+        if (context !== undefined) {
+            contextSafe = context;
+        }
+        else {
+            if (this.untoggleAll !== undefined) {
+                const untoggledValue = this.untoggleAll(value);
+                const valueChars = [...value];
+                const untoggledValueChars = [...untoggledValue];
+                const togglePositions = computeTogglePositions(untoggledValueChars, this.toggleCase);
+                contextSafe = {
+                    rawString: untoggledValue,
+                    rawStringContext: undefined,
+                    flags: computeFlagsFromChars(untoggledValueChars, valueChars, togglePositions),
+                    flagsContext: undefined,
+                };
+            }
+            else {
+                contextSafe = {
+                    rawString: value,
+                    rawStringContext: undefined,
+                    flags: BigInt(0),
+                    flagsContext: undefined,
+                };
+            }
+        }
         const rawString = contextSafe.rawString;
         const flags = contextSafe.flags;
         return this.stringArb
             .shrink(rawString, contextSafe.rawStringContext)
             .map((nRawStringNextValue) => {
             const nChars = [...nRawStringNextValue.value];
-            const nTogglePositions = this.computeTogglePositions(nChars);
+            const nTogglePositions = computeTogglePositions(nChars, this.toggleCase);
             const nFlags = computeNextFlags(flags, nTogglePositions.length);
-            this.applyFlagsOnChars(nChars, nFlags, nTogglePositions);
+            applyFlagsOnChars(nChars, nFlags, nTogglePositions, this.toggleCase);
             return new NextValue(nChars.join(''), this.buildContextFor(nRawStringNextValue, new NextValue(nFlags, undefined)));
         })
             .join(makeLazy(() => {
             const chars = [...rawString];
-            const togglePositions = this.computeTogglePositions(chars);
+            const togglePositions = computeTogglePositions(chars, this.toggleCase);
             return convertToNext(bigUintN(togglePositions.length))
                 .shrink(flags, contextSafe.flagsContext)
                 .map((nFlagsNextValue) => {
                 const nChars = chars.slice();
-                this.applyFlagsOnChars(nChars, nFlagsNextValue.value, togglePositions);
+                applyFlagsOnChars(nChars, nFlagsNextValue.value, togglePositions, this.toggleCase);
                 return new NextValue(nChars.join(''), this.buildContextFor(new NextValue(rawString, contextSafe.rawStringContext), nFlagsNextValue));
             });
         }));
@@ -4900,25 +5006,32 @@ function mixedCase(stringArb, constraints) {
         throw new Error(`mixedCase requires BigInt support`);
     }
     const toggleCase = (constraints && constraints.toggleCase) || defaultToggleCase;
-    return convertFromNext(new MixedCaseArbitrary(convertToNext(stringArb), toggleCase));
+    const untoggleAll = constraints && constraints.untoggleAll;
+    return convertFromNext(new MixedCaseArbitrary(convertToNext(stringArb), toggleCase, untoggleAll));
 }
 
-function string(...args) {
-    const constraints = extractStringConstraints(args);
-    return convertFromNext(convertToNext(array(char(), constraints)).map(codePointsToStringMapper, codePointsToStringUnmapper));
+function toTypedMapper(data) {
+    return Float32Array.from(data);
 }
-
-function unicodeString(...args) {
-    const constraints = extractStringConstraints(args);
-    return convertFromNext(convertToNext(array(unicode(), constraints)).map(codePointsToStringMapper, codePointsToStringUnmapper));
+function fromTypedUnmapper(value) {
+    if (!(value instanceof Float32Array))
+        throw new Error('Unexpected type');
+    return [...value];
 }
-
 function float32Array(constraints = {}) {
-    return array(float(Object.assign(Object.assign({}, constraints), { next: true })), constraints).map((data) => Float32Array.from(data));
+    return convertFromNext(convertToNext(array(float(Object.assign(Object.assign({}, constraints), { next: true })), constraints)).map(toTypedMapper, fromTypedUnmapper));
 }
 
+function toTypedMapper$1(data) {
+    return Float64Array.from(data);
+}
+function fromTypedUnmapper$1(value) {
+    if (!(value instanceof Float64Array))
+        throw new Error('Unexpected type');
+    return [...value];
+}
 function float64Array(constraints = {}) {
-    return array(double(Object.assign(Object.assign({}, constraints), { next: true })), constraints).map((data) => Float64Array.from(data));
+    return convertFromNext(convertToNext(array(double(Object.assign(Object.assign({}, constraints), { next: true })), constraints)).map(toTypedMapper$1, fromTypedUnmapper$1));
 }
 
 var __rest = (undefined && undefined.__rest) || function (s, e) {
@@ -4944,7 +5057,11 @@ function typedIntArrayArbitraryArbitraryBuilder(constraints, defaultMin, default
     if (max > defaultMax) {
         throw new Error(`Invalid max value passed to ${generatorName}: max must be lower than or equal to ${defaultMax}`);
     }
-    return array(arbitraryBuilder({ min, max }), arrayConstraints).map((data) => TypedArrayClass.from(data));
+    return convertFromNext(convertToNext(array(arbitraryBuilder({ min, max }), arrayConstraints)).map((data) => TypedArrayClass.from(data), (value) => {
+        if (!(value instanceof TypedArrayClass))
+            throw new Error('Invalid type');
+        return [...value];
+    }));
 }
 
 function int16Array(constraints = {}) {
@@ -5000,118 +5117,192 @@ function sparseArray(arb, constraints = {}) {
         throw new Error(`The minimal number of non-hole elements cannot be higher than the maximal number of non-holes`);
     }
     const resultedMaxNumElements = Math.min(maxNumElements, maxLength);
-    if (noTrailingHole) {
-        const maxIndexAuthorized = Math.max(maxLength - 1, 0);
-        return set(tuple(nat(maxIndexAuthorized), arb), {
-            minLength: minNumElements,
-            maxLength: resultedMaxNumElements,
-            compare: (itemA, itemB) => itemA[0] === itemB[0],
-        }).map((items) => {
-            const lastIndex = extractMaxIndex(items);
-            return arrayFromItems(lastIndex + 1, items);
-        });
-    }
-    return set(tuple(nat(maxLength), arb), {
-        minLength: minNumElements + 1,
-        maxLength: resultedMaxNumElements + 1,
+    const maxIndexAuthorized = Math.max(maxLength - 1, 0);
+    const sparseArrayNoTrailingHole = convertFromNext(convertToNext(set(tuple(nat(maxIndexAuthorized), arb), {
+        minLength: minNumElements,
+        maxLength: resultedMaxNumElements,
         compare: (itemA, itemB) => itemA[0] === itemB[0],
-    }).map((items) => {
-        const length = extractMaxIndex(items);
-        return arrayFromItems(length, items);
-    });
+    })).map((items) => {
+        const lastIndex = extractMaxIndex(items);
+        return arrayFromItems(lastIndex + 1, items);
+    }, (value) => {
+        if (!Array.isArray(value)) {
+            throw new Error('Not supported entry type');
+        }
+        return Object.entries(value).map((entry) => [Number(entry[0]), entry[1]]);
+    }));
+    if (noTrailingHole || maxLength === minNumElements) {
+        return sparseArrayNoTrailingHole;
+    }
+    return convertFromNext(convertToNext(tuple(sparseArrayNoTrailingHole, integer({ min: minNumElements, max: maxLength }))).map((data) => {
+        const sparse = data[0];
+        const targetLength = data[1];
+        if (sparse.length >= targetLength) {
+            return sparse;
+        }
+        const longerSparse = sparse.slice();
+        longerSparse.length = targetLength;
+        return longerSparse;
+    }, (value) => {
+        if (!Array.isArray(value)) {
+            throw new Error('Not supported entry type');
+        }
+        return [value, value.length];
+    }));
 }
 
-function boxArbitrary(arb) {
-    return arb.map((v) => {
-        switch (typeof v) {
-            case 'boolean':
-                return new Boolean(v);
-            case 'number':
-                return new Number(v);
-            case 'string':
-                return new String(v);
-            default:
-                return v;
-        }
-    });
+function arrayToMapMapper(data) {
+    return new Map(data);
 }
-class QualifiedObjectConstraints {
-    constructor(key, values, maxDepth, maxKeys, withSet, withMap, withObjectString, withNullPrototype, withBigInt, withDate, withTypedArray, withSparseArray) {
-        this.key = key;
-        this.values = values;
-        this.maxDepth = maxDepth;
-        this.maxKeys = maxKeys;
-        this.withSet = withSet;
-        this.withMap = withMap;
-        this.withObjectString = withObjectString;
-        this.withNullPrototype = withNullPrototype;
-        this.withBigInt = withBigInt;
-        this.withDate = withDate;
-        this.withTypedArray = withTypedArray;
-        this.withSparseArray = withSparseArray;
+function arrayToMapUnmapper(value) {
+    if (typeof value !== 'object' || value === null) {
+        throw new Error('Incompatible instance received: should be a non-null object');
     }
-    static defaultValues() {
-        return [
-            boolean(),
-            maxSafeInteger(),
-            double({ next: true }),
-            string(),
-            oneof(string(), constant(null), constant(undefined)),
-        ];
+    if (!('constructor' in value) || value.constructor !== Map) {
+        throw new Error('Incompatible instance received: should be of exact type Map');
     }
-    static boxArbitraries(arbs) {
-        return arbs.map((arb) => boxArbitrary(arb));
-    }
-    static boxArbitrariesIfNeeded(arbs, boxEnabled) {
-        return boxEnabled ? QualifiedObjectConstraints.boxArbitraries(arbs).concat(arbs) : arbs;
-    }
-    static from(settings = {}) {
-        function orDefault(optionalValue, defaultValue) {
-            return optionalValue !== undefined ? optionalValue : defaultValue;
-        }
-        return new QualifiedObjectConstraints(orDefault(settings.key, string()), QualifiedObjectConstraints.boxArbitrariesIfNeeded(orDefault(settings.values, QualifiedObjectConstraints.defaultValues()), orDefault(settings.withBoxedValues, false)), orDefault(settings.maxDepth, 2), orDefault(settings.maxKeys, 5), orDefault(settings.withSet, false), orDefault(settings.withMap, false), orDefault(settings.withObjectString, false), orDefault(settings.withNullPrototype, false), orDefault(settings.withBigInt, false), orDefault(settings.withDate, false), orDefault(settings.withTypedArray, false), orDefault(settings.withSparseArray, false));
-    }
+    return Array.from(value);
 }
-const anythingInternal = (constraints) => {
-    const arbKeys = constraints.withObjectString
-        ? memo((n) => frequency({ arbitrary: constraints.key, weight: 10 }, { arbitrary: anythingArb(n).map((o) => stringify(o)), weight: 1 }))
-        : memo(() => constraints.key);
+
+function arrayToSetMapper(data) {
+    return new Set(data);
+}
+function arrayToSetUnmapper(value) {
+    if (typeof value !== 'object' || value === null) {
+        throw new Error('Incompatible instance received: should be a non-null object');
+    }
+    if (!('constructor' in value) || value.constructor !== Set) {
+        throw new Error('Incompatible instance received: should be of exact type Set');
+    }
+    return Array.from(value);
+}
+
+function objectToPrototypeLessMapper(o) {
+    return Object.assign(Object.create(null), o);
+}
+function objectToPrototypeLessUnmapper(value) {
+    if (typeof value !== 'object' || value === null) {
+        throw new Error('Incompatible instance received: should be a non-null object');
+    }
+    if ('__proto__' in value) {
+        throw new Error('Incompatible instance received: should not have any __proto__');
+    }
+    return Object.assign({}, value);
+}
+
+function entriesOf(keyArb, valueArb, maxKeys) {
+    return convertToNext(set(tuple(keyArb, valueArb), { maxLength: maxKeys, compare: (t1, t2) => t1[0] === t2[0] }));
+}
+function mapOf(ka, va, maxKeys) {
+    return convertFromNext(entriesOf(ka, va, maxKeys).map(arrayToMapMapper, arrayToMapUnmapper));
+}
+function dictOf(ka, va, maxKeys) {
+    return convertFromNext(entriesOf(ka, va, maxKeys).map(keyValuePairsToObjectMapper, keyValuePairsToObjectUnmapper));
+}
+function setOf(va, maxKeys) {
+    return convertFromNext(convertToNext(set(va, { maxLength: maxKeys })).map(arrayToSetMapper, arrayToSetUnmapper));
+}
+function prototypeLessOf(objectArb) {
+    return convertFromNext(convertToNext(objectArb).map(objectToPrototypeLessMapper, objectToPrototypeLessUnmapper));
+}
+function typedArray() {
+    return oneof(int8Array(), uint8Array(), uint8ClampedArray(), int16Array(), uint16Array(), int32Array(), uint32Array(), float32Array(), float64Array());
+}
+function anyArbitraryBuilder(constraints) {
     const arbitrariesForBase = constraints.values;
     const maxDepth = constraints.maxDepth;
     const maxKeys = constraints.maxKeys;
-    const entriesOf = (keyArb, valueArb) => set(tuple(keyArb, valueArb), { maxLength: maxKeys, compare: (t1, t2) => t1[0] === t2[0] });
-    const mapOf = (ka, va) => entriesOf(ka, va).map((v) => new Map(v));
-    const dictOf = (ka, va) => entriesOf(ka, va).map((v) => keyValuePairsToObjectMapper(v));
     const baseArb = oneof(...arbitrariesForBase);
-    const arrayBaseArb = oneof(...arbitrariesForBase.map((arb) => array(arb, { maxLength: maxKeys })));
-    const objectBaseArb = (n) => oneof(...arbitrariesForBase.map((arb) => dictOf(arbKeys(n), arb)));
-    const setBaseArb = () => oneof(...arbitrariesForBase.map((arb) => set(arb, { maxLength: maxKeys }).map((v) => new Set(v))));
-    const mapBaseArb = (n) => oneof(...arbitrariesForBase.map((arb) => mapOf(arbKeys(n), arb)));
-    const arrayArb = memo((n) => oneof(arrayBaseArb, array(anythingArb(n), { maxLength: maxKeys })));
-    const setArb = memo((n) => oneof(setBaseArb(), set(anythingArb(n), { maxLength: maxKeys }).map((v) => new Set(v))));
-    const mapArb = memo((n) => oneof(mapBaseArb(n), oneof(mapOf(arbKeys(n), anythingArb(n)), mapOf(anythingArb(n), anythingArb(n)))));
-    const objectArb = memo((n) => oneof(objectBaseArb(n), dictOf(arbKeys(n), anythingArb(n))));
-    const anythingArb = memo((n) => {
-        if (n <= 0)
-            return oneof(baseArb);
-        return oneof(baseArb, arrayArb(), objectArb(), ...(constraints.withMap ? [mapArb()] : []), ...(constraints.withSet ? [setArb()] : []), ...(constraints.withObjectString ? [anythingArb().map((o) => stringify(o))] : []), ...(constraints.withNullPrototype ? [objectArb().map((o) => Object.assign(Object.create(null), o))] : []), ...(constraints.withBigInt ? [bigInt()] : []), ...(constraints.withDate ? [date()] : []), ...(constraints.withTypedArray
-            ? [
-                oneof(int8Array(), uint8Array(), uint8ClampedArray(), int16Array(), uint16Array(), int32Array(), uint32Array(), float32Array(), float64Array()),
-            ]
-            : []), ...(constraints.withSparseArray ? [sparseArray(anythingArb())] : []));
-    });
-    return anythingArb(maxDepth);
-};
-const objectInternal = (constraints) => {
-    return dictionary(constraints.key, anythingInternal(constraints));
-};
-function anything(constraints) {
-    return anythingInternal(QualifiedObjectConstraints.from(constraints));
+    return letrec((tie) => ({
+        anything: oneof({ maxDepth }, baseArb, tie('array'), tie('object'), ...(constraints.withMap ? [tie('map')] : []), ...(constraints.withSet ? [tie('set')] : []), ...(constraints.withObjectString ? [tie('anything').map((o) => stringify(o))] : []), ...(constraints.withNullPrototype ? [prototypeLessOf(tie('object'))] : []), ...(constraints.withBigInt ? [bigInt()] : []), ...(constraints.withDate ? [date()] : []), ...(constraints.withTypedArray ? [typedArray()] : []), ...(constraints.withSparseArray ? [sparseArray(tie('anything'), { maxNumElements: maxKeys })] : [])),
+        keys: constraints.withObjectString
+            ? frequency({ arbitrary: constraints.key, weight: 10 }, { arbitrary: tie('anything').map((o) => stringify(o)), weight: 1 })
+            : constraints.key,
+        arrayBase: oneof(...arbitrariesForBase.map((arb) => array(arb, { maxLength: maxKeys }))),
+        array: oneof(tie('arrayBase'), array(tie('anything'), { maxLength: maxKeys })),
+        setBase: oneof(...arbitrariesForBase.map((arb) => setOf(arb, maxKeys))),
+        set: oneof(tie('setBase'), setOf(tie('anything'), maxKeys)),
+        mapBase: oneof(...arbitrariesForBase.map((arb) => mapOf(tie('keys'), arb, maxKeys))),
+        map: oneof(tie('mapBase'), oneof(mapOf(tie('keys'), tie('anything'), maxKeys), mapOf(tie('anything'), tie('anything'), maxKeys))),
+        objectBase: oneof(...arbitrariesForBase.map((arb) => dictOf(tie('keys'), arb, maxKeys))),
+        object: oneof(tie('objectBase'), dictOf(tie('keys'), tie('anything'), maxKeys)),
+    })).anything;
+}
+
+function string(...args) {
+    const constraints = extractStringConstraints(args);
+    return convertFromNext(convertToNext(array(char(), constraints)).map(codePointsToStringMapper, codePointsToStringUnmapper));
+}
+
+function unboxedToBoxedMapper(value) {
+    switch (typeof value) {
+        case 'boolean':
+            return new Boolean(value);
+        case 'number':
+            return new Number(value);
+        case 'string':
+            return new String(value);
+        default:
+            return value;
+    }
+}
+function unboxedToBoxedUnmapper(value) {
+    if (typeof value !== 'object' || value === null || !('constructor' in value)) {
+        return value;
+    }
+    return value.constructor === Boolean || value.constructor === Number || value.constructor === String
+        ?
+            value.valueOf()
+        : value;
+}
+
+function boxedArbitraryBuilder(arb) {
+    return convertFromNext(convertToNext(arb).map(unboxedToBoxedMapper, unboxedToBoxedUnmapper));
+}
+
+function defaultValues() {
+    return [
+        boolean(),
+        maxSafeInteger(),
+        double({ next: true }),
+        string(),
+        oneof(string(), constant(null), constant(undefined)),
+    ];
+}
+function boxArbitraries(arbs) {
+    return arbs.map((arb) => boxedArbitraryBuilder(arb));
+}
+function boxArbitrariesIfNeeded(arbs, boxEnabled) {
+    return boxEnabled ? boxArbitraries(arbs).concat(arbs) : arbs;
+}
+function toQualifiedObjectConstraints(settings = {}) {
+    function orDefault(optionalValue, defaultValue) {
+        return optionalValue !== undefined ? optionalValue : defaultValue;
+    }
+    return {
+        key: orDefault(settings.key, string()),
+        values: boxArbitrariesIfNeeded(orDefault(settings.values, defaultValues()), orDefault(settings.withBoxedValues, false)),
+        maxDepth: orDefault(settings.maxDepth, 2),
+        maxKeys: orDefault(settings.maxKeys, 5),
+        withSet: orDefault(settings.withSet, false),
+        withMap: orDefault(settings.withMap, false),
+        withObjectString: orDefault(settings.withObjectString, false),
+        withNullPrototype: orDefault(settings.withNullPrototype, false),
+        withBigInt: orDefault(settings.withBigInt, false),
+        withDate: orDefault(settings.withDate, false),
+        withTypedArray: orDefault(settings.withTypedArray, false),
+        withSparseArray: orDefault(settings.withSparseArray, false),
+    };
+}
+
+function objectInternal(constraints) {
+    return dictionary(constraints.key, anyArbitraryBuilder(constraints));
 }
 function object(constraints) {
-    return objectInternal(QualifiedObjectConstraints.from(constraints));
+    return objectInternal(toQualifiedObjectConstraints(constraints));
 }
-function jsonSettings(stringArbitrary, constraints) {
+
+function jsonConstraintsBuilder(stringArbitrary, constraints) {
     const key = stringArbitrary;
     const values = [
         boolean(),
@@ -5126,16 +5317,29 @@ function jsonSettings(stringArbitrary, constraints) {
             : { key, values, maxDepth: constraints.maxDepth }
         : { key, values };
 }
+
+function anything(constraints) {
+    return anyArbitraryBuilder(toQualifiedObjectConstraints(constraints));
+}
+
 function jsonObject(constraints) {
-    return anything(jsonSettings(string(), constraints));
+    return anything(jsonConstraintsBuilder(string(), constraints));
 }
-function unicodeJsonObject(constraints) {
-    return anything(jsonSettings(unicodeString(), constraints));
-}
+
 function json(constraints) {
     const arb = constraints != null ? jsonObject(constraints) : jsonObject();
     return arb.map(JSON.stringify);
 }
+
+function unicodeString(...args) {
+    const constraints = extractStringConstraints(args);
+    return convertFromNext(convertToNext(array(unicode(), constraints)).map(codePointsToStringMapper, codePointsToStringUnmapper));
+}
+
+function unicodeJsonObject(constraints) {
+    return anything(jsonConstraintsBuilder(unicodeString(), constraints));
+}
+
 function unicodeJson(constraints) {
     const arb = constraints != null ? unicodeJsonObject(constraints) : unicodeJsonObject();
     return arb.map(JSON.stringify);
@@ -5357,22 +5561,39 @@ function string16bits(...args) {
     return convertFromNext(convertToNext(array(char16bits(), constraints)).map(charsToStringMapper, charsToStringUnmapper));
 }
 
-class BiasedArbitraryWrapper extends Arbitrary {
-    constructor(freq, arb, biasedArbBuilder) {
-        super();
-        this.freq = freq;
-        this.arb = arb;
-        this.biasedArbBuilder = biasedArbBuilder;
+function isSubarrayOf(source, small) {
+    const countMap = new Map();
+    let countMinusZero = 0;
+    for (const sourceEntry of source) {
+        if (Object.is(sourceEntry, -0)) {
+            ++countMinusZero;
+        }
+        else {
+            const oldCount = countMap.get(sourceEntry) || 0;
+            countMap.set(sourceEntry, oldCount + 1);
+        }
     }
-    generate(mrng) {
-        return mrng.nextInt(1, this.freq) === 1 ? this.biasedArbBuilder(this.arb).generate(mrng) : this.arb.generate(mrng);
+    for (let index = 0; index !== small.length; ++index) {
+        if (!(index in small)) {
+            return false;
+        }
+        const smallEntry = small[index];
+        if (Object.is(smallEntry, -0)) {
+            if (countMinusZero === 0)
+                return false;
+            --countMinusZero;
+        }
+        else {
+            const oldCount = countMap.get(smallEntry) || 0;
+            if (oldCount === 0)
+                return false;
+            countMap.set(smallEntry, oldCount - 1);
+        }
     }
-}
-function biasWrapper(freq, arb, biasedArbBuilder) {
-    return new BiasedArbitraryWrapper(freq, arb, biasedArbBuilder);
+    return true;
 }
 
-class SubarrayArbitrary extends Arbitrary {
+class SubarrayArbitrary extends NextArbitrary {
     constructor(originalArray, isOrdered, minLength, maxLength) {
         super();
         this.originalArray = originalArray;
@@ -5385,117 +5606,284 @@ class SubarrayArbitrary extends Arbitrary {
             throw new Error('fc.*{s|S}ubarrayOf expects the maximal length to be between 0 and the size of the original array');
         if (minLength > maxLength)
             throw new Error('fc.*{s|S}ubarrayOf expects the minimal length to be inferior or equal to the maximal length');
-        this.lengthArb = integer(minLength, maxLength);
+        this.lengthArb = new IntegerArbitrary(minLength, maxLength);
+        this.biasedLengthArb =
+            minLength !== maxLength
+                ? new IntegerArbitrary(minLength, minLength + Math.floor(Math.log(maxLength - minLength) / Math.log(2)))
+                : this.lengthArb;
     }
-    wrapper(items, itemsLengthContext) {
-        return new Shrinkable(items, () => this.shrinkImpl(items, itemsLengthContext).map((contextualValue) => this.wrapper(contextualValue[0], contextualValue[1])));
-    }
-    generate(mrng) {
+    generate(mrng, biasFactor) {
+        const lengthArb = biasFactor !== undefined && mrng.nextInt(1, biasFactor) === 1 ? this.biasedLengthArb : this.lengthArb;
+        const size = lengthArb.generate(mrng, undefined);
+        const sizeValue = size.value;
         const remainingElements = this.originalArray.map((_v, idx) => idx);
-        const size = this.lengthArb.generate(mrng).value;
         const ids = [];
-        for (let idx = 0; idx !== size; ++idx) {
+        for (let index = 0; index !== sizeValue; ++index) {
             const selectedIdIndex = mrng.nextInt(0, remainingElements.length - 1);
             ids.push(remainingElements[selectedIdIndex]);
             remainingElements.splice(selectedIdIndex, 1);
         }
-        if (this.isOrdered)
+        if (this.isOrdered) {
             ids.sort((a, b) => a - b);
-        return this.wrapper(ids.map((i) => this.originalArray[i]), undefined);
+        }
+        return new NextValue(ids.map((i) => this.originalArray[i]), size.context);
     }
-    shrinkImpl(items, itemsLengthContext) {
-        if (items.length === 0) {
+    canShrinkWithoutContext(value) {
+        if (!Array.isArray(value)) {
+            return false;
+        }
+        if (!this.lengthArb.canShrinkWithoutContext(value.length)) {
+            return false;
+        }
+        return isSubarrayOf(this.originalArray, value);
+    }
+    shrink(value, context) {
+        if (value.length === 0) {
             return Stream.nil();
         }
         return this.lengthArb
-            .contextualShrink(items.length, itemsLengthContext)
-            .map((contextualValue) => {
-            return [
-                items.slice(items.length - contextualValue[0]),
-                contextualValue[1],
-            ];
+            .shrink(value.length, context)
+            .map((newSize) => {
+            return new NextValue(value.slice(value.length - newSize.value), newSize.context);
         })
-            .join(items.length > this.minLength
-            ? makeLazy(() => this.shrinkImpl(items.slice(1), undefined)
-                .filter((contextualValue) => this.minLength <= contextualValue[0].length + 1)
-                .map((contextualValue) => [[items[0]].concat(contextualValue[0]), undefined]))
+            .join(value.length > this.minLength
+            ? makeLazy(() => this.shrink(value.slice(1), undefined)
+                .filter((newValue) => this.minLength <= newValue.value.length + 1)
+                .map((newValue) => new NextValue([value[0]].concat(newValue.value), undefined)))
             : Stream.nil());
     }
-    withBias(freq) {
-        return this.minLength !== this.maxLength
-            ? biasWrapper(freq, this, (originalArbitrary) => {
-                return new SubarrayArbitrary(originalArbitrary.originalArray, originalArbitrary.isOrdered, originalArbitrary.minLength, originalArbitrary.minLength +
-                    Math.floor(Math.log(originalArbitrary.maxLength - originalArbitrary.minLength) / Math.log(2)));
-            })
-            : this;
-    }
 }
+
 function subarray(originalArray, ...args) {
     if (typeof args[0] === 'number' && typeof args[1] === 'number') {
-        return new SubarrayArbitrary(originalArray, true, args[0], args[1]);
+        return convertFromNext(new SubarrayArbitrary(originalArray, true, args[0], args[1]));
     }
     const ct = args[0];
     const minLength = ct !== undefined && ct.minLength !== undefined ? ct.minLength : 0;
     const maxLength = ct !== undefined && ct.maxLength !== undefined ? ct.maxLength : originalArray.length;
-    return new SubarrayArbitrary(originalArray, true, minLength, maxLength);
+    return convertFromNext(new SubarrayArbitrary(originalArray, true, minLength, maxLength));
 }
+
 function shuffledSubarray(originalArray, ...args) {
     if (typeof args[0] === 'number' && typeof args[1] === 'number') {
-        return new SubarrayArbitrary(originalArray, false, args[0], args[1]);
+        return convertFromNext(new SubarrayArbitrary(originalArray, false, args[0], args[1]));
     }
     const ct = args[0];
     const minLength = ct !== undefined && ct.minLength !== undefined ? ct.minLength : 0;
     const maxLength = ct !== undefined && ct.maxLength !== undefined ? ct.maxLength : originalArray.length;
-    return new SubarrayArbitrary(originalArray, false, minLength, maxLength);
+    return convertFromNext(new SubarrayArbitrary(originalArray, false, minLength, maxLength));
 }
 
-const padEight = (arb) => arb.map((n) => n.toString(16).padStart(8, '0'));
+function numberToPaddedEightMapper(n) {
+    return n.toString(16).padStart(8, '0');
+}
+function numberToPaddedEightUnmapper(value) {
+    if (typeof value !== 'string') {
+        throw new Error('Unsupported type');
+    }
+    if (value.length !== 8) {
+        throw new Error('Unsupported value: invalid length');
+    }
+    const n = parseInt(value, 16);
+    if (value !== numberToPaddedEightMapper(n)) {
+        throw new Error('Unsupported value: invalid content');
+    }
+    return n;
+}
+
+function buildPaddedNumberArbitrary(min, max) {
+    return convertFromNext(convertToNext(integer({ min, max })).map(numberToPaddedEightMapper, numberToPaddedEightUnmapper));
+}
+
+function paddedEightsToUuidMapper(t) {
+    return `${t[0]}-${t[1].substring(4)}-${t[1].substring(0, 4)}-${t[2].substring(0, 4)}-${t[2].substring(4)}${t[3]}`;
+}
+const UuidRegex = /^([0-9a-f]{8})-([0-9a-f]{4})-([0-9a-f]{4})-([0-9a-f]{4})-([0-9a-f]{12})$/;
+function paddedEightsToUuidUnmapper(value) {
+    if (typeof value !== 'string') {
+        throw new Error('Unsupported type');
+    }
+    const m = UuidRegex.exec(value);
+    if (m === null) {
+        throw new Error('Unsupported type');
+    }
+    return [m[1], m[3] + m[2], m[4] + m[5].substring(0, 4), m[5].substring(4)];
+}
+
 function uuid() {
-    const padded = padEight(nat(0xffffffff));
-    const secondPadded = padEight(integer(0x10000000, 0x5fffffff));
-    const thirdPadded = padEight(integer(0x80000000, 0xbfffffff));
-    return tuple(padded, secondPadded, thirdPadded, padded).map((t) => {
-        return `${t[0]}-${t[1].substring(4)}-${t[1].substring(0, 4)}-${t[2].substring(0, 4)}-${t[2].substring(4)}${t[3]}`;
-    });
-}
-function uuidV(versionNumber) {
-    const padded = padEight(nat(0xffffffff));
-    const secondPadded = padEight(nat(0x0fffffff));
-    const thirdPadded = padEight(integer(0x80000000, 0xbfffffff));
-    return tuple(padded, secondPadded, thirdPadded, padded).map((t) => {
-        return `${t[0]}-${t[1].substring(4)}-${versionNumber}${t[1].substring(1, 4)}-${t[2].substring(0, 4)}-${t[2].substring(4)}${t[3]}`;
-    });
+    const padded = buildPaddedNumberArbitrary(0, 0xffffffff);
+    const secondPadded = buildPaddedNumberArbitrary(0x10000000, 0x5fffffff);
+    const thirdPadded = buildPaddedNumberArbitrary(0x80000000, 0xbfffffff);
+    return convertFromNext(convertToNext(tuple(padded, secondPadded, thirdPadded, padded)).map(paddedEightsToUuidMapper, paddedEightsToUuidUnmapper));
 }
 
+function uuidV(versionNumber) {
+    const padded = buildPaddedNumberArbitrary(0, 0xffffffff);
+    const offsetSecond = versionNumber * 0x10000000;
+    const secondPadded = buildPaddedNumberArbitrary(offsetSecond, offsetSecond + 0x0fffffff);
+    const thirdPadded = buildPaddedNumberArbitrary(0x80000000, 0xbfffffff);
+    return convertFromNext(convertToNext(tuple(padded, secondPadded, thirdPadded, padded)).map(paddedEightsToUuidMapper, paddedEightsToUuidUnmapper));
+}
+
+function hostUserInfo() {
+    const others = ['-', '.', '_', '~', '!', '$', '&', "'", '(', ')', '*', '+', ',', ';', '=', ':'];
+    return stringOf(buildAlphaNumericPercentArbitrary(others));
+}
+function userHostPortMapper([u, h, p]) {
+    return (u === null ? '' : `${u}@`) + h + (p === null ? '' : `:${p}`);
+}
+function userHostPortUnmapper(value) {
+    if (typeof value !== 'string') {
+        throw new Error('Unsupported');
+    }
+    const atPosition = value.indexOf('@');
+    const user = atPosition !== -1 ? value.substring(0, atPosition) : null;
+    const portRegex = /:(\d+)$/;
+    const m = portRegex.exec(value);
+    const port = m !== null ? Number(m[1]) : null;
+    const host = m !== null ? value.substring(atPosition + 1, value.length - m[1].length - 1) : value.substring(atPosition + 1);
+    return [user, host, port];
+}
+function bracketedMapper(s) {
+    return `[${s}]`;
+}
+function bracketedUnmapper(value) {
+    if (typeof value !== 'string' || value[0] !== '[' || value[value.length - 1] !== ']') {
+        throw new Error('Unsupported');
+    }
+    return value.substring(1, value.length - 1);
+}
 function webAuthority(constraints) {
     const c = constraints || {};
     const hostnameArbs = [domain()]
         .concat(c.withIPv4 === true ? [ipV4()] : [])
-        .concat(c.withIPv6 === true ? [ipV6().map((ip) => `[${ip}]`)] : [])
+        .concat(c.withIPv6 === true ? [convertFromNext(convertToNext(ipV6()).map(bracketedMapper, bracketedUnmapper))] : [])
         .concat(c.withIPv4Extended === true ? [ipV4Extended()] : []);
-    return tuple(c.withUserInfo === true ? option(hostUserInfo()) : constant(null), oneof(...hostnameArbs), c.withPort === true ? option(nat(65535)) : constant(null)).map(([u, h, p]) => (u === null ? '' : `${u}@`) + h + (p === null ? '' : `:${p}`));
+    return convertFromNext(convertToNext(tuple(c.withUserInfo === true ? option(hostUserInfo()) : constant(null), oneof(...hostnameArbs), c.withPort === true ? option(nat(65535)) : constant(null))).map(userHostPortMapper, userHostPortUnmapper));
 }
+
+function buildUriQueryOrFragmentArbitrary() {
+    const others = ['-', '.', '_', '~', '!', '$', '&', "'", '(', ')', '*', '+', ',', ';', '=', ':', '@', '/', '?'];
+    return stringOf(buildAlphaNumericPercentArbitrary(others));
+}
+
+function webFragments() {
+    return buildUriQueryOrFragmentArbitrary();
+}
+
+function webQueryParameters() {
+    return buildUriQueryOrFragmentArbitrary();
+}
+
 function webSegment() {
     const others = ['-', '.', '_', '~', '!', '$', '&', "'", '(', ')', '*', '+', ',', ';', '=', ':', '@'];
-    return stringOf(buildAlphaNumericPercentArb(others));
+    return stringOf(buildAlphaNumericPercentArbitrary(others));
 }
-function uriQueryOrFragment() {
-    const others = ['-', '.', '_', '~', '!', '$', '&', "'", '(', ')', '*', '+', ',', ';', '=', ':', '@', '/', '?'];
-    return stringOf(buildAlphaNumericPercentArb(others));
+
+function partsToUrlMapper(data) {
+    const [scheme, authority, path] = data;
+    const query = data[3] === null ? '' : `?${data[3]}`;
+    const fragments = data[4] === null ? '' : `#${data[4]}`;
+    return `${scheme}://${authority}${path}${query}${fragments}`;
 }
-function webQueryParameters() {
-    return uriQueryOrFragment();
+const UrlSplitRegex = /^([[A-Za-z][A-Za-z0-9+.-]*):\/\/([^/?#]*)([^?#]*)(\?[A-Za-z0-9\-._~!$&'()*+,;=:@/?%]*)?(#[A-Za-z0-9\-._~!$&'()*+,;=:@/?%]*)?$/;
+function partsToUrlUnmapper(value) {
+    if (typeof value !== 'string') {
+        throw new Error('Incompatible value received: type');
+    }
+    const m = UrlSplitRegex.exec(value);
+    if (m === null) {
+        throw new Error('Incompatible value received');
+    }
+    const scheme = m[1];
+    const authority = m[2];
+    const path = m[3];
+    const query = m[4];
+    const fragments = m[5];
+    return [
+        scheme,
+        authority,
+        path,
+        query !== undefined ? query.substring(1) : null,
+        fragments !== undefined ? fragments.substring(1) : null,
+    ];
 }
-function webFragments() {
-    return uriQueryOrFragment();
+
+function segmentsToPathMapper(segments) {
+    return segments.map((v) => `/${v}`).join('');
 }
+function segmentsToPathUnmapper(value) {
+    if (typeof value !== 'string') {
+        throw new Error('Incompatible value received: type');
+    }
+    if (value.length !== 0 && value[0] !== '/') {
+        throw new Error('Incompatible value received: start');
+    }
+    return value.split('/').splice(1);
+}
+
 function webUrl(constraints) {
     const c = constraints || {};
     const validSchemes = c.validSchemes || ['http', 'https'];
     const schemeArb = constantFrom(...validSchemes);
     const authorityArb = webAuthority(c.authoritySettings);
-    const pathArb = array(webSegment()).map((p) => p.map((v) => `/${v}`).join(''));
-    return tuple(schemeArb, authorityArb, pathArb, c.withQueryParameters === true ? option(webQueryParameters()) : constant(null), c.withFragments === true ? option(webFragments()) : constant(null)).map(([s, a, p, q, f]) => `${s}://${a}${p}${q === null ? '' : `?${q}`}${f === null ? '' : `#${f}`}`);
+    const pathArb = convertFromNext(convertToNext(array(webSegment())).map(segmentsToPathMapper, segmentsToPathUnmapper));
+    return convertFromNext(convertToNext(tuple(schemeArb, authorityArb, pathArb, c.withQueryParameters === true ? option(webQueryParameters()) : constant(null), c.withFragments === true ? option(webFragments()) : constant(null))).map(partsToUrlMapper, partsToUrlUnmapper));
+}
+
+class CommandsIterable {
+    constructor(commands, metadataForReplay) {
+        this.commands = commands;
+        this.metadataForReplay = metadataForReplay;
+    }
+    [Symbol.iterator]() {
+        return this.commands[Symbol.iterator]();
+    }
+    [cloneMethod]() {
+        return new CommandsIterable(this.commands.map((c) => c.clone()), this.metadataForReplay);
+    }
+    toString() {
+        const serializedCommands = this.commands
+            .filter((c) => c.hasRan)
+            .map((c) => c.toString())
+            .join(',');
+        const metadata = this.metadataForReplay();
+        return metadata.length !== 0 ? `${serializedCommands} /*${metadata}*/` : serializedCommands;
+    }
+}
+
+class CommandWrapper {
+    constructor(cmd) {
+        this.cmd = cmd;
+        this.hasRan = false;
+        if (hasToStringMethod(cmd)) {
+            const method = cmd[toStringMethod];
+            this[toStringMethod] = function toStringMethod() {
+                return method.call(cmd);
+            };
+        }
+        if (hasAsyncToStringMethod(cmd)) {
+            const method = cmd[asyncToStringMethod];
+            this[asyncToStringMethod] = function asyncToStringMethod() {
+                return method.call(cmd);
+            };
+        }
+    }
+    check(m) {
+        return this.cmd.check(m);
+    }
+    run(m, r) {
+        this.hasRan = true;
+        return this.cmd.run(m, r);
+    }
+    clone() {
+        if (hasCloneMethod(this.cmd))
+            return new CommandWrapper(this.cmd[cloneMethod]());
+        return new CommandWrapper(this.cmd);
+    }
+    toString() {
+        return this.cmd.toString();
+    }
 }
 
 class ReplayPath {
@@ -5577,86 +5965,37 @@ class ReplayPath {
     }
 }
 
-class CommandsIterable {
-    constructor(commands, metadataForReplay) {
-        this.commands = commands;
-        this.metadataForReplay = metadataForReplay;
-    }
-    [Symbol.iterator]() {
-        return this.commands[Symbol.iterator]();
-    }
-    [cloneMethod]() {
-        return new CommandsIterable(this.commands.map((c) => c.clone()), this.metadataForReplay);
-    }
-    toString() {
-        const serializedCommands = this.commands
-            .filter((c) => c.hasRan)
-            .map((c) => c.toString())
-            .join(',');
-        const metadata = this.metadataForReplay();
-        return metadata.length !== 0 ? `${serializedCommands} /*${metadata}*/` : serializedCommands;
-    }
-}
-
-class CommandWrapper {
-    constructor(cmd) {
-        this.cmd = cmd;
-        this.hasRan = false;
-        if (hasToStringMethod(cmd)) {
-            const method = cmd[toStringMethod];
-            this[toStringMethod] = function toStringMethod() {
-                return method.call(cmd);
-            };
-        }
-        if (hasAsyncToStringMethod(cmd)) {
-            const method = cmd[asyncToStringMethod];
-            this[asyncToStringMethod] = function asyncToStringMethod() {
-                return method.call(cmd);
-            };
-        }
-    }
-    check(m) {
-        return this.cmd.check(m);
-    }
-    run(m, r) {
-        this.hasRan = true;
-        return this.cmd.run(m, r);
-    }
-    clone() {
-        if (hasCloneMethod(this.cmd))
-            return new CommandWrapper(this.cmd[cloneMethod]());
-        return new CommandWrapper(this.cmd);
-    }
-    toString() {
-        return this.cmd.toString();
-    }
-}
-
-class CommandsArbitrary extends Arbitrary {
+class CommandsArbitrary extends NextArbitrary {
     constructor(commandArbs, maxCommands, sourceReplayPath, disableReplayLog) {
         super();
         this.sourceReplayPath = sourceReplayPath;
         this.disableReplayLog = disableReplayLog;
-        this.oneCommandArb = oneof(...commandArbs).map((c) => new CommandWrapper(c));
-        this.lengthArb = nat(maxCommands);
+        this.oneCommandArb = convertToNext(oneof(...commandArbs).map((c) => new CommandWrapper(c)));
+        this.lengthArb = new IntegerArbitrary(0, maxCommands);
         this.replayPath = [];
         this.replayPathPosition = 0;
     }
     metadataForReplay() {
         return this.disableReplayLog ? '' : `replayPath=${JSON.stringify(ReplayPath.stringify(this.replayPath))}`;
     }
-    wrapper(items, shrunkOnce) {
-        return new Shrinkable(new CommandsIterable(items.map((s) => s.value_), () => this.metadataForReplay()), () => this.shrinkImpl(items, shrunkOnce).map((v) => this.wrapper(v, true)));
+    buildNextValueFor(items, shrunkOnce) {
+        const commands = items.map((item) => item.value_);
+        const context = { shrunkOnce, items };
+        return new NextValue(new CommandsIterable(commands, () => this.metadataForReplay()), context);
     }
     generate(mrng) {
-        const size = this.lengthArb.generate(mrng);
-        const items = Array(size.value_);
-        for (let idx = 0; idx !== size.value_; ++idx) {
-            const item = this.oneCommandArb.generate(mrng);
+        const size = this.lengthArb.generate(mrng, undefined);
+        const sizeValue = size.value;
+        const items = Array(sizeValue);
+        for (let idx = 0; idx !== sizeValue; ++idx) {
+            const item = this.oneCommandArb.generate(mrng, undefined);
             items[idx] = item;
         }
         this.replayPathPosition = 0;
-        return this.wrapper(items, false);
+        return this.buildNextValueFor(items, false);
+    }
+    canShrinkWithoutContext(value) {
+        return false;
     }
     filterOnExecution(itemsRaw) {
         const items = [];
@@ -5690,7 +6029,13 @@ class CommandsArbitrary extends Arbitrary {
         this.replayPathPosition += itemsRaw.length;
         return items;
     }
-    shrinkImpl(itemsRaw, shrunkOnce) {
+    shrink(_value, context) {
+        if (context === undefined) {
+            return Stream.nil();
+        }
+        const safeContext = context;
+        const shrunkOnce = safeContext.shrunkOnce;
+        const itemsRaw = safeContext.items;
         const items = this.filterForShrinkImpl(itemsRaw);
         if (items.length === 0) {
             return Stream.nil();
@@ -5701,24 +6046,26 @@ class CommandsArbitrary extends Arbitrary {
         const nextShrinks = [];
         for (let numToKeep = 0; numToKeep !== items.length; ++numToKeep) {
             nextShrinks.push(makeLazy(() => {
-                const size = this.lengthArb.contextualShrinkableFor(items.length - 1 - numToKeep);
                 const fixedStart = items.slice(0, numToKeep);
-                return size.shrink().map((l) => fixedStart.concat(items.slice(items.length - (l.value + 1))));
+                return this.lengthArb
+                    .shrink(items.length - 1 - numToKeep, undefined)
+                    .map((l) => fixedStart.concat(items.slice(items.length - (l.value + 1))));
             }));
         }
         for (let itemAt = 0; itemAt !== items.length; ++itemAt) {
-            nextShrinks.push(makeLazy(() => items[itemAt].shrink().map((v) => items.slice(0, itemAt).concat([v], items.slice(itemAt + 1)))));
+            nextShrinks.push(makeLazy(() => this.oneCommandArb
+                .shrink(items[itemAt].value_, items[itemAt].context)
+                .map((v) => items.slice(0, itemAt).concat([v], items.slice(itemAt + 1)))));
         }
         return rootShrink.join(...nextShrinks).map((shrinkables) => {
-            return shrinkables.map((c) => {
-                return new Shrinkable(c.value_.clone(), c.shrink);
-            });
+            return this.buildNextValueFor(shrinkables.map((c) => new NextValue(c.value_.clone(), c.context)), true);
         });
     }
 }
+
 function commands(commandArbs, constraints) {
     const config = constraints == null ? {} : typeof constraints === 'number' ? { maxCommands: constraints } : constraints;
-    return new CommandsArbitrary(commandArbs, config.maxCommands != null ? config.maxCommands : 10, config.replayPath != null ? config.replayPath : null, !!config.disableReplayLog);
+    return convertFromNext(new CommandsArbitrary(commandArbs, config.maxCommands != null ? config.maxCommands : 10, config.replayPath != null ? config.replayPath : null, !!config.disableReplayLog));
 }
 
 class ScheduledCommand {
@@ -6034,8 +6381,8 @@ class ArbitraryWithShrink extends Arbitrary {
 }
 
 const __type$1 = 'module';
-const __version$1 = '2.17.0';
-const __commitHash$1 = 'b7064a21412eb9e68edb3aece74d45522c80bc77';
+const __version$1 = '2.18.1';
+const __commitHash$1 = 'dd2135fb3b5d19c66e6370ad82f131a5f7739094';
 
 var fc = /*#__PURE__*/Object.freeze({
     __proto__: null,

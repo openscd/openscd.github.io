@@ -483,16 +483,16 @@ function ixNamingIdentity(e) {
   const [name2, ix] = ["name", "ix"].map((name3) => e.getAttribute(name3));
   return `${identity(e.parentElement)}>${name2}${ix ? "[" + ix + "]" : ""}`;
 }
-function ixNamingSelector(tagName, identity2, depth = -1) {
-  if (depth === -1)
-    depth = identity2.split(">").length;
+function ixNamingSelector(tagName, identity2, depth2 = -1) {
+  if (depth2 === -1)
+    depth2 = identity2.split(">").length;
   const [parentIdentity, childIdentity] = pathParts(identity2);
   const [_0, name2, _1, ix] = childIdentity.match(/([^[]*)(\[([0-9]*)\])?/) ?? [];
   if (!name2)
     return voidSelector;
-  if (depth === 0)
+  if (depth2 === 0)
     return `${tagName}[name="${name2}"]`;
-  const parentSelectors = tags[tagName].parents.flatMap((parentTag) => parentTag === "SDI" ? ixNamingSelector(parentTag, parentIdentity, depth - 1).split(",") : selector(parentTag, parentIdentity).split(",")).filter((selector2) => !selector2.startsWith(voidSelector));
+  const parentSelectors = tags[tagName].parents.flatMap((parentTag) => parentTag === "SDI" ? ixNamingSelector(parentTag, parentIdentity, depth2 - 1).split(",") : selector(parentTag, parentIdentity).split(",")).filter((selector2) => !selector2.startsWith(voidSelector));
   if (parentSelectors.length === 0)
     return voidSelector;
   const [nameSelectors, ixSelectors] = [
@@ -605,18 +605,18 @@ function sCLSelector() {
 function namingIdentity(e) {
   return e.parentElement.tagName === "SCL" ? e.getAttribute("name") : `${identity(e.parentElement)}>${e.getAttribute("name")}`;
 }
-function namingSelector(tagName, identity2, depth = -1) {
-  if (depth === -1)
-    depth = identity2.split(">").length;
+function namingSelector(tagName, identity2, depth2 = -1) {
+  if (depth2 === -1)
+    depth2 = identity2.split(">").length;
   const [parentIdentity, name2] = pathParts(identity2);
   if (!name2)
     return voidSelector;
-  if (depth === 0)
+  if (depth2 === 0)
     return `${tagName}[name="${name2}"]`;
   const parents = tags[tagName].parents;
   if (!parents)
     return voidSelector;
-  const parentSelectors = parents.flatMap((parentTag) => tags[parentTag].selector === tags["Substation"].selector ? namingSelector(parentTag, parentIdentity, depth - 1).split(",") : selector(parentTag, parentIdentity).split(",")).filter((selector2) => !selector2.startsWith(voidSelector));
+  const parentSelectors = parents.flatMap((parentTag) => tags[parentTag].selector === tags["Substation"].selector ? namingSelector(parentTag, parentIdentity, depth2 - 1).split(",") : selector(parentTag, parentIdentity).split(",")).filter((selector2) => !selector2.startsWith(voidSelector));
   if (parentSelectors.length === 0)
     return voidSelector;
   return crossProduct(parentSelectors, [">"], [tagName], [`[name="${name2}"]`]).map((strings) => strings.join("")).join(",");
@@ -1803,6 +1803,19 @@ export function unreachable(message) {
 }
 export function crossProduct(...arrays) {
   return arrays.reduce((a, b) => a.flatMap((d) => b.map((e) => [d, e].flat())), [[]]);
+}
+export function depth(t, mem = new WeakSet()) {
+  if (mem.has(t))
+    return Infinity;
+  else
+    switch (t?.constructor) {
+      case Object:
+      case Array:
+        mem.add(t);
+        return 1 + Math.max(-1, ...Object.values(t).map((_) => depth(_, mem)));
+      default:
+        return 0;
+    }
 }
 export function findFCDAs(extRef) {
   if (extRef.tagName !== "ExtRef" || extRef.closest("Private"))

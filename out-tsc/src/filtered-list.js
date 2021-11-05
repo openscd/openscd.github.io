@@ -1,8 +1,9 @@
 import { __decorate } from "../../_snowpack/pkg/tslib.js";
-import { List } from '../../_snowpack/pkg/@material/mwc-list.js';
-import { CheckListItem } from '../../_snowpack/pkg/@material/mwc-list/mwc-check-list-item.js';
-import { ListBase } from '../../_snowpack/pkg/@material/mwc-list/mwc-list-base.js';
 import { css, customElement, html, internalProperty, property, query, unsafeCSS, } from '../../_snowpack/pkg/lit-element.js';
+import { translate } from '../../_snowpack/pkg/lit-translate.js';
+import { CheckListItem } from '../../_snowpack/pkg/@material/mwc-list/mwc-check-list-item.js';
+import { List } from '../../_snowpack/pkg/@material/mwc-list.js';
+import { ListBase } from '../../_snowpack/pkg/@material/mwc-list/mwc-list-base.js';
 let FilteredList = class FilteredList extends ListBase {
     constructor() {
         super();
@@ -64,12 +65,14 @@ let FilteredList = class FilteredList extends ListBase {
     }
     render() {
         return html `<div id="tfcontainer">
-        <mwc-textfield
-          label="${this.searchFieldLabel ?? ''}"
-          iconTrailing="search"
-          outlined
-          @input=${() => this.onFilterInput()}
-        ></mwc-textfield>
+        <abbr title="${this.searchFieldLabel ?? translate('filter')}"
+          ><mwc-textfield
+            label="${this.searchFieldLabel ?? ''}"
+            iconTrailing="search"
+            outlined
+            @input=${() => this.onFilterInput()}
+          ></mwc-textfield
+        ></abbr>
         ${this.renderCheckAll()}
       </div>
       ${super.render()}`;
@@ -87,8 +90,11 @@ FilteredList.styles = css `
       display: none;
     }
 
+    abbr {
+      margin: 8px;
+    }
+
     mwc-textfield {
-      margin: 10px;
       width: 100%;
       --mdc-shape-small: 28px;
     }

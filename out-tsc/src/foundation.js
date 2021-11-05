@@ -1862,6 +1862,21 @@ export function unreachable(message) {
 export function crossProduct(...arrays) {
     return arrays.reduce((a, b) => a.flatMap(d => b.map(e => [d, e].flat())), [[]]);
 }
+/** @returns the depth of `t` if it is an object or array, zero otherwise. */
+export function depth(t, mem = new WeakSet()) {
+    if (mem.has(t))
+        return Infinity;
+    else
+        switch (t?.constructor) {
+            case Object:
+            case Array:
+                mem.add(t);
+                return (1 +
+                    Math.max(-1, ...Object.values(t).map(_ => depth(_, mem))));
+            default:
+                return 0;
+        }
+}
 export function findFCDAs(extRef) {
     if (extRef.tagName !== 'ExtRef' || extRef.closest('Private'))
         return [];

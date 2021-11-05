@@ -9,6 +9,8 @@
  * The code in this file is generated from files in ./src/
  */
 
+var esmEntry$1 = {exports: {}};
+
 var defaults$5 = {exports: {}};
 
 function getDefaults$1() {
@@ -326,7 +328,7 @@ function outputLink(cap, link, raw, lexer) {
 
   if (cap[0].charAt(0) !== '!') {
     lexer.state.inLink = true;
-    return {
+    const token = {
       type: 'link',
       raw,
       href,
@@ -334,6 +336,8 @@ function outputLink(cap, link, raw, lexer) {
       text,
       tokens: lexer.inlineTokens(text, [])
     };
+    lexer.state.inLink = false;
+    return token;
   } else {
     return {
       type: 'image',
@@ -376,7 +380,7 @@ function indentCodeCompensation(raw, text) {
 /**
  * Tokenizer
  */
-var Tokenizer_1 = class Tokenizer {
+var Tokenizer_1$1 = class Tokenizer {
   constructor(options) {
     this.options = options || defaults$4;
   }
@@ -1159,8 +1163,8 @@ block$1.normal = merge$1({}, block$1);
 
 block$1.gfm = merge$1({}, block$1.normal, {
   table: '^ *([^\\n ].*\\|.*)\\n' // Header
-    + ' {0,3}(?:\\| *)?(:?-+:? *(?:\\| *:?-+:? *)*)\\|?' // Align
-    + '(?:\\n *((?:(?!\\n|hr|heading|blockquote|code|fences|list|html).*(?:\\n|$))*)\\n*|$)' // Cells
+    + ' {0,3}(?:\\| *)?(:?-+:? *(?:\\| *:?-+:? *)*)(?:\\| *)?' // Align
+    + '(?:\\n((?:(?! *\\n|hr|heading|blockquote|code|fences|list|html).*(?:\\n|$))*)\\n*|$)' // Cells
 });
 
 block$1.gfm.table = edit(block$1.gfm.table)
@@ -1223,9 +1227,9 @@ const inline$1 = {
   emStrong: {
     lDelim: /^(?:\*+(?:([punct_])|[^\s*]))|^_+(?:([punct*])|([^\s_]))/,
     //        (1) and (2) can only be a Right Delimiter. (3) and (4) can only be Left.  (5) and (6) can be either Left or Right.
-    //        () Skip other delimiter (1) #***                   (2) a***#, a***                   (3) #***a, ***a                 (4) ***#              (5) #***#                 (6) a***a
-    rDelimAst: /\_\_[^_*]*?\*[^_*]*?\_\_|[punct_](\*+)(?=[\s]|$)|[^punct*_\s](\*+)(?=[punct_\s]|$)|[punct_\s](\*+)(?=[^punct*_\s])|[\s](\*+)(?=[punct_])|[punct_](\*+)(?=[punct_])|[^punct*_\s](\*+)(?=[^punct*_\s])/,
-    rDelimUnd: /\*\*[^_*]*?\_[^_*]*?\*\*|[punct*](\_+)(?=[\s]|$)|[^punct*_\s](\_+)(?=[punct*\s]|$)|[punct*\s](\_+)(?=[^punct*_\s])|[\s](\_+)(?=[punct*])|[punct*](\_+)(?=[punct*])/ // ^- Not allowed for _
+    //        () Skip orphan delim inside strong    (1) #***                (2) a***#, a***                   (3) #***a, ***a                 (4) ***#              (5) #***#                 (6) a***a
+    rDelimAst: /^[^_*]*?\_\_[^_*]*?\*[^_*]*?(?=\_\_)|[punct_](\*+)(?=[\s]|$)|[^punct*_\s](\*+)(?=[punct_\s]|$)|[punct_\s](\*+)(?=[^punct*_\s])|[\s](\*+)(?=[punct_])|[punct_](\*+)(?=[punct_])|[^punct*_\s](\*+)(?=[^punct*_\s])/,
+    rDelimUnd: /^[^_*]*?\*\*[^_*]*?\_[^_*]*?(?=\*\*)|[punct*](\_+)(?=[\s]|$)|[^punct*_\s](\_+)(?=[punct*\s]|$)|[punct*\s](\_+)(?=[^punct*_\s])|[\s](\_+)(?=[punct*])|[punct*](\_+)(?=[punct*])/ // ^- Not allowed for _
   },
   code: /^(`+)([^`]|[^`][\s\S]*?[^`])\1(?!`)/,
   br: /^( {2,}|\\)\n(?!\s*$)/,
@@ -1356,7 +1360,7 @@ var rules = {
   inline: inline$1
 };
 
-const Tokenizer$1 = Tokenizer_1;
+const Tokenizer$2 = Tokenizer_1$1;
 const { defaults: defaults$3 } = defaults$5.exports;
 const { block, inline } = rules;
 const { repeatString } = helpers;
@@ -1405,12 +1409,12 @@ function mangle(text) {
 /**
  * Block Lexer
  */
-var Lexer_1 = class Lexer {
+var Lexer_1$1 = class Lexer {
   constructor(options) {
     this.tokens = [];
     this.tokens.links = Object.create(null);
     this.options = options || defaults$3;
-    this.options.tokenizer = this.options.tokenizer || new Tokenizer$1();
+    this.options.tokenizer = this.options.tokenizer || new Tokenizer$2();
     this.tokenizer = this.options.tokenizer;
     this.tokenizer.options = this.options;
     this.tokenizer.lexer = this;
@@ -1857,7 +1861,7 @@ const {
 /**
  * Renderer
  */
-var Renderer_1 = class Renderer {
+var Renderer_1$1 = class Renderer {
   constructor(options) {
     this.options = options || defaults$2;
   }
@@ -2020,7 +2024,7 @@ var Renderer_1 = class Renderer {
  * returns only the textual part of the token
  */
 
-var TextRenderer_1 = class TextRenderer {
+var TextRenderer_1$1 = class TextRenderer {
   // no need for block level renderers
   strong(text) {
     return text;
@@ -2063,7 +2067,7 @@ var TextRenderer_1 = class TextRenderer {
  * Slugger generates header id
  */
 
-var Slugger_1 = class Slugger {
+var Slugger_1$1 = class Slugger {
   constructor() {
     this.seen = {};
   }
@@ -2110,9 +2114,9 @@ var Slugger_1 = class Slugger {
   }
 };
 
-const Renderer$1 = Renderer_1;
-const TextRenderer$1 = TextRenderer_1;
-const Slugger$1 = Slugger_1;
+const Renderer$2 = Renderer_1$1;
+const TextRenderer$2 = TextRenderer_1$1;
+const Slugger$2 = Slugger_1$1;
 const { defaults: defaults$1 } = defaults$5.exports;
 const {
   unescape
@@ -2121,14 +2125,14 @@ const {
 /**
  * Parsing & Compiling
  */
-var Parser_1 = class Parser {
+var Parser_1$1 = class Parser {
   constructor(options) {
     this.options = options || defaults$1;
-    this.options.renderer = this.options.renderer || new Renderer$1();
+    this.options.renderer = this.options.renderer || new Renderer$2();
     this.renderer = this.options.renderer;
     this.renderer.options = this.options;
-    this.textRenderer = new TextRenderer$1();
-    this.slugger = new Slugger$1();
+    this.textRenderer = new TextRenderer$2();
+    this.slugger = new Slugger$2();
   }
 
   /**
@@ -2397,12 +2401,12 @@ var Parser_1 = class Parser {
   }
 };
 
-const Lexer = Lexer_1;
-const Parser = Parser_1;
-const Tokenizer = Tokenizer_1;
-const Renderer = Renderer_1;
-const TextRenderer = TextRenderer_1;
-const Slugger = Slugger_1;
+const Lexer$1 = Lexer_1$1;
+const Parser$1 = Parser_1$1;
+const Tokenizer$1 = Tokenizer_1$1;
+const Renderer$1 = Renderer_1$1;
+const TextRenderer$1 = TextRenderer_1$1;
+const Slugger$1 = Slugger_1$1;
 const {
   merge,
   checkSanitizeDeprecation,
@@ -2417,7 +2421,7 @@ const {
 /**
  * Marked
  */
-function marked(src, opt, callback) {
+function marked$1(src, opt, callback) {
   // throw error in case of non string input
   if (typeof src === 'undefined' || src === null) {
     throw new Error('marked(): input parameter is undefined or null');
@@ -2432,7 +2436,7 @@ function marked(src, opt, callback) {
     opt = null;
   }
 
-  opt = merge({}, marked.defaults, opt || {});
+  opt = merge({}, marked$1.defaults, opt || {});
   checkSanitizeDeprecation(opt);
 
   if (callback) {
@@ -2440,7 +2444,7 @@ function marked(src, opt, callback) {
     let tokens;
 
     try {
-      tokens = Lexer.lex(src, opt);
+      tokens = Lexer$1.lex(src, opt);
     } catch (e) {
       return callback(e);
     }
@@ -2451,9 +2455,9 @@ function marked(src, opt, callback) {
       if (!err) {
         try {
           if (opt.walkTokens) {
-            marked.walkTokens(tokens, opt.walkTokens);
+            marked$1.walkTokens(tokens, opt.walkTokens);
           }
-          out = Parser.parse(tokens, opt);
+          out = Parser$1.parse(tokens, opt);
         } catch (e) {
           err = e;
         }
@@ -2475,7 +2479,7 @@ function marked(src, opt, callback) {
     if (!tokens.length) return done();
 
     let pending = 0;
-    marked.walkTokens(tokens, function(token) {
+    marked$1.walkTokens(tokens, function(token) {
       if (token.type === 'code') {
         pending++;
         setTimeout(() => {
@@ -2505,11 +2509,11 @@ function marked(src, opt, callback) {
   }
 
   try {
-    const tokens = Lexer.lex(src, opt);
+    const tokens = Lexer$1.lex(src, opt);
     if (opt.walkTokens) {
-      marked.walkTokens(tokens, opt.walkTokens);
+      marked$1.walkTokens(tokens, opt.walkTokens);
     }
-    return Parser.parse(tokens, opt);
+    return Parser$1.parse(tokens, opt);
   } catch (e) {
     e.message += '\nPlease report this to https://github.com/markedjs/marked.';
     if (opt.silent) {
@@ -2525,24 +2529,24 @@ function marked(src, opt, callback) {
  * Options
  */
 
-marked.options =
-marked.setOptions = function(opt) {
-  merge(marked.defaults, opt);
-  changeDefaults(marked.defaults);
-  return marked;
+marked$1.options =
+marked$1.setOptions = function(opt) {
+  merge(marked$1.defaults, opt);
+  changeDefaults(marked$1.defaults);
+  return marked$1;
 };
 
-marked.getDefaults = getDefaults;
+marked$1.getDefaults = getDefaults;
 
-marked.defaults = defaults;
+marked$1.defaults = defaults;
 
 /**
  * Use Extension
  */
 
-marked.use = function(...args) {
+marked$1.use = function(...args) {
   const opts = merge({}, ...args);
-  const extensions = marked.defaults.extensions || { renderers: {}, childTokens: {} };
+  const extensions = marked$1.defaults.extensions || { renderers: {}, childTokens: {} };
   let hasExtensions;
 
   args.forEach((pack) => {
@@ -2601,7 +2605,7 @@ marked.use = function(...args) {
 
     // ==-- Parse "overwrite" extensions --== //
     if (pack.renderer) {
-      const renderer = marked.defaults.renderer || new Renderer();
+      const renderer = marked$1.defaults.renderer || new Renderer$1();
       for (const prop in pack.renderer) {
         const prevRenderer = renderer[prop];
         // Replace renderer with func to run extension, but fall back if false
@@ -2616,7 +2620,7 @@ marked.use = function(...args) {
       opts.renderer = renderer;
     }
     if (pack.tokenizer) {
-      const tokenizer = marked.defaults.tokenizer || new Tokenizer();
+      const tokenizer = marked$1.defaults.tokenizer || new Tokenizer$1();
       for (const prop in pack.tokenizer) {
         const prevTokenizer = tokenizer[prop];
         // Replace tokenizer with func to run extension, but fall back if false
@@ -2633,11 +2637,11 @@ marked.use = function(...args) {
 
     // ==-- Parse WalkTokens extensions --== //
     if (pack.walkTokens) {
-      const walkTokens = marked.defaults.walkTokens;
-      opts.walkTokens = (token) => {
+      const walkTokens = marked$1.defaults.walkTokens;
+      opts.walkTokens = function(token) {
         pack.walkTokens.call(this, token);
         if (walkTokens) {
-          walkTokens(token);
+          walkTokens.call(this, token);
         }
       };
     }
@@ -2646,7 +2650,7 @@ marked.use = function(...args) {
       opts.extensions = extensions;
     }
 
-    marked.setOptions(opts);
+    marked$1.setOptions(opts);
   });
 };
 
@@ -2654,32 +2658,32 @@ marked.use = function(...args) {
  * Run callback for every token
  */
 
-marked.walkTokens = function(tokens, callback) {
+marked$1.walkTokens = function(tokens, callback) {
   for (const token of tokens) {
-    callback(token);
+    callback.call(marked$1, token);
     switch (token.type) {
       case 'table': {
         for (const cell of token.header) {
-          marked.walkTokens(cell.tokens, callback);
+          marked$1.walkTokens(cell.tokens, callback);
         }
         for (const row of token.rows) {
           for (const cell of row) {
-            marked.walkTokens(cell.tokens, callback);
+            marked$1.walkTokens(cell.tokens, callback);
           }
         }
         break;
       }
       case 'list': {
-        marked.walkTokens(token.items, callback);
+        marked$1.walkTokens(token.items, callback);
         break;
       }
       default: {
-        if (marked.defaults.extensions && marked.defaults.extensions.childTokens && marked.defaults.extensions.childTokens[token.type]) { // Walk any extensions
-          marked.defaults.extensions.childTokens[token.type].forEach(function(childTokens) {
-            marked.walkTokens(token[childTokens], callback);
+        if (marked$1.defaults.extensions && marked$1.defaults.extensions.childTokens && marked$1.defaults.extensions.childTokens[token.type]) { // Walk any extensions
+          marked$1.defaults.extensions.childTokens[token.type].forEach(function(childTokens) {
+            marked$1.walkTokens(token[childTokens], callback);
           });
         } else if (token.tokens) {
-          marked.walkTokens(token.tokens, callback);
+          marked$1.walkTokens(token.tokens, callback);
         }
       }
     }
@@ -2689,7 +2693,7 @@ marked.walkTokens = function(tokens, callback) {
 /**
  * Parse Inline
  */
-marked.parseInline = function(src, opt) {
+marked$1.parseInline = function(src, opt) {
   // throw error in case of non string input
   if (typeof src === 'undefined' || src === null) {
     throw new Error('marked.parseInline(): input parameter is undefined or null');
@@ -2699,15 +2703,15 @@ marked.parseInline = function(src, opt) {
       + Object.prototype.toString.call(src) + ', string expected');
   }
 
-  opt = merge({}, marked.defaults, opt || {});
+  opt = merge({}, marked$1.defaults, opt || {});
   checkSanitizeDeprecation(opt);
 
   try {
-    const tokens = Lexer.lexInline(src, opt);
+    const tokens = Lexer$1.lexInline(src, opt);
     if (opt.walkTokens) {
-      marked.walkTokens(tokens, opt.walkTokens);
+      marked$1.walkTokens(tokens, opt.walkTokens);
     }
-    return Parser.parseInline(tokens, opt);
+    return Parser$1.parseInline(tokens, opt);
   } catch (e) {
     e.message += '\nPlease report this to https://github.com/markedjs/marked.';
     if (opt.silent) {
@@ -2722,22 +2726,37 @@ marked.parseInline = function(src, opt) {
 /**
  * Expose
  */
+marked$1.Parser = Parser$1;
+marked$1.parser = Parser$1.parse;
+marked$1.Renderer = Renderer$1;
+marked$1.TextRenderer = TextRenderer$1;
+marked$1.Lexer = Lexer$1;
+marked$1.lexer = Lexer$1.lex;
+marked$1.Tokenizer = Tokenizer$1;
+marked$1.Slugger = Slugger$1;
+marked$1.parse = marked$1;
 
-marked.Parser = Parser;
-marked.parser = Parser.parse;
+var marked_1 = marked$1;
 
-marked.Renderer = Renderer;
-marked.TextRenderer = TextRenderer;
+const marked = marked_1;
+const Lexer = Lexer_1$1;
+const Parser = Parser_1$1;
+const Tokenizer = Tokenizer_1$1;
+const Renderer = Renderer_1$1;
+const TextRenderer = TextRenderer_1$1;
+const Slugger = Slugger_1$1;
 
-marked.Lexer = Lexer;
-marked.lexer = Lexer.lex;
+esmEntry$1.exports = marked;
+var parse = esmEntry$1.exports.parse = marked;
+var Parser_1 = esmEntry$1.exports.Parser = Parser;
+var parser = esmEntry$1.exports.parser = Parser.parse;
+var Renderer_1 = esmEntry$1.exports.Renderer = Renderer;
+var TextRenderer_1 = esmEntry$1.exports.TextRenderer = TextRenderer;
+var Lexer_1 = esmEntry$1.exports.Lexer = Lexer;
+var lexer = esmEntry$1.exports.lexer = Lexer.lex;
+var Tokenizer_1 = esmEntry$1.exports.Tokenizer = Tokenizer;
+var Slugger_1 = esmEntry$1.exports.Slugger = Slugger;
 
-marked.Tokenizer = Tokenizer;
+var esmEntry = esmEntry$1.exports;
 
-marked.Slugger = Slugger;
-
-marked.parse = marked;
-
-var marked_1 = marked;
-
-export default marked_1;
+export default esmEntry;

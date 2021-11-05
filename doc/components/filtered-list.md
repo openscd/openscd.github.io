@@ -19,7 +19,7 @@
 | `noninteractive`   |                    |           | `boolean`                                        |         |
 | `rootTabbable`     |                    |           | `boolean`                                        |         |
 | `searchField`      |                    |           | `TextField`                                      |         |
-| `searchFieldLabel` | `searchFieldLabel` |           | `string`                                         |         |
+| `searchFieldLabel` | `searchFieldLabel` |           | `string \| undefined`                            |         |
 | `selected`         |                    | readonly  | `ListItemBase \| ListItemBase[] \| null`         |         |
 | `wrapFocus`        |                    |           | `boolean`                                        |         |
 
