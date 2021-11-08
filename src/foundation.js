@@ -280,7 +280,7 @@ function fCDAIdentity(e) {
 function fCDASelector(tagName, identity2) {
   const [parentIdentity, childIdentity] = pathParts(identity2);
   const [ldInst, prefix, lnClass, lnInst] = childIdentity.split(/[ /.]/);
-  const matchDoDa = childIdentity.match(/.([A-Z][a-z0-9.]*) ([A-Za-z0-9.]*) \(/);
+  const matchDoDa = childIdentity.match(/.([A-Z][A-Za-z0-9.]*) ([A-Za-z0-9.]*) \(/);
   const doName = matchDoDa && matchDoDa[1] ? matchDoDa[1] : "";
   const daName = matchDoDa && matchDoDa[2] ? matchDoDa[2] : "";
   const matchFx = childIdentity.match(/\(([A-Z]{2})/);
