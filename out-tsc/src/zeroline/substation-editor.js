@@ -41,7 +41,7 @@ let SubstationEditor = SubstationEditor_1 = class SubstationEditor extends LitEl
     renderIedContainer() {
         const ieds = this.getAttachedIeds?.(this.element) ?? [];
         return ieds?.length
-            ? html `<div id="iedcontainer" slot="container">
+            ? html `<div id="iedcontainer">
           ${ieds.map(ied => html `<ied-editor .element=${ied}></ied-editor>`)}
         </div>`
             : html ``;
@@ -82,7 +82,6 @@ let SubstationEditor = SubstationEditor_1 = class SubstationEditor extends LitEl
               @click=${() => this.remove()}
             ></mwc-icon-button> </abbr
         >${Array.from(this.element.querySelectorAll(selectors.VoltageLevel)).map(voltageLevel => html `<voltage-level-editor
-              slot="container"
               .element=${voltageLevel}
               .getAttachedIeds=${this.getAttachedIeds}
               ?readonly=${this.readonly}

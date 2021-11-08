@@ -25,7 +25,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>68/68</span>
+                <span class='fraction'>69/69</span>
             </div>
         
             
@@ -46,7 +46,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>56/56</span>
+                <span class='fraction'>57/57</span>
             </div>
         
             
@@ -372,7 +372,8 @@
 <a name='L313'></a><a href='#L313'>313</a>
 <a name='L314'></a><a href='#L314'>314</a>
 <a name='L315'></a><a href='#L315'>315</a>
-<a name='L316'></a><a href='#L316'>316</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L316'></a><a href='#L316'>316</a>
+<a name='L317'></a><a href='#L317'>317</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -450,7 +451,9 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">477x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">477x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">477x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -461,6 +464,8 @@
 <span class="cline-any cline-yes">328x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">328x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">328x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -491,6 +496,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -558,11 +564,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -765,7 +767,9 @@ export class EditorContainer extends LitElement {
 &nbsp;
   async firstUpdated(): Promise&lt;void&gt; {
     await super.updateComplete;
+&nbsp;
     if (this.addMenu) this.addMenu.anchor = this.headerContainer;
+&nbsp;
     const parentEditorContainer =
       &lt;EditorContainer&gt;(
         (&lt;ShadowRoot&gt;this.parentNode).host?.closest('editor-container')
@@ -778,6 +782,8 @@ export class EditorContainer extends LitElement {
     );
 &nbsp;
     this.contrasted = !parentEditorContainer.contrasted;
+&nbsp;
+    this.tabIndex = 0;
   }
 &nbsp;
   private renderAddButtons(): TemplateResult[] {
@@ -811,6 +817,7 @@ export class EditorContainer extends LitElement {
               id="menu"
               corner="TOP_RIGHT"
               menuCorner="END"
+              .anchor=${this.headerContainer}
               @selected=${(e: Event) =&gt; {
                 const tagName = (&lt;ListItem&gt;(&lt;Menu&gt;e.target).selected).value;
                 this.openCreateWizard(tagName);
@@ -867,15 +874,14 @@ export class EditorContainer extends LitElement {
         contrasted: this.contrasted,
         nomargin: this.nomargin,
       })}"
-      tabindex="0"
     &gt;
       ${this.renderHeader()}
-      &lt;slot name="container"&gt;&lt;/slot&gt;
+      &lt;slot&gt;&lt;/slot&gt;
     &lt;/section&gt;`;
   }
 &nbsp;
   static styles = css`
-    :host(.moving) section {
+    :host(.moving) .container {
       opacity: 0.3;
     }
 &nbsp;
@@ -884,7 +890,7 @@ export class EditorContainer extends LitElement {
       transition: all 200ms linear;
       outline-style: solid;
       margin: 8px 12px 16px;
-      padding: 0.02px; /*Dirty hack to force outline around content with margin*/
+      overflow: hidden;
       outline-width: 0px;
       outline-color: var(--mdc-theme-primary);
       opacity: 1;
@@ -904,34 +910,31 @@ export class EditorContainer extends LitElement {
 &nbsp;
     .nomargin {
       margin: 0px;
+      overflow: visible;
     }
 &nbsp;
-    .container:focus {
+    :host {
+      outline: none;
+    }
+&nbsp;
+    :host(:focus-within) .container {
       box-shadow: 0 8px 10px 1px rgba(0, 0, 0, 0.14),
         0 3px 14px 2px rgba(0, 0, 0, 0.12), 0 5px 5px -3px rgba(0, 0, 0, 0.2);
-    }
-&nbsp;
-    .container:focus-within {
       outline-width: 2px;
       transition: all 250ms linear;
     }
 &nbsp;
-    .container:focus-within h1,
-    .container:focus-within h2,
-    .container:focus-within h3 {
+    :host(:focus-within) h1,
+    :host(:focus-within) h2,
+    :host(:focus-within) h3 {
       color: var(--mdc-theme-surface);
       transition: background-color 200ms linear;
-    }
-&nbsp;
-    .container:focus-within h1,
-    .container:focus-within h2,
-    .container:focus-within h3 {
       background-color: var(--mdc-theme-primary);
     }
 &nbsp;
-    .container.secondary:focus-within h1,
-    .container.secondary:focus-within h2,
-    .container.secondary:focus-within h3 {
+    :host(:focus-within) .container.secondary h1,
+    :host(:focus-within) .container.secondary h2,
+    :host(:focus-within) .container.secondary h3 {
       background-color: var(--mdc-theme-secondary);
     }
 &nbsp;
@@ -1009,7 +1012,7 @@ export class EditorContainer extends LitElement {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Fri Nov 05 2021 15:44:44 GMT+0000 (Coordinated Universal Time)
+                at Mon Nov 08 2021 15:18:22 GMT+0000 (Coordinated Universal Time)
             </div>
         </div>
         <script src="../prettify.js"></script>

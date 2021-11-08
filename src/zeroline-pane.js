@@ -105,7 +105,7 @@ export let ZerolinePane = class extends LitElement {
         </nav>
       </h1>
       ${this.renderIedContainer()}
-      ${this.doc?.querySelector(":root > Substation") ? html`<section tabindex="0">
+      ${this.doc?.querySelector(":root > Substation") ? html`<section>
             ${Array.from(this.doc.querySelectorAll("Substation") ?? []).filter(isPublic).map((substation) => html`<substation-editor
                     .element=${substation}
                     .getAttachedIeds=${this.getAttachedIeds}

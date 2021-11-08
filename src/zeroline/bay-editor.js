@@ -56,7 +56,7 @@ export let BayEditor = class extends LitElement {
   }
   renderIedContainer() {
     const ieds = this.getAttachedIeds?.(this.element) ?? [];
-    return ieds?.length ? html`<div slot="container" id="iedcontainer">
+    return ieds?.length ? html`<div id="iedcontainer">
           ${ieds.map((ied) => html`<ied-editor .element=${ied}></ied-editor>`)}
         </div>` : html``;
   }
@@ -93,7 +93,7 @@ export let BayEditor = class extends LitElement {
         ></mwc-icon-button>
       </abbr>
       ${this.renderIedContainer()}
-      <div slot="container" id="ceContainer">
+      <div id="ceContainer">
         ${Array.from(getChildElementsByTagName(this.element, "ConductingEquipment")).map((voltageLevel) => html`<conducting-equipment-editor
               .element=${voltageLevel}
               ?readonly=${this.readonly}

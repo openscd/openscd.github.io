@@ -55,7 +55,7 @@ let VoltageLevelEditor = VoltageLevelEditor_1 = class VoltageLevelEditor extends
     renderIedContainer() {
         const ieds = this.getAttachedIeds?.(this.element) ?? [];
         return ieds?.length
-            ? html `<div id="iedcontainer" slot="container">
+            ? html `<div id="iedcontainer">
           ${ieds.map(ied => html `<ied-editor .element=${ied}></ied-editor>`)}
         </div>`
             : html ``;
@@ -96,7 +96,7 @@ let VoltageLevelEditor = VoltageLevelEditor_1 = class VoltageLevelEditor extends
         ></mwc-icon-button>
       </abbr>
       ${this.renderIedContainer()}
-      <div id="bayContainer" slot="container">
+      <div id="bayContainer">
         ${Array.from(this.element?.querySelectorAll(selectors.Bay) ?? []).map(bay => html `<bay-editor
             .element=${bay}
             .getAttachedIeds=${this.getAttachedIeds}
