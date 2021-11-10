@@ -49,6 +49,7 @@ export let EditorContainer = class extends LitElement {
   }
   async firstUpdated() {
     await super.updateComplete;
+    this.tabIndex = 0;
     if (this.addMenu)
       this.addMenu.anchor = this.headerContainer;
     const parentEditorContainer = this.parentNode.host?.closest("editor-container") ?? null;
@@ -56,7 +57,6 @@ export let EditorContainer = class extends LitElement {
       return;
     this.level = Math.min(parentEditorContainer.level + 1, 6);
     this.contrasted = !parentEditorContainer.contrasted;
-    this.tabIndex = 0;
   }
   renderAddButtons() {
     return childTags(this.element).map((child) => html`<mwc-list-item value="${child}"
@@ -147,7 +147,7 @@ EditorContainer.styles = css`
       transition: all 200ms linear;
       outline-style: solid;
       margin: 8px 12px 16px;
-      overflow: hidden;
+      padding: 0.05px;
       outline-width: 0px;
       outline-color: var(--mdc-theme-primary);
       opacity: 1;
@@ -167,7 +167,6 @@ EditorContainer.styles = css`
 
     .nomargin {
       margin: 0px;
-      overflow: visible;
     }
 
     :host {
