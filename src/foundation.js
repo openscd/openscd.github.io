@@ -346,9 +346,9 @@ function extRefIdentity(e) {
     "srcLNInst",
     "srcCBName"
   ].map((name2) => e.getAttribute(name2));
-  const cbPath = srcCBName ? `${serviceType}:${srcCBName} ${srcLDInst ?? ""}/${srcPrefix ?? ""} ${srcLNClass} ${srcLNInst ?? ""}` : "";
+  const cbPath = srcCBName ? `${serviceType}:${srcCBName} ${srcLDInst ?? ""}/${srcPrefix ?? ""} ${srcLNClass ?? ""} ${srcLNInst ?? ""}` : "";
   const dataPath = `${iedName} ${ldInst}/${prefix ?? ""} ${lnClass} ${lnInst ?? ""} ${doName} ${daName ? daName : ""}`;
-  return `${parentIdentity}>${cbPath} ${dataPath}${intAddr ? `@${intAddr}` : ""}`;
+  return `${parentIdentity}>${cbPath ? cbPath + " " : ""}${dataPath}${intAddr ? `@${intAddr}` : ""}`;
 }
 function extRefSelector(tagName, identity2) {
   const [parentIdentity, childIdentity] = pathParts(identity2);

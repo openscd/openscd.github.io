@@ -342,10 +342,10 @@ function extRefIdentity(e) {
         'srcCBName',
     ].map(name => e.getAttribute(name));
     const cbPath = srcCBName
-        ? `${serviceType}:${srcCBName} ${srcLDInst ?? ''}/${srcPrefix ?? ''} ${srcLNClass} ${srcLNInst ?? ''}`
+        ? `${serviceType}:${srcCBName} ${srcLDInst ?? ''}/${srcPrefix ?? ''} ${srcLNClass ?? ''} ${srcLNInst ?? ''}`
         : '';
     const dataPath = `${iedName} ${ldInst}/${prefix ?? ''} ${lnClass} ${lnInst ?? ''} ${doName} ${daName ? daName : ''}`;
-    return `${parentIdentity}>${cbPath} ${dataPath}${intAddr ? '@' + `${intAddr}` : ''}`;
+    return `${parentIdentity}>${cbPath ? cbPath + ' ' : ''}${dataPath}${intAddr ? '@' + `${intAddr}` : ''}`;
 }
 function extRefSelector(tagName, identity) {
     const [parentIdentity, childIdentity] = pathParts(identity);
