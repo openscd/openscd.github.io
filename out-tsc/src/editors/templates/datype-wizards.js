@@ -1,6 +1,6 @@
 import { html } from '../../../../_snowpack/pkg/lit-element.js';
 import { get, translate } from '../../../../_snowpack/pkg/lit-translate.js';
-import { getReference, getValue, identity, newActionEvent, newWizardEvent, patterns, selector, } from '../../foundation.js';
+import { getValue, identity, newActionEvent, newWizardEvent, patterns, selector, } from '../../foundation.js';
 import { addReferencedDataTypes, allDataTypeSelector, unifyCreateActionArray, updateIDNamingAction, } from './foundation.js';
 import { createBDAWizard, editBDAWizard } from '../../wizards/bda.js';
 export function editDaTypeWizard(dATypeIdentity, doc) {
@@ -116,7 +116,6 @@ function addPredefinedDAType(parent, templates) {
             new: {
                 parent,
                 element,
-                reference: getReference(parent, element.tagName),
             },
         });
         return unifyCreateActionArray(actions);

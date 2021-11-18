@@ -2,7 +2,7 @@ import { __decorate } from "../../../../_snowpack/pkg/tslib.js";
 import { LitElement, customElement, html, property, css, } from '../../../../_snowpack/pkg/lit-element.js';
 import { ifDefined } from '../../../../_snowpack/pkg/lit-html/directives/if-defined.js';
 import { translate, get } from '../../../../_snowpack/pkg/lit-translate.js';
-import { newWizardEvent, newActionEvent, compareNames, getValue, createElement, getReference, } from '../../foundation.js';
+import { newWizardEvent, newActionEvent, compareNames, getValue, createElement, } from '../../foundation.js';
 import { getTypes, typePattern, typeNullable, typeMaxLength, } from './p-types.js';
 import { selectors } from './foundation.js';
 /** Sorts disabled `ListItem`s to the bottom. */
@@ -42,7 +42,6 @@ function createConnectedApAction(parent) {
                     iedName: value.iedName,
                     apName: value.apName,
                 }),
-                reference: getReference(parent, 'ConnectedAP'),
             },
         }));
         return actions;
@@ -133,7 +132,6 @@ export function editConnectedApAction(parent) {
                 new: {
                     parent: parent,
                     element: newAddress,
-                    reference: getReference(parent, 'Address'),
                 },
             });
         return [complexAction];

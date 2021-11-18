@@ -1,7 +1,7 @@
 import { html } from '../../../_snowpack/pkg/lit-html.js';
 import { ifDefined } from '../../../_snowpack/pkg/lit-html/directives/if-defined.js';
 import { translate } from '../../../_snowpack/pkg/lit-translate.js';
-import { createElement, getReference, getValue, } from '../foundation.js';
+import { createElement, getValue, } from '../foundation.js';
 import { pTypesGSESMV, typeNullable, typePattern, } from './foundation/p-types.js';
 export function renderGseSmvAddress(parent) {
     const hasInstType = Array.from(parent.querySelectorAll('Address > P')).some(pType => pType.getAttribute('xsi:type'));
@@ -66,7 +66,6 @@ export function updateAddress(parent, inputs, instType) {
             new: {
                 parent: parent,
                 element: newAddress,
-                reference: getReference(parent, 'Address'),
             },
         });
     return actions;

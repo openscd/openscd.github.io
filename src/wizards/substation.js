@@ -2,7 +2,6 @@ import {html} from "../../_snowpack/pkg/lit-element.js";
 import {get, translate} from "../../_snowpack/pkg/lit-translate.js";
 import {
   createElement,
-  getReference,
   getValue,
   newWizardEvent
 } from "../foundation.js";
@@ -42,8 +41,7 @@ export function createAction(parent) {
     const action = {
       new: {
         parent,
-        element,
-        reference: getReference(parent, "Substation")
+        element
       }
     };
     if (guess)

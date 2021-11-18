@@ -3,7 +3,6 @@ import {get, translate} from "../../_snowpack/pkg/lit-translate.js";
 import {
   cloneElement,
   createElement,
-  getReference,
   getValue,
   isPublic,
   newActionEvent,
@@ -184,8 +183,7 @@ export function createDaAction(parent) {
     actions.push({
       new: {
         parent,
-        element,
-        reference: getReference(parent, element.tagName)
+        element
       }
     });
     return actions;

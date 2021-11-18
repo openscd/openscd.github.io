@@ -1,6 +1,6 @@
 import { html } from '../../../../_snowpack/pkg/lit-element.js';
 import { get, translate } from '../../../../_snowpack/pkg/lit-translate.js';
-import { cloneElement, createElement, getChildElementsByTagName, getReference, getValue, identity, isPublic, newActionEvent, newWizardEvent, patterns, selector, } from '../../foundation.js';
+import { cloneElement, createElement, getChildElementsByTagName, getValue, identity, isPublic, newActionEvent, newWizardEvent, patterns, selector, } from '../../foundation.js';
 import { addReferencedDataTypes, allDataTypeSelector, buildListFromStringArray, unifyCreateActionArray, } from './foundation.js';
 function updateDoAction(element) {
     return (inputs) => {
@@ -49,7 +49,6 @@ function createDoAction(parent) {
             new: {
                 parent,
                 element,
-                reference: getReference(parent, element.tagName),
             },
         });
         return actions;
@@ -177,7 +176,6 @@ function createNewLNodeType(parent, element) {
                 new: {
                     parent: element,
                     element: DO,
-                    reference: getReference(element, DO.tagName),
                 },
             });
         });
@@ -185,7 +183,6 @@ function createNewLNodeType(parent, element) {
             new: {
                 parent,
                 element,
-                reference: getReference(parent, element.tagName),
             },
         });
         return actions;
@@ -241,7 +238,6 @@ function addPredefinedLNodeType(parent, newLNodeType, templateLNodeType) {
         new: {
             parent,
             element: newLNodeType,
-            reference: getReference(parent, 'LNodeType'),
         },
     });
     return unifyCreateActionArray(actions);

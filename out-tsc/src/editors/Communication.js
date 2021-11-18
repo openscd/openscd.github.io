@@ -1,7 +1,7 @@
 import { __decorate } from "../../../_snowpack/pkg/tslib.js";
 import { LitElement, html, property, css } from '../../../_snowpack/pkg/lit-element.js';
 import { translate, get } from '../../../_snowpack/pkg/lit-translate.js';
-import { newWizardEvent, newActionEvent, createElement, getReference, } from '../foundation.js';
+import { newWizardEvent, newActionEvent, createElement, } from '../foundation.js';
 import { selectors, styles } from './communication/foundation.js';
 import './communication/subnetwork-editor.js';
 import { subNetworkWizard } from './communication/subnetwork-editor.js';
@@ -12,7 +12,6 @@ export default class CommunicationPlugin extends LitElement {
             new: {
                 parent: this.doc.documentElement,
                 element: createElement(this.doc, 'Communication', {}),
-                reference: getReference(this.doc.documentElement, 'Communication'),
             },
         }));
     }

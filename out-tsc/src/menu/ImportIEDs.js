@@ -1,7 +1,7 @@
 import { __decorate } from "../../../_snowpack/pkg/tslib.js";
 import { css, html, LitElement, query } from '../../../_snowpack/pkg/lit-element.js';
 import { get } from '../../../_snowpack/pkg/lit-translate.js';
-import { createElement, getReference, identity, newActionEvent, newLogEvent, newPendingStateEvent, newWizardEvent, selector, } from '../foundation.js';
+import { createElement, identity, newActionEvent, newLogEvent, newPendingStateEvent, newWizardEvent, selector, } from '../foundation.js';
 function importIedsAction(importDoc, doc) {
     return (_, wizard) => {
         const selectedItems = (wizard.shadowRoot.querySelector('#iedList').selected);
@@ -51,7 +51,6 @@ function addCommunicationElements(ied, doc) {
             new: {
                 parent: doc.querySelector(':root'),
                 element: communication,
-                reference: getReference(doc.querySelector(':root'), 'Communication'),
             },
         });
     const connectedAPs = Array.from(ied.ownerDocument.querySelectorAll(`:root > Communication > SubNetwork > ConnectedAP[iedName="${ied.getAttribute('name')}"]`));
@@ -68,7 +67,6 @@ function addCommunicationElements(ied, doc) {
                 new: {
                     parent: communication,
                     element: subNetwork,
-                    reference: getReference(communication, 'SubNetwork'),
                 },
             });
             createdSubNetworks.push(subNetwork);
@@ -77,7 +75,6 @@ function addCommunicationElements(ied, doc) {
             new: {
                 parent: subNetwork,
                 element,
-                reference: getReference(subNetwork, 'ConnectedAP'),
             },
         });
     });
@@ -119,7 +116,6 @@ function addEnumType(ied, enumType, doc) {
         new: {
             parent: doc.querySelector(':root > DataTypeTemplates'),
             element: enumType,
-            reference: getReference(doc.querySelector(':root > DataTypeTemplates'), 'EnumType'),
         },
     };
 }
@@ -144,7 +140,6 @@ function addDAType(ied, daType, doc) {
         new: {
             parent: doc.querySelector(':root > DataTypeTemplates'),
             element: daType,
-            reference: getReference(doc.querySelector(':root > DataTypeTemplates'), 'DAType'),
         },
     };
 }
@@ -169,7 +164,6 @@ function addDOType(ied, doType, doc) {
         new: {
             parent: doc.querySelector(':root > DataTypeTemplates'),
             element: doType,
-            reference: getReference(doc.querySelector(':root > DataTypeTemplates'), 'DOType'),
         },
     };
 }
@@ -193,7 +187,6 @@ function addLNodeType(ied, lNodeType, doc) {
         new: {
             parent: doc.querySelector(':root > DataTypeTemplates'),
             element: lNodeType,
-            reference: getReference(doc.querySelector('DataTypeTemplates'), 'LNodeType'),
         },
     };
 }
@@ -240,7 +233,6 @@ export async function importIED(ied, doc, dispatchObject) {
         new: {
             parent: doc.querySelector(':root'),
             element: ied,
-            reference: getReference(doc.querySelector(':root'), 'IED'),
         },
     });
     dispatchObject.dispatchEvent(newActionEvent({
@@ -288,7 +280,6 @@ export default class ImportingIedPlugin extends LitElement {
                 new: {
                     parent: doc.documentElement,
                     element,
-                    reference: getReference(doc.documentElement, 'DataTypeTemplates'),
                 },
             }));
         }

@@ -2,7 +2,6 @@ import {html} from "../../_snowpack/pkg/lit-html.js";
 import {get, translate} from "../../_snowpack/pkg/lit-translate.js";
 import {
   createElement,
-  getReference,
   getValue
 } from "../foundation.js";
 import {updateNamingAction} from "./foundation/actions.js";
@@ -35,8 +34,7 @@ export function createAction(parent) {
     const action = {
       new: {
         parent,
-        element,
-        reference: getReference(parent, "Bay")
+        element
       }
     };
     return [action];

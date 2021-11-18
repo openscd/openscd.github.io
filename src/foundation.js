@@ -3,13 +3,13 @@ import {Select} from "../_snowpack/pkg/@material/mwc-select.js";
 import {WizardTextField} from "./wizard-textfield.js";
 import {WizardSelect} from "./wizard-select.js";
 export function isCreate(action) {
-  return action.old === void 0 && action.new?.parent !== void 0 && action.new?.element !== void 0 && action.new?.reference !== void 0;
+  return action.old === void 0 && action.new?.parent !== void 0 && action.new?.element !== void 0;
 }
 export function isDelete(action) {
-  return action.old?.parent !== void 0 && action.old?.element !== void 0 && action.old?.reference !== void 0 && action.new === void 0;
+  return action.old?.parent !== void 0 && action.old?.element !== void 0 && action.new === void 0;
 }
 export function isMove(action) {
-  return action.old?.parent !== void 0 && action.old?.element !== void 0 && action.old?.reference !== void 0 && action.new?.parent !== void 0 && action.new?.element == void 0 && action.new?.reference !== void 0;
+  return action.old?.parent !== void 0 && action.old?.element !== void 0 && action.new?.parent !== void 0 && action.new?.element == void 0;
 }
 export function isUpdate(action) {
   return action.old?.parent === void 0 && action.old?.element !== void 0 && action.new?.parent === void 0 && action.new?.element !== void 0;

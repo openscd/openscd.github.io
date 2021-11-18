@@ -1,6 +1,6 @@
 import { html } from '../../../_snowpack/pkg/lit-element.js';
 import { get, translate } from '../../../_snowpack/pkg/lit-translate.js';
-import { createElement, getReference, getValue, isPublic, } from '../foundation.js';
+import { createElement, getValue, isPublic, } from '../foundation.js';
 import { updateNamingAction } from './foundation/actions.js';
 const types = {
     // standard
@@ -103,7 +103,6 @@ export function createAction(parent) {
             new: {
                 parent,
                 element,
-                reference: getReference(parent, 'ConductingEquipment'),
             },
         };
         return [action];

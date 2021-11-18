@@ -1,6 +1,6 @@
 import { html, render } from '../../../_snowpack/pkg/lit-html.js';
 import { get, translate } from '../../../_snowpack/pkg/lit-translate.js';
-import { createElement, getChildElementsByTagName, getReference, identity, isPublic, referencePath, selector, } from '../foundation.js';
+import { createElement, getChildElementsByTagName, identity, isPublic, referencePath, selector, } from '../foundation.js';
 import { ListBase } from '../../../_snowpack/pkg/@material/mwc-list/mwc-list-base.js';
 /** Logical nodes perferred for lnode reference to substation element */
 const preferredLn = {
@@ -52,7 +52,6 @@ function createAction(parent, anyln) {
         new: {
             parent,
             element,
-            reference: getReference(parent, 'LNode'),
         },
     };
 }

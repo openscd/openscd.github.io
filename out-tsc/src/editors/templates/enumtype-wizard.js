@@ -1,6 +1,6 @@
 import { html } from '../../../../_snowpack/pkg/lit-element.js';
 import { get, translate } from '../../../../_snowpack/pkg/lit-translate.js';
-import { cloneElement, createElement, getReference, getValue, identity, isPublic, newActionEvent, newWizardEvent, patterns, selector, } from '../../foundation.js';
+import { cloneElement, createElement, getValue, identity, isPublic, newActionEvent, newWizardEvent, patterns, selector, } from '../../foundation.js';
 import { updateIDNamingAction, } from './foundation.js';
 function nextOrd(parent) {
     const maxOrd = Math.max(...Array.from(parent.children).map(child => parseInt(child.getAttribute('ord') ?? '-2', 10)));
@@ -20,7 +20,6 @@ function createEnumValAction(parent) {
             new: {
                 parent,
                 element,
-                reference: getReference(parent, 'EnumVal'),
             },
         };
         return [action];
@@ -135,7 +134,6 @@ function createAction(parent, templates) {
             new: {
                 parent,
                 element,
-                reference: getReference(parent, element.tagName),
             },
         };
         return [action];

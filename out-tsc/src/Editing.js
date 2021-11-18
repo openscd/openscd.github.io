@@ -1,7 +1,7 @@
 import { __decorate } from "../../_snowpack/pkg/tslib.js";
 import { LitElement, property } from '../../_snowpack/pkg/lit-element.js';
 import { get } from '../../_snowpack/pkg/lit-translate.js';
-import { isCreate, isDelete, isMove, isSimple, isUpdate, newLogEvent, newValidateEvent, } from './foundation.js';
+import { getReference, isCreate, isDelete, isMove, isSimple, isUpdate, newLogEvent, newValidateEvent, } from './foundation.js';
 /** @typeParam TBase - a type extending `LitElement`
  * @returns `Base` with an `XMLDocument` property "`doc`" and an event listener
  * applying [[`EditorActionEvent`]]s and dispatching [[`LogEvent`]]s. */
@@ -43,6 +43,8 @@ export function Editing(Base) {
         onCreate(action) {
             if (!this.checkCreateValidity(action))
                 return false;
+            if (action.new.reference === undefined)
+                action.new.reference = getReference(action.new.parent, action.new.element.tagName);
             action.new.parent.insertBefore(action.new.element, action.new.reference);
             return true;
         }
@@ -56,6 +58,8 @@ export function Editing(Base) {
             }));
         }
         onDelete(action) {
+            if (!action.old.reference)
+                action.old.reference = action.old.element.nextSibling;
             action.old.element.remove();
             return true;
         }
@@ -92,6 +96,10 @@ export function Editing(Base) {
         onMove(action) {
             if (!this.checkMoveValidity(action))
                 return false;
+            if (!action.old.reference)
+                action.old.reference = action.old.element.nextSibling;
+            if (action.new.reference === undefined)
+                action.new.reference = getReference(action.new.parent, action.old.element.tagName);
             action.new.parent.insertBefore(action.old.element, action.new.reference);
             return true;
         }

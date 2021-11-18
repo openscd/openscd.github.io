@@ -3,7 +3,6 @@ import {ifDefined} from "../../_snowpack/pkg/lit-html/directives/if-defined.js";
 import {translate} from "../../_snowpack/pkg/lit-translate.js";
 import {
   createElement,
-  getReference,
   getValue
 } from "../foundation.js";
 import {
@@ -65,8 +64,7 @@ export function updateAddress(parent, inputs, instType) {
     actions.push({
       new: {
         parent,
-        element: newAddress,
-        reference: getReference(parent, "Address")
+        element: newAddress
       }
     });
   return actions;

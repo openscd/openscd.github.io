@@ -23,8 +23,7 @@ import {
   newActionEvent,
   compareNames,
   getValue,
-  createElement,
-  getReference
+  createElement
 } from "../../foundation.js";
 import {
   getTypes,
@@ -64,8 +63,7 @@ function createConnectedApAction(parent) {
         element: createElement(parent.ownerDocument, "ConnectedAP", {
           iedName: value.iedName,
           apName: value.apName
-        }),
-        reference: getReference(parent, "ConnectedAP")
+        })
       }
     }));
     return actions;
@@ -146,8 +144,7 @@ export function editConnectedApAction(parent) {
       complexAction.actions.push({
         new: {
           parent,
-          element: newAddress,
-          reference: getReference(parent, "Address")
+          element: newAddress
         }
       });
     return [complexAction];

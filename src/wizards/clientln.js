@@ -2,7 +2,6 @@ import {html} from "../../_snowpack/pkg/lit-element.js";
 import {get} from "../../_snowpack/pkg/lit-translate.js";
 import {
   createElement,
-  getReference,
   identity,
   pathParts,
   selector
@@ -95,8 +94,7 @@ function addClientLnAction(doc) {
           actions.push({
             new: {
               parent: cb.querySelector("RptEnabled"),
-              element,
-              reference: getReference(cb.querySelector("RptEnabled"), "ClientLN")
+              element
             }
           });
         }

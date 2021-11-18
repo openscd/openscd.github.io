@@ -1,6 +1,6 @@
 import { html } from '../../../_snowpack/pkg/lit-element.js';
 import { get } from '../../../_snowpack/pkg/lit-translate.js';
-import { createElement, getReference, identity, pathParts, selector, } from '../foundation.js';
+import { createElement, identity, pathParts, selector, } from '../foundation.js';
 import { openCommunicationMappingWizard } from './commmap-wizards.js';
 import { clientIcon } from '../icons.js';
 function getPath(identity) {
@@ -112,7 +112,6 @@ function addClientLnAction(doc) {
                         new: {
                             parent: cb.querySelector('RptEnabled'),
                             element,
-                            reference: getReference(cb.querySelector('RptEnabled'), 'ClientLN'),
                         },
                     });
                 }

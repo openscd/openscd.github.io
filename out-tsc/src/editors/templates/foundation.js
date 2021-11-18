@@ -1,6 +1,6 @@
 import { css, html } from '../../../../_snowpack/pkg/lit-element.js';
 import { ifDefined } from '../../../../_snowpack/pkg/lit-html/directives/if-defined.js';
-import { cloneElement, getReference, getValue, isPublic, } from '../../foundation.js';
+import { cloneElement, getValue, isPublic, } from '../../foundation.js';
 export const allDataTypeSelector = 'LNodeType, DOType, DAType, EnumType';
 export function isCreateOptions(options) {
     return options.parent !== undefined;
@@ -52,7 +52,6 @@ export function addReferencedDataTypes(element, parent) {
             new: {
                 parent,
                 element: adjacent.cloneNode(true),
-                reference: getReference(parent, adjacent.tagName),
             },
         });
     });

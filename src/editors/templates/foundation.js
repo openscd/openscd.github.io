@@ -2,7 +2,6 @@ import {css, html} from "../../../_snowpack/pkg/lit-element.js";
 import {ifDefined} from "../../../_snowpack/pkg/lit-html/directives/if-defined.js";
 import {
   cloneElement,
-  getReference,
   getValue,
   isPublic
 } from "../../foundation.js";
@@ -46,8 +45,7 @@ export function addReferencedDataTypes(element, parent) {
     actions.push({
       new: {
         parent,
-        element: adjacent.cloneNode(true),
-        reference: getReference(parent, adjacent.tagName)
+        element: adjacent.cloneNode(true)
       }
     });
   });

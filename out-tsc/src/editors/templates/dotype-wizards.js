@@ -1,6 +1,6 @@
 import { html } from '../../../../_snowpack/pkg/lit-html.js';
 import { get, translate } from '../../../../_snowpack/pkg/lit-translate.js';
-import { cloneElement, createElement, getReference, getValue, identity, isPublic, newActionEvent, newWizardEvent, selector, } from '../../foundation.js';
+import { cloneElement, createElement, getValue, identity, isPublic, newActionEvent, newWizardEvent, selector, } from '../../foundation.js';
 import { addReferencedDataTypes, allDataTypeSelector, unifyCreateActionArray, } from './foundation.js';
 import { createDaWizard, editDAWizard } from '../../wizards/da.js';
 import { patterns } from '../../wizards/foundation/limits.js';
@@ -35,7 +35,6 @@ function createSDoAction(parent) {
             new: {
                 parent,
                 element,
-                reference: getReference(parent, element.tagName),
             },
         });
         return actions;
@@ -148,7 +147,6 @@ function addPredefinedDOType(parent, templates) {
             new: {
                 parent,
                 element,
-                reference: getReference(parent, element.tagName),
             },
         });
         return unifyCreateActionArray(actions);

@@ -5,22 +5,18 @@ import { WizardSelect } from './wizard-select.js';
 export function isCreate(action) {
     return (action.old === undefined &&
         action.new?.parent !== undefined &&
-        action.new?.element !== undefined &&
-        action.new?.reference !== undefined);
+        action.new?.element !== undefined);
 }
 export function isDelete(action) {
     return (action.old?.parent !== undefined &&
         action.old?.element !== undefined &&
-        action.old?.reference !== undefined &&
         action.new === undefined);
 }
 export function isMove(action) {
     return (action.old?.parent !== undefined &&
         action.old?.element !== undefined &&
-        action.old?.reference !== undefined &&
         action.new?.parent !== undefined &&
-        action.new?.element == undefined &&
-        action.new?.reference !== undefined);
+        action.new?.element == undefined);
 }
 export function isUpdate(action) {
     return (action.old?.parent === undefined &&

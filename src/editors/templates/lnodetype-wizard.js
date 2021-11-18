@@ -4,7 +4,6 @@ import {
   cloneElement,
   createElement,
   getChildElementsByTagName,
-  getReference,
   getValue,
   identity,
   isPublic,
@@ -57,8 +56,7 @@ function createDoAction(parent) {
     actions.push({
       new: {
         parent,
-        element,
-        reference: getReference(parent, element.tagName)
+        element
       }
     });
     return actions;
@@ -186,16 +184,14 @@ function createNewLNodeType(parent, element) {
       actions.push({
         new: {
           parent: element,
-          element: DO,
-          reference: getReference(element, DO.tagName)
+          element: DO
         }
       });
     });
     actions.push({
       new: {
         parent,
-        element,
-        reference: getReference(parent, element.tagName)
+        element
       }
     });
     return actions;
@@ -248,8 +244,7 @@ function addPredefinedLNodeType(parent, newLNodeType, templateLNodeType) {
   actions.push({
     new: {
       parent,
-      element: newLNodeType,
-      reference: getReference(parent, "LNodeType")
+      element: newLNodeType
     }
   });
   return unifyCreateActionArray(actions);

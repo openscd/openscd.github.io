@@ -1,7 +1,7 @@
 import { __decorate } from "../../../../_snowpack/pkg/tslib.js";
 import { LitElement, customElement, html, property, css, } from '../../../../_snowpack/pkg/lit-element.js';
 import { translate, get } from '../../../../_snowpack/pkg/lit-translate.js';
-import { newWizardEvent, newActionEvent, getValue, getMultiplier, patterns, compareNames, createElement, getReference, cloneElement, } from '../../foundation.js';
+import { newWizardEvent, newActionEvent, getValue, getMultiplier, patterns, compareNames, createElement, cloneElement, } from '../../foundation.js';
 import { styles, isCreateOptions } from './foundation.js';
 import './connectedap-editor.js';
 import { createConnectedApWizard } from './connectedap-editor.js';
@@ -97,7 +97,6 @@ export function createSubNetworkAction(parent) {
             new: {
                 parent,
                 element,
-                reference: getReference(parent, 'SubNetwork'),
             },
         };
         return [action];

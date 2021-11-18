@@ -4,7 +4,6 @@ import {
   cloneElement,
   createElement,
   getMultiplier,
-  getReference,
   getValue,
   patterns
 } from "../foundation.js";
@@ -92,8 +91,7 @@ export function createAction(parent) {
       {
         new: {
           parent,
-          element,
-          reference: getReference(parent, "VoltageLevel")
+          element
         }
       }
     ];

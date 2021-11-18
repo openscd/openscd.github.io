@@ -1,6 +1,6 @@
 import { html } from '../../../_snowpack/pkg/lit-html.js';
 import { get, translate } from '../../../_snowpack/pkg/lit-translate.js';
-import { cloneElement, createElement, getReference, getValue, isPublic, newActionEvent, newWizardEvent, } from '../foundation.js';
+import { cloneElement, createElement, getValue, isPublic, newActionEvent, newWizardEvent, } from '../foundation.js';
 import { getValAction, wizardContent } from './abstractda.js';
 export function updateBDaAction(element) {
     return (inputs) => {
@@ -134,7 +134,6 @@ export function createBDaAction(parent) {
                 new: {
                     parent,
                     element,
-                    reference: getReference(parent, element.tagName),
                 },
             },
         ];

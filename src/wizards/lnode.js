@@ -3,7 +3,6 @@ import {get, translate} from "../../_snowpack/pkg/lit-translate.js";
 import {
   createElement,
   getChildElementsByTagName,
-  getReference,
   identity,
   isPublic,
   referencePath,
@@ -46,8 +45,7 @@ function createAction(parent, anyln) {
   return {
     new: {
       parent,
-      element,
-      reference: getReference(parent, "LNode")
+      element
     }
   };
 }

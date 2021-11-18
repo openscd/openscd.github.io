@@ -1,7 +1,6 @@
 import {html} from "../../../_snowpack/pkg/lit-element.js";
 import {get, translate} from "../../../_snowpack/pkg/lit-translate.js";
 import {
-  getReference,
   getValue,
   identity,
   newActionEvent,
@@ -121,8 +120,7 @@ function addPredefinedDAType(parent, templates) {
     actions.push({
       new: {
         parent,
-        element,
-        reference: getReference(parent, element.tagName)
+        element
       }
     });
     return unifyCreateActionArray(actions);

@@ -1,6 +1,6 @@
 import { html } from '../../../_snowpack/pkg/lit-html.js';
 import { get, translate } from '../../../_snowpack/pkg/lit-translate.js';
-import { cloneElement, createElement, getMultiplier, getReference, getValue, patterns, } from '../foundation.js';
+import { cloneElement, createElement, getMultiplier, getValue, patterns, } from '../foundation.js';
 const initial = {
     nomFreq: '50',
     numPhases: '3',
@@ -86,7 +86,6 @@ export function createAction(parent) {
                 new: {
                     parent,
                     element,
-                    reference: getReference(parent, 'VoltageLevel'),
                 },
             },
         ];

@@ -1,6 +1,6 @@
 import { html } from '../../../_snowpack/pkg/lit-html.js';
 import { get, translate } from '../../../_snowpack/pkg/lit-translate.js';
-import { cloneElement, createElement, getReference, getValue, isPublic, newActionEvent, newWizardEvent, } from '../foundation.js';
+import { cloneElement, createElement, getValue, isPublic, newActionEvent, newWizardEvent, } from '../foundation.js';
 import { getValAction, wizardContent } from './abstractda.js';
 import { functionalConstraintEnum } from './foundation/enums.js';
 export function renderDa(fc, dchg, qchg, dupd) {
@@ -195,7 +195,6 @@ export function createDaAction(parent) {
             new: {
                 parent,
                 element,
-                reference: getReference(parent, element.tagName),
             },
         });
         return actions;

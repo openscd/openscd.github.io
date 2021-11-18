@@ -25,7 +25,6 @@ import {
   patterns,
   compareNames,
   createElement,
-  getReference,
   cloneElement
 } from "../../foundation.js";
 import {styles, isCreateOptions} from "./foundation.js";
@@ -111,8 +110,7 @@ export function createSubNetworkAction(parent) {
     const action = {
       new: {
         parent,
-        element,
-        reference: getReference(parent, "SubNetwork")
+        element
       }
     };
     return [action];

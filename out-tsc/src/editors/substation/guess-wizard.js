@@ -1,6 +1,6 @@
 import { html } from '../../../../_snowpack/pkg/lit-html.js';
 import { get, translate } from '../../../../_snowpack/pkg/lit-translate.js';
-import { compareNames, createElement, getReference, } from '../../foundation.js';
+import { compareNames, createElement, } from '../../foundation.js';
 let bayNum = 1;
 let cbNum = 1;
 let dsNum = 1;
@@ -110,7 +110,6 @@ function guessBasedOnCSWI(doc) {
             new: {
                 parent: substation,
                 element: voltageLevel,
-                reference: getReference(substation, 'VoltageLevel'),
             },
         });
         return actions;

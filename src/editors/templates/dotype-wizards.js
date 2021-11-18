@@ -3,7 +3,6 @@ import {get, translate} from "../../../_snowpack/pkg/lit-translate.js";
 import {
   cloneElement,
   createElement,
-  getReference,
   getValue,
   identity,
   isPublic,
@@ -46,8 +45,7 @@ function createSDoAction(parent) {
     actions.push({
       new: {
         parent,
-        element,
-        reference: getReference(parent, element.tagName)
+        element
       }
     });
     return actions;
@@ -149,8 +147,7 @@ function addPredefinedDOType(parent, templates) {
     actions.push({
       new: {
         parent,
-        element,
-        reference: getReference(parent, element.tagName)
+        element
       }
     });
     return unifyCreateActionArray(actions);

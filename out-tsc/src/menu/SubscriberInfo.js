@@ -1,6 +1,6 @@
 import { LitElement } from '../../../_snowpack/pkg/lit-element.js';
 import { get } from '../../../_snowpack/pkg/lit-translate.js';
-import { createElement, getReference, getVersion, newActionEvent, } from '../foundation.js';
+import { createElement, getVersion, newActionEvent, } from '../foundation.js';
 function getElementIndexOf(list, match) {
     for (let i = 0; list.length; i++)
         if (list[i]?.isEqualNode(match))
@@ -90,7 +90,6 @@ export function createMissingIEDNameSubscriberInfo(doc) {
                 new: {
                     parent: controlBlock,
                     element: iedName,
-                    reference: getReference(controlBlock, 'IEDName'),
                 },
             });
         });

@@ -1,6 +1,6 @@
 import { html } from '../../../_snowpack/pkg/lit-element.js';
 import { get, translate } from '../../../_snowpack/pkg/lit-translate.js';
-import { createElement, getReference, getValue, newWizardEvent, } from '../foundation.js';
+import { createElement, getValue, newWizardEvent, } from '../foundation.js';
 import { updateNamingAction } from './foundation/actions.js';
 import { guessVoltageLevel } from '../editors/substation/guess-wizard.js';
 function render(name, desc, guessable) {
@@ -40,7 +40,6 @@ export function createAction(parent) {
             new: {
                 parent,
                 element,
-                reference: getReference(parent, 'Substation'),
             },
         };
         if (guess)

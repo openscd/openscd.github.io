@@ -3,7 +3,6 @@ import {get, translate} from "../../../_snowpack/pkg/lit-translate.js";
 import {
   cloneElement,
   createElement,
-  getReference,
   getValue,
   identity,
   isPublic,
@@ -32,8 +31,7 @@ function createEnumValAction(parent) {
     const action = {
       new: {
         parent,
-        element,
-        reference: getReference(parent, "EnumVal")
+        element
       }
     };
     return [action];
@@ -135,8 +133,7 @@ function createAction(parent, templates) {
     const action = {
       new: {
         parent,
-        element,
-        reference: getReference(parent, element.tagName)
+        element
       }
     };
     return [action];

@@ -1,7 +1,7 @@
 import { __decorate } from "../../../_snowpack/pkg/tslib.js";
 import { LitElement, html, property, css } from '../../../_snowpack/pkg/lit-element.js';
 import { translate } from '../../../_snowpack/pkg/lit-translate.js';
-import { createElement, getReference, identity, newActionEvent, newWizardEvent, } from '../foundation.js';
+import { createElement, identity, newActionEvent, newWizardEvent, } from '../foundation.js';
 import { styles } from './templates/foundation.js';
 import '../filtered-list.js';
 import { createEnumTypeWizard, eNumTypeEditWizard, } from './templates/enumtype-wizard.js';
@@ -58,7 +58,6 @@ export default class TemplatesPlugin extends LitElement {
                 new: {
                     parent: this.doc.documentElement,
                     element: createElement(this.doc, 'DataTypeTemplates', {}),
-                    reference: getReference(this.doc.documentElement, 'DataTypeTemplates'),
                 },
             }));
     }
