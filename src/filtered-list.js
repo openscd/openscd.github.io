@@ -13,7 +13,7 @@ import {
   css,
   customElement,
   html,
-  internalProperty,
+  state,
   property,
   query,
   unsafeCSS
@@ -93,7 +93,11 @@ FilteredList.styles = css`
     }
 
     abbr {
+      display: flex;
+      flex: auto;
       margin: 8px;
+      text-decoration: none;
+      border-bottom: none;
     }
 
     mwc-textfield {
@@ -116,13 +120,13 @@ __decorate([
   property({type: Boolean})
 ], FilteredList.prototype, "disableCheckAll", 2);
 __decorate([
-  internalProperty()
+  state()
 ], FilteredList.prototype, "existCheckListItem", 1);
 __decorate([
-  internalProperty()
+  state()
 ], FilteredList.prototype, "isAllSelected", 1);
 __decorate([
-  internalProperty()
+  state()
 ], FilteredList.prototype, "isSomeSelected", 1);
 __decorate([
   query("mwc-textfield")

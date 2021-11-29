@@ -1,27 +1,29 @@
 # filtered-list
 
+A mwc-list with mwc-textfield that filters the list items for given or separated terms
+
 ## Properties
 
-| Property           | Attribute          | Modifiers | Type                                             | Default |
-|--------------------|--------------------|-----------|--------------------------------------------------|---------|
-| `activatable`      |                    |           | `boolean`                                        |         |
-| `debouncedLayout`  |                    |           | `(updateItems?: boolean \| undefined) => void \| undefined` |         |
-| `disableCheckAll`  | `disableCheckAll`  |           | `boolean`                                        | false   |
-| `emptyMessage`     |                    |           | `string \| undefined`                            |         |
-| `index`            |                    | readonly  | `MWCListIndex`                                   |         |
-| `innerAriaLabel`   |                    |           | `string \| null`                                 |         |
-| `innerRole`        |                    |           | `string \| null`                                 |         |
-| `itemRoles`        |                    |           | `string \| null`                                 |         |
-| `items`            |                    | readonly  | `ListItemBase[]`                                 |         |
-| `itemsReady`       |                    |           | `Promise<never[]>`                               |         |
-| `layout`           |                    |           | `(updateItems?: boolean \| undefined) => void`   |         |
-| `multi`            |                    |           | `boolean`                                        |         |
-| `noninteractive`   |                    |           | `boolean`                                        |         |
-| `rootTabbable`     |                    |           | `boolean`                                        |         |
-| `searchField`      |                    |           | `TextField`                                      |         |
-| `searchFieldLabel` | `searchFieldLabel` |           | `string \| undefined`                            |         |
-| `selected`         |                    | readonly  | `ListItemBase \| ListItemBase[] \| null`         |         |
-| `wrapFocus`        |                    |           | `boolean`                                        |         |
+| Property           | Attribute          | Modifiers | Type                                             | Default | Description                                      |
+|--------------------|--------------------|-----------|--------------------------------------------------|---------|--------------------------------------------------|
+| `activatable`      |                    |           | `boolean`                                        |         |                                                  |
+| `debouncedLayout`  |                    |           | `(updateItems?: boolean \| undefined) => void \| undefined` |         |                                                  |
+| `disableCheckAll`  | `disableCheckAll`  |           | `boolean`                                        | false   | Whether the check all option (checkbox next to search text field) is activated |
+| `emptyMessage`     |                    |           | `string \| undefined`                            |         |                                                  |
+| `index`            |                    | readonly  | `MWCListIndex`                                   |         |                                                  |
+| `innerAriaLabel`   |                    |           | `string \| null`                                 |         |                                                  |
+| `innerRole`        |                    |           | `string \| null`                                 |         |                                                  |
+| `itemRoles`        |                    |           | `string \| null`                                 |         |                                                  |
+| `items`            |                    | readonly  | `ListItemBase[]`                                 |         |                                                  |
+| `itemsReady`       |                    |           | `Promise<never[]>`                               |         |                                                  |
+| `layout`           |                    |           | `(updateItems?: boolean \| undefined) => void`   |         |                                                  |
+| `multi`            |                    |           | `boolean`                                        |         |                                                  |
+| `noninteractive`   |                    |           | `boolean`                                        |         |                                                  |
+| `rootTabbable`     |                    |           | `boolean`                                        |         |                                                  |
+| `searchField`      |                    |           | `TextField`                                      |         |                                                  |
+| `searchFieldLabel` | `searchFieldLabel` |           | `string \| undefined`                            |         | search mwc-textfield label property              |
+| `selected`         |                    | readonly  | `ListItemBase \| ListItemBase[] \| null`         |         |                                                  |
+| `wrapFocus`        |                    |           | `boolean`                                        |         |                                                  |
 
 ## Methods
 

@@ -1,12 +1,16 @@
 import { __decorate } from "../../_snowpack/pkg/tslib.js";
-import { css, customElement, html, internalProperty, property, query, unsafeCSS, } from '../../_snowpack/pkg/lit-element.js';
+import { css, customElement, html, state, property, query, unsafeCSS, } from '../../_snowpack/pkg/lit-element.js';
 import { translate } from '../../_snowpack/pkg/lit-translate.js';
 import { CheckListItem } from '../../_snowpack/pkg/@material/mwc-list/mwc-check-list-item.js';
 import { List } from '../../_snowpack/pkg/@material/mwc-list.js';
 import { ListBase } from '../../_snowpack/pkg/@material/mwc-list/mwc-list-base.js';
+/**
+ * A mwc-list with mwc-textfield that filters the list items for given or separated terms
+ */
 let FilteredList = class FilteredList extends ListBase {
     constructor() {
         super();
+        /** Whether the check all option (checkbox next to search text field) is activated */
         this.disableCheckAll = false;
         this.addEventListener('selected', () => {
             this.requestUpdate();
@@ -91,7 +95,11 @@ FilteredList.styles = css `
     }
 
     abbr {
+      display: flex;
+      flex: auto;
       margin: 8px;
+      text-decoration: none;
+      border-bottom: none;
     }
 
     mwc-textfield {
@@ -114,13 +122,13 @@ __decorate([
     property({ type: Boolean })
 ], FilteredList.prototype, "disableCheckAll", void 0);
 __decorate([
-    internalProperty()
+    state()
 ], FilteredList.prototype, "existCheckListItem", null);
 __decorate([
-    internalProperty()
+    state()
 ], FilteredList.prototype, "isAllSelected", null);
 __decorate([
-    internalProperty()
+    state()
 ], FilteredList.prototype, "isSomeSelected", null);
 __decorate([
     query('mwc-textfield')
