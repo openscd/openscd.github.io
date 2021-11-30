@@ -14,19 +14,25 @@ import {
   customElement,
   html,
   LitElement,
-  property
+  property,
+  query
 } from "../../_snowpack/pkg/lit-element.js";
 import {translate} from "../../_snowpack/pkg/lit-translate.js";
-import {newActionEvent, newWizardEvent} from "../foundation.js";
+import {newActionEvent, newWizardEvent, tags} from "../foundation.js";
 import {
   cloneSubstationElement,
   selectors,
   startMove,
   styles
 } from "./foundation.js";
-import {wizards} from "../wizards/wizard-library.js";
+import {emptyWizard, wizards} from "../wizards/wizard-library.js";
 import "./voltage-level-editor.js";
-import "../editor-container.js";
+import "../action-pane.js";
+function childTags(element) {
+  if (!element)
+    return [];
+  return tags[element.tagName].children.filter((child) => wizards[child].create !== emptyWizard);
+}
 export let SubstationEditor = class extends LitElement {
   constructor() {
     super(...arguments);
@@ -34,6 +40,11 @@ export let SubstationEditor = class extends LitElement {
     this.getAttachedIeds = () => {
       return [];
     };
+  }
+  get header() {
+    const name = this.element.getAttribute("name") ?? "";
+    const desc = this.element.getAttribute("desc");
+    return `${name} ${desc ? `- ${desc}` : ""}`;
   }
   openEditWizard() {
     const wizard = wizards["Substation"].edit(this.element);
@@ -54,50 +65,82 @@ export let SubstationEditor = class extends LitElement {
       }
     }));
   }
+  openCreateWizard(tagName) {
+    const wizard = wizards[tagName].create(this.element);
+    if (wizard)
+      this.dispatchEvent(newWizardEvent(wizard));
+  }
+  firstUpdated() {
+    this.addMenu.anchor = this.addButton;
+  }
   renderIedContainer() {
     const ieds = this.getAttachedIeds?.(this.element) ?? [];
     return ieds?.length ? html`<div id="iedcontainer">
           ${ieds.map((ied) => html`<ied-editor .element=${ied}></ied-editor>`)}
         </div>` : html``;
   }
+  renderAddButtons() {
+    return childTags(this.element).map((child) => html`<mwc-list-item value="${child}"
+          ><span>${child}</span></mwc-list-item
+        >`);
+  }
   render() {
-    return html`<editor-container .element=${this.element}>
-      <abbr slot="header" title="${translate("lnode.tooltip")}">
+    return html`<action-pane label="${this.header}">
+      <abbr slot="action" title="${translate("lnode.tooltip")}">
         <mwc-icon-button
           icon="account_tree"
           @click=${() => this.openLNodeWizard()}
         ></mwc-icon-button>
       </abbr>
-      <abbr slot="header" title="${translate("duplicate")}">
+      <abbr slot="action" title="${translate("duplicate")}">
         <mwc-icon-button
           icon="content_copy"
           @click=${() => cloneSubstationElement(this)}
         ></mwc-icon-button>
       </abbr>
-      <abbr slot="header" title="${translate("edit")}">
+      <abbr slot="action" title="${translate("edit")}">
         <mwc-icon-button
           icon="edit"
           @click=${() => this.openEditWizard()}
         ></mwc-icon-button>
       </abbr>
-      <abbr slot="header" title="${translate("move")}">
+      <abbr slot="action" title="${translate("move")}">
         <mwc-icon-button
           icon="forward"
           @click=${() => startMove(this, SubstationEditor, SubstationEditor)}
         ></mwc-icon-button>
       </abbr>
-      <abbr slot="header" title="${translate("remove")}">
+      <abbr slot="action" title="${translate("remove")}">
         <mwc-icon-button
           icon="delete"
           @click=${() => this.remove()}
         ></mwc-icon-button
       ></abbr>
+      <abbr
+        slot="action"
+        style="position:relative;"
+        title="${translate("add")}"
+      >
+        <mwc-icon-button
+          icon="playlist_add"
+          @click=${() => this.addMenu.open = true}
+        ></mwc-icon-button
+        ><mwc-menu
+          corner="BOTTOM_RIGHT"
+          menuCorner="END"
+          @selected=${(e) => {
+      const tagName = e.target.selected.value;
+      this.openCreateWizard(tagName);
+    }}
+          >${this.renderAddButtons()}</mwc-menu
+        >
+      </abbr>
       ${this.renderIedContainer()}
       ${Array.from(this.element.querySelectorAll(selectors.VoltageLevel)).map((voltageLevel) => html`<voltage-level-editor
             .element=${voltageLevel}
             .getAttachedIeds=${this.getAttachedIeds}
             ?readonly=${this.readonly}
-          ></voltage-level-editor>`)}</editor-container
+          ></voltage-level-editor>`)}</action-pane
     >`;
   }
 };
@@ -111,8 +154,17 @@ __decorate([
   property({type: Boolean})
 ], SubstationEditor.prototype, "readonly", 2);
 __decorate([
+  property({type: String})
+], SubstationEditor.prototype, "header", 1);
+__decorate([
   property({attribute: false})
 ], SubstationEditor.prototype, "getAttachedIeds", 2);
+__decorate([
+  query("mwc-menu")
+], SubstationEditor.prototype, "addMenu", 2);
+__decorate([
+  query('mwc-icon-button[icon="playlist_add"]')
+], SubstationEditor.prototype, "addButton", 2);
 SubstationEditor = __decorate([
   customElement("substation-editor")
 ], SubstationEditor);

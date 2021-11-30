@@ -1,8 +1,5 @@
 import {css} from "../../_snowpack/pkg/lit-element.js";
-import {
-  newActionEvent,
-  isPublic
-} from "../foundation.js";
+import {newActionEvent, isPublic} from "../foundation.js";
 function containsReference(element, iedName) {
   return Array.from(element.getElementsByTagName("LNode")).filter(isPublic).some((lnode) => lnode.getAttribute("iedName") === iedName);
 }
@@ -111,9 +108,17 @@ const substationPath = [
 ];
 export const selectors = Object.fromEntries(substationPath.map((e, i, a) => [e, a.slice(0, i + 1).join(" > ")]));
 export const styles = css`
+  :host {
+    transition: opacity 200ms linear;
+  }
+
   abbr {
     text-decoration: none;
     border-bottom: none;
+  }
+
+  .moving {
+    opacity: 0.3;
   }
 
   #iedcontainer {

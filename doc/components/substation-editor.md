@@ -4,11 +4,14 @@
 
 ## Properties
 
-| Property          | Attribute  | Type                                             | Default                        | Description                                      |
-|-------------------|------------|--------------------------------------------------|--------------------------------|--------------------------------------------------|
-| `element`         |            | `Element`                                        |                                | The edited `Element`, a common property of all Substation subeditors. |
-| `getAttachedIeds` |            | `((element: Element) => Element[]) \| undefined` | "() => {\n    return [];\n  }" |                                                  |
-| `readonly`        | `readonly` | `boolean`                                        | false                          |                                                  |
+| Property          | Attribute  | Modifiers | Type                                             | Default                        | Description                                      |
+|-------------------|------------|-----------|--------------------------------------------------|--------------------------------|--------------------------------------------------|
+| `addButton`       |            |           | `IconButton`                                     |                                |                                                  |
+| `addMenu`         |            |           | `Menu`                                           |                                |                                                  |
+| `element`         |            |           | `Element`                                        |                                | The edited `Element`, a common property of all Substation subeditors. |
+| `getAttachedIeds` |            |           | `((element: Element) => Element[]) \| undefined` | "() => {\n    return [];\n  }" |                                                  |
+| `header`          | `header`   | readonly  | `string`                                         |                                |                                                  |
+| `readonly`        | `readonly` |           | `boolean`                                        | false                          |                                                  |
 
 ## Methods
 

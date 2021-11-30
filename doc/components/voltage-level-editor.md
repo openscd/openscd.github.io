@@ -6,7 +6,9 @@
 
 | Property          | Attribute  | Modifiers | Type                                             | Default                        |
 |-------------------|------------|-----------|--------------------------------------------------|--------------------------------|
-| `element`         | `element`  |           | `Element`                                        |                                |
+| `addButton`       |            |           | `IconButton`                                     |                                |
+| `addMenu`         |            |           | `Menu`                                           |                                |
+| `element`         |            |           | `Element`                                        |                                |
 | `getAttachedIeds` |            |           | `((element: Element) => Element[]) \| undefined` | "() => {\n    return [];\n  }" |
 | `header`          | `header`   | readonly  | `string`                                         |                                |
 | `readonly`        | `readonly` |           | `boolean`                                        | false                          |

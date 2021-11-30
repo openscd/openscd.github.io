@@ -119,8 +119,7 @@ export let ZerolinePane = class extends LitElement {
   }
 };
 ZerolinePane.styles = css`
-    h1,
-    h3 {
+    h1 {
       color: var(--mdc-theme-on-surface);
       font-family: 'Roboto', sans-serif;
       font-weight: 300;
@@ -136,6 +135,10 @@ ZerolinePane.styles = css`
     h1 > nav,
     h1 > abbr > mwc-icon-button {
       float: right;
+    }
+
+    section {
+      padding: 8px 12px 16px;
     }
 
     abbr {

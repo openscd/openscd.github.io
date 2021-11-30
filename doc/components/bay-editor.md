@@ -4,11 +4,14 @@
 
 ## Properties
 
-| Property          | Attribute  | Type                                             | Default                        |
-|-------------------|------------|--------------------------------------------------|--------------------------------|
-| `element`         |            | `Element`                                        |                                |
-| `getAttachedIeds` |            | `((element: Element) => Element[]) \| undefined` | "() => {\n    return [];\n  }" |
-| `readonly`        | `readonly` | `boolean`                                        | false                          |
+| Property          | Attribute  | Modifiers | Type                                             | Default                        |
+|-------------------|------------|-----------|--------------------------------------------------|--------------------------------|
+| `addButton`       |            |           | `IconButton`                                     |                                |
+| `addMenu`         |            |           | `Menu`                                           |                                |
+| `element`         |            |           | `Element`                                        |                                |
+| `getAttachedIeds` |            |           | `((element: Element) => Element[]) \| undefined` | "() => {\n    return [];\n  }" |
+| `header`          | `header`   | readonly  | `string`                                         |                                |
+| `readonly`        | `readonly` |           | `boolean`                                        | false                          |
 
 ## Methods
 
