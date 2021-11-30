@@ -1,5 +1,6 @@
 import { css } from '../../../_snowpack/pkg/lit-element.js';
 import { newActionEvent, isPublic } from '../foundation.js';
+import { circuitBreakerIcon, disconnectorIcon, currentTransformerIcon, voltageTransformerIcon, earthSwitchIcon, generalConductingEquipmentIcon, } from '../icons.js';
 function containsReference(element, iedName) {
     return Array.from(element.getElementsByTagName('LNode'))
         .filter(isPublic)
@@ -136,6 +137,30 @@ export function startMove(editor, Child, Parent) {
     window.addEventListener('click', moveToTarget, true);
     window.addEventListener('keydown', moveToTarget, true);
 }
+/**
+ * Get the correct icon for a specific Conducting Equipment.
+ * @param condEq - The Conducting Equipment to search the icon for.
+ * @returns The icon.
+ */
+export function getIcon(condEq) {
+    return typeIcons[typeStr(condEq)] ?? generalConductingEquipmentIcon;
+}
+function typeStr(condEq) {
+    if (condEq.getAttribute('type') === 'DIS' &&
+        condEq.querySelector('Terminal')?.getAttribute('cNodeName') === 'grounded') {
+        return 'ERS';
+    }
+    else {
+        return condEq.getAttribute('type') ?? '';
+    }
+}
+const typeIcons = {
+    CBR: circuitBreakerIcon,
+    DIS: disconnectorIcon,
+    CTR: currentTransformerIcon,
+    VTR: voltageTransformerIcon,
+    ERS: earthSwitchIcon,
+};
 // Substation element hierarchy
 const substationPath = [
     ':root',
@@ -148,17 +173,9 @@ const substationPath = [
 export const selectors = (Object.fromEntries(substationPath.map((e, i, a) => [e, a.slice(0, i + 1).join(' > ')])));
 /** Common `CSS` styles used by substation subeditors */
 export const styles = css `
-  :host {
-    transition: opacity 200ms linear;
-  }
-
   abbr {
     text-decoration: none;
     border-bottom: none;
-  }
-
-  .moving {
-    opacity: 0.3;
   }
 
   #iedcontainer {

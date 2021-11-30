@@ -1,5 +1,13 @@
 import {css} from "../../_snowpack/pkg/lit-element.js";
 import {newActionEvent, isPublic} from "../foundation.js";
+import {
+  circuitBreakerIcon,
+  disconnectorIcon,
+  currentTransformerIcon,
+  voltageTransformerIcon,
+  earthSwitchIcon,
+  generalConductingEquipmentIcon
+} from "../icons.js";
 function containsReference(element, iedName) {
   return Array.from(element.getElementsByTagName("LNode")).filter(isPublic).some((lnode) => lnode.getAttribute("iedName") === iedName);
 }
@@ -99,6 +107,23 @@ export function startMove(editor, Child, Parent) {
   window.addEventListener("click", moveToTarget, true);
   window.addEventListener("keydown", moveToTarget, true);
 }
+export function getIcon(condEq) {
+  return typeIcons[typeStr(condEq)] ?? generalConductingEquipmentIcon;
+}
+function typeStr(condEq) {
+  if (condEq.getAttribute("type") === "DIS" && condEq.querySelector("Terminal")?.getAttribute("cNodeName") === "grounded") {
+    return "ERS";
+  } else {
+    return condEq.getAttribute("type") ?? "";
+  }
+}
+const typeIcons = {
+  CBR: circuitBreakerIcon,
+  DIS: disconnectorIcon,
+  CTR: currentTransformerIcon,
+  VTR: voltageTransformerIcon,
+  ERS: earthSwitchIcon
+};
 const substationPath = [
   ":root",
   "Substation",
@@ -108,17 +133,9 @@ const substationPath = [
 ];
 export const selectors = Object.fromEntries(substationPath.map((e, i, a) => [e, a.slice(0, i + 1).join(" > ")]));
 export const styles = css`
-  :host {
-    transition: opacity 200ms linear;
-  }
-
   abbr {
     text-decoration: none;
     border-bottom: none;
-  }
-
-  .moving {
-    opacity: 0.3;
   }
 
   #iedcontainer {

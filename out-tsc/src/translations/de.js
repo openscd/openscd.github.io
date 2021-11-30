@@ -187,6 +187,29 @@ export const de = {
         },
         unknownType: 'Unbekannter Typ',
     },
+    connectivitynode: {
+        name: 'Verbindungsknoten',
+        wizard: {
+            nameHelper: 'Verbindungsknoten Name',
+            pathNameHelper: 'Verbindungsknoten Beschreibung',
+            title: {
+                add: 'Verbindungsknoten hinzufügen',
+                edit: 'Verbindungsknoten bearbeiten',
+            },
+        },
+    },
+    terminal: {
+        name: 'Anschluss',
+        wizard: {
+            nameHelper: 'Anschluss Name',
+            connectivityNodeHelper: 'Anschluss Verbindungsknoten',
+            cNodeNameHelper: 'Anschluss Verbindungsknoten Name',
+            title: {
+                add: 'Anschlussknoten hinzufügen',
+                edit: 'Anschlussknoten bearbeiten',
+            },
+        },
+    },
     templates: {
         name: 'Data Type Templates',
         missing: 'DataTypeTemplates fehlen',

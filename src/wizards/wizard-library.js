@@ -3,9 +3,11 @@ import {
   createConductingEquipmentWizard,
   editConductingEquipmentWizard
 } from "./conductingequipment.js";
+import {editConnectivityNodeWizard} from "./connectivitynode.js";
 import {createFCDAsWizard} from "./fcda.js";
 import {lNodeWizard} from "./lnode.js";
 import {createSubstationWizard, substationEditWizard} from "./substation.js";
+import {editTerminalWizard} from "./terminal.js";
 import {
   voltageLevelCreateWizard,
   voltageLevelEditWizard
@@ -99,7 +101,7 @@ export const wizards = {
     create: emptyWizard
   },
   ConnectivityNode: {
-    edit: emptyWizard,
+    edit: editConnectivityNodeWizard,
     create: emptyWizard
   },
   DA: {
@@ -471,7 +473,7 @@ export const wizards = {
     create: emptyWizard
   },
   Terminal: {
-    edit: emptyWizard,
+    edit: editTerminalWizard,
     create: emptyWizard
   },
   Text: {

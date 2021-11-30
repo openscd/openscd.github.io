@@ -16,31 +16,10 @@ import {
   LitElement,
   property
 } from "../../_snowpack/pkg/lit-element.js";
-import {startMove} from "./foundation.js";
+import {startMove, getIcon} from "./foundation.js";
 import {newActionEvent, newWizardEvent} from "../foundation.js";
-import {
-  circuitBreakerIcon,
-  currentTransformerIcon,
-  disconnectorIcon,
-  earthSwitchIcon,
-  generalConductingEquipmentIcon,
-  voltageTransformerIcon
-} from "../icons.js";
 import {BayEditor} from "./bay-editor.js";
 import {wizards} from "../wizards/wizard-library.js";
-function typeStr(condEq) {
-  return condEq.getAttribute("type") === "DIS" && condEq.querySelector("Terminal")?.getAttribute("cNodeName") === "grounded" ? "ERS" : condEq.getAttribute("type") ?? "";
-}
-const typeIcons = {
-  CBR: circuitBreakerIcon,
-  DIS: disconnectorIcon,
-  CTR: currentTransformerIcon,
-  VTR: voltageTransformerIcon,
-  ERS: earthSwitchIcon
-};
-export function typeIcon(condEq) {
-  return typeIcons[typeStr(condEq)] ?? generalConductingEquipmentIcon;
-}
 export let ConductingEquipmentEditor = class extends LitElement {
   constructor() {
     super(...arguments);
@@ -72,7 +51,7 @@ export let ConductingEquipmentEditor = class extends LitElement {
   render() {
     return html`
       <div id="container" tabindex="0">
-        ${typeIcon(this.element)}
+        ${getIcon(this.element)}
         ${this.readonly ? html`` : html`<mwc-fab
                 mini
                 class="menu-item left"
