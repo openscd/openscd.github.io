@@ -1,4 +1,4 @@
-import { a as __extends, b as __assign, _ as __decorate } from '../common/index-9005815a.js';
+import { a as __extends, c as __assign, _ as __decorate } from '../common/tslib.es6-ea9e4e3f.js';
 import { p as property, q as query, d as queryAssignedNodes, c as css, b as customElement } from '../common/lit-element-63d74f47.js';
 import { M as MDCFoundation, B as BaseElement } from '../common/foundation-d8050818.js';
 import { F as FormElement } from '../common/form-element-d1bc9d18.js';

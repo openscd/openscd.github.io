@@ -18,14 +18,16 @@ import {
   query
 } from "../_snowpack/pkg/lit-element.js";
 import {translate} from "../_snowpack/pkg/lit-translate.js";
-import {isPublic, newWizardEvent} from "./foundation.js";
-import {getAttachedIeds} from "./zeroline/foundation.js";
+import "../_snowpack/pkg/@material/mwc-icon-button.js";
+import "../_snowpack/pkg/@material/mwc-icon-button-toggle.js";
 import "./zeroline/substation-editor.js";
 import "./zeroline/ied-editor.js";
-import {wizards} from "./wizards/wizard-library.js";
 import {communicationMappingWizard} from "./wizards/commmap-wizards.js";
-import {selectGseControlWizard} from "./wizards/gsecontrol.js";
 import {gooseIcon} from "./icons.js";
+import {isPublic, newWizardEvent} from "./foundation.js";
+import {selectGseControlWizard} from "./wizards/gsecontrol.js";
+import {wizards} from "./wizards/wizard-library.js";
+import {getAttachedIeds} from "./zeroline/foundation.js";
 function shouldShowIEDs() {
   return localStorage.getItem("showieds") === "on";
 }

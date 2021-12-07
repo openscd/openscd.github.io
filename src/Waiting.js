@@ -10,6 +10,7 @@ var __decorate = (decorators, target, key, kind) => {
   return result;
 };
 import {html, property} from "../_snowpack/pkg/lit-element.js";
+import "../_snowpack/pkg/@material/mwc-circular-progress-four-color.js";
 import {
   ifImplemented
 } from "./foundation.js";

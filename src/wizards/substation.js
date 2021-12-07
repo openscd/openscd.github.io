@@ -1,5 +1,8 @@
 import {html} from "../../_snowpack/pkg/lit-element.js";
 import {get, translate} from "../../_snowpack/pkg/lit-translate.js";
+import "../../_snowpack/pkg/@material/mwc-checkbox.js";
+import "../../_snowpack/pkg/@material/mwc-formfield.js";
+import "../wizard-textfield.js";
 import {
   createElement,
   getValue,

@@ -18,16 +18,18 @@ import {
   query
 } from "../../_snowpack/pkg/lit-element.js";
 import {translate} from "../../_snowpack/pkg/lit-translate.js";
+import "../../_snowpack/pkg/@material/mwc-icon-button.js";
+import "../action-pane.js";
+import "./ied-editor.js";
+import "./voltage-level-editor.js";
 import {newActionEvent, newWizardEvent, tags} from "../foundation.js";
+import {emptyWizard, wizards} from "../wizards/wizard-library.js";
 import {
   cloneSubstationElement,
   selectors,
   startMove,
   styles
 } from "./foundation.js";
-import {emptyWizard, wizards} from "../wizards/wizard-library.js";
-import "./voltage-level-editor.js";
-import "../action-pane.js";
 function childTags(element) {
   if (!element)
     return [];

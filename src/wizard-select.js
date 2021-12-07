@@ -16,6 +16,7 @@ import {
   property,
   query
 } from "../_snowpack/pkg/lit-element.js";
+import "../_snowpack/pkg/@material/mwc-switch.js";
 import {Select} from "../_snowpack/pkg/@material/mwc-select.js";
 export let WizardSelect = class extends Select {
   constructor() {

@@ -16,9 +16,10 @@ import {
   LitElement,
   property
 } from "../../_snowpack/pkg/lit-element.js";
+import "../../_snowpack/pkg/@material/mwc-fab.js";
+import {BayEditor} from "./bay-editor.js";
 import {startMove, getIcon} from "./foundation.js";
 import {newActionEvent, newWizardEvent} from "../foundation.js";
-import {BayEditor} from "./bay-editor.js";
 import {wizards} from "../wizards/wizard-library.js";
 export let ConductingEquipmentEditor = class extends LitElement {
   constructor() {

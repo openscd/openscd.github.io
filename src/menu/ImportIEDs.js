@@ -11,6 +11,8 @@ var __decorate = (decorators, target, key, kind) => {
 };
 import {css, html, LitElement, query} from "../../_snowpack/pkg/lit-element.js";
 import {get} from "../../_snowpack/pkg/lit-translate.js";
+import "../../_snowpack/pkg/@material/mwc-list/mwc-check-list-item.js";
+import "../filtered-list.js";
 import {
   createElement,
   identity,

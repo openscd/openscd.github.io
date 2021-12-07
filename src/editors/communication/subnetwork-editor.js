@@ -17,6 +17,9 @@ import {
   css
 } from "../../../_snowpack/pkg/lit-element.js";
 import {translate, get} from "../../../_snowpack/pkg/lit-translate.js";
+import "../../../_snowpack/pkg/@material/mwc-icon-button.js";
+import "../../wizard-textfield.js";
+import "./connectedap-editor.js";
 import {
   newWizardEvent,
   newActionEvent,
@@ -28,7 +31,6 @@ import {
   cloneElement
 } from "../../foundation.js";
 import {styles, isCreateOptions} from "./foundation.js";
-import "./connectedap-editor.js";
 import {createConnectedApWizard} from "./connectedap-editor.js";
 const initial = {
   type: "8-MMS",

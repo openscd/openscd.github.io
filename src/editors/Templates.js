@@ -11,6 +11,11 @@ var __decorate = (decorators, target, key, kind) => {
 };
 import {LitElement, html, property, css} from "../../_snowpack/pkg/lit-element.js";
 import {translate} from "../../_snowpack/pkg/lit-translate.js";
+import "../../_snowpack/pkg/@material/mwc-fab.js";
+import "../../_snowpack/pkg/@material/mwc-icon-button.js";
+import "../../_snowpack/pkg/@material/mwc-list.js";
+import "../../_snowpack/pkg/@material/mwc-list/mwc-list-item.js";
+import "../filtered-list.js";
 import {
   createElement,
   identity,
@@ -18,7 +23,6 @@ import {
   newWizardEvent
 } from "../foundation.js";
 import {styles} from "./templates/foundation.js";
-import "../filtered-list.js";
 import {
   createEnumTypeWizard,
   eNumTypeEditWizard

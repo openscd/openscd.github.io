@@ -11,6 +11,7 @@ var __decorate = (decorators, target, key, kind) => {
 };
 import {LitElement, html, property, css} from "../../_snowpack/pkg/lit-element.js";
 import {translate, get} from "../../_snowpack/pkg/lit-translate.js";
+import "../../_snowpack/pkg/@material/mwc-fab.js";
 import {
   newWizardEvent,
   newActionEvent,

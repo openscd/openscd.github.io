@@ -1,5 +1,10 @@
 import {html, render} from "../../_snowpack/pkg/lit-html.js";
 import {get, translate} from "../../_snowpack/pkg/lit-translate.js";
+import "../../_snowpack/pkg/@material/mwc-icon.js";
+import "../../_snowpack/pkg/@material/mwc-list/mwc-check-list-item.js";
+import "../../_snowpack/pkg/@material/mwc-list/mwc-list-item.js";
+import {ListBase} from "../../_snowpack/pkg/@material/mwc-list/mwc-list-base.js";
+import "../filtered-list.js";
 import {
   createElement,
   getChildElementsByTagName,
@@ -8,7 +13,6 @@ import {
   referencePath,
   selector
 } from "../foundation.js";
-import {ListBase} from "../../_snowpack/pkg/@material/mwc-list/mwc-list-base.js";
 const preferredLn = {
   CBR: ["CSWI", "CILO", "XCBR"],
   DIS: ["CSWI", "CILO", "XSWI"],

@@ -16,34 +16,6 @@ import {
   LitElement,
   property
 } from "../_snowpack/pkg/lit-element.js";
-import "../_snowpack/pkg/@material/mwc-button.js";
-import "../_snowpack/pkg/@material/mwc-checkbox.js";
-import "../_snowpack/pkg/@material/mwc-circular-progress-four-color.js";
-import "../_snowpack/pkg/@material/mwc-dialog.js";
-import "../_snowpack/pkg/@material/mwc-drawer.js";
-import "../_snowpack/pkg/@material/mwc-fab.js";
-import "../_snowpack/pkg/@material/mwc-formfield.js";
-import "../_snowpack/pkg/@material/mwc-icon.js";
-import "../_snowpack/pkg/@material/mwc-icon-button.js";
-import "../_snowpack/pkg/@material/mwc-icon-button-toggle.js";
-import "../_snowpack/pkg/@material/mwc-linear-progress.js";
-import "../_snowpack/pkg/@material/mwc-list.js";
-import "../_snowpack/pkg/@material/mwc-list/mwc-check-list-item.js";
-import "../_snowpack/pkg/@material/mwc-list/mwc-list-item.js";
-import "../_snowpack/pkg/@material/mwc-list/mwc-radio-list-item.js";
-import "../_snowpack/pkg/@material/mwc-menu.js";
-import "../_snowpack/pkg/@material/mwc-select.js";
-import "../_snowpack/pkg/@material/mwc-snackbar.js";
-import "../_snowpack/pkg/@material/mwc-switch.js";
-import "../_snowpack/pkg/@material/mwc-tab.js";
-import "../_snowpack/pkg/@material/mwc-tab-bar.js";
-import "../_snowpack/pkg/@material/mwc-textfield.js";
-import "../_snowpack/pkg/@material/mwc-top-app-bar-fixed.js";
-import "./filtered-list.js";
-import "./finder-list.js";
-import "./wizard-dialog.js";
-import "./wizard-textfield.js";
-import "./wizard-select.js";
 import {newOpenDocEvent, newPendingStateEvent} from "./foundation.js";
 import {getTheme} from "./themes.js";
 import {Editing} from "./Editing.js";

@@ -18,6 +18,10 @@ import {
   query
 } from "../../_snowpack/pkg/lit-element.js";
 import {translate} from "../../_snowpack/pkg/lit-translate.js";
+import "../../_snowpack/pkg/@material/mwc-icon-button.js";
+import "../action-pane.js";
+import "./bay-editor.js";
+import "./ied-editor.js";
 import {
   selectors,
   startMove,
@@ -27,8 +31,6 @@ import {
 import {newActionEvent, newWizardEvent, tags} from "../foundation.js";
 import {SubstationEditor} from "./substation-editor.js";
 import {emptyWizard, wizards} from "../wizards/wizard-library.js";
-import "./bay-editor.js";
-import "../action-pane.js";
 function childTags(element) {
   if (!element)
     return [];

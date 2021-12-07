@@ -19,6 +19,10 @@ import {
 } from "../_snowpack/pkg/lit-element.js";
 import {until} from "../_snowpack/pkg/lit-html/directives/until.js";
 import {translate} from "../_snowpack/pkg/lit-translate.js";
+import "../_snowpack/pkg/@material/mwc-icon.js";
+import "../_snowpack/pkg/@material/mwc-list.js";
+import "../_snowpack/pkg/@material/mwc-list/mwc-list-item.js";
+import "./filtered-list.js";
 import {depth} from "./foundation.js";
 import {ifDefined} from "../_snowpack/pkg/lit-html/directives/if-defined.js";
 const waitingList = html`<div class="column">

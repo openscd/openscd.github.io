@@ -1,5 +1,10 @@
 import {html} from "../../_snowpack/pkg/lit-element.js";
 import {get, translate} from "../../_snowpack/pkg/lit-translate.js";
+import "../../_snowpack/pkg/@material/mwc-button.js";
+import "../../_snowpack/pkg/@material/mwc-list/mwc-list-item.js";
+import "../filtered-list.js";
+import "../wizard-select.js";
+import "../wizard-textfield.js";
 import {
   cloneElement,
   getValue,

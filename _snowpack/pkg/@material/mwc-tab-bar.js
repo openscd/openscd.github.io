@@ -1,4 +1,4 @@
-import { a as __extends, b as __assign, d as __read, _ as __decorate } from '../common/index-9005815a.js';
+import { a as __extends, d as __read, c as __assign, _ as __decorate } from '../common/tslib.es6-ea9e4e3f.js';
 import { q as query, e as eventOptions, c as css, b as customElement, p as property } from '../common/lit-element-63d74f47.js';
 import { Tab } from './mwc-tab.js';
 import { m as matches } from '../common/ponyfill-4ccc5f83.js';
@@ -7,7 +7,7 @@ import { h as html } from '../common/lit-html-44a7bec9.js';
 import { o as observer } from '../common/observer-2c150244.js';
 import '../common/render-4f397355.js';
 import '../common/class-map-f3820f9a.js';
-import '../common/ripple-handlers-12c14ae0.js';
+import '../common/ripple-handlers-a64f019c.js';
 import '../common/style-map-b311a692.js';
 
 /**

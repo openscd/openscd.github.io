@@ -1,6 +1,9 @@
 import {html} from "../../_snowpack/pkg/lit-html.js";
 import {ifDefined} from "../../_snowpack/pkg/lit-html/directives/if-defined.js";
 import {translate} from "../../_snowpack/pkg/lit-translate.js";
+import "../../_snowpack/pkg/@material/mwc-checkbox.js";
+import "../../_snowpack/pkg/@material/mwc-formfield.js";
+import "../wizard-textfield.js";
 import {
   createElement,
   getValue

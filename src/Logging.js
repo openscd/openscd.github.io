@@ -16,12 +16,21 @@ import {
   query
 } from "../_snowpack/pkg/lit-element.js";
 import {ifDefined} from "../_snowpack/pkg/lit-html/directives/if-defined.js";
+import {get, translate} from "../_snowpack/pkg/lit-translate.js";
+import "../_snowpack/pkg/@material/mwc-button.js";
+import "../_snowpack/pkg/@material/mwc-dialog.js";
+import "../_snowpack/pkg/@material/mwc-icon.js";
+import "../_snowpack/pkg/@material/mwc-icon-button.js";
+import "../_snowpack/pkg/@material/mwc-icon-button-toggle.js";
+import "../_snowpack/pkg/@material/mwc-list.js";
+import "../_snowpack/pkg/@material/mwc-list/mwc-list-item.js";
+import "../_snowpack/pkg/@material/mwc-snackbar.js";
+import "./filtered-list.js";
 import {
   ifImplemented,
   invert,
   newActionEvent
 } from "./foundation.js";
-import {get, translate} from "../_snowpack/pkg/lit-translate.js";
 import {getFilterIcon, iconColors} from "./icons.js";
 const icons = {
   info: "info",

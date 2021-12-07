@@ -1,5 +1,8 @@
 import {html, render} from "../../_snowpack/pkg/lit-html.js";
 import {translate} from "../../_snowpack/pkg/lit-translate.js";
+import "../../_snowpack/pkg/@material/mwc-list/mwc-list-item.js";
+import "../wizard-select.js";
+import "../wizard-textfield.js";
 import {createElement} from "../foundation.js";
 import {maxLength, patterns} from "./foundation/limits.js";
 import {predefinedBasicTypeEnum, valKindEnum} from "./foundation/enums.js";

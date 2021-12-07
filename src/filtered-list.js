@@ -19,6 +19,9 @@ import {
   unsafeCSS
 } from "../_snowpack/pkg/lit-element.js";
 import {translate} from "../_snowpack/pkg/lit-translate.js";
+import "../_snowpack/pkg/@material/mwc-checkbox.js";
+import "../_snowpack/pkg/@material/mwc-formfield.js";
+import "../_snowpack/pkg/@material/mwc-textfield.js";
 import {CheckListItem} from "../_snowpack/pkg/@material/mwc-list/mwc-check-list-item.js";
 import {List} from "../_snowpack/pkg/@material/mwc-list.js";
 import {ListBase} from "../_snowpack/pkg/@material/mwc-list/mwc-list-base.js";

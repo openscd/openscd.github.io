@@ -1,5 +1,6 @@
 import {html} from "../../_snowpack/pkg/lit-html.js";
 import {get, translate} from "../../_snowpack/pkg/lit-translate.js";
+import "../wizard-textfield.js";
 import {
   cloneElement,
   createElement,

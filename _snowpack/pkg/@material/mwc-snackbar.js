@@ -1,4 +1,4 @@
-import { a as __extends, b as __assign, _ as __decorate } from '../common/index-9005815a.js';
+import { a as __extends, c as __assign, _ as __decorate } from '../common/tslib.es6-ea9e4e3f.js';
 import { q as query, p as property, c as css, b as customElement } from '../common/lit-element-63d74f47.js';
 import { M as MDCFoundation, B as BaseElement, a as addHasRemoveClass } from '../common/foundation-d8050818.js';
 import { o as observer } from '../common/observer-2c150244.js';

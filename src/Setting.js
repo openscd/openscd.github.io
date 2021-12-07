@@ -11,6 +11,12 @@ var __decorate = (decorators, target, key, kind) => {
 };
 import {html, property, query} from "../_snowpack/pkg/lit-element.js";
 import {registerTranslateConfig, translate, use} from "../_snowpack/pkg/lit-translate.js";
+import "../_snowpack/pkg/@material/mwc-button.js";
+import "../_snowpack/pkg/@material/mwc-dialog.js";
+import "../_snowpack/pkg/@material/mwc-formfield.js";
+import "../_snowpack/pkg/@material/mwc-list/mwc-list-item.js";
+import "../_snowpack/pkg/@material/mwc-select.js";
+import "../_snowpack/pkg/@material/mwc-switch.js";
 import {ifImplemented} from "./foundation.js";
 import {languages, loader} from "./translations/loader.js";
 export const defaults = {

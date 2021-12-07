@@ -12,6 +12,15 @@ var __decorate = (decorators, target, key, kind) => {
 import {html, property, query} from "../_snowpack/pkg/lit-element.js";
 import {until} from "../_snowpack/pkg/lit-html/directives/until.js";
 import {translate} from "../_snowpack/pkg/lit-translate.js";
+import "../_snowpack/pkg/@material/mwc-drawer.js";
+import "../_snowpack/pkg/@material/mwc-icon.js";
+import "../_snowpack/pkg/@material/mwc-icon-button.js";
+import "../_snowpack/pkg/@material/mwc-linear-progress.js";
+import "../_snowpack/pkg/@material/mwc-list.js";
+import "../_snowpack/pkg/@material/mwc-list/mwc-list-item.js";
+import "../_snowpack/pkg/@material/mwc-tab.js";
+import "../_snowpack/pkg/@material/mwc-tab-bar.js";
+import "../_snowpack/pkg/@material/mwc-top-app-bar-fixed.js";
 import {newPendingStateEvent} from "./foundation.js";
 import {pluginIcons} from "./Plugging.js";
 export function Hosting(Base) {

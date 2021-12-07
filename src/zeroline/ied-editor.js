@@ -17,10 +17,12 @@ import {
   property,
   query
 } from "../../_snowpack/pkg/lit-element.js";
-import {newWizardEvent} from "../foundation.js";
+import "../../_snowpack/pkg/@material/mwc-fab.js";
+import "../../_snowpack/pkg/@material/mwc-icon.js";
 import {createClientLnWizard} from "../wizards/clientln.js";
-import {selectGseControlWizard} from "../wizards/gsecontrol.js";
 import {gooseIcon} from "../icons.js";
+import {newWizardEvent} from "../foundation.js";
+import {selectGseControlWizard} from "../wizards/gsecontrol.js";
 export let IedEditor = class extends LitElement {
   get name() {
     return this.element.getAttribute("name") ?? "";

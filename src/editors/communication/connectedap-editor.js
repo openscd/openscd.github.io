@@ -18,6 +18,14 @@ import {
 } from "../../../_snowpack/pkg/lit-element.js";
 import {ifDefined} from "../../../_snowpack/pkg/lit-html/directives/if-defined.js";
 import {translate, get} from "../../../_snowpack/pkg/lit-translate.js";
+import "../../../_snowpack/pkg/@material/mwc-checkbox.js";
+import "../../../_snowpack/pkg/@material/mwc-fab.js";
+import "../../../_snowpack/pkg/@material/mwc-formfield.js";
+import "../../../_snowpack/pkg/@material/mwc-list/mwc-list-item.js";
+import "../../../_snowpack/pkg/@material/mwc-list/mwc-check-list-item.js";
+import "../../../_snowpack/pkg/@material/mwc-icon.js";
+import "../../wizard-textfield.js";
+import "../../filtered-list.js";
 import {
   newWizardEvent,
   newActionEvent,
@@ -25,13 +33,13 @@ import {
   getValue,
   createElement
 } from "../../foundation.js";
+import {selectors} from "./foundation.js";
 import {
   getTypes,
   typePattern,
   typeNullable,
   typeMaxLength
 } from "./p-types.js";
-import {selectors} from "./foundation.js";
 function compareListItemConnection(a, b) {
   if (a.connected !== b.connected)
     return b.connected ? -1 : 1;

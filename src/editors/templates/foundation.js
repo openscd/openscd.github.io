@@ -1,5 +1,6 @@
 import {css, html} from "../../../_snowpack/pkg/lit-element.js";
 import {ifDefined} from "../../../_snowpack/pkg/lit-html/directives/if-defined.js";
+import "../../../_snowpack/pkg/@material/mwc-list/mwc-list-item.js";
 import {
   cloneElement,
   getValue,

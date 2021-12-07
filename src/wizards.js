@@ -1,6 +1,10 @@
 import {html} from "../_snowpack/pkg/lit-element.js";
 import {repeat} from "../_snowpack/pkg/lit-html/directives/repeat.js";
 import {get, translate} from "../_snowpack/pkg/lit-translate.js";
+import "../_snowpack/pkg/@material/mwc-icon.js";
+import "../_snowpack/pkg/@material/mwc-list.js";
+import "../_snowpack/pkg/@material/mwc-list/mwc-check-list-item.js";
+import "../_snowpack/pkg/@material/mwc-list/mwc-list-item.js";
 import {
   identity,
   isEqual,

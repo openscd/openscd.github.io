@@ -17,6 +17,10 @@ import {
   query
 } from "../_snowpack/pkg/lit-element.js";
 import {translate, get} from "../_snowpack/pkg/lit-translate.js";
+import "../_snowpack/pkg/@material/mwc-icon-button.js";
+import "../_snowpack/pkg/@material/mwc-list/mwc-list-item.js";
+import "../_snowpack/pkg/@material/mwc-menu.js";
+import "../_snowpack/pkg/@material/mwc-switch.js";
 import {TextField} from "../_snowpack/pkg/@material/mwc-textfield.js";
 export let WizardTextField = class extends TextField {
   constructor() {

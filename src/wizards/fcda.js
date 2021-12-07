@@ -1,5 +1,6 @@
 import {html} from "../../_snowpack/pkg/lit-element.js";
 import {get, translate} from "../../_snowpack/pkg/lit-translate.js";
+import "../finder-list.js";
 import {
   createElement,
   identity,

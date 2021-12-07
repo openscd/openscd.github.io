@@ -1,5 +1,10 @@
 import {html} from "../../../_snowpack/pkg/lit-element.js";
 import {get, translate} from "../../../_snowpack/pkg/lit-translate.js";
+import "../../../_snowpack/pkg/@material/mwc-button.js";
+import "../../../_snowpack/pkg/@material/mwc-list.js";
+import "../../../_snowpack/pkg/@material/mwc-list/mwc-list-item.js";
+import "../../../_snowpack/pkg/@material/mwc-select.js";
+import "../../wizard-textfield.js";
 import {
   getValue,
   identity,
@@ -8,13 +13,13 @@ import {
   patterns,
   selector
 } from "../../foundation.js";
+import {createBDAWizard, editBDAWizard} from "../../wizards/bda.js";
 import {
   addReferencedDataTypes,
   allDataTypeSelector,
   unifyCreateActionArray,
   updateIDNamingAction
 } from "./foundation.js";
-import {createBDAWizard, editBDAWizard} from "../../wizards/bda.js";
 export function editDaTypeWizard(dATypeIdentity, doc) {
   const datype = doc.querySelector(selector("DAType", dATypeIdentity));
   if (!datype)

@@ -1,5 +1,10 @@
 import {html} from "../../../_snowpack/pkg/lit-html.js";
 import {get, translate} from "../../../_snowpack/pkg/lit-translate.js";
+import "../../../_snowpack/pkg/@material/mwc-button.js";
+import "../../../_snowpack/pkg/@material/mwc-list.js";
+import "../../../_snowpack/pkg/@material/mwc-list/mwc-list-item.js";
+import "../../../_snowpack/pkg/@material/mwc-select.js";
+import "../../wizard-textfield.js";
 import {
   cloneElement,
   createElement,
@@ -10,13 +15,13 @@ import {
   newWizardEvent,
   selector
 } from "../../foundation.js";
+import {createDaWizard, editDAWizard} from "../../wizards/da.js";
+import {patterns} from "../../wizards/foundation/limits.js";
 import {
   addReferencedDataTypes,
   allDataTypeSelector,
   unifyCreateActionArray
 } from "./foundation.js";
-import {createDaWizard, editDAWizard} from "../../wizards/da.js";
-import {patterns} from "../../wizards/foundation/limits.js";
 function updateSDoAction(element) {
   return (inputs) => {
     const name = getValue(inputs.find((i) => i.label === "name"));

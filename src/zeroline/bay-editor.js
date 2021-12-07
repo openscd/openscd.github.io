@@ -18,7 +18,11 @@ import {
   query
 } from "../../_snowpack/pkg/lit-element.js";
 import {translate} from "../../_snowpack/pkg/lit-translate.js";
-import {startMove, styles, cloneSubstationElement} from "./foundation.js";
+import "../../_snowpack/pkg/@material/mwc-icon-button.js";
+import "../action-pane.js";
+import "./ied-editor.js";
+import "./conducting-equipment-editor.js";
+import {VoltageLevelEditor} from "./voltage-level-editor.js";
 import {
   getChildElementsByTagName,
   newActionEvent,
@@ -26,14 +30,12 @@ import {
   tags
 } from "../foundation.js";
 import {emptyWizard, wizards} from "../wizards/wizard-library.js";
-import {VoltageLevelEditor} from "./voltage-level-editor.js";
-import "./conducting-equipment-editor.js";
-import "../action-pane.js";
 function childTags(element) {
   if (!element)
     return [];
   return tags[element.tagName].children.filter((child) => wizards[child].create !== emptyWizard);
 }
+import {startMove, styles, cloneSubstationElement} from "./foundation.js";
 export let BayEditor = class extends LitElement {
   constructor() {
     super(...arguments);
