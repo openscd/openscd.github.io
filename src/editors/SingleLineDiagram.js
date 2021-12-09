@@ -16,28 +16,29 @@ import {
   property,
   query
 } from "../../_snowpack/pkg/lit-element.js";
-import {identity, newWizardEvent} from "../foundation.js";
 import panzoom from "../../_snowpack/pkg/panzoom.js";
+import {identity, newWizardEvent} from "../foundation.js";
 import {
   getAbsolutePosition,
-  drawRouteBetweenElements,
-  DEFAULT_ELEMENT_SIZE,
   createTerminalElement,
   createBusBarElement,
   createVoltageLevelElement,
   createBayElement,
   createConductingEquipmentElement,
   createConnectivityNodeElement,
-  getElementDimensions,
-  getAbsolutePositionConnectivityNode,
   getBusBarLength,
-  createPowerTransformerElement
+  createPowerTransformerElement,
+  getAbsolutePositionBusBar,
+  drawBusBarRoute,
+  getDirections,
+  getAbsolutePositionTerminal,
+  drawCNodeConnections,
+  getConnectivityNodesDrawingPosition
 } from "./singlelinediagram/sld-drawing.js";
 import {
   isBusBar,
   getConnectedTerminals,
-  getPathNameAttribute,
-  getNameAttribute
+  getPathNameAttribute
 } from "./singlelinediagram/foundation.js";
 import {wizards} from "../wizards/wizard-library.js";
 export default class SingleLineDiagramPlugin extends LitElement {
@@ -49,6 +50,9 @@ export default class SingleLineDiagramPlugin extends LitElement {
   }
   get voltageLevels() {
     return Array.from(this.doc.querySelectorAll("VoltageLevel"));
+  }
+  addElementToGroup(elementToAdd, identity2) {
+    this.svg.querySelectorAll(`g[id="${identity2}"]`).forEach((group) => group.appendChild(elementToAdd));
   }
   drawVoltageLevels() {
     this.voltageLevels.forEach((voltageLevel) => {
@@ -80,8 +84,7 @@ export default class SingleLineDiagramPlugin extends LitElement {
   drawConnectivityNodes() {
     this.bays.forEach((bay) => {
       Array.from(bay.querySelectorAll("ConnectivityNode")).filter((cNode) => cNode.getAttribute("name") !== "grounded").filter((cNode) => getConnectedTerminals(cNode).length > 0).forEach((cNode) => {
-        const cNodePosition = getAbsolutePositionConnectivityNode(cNode);
-        const cNodeElement = createConnectivityNodeElement(cNode, cNodePosition, () => this.openEditWizard(cNode));
+        const cNodeElement = createConnectivityNodeElement(cNode, () => this.openEditWizard(cNode));
         this.addElementToGroup(cNodeElement, identity(cNode.parentElement));
       });
     });
@@ -95,27 +98,14 @@ export default class SingleLineDiagramPlugin extends LitElement {
   drawConnectivityNodeConnections() {
     this.bays.forEach((bay) => {
       Array.from(bay.querySelectorAll("ConnectivityNode")).filter((cNode) => cNode.getAttribute("name") !== "grounded").forEach((cNode) => {
-        const cNodeAbsolutePosition = getAbsolutePositionConnectivityNode(cNode);
-        const cNodeDimensions = getElementDimensions(getNameAttribute(bay), getNameAttribute(cNode), this.svg);
-        Array.from(this.doc.querySelectorAll("ConductingEquipment,PowerTransformer")).filter((cEquipment) => cEquipment.querySelector(`Terminal[connectivityNode="${cNode.getAttribute("pathName")}"]`)).forEach((cEquipment) => {
-          const cEquipmentAbsolutePosition = getAbsolutePosition(cEquipment);
-          let sideToDrawTerminalOn;
-          if (cEquipmentAbsolutePosition.y > cNodeAbsolutePosition.y) {
-            const sidesOfRoutes = drawRouteBetweenElements(cNodeAbsolutePosition, cEquipmentAbsolutePosition, cNodeDimensions, {
-              height: DEFAULT_ELEMENT_SIZE,
-              width: DEFAULT_ELEMENT_SIZE
-            }, this.svg);
-            sideToDrawTerminalOn = sidesOfRoutes.pointBSide;
-          } else {
-            const sidesOfRoutes = drawRouteBetweenElements(cEquipmentAbsolutePosition, cNodeAbsolutePosition, {
-              height: DEFAULT_ELEMENT_SIZE,
-              width: DEFAULT_ELEMENT_SIZE
-            }, cNodeDimensions, this.svg);
-            sideToDrawTerminalOn = sidesOfRoutes.pointASide;
-          }
-          const terminalElement = cEquipment.querySelector(`Terminal[connectivityNode="${cNode.getAttribute("pathName")}"]`);
-          const terminal = createTerminalElement(cEquipmentAbsolutePosition, sideToDrawTerminalOn, terminalElement, () => this.openEditWizard(terminalElement));
-          this.svg.querySelectorAll(`g[id="${identity(cEquipment)}"]`).forEach((eq) => eq.appendChild(terminal));
+        Array.from(this.doc.querySelectorAll("ConductingEquipment, PowerTransformer")).filter((element) => element.querySelector(`Terminal[connectivityNode="${cNode.getAttribute("pathName")}"]`)).forEach((element) => {
+          const sides = getDirections(element, cNode);
+          const elementsTerminalPosition = getAbsolutePositionTerminal(element, sides.startDirection);
+          const cNodePosition = getConnectivityNodesDrawingPosition(cNode, sides.endDirection);
+          drawCNodeConnections(cNodePosition, elementsTerminalPosition, this.svg);
+          const terminalElement = element.querySelector(`Terminal[connectivityNode="${cNode.getAttribute("pathName")}"]`);
+          const terminal = createTerminalElement(terminalElement, sides.startDirection, () => this.openEditWizard(terminalElement));
+          this.svg.querySelectorAll(`g[id="${identity(element)}"]`).forEach((eq) => eq.appendChild(terminal));
         });
       });
     });
@@ -123,27 +113,19 @@ export default class SingleLineDiagramPlugin extends LitElement {
   drawBusBarConnections() {
     this.busBars.forEach((busBar) => {
       const pathName = getPathNameAttribute(busBar.children[0]);
-      const busBarPosition = getAbsolutePosition(busBar);
-      Array.from(this.doc.querySelectorAll("ConductingEquipment")).filter((cEquipment) => cEquipment.querySelector(`Terminal[connectivityNode="${pathName}"]`)).forEach((cEquipment) => {
-        const cEquipmentAbsolutePosition = getAbsolutePosition(cEquipment);
-        let sideToDrawTerminalOn;
-        const customShape = {width: DEFAULT_ELEMENT_SIZE, height: 1};
-        if (busBarPosition.y > cEquipmentAbsolutePosition.y) {
-          const sidesOfRoutes = drawRouteBetweenElements(cEquipmentAbsolutePosition, {
-            x: cEquipmentAbsolutePosition.x,
-            y: busBarPosition.y - (DEFAULT_ELEMENT_SIZE - customShape.height) / 2
-          }, customShape, customShape, this.svg);
-          sideToDrawTerminalOn = sidesOfRoutes.pointASide;
-        } else {
-          const sidesOfRoutes = drawRouteBetweenElements({
-            x: cEquipmentAbsolutePosition.x,
-            y: busBarPosition.y - (DEFAULT_ELEMENT_SIZE - customShape.height) / 2
-          }, cEquipmentAbsolutePosition, customShape, customShape, this.svg);
-          sideToDrawTerminalOn = sidesOfRoutes.pointBSide;
-        }
-        const terminalElement = cEquipment.querySelector(`Terminal[connectivityNode="${pathName}"]`);
-        const terminal = createTerminalElement(cEquipmentAbsolutePosition, sideToDrawTerminalOn, terminalElement, () => this.openEditWizard(terminalElement));
-        this.svg.querySelectorAll(`g[id="${identity(cEquipment)}"]`).forEach((eq) => eq.appendChild(terminal));
+      const busBarPosition = getAbsolutePositionBusBar(busBar);
+      Array.from(this.doc.querySelectorAll("ConductingEquipment")).filter((cEquipment) => cEquipment.querySelector(`Terminal[connectivityNode="${pathName}"]`)).forEach((element) => {
+        const elementPosition = getAbsolutePosition(element);
+        const elementsTerminalSide = busBarPosition.y < elementPosition.y ? "top" : "bottom";
+        const elementsTerminalPosition = getAbsolutePositionTerminal(element, elementsTerminalSide);
+        const busbarTerminalPosition = {
+          x: elementsTerminalPosition.x,
+          y: busBarPosition.y
+        };
+        const terminalElement = element.querySelector(`Terminal[connectivityNode="${pathName}"]`);
+        drawBusBarRoute(busbarTerminalPosition, elementsTerminalPosition, this.svg);
+        const terminal = createTerminalElement(terminalElement, elementsTerminalSide, () => this.openEditWizard(terminalElement));
+        this.svg.querySelectorAll(` g[id="${identity(element)}"]`).forEach((eq) => eq.appendChild(terminal));
       });
     });
   }
@@ -156,9 +138,6 @@ export default class SingleLineDiagramPlugin extends LitElement {
     this.drawBusBars();
     this.drawConnectivityNodeConnections();
     this.drawBusBarConnections();
-  }
-  addElementToGroup(elementToAdd, identity2) {
-    this.svg.querySelectorAll(`g[id="${identity2}"]`).forEach((group) => group.appendChild(elementToAdd));
   }
   openEditWizard(element) {
     const wizard = wizards[element.tagName].edit(element);
@@ -187,13 +166,14 @@ SingleLineDiagramPlugin.styles = css`
       overflow: hidden;
     }
 
-    g[type='ConnectivityNode']:hover, g[type='Terminal']:hover {
+    g[type='ConnectivityNode']:hover,
+    g[type='Terminal']:hover {
       outline: 2px dashed var(--mdc-theme-primary);
       transition: transform 200ms linear, box-shadow 250ms linear;
     }
   `;
 __decorate([
-  property()
+  property({attribute: false})
 ], SingleLineDiagramPlugin.prototype, "doc", 2);
 __decorate([
   query("#panzoom")

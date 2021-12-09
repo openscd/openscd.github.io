@@ -70,9 +70,16 @@
 				<section class="tsd-panel tsd-index-panel">
 					<div class="tsd-index-content">
 						<section class="tsd-index-section ">
+							<h3>Interfaces</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-interface tsd-parent-kind-module"><a href="../interfaces/editors_singlelinediagram_sld_drawing.PointDirections.html" class="tsd-kind-icon">Point<wbr>Directions</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section ">
 							<h3>Variables</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-variable tsd-parent-kind-module"><a href="editors_singlelinediagram_sld_drawing.html#DEFAULT_ELEMENT_SIZE" class="tsd-kind-icon">DEFAULT_<wbr>ELEMENT_<wbr>SIZE</a></li>
+								<li class="tsd-kind-variable tsd-parent-kind-module"><a href="editors_singlelinediagram_sld_drawing.html#CNODE_SIZE" class="tsd-kind-icon">CNODE_<wbr>SIZE</a></li>
+								<li class="tsd-kind-variable tsd-parent-kind-module"><a href="editors_singlelinediagram_sld_drawing.html#EQUIPMENT_SIZE" class="tsd-kind-icon">EQUIPMENT_<wbr>SIZE</a></li>
 								<li class="tsd-kind-variable tsd-parent-kind-module"><a href="editors_singlelinediagram_sld_drawing.html#SVG_GRID_SIZE" class="tsd-kind-icon">SVG_<wbr>GRID_<wbr>SIZE</a></li>
 							</ul>
 						</section>
@@ -87,11 +94,15 @@
 								<li class="tsd-kind-function tsd-parent-kind-module"><a href="editors_singlelinediagram_sld_drawing.html#createTerminalElement" class="tsd-kind-icon">create<wbr>Terminal<wbr>Element</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-module"><a href="editors_singlelinediagram_sld_drawing.html#createTextElement" class="tsd-kind-icon">create<wbr>Text<wbr>Element</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-module"><a href="editors_singlelinediagram_sld_drawing.html#createVoltageLevelElement" class="tsd-kind-icon">create<wbr>Voltage<wbr>Level<wbr>Element</a></li>
-								<li class="tsd-kind-function tsd-parent-kind-module"><a href="editors_singlelinediagram_sld_drawing.html#drawRouteBetweenElements" class="tsd-kind-icon">draw<wbr>Route<wbr>Between<wbr>Elements</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module"><a href="editors_singlelinediagram_sld_drawing.html#drawBusBarRoute" class="tsd-kind-icon">draw<wbr>Bus<wbr>Bar<wbr>Route</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module"><a href="editors_singlelinediagram_sld_drawing.html#drawCNodeConnections" class="tsd-kind-icon">drawCNode<wbr>Connections</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-module"><a href="editors_singlelinediagram_sld_drawing.html#getAbsolutePosition" class="tsd-kind-icon">get<wbr>Absolute<wbr>Position</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module"><a href="editors_singlelinediagram_sld_drawing.html#getAbsolutePositionBusBar" class="tsd-kind-icon">get<wbr>Absolute<wbr>Position<wbr>Bus<wbr>Bar</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-module"><a href="editors_singlelinediagram_sld_drawing.html#getAbsolutePositionConnectivityNode" class="tsd-kind-icon">get<wbr>Absolute<wbr>Position<wbr>Connectivity<wbr>Node</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module"><a href="editors_singlelinediagram_sld_drawing.html#getAbsolutePositionTerminal" class="tsd-kind-icon">get<wbr>Absolute<wbr>Position<wbr>Terminal</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-module"><a href="editors_singlelinediagram_sld_drawing.html#getBusBarLength" class="tsd-kind-icon">get<wbr>Bus<wbr>Bar<wbr>Length</a></li>
-								<li class="tsd-kind-function tsd-parent-kind-module"><a href="editors_singlelinediagram_sld_drawing.html#getElementDimensions" class="tsd-kind-icon">get<wbr>Element<wbr>Dimensions</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module"><a href="editors_singlelinediagram_sld_drawing.html#getConnectivityNodesDrawingPosition" class="tsd-kind-icon">get<wbr>Connectivity<wbr>Nodes<wbr>Drawing<wbr>Position</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module"><a href="editors_singlelinediagram_sld_drawing.html#getDirections" class="tsd-kind-icon">get<wbr>Directions</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-module"><a href="editors_singlelinediagram_sld_drawing.html#getParentElementName" class="tsd-kind-icon">get<wbr>Parent<wbr>Element<wbr>Name</a></li>
 							</ul>
 						</section>
@@ -101,17 +112,32 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Variables</h2>
 				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-module">
-					<a name="DEFAULT_ELEMENT_SIZE" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagConst">Const</span> DEFAULT_<wbr>ELEMENT_<wbr>SIZE</h3>
-					<div class="tsd-signature tsd-kind-icon">DEFAULT_<wbr>ELEMENT_<wbr>SIZE<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">25</span><span class="tsd-signature-symbol"> = 25</span></div>
+					<a name="CNODE_SIZE" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> CNODE_<wbr>SIZE</h3>
+					<div class="tsd-signature tsd-kind-icon">CNODE_<wbr>SIZE<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">25</span><span class="tsd-signature-symbol"> = 25</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/e3408d2/src/editors/singlelinediagram/sld-drawing.ts#L29">src/editors/singlelinediagram/sld-drawing.ts:29</a></li>
+							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/5b209c0/src/editors/singlelinediagram/sld-drawing.ts#L25">src/editors/singlelinediagram/sld-drawing.ts:25</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>The default element size of an SCL element.</p>
+							<p>The size of SLC element ConnectivityNode</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-module">
+					<a name="EQUIPMENT_SIZE" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> EQUIPMENT_<wbr>SIZE</h3>
+					<div class="tsd-signature tsd-kind-icon">EQUIPMENT_<wbr>SIZE<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">50</span><span class="tsd-signature-symbol"> = 50</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/5b209c0/src/editors/singlelinediagram/sld-drawing.ts#L22">src/editors/singlelinediagram/sld-drawing.ts:22</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Size of SLC element ConductingEquipment or PowerTransformer</p>
 						</div>
 					</div>
 				</section>
@@ -121,12 +147,12 @@
 					<div class="tsd-signature tsd-kind-icon">SVG_<wbr>GRID_<wbr>SIZE<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">64</span><span class="tsd-signature-symbol"> = 64</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/e3408d2/src/editors/singlelinediagram/sld-drawing.ts#L24">src/editors/singlelinediagram/sld-drawing.ts:24</a></li>
+							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/5b209c0/src/editors/singlelinediagram/sld-drawing.ts#L19">src/editors/singlelinediagram/sld-drawing.ts:19</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>Default &#39;grid size&#39; of our SVG.</p>
+							<p>Default &#39;grid size&#39; of our SVG</p>
 						</div>
 					</div>
 				</section>
@@ -143,7 +169,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/e3408d2/src/editors/singlelinediagram/sld-drawing.ts#L139">src/editors/singlelinediagram/sld-drawing.ts:139</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/5b209c0/src/editors/singlelinediagram/sld-drawing.ts#L200">src/editors/singlelinediagram/sld-drawing.ts:200</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -166,18 +192,18 @@
 					<a name="createBusBarElement" class="tsd-anchor"></a>
 					<h3>create<wbr>Bus<wbr>Bar<wbr>Element</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
-						<li class="tsd-signature tsd-kind-icon">create<wbr>Bus<wbr>Bar<wbr>Element<span class="tsd-signature-symbol">(</span>busBarElement<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Element</span>, biggestVoltageLevelXCoordinate<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">SVGElement</span></li>
+						<li class="tsd-signature tsd-kind-icon">create<wbr>Bus<wbr>Bar<wbr>Element<span class="tsd-signature-symbol">(</span>busBarElement<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Element</span>, busbarLength<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">SVGElement</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/e3408d2/src/editors/singlelinediagram/sld-drawing.ts#L218">src/editors/singlelinediagram/sld-drawing.ts:218</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/5b209c0/src/editors/singlelinediagram/sld-drawing.ts#L279">src/editors/singlelinediagram/sld-drawing.ts:279</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Create a Bus Bar element.</p>
+									<p>Create a bus bar element.</p>
 								</div>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -189,10 +215,9 @@
 									</div>
 								</li>
 								<li>
-									<h5>biggestVoltageLevelXCoordinate: <span class="tsd-signature-type">number</span></h5>
+									<h5>busbarLength: <span class="tsd-signature-type">number</span></h5>
 									<div class="tsd-comment tsd-typography">
-										<p>The biggest of the VoltageLevel the bus bar is in,
-										so the method can decide how long the bus bar should be.</p>
+										<p>The length of the bus bar depending on the x coordinate of the most far out right equipment ()</p>
 									</div>
 								</li>
 							</ul>
@@ -211,7 +236,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/e3408d2/src/editors/singlelinediagram/sld-drawing.ts#L255">src/editors/singlelinediagram/sld-drawing.ts:255</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/5b209c0/src/editors/singlelinediagram/sld-drawing.ts#L316">src/editors/singlelinediagram/sld-drawing.ts:316</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -224,7 +249,7 @@
 								<li>
 									<h5>equipmentElement: <span class="tsd-signature-type">Element</span></h5>
 									<div class="tsd-comment tsd-typography">
-										<p>The name of the busbar</p>
+										<p>The SCL element ConductingEquipment</p>
 									</div>
 								</li>
 							</ul>
@@ -237,13 +262,13 @@
 					<a name="createConnectivityNodeElement" class="tsd-anchor"></a>
 					<h3>create<wbr>Connectivity<wbr>Node<wbr>Element</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
-						<li class="tsd-signature tsd-kind-icon">create<wbr>Connectivity<wbr>Node<wbr>Element<span class="tsd-signature-symbol">(</span>cNodeElement<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Element</span>, position<span class="tsd-signature-symbol">: </span><a href="../interfaces/editors_singlelinediagram_foundation.Point.html" class="tsd-signature-type" data-tsd-kind="Interface">Point</a>, clickAction<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">SVGElement</span></li>
+						<li class="tsd-signature tsd-kind-icon">create<wbr>Connectivity<wbr>Node<wbr>Element<span class="tsd-signature-symbol">(</span>cNodeElement<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Element</span>, clickAction<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">SVGElement</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/e3408d2/src/editors/singlelinediagram/sld-drawing.ts#L323">src/editors/singlelinediagram/sld-drawing.ts:323</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/5b209c0/src/editors/singlelinediagram/sld-drawing.ts#L388">src/editors/singlelinediagram/sld-drawing.ts:388</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -256,17 +281,11 @@
 								<li>
 									<h5>cNodeElement: <span class="tsd-signature-type">Element</span></h5>
 									<div class="tsd-comment tsd-typography">
-										<p>The name of the busbar</p>
+										<p>The SCL element ConnectivityNode</p>
 									</div>
 								</li>
 								<li>
-									<h5>position: <a href="../interfaces/editors_singlelinediagram_foundation.Point.html" class="tsd-signature-type" data-tsd-kind="Interface">Point</a></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>The SCL position of the Connectivity Node.</p>
-									</div>
-								</li>
-								<li>
-									<h5>clickAction: <span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></h5>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> clickAction: <span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></h5>
 									<div class="tsd-comment tsd-typography">
 										<p>The action to execute when the terminal is being clicked.</p>
 									</div>
@@ -299,7 +318,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/e3408d2/src/editors/singlelinediagram/sld-drawing.ts#L288">src/editors/singlelinediagram/sld-drawing.ts:288</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/5b209c0/src/editors/singlelinediagram/sld-drawing.ts#L351">src/editors/singlelinediagram/sld-drawing.ts:351</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -312,7 +331,7 @@
 								<li>
 									<h5>powerTransformerElement: <span class="tsd-signature-type">Element</span></h5>
 									<div class="tsd-comment tsd-typography">
-										<p>The SCL PowerTransformer element</p>
+										<p>The SCL element PowerTransformer</p>
 									</div>
 								</li>
 							</ul>
@@ -325,13 +344,13 @@
 					<a name="createTerminalElement" class="tsd-anchor"></a>
 					<h3>create<wbr>Terminal<wbr>Element</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
-						<li class="tsd-signature tsd-kind-icon">create<wbr>Terminal<wbr>Element<span class="tsd-signature-symbol">(</span>elementPosition<span class="tsd-signature-symbol">: </span><a href="../interfaces/editors_singlelinediagram_foundation.Point.html" class="tsd-signature-type" data-tsd-kind="Interface">Point</a>, sideToDraw<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Side</span>, terminalElement<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Element</span>, clickAction<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">SVGElement</span></li>
+						<li class="tsd-signature tsd-kind-icon">create<wbr>Terminal<wbr>Element<span class="tsd-signature-symbol">(</span>terminal<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Element</span>, sideToDraw<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Direction</span>, clickAction<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">SVGElement</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/e3408d2/src/editors/singlelinediagram/sld-drawing.ts#L179">src/editors/singlelinediagram/sld-drawing.ts:179</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/5b209c0/src/editors/singlelinediagram/sld-drawing.ts#L240">src/editors/singlelinediagram/sld-drawing.ts:240</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -342,25 +361,19 @@
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>elementPosition: <a href="../interfaces/editors_singlelinediagram_foundation.Point.html" class="tsd-signature-type" data-tsd-kind="Interface">Point</a></h5>
+									<h5>terminal: <span class="tsd-signature-type">Element</span></h5>
 									<div class="tsd-comment tsd-typography">
-										<p>The position of the element belonging to the terminal/</p>
+										<p>The SCL element Terminal to draw</p>
 									</div>
 								</li>
 								<li>
-									<h5>sideToDraw: <span class="tsd-signature-type">Side</span></h5>
+									<h5>sideToDraw: <span class="tsd-signature-type">Direction</span></h5>
 									<div class="tsd-comment tsd-typography">
 										<p>The side of the element the terminal must be drawn on.</p>
 									</div>
 								</li>
 								<li>
-									<h5>terminalElement: <span class="tsd-signature-type">Element</span></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>The terminal element to extract information from.</p>
-									</div>
-								</li>
-								<li>
-									<h5>clickAction: <span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></h5>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> clickAction: <span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></h5>
 									<div class="tsd-comment tsd-typography">
 										<p>The action to execute when the terminal is being clicked.</p>
 									</div>
@@ -393,27 +406,33 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/e3408d2/src/editors/singlelinediagram/sld-drawing.ts#L149">src/editors/singlelinediagram/sld-drawing.ts:149</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/5b209c0/src/editors/singlelinediagram/sld-drawing.ts#L211">src/editors/singlelinediagram/sld-drawing.ts:211</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Create a basic text element.</p>
+									<p>Create a basic caption.</p>
 								</div>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
 									<h5>textContent: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The content of the caption.</p>
+									</div>
 								</li>
 								<li>
 									<h5>coordinates: <a href="../interfaces/editors_singlelinediagram_foundation.Point.html" class="tsd-signature-type" data-tsd-kind="Interface">Point</a></h5>
 									<div class="tsd-comment tsd-typography">
-										<p>The x and y coordinates of this text elements.</p>
+										<p>The x and y position in px to locate in drawing pane.</p>
 									</div>
 								</li>
 								<li>
 									<h5>textSize: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The size of the caption</p>
+									</div>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">SVGElement</span></h4>
@@ -431,7 +450,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/e3408d2/src/editors/singlelinediagram/sld-drawing.ts#L130">src/editors/singlelinediagram/sld-drawing.ts:130</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/5b209c0/src/editors/singlelinediagram/sld-drawing.ts#L191">src/editors/singlelinediagram/sld-drawing.ts:191</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -454,42 +473,36 @@
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
-					<a name="drawRouteBetweenElements" class="tsd-anchor"></a>
-					<h3>draw<wbr>Route<wbr>Between<wbr>Elements</h3>
+					<a name="drawBusBarRoute" class="tsd-anchor"></a>
+					<h3>draw<wbr>Bus<wbr>Bar<wbr>Route</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
-						<li class="tsd-signature tsd-kind-icon">draw<wbr>Route<wbr>Between<wbr>Elements<span class="tsd-signature-symbol">(</span>pointA<span class="tsd-signature-symbol">: </span><a href="../interfaces/editors_singlelinediagram_foundation.Point.html" class="tsd-signature-type" data-tsd-kind="Interface">Point</a>, pointB<span class="tsd-signature-symbol">: </span><a href="../interfaces/editors_singlelinediagram_foundation.Point.html" class="tsd-signature-type" data-tsd-kind="Interface">Point</a>, pointAShape<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Shape</span>, pointBShape<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Shape</span>, svgToDrawOn<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">HTMLElement</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">PointSides</span></li>
+						<li class="tsd-signature tsd-kind-icon">draw<wbr>Bus<wbr>Bar<wbr>Route<span class="tsd-signature-symbol">(</span>busbarsTerminalPosition<span class="tsd-signature-symbol">: </span><a href="../interfaces/editors_singlelinediagram_foundation.Point.html" class="tsd-signature-type" data-tsd-kind="Interface">Point</a>, equipmentsTerminalPosition<span class="tsd-signature-symbol">: </span><a href="../interfaces/editors_singlelinediagram_foundation.Point.html" class="tsd-signature-type" data-tsd-kind="Interface">Point</a>, svgToDrawOn<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">HTMLElement</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/e3408d2/src/editors/singlelinediagram/sld-drawing.ts#L352">src/editors/singlelinediagram/sld-drawing.ts:352</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/5b209c0/src/editors/singlelinediagram/sld-drawing.ts#L457">src/editors/singlelinediagram/sld-drawing.ts:457</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Draw a route from the first point to the second point.</p>
+									<p>Draw a route from the bus bar to elements terminal position.</p>
 								</div>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>pointA: <a href="../interfaces/editors_singlelinediagram_foundation.Point.html" class="tsd-signature-type" data-tsd-kind="Interface">Point</a></h5>
+									<h5>busbarsTerminalPosition: <a href="../interfaces/editors_singlelinediagram_foundation.Point.html" class="tsd-signature-type" data-tsd-kind="Interface">Point</a></h5>
 									<div class="tsd-comment tsd-typography">
-										<p>The first point of this connection.</p>
+										<p>The start position in px the bus bar.</p>
 									</div>
 								</li>
 								<li>
-									<h5>pointB: <a href="../interfaces/editors_singlelinediagram_foundation.Point.html" class="tsd-signature-type" data-tsd-kind="Interface">Point</a></h5>
+									<h5>equipmentsTerminalPosition: <a href="../interfaces/editors_singlelinediagram_foundation.Point.html" class="tsd-signature-type" data-tsd-kind="Interface">Point</a></h5>
 									<div class="tsd-comment tsd-typography">
-										<p>The second point of this connection.</p>
+										<p>The end position in px of the SCL element ConductingEquipment or PowerTransformer.</p>
 									</div>
-								</li>
-								<li>
-									<h5>pointAShape: <span class="tsd-signature-type">Shape</span></h5>
-								</li>
-								<li>
-									<h5>pointBShape: <span class="tsd-signature-type">Shape</span></h5>
 								</li>
 								<li>
 									<h5>svgToDrawOn: <span class="tsd-signature-type">HTMLElement</span></h5>
@@ -498,8 +511,50 @@
 									</div>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">PointSides</span></h4>
-							<p>The sides where the routes are being drawn next to both points.</p>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
+					<a name="drawCNodeConnections" class="tsd-anchor"></a>
+					<h3>drawCNode<wbr>Connections</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
+						<li class="tsd-signature tsd-kind-icon">drawCNode<wbr>Connections<span class="tsd-signature-symbol">(</span>cNodesTerminalPosition<span class="tsd-signature-symbol">: </span><a href="../interfaces/editors_singlelinediagram_foundation.Point.html" class="tsd-signature-type" data-tsd-kind="Interface">Point</a>, equipmentsTerminalPosition<span class="tsd-signature-symbol">: </span><a href="../interfaces/editors_singlelinediagram_foundation.Point.html" class="tsd-signature-type" data-tsd-kind="Interface">Point</a>, svgToDrawOn<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">HTMLElement</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/5b209c0/src/editors/singlelinediagram/sld-drawing.ts#L419">src/editors/singlelinediagram/sld-drawing.ts:419</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Draw a route from ConnectivityNode to equipments Terminal (ConductingEquipment or PowerTransformer)</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>cNodesTerminalPosition: <a href="../interfaces/editors_singlelinediagram_foundation.Point.html" class="tsd-signature-type" data-tsd-kind="Interface">Point</a></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The start position in px of the SCL element ConnectivityNode.</p>
+									</div>
+								</li>
+								<li>
+									<h5>equipmentsTerminalPosition: <a href="../interfaces/editors_singlelinediagram_foundation.Point.html" class="tsd-signature-type" data-tsd-kind="Interface">Point</a></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The end position in px of the SCL element ConductingEquipment or PowerTransformer.</p>
+									</div>
+								</li>
+								<li>
+									<h5>svgToDrawOn: <span class="tsd-signature-type">HTMLElement</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The SVG to draw the route on.</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -513,7 +568,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/e3408d2/src/editors/singlelinediagram/sld-drawing.ts#L59">src/editors/singlelinediagram/sld-drawing.ts:59</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/5b209c0/src/editors/singlelinediagram/sld-drawing.ts#L44">src/editors/singlelinediagram/sld-drawing.ts:44</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -527,7 +582,7 @@
 								<li>
 									<h5>element: <span class="tsd-signature-type">Element</span></h5>
 									<div class="tsd-comment tsd-typography">
-										<p>The element to get the position for.</p>
+										<p>The SCL element to get the position for.</p>
 									</div>
 								</li>
 							</ul>
@@ -537,34 +592,97 @@
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
-					<a name="getAbsolutePositionConnectivityNode" class="tsd-anchor"></a>
-					<h3>get<wbr>Absolute<wbr>Position<wbr>Connectivity<wbr>Node</h3>
+					<a name="getAbsolutePositionBusBar" class="tsd-anchor"></a>
+					<h3>get<wbr>Absolute<wbr>Position<wbr>Bus<wbr>Bar</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
-						<li class="tsd-signature tsd-kind-icon">get<wbr>Absolute<wbr>Position<wbr>Connectivity<wbr>Node<span class="tsd-signature-symbol">(</span>connectivityNode<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Element</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/editors_singlelinediagram_foundation.Point.html" class="tsd-signature-type" data-tsd-kind="Interface">Point</a></li>
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Absolute<wbr>Position<wbr>Bus<wbr>Bar<span class="tsd-signature-symbol">(</span>busbar<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Element</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/editors_singlelinediagram_foundation.Point.html" class="tsd-signature-type" data-tsd-kind="Interface">Point</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/e3408d2/src/editors/singlelinediagram/sld-drawing.ts#L72">src/editors/singlelinediagram/sld-drawing.ts:72</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/5b209c0/src/editors/singlelinediagram/sld-drawing.ts#L61">src/editors/singlelinediagram/sld-drawing.ts:61</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Get the full position of an ConnecitvityNode SCL element (multiplied with an offset for the SVG).</p>
+									<p>Get the full position of an bus bar (multiplied with an offset for the SVG).</p>
 								</div>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>connectivityNode: <span class="tsd-signature-type">Element</span></h5>
+									<h5>busbar: <span class="tsd-signature-type">Element</span></h5>
 									<div class="tsd-comment tsd-typography">
-										<p>The SCL element ConnectivityNode to get the position for.</p>
+										<p>The SCL element Bay to get the position for.</p>
 									</div>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <a href="../interfaces/editors_singlelinediagram_foundation.Point.html" class="tsd-signature-type" data-tsd-kind="Interface">Point</a></h4>
 							<p>A point containing the full x/y position in px.</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
+					<a name="getAbsolutePositionConnectivityNode" class="tsd-anchor"></a>
+					<h3>get<wbr>Absolute<wbr>Position<wbr>Connectivity<wbr>Node</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Absolute<wbr>Position<wbr>Connectivity<wbr>Node<span class="tsd-signature-symbol">(</span>element<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Element</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/editors_singlelinediagram_foundation.Point.html" class="tsd-signature-type" data-tsd-kind="Interface">Point</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/5b209c0/src/editors/singlelinediagram/sld-drawing.ts#L74">src/editors/singlelinediagram/sld-drawing.ts:74</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Get the full position of an ConnectivityNode SCL element (multiplied with an offset for the SVG).</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>element: <span class="tsd-signature-type">Element</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="../interfaces/editors_singlelinediagram_foundation.Point.html" class="tsd-signature-type" data-tsd-kind="Interface">Point</a></h4>
+							<p>A point containing the full x/y position in px.</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
+					<a name="getAbsolutePositionTerminal" class="tsd-anchor"></a>
+					<h3>get<wbr>Absolute<wbr>Position<wbr>Terminal</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Absolute<wbr>Position<wbr>Terminal<span class="tsd-signature-symbol">(</span>equipment<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Element</span>, direction<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Direction</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/editors_singlelinediagram_foundation.Point.html" class="tsd-signature-type" data-tsd-kind="Interface">Point</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/5b209c0/src/editors/singlelinediagram/sld-drawing.ts#L133">src/editors/singlelinediagram/sld-drawing.ts:133</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Get the absolute position in py for a equipments Terminal (based on the TERMINAL_OFFSET).</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>equipment: <span class="tsd-signature-type">Element</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The SCL elements ConductingEquipment or PowerTransformer.</p>
+									</div>
+								</li>
+								<li>
+									<h5>direction: <span class="tsd-signature-type">Direction</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="../interfaces/editors_singlelinediagram_foundation.Point.html" class="tsd-signature-type" data-tsd-kind="Interface">Point</a></h4>
 						</li>
 					</ul>
 				</section>
@@ -578,7 +696,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/e3408d2/src/editors/singlelinediagram/sld-drawing.ts#L535">src/editors/singlelinediagram/sld-drawing.ts:535</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/5b209c0/src/editors/singlelinediagram/sld-drawing.ts#L539">src/editors/singlelinediagram/sld-drawing.ts:539</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -592,46 +710,78 @@
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
-					<a name="getElementDimensions" class="tsd-anchor"></a>
-					<h3>get<wbr>Element<wbr>Dimensions</h3>
+					<a name="getConnectivityNodesDrawingPosition" class="tsd-anchor"></a>
+					<h3>get<wbr>Connectivity<wbr>Nodes<wbr>Drawing<wbr>Position</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
-						<li class="tsd-signature tsd-kind-icon">get<wbr>Element<wbr>Dimensions<span class="tsd-signature-symbol">(</span>bayName<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, elementName<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, svg<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">HTMLElement</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Shape</span></li>
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Connectivity<wbr>Nodes<wbr>Drawing<wbr>Position<span class="tsd-signature-symbol">(</span>cNode<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Element</span>, direction<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Direction</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/editors_singlelinediagram_foundation.Point.html" class="tsd-signature-type" data-tsd-kind="Interface">Point</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/e3408d2/src/editors/singlelinediagram/sld-drawing.ts#L426">src/editors/singlelinediagram/sld-drawing.ts:426</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/5b209c0/src/editors/singlelinediagram/sld-drawing.ts#L147">src/editors/singlelinediagram/sld-drawing.ts:147</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Get the dimensions of a specific element within a specific bay.</p>
+									<p>Get the absolute position in px for a SLC element ConnectivityNode drawing start/end (based on the TERMINAL_OFFSET).</p>
 								</div>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>bayName: <span class="tsd-signature-type">string</span></h5>
+									<h5>cNode: <span class="tsd-signature-type">Element</span></h5>
 									<div class="tsd-comment tsd-typography">
-										<p>The name of the bay.</p>
+										<p>The SCL element ConnectivityNode</p>
 									</div>
 								</li>
 								<li>
-									<h5>elementName: <span class="tsd-signature-type">string</span></h5>
+									<h5>direction: <span class="tsd-signature-type">Direction</span></h5>
 									<div class="tsd-comment tsd-typography">
-										<p>The name of the element.</p>
-									</div>
-								</li>
-								<li>
-									<h5>svg: <span class="tsd-signature-type">HTMLElement</span></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>The SVG to search on.</p>
+										<p>The direction of the connector from/to the ConnectivityNode</p>
 									</div>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Shape</span></h4>
-							<p>The shape (width and height) of the specific element.</p>
+							<h4 class="tsd-returns-title">Returns <a href="../interfaces/editors_singlelinediagram_foundation.Point.html" class="tsd-signature-type" data-tsd-kind="Interface">Point</a></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
+					<a name="getDirections" class="tsd-anchor"></a>
+					<h3>get<wbr>Directions</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Directions<span class="tsd-signature-symbol">(</span>equipment<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Element</span>, cNode<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Element</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/editors_singlelinediagram_sld_drawing.PointDirections.html" class="tsd-signature-type" data-tsd-kind="Interface">PointDirections</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/5b209c0/src/editors/singlelinediagram/sld-drawing.ts#L489">src/editors/singlelinediagram/sld-drawing.ts:489</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Small simple algorithm deciding on which direction the route should be drawn
+									for a connection between elements Terminal and ConnectivityNode</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>equipment: <span class="tsd-signature-type">Element</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The SCL element ConductingEquipment or PowerTransformer the route starts from.</p>
+									</div>
+								</li>
+								<li>
+									<h5>cNode: <span class="tsd-signature-type">Element</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The SLC element ConnectivityNode the route ends with.</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="../interfaces/editors_singlelinediagram_sld_drawing.PointDirections.html" class="tsd-signature-type" data-tsd-kind="Interface">PointDirections</a></h4>
+							<p>The sides of both points .</p>
 						</li>
 					</ul>
 				</section>
@@ -645,7 +795,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/e3408d2/src/editors/singlelinediagram/sld-drawing.ts#L88">src/editors/singlelinediagram/sld-drawing.ts:88</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/5b209c0/src/editors/singlelinediagram/sld-drawing.ts#L528">src/editors/singlelinediagram/sld-drawing.ts:528</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -682,8 +832,14 @@
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
+					<li class=" tsd-kind-interface tsd-parent-kind-module">
+						<a href="../interfaces/editors_singlelinediagram_sld_drawing.PointDirections.html" class="tsd-kind-icon">Point<wbr>Directions</a>
+					</li>
 					<li class=" tsd-kind-variable tsd-parent-kind-module">
-						<a href="editors_singlelinediagram_sld_drawing.html#DEFAULT_ELEMENT_SIZE" class="tsd-kind-icon">DEFAULT_<wbr>ELEMENT_<wbr>SIZE</a>
+						<a href="editors_singlelinediagram_sld_drawing.html#CNODE_SIZE" class="tsd-kind-icon">CNODE_<wbr>SIZE</a>
+					</li>
+					<li class=" tsd-kind-variable tsd-parent-kind-module">
+						<a href="editors_singlelinediagram_sld_drawing.html#EQUIPMENT_SIZE" class="tsd-kind-icon">EQUIPMENT_<wbr>SIZE</a>
 					</li>
 					<li class=" tsd-kind-variable tsd-parent-kind-module">
 						<a href="editors_singlelinediagram_sld_drawing.html#SVG_GRID_SIZE" class="tsd-kind-icon">SVG_<wbr>GRID_<wbr>SIZE</a>
@@ -713,19 +869,31 @@
 						<a href="editors_singlelinediagram_sld_drawing.html#createVoltageLevelElement" class="tsd-kind-icon">create<wbr>Voltage<wbr>Level<wbr>Element</a>
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-module">
-						<a href="editors_singlelinediagram_sld_drawing.html#drawRouteBetweenElements" class="tsd-kind-icon">draw<wbr>Route<wbr>Between<wbr>Elements</a>
+						<a href="editors_singlelinediagram_sld_drawing.html#drawBusBarRoute" class="tsd-kind-icon">draw<wbr>Bus<wbr>Bar<wbr>Route</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-module">
+						<a href="editors_singlelinediagram_sld_drawing.html#drawCNodeConnections" class="tsd-kind-icon">drawCNode<wbr>Connections</a>
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-module">
 						<a href="editors_singlelinediagram_sld_drawing.html#getAbsolutePosition" class="tsd-kind-icon">get<wbr>Absolute<wbr>Position</a>
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-module">
+						<a href="editors_singlelinediagram_sld_drawing.html#getAbsolutePositionBusBar" class="tsd-kind-icon">get<wbr>Absolute<wbr>Position<wbr>Bus<wbr>Bar</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-module">
 						<a href="editors_singlelinediagram_sld_drawing.html#getAbsolutePositionConnectivityNode" class="tsd-kind-icon">get<wbr>Absolute<wbr>Position<wbr>Connectivity<wbr>Node</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-module">
+						<a href="editors_singlelinediagram_sld_drawing.html#getAbsolutePositionTerminal" class="tsd-kind-icon">get<wbr>Absolute<wbr>Position<wbr>Terminal</a>
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-module">
 						<a href="editors_singlelinediagram_sld_drawing.html#getBusBarLength" class="tsd-kind-icon">get<wbr>Bus<wbr>Bar<wbr>Length</a>
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-module">
-						<a href="editors_singlelinediagram_sld_drawing.html#getElementDimensions" class="tsd-kind-icon">get<wbr>Element<wbr>Dimensions</a>
+						<a href="editors_singlelinediagram_sld_drawing.html#getConnectivityNodesDrawingPosition" class="tsd-kind-icon">get<wbr>Connectivity<wbr>Nodes<wbr>Drawing<wbr>Position</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-module">
+						<a href="editors_singlelinediagram_sld_drawing.html#getDirections" class="tsd-kind-icon">get<wbr>Directions</a>
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-module">
 						<a href="editors_singlelinediagram_sld_drawing.html#getParentElementName" class="tsd-kind-icon">get<wbr>Parent<wbr>Element<wbr>Name</a>
