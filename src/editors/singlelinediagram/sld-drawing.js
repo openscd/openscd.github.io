@@ -142,7 +142,7 @@ export function createBusBarElement(busBarElement, busbarLength) {
   groupElement.appendChild(text);
   return groupElement;
 }
-export function createConductingEquipmentElement(equipmentElement) {
+export function createConductingEquipmentElement(equipmentElement, clickAction) {
   const groupElement = createGroupElement(equipmentElement);
   const absolutePosition = getAbsolutePosition(equipmentElement);
   const parsedIcon = new DOMParser().parseFromString(getIcon(equipmentElement).strings[0], "application/xml");
@@ -152,6 +152,8 @@ export function createConductingEquipmentElement(equipmentElement) {
   });
   const text = createTextElement(getNameAttribute(equipmentElement), {x: absolutePosition.x - 15, y: absolutePosition.y + 30}, "x-small");
   groupElement.appendChild(text);
+  if (clickAction)
+    groupElement.addEventListener("click", clickAction);
   return groupElement;
 }
 export function createPowerTransformerElement(powerTransformerElement) {

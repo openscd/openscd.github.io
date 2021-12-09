@@ -77,7 +77,7 @@ export default class SingleLineDiagramPlugin extends LitElement {
   }
   drawConductingEquipments() {
     Array.from(this.doc.querySelectorAll("ConductingEquipment")).filter((child) => Array.from(child.querySelectorAll("Terminal")).filter((terminal) => terminal.getAttribute("cNodeName") !== "grounded").length !== 0).forEach((equipment) => {
-      const eqElement = createConductingEquipmentElement(equipment);
+      const eqElement = createConductingEquipmentElement(equipment, () => this.openEditWizard(equipment));
       this.addElementToGroup(eqElement, identity(equipment.parentElement));
     });
   }
@@ -166,8 +166,13 @@ SingleLineDiagramPlugin.styles = css`
       overflow: hidden;
     }
 
+    g {
+      pointer-events: bounding-box;
+    }
+
     g[type='ConnectivityNode']:hover,
-    g[type='Terminal']:hover {
+    g[type='Terminal']:hover,
+    g[type='ConductingEquipment']:hover {
       outline: 2px dashed var(--mdc-theme-primary);
       transition: transform 200ms linear, box-shadow 250ms linear;
     }
