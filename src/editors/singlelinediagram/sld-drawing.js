@@ -37,14 +37,15 @@ export function getAbsolutePositionConnectivityNode(element) {
     y: absoluteCoordinates.y * SVG_GRID_SIZE + (SVG_GRID_SIZE - CNODE_SIZE) / 2
   };
 }
-function offsetTerminal(parentElementPosition, elementOffset, direction) {
-  switch (direction) {
+function absoluteOffsetTerminal(parentElementPosition, elementOffset, terminalSide, customTerminalOffset) {
+  const terminalOffset = customTerminalOffset ?? TERMINAL_OFFSET;
+  switch (terminalSide) {
     case "top": {
       const x = parentElementPosition.x;
       const y = parentElementPosition.y;
       return {
         x: x + elementOffset / 2,
-        y: y - TERMINAL_OFFSET
+        y: y - terminalOffset
       };
     }
     case "bottom": {
@@ -52,14 +53,14 @@ function offsetTerminal(parentElementPosition, elementOffset, direction) {
       const y = parentElementPosition.y;
       return {
         x: x + elementOffset / 2,
-        y: y + (elementOffset + TERMINAL_OFFSET)
+        y: y + (elementOffset + terminalOffset)
       };
     }
     case "left": {
       const x = parentElementPosition.x;
       const y = parentElementPosition.y;
       return {
-        x: x - TERMINAL_OFFSET,
+        x: x - terminalOffset,
         y: y + elementOffset / 2
       };
     }
@@ -67,7 +68,7 @@ function offsetTerminal(parentElementPosition, elementOffset, direction) {
       const x = parentElementPosition.x;
       const y = parentElementPosition.y;
       return {
-        x: x + (elementOffset + TERMINAL_OFFSET),
+        x: x + (elementOffset + terminalOffset),
         y: y + elementOffset / 2
       };
     }
@@ -78,11 +79,12 @@ function offsetTerminal(parentElementPosition, elementOffset, direction) {
 }
 export function getAbsolutePositionTerminal(equipment, direction) {
   const parentElementPosition = getAbsolutePosition(equipment);
-  return offsetTerminal(parentElementPosition, EQUIPMENT_SIZE, direction);
+  return absoluteOffsetTerminal(parentElementPosition, EQUIPMENT_SIZE, direction);
 }
 export function getConnectivityNodesDrawingPosition(cNode, direction) {
   const parentElementPosition = getAbsolutePositionConnectivityNode(cNode);
-  return offsetTerminal(parentElementPosition, CNODE_SIZE, direction);
+  const customTerminalOffset = -(CNODE_SIZE / 3);
+  return absoluteOffsetTerminal(parentElementPosition, CNODE_SIZE, direction, customTerminalOffset);
 }
 function createGroupElement(element) {
   const finalElement = document.createElementNS("http://www.w3.org/2000/svg", "g");

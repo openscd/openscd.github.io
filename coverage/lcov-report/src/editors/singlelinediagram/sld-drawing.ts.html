@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">84.18% </span>
+                <span class="strong">84.27% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>463/550</span>
+                <span class='fraction'>477/566</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">84.18% </span>
+                <span class="strong">84.27% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>463/550</span>
+                <span class='fraction'>477/566</span>
             </div>
         
             
@@ -613,7 +613,37 @@
 <a name='L548'></a><a href='#L548'>548</a>
 <a name='L549'></a><a href='#L549'>549</a>
 <a name='L550'></a><a href='#L550'>550</a>
-<a name='L551'></a><a href='#L551'>551</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L551'></a><a href='#L551'>551</a>
+<a name='L552'></a><a href='#L552'>552</a>
+<a name='L553'></a><a href='#L553'>553</a>
+<a name='L554'></a><a href='#L554'>554</a>
+<a name='L555'></a><a href='#L555'>555</a>
+<a name='L556'></a><a href='#L556'>556</a>
+<a name='L557'></a><a href='#L557'>557</a>
+<a name='L558'></a><a href='#L558'>558</a>
+<a name='L559'></a><a href='#L559'>559</a>
+<a name='L560'></a><a href='#L560'>560</a>
+<a name='L561'></a><a href='#L561'>561</a>
+<a name='L562'></a><a href='#L562'>562</a>
+<a name='L563'></a><a href='#L563'>563</a>
+<a name='L564'></a><a href='#L564'>564</a>
+<a name='L565'></a><a href='#L565'>565</a>
+<a name='L566'></a><a href='#L566'>566</a>
+<a name='L567'></a><a href='#L567'>567</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -760,6 +790,8 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -1246,18 +1278,32 @@ export function getAbsolutePositionConnectivityNode(element: Element): Point {
   };
 }
 &nbsp;
-function offsetTerminal(
+/**
+ * Calculate the absolute offset of a terminal next to an element.
+ * @param parentElementPosition - The position of the parent element of the terminal.
+ * @param elementOffset - The offset of the parent element.
+ * @param terminalSide - The side of the parent element where the terminal should be placed. 
+ * @param customTerminalOffset - An optional parameter containing the offset of the terminal next to the parent element.
+ * This may vary, for example for Connectivity Nodes.
+ * 
+ * @returns The absolute position of the terminal.
+ */
+function absoluteOffsetTerminal(
   parentElementPosition: Point,
   elementOffset: number,
-  direction: Direction
+  terminalSide: Direction,
+  customTerminalOffset?: number
 ): Point {
-  switch (direction) {
+&nbsp;
+  const terminalOffset = customTerminalOffset ?? TERMINAL_OFFSET;
+&nbsp;
+  switch (terminalSide) {
     case 'top': {
       const x = parentElementPosition.x;
       const y = parentElementPosition.y;
       return {
         x: x! + elementOffset / 2,
-        y: y! - <span class="branch-0 cbranch-no" title="branch not covered" >TERMINAL_OFFSET,</span>
+        y: y! - <span class="branch-0 cbranch-no" title="branch not covered" >terminalOffset,</span>
 <span class="cstat-no" title="statement not covered" >      };</span>
 <span class="cstat-no" title="statement not covered" >    }</span>
 <span class="cstat-no" title="statement not covered" >    case 'bottom': {</span>
@@ -1265,14 +1311,14 @@ function offsetTerminal(
 <span class="cstat-no" title="statement not covered" >      const y = parentElementPosition.y;</span>
 <span class="cstat-no" title="statement not covered" >      return {</span>
 <span class="cstat-no" title="statement not covered" >        x: x! + elementOffset / 2,</span>
-<span class="cstat-no" title="statement not covered" >        y: y! + (elementOffset + <span class="branch-0 cbranch-no" title="branch not covered" >TERMINAL_OFFSET),</span></span>
+<span class="cstat-no" title="statement not covered" >        y: y! + (elementOffset + <span class="branch-0 cbranch-no" title="branch not covered" >terminalOffset),</span></span>
 <span class="cstat-no" title="statement not covered" >      };</span>
 <span class="cstat-no" title="statement not covered" >    }</span>
 <span class="cstat-no" title="statement not covered" >    case 'left': {</span>
 <span class="cstat-no" title="statement not covered" >      const x = parentElementPosition.x;</span>
 <span class="cstat-no" title="statement not covered" >      const y = parentElementPosition.y;</span>
 <span class="cstat-no" title="statement not covered" >      return {</span>
-<span class="cstat-no" title="statement not covered" >        x: x! - TERMINAL_OFFSET,</span>
+<span class="cstat-no" title="statement not covered" >        x: x! - terminalOffset,</span>
 <span class="cstat-no" title="statement not covered" >        y: y! + elementOffset / <span class="branch-0 cbranch-no" title="branch not covered" >2,</span></span>
 <span class="cstat-no" title="statement not covered" >      };</span>
 <span class="cstat-no" title="statement not covered" >    }</span>
@@ -1280,7 +1326,7 @@ function offsetTerminal(
 <span class="cstat-no" title="statement not covered" >      const x = parentElementPosition.x;</span>
 <span class="cstat-no" title="statement not covered" >      const y = parentElementPosition.y;</span>
 <span class="cstat-no" title="statement not covered" >      return {</span>
-<span class="cstat-no" title="statement not covered" >        x: x! + (elementOffset + TERMINAL_OFFSET),</span>
+<span class="cstat-no" title="statement not covered" >        x: x! + (elementOffset + terminalOffset),</span>
 <span class="cstat-no" title="statement not covered" >        y: y! + elementOffset / <span class="branch-0 cbranch-no" title="branch not covered" >2,</span></span>
 <span class="cstat-no" title="statement not covered" >      };</span>
 <span class="cstat-no" title="statement not covered" >    }</span>
@@ -1301,7 +1347,7 @@ export function getAbsolutePositionTerminal(
 ): Point {
   const parentElementPosition = getAbsolutePosition(equipment);
 &nbsp;
-  return offsetTerminal(parentElementPosition, EQUIPMENT_SIZE, direction);
+  return absoluteOffsetTerminal(parentElementPosition, EQUIPMENT_SIZE, direction);
 }
 &nbsp;
 /**
@@ -1315,7 +1361,9 @@ export <span class="fstat-no" title="function not covered" >function getConnecti
 <span class="cstat-no" title="statement not covered" >): Point {</span>
 <span class="cstat-no" title="statement not covered" >  const parentElementPosition = getAbsolutePositionConnectivityNode(cNode);</span>
 <span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >  return offsetTerminal(parentElementPosition, CNODE_SIZE, direction);</span>
+<span class="cstat-no" title="statement not covered" >  // Using a custom terminal offset for Connectivity Nodes, so the routes are nicely connected to the Connectivity Nodes.</span>
+<span class="cstat-no" title="statement not covered" >  const customTerminalOffset = -(CNODE_SIZE/3)</span>
+<span class="cstat-no" title="statement not covered" >  return absoluteOffsetTerminal(parentElementPosition, CNODE_SIZE, direction, customTerminalOffset);</span>
 }
 &nbsp;
 /**
@@ -1720,7 +1768,7 @@ export function getBusBarLength(root: Element | XMLDocument): number {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener">istanbul</a>
-                at Fri Dec 10 2021 09:35:32 GMT+0000 (Coordinated Universal Time)
+                at Tue Dec 14 2021 13:00:13 GMT+0000 (Coordinated Universal Time)
             </div>
         </div>
         <script src="../../../prettify.js"></script>
