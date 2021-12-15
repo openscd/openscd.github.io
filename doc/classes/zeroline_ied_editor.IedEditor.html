@@ -71,7 +71,7 @@
 			<section class="tsd-panel tsd-comment">
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p><a href="zeroline_substation_editor.SubstationEditor.html"><code>SubstationEditor</code></a> subeditor for a <code>ConductingEquipment</code> element.</p>
+						<p><a href="zeroline_substation_editor.SubstationEditor.html"><code>SubstationEditor</code></a> subeditor for a child-less <code>IED</code> element.</p>
 					</div>
 				</div>
 			</section>
@@ -284,7 +284,7 @@
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-static tsd-is-external"><a href="zeroline_ied_editor.IedEditor.html#properties" class="tsd-kind-icon">properties</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-static tsd-is-external"><a href="zeroline_ied_editor.IedEditor.html#render" class="tsd-kind-icon">render</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-static tsd-is-external"><a href="zeroline_ied_editor.IedEditor.html#shadowRootOptions" class="tsd-kind-icon">shadow<wbr>Root<wbr>Options</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-overwrite tsd-is-static"><a href="zeroline_ied_editor.IedEditor.html#styles" class="tsd-kind-icon">styles</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-static tsd-is-external"><a href="zeroline_ied_editor.IedEditor.html#styles" class="tsd-kind-icon">styles</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
@@ -354,8 +354,8 @@
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external"><a href="zeroline_ied_editor.IedEditor.html#matches" class="tsd-kind-icon">matches</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external"><a href="zeroline_ied_editor.IedEditor.html#msGetRegionContent" class="tsd-kind-icon">ms<wbr>Get<wbr>Region<wbr>Content</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external"><a href="zeroline_ied_editor.IedEditor.html#normalize" class="tsd-kind-icon">normalize</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="zeroline_ied_editor.IedEditor.html#openCommunicationMapping" class="tsd-kind-icon">open<wbr>Communication<wbr>Mapping</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="zeroline_ied_editor.IedEditor.html#openGseControlSelection" class="tsd-kind-icon">open<wbr>Gse<wbr>Control<wbr>Selection</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="zeroline_ied_editor.IedEditor.html#openCommunicationMapping" class="tsd-kind-icon">open<wbr>Communication<wbr>Mapping</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="zeroline_ied_editor.IedEditor.html#openGseControlSelection" class="tsd-kind-icon">open<wbr>Gse<wbr>Control<wbr>Selection</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-protected tsd-is-external"><a href="zeroline_ied_editor.IedEditor.html#performUpdate" class="tsd-kind-icon">perform<wbr>Update</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external"><a href="zeroline_ied_editor.IedEditor.html#prepend" class="tsd-kind-icon">prepend</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-inherited tsd-is-external"><a href="zeroline_ied_editor.IedEditor.html#querySelector" class="tsd-kind-icon">query<wbr>Selector</a></li>
@@ -891,7 +891,7 @@
 					<div class="tsd-signature tsd-kind-icon">connect<wbr>Report<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Fab</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/866b114/src/zeroline/ied-editor.ts#L31">src/zeroline/ied-editor.ts:31</a></li>
+							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/8a5d569/src/zeroline/ied-editor.ts#L32">src/zeroline/ied-editor.ts:32</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -945,9 +945,14 @@
 					<div class="tsd-signature tsd-kind-icon">element<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Element</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/866b114/src/zeroline/ied-editor.ts#L24">src/zeroline/ied-editor.ts:24</a></li>
+							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/8a5d569/src/zeroline/ied-editor.ts#L25">src/zeroline/ied-editor.ts:25</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>SCL element IED</p>
+						</div>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-external">
 					<a name="enterKeyHint" class="tsd-anchor"></a>
@@ -3161,16 +3166,22 @@
 						</dl>
 					</div>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-overwrite tsd-is-static">
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-static tsd-is-external">
 					<a name="styles" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagStatic">Static</span> styles</h3>
-					<div class="tsd-signature tsd-kind-icon">styles<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">CSSResult</span><span class="tsd-signature-symbol"> = ...</span></div>
+					<h3><span class="tsd-flag ts-flagStatic">Static</span> <span class="tsd-flag ts-flagOptional">Optional</span> styles</h3>
+					<div class="tsd-signature tsd-kind-icon">styles<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">CSSResultGroup</span></div>
 					<aside class="tsd-sources">
-						<p>Overrides LitElement.styles</p>
+						<p>Inherited from LitElement.styles</p>
 						<ul>
-							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/866b114/src/zeroline/ied-editor.ts#L71">src/zeroline/ied-editor.ts:71</a></li>
+							<li>Defined in node_modules/lit-element/lit-element.d.ts:112</li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Array of styles to apply to the element. The styles should be defined
+							using the [[<code>css</code>]] tag function or via constructible stylesheets.</p>
+						</div>
+					</div>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
@@ -3219,9 +3230,14 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/866b114/src/zeroline/ied-editor.ts#L27">src/zeroline/ied-editor.ts:27</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/8a5d569/src/zeroline/ied-editor.ts#L28">src/zeroline/ied-editor.ts:28</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>IED name attribute</p>
+								</div>
+							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
 						</li>
 					</ul>
@@ -4900,34 +4916,34 @@
 						</li>
 					</ul>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private">
 					<a name="openCommunicationMapping" class="tsd-anchor"></a>
-					<h3>open<wbr>Communication<wbr>Mapping</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> open<wbr>Communication<wbr>Mapping</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private">
 						<li class="tsd-signature tsd-kind-icon">open<wbr>Communication<wbr>Mapping<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/866b114/src/zeroline/ied-editor.ts#L33">src/zeroline/ied-editor.ts:33</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/8a5d569/src/zeroline/ied-editor.ts#L34">src/zeroline/ied-editor.ts:34</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
 						</li>
 					</ul>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private">
 					<a name="openGseControlSelection" class="tsd-anchor"></a>
-					<h3>open<wbr>Gse<wbr>Control<wbr>Selection</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> open<wbr>Gse<wbr>Control<wbr>Selection</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private">
 						<li class="tsd-signature tsd-kind-icon">open<wbr>Gse<wbr>Control<wbr>Selection<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/866b114/src/zeroline/ied-editor.ts#L41">src/zeroline/ied-editor.ts:41</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/8a5d569/src/zeroline/ied-editor.ts#L42">src/zeroline/ied-editor.ts:42</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -5403,7 +5419,7 @@
 							<aside class="tsd-sources">
 								<p>Overrides LitElement.render</p>
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/866b114/src/zeroline/ied-editor.ts#L46">src/zeroline/ied-editor.ts:46</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/8a5d569/src/zeroline/ied-editor.ts#L47">src/zeroline/ied-editor.ts:47</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">TemplateResult</span></h4>
@@ -6874,7 +6890,7 @@
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-static tsd-is-external">
 								<a href="zeroline_ied_editor.IedEditor.html#shadowRootOptions" class="tsd-kind-icon">shadow<wbr>Root<wbr>Options</a>
 							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-overwrite tsd-is-static">
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-static tsd-is-external">
 								<a href="zeroline_ied_editor.IedEditor.html#styles" class="tsd-kind-icon">styles</a>
 							</li>
 							<li class=" tsd-kind-get-signature tsd-parent-kind-class tsd-is-private tsd-is-external">
@@ -7054,10 +7070,10 @@
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external">
 								<a href="zeroline_ied_editor.IedEditor.html#normalize" class="tsd-kind-icon">normalize</a>
 							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class">
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private">
 								<a href="zeroline_ied_editor.IedEditor.html#openCommunicationMapping" class="tsd-kind-icon">open<wbr>Communication<wbr>Mapping</a>
 							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class">
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private">
 								<a href="zeroline_ied_editor.IedEditor.html#openGseControlSelection" class="tsd-kind-icon">open<wbr>Gse<wbr>Control<wbr>Selection</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-protected tsd-is-external">
@@ -7204,7 +7220,7 @@
 				<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited constructor</span></li>
 			</ul>
 			<ul class="tsd-legend">
-				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private method</span></li>
 			</ul>
 		</div>
 	</div>

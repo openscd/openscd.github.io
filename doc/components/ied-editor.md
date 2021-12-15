@@ -1,18 +1,11 @@
 # ied-editor
 
-[[`SubstationEditor`]] subeditor for a `ConductingEquipment` element.
+[[`SubstationEditor`]] subeditor for a child-less `IED` element.
 
 ## Properties
 
-| Property        | Attribute | Modifiers | Type      |
-|-----------------|-----------|-----------|-----------|
-| `connectReport` |           |           | `Fab`     |
-| `element`       | `element` |           | `Element` |
-| `name`          | `name`    | readonly  | `string`  |
-
-## Methods
-
-| Method                     | Type       |
-|----------------------------|------------|
-| `openCommunicationMapping` | `(): void` |
-| `openGseControlSelection`  | `(): void` |
+| Property        | Attribute | Modifiers | Type      | Description        |
+|-----------------|-----------|-----------|-----------|--------------------|
+| `connectReport` |           |           | `Fab`     |                    |
+| `element`       |           |           | `Element` | SCL element IED    |
+| `name`          | `name`    | readonly  | `string`  | IED name attribute |

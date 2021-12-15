@@ -4,16 +4,13 @@
 
 ## Properties
 
-| Property   | Attribute  | Modifiers | Type      | Default |
-|------------|------------|-----------|-----------|---------|
-| `element`  | `element`  |           | `Element` |         |
-| `name`     | `name`     | readonly  | `string`  |         |
-| `readonly` | `readonly` |           | `boolean` | false   |
+| Property  | Attribute | Modifiers | Type      | Description                        |
+|-----------|-----------|-----------|-----------|------------------------------------|
+| `element` |           |           | `Element` | SCL element ConductingEquipment    |
+| `name`    | `name`    | readonly  | `string`  | ConductingEquipment name attribute |
 
 ## Methods
 
-| Method            | Type       | Description                                      |
-|-------------------|------------|--------------------------------------------------|
-| `openEditWizard`  | `(): void` |                                                  |
-| `openLNodeWizard` | `(): void` | Opens a [[`WizardDialog`]] for editing `LNode` connections. |
-| `remove`          | `(): void` |                                                  |
+| Method   | Type       |
+|----------|------------|
+| `remove` | `(): void` |
