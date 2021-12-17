@@ -19,7 +19,6 @@ function newFCDA(parent, path) {
   const ln = parent.ownerDocument.querySelector(selector(lnTag, lnId));
   if (!ln)
     return;
-  const iedName = ln.closest("IED")?.getAttribute("name");
   const ldInst = ln.closest("LDevice")?.getAttribute("inst");
   const prefix = ln.getAttribute("prefix") ?? "";
   const lnClass = ln.getAttribute("lnClass");
@@ -46,10 +45,9 @@ function newFCDA(parent, path) {
     if (tagName === "BDA")
       daName = daName + "." + name;
   }
-  if (!iedName || !ldInst || !lnClass || !doName || !daName || !fc)
+  if (!ldInst || !lnClass || !doName || !daName || !fc)
     return;
   return createElement(parent.ownerDocument, "FCDA", {
-    iedName,
     ldInst,
     prefix,
     lnClass,
