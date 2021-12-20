@@ -147,7 +147,7 @@ ActionIcon.styles = css`
       margin: 0px;
       text-align: center;
       align-self: center;
-      max-width: 64px;
+      max-width: 100%;
       direction: rtl;
     }
 
