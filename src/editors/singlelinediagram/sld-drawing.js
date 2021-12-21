@@ -98,6 +98,9 @@ function createGroupElement(element) {
   finalElement.setAttribute("sxy:y", `${coordinates.y}`);
   return finalElement;
 }
+export function createSubstationElement(substation) {
+  return createGroupElement(substation);
+}
 export function createVoltageLevelElement(voltageLevel) {
   return createGroupElement(voltageLevel);
 }
@@ -182,7 +185,7 @@ export function createConnectivityNodeElement(cNodeElement, clickAction) {
     groupElement.addEventListener("click", clickAction);
   return groupElement;
 }
-export function drawCNodeConnections(cNodesTerminalPosition, equipmentsTerminalPosition, svgToDrawOn) {
+export function drawCNodeConnections(cNodesTerminalPosition, equipmentsTerminalPosition, svgElementToDrawOn) {
   const path = getOrthogonalPath(equipmentsTerminalPosition, cNodesTerminalPosition, SVG_GRID_SIZE);
   const line = document.createElementNS("http://www.w3.org/2000/svg", "path");
   let d = "";
@@ -197,9 +200,9 @@ export function drawCNodeConnections(cNodesTerminalPosition, equipmentsTerminalP
   line.setAttribute("fill", "transparent");
   line.setAttribute("stroke", "currentColor");
   line.setAttribute("stroke-width", "1");
-  svgToDrawOn.insertAdjacentElement("afterbegin", line);
+  svgElementToDrawOn.insertAdjacentElement("afterbegin", line);
 }
-export function drawBusBarRoute(busbarsTerminalPosition, equipmentsTerminalPosition, svgToDrawOn) {
+export function drawBusBarRoute(busbarsTerminalPosition, equipmentsTerminalPosition, svgElementToDrawOn) {
   const path = [busbarsTerminalPosition].concat([equipmentsTerminalPosition]);
   const line = document.createElementNS("http://www.w3.org/2000/svg", "path");
   let d = "";
@@ -214,7 +217,7 @@ export function drawBusBarRoute(busbarsTerminalPosition, equipmentsTerminalPosit
   line.setAttribute("fill", "transparent");
   line.setAttribute("stroke", "currentColor");
   line.setAttribute("stroke-width", "1.5");
-  svgToDrawOn.appendChild(line);
+  svgElementToDrawOn.appendChild(line);
 }
 export function getDirections(equipment, cNode) {
   const pointA = getAbsoluteCoordinates(equipment);

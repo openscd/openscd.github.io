@@ -384,6 +384,9 @@ export const de = {
   updatedesc: {
     abb: "Signalbeschreibungen zu ABB IEDs hinzugefügt"
   },
+  sld: {
+    substationSelector: "Schaltanlage auswählen"
+  },
   add: "Hinzufügen",
   new: "Neu",
   remove: "Entfernen",

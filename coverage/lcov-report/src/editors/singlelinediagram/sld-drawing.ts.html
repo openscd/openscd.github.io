@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">84.27% </span>
+                <span class="strong">84.34% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>477/566</span>
+                <span class='fraction'>485/575</span>
             </div>
         
             
@@ -37,16 +37,16 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">85% </span>
+                <span class="strong">80.95% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>17/20</span>
+                <span class='fraction'>17/21</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">84.27% </span>
+                <span class="strong">84.34% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>477/566</span>
+                <span class='fraction'>485/575</span>
             </div>
         
             
@@ -629,7 +629,16 @@
 <a name='L564'></a><a href='#L564'>564</a>
 <a name='L565'></a><a href='#L565'>565</a>
 <a name='L566'></a><a href='#L566'>566</a>
-<a name='L567'></a><a href='#L567'>567</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L567'></a><a href='#L567'>567</a>
+<a name='L568'></a><a href='#L568'>568</a>
+<a name='L569'></a><a href='#L569'>569</a>
+<a name='L570'></a><a href='#L570'>570</a>
+<a name='L571'></a><a href='#L571'>571</a>
+<a name='L572'></a><a href='#L572'>572</a>
+<a name='L573'></a><a href='#L573'>573</a>
+<a name='L574'></a><a href='#L574'>574</a>
+<a name='L575'></a><a href='#L575'>575</a>
+<a name='L576'></a><a href='#L576'>576</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -828,6 +837,15 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -1282,10 +1300,10 @@ export function getAbsolutePositionConnectivityNode(element: Element): Point {
  * Calculate the absolute offset of a terminal next to an element.
  * @param parentElementPosition - The position of the parent element of the terminal.
  * @param elementOffset - The offset of the parent element.
- * @param terminalSide - The side of the parent element where the terminal should be placed. 
+ * @param terminalSide - The side of the parent element where the terminal should be placed.
  * @param customTerminalOffset - An optional parameter containing the offset of the terminal next to the parent element.
  * This may vary, for example for Connectivity Nodes.
- * 
+ *
  * @returns The absolute position of the terminal.
  */
 function absoluteOffsetTerminal(
@@ -1394,6 +1412,15 @@ function createGroupElement(element: Element): SVGElement {
   finalElement.setAttribute('sxy:y', `${coordinates.y}`);
 &nbsp;
   return finalElement;
+}
+&nbsp;
+/**
+ * Create a Substation &lt;g&gt; element.
+ * @param substation - The Substation from the SCL document to use.
+ * @returns A Substation &lt;g&gt; element.
+ */
+export <span class="fstat-no" title="function not covered" >function createSubstationElement(substation: Element): SVGElement {</span>
+<span class="cstat-no" title="statement not covered" >  return createGroupElement(substation);</span>
 }
 &nbsp;
 /**
@@ -1630,12 +1657,12 @@ export function createConnectivityNodeElement(
  * Draw a route from ConnectivityNode to equipments Terminal (ConductingEquipment or PowerTransformer)
  * @param cNodesTerminalPosition - The start position in px of the SCL element ConnectivityNode.
  * @param equipmentsTerminalPosition - The end position in px of the SCL element ConductingEquipment or PowerTransformer.
- * @param svgToDrawOn - The SVG to draw the route on.
+ * @param svgElementToDrawOn - The SVG Element to draw the route on.
  */
 export <span class="fstat-no" title="function not covered" >function drawCNodeConnections(</span>
 <span class="cstat-no" title="statement not covered" >  cNodesTerminalPosition: Point,</span>
 <span class="cstat-no" title="statement not covered" >  equipmentsTerminalPosition: Point,</span>
-<span class="cstat-no" title="statement not covered" >  svgToDrawOn: HTMLElement</span>
+<span class="cstat-no" title="statement not covered" >  svgElementToDrawOn: SVGElement</span>
 <span class="cstat-no" title="statement not covered" >): void {</span>
 <span class="cstat-no" title="statement not covered" >  const path = getOrthogonalPath(</span>
 <span class="cstat-no" title="statement not covered" >    equipmentsTerminalPosition,</span>
@@ -1661,19 +1688,19 @@ export <span class="fstat-no" title="function not covered" >function drawCNodeCo
 <span class="cstat-no" title="statement not covered" >  // Inserting elements like this works kind of like z-index (not supported in SVG yet),</span>
 <span class="cstat-no" title="statement not covered" >  // these elements are placed behind all other elements.</span>
 <span class="cstat-no" title="statement not covered" >  // By doing it like this, all other elements are hoverable for example.</span>
-<span class="cstat-no" title="statement not covered" >  svgToDrawOn.insertAdjacentElement('afterbegin', line);</span>
+<span class="cstat-no" title="statement not covered" >  svgElementToDrawOn.insertAdjacentElement('afterbegin', line);</span>
 }
 &nbsp;
 /**
  * Draw a route from the bus bar to elements terminal position.
  * @param busbarsTerminalPosition - The start position in px the bus bar.
  * @param equipmentsTerminalPosition - The end position in px of the SCL element ConductingEquipment or PowerTransformer.
- * @param svgToDrawOn - The SVG to draw the route on.
+ * @param svgElementToDrawOn - The SVG Element to draw the route on.
  */
 export <span class="fstat-no" title="function not covered" >function drawBusBarRoute(</span>
 <span class="cstat-no" title="statement not covered" >  busbarsTerminalPosition: Point,</span>
 <span class="cstat-no" title="statement not covered" >  equipmentsTerminalPosition: Point,</span>
-<span class="cstat-no" title="statement not covered" >  svgToDrawOn: HTMLElement</span>
+<span class="cstat-no" title="statement not covered" >  svgElementToDrawOn: SVGElement</span>
 <span class="cstat-no" title="statement not covered" >): void {</span>
 <span class="cstat-no" title="statement not covered" >  const path = [busbarsTerminalPosition].concat([equipmentsTerminalPosition]);</span>
 <span class="cstat-no" title="statement not covered" ></span>
@@ -1692,7 +1719,7 @@ export <span class="fstat-no" title="function not covered" >function drawBusBarR
 <span class="cstat-no" title="statement not covered" >  line.setAttribute('stroke', 'currentColor');</span>
 <span class="cstat-no" title="statement not covered" >  line.setAttribute('stroke-width', '1.5');</span>
 <span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >  svgToDrawOn.appendChild(line);</span>
+<span class="cstat-no" title="statement not covered" >  svgElementToDrawOn.appendChild(line);</span>
 }
 &nbsp;
 /**
@@ -1752,7 +1779,7 @@ export function getParentElementName(
  * @param root - Either the whole SCL file or the voltage level where the bus bar resides
  * @returns - the length of the bus bar
  */
-export function getBusBarLength(root: Element | XMLDocument): number {
+export function getBusBarLength(root: Element): number {
   return (
     Math.max(
       ...Array.from(
@@ -1768,7 +1795,7 @@ export function getBusBarLength(root: Element | XMLDocument): number {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener">istanbul</a>
-                at Mon Dec 20 2021 20:57:54 GMT+0000 (Coordinated Universal Time)
+                at Tue Dec 21 2021 16:02:25 GMT+0000 (Coordinated Universal Time)
             </div>
         </div>
         <script src="../../../prettify.js"></script>

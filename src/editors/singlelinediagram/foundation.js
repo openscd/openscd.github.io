@@ -38,7 +38,7 @@ export function getConnectedTerminals(element) {
     return [];
   const path = getPathNameAttribute(element) ?? "";
   const [substationName, voltageLevelName, bayName] = path.split("/");
-  return Array.from(substationElement.getElementsByTagName("Terminal")).filter((terminal) => terminal.getAttribute("connectivityNode") === path && terminal.getAttribute("substationName") === substationName && terminal.getAttribute("voltageLevelName") === voltageLevelName && terminal.getAttribute("bayName") === bayName && terminal.getAttribute("cNodeName") === getNameAttribute(element));
+  return Array.from(substationElement.getElementsByTagName("Terminal")).filter((terminal) => terminal.getAttribute("connectivityNode") === path && terminal.getAttribute("cNodeName") === getNameAttribute(element) && (!terminal.hasAttribute("substationName") || terminal.getAttribute("substationName") === substationName) && (!terminal.hasAttribute("voltageLevelName") || terminal.getAttribute("voltageLevelName") === voltageLevelName) && (!terminal.hasAttribute("bayName") || terminal.getAttribute("bayName") === bayName));
 }
 export function calculateConnectivityNodeCoordinates(cNodeElement) {
   if (cNodeElement.tagName != "ConnectivityNode")
