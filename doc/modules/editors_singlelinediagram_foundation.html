@@ -76,10 +76,17 @@
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
+							<h3>Variables</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-variable tsd-parent-kind-module"><a href="editors_singlelinediagram_foundation.html#SCL_COORDINATES_NAMESPACE" class="tsd-kind-icon">SCL_<wbr>COORDINATES_<wbr>NAMESPACE</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section ">
 							<h3>Functions</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-function tsd-parent-kind-module"><a href="editors_singlelinediagram_foundation.html#calculateConnectivityNodeCoordinates" class="tsd-kind-icon">calculate<wbr>Connectivity<wbr>Node<wbr>Coordinates</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-module"><a href="editors_singlelinediagram_foundation.html#getAbsoluteCoordinates" class="tsd-kind-icon">get<wbr>Absolute<wbr>Coordinates</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module"><a href="editors_singlelinediagram_foundation.html#getCommonParentElement" class="tsd-kind-icon">get<wbr>Common<wbr>Parent<wbr>Element</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-module"><a href="editors_singlelinediagram_foundation.html#getConnectedTerminals" class="tsd-kind-icon">get<wbr>Connected<wbr>Terminals</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-module"><a href="editors_singlelinediagram_foundation.html#getDescriptionAttribute" class="tsd-kind-icon">get<wbr>Description<wbr>Attribute</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-module"><a href="editors_singlelinediagram_foundation.html#getNameAttribute" class="tsd-kind-icon">get<wbr>Name<wbr>Attribute</a></li>
@@ -89,6 +96,19 @@
 							</ul>
 						</section>
 					</div>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Variables</h2>
+				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-module">
+					<a name="SCL_COORDINATES_NAMESPACE" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> SCL_<wbr>COORDINATES_<wbr>NAMESPACE</h3>
+					<div class="tsd-signature tsd-kind-icon">SCL_<wbr>COORDINATES_<wbr>NAMESPACE<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">&quot;http://www.iec.ch/61850/2003/SCLcoordinates&quot;</span><span class="tsd-signature-symbol"> = &#x27;http://www.iec.ch/61850/2003/SCLcoordinates&#x27;</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/dfae9b0/src/editors/singlelinediagram/foundation.ts#L9">src/editors/singlelinediagram/foundation.ts:9</a></li>
+						</ul>
+					</aside>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
@@ -103,7 +123,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/18d5925/src/editors/singlelinediagram/foundation.ts#L124">src/editors/singlelinediagram/foundation.ts:124</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/dfae9b0/src/editors/singlelinediagram/foundation.ts#L125">src/editors/singlelinediagram/foundation.ts:125</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -121,6 +141,9 @@
 							<ul class="tsd-parameters">
 								<li>
 									<h5>cNodeElement: <span class="tsd-signature-type">Element</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The Connectivity Node to calculate the X and Y Coordinates for.</p>
+									</div>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <a href="../interfaces/editors_singlelinediagram_foundation.Point.html" class="tsd-signature-type" data-tsd-kind="Interface">Point</a></h4>
@@ -138,7 +161,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/18d5925/src/editors/singlelinediagram/foundation.ts#L68">src/editors/singlelinediagram/foundation.ts:68</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/dfae9b0/src/editors/singlelinediagram/foundation.ts#L70">src/editors/singlelinediagram/foundation.ts:70</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -161,6 +184,35 @@
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
+					<a name="getCommonParentElement" class="tsd-anchor"></a>
+					<h3>get<wbr>Common<wbr>Parent<wbr>Element</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Common<wbr>Parent<wbr>Element<span class="tsd-signature-symbol">(</span>leftElement<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Element</span>, rightElement<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Element</span>, defaultParent<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Element</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Element</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/dfae9b0/src/editors/singlelinediagram/foundation.ts#L171">src/editors/singlelinediagram/foundation.ts:171</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>leftElement: <span class="tsd-signature-type">Element</span></h5>
+								</li>
+								<li>
+									<h5>rightElement: <span class="tsd-signature-type">Element</span></h5>
+								</li>
+								<li>
+									<h5>defaultParent: <span class="tsd-signature-type">Element</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Element</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
 					<a name="getConnectedTerminals" class="tsd-anchor"></a>
 					<h3>get<wbr>Connected<wbr>Terminals</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
@@ -170,7 +222,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/18d5925/src/editors/singlelinediagram/foundation.ts#L97">src/editors/singlelinediagram/foundation.ts:97</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/dfae9b0/src/editors/singlelinediagram/foundation.ts#L99">src/editors/singlelinediagram/foundation.ts:99</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -202,7 +254,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/18d5925/src/editors/singlelinediagram/foundation.ts#L27">src/editors/singlelinediagram/foundation.ts:27</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/dfae9b0/src/editors/singlelinediagram/foundation.ts#L29">src/editors/singlelinediagram/foundation.ts:29</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -234,7 +286,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/18d5925/src/editors/singlelinediagram/foundation.ts#L17">src/editors/singlelinediagram/foundation.ts:17</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/dfae9b0/src/editors/singlelinediagram/foundation.ts#L19">src/editors/singlelinediagram/foundation.ts:19</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -266,7 +318,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/18d5925/src/editors/singlelinediagram/foundation.ts#L37">src/editors/singlelinediagram/foundation.ts:37</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/dfae9b0/src/editors/singlelinediagram/foundation.ts#L39">src/editors/singlelinediagram/foundation.ts:39</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -298,7 +350,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/18d5925/src/editors/singlelinediagram/foundation.ts#L47">src/editors/singlelinediagram/foundation.ts:47</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/dfae9b0/src/editors/singlelinediagram/foundation.ts#L49">src/editors/singlelinediagram/foundation.ts:49</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -330,7 +382,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/18d5925/src/editors/singlelinediagram/foundation.ts#L85">src/editors/singlelinediagram/foundation.ts:85</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/dfae9b0/src/editors/singlelinediagram/foundation.ts#L87">src/editors/singlelinediagram/foundation.ts:87</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -370,11 +422,17 @@
 					<li class=" tsd-kind-interface tsd-parent-kind-module">
 						<a href="../interfaces/editors_singlelinediagram_foundation.Point.html" class="tsd-kind-icon">Point</a>
 					</li>
+					<li class=" tsd-kind-variable tsd-parent-kind-module">
+						<a href="editors_singlelinediagram_foundation.html#SCL_COORDINATES_NAMESPACE" class="tsd-kind-icon">SCL_<wbr>COORDINATES_<wbr>NAMESPACE</a>
+					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-module">
 						<a href="editors_singlelinediagram_foundation.html#calculateConnectivityNodeCoordinates" class="tsd-kind-icon">calculate<wbr>Connectivity<wbr>Node<wbr>Coordinates</a>
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-module">
 						<a href="editors_singlelinediagram_foundation.html#getAbsoluteCoordinates" class="tsd-kind-icon">get<wbr>Absolute<wbr>Coordinates</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-module">
+						<a href="editors_singlelinediagram_foundation.html#getCommonParentElement" class="tsd-kind-icon">get<wbr>Common<wbr>Parent<wbr>Element</a>
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-module">
 						<a href="editors_singlelinediagram_foundation.html#getConnectedTerminals" class="tsd-kind-icon">get<wbr>Connected<wbr>Terminals</a>

@@ -1,3 +1,4 @@
+export const SCL_COORDINATES_NAMESPACE = "http://www.iec.ch/61850/2003/SCLcoordinates";
 const COORDINATES_SCALE_FACTOR = 2;
 export function getNameAttribute(element) {
   const name = element.getAttribute("name");
@@ -12,8 +13,8 @@ export function getPathNameAttribute(element) {
   return name ? name : void 0;
 }
 export function getRelativeCoordinates(element) {
-  const x = element.getAttributeNS("http://www.iec.ch/61850/2003/SCLcoordinates", "x");
-  const y = element.getAttributeNS("http://www.iec.ch/61850/2003/SCLcoordinates", "y");
+  const x = element.getAttributeNS(SCL_COORDINATES_NAMESPACE, "x");
+  const y = element.getAttributeNS(SCL_COORDINATES_NAMESPACE, "y");
   return {
     x: x ? parseInt(x) * COORDINATES_SCALE_FACTOR : 0,
     y: y ? parseInt(y) * COORDINATES_SCALE_FACTOR : 0
@@ -46,12 +47,16 @@ export function calculateConnectivityNodeCoordinates(cNodeElement) {
   const substationElement = cNodeElement.closest("Substation");
   const pathName = getPathNameAttribute(cNodeElement);
   let nrOfConnections = 0;
+  let nrOfXConnections = 0;
   let totalX = 0;
   let totalY = 0;
   Array.from(substationElement.querySelectorAll("ConductingEquipment, PowerTransformer")).filter((equipment) => equipment.querySelector(`Terminal[connectivityNode="${pathName}"]`) != null).forEach((equipment) => {
     nrOfConnections++;
     const {x, y} = getAbsoluteCoordinates(equipment);
-    totalX += x;
+    if (equipment.parentElement === cNodeElement.parentElement) {
+      nrOfXConnections++;
+      totalX += x;
+    }
     totalY += y;
   });
   if (nrOfConnections === 0)
@@ -59,7 +64,17 @@ export function calculateConnectivityNodeCoordinates(cNodeElement) {
   if (nrOfConnections === 1)
     return {x: totalX + 1, y: totalY + 1};
   return {
-    x: Math.round(totalX / nrOfConnections),
+    x: Math.round(totalX / nrOfXConnections),
     y: Math.round(totalY / nrOfConnections)
   };
+}
+export function getCommonParentElement(leftElement, rightElement, defaultParent) {
+  let leftParentElement = leftElement.parentElement;
+  while (leftParentElement) {
+    if (leftParentElement.contains(rightElement)) {
+      return leftParentElement;
+    }
+    leftParentElement = leftParentElement.parentElement;
+  }
+  return defaultParent;
 }

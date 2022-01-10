@@ -42,7 +42,7 @@ const types = {
 function typeStr(condEq) {
   return condEq.getAttribute("type") === "DIS" && condEq.querySelector("Terminal")?.getAttribute("cNodeName") === "grounded" ? "ERS" : condEq.getAttribute("type") ?? "";
 }
-function typeName(condEq) {
+export function typeName(condEq) {
   return types[typeStr(condEq)] ?? get("conductingequipment.unknownType");
 }
 function renderTypeSelector(option, type) {
@@ -63,7 +63,7 @@ function renderTypeSelector(option, type) {
         <mwc-list-item selected value="0">${type}</mwc-list-item>
       </mwc-select>`;
 }
-function render(name, desc, option, type, reservedNames) {
+export function renderConductingEquipmentWizard(name, desc, option, type, reservedNames) {
   return [
     renderTypeSelector(option, type),
     html`<wizard-textfield
@@ -108,8 +108,11 @@ export function createAction(parent) {
     return [action];
   };
 }
+export function reservedNamesConductingEquipment(parent, currentName) {
+  return Array.from(parent.querySelectorAll("ConductingEquipment")).filter(isPublic).map((condEq) => condEq.getAttribute("name") ?? "").filter((name) => currentName && name !== currentName);
+}
 export function createConductingEquipmentWizard(parent) {
-  const reservedNames = Array.from(parent.querySelectorAll("ConductingEquipment")).filter(isPublic).map((condEq) => condEq.getAttribute("name") ?? "");
+  const reservedNames = reservedNamesConductingEquipment(parent);
   return [
     {
       title: get("conductingequipment.wizard.title.add"),
@@ -119,12 +122,12 @@ export function createConductingEquipmentWizard(parent) {
         label: get("add"),
         action: createAction(parent)
       },
-      content: render("", "", "create", "", reservedNames)
+      content: renderConductingEquipmentWizard("", "", "create", "", reservedNames)
     }
   ];
 }
 export function editConductingEquipmentWizard(element) {
-  const reservedNames = Array.from(element.parentNode.querySelectorAll("ConductingEquipment")).filter(isPublic).map((condEq) => condEq.getAttribute("name") ?? "").filter((name) => name !== element.getAttribute("name"));
+  const reservedNames = reservedNamesConductingEquipment(element.parentNode, element.getAttribute("name"));
   return [
     {
       title: get("conductingequipment.wizard.title.edit"),
@@ -134,7 +137,7 @@ export function editConductingEquipmentWizard(element) {
         label: get("save"),
         action: updateNamingAction(element)
       },
-      content: render(element.getAttribute("name"), element.getAttribute("desc"), "edit", typeName(element), reservedNames)
+      content: renderConductingEquipmentWizard(element.getAttribute("name"), element.getAttribute("desc"), "edit", typeName(element), reservedNames)
     }
   ];
 }

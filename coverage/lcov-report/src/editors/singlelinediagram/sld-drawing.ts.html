@@ -23,16 +23,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">84.34% </span>
+                <span class="strong">84.53% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>485/575</span>
+                <span class='fraction'>492/582</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">70% </span>
+                <span class="strong">65.62% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>21/30</span>
+                <span class='fraction'>21/32</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">84.34% </span>
+                <span class="strong">84.53% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>485/575</span>
+                <span class='fraction'>492/582</span>
             </div>
         
             
@@ -638,7 +638,14 @@
 <a name='L573'></a><a href='#L573'>573</a>
 <a name='L574'></a><a href='#L574'>574</a>
 <a name='L575'></a><a href='#L575'>575</a>
-<a name='L576'></a><a href='#L576'>576</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L576'></a><a href='#L576'>576</a>
+<a name='L577'></a><a href='#L577'>577</a>
+<a name='L578'></a><a href='#L578'>578</a>
+<a name='L579'></a><a href='#L579'>579</a>
+<a name='L580'></a><a href='#L580'>580</a>
+<a name='L581'></a><a href='#L581'>581</a>
+<a name='L582'></a><a href='#L582'>582</a>
+<a name='L583'></a><a href='#L583'>583</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -913,6 +920,13 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -1286,8 +1300,8 @@ export function getAbsolutePositionBusBar(busbar: Element): Point {
  * @param connectivityNode - The SCL element ConnectivityNode to get the position for.
  * @returns A point containing the full x/y position in px.
  */
-export function getAbsolutePositionConnectivityNode(element: Element): Point {
-  const absoluteCoordinates = calculateConnectivityNodeCoordinates(element);
+export function getAbsolutePositionConnectivityNode(connectivityNode: Element): Point {
+  const absoluteCoordinates = calculateConnectivityNodeCoordinates(connectivityNode);
   return {
     x:
       absoluteCoordinates.x! * SVG_GRID_SIZE + (SVG_GRID_SIZE - CNODE_SIZE) / 2,
@@ -1357,7 +1371,7 @@ function absoluteOffsetTerminal(
 /**
  * Get the absolute position in py for a equipments Terminal (based on the TERMINAL_OFFSET).
  * @param equipment - The SCL elements ConductingEquipment or PowerTransformer.
- * @param side - On which side does the terminal needs to be placed relative to the given point.
+ * @param direction - On which side does the terminal needs to be placed relative to the given point.
  */
 export function getAbsolutePositionTerminal(
   equipment: Element,
@@ -1434,7 +1448,7 @@ export function createVoltageLevelElement(voltageLevel: Element): SVGElement {
 &nbsp;
 /**
  * Create a Bay &lt;g&gt; element.
- * @param voltageLevel - The Bay from the SCL document to use.
+ * @param bay - The Bay from the SCL document to use.
  * @returns A Bay &lt;g&gt; element.
  */
 export function createBayElement(bay: Element): SVGElement {
@@ -1480,7 +1494,7 @@ export function createTextElement(
 export function createTerminalElement(
   terminal: Element,
   sideToDraw: Direction,
-  clickAction?: () =&gt; void
+  clickAction?: (event: Event) =&gt; void
 ): SVGElement {
   const groupElement = createGroupElement(terminal);
 &nbsp;
@@ -1518,9 +1532,12 @@ export function createTerminalElement(
  */
 export function createBusBarElement(
   busBarElement: Element,
-  busbarLength: number
+  busbarLength: number,
+  clickAction?: (event: Event) =&gt; void
 ): SVGElement {
   const groupElement = createGroupElement(busBarElement);
+  // Overwrite the type to make a distinction between Bays and Busbars.
+  groupElement.setAttribute('type', 'Busbar');
 &nbsp;
   const busBarName = getNameAttribute(busBarElement)!;
   const absolutePosition = getAbsolutePositionBusBar(busBarElement);
@@ -1545,6 +1562,8 @@ export function createBusBarElement(
   );
   groupElement.appendChild(text);
 &nbsp;
+  if (clickAction) <span class="branch-0 cbranch-no" title="branch not covered" >groupElement.addEventListener('click', clickAction);</span>
+&nbsp;
   return groupElement;
 }
 &nbsp;
@@ -1555,7 +1574,7 @@ export function createBusBarElement(
  */
 export function createConductingEquipmentElement(
   equipmentElement: Element,
-  clickAction?: () =&gt; void
+  clickAction?: (event: Event) =&gt; void
 ): SVGElement {
   const groupElement = createGroupElement(equipmentElement);
 &nbsp;
@@ -1592,7 +1611,8 @@ export function createConductingEquipmentElement(
  * @returns The Power Transformer SVG element.
  */
 export function createPowerTransformerElement(
-  powerTransformerElement: Element
+  powerTransformerElement: Element,
+  clickAction?: (event: Event) =&gt; void
 ): SVGElement {
   const groupElement = createGroupElement(powerTransformerElement);
 &nbsp;
@@ -1618,19 +1638,20 @@ export function createPowerTransformerElement(
   );
   groupElement.appendChild(text);
 &nbsp;
+  if (clickAction) <span class="branch-0 cbranch-no" title="branch not covered" >groupElement.addEventListener('click', clickAction);</span>
+&nbsp;
   return groupElement;
 }
 &nbsp;
 /**
  * Create a Connectivity Node element.
  * @param cNodeElement - The SCL element ConnectivityNode
- * @param position - The SCL position of the Connectivity Node.
  * @param clickAction - The action to execute when the terminal is being clicked.
  * @returns The Connectivity Node SVG element.
  */
 export function createConnectivityNodeElement(
   cNodeElement: Element,
-  clickAction?: () =&gt; void
+  clickAction?: (event: Event) =&gt; void
 ): SVGElement {
   const groupElement = createGroupElement(cNodeElement);
 &nbsp;
@@ -1795,7 +1816,7 @@ export function getBusBarLength(root: Element): number {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener">istanbul</a>
-                at Thu Dec 23 2021 22:45:06 GMT+0000 (Coordinated Universal Time)
+                at Mon Jan 10 2022 15:12:37 GMT+0000 (Coordinated Universal Time)
             </div>
         </div>
         <script src="../../../prettify.js"></script>

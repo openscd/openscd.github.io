@@ -30,8 +30,8 @@ export function getAbsolutePositionBusBar(busbar) {
     y: absoluteCoordinates.y * SVG_GRID_SIZE
   };
 }
-export function getAbsolutePositionConnectivityNode(element) {
-  const absoluteCoordinates = calculateConnectivityNodeCoordinates(element);
+export function getAbsolutePositionConnectivityNode(connectivityNode) {
+  const absoluteCoordinates = calculateConnectivityNodeCoordinates(connectivityNode);
   return {
     x: absoluteCoordinates.x * SVG_GRID_SIZE + (SVG_GRID_SIZE - CNODE_SIZE) / 2,
     y: absoluteCoordinates.y * SVG_GRID_SIZE + (SVG_GRID_SIZE - CNODE_SIZE) / 2
@@ -130,8 +130,9 @@ export function createTerminalElement(terminal, sideToDraw, clickAction) {
     groupElement.addEventListener("click", clickAction);
   return groupElement;
 }
-export function createBusBarElement(busBarElement, busbarLength) {
+export function createBusBarElement(busBarElement, busbarLength, clickAction) {
   const groupElement = createGroupElement(busBarElement);
+  groupElement.setAttribute("type", "Busbar");
   const busBarName = getNameAttribute(busBarElement);
   const absolutePosition = getAbsolutePositionBusBar(busBarElement);
   const icon = document.createElementNS("http://www.w3.org/2000/svg", "line");
@@ -145,6 +146,8 @@ export function createBusBarElement(busBarElement, busbarLength) {
   groupElement.appendChild(icon);
   const text = createTextElement(busBarName, {x: absolutePosition.x, y: absolutePosition.y - 10}, "small");
   groupElement.appendChild(text);
+  if (clickAction)
+    groupElement.addEventListener("click", clickAction);
   return groupElement;
 }
 export function createConductingEquipmentElement(equipmentElement, clickAction) {
@@ -161,7 +164,7 @@ export function createConductingEquipmentElement(equipmentElement, clickAction) 
     groupElement.addEventListener("click", clickAction);
   return groupElement;
 }
-export function createPowerTransformerElement(powerTransformerElement) {
+export function createPowerTransformerElement(powerTransformerElement, clickAction) {
   const groupElement = createGroupElement(powerTransformerElement);
   const absolutePosition = getAbsolutePosition(powerTransformerElement);
   const parsedIcon = new DOMParser().parseFromString(powerTransformerTwoWindingIcon.strings[0], "application/xml");
@@ -171,6 +174,8 @@ export function createPowerTransformerElement(powerTransformerElement) {
   });
   const text = createTextElement(getNameAttribute(powerTransformerElement), {x: absolutePosition.x - 15, y: absolutePosition.y + 30}, "x-small");
   groupElement.appendChild(text);
+  if (clickAction)
+    groupElement.addEventListener("click", clickAction);
   return groupElement;
 }
 export function createConnectivityNodeElement(cNodeElement, clickAction) {

@@ -46,10 +46,11 @@ import {
   getConnectedTerminals,
   getPathNameAttribute,
   getNameAttribute,
-  getDescriptionAttribute
+  getDescriptionAttribute,
+  getCommonParentElement
 } from "./singlelinediagram/foundation.js";
 import {isSCLNamespace} from "../schemas.js";
-import {wizards} from "../wizards/wizard-library.js";
+import {wizards} from "./singlelinediagram/wizards/wizard-library.js";
 import {translate} from "../../_snowpack/pkg/lit-translate.js";
 import "../../_snowpack/pkg/@material/mwc-list/mwc-list-item.js";
 import "../../_snowpack/pkg/@material/mwc-select.js";
@@ -89,7 +90,7 @@ export default class SingleLineDiagramPlugin extends LitElement {
     this.getPowerTransformers(parentElement).forEach((powerTransformerElement) => this.drawPowerTransformer(parentGroup, powerTransformerElement));
   }
   drawPowerTransformer(parentGroup, powerTransformerElement) {
-    const powerTransformerGroup = createPowerTransformerElement(powerTransformerElement);
+    const powerTransformerGroup = createPowerTransformerElement(powerTransformerElement, (event) => this.openEditWizard(event, powerTransformerElement));
     parentGroup.appendChild(powerTransformerGroup);
   }
   drawVoltageLevels(substationElement, substationGroup) {
@@ -102,10 +103,10 @@ export default class SingleLineDiagramPlugin extends LitElement {
     });
     this.getVoltageLevels(substationElement).forEach((voltageLevelElement) => {
       this.getBusBars(voltageLevelElement).forEach((busbarElement) => {
-        this.drawBusBarConnections(substationElement, substationGroup, busbarElement);
+        this.drawBusBarConnections(substationElement, this.svg, busbarElement);
       });
       this.getBays(voltageLevelElement).forEach((bayElement) => {
-        this.drawBayConnections(substationElement, substationGroup, bayElement);
+        this.drawBayConnections(substationElement, this.svg, bayElement);
       });
     });
   }
@@ -120,26 +121,27 @@ export default class SingleLineDiagramPlugin extends LitElement {
   }
   drawConductingEquipments(bayElement, bayGroup) {
     this.getConductingEquipments(bayElement).filter((conductingEquipmentElement) => Array.from(conductingEquipmentElement.querySelectorAll("Terminal")).filter((terminal) => terminal.getAttribute("cNodeName") !== "grounded").length !== 0).forEach((conductingEquipmentElement) => {
-      const conductingEquipmentGroup = createConductingEquipmentElement(conductingEquipmentElement, () => this.openEditWizard(conductingEquipmentElement));
+      const conductingEquipmentGroup = createConductingEquipmentElement(conductingEquipmentElement, (event) => this.openEditWizard(event, conductingEquipmentElement));
       bayGroup.appendChild(conductingEquipmentGroup);
     });
   }
   drawConnectivityNodes(bayElement, bayGroup) {
     this.getConnectivityNode(bayElement).filter((cNode) => getConnectedTerminals(cNode).length > 0).forEach((cNode) => {
-      const cNodegroup = createConnectivityNodeElement(cNode, () => this.openEditWizard(cNode));
+      const cNodegroup = createConnectivityNodeElement(cNode, (event) => this.openEditWizard(event, cNode));
       bayGroup.appendChild(cNodegroup);
     });
   }
   drawBayConnections(rootElement, rootGroup, bayElement) {
     this.getConnectivityNode(bayElement).forEach((cNode) => {
-      this.findEquipment(rootElement, getPathNameAttribute(cNode)).forEach((element) => {
-        const sides = getDirections(element, cNode);
-        const elementsTerminalPosition = getAbsolutePositionTerminal(element, sides.startDirection);
+      this.findEquipment(rootElement, getPathNameAttribute(cNode)).forEach((equipmentElement) => {
+        const commonParentElement = getCommonParentElement(cNode, equipmentElement, bayElement);
+        const sides = getDirections(equipmentElement, cNode);
+        const elementsTerminalPosition = getAbsolutePositionTerminal(equipmentElement, sides.startDirection);
         const cNodePosition = getConnectivityNodesDrawingPosition(cNode, sides.endDirection);
-        rootGroup.querySelectorAll(`g[id="${identity(bayElement)}"]`).forEach((eq) => drawCNodeConnections(cNodePosition, elementsTerminalPosition, eq));
-        const terminalElement = element.querySelector(`Terminal[connectivityNode="${cNode.getAttribute("pathName")}"]`);
-        const terminal = createTerminalElement(terminalElement, sides.startDirection, () => this.openEditWizard(terminalElement));
-        rootGroup.querySelectorAll(`g[id="${identity(element)}"]`).forEach((eq) => eq.appendChild(terminal));
+        rootGroup.querySelectorAll(`g[id="${identity(commonParentElement)}"]`).forEach((eq) => drawCNodeConnections(cNodePosition, elementsTerminalPosition, eq));
+        const terminalElement = equipmentElement.querySelector(`Terminal[connectivityNode="${cNode.getAttribute("pathName")}"]`);
+        const terminal = createTerminalElement(terminalElement, sides.startDirection, (event) => this.openEditWizard(event, terminalElement));
+        rootGroup.querySelectorAll(`g[id="${identity(equipmentElement)}"]`).forEach((eq) => eq.appendChild(terminal));
       });
     });
   }
@@ -147,13 +149,14 @@ export default class SingleLineDiagramPlugin extends LitElement {
     this.getBusBars(voltageLevelElement).forEach((busbarElement) => this.drawBusBar(voltageLevelElement, voltageLevelGroup, busbarElement));
   }
   drawBusBar(parentElement, parentGroup, busbarElement) {
-    const busBarGroup = createBusBarElement(busbarElement, getBusBarLength(parentElement));
+    const busBarGroup = createBusBarElement(busbarElement, getBusBarLength(parentElement), (event) => this.openEditWizard(event, busbarElement));
     parentGroup.appendChild(busBarGroup);
   }
   drawBusBarConnections(rootElement, rootGroup, busbarElement) {
     const pathName = getPathNameAttribute(busbarElement.children[0]);
     const busBarPosition = getAbsolutePositionBusBar(busbarElement);
     this.findEquipment(rootElement, pathName).forEach((element) => {
+      const parentElement = element.parentElement;
       const elementPosition = getAbsolutePosition(element);
       const elementsTerminalSide = busBarPosition.y < elementPosition.y ? "top" : "bottom";
       const elementsTerminalPosition = getAbsolutePositionTerminal(element, elementsTerminalSide);
@@ -162,8 +165,8 @@ export default class SingleLineDiagramPlugin extends LitElement {
         y: busBarPosition.y
       };
       const terminalElement = element.querySelector(`Terminal[connectivityNode="${pathName}"]`);
-      rootGroup.querySelectorAll(`g[id="${identity(busbarElement)}"]`).forEach((eq) => drawBusBarRoute(busbarTerminalPosition, elementsTerminalPosition, eq));
-      const terminal = createTerminalElement(terminalElement, elementsTerminalSide, () => this.openEditWizard(terminalElement));
+      rootGroup.querySelectorAll(`g[id="${identity(parentElement)}"]`).forEach((eq) => drawBusBarRoute(busbarTerminalPosition, elementsTerminalPosition, eq));
+      const terminal = createTerminalElement(terminalElement, elementsTerminalSide, (event) => this.openEditWizard(event, terminalElement));
       rootGroup.querySelectorAll(`g[id="${identity(element)}"]`).forEach((eq) => eq.appendChild(terminal));
     });
   }
@@ -176,14 +179,25 @@ export default class SingleLineDiagramPlugin extends LitElement {
     this.clearSVG();
     this.drawSubstation();
   }
-  openEditWizard(element) {
+  openEditWizard(event, element) {
     const wizard = wizards[element.tagName].edit(element);
-    if (wizard)
+    if (wizard) {
       this.dispatchEvent(newWizardEvent(wizard));
+      event.stopPropagation();
+    }
   }
   firstUpdated() {
-    panzoom(this.panzoomContainer);
     this.drawSubstationElements();
+    const bbox = this.svg.getBBox();
+    this.svg.setAttribute("viewBox", bbox.x - 10 + " " + (bbox.y - 10) + " " + (bbox.width + 20) + " " + (bbox.height + 20));
+    this.svg.setAttribute("width", bbox.width + 20 + "px");
+    this.svg.setAttribute("height", bbox.height + 20 + "px");
+    panzoom(this.panzoomContainer, {
+      zoomSpeed: 0.2,
+      maxZoom: 1.5,
+      minZoom: 0.2,
+      initialZoom: 0.5
+    });
   }
   onSelect(event) {
     this.selectedSubstation = this.substations[event.detail.index];
@@ -239,8 +253,6 @@ export default class SingleLineDiagramPlugin extends LitElement {
           <svg
             xmlns="http://www.w3.org/2000/svg"
             id="svg"
-            width="5000"
-            height="5000"
           ></svg>
         </div>
       </div>`;
@@ -281,9 +293,11 @@ SingleLineDiagramPlugin.styles = css`
       pointer-events: bounding-box;
     }
 
+    g[type='Busbar']:hover,
+    g[type='ConductingEquipment']:hover,
     g[type='ConnectivityNode']:hover,
-    g[type='Terminal']:hover,
-    g[type='ConductingEquipment']:hover {
+    g[type='PowerTransformer']:hover,
+    g[type='Terminal']:hover {
       outline: 2px dashed var(--mdc-theme-primary);
       transition: transform 200ms linear, box-shadow 250ms linear;
     }
