@@ -142,6 +142,22 @@ export function referencePath(element) {
   }
   return path;
 }
+export function getNameAttribute(element) {
+  const name2 = element.getAttribute("name");
+  return name2 ? name2 : void 0;
+}
+export function getDescriptionAttribute(element) {
+  const name2 = element.getAttribute("desc");
+  return name2 ? name2 : void 0;
+}
+export function getPathNameAttribute(element) {
+  const name2 = element.getAttribute("pathName");
+  return name2 ? name2 : void 0;
+}
+export function getInstanceAttribute(element) {
+  const inst = element.getAttribute("inst");
+  return inst ? inst : void 0;
+}
 export function pathParts(identity2) {
   const path = identity2.split(">");
   const end = path.pop() ?? "";
@@ -1791,11 +1807,11 @@ export function compareNames(a, b) {
   if (typeof a === "string" && typeof b === "string")
     return a.localeCompare(b);
   if (typeof a === "object" && typeof b === "string")
-    return a.getAttribute("name").localeCompare(b);
+    return (a.getAttribute("name") ?? "").localeCompare(b);
   if (typeof a === "string" && typeof b === "object")
     return a.localeCompare(b.getAttribute("name"));
   if (typeof a === "object" && typeof b === "object")
-    return a.getAttribute("name").localeCompare(b.getAttribute("name"));
+    return (a.getAttribute("name") ?? "").localeCompare(b.getAttribute("name") ?? "");
   return 0;
 }
 export function unreachable(message) {

@@ -1,17 +1,6 @@
+import {getNameAttribute, getPathNameAttribute} from "../../foundation.js";
 export const SCL_COORDINATES_NAMESPACE = "http://www.iec.ch/61850/2003/SCLcoordinates";
 const COORDINATES_SCALE_FACTOR = 2;
-export function getNameAttribute(element) {
-  const name = element.getAttribute("name");
-  return name ? name : void 0;
-}
-export function getDescriptionAttribute(element) {
-  const name = element.getAttribute("desc");
-  return name ? name : void 0;
-}
-export function getPathNameAttribute(element) {
-  const name = element.getAttribute("pathName");
-  return name ? name : void 0;
-}
 export function getRelativeCoordinates(element) {
   const x = element.getAttributeNS(SCL_COORDINATES_NAMESPACE, "x");
   const y = element.getAttributeNS(SCL_COORDINATES_NAMESPACE, "y");

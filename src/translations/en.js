@@ -149,6 +149,12 @@ export const en = {
       addvoltagelevel: "Add voltage level"
     }
   },
+  iededitor: {
+    searchHelper: "Select IED",
+    searchHelperDesc: "({{description}})",
+    missing: "No IED",
+    toggleChildElements: "Toggle child elements"
+  },
   powertransformer: {
     wizard: {
       nameHelper: "Power transformer name",

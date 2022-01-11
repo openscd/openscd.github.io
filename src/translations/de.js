@@ -149,6 +149,12 @@ export const de = {
       addvoltagelevel: "Spannungsebene hinzufügen"
     }
   },
+  iededitor: {
+    searchHelper: "IED auswählen",
+    searchHelperDesc: "({{description}})",
+    missing: "Kein IED vorhanden",
+    toggleChildElements: "???"
+  },
   powertransformer: {
     wizard: {
       nameHelper: "`Name des Leistungstransformators",

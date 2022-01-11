@@ -18,10 +18,9 @@ import {
   state
 } from "../../_snowpack/pkg/lit-element.js";
 import panzoom from "../../_snowpack/pkg/panzoom.js";
+import {identity, getPathNameAttribute, newWizardEvent, getNameAttribute, getDescriptionAttribute} from "../foundation.js";
 import {
-  compareNames,
-  identity,
-  newWizardEvent
+  compareNames
 } from "../foundation.js";
 import {
   getAbsolutePosition,
@@ -44,9 +43,6 @@ import {
 import {
   isBusBar,
   getConnectedTerminals,
-  getPathNameAttribute,
-  getNameAttribute,
-  getDescriptionAttribute,
   getCommonParentElement
 } from "./singlelinediagram/foundation.js";
 import {isSCLNamespace} from "../schemas.js";
