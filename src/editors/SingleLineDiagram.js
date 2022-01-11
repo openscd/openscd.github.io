@@ -171,19 +171,9 @@ export default class SingleLineDiagramPlugin extends LitElement {
       this.svg.removeChild(this.svg.lastChild);
     }
   }
-  drawSubstationElements() {
+  drawSVGElements() {
     this.clearSVG();
     this.drawSubstation();
-  }
-  openEditWizard(event, element) {
-    const wizard = wizards[element.tagName].edit(element);
-    if (wizard) {
-      this.dispatchEvent(newWizardEvent(wizard));
-      event.stopPropagation();
-    }
-  }
-  firstUpdated() {
-    this.drawSubstationElements();
     const bbox = this.svg.getBBox();
     this.svg.setAttribute("viewBox", bbox.x - 10 + " " + (bbox.y - 10) + " " + (bbox.width + 20) + " " + (bbox.height + 20));
     this.svg.setAttribute("width", bbox.width + 20 + "px");
@@ -195,9 +185,19 @@ export default class SingleLineDiagramPlugin extends LitElement {
       initialZoom: 0.5
     });
   }
+  openEditWizard(event, element) {
+    const wizard = wizards[element.tagName].edit(element);
+    if (wizard) {
+      this.dispatchEvent(newWizardEvent(wizard));
+      event.stopPropagation();
+    }
+  }
+  firstUpdated() {
+    this.drawSVGElements();
+  }
   onSelect(event) {
     this.selectedSubstation = this.substations[event.detail.index];
-    this.drawSubstationElements();
+    this.drawSVGElements();
   }
   renderSubstationSelector() {
     const substationList = this.substations;
