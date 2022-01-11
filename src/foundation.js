@@ -1801,7 +1801,7 @@ export const patterns = {
   unsigned: "[+]?[0-9]+(([.][0-9]*)?|([.][0-9]+))",
   alphanumericFirstUpperCase: "[A-Z][0-9,A-Z,a-z]*",
   alphanumericFirstLowerCase: "[a-z][0-9,A-Z,a-z]*",
-  lnClass: "[A-Z]{4,4}"
+  lnClass: "(LLN0)|[A-Z]{4,4}"
 };
 export function compareNames(a, b) {
   if (typeof a === "string" && typeof b === "string")
