@@ -362,11 +362,7 @@ export const en = {
   connectedap: {
     name: "Connected access point",
     wizard: {
-      addschemainsttype: "Add XMLSchema-instance type",
-      title: {
-        connect: "Connect access point",
-        edit: "Edit access point"
-      }
+      addschemainsttype: "Add XMLSchema-instance type"
     },
     action: {
       addaddress: "Edit Address ({{iedName}} - {{apName}})"

@@ -73,8 +73,15 @@
 							<h3>Variables</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-variable tsd-parent-kind-module"><a href="wizards_foundation_p_types.html#pTypesGSESMV" class="tsd-kind-icon">p<wbr>TypesGSESMV</a></li>
+								<li class="tsd-kind-variable tsd-parent-kind-module"><a href="wizards_foundation_p_types.html#typeMaxLength" class="tsd-kind-icon">type<wbr>Max<wbr>Length</a></li>
 								<li class="tsd-kind-variable tsd-parent-kind-module"><a href="wizards_foundation_p_types.html#typeNullable" class="tsd-kind-icon">type<wbr>Nullable</a></li>
 								<li class="tsd-kind-variable tsd-parent-kind-module"><a href="wizards_foundation_p_types.html#typePattern" class="tsd-kind-icon">type<wbr>Pattern</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section ">
+							<h3>Functions</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-function tsd-parent-kind-module"><a href="wizards_foundation_p_types.html#getTypes" class="tsd-kind-icon">get<wbr>Types</a></li>
 							</ul>
 						</section>
 					</div>
@@ -88,9 +95,24 @@
 					<div class="tsd-signature tsd-kind-icon">p<wbr>TypesGSESMV<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> = ...</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/55e0c7e/src/wizards/foundation/p-types.ts#L1">src/wizards/foundation/p-types.ts:1</a></li>
+							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/3d5c5bd/src/wizards/foundation/p-types.ts#L59">src/wizards/foundation/p-types.ts:59</a></li>
 						</ul>
 					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-module">
+					<a name="typeMaxLength" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> type<wbr>Max<wbr>Length</h3>
+					<div class="tsd-signature tsd-kind-icon">type<wbr>Max<wbr>Length<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Partial</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = ...</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/3d5c5bd/src/wizards/foundation/p-types.ts#L148">src/wizards/foundation/p-types.ts:148</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Max length definition for all <code>P</code> element</p>
+						</div>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-module">
 					<a name="typeNullable" class="tsd-anchor"></a>
@@ -98,9 +120,14 @@
 					<div class="tsd-signature tsd-kind-icon">type<wbr>Nullable<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Partial</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = ...</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/55e0c7e/src/wizards/foundation/p-types.ts#L8">src/wizards/foundation/p-types.ts:8</a></li>
+							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/3d5c5bd/src/wizards/foundation/p-types.ts#L115">src/wizards/foundation/p-types.ts:115</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Whether <code>P</code> element is required within <code>Address</code></p>
+						</div>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-module">
 					<a name="typePattern" class="tsd-anchor"></a>
@@ -108,9 +135,46 @@
 					<div class="tsd-signature tsd-kind-icon">type<wbr>Pattern<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Partial</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = ...</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/55e0c7e/src/wizards/foundation/p-types.ts#L15">src/wizards/foundation/p-types.ts:15</a></li>
+							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/3d5c5bd/src/wizards/foundation/p-types.ts#L81">src/wizards/foundation/p-types.ts:81</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Patterns from IEC 61850-6 for all <code>P</code> elements</p>
+						</div>
+					</div>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Functions</h2>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
+					<a name="getTypes" class="tsd-anchor"></a>
+					<h3>get<wbr>Types</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Types<span class="tsd-signature-symbol">(</span>element<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Element</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/3d5c5bd/src/wizards/foundation/p-types.ts#L4">src/wizards/foundation/p-types.ts:4</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Selects edition depending array of <code>P</code> element types
+									Supported Editions are 1 (2003), 2 (2007B) and 2.1 (2007B4)</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>element: <span class="tsd-signature-type">Element</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></h4>
+						</li>
+					</ul>
 				</section>
 			</section>
 		</div>
@@ -131,10 +195,16 @@
 						<a href="wizards_foundation_p_types.html#pTypesGSESMV" class="tsd-kind-icon">p<wbr>TypesGSESMV</a>
 					</li>
 					<li class=" tsd-kind-variable tsd-parent-kind-module">
+						<a href="wizards_foundation_p_types.html#typeMaxLength" class="tsd-kind-icon">type<wbr>Max<wbr>Length</a>
+					</li>
+					<li class=" tsd-kind-variable tsd-parent-kind-module">
 						<a href="wizards_foundation_p_types.html#typeNullable" class="tsd-kind-icon">type<wbr>Nullable</a>
 					</li>
 					<li class=" tsd-kind-variable tsd-parent-kind-module">
 						<a href="wizards_foundation_p_types.html#typePattern" class="tsd-kind-icon">type<wbr>Pattern</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-module">
+						<a href="wizards_foundation_p_types.html#getTypes" class="tsd-kind-icon">get<wbr>Types</a>
 					</li>
 				</ul>
 			</nav>

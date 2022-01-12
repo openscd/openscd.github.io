@@ -362,11 +362,7 @@ export const de = {
   connectedap: {
     name: "Schnittstelle",
     wizard: {
-      addschemainsttype: "XMLSchema-instance type hinzufügen",
-      title: {
-        connect: "Schnittstelle verbinden",
-        edit: "Schnittstelle bearbeiten"
-      }
+      addschemainsttype: "XMLSchema-instance type hinzufügen"
     },
     action: {
       addaddress: "Adressfeld bearbeitet ({{iedName}} - {{apName}})"

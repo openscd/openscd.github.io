@@ -31,7 +31,7 @@ import {
   cloneElement
 } from "../../foundation.js";
 import {styles, isCreateOptions} from "./foundation.js";
-import {createConnectedApWizard} from "./connectedap-editor.js";
+import {createConnectedApWizard} from "../../wizards/connectedap.js";
 const initial = {
   type: "8-MMS",
   bitrate: "100",

@@ -4,10 +4,10 @@
 
 ## Properties
 
-| Property  | Attribute | Modifiers | Type      | Description                          |
-|-----------|-----------|-----------|-----------|--------------------------------------|
-| `apName`  | `apName`  | readonly  | `string`  | ConductingEquipment apName attribute |
-| `element` |           |           | `Element` | SCL element ConnectedAP              |
+| Property  | Attribute | Modifiers | Type      | Description                  |
+|-----------|-----------|-----------|-----------|------------------------------|
+| `apName`  | `apName`  | readonly  | `string`  | ConnectedAP attribute apName |
+| `element` |           |           | `Element` | SCL element ConnectedAP      |
 
 ## Methods
 
