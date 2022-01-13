@@ -24,8 +24,6 @@ export function Wizarding(Base) {
     }
     onWizard(we) {
       const wizard = we.detail.wizard;
-      if (wizard?.length === 0)
-        return;
       if (wizard === null)
         this.workflow.shift();
       else if (we.detail.subwizard)
@@ -37,7 +35,7 @@ export function Wizarding(Base) {
     }
     render() {
       return html`${ifImplemented(super.render())}
-        <wizard-dialog .wizard=${this.workflow[0] ?? []}></wizard-dialog>`;
+        <wizard-dialog .wizard=${this.workflow[0]?.() ?? []}></wizard-dialog>`;
     }
   }
   __decorate([

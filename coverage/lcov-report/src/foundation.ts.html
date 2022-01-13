@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">96.94% </span>
+                <span class="strong">96.96% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>2539/2619</span>
+                <span class='fraction'>2552/2632</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">73.2% </span>
+                <span class="strong">73.39% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>235/321</span>
+                <span class='fraction'>240/327</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">95.5% </span>
+                <span class="strong">95.55% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>85/89</span>
+                <span class='fraction'>86/90</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">96.94% </span>
+                <span class="strong">96.96% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>2539/2619</span>
+                <span class='fraction'>2552/2632</span>
             </div>
         
             
@@ -2682,7 +2682,20 @@
 <a name='L2617'></a><a href='#L2617'>2617</a>
 <a name='L2618'></a><a href='#L2618'>2618</a>
 <a name='L2619'></a><a href='#L2619'>2619</a>
-<a name='L2620'></a><a href='#L2620'>2620</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">99x</span>
+<a name='L2620'></a><a href='#L2620'>2620</a>
+<a name='L2621'></a><a href='#L2621'>2621</a>
+<a name='L2622'></a><a href='#L2622'>2622</a>
+<a name='L2623'></a><a href='#L2623'>2623</a>
+<a name='L2624'></a><a href='#L2624'>2624</a>
+<a name='L2625'></a><a href='#L2625'>2625</a>
+<a name='L2626'></a><a href='#L2626'>2626</a>
+<a name='L2627'></a><a href='#L2627'>2627</a>
+<a name='L2628'></a><a href='#L2628'>2628</a>
+<a name='L2629'></a><a href='#L2629'>2629</a>
+<a name='L2630'></a><a href='#L2630'>2630</a>
+<a name='L2631'></a><a href='#L2631'>2631</a>
+<a name='L2632'></a><a href='#L2632'>2632</a>
+<a name='L2633'></a><a href='#L2633'>2633</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">99x</span>
 <span class="cline-any cline-yes">99x</span>
 <span class="cline-any cline-yes">99x</span>
 <span class="cline-any cline-yes">99x</span>
@@ -2836,9 +2849,9 @@
 <span class="cline-any cline-yes">99x</span>
 <span class="cline-any cline-yes">99x</span>
 <span class="cline-any cline-yes">99x</span>
-<span class="cline-any cline-yes">29x</span>
-<span class="cline-any cline-yes">29x</span>
-<span class="cline-any cline-yes">29x</span>
+<span class="cline-any cline-yes">43x</span>
+<span class="cline-any cline-yes">43x</span>
+<span class="cline-any cline-yes">43x</span>
 <span class="cline-any cline-yes">99x</span>
 <span class="cline-any cline-yes">99x</span>
 <span class="cline-any cline-yes">99x</span>
@@ -2895,8 +2908,21 @@
 <span class="cline-any cline-yes">99x</span>
 <span class="cline-any cline-yes">99x</span>
 <span class="cline-any cline-yes">99x</span>
+<span class="cline-any cline-yes">99x</span>
 <span class="cline-any cline-yes">54x</span>
 <span class="cline-any cline-yes">54x</span>
+<span class="cline-any cline-yes">54x</span>
+<span class="cline-any cline-yes">54x</span>
+<span class="cline-any cline-yes">54x</span>
+<span class="cline-any cline-yes">49x</span>
+<span class="cline-any cline-yes">49x</span>
+<span class="cline-any cline-yes">49x</span>
+<span class="cline-any cline-yes">49x</span>
+<span class="cline-any cline-yes">35x</span>
+<span class="cline-any cline-yes">35x</span>
+<span class="cline-any cline-yes">35x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">35x</span>
 <span class="cline-any cline-yes">54x</span>
 <span class="cline-any cline-yes">54x</span>
 <span class="cline-any cline-yes">54x</span>
@@ -5445,7 +5471,7 @@ export type WizardInput =
   | Select
   | WizardSelect;
 &nbsp;
-export type WizardAction = EditorAction | (() =&gt; Wizard);
+export type WizardAction = EditorAction | WizardFactory;
 &nbsp;
 /** @returns [[`EditorAction`]]s to dispatch on [[`WizardDialog`]] commit. */
 export type WizardActor = (
@@ -5454,10 +5480,10 @@ export type WizardActor = (
   list?: List | null
 ) =&gt; WizardAction[];
 &nbsp;
-export function isWizard(
-  wizardAction: WizardAction
-): wizardAction is () =&gt; Wizard {
-  return typeof wizardAction === 'function';
+export function isWizardFactory(
+  maybeFactory: WizardAction | Wizard | null
+): maybeFactory is WizardFactory {
+  return typeof maybeFactory === 'function';
 }
 &nbsp;
 /** @returns the validity of `input` depending on type. */
@@ -5506,17 +5532,30 @@ export interface WizardPage {
   element?: Element;
 }
 export type Wizard = WizardPage[];
+export type WizardFactory = () =&gt; Wizard;
 &nbsp;
 /** If `wizard === null`, close the current wizard, else queue `wizard`. */
 export interface WizardDetail {
-  wizard: Wizard | null;
+  wizard: WizardFactory | null;
   subwizard?: boolean;
 }
 export type WizardEvent = CustomEvent&lt;WizardDetail&gt;;
 export function newWizardEvent(
-  wizard: Wizard | null = null,
+  wizardOrFactory?: Wizard | WizardFactory,
   eventInitDict?: CustomEventInit&lt;Partial&lt;WizardDetail&gt;&gt;
 ): WizardEvent {
+  if (!wizardOrFactory)
+    return new CustomEvent&lt;WizardDetail&gt;('wizard', {
+      bubbles: true,
+      composed: true,
+      ...eventInitDict,
+      detail: { wizard: null, ...<span class="branch-0 cbranch-no" title="branch not covered" >eventInitDict?.detail },</span>
+    });
+&nbsp;
+  const wizard = isWizardFactory(wizardOrFactory)
+    ? wizardOrFactory
+    : () =&gt; wizardOrFactory;
+&nbsp;
   return new CustomEvent&lt;WizardDetail&gt;('wizard', {
     bubbles: true,
     composed: true,
@@ -7927,7 +7966,7 @@ declare global {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener">istanbul</a>
-                at Wed Jan 12 2022 14:10:40 GMT+0000 (Coordinated Universal Time)
+                at Thu Jan 13 2022 09:28:27 GMT+0000 (Coordinated Universal Time)
             </div>
         </div>
         <script src="../prettify.js"></script>

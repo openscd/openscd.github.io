@@ -28,7 +28,7 @@ import {
   newActionEvent,
   newWizardEvent,
   wizardInputSelector,
-  isWizard,
+  isWizardFactory,
   checkValidity,
   reportValidity,
   identity
@@ -122,7 +122,7 @@ export let WizardDialog = class extends LitElement {
         this.wizard[this.pageIndex].secondary = void 0;
       this.dispatchEvent(newWizardEvent());
     }
-    wizardActions.forEach((wa) => isWizard(wa) ? this.dispatchEvent(newWizardEvent(wa())) : this.dispatchEvent(newActionEvent(wa)));
+    wizardActions.forEach((wa) => isWizardFactory(wa) ? this.dispatchEvent(newWizardEvent(wa)) : this.dispatchEvent(newActionEvent(wa)));
     return true;
   }
   onClosed(ae) {

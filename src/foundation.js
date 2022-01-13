@@ -59,8 +59,8 @@ export function newActionEvent(action, eventInitDict) {
   });
 }
 export const wizardInputSelector = "wizard-textfield, mwc-textfield, ace-editor, mwc-select,wizard-select";
-export function isWizard(wizardAction) {
-  return typeof wizardAction === "function";
+export function isWizardFactory(maybeFactory) {
+  return typeof maybeFactory === "function";
 }
 export function checkValidity(input) {
   if (input instanceof WizardTextField || input instanceof Select)
@@ -86,7 +86,15 @@ export function getMultiplier(input) {
   else
     return null;
 }
-export function newWizardEvent(wizard = null, eventInitDict) {
+export function newWizardEvent(wizardOrFactory, eventInitDict) {
+  if (!wizardOrFactory)
+    return new CustomEvent("wizard", {
+      bubbles: true,
+      composed: true,
+      ...eventInitDict,
+      detail: {wizard: null, ...eventInitDict?.detail}
+    });
+  const wizard = isWizardFactory(wizardOrFactory) ? wizardOrFactory : () => wizardOrFactory;
   return new CustomEvent("wizard", {
     bubbles: true,
     composed: true,

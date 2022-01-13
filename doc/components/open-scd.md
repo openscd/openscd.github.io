@@ -54,7 +54,7 @@ Open Substation Configuration Designer.
 | `warningUI`        |                 |           | `Snackbar`                              |                                    |                                                  |
 | `wizardUI`         |                 |           | `WizardDialog`                          |                                    |                                                  |
 | `workDone`         |                 |           | `Promise<PromiseSettledResult<void>[]>` | "Promise.allSettled(this.work)"    | A promise which resolves once all currently pending work is done. |
-| `workflow`         |                 |           | `Wizard[]`                              | []                                 | FIFO queue of [[`Wizard`]]s to display.          |
+| `workflow`         |                 |           | `WizardFactory[]`                       | []                                 | FIFO queue of [[`Wizard`]]s to display.          |
 
 ## Methods
 
