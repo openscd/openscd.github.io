@@ -63,7 +63,8 @@ export const en = {
   zeroline: {
     iedsloading: "Loading IEDs...",
     commmap: "Communication mapping",
-    gsecontrol: "Show all GOOSEs"
+    gsecontrol: "Show all GOOSEs",
+    smvcontrol: "Show all Sampled Values"
   },
   editing: {
     created: "Added {{ name }}",

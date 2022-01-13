@@ -20,9 +20,10 @@ import "../../_snowpack/pkg/@material/mwc-fab.js";
 import "../../_snowpack/pkg/@material/mwc-icon.js";
 import "../action-icon.js";
 import {createClientLnWizard} from "../wizards/clientln.js";
-import {gooseIcon} from "../icons.js";
+import {gooseIcon, smvIcon} from "../icons.js";
 import {newWizardEvent} from "../foundation.js";
 import {selectGseControlWizard} from "../wizards/gsecontrol.js";
+import {selectSampledValueControlWizard} from "../wizards/sampledvaluecontrol.js";
 export let IedEditor = class extends LitElement {
   get name() {
     return this.element.getAttribute("name") ?? "UNDEFINED";
@@ -35,6 +36,11 @@ export let IedEditor = class extends LitElement {
   }
   openGseControlSelection() {
     const wizard = selectGseControlWizard(this.element);
+    if (wizard)
+      this.dispatchEvent(newWizardEvent(wizard));
+  }
+  openSmvControlSelection() {
+    const wizard = selectSampledValueControlWizard(this.element);
     if (wizard)
       this.dispatchEvent(newWizardEvent(wizard));
   }
@@ -53,6 +59,12 @@ export let IedEditor = class extends LitElement {
         mini
         @click="${() => this.openGseControlSelection()}"
         ><mwc-icon slot="icon">${gooseIcon}</mwc-icon></mwc-fab
+      ><mwc-fab
+        slot="action"
+        class="selectsmv"
+        mini
+        @click="${() => this.openSmvControlSelection()}"
+        ><mwc-icon slot="icon">${smvIcon}</mwc-icon></mwc-fab
       ></action-icon
     > `;
   }

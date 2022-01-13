@@ -13,13 +13,15 @@
 | `gsecontrol`       |            | `IconButton`                                     |            |                                                  |
 | `readonly`         | `readonly` | `boolean`                                        | false      |                                                  |
 | `showieds`         |            | `IconButtonToggle`                               |            |                                                  |
+| `smvcontrol`       |            | `IconButton`                                     |            |                                                  |
 
 ## Methods
 
-| Method                       | Type                 | Description                                      |
-|------------------------------|----------------------|--------------------------------------------------|
-| `openCommunicationMapping`   | `(): void`           |                                                  |
-| `openCreateSubstationWizard` | `(): void`           | Opens a [[`WizardDialog`]] for creating a new `Substation` element. |
-| `openGseControlSelection`    | `(): void`           |                                                  |
-| `renderIedContainer`         | `(): TemplateResult` |                                                  |
-| `toggleShowIEDs`             | `(): void`           |                                                  |
+| Method                             | Type                 | Description                                      |
+|------------------------------------|----------------------|--------------------------------------------------|
+| `openCommunicationMapping`         | `(): void`           |                                                  |
+| `openCreateSubstationWizard`       | `(): void`           | Opens a [[`WizardDialog`]] for creating a new `Substation` element. |
+| `openGseControlSelection`          | `(): void`           |                                                  |
+| `openSampledValueControlSelection` | `(): void`           |                                                  |
+| `renderIedContainer`               | `(): TemplateResult` |                                                  |
+| `toggleShowIEDs`                   | `(): void`           |                                                  |

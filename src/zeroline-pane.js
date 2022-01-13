@@ -23,11 +23,12 @@ import "../_snowpack/pkg/@material/mwc-icon-button-toggle.js";
 import "./zeroline/substation-editor.js";
 import "./zeroline/ied-editor.js";
 import {communicationMappingWizard} from "./wizards/commmap-wizards.js";
-import {gooseIcon} from "./icons.js";
+import {gooseIcon, smvIcon} from "./icons.js";
 import {isPublic, newWizardEvent} from "./foundation.js";
 import {selectGseControlWizard} from "./wizards/gsecontrol.js";
 import {wizards} from "./wizards/wizard-library.js";
 import {getAttachedIeds} from "./zeroline/foundation.js";
+import {selectSampledValueControlWizard} from "./wizards/sampledvaluecontrol.js";
 function shouldShowIEDs() {
   return localStorage.getItem("showieds") === "on";
 }
@@ -52,6 +53,11 @@ export let ZerolinePane = class extends LitElement {
   }
   openGseControlSelection() {
     const wizard = selectGseControlWizard(this.doc.documentElement);
+    if (wizard)
+      this.dispatchEvent(newWizardEvent(wizard));
+  }
+  openSampledValueControlSelection() {
+    const wizard = selectSampledValueControlWizard(this.doc.documentElement);
     if (wizard)
       this.dispatchEvent(newWizardEvent(wizard));
   }
@@ -102,6 +108,13 @@ export let ZerolinePane = class extends LitElement {
               id="gsecontrol"
               @click="${() => this.openGseControlSelection()}"
               >${gooseIcon}</mwc-icon-button
+            ></abbr
+          >
+          <abbr title="${translate("zeroline.smvcontrol")}"
+            ><mwc-icon-button
+              id="smvcontrol"
+              @click="${() => this.openSampledValueControlSelection()}"
+              >${smvIcon}</mwc-icon-button
             ></abbr
           >
         </nav>
@@ -174,6 +187,9 @@ __decorate([
 __decorate([
   query("#gsecontrol")
 ], ZerolinePane.prototype, "gsecontrol", 2);
+__decorate([
+  query("#smvcontrol")
+], ZerolinePane.prototype, "smvcontrol", 2);
 __decorate([
   query("#createsubstation")
 ], ZerolinePane.prototype, "createsubstation", 2);
