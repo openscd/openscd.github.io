@@ -393,7 +393,8 @@ export const en = {
     log: "Changed element in XML editor: {{id}}"
   },
   updatedesc: {
-    abb: "Added signal descriptions to ABB IEDs"
+    abb: "Added signal descriptions to ABB IEDs",
+    sel: "Added signal descriptions to SEL IEDs"
   },
   sld: {
     substationSelector: "Select a substation",
