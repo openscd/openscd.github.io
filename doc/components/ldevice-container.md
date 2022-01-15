@@ -4,6 +4,7 @@
 
 ## Properties
 
-| Property  | Type      |
-|-----------|-----------|
-| `element` | `Element` |
+| Property       | Type                            |
+|----------------|---------------------------------|
+| `element`      | `Element`                       |
+| `toggleButton` | `IconButtonToggle \| undefined` |

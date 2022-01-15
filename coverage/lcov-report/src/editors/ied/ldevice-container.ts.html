@@ -25,28 +25,28 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>52/52</span>
+                <span class='fraction'>72/72</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">75% </span>
+                <span class="strong">83.33% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>3/4</span>
+                <span class='fraction'>5/6</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>2/2</span>
+                <span class='fraction'>3/3</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>52/52</span>
+                <span class='fraction'>72/72</span>
             </div>
         
             
@@ -115,7 +115,27 @@
 <a name='L50'></a><a href='#L50'>50</a>
 <a name='L51'></a><a href='#L51'>51</a>
 <a name='L52'></a><a href='#L52'>52</a>
-<a name='L53'></a><a href='#L53'>53</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">5x</span>
+<a name='L53'></a><a href='#L53'>53</a>
+<a name='L54'></a><a href='#L54'>54</a>
+<a name='L55'></a><a href='#L55'>55</a>
+<a name='L56'></a><a href='#L56'>56</a>
+<a name='L57'></a><a href='#L57'>57</a>
+<a name='L58'></a><a href='#L58'>58</a>
+<a name='L59'></a><a href='#L59'>59</a>
+<a name='L60'></a><a href='#L60'>60</a>
+<a name='L61'></a><a href='#L61'>61</a>
+<a name='L62'></a><a href='#L62'>62</a>
+<a name='L63'></a><a href='#L63'>63</a>
+<a name='L64'></a><a href='#L64'>64</a>
+<a name='L65'></a><a href='#L65'>65</a>
+<a name='L66'></a><a href='#L66'>66</a>
+<a name='L67'></a><a href='#L67'>67</a>
+<a name='L68'></a><a href='#L68'>68</a>
+<a name='L69'></a><a href='#L69'>69</a>
+<a name='L70'></a><a href='#L70'>70</a>
+<a name='L71'></a><a href='#L71'>71</a>
+<a name='L72'></a><a href='#L72'>72</a>
+<a name='L73'></a><a href='#L73'>73</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-yes">5x</span>
@@ -144,6 +164,26 @@
 <span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-yes">5x</span>
@@ -173,6 +213,7 @@
   html,
   LitElement,
   property,
+  query,
   TemplateResult,
 } from 'lit-element';
 &nbsp;
@@ -180,12 +221,16 @@ import '../../action-pane.js';
 import './ln-container.js'
 import { nothing } from 'lit-html';
 import { getDescriptionAttribute, getInstanceAttribute, getNameAttribute } from '../../foundation.js';
+import { IconButtonToggle } from '@material/mwc-icon-button-toggle';
+import { translate } from 'lit-translate';
 &nbsp;
 /** [[`IED`]] plugin subeditor for editing `LDevice` element. */
 @customElement('ldevice-container')
 export class LDeviceContainer extends LitElement {
   @property({ attribute: false })
   element!: Element;
+  
+  @query('#toggleButton') toggleButton!: IconButtonToggle | undefined;
 &nbsp;
   private header(): TemplateResult {
     const nameOrInst = getNameAttribute(this.element) ?? getInstanceAttribute(this.element);
@@ -194,14 +239,29 @@ export class LDeviceContainer extends LitElement {
     return html`${nameOrInst}${<span class="branch-0 cbranch-no" title="branch not covered" >desc ? html` &amp;mdash; ${desc}` : n</span>othing}`;
   }
 &nbsp;
+  protected firstUpdated(): void {
+    this.requestUpdate();
+  }
+&nbsp;
   render(): TemplateResult {
+    const lnElements = Array.from(this.element.querySelectorAll(':scope &gt; LN,LN0'));
+    
     return html`&lt;action-pane .label="${this.header()}"&gt;
-    &lt;div id="lnContainer"&gt;
-      ${Array.from(this.element.querySelectorAll(':scope &gt; LN,LN0')).map(
-        server =&gt; html`&lt;ln-container
-          .element=${server}
-        &gt;&lt;/ln-container&gt;`)}
-    &lt;/div&gt;
+      ${lnElements.length &gt; 0 ? html`&lt;abbr slot="action" title="${translate('iededitor.toggleChildElements')}"&gt;
+        &lt;mwc-icon-button-toggle
+          on
+          id="toggleButton"
+          onIcon="keyboard_arrow_up"
+          offIcon="keyboard_arrow_down"
+          @click=${() =&gt; this.requestUpdate()}
+        &gt;&lt;/mwc-icon-button-toggle&gt;
+      &lt;/abbr&gt;` : nothing}
+      &lt;div id="lnContainer"&gt;
+        ${this.toggleButton?.on ? lnElements.map(server =&gt; html`&lt;ln-container
+            .element=${server}
+          &gt;&lt;/ln-container&gt;
+          `) : nothing}
+      &lt;/div&gt;
     &lt;/action-pane&gt;`;
   }
 &nbsp;
@@ -226,7 +286,7 @@ export class LDeviceContainer extends LitElement {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener">istanbul</a>
-                at Thu Jan 13 2022 13:25:38 GMT+0000 (Coordinated Universal Time)
+                at Sat Jan 15 2022 21:55:35 GMT+0000 (Coordinated Universal Time)
             </div>
         </div>
         <script src="../../../prettify.js"></script>
