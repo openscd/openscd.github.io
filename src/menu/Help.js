@@ -1,6 +1,6 @@
 import {html, LitElement} from "../../_snowpack/pkg/lit-element.js";
 import {unsafeHTML} from "../../_snowpack/pkg/lit-html/directives/unsafe-html.js";
-import marked from "../../_snowpack/pkg/marked.js";
+import * as marked from "../../_snowpack/pkg/marked.js";
 import "../../_snowpack/pkg/@material/mwc-icon.js";
 import "../finder-list.js";
 import {newWizardEvent} from "../foundation.js";
