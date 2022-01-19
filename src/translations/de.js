@@ -156,6 +156,18 @@ export const de = {
     missing: "Kein IED vorhanden",
     toggleChildElements: "???"
   },
+  ied: {
+    wizard: {
+      nameHelper: "Name des IED",
+      descHelper: "Beschreibung des IED",
+      title: {
+        edit: "IED bearbeiten"
+      }
+    },
+    action: {
+      updateied: 'IED "{{iedName}}" bearbeitet'
+    }
+  },
   powertransformer: {
     wizard: {
       nameHelper: "`Name des Leistungstransformators",

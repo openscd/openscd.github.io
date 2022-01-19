@@ -22,11 +22,17 @@ import "../action-icon.js";
 import {createClientLnWizard} from "../wizards/clientln.js";
 import {gooseIcon, smvIcon} from "../icons.js";
 import {newWizardEvent} from "../foundation.js";
+import {wizards} from "../wizards/wizard-library.js";
 import {selectGseControlWizard} from "../wizards/gsecontrol.js";
 import {selectSampledValueControlWizard} from "../wizards/sampledvaluecontrol.js";
 export let IedEditor = class extends LitElement {
   get name() {
     return this.element.getAttribute("name") ?? "UNDEFINED";
+  }
+  openEditWizard() {
+    const wizard = wizards["IED"].edit(this.element);
+    if (wizard)
+      this.dispatchEvent(newWizardEvent(wizard));
   }
   openCommunicationMapping() {
     const sendingIeds = Array.from(this.element.closest("SCL")?.querySelectorAll("IED") ?? []);
@@ -65,6 +71,13 @@ export let IedEditor = class extends LitElement {
         mini
         @click="${() => this.openSmvControlSelection()}"
         ><mwc-icon slot="icon">${smvIcon}</mwc-icon></mwc-fab
+      ><mwc-fab
+        slot="action"
+        class="edit"
+        mini
+        @click="${() => this.openEditWizard()}"
+        icon="edit"
+      ></mwc-fab
       ></action-icon
     > `;
   }

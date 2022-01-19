@@ -7,6 +7,7 @@ import {createSubstationWizard, substationEditWizard} from "./substation.js";
 import {editTerminalWizard} from "./terminal.js";
 import {voltageLevelCreateWizard, voltageLevelEditWizard} from "./voltagelevel.js";
 import {editPowerTransformerWizard} from "./powertransformer.js";
+import {editIEDWizard} from "./ied.js";
 export function emptyWizard() {
   return;
 }
@@ -240,7 +241,7 @@ export const wizards = {
     create: emptyWizard
   },
   IED: {
-    edit: emptyWizard,
+    edit: editIEDWizard,
     create: emptyWizard
   },
   IEDName: {

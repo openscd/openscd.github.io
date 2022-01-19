@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">96.22% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>39/39</span>
+                <span class='fraction'>51/53</span>
             </div>
         
             
@@ -37,16 +37,16 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">66.66% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>2/2</span>
+                <span class='fraction'>2/3</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">96.22% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>39/39</span>
+                <span class='fraction'>51/53</span>
             </div>
         
             
@@ -102,7 +102,21 @@
 <a name='L37'></a><a href='#L37'>37</a>
 <a name='L38'></a><a href='#L38'>38</a>
 <a name='L39'></a><a href='#L39'>39</a>
-<a name='L40'></a><a href='#L40'>40</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">2x</span>
+<a name='L40'></a><a href='#L40'>40</a>
+<a name='L41'></a><a href='#L41'>41</a>
+<a name='L42'></a><a href='#L42'>42</a>
+<a name='L43'></a><a href='#L43'>43</a>
+<a name='L44'></a><a href='#L44'>44</a>
+<a name='L45'></a><a href='#L45'>45</a>
+<a name='L46'></a><a href='#L46'>46</a>
+<a name='L47'></a><a href='#L47'>47</a>
+<a name='L48'></a><a href='#L48'>48</a>
+<a name='L49'></a><a href='#L49'>49</a>
+<a name='L50'></a><a href='#L50'>50</a>
+<a name='L51'></a><a href='#L51'>51</a>
+<a name='L52'></a><a href='#L52'>52</a>
+<a name='L53'></a><a href='#L53'>53</a>
+<a name='L54'></a><a href='#L54'>54</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
@@ -114,6 +128,20 @@
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
@@ -150,9 +178,11 @@
   TemplateResult,
 } from 'lit-element';
 import { nothing } from 'lit-html';
+import { translate } from "lit-translate";
 &nbsp;
+import {wizards} from "../../wizards/wizard-library.js";
 import '../../action-pane.js';
-import { getDescriptionAttribute, getNameAttribute } from '../../foundation.js';
+import {getDescriptionAttribute, getNameAttribute, newWizardEvent} from '../../foundation.js';
 import './access-point-container.js';
 &nbsp;
 /** [[`IED`]] plugin subeditor for editing `IED` element. */
@@ -161,6 +191,11 @@ export class IedContainer extends LitElement {
   /** The edited `Element`, a common property of all IED subcontainers. */
   @property({ attribute: false })
   element!: Element;
+&nbsp;
+  private <span class="fstat-no" title="function not covered" >openEditWizard(): void {</span>
+<span class="cstat-no" title="statement not covered" >    const wizard = wizards['IED'].edit(this.element);</span>
+<span class="cstat-no" title="statement not covered" >    if (wizard) this.dispatchEvent(newWizardEvent(wizard));</span>
+  }
 &nbsp;
   private header(): TemplateResult {
     const name = getNameAttribute(this.element);
@@ -171,6 +206,13 @@ export class IedContainer extends LitElement {
 &nbsp;
   render(): TemplateResult {
     return html`&lt;action-pane .label="${this.header()}"&gt;
+      &lt;abbr slot="action" title="${translate('edit')}"&gt;
+        &lt;mwc-icon-button
+          icon="edit"
+          @click=${() =&gt; this.openEditWizard()}
+        &gt;&lt;/mwc-icon-button&gt;
+      &lt;/abbr&gt;
+&nbsp;
       ${Array.from(this.element.querySelectorAll(':scope &gt; AccessPoint')).map(
         ap =&gt; html`&lt;access-point-container
           .element=${ap}
@@ -187,7 +229,7 @@ export class IedContainer extends LitElement {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener">istanbul</a>
-                at Wed Jan 19 2022 06:29:24 GMT+0000 (Coordinated Universal Time)
+                at Wed Jan 19 2022 09:04:07 GMT+0000 (Coordinated Universal Time)
             </div>
         </div>
         <script src="../../../prettify.js"></script>

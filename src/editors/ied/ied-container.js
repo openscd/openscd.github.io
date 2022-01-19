@@ -17,10 +17,17 @@ import {
   property
 } from "../../../_snowpack/pkg/lit-element.js";
 import {nothing} from "../../../_snowpack/pkg/lit-html.js";
+import {translate} from "../../../_snowpack/pkg/lit-translate.js";
+import {wizards} from "../../wizards/wizard-library.js";
 import "../../action-pane.js";
-import {getDescriptionAttribute, getNameAttribute} from "../../foundation.js";
+import {getDescriptionAttribute, getNameAttribute, newWizardEvent} from "../../foundation.js";
 import "./access-point-container.js";
 export let IedContainer = class extends LitElement {
+  openEditWizard() {
+    const wizard = wizards["IED"].edit(this.element);
+    if (wizard)
+      this.dispatchEvent(newWizardEvent(wizard));
+  }
   header() {
     const name = getNameAttribute(this.element);
     const desc = getDescriptionAttribute(this.element);
@@ -28,6 +35,13 @@ export let IedContainer = class extends LitElement {
   }
   render() {
     return html`<action-pane .label="${this.header()}">
+      <abbr slot="action" title="${translate("edit")}">
+        <mwc-icon-button
+          icon="edit"
+          @click=${() => this.openEditWizard()}
+        ></mwc-icon-button>
+      </abbr>
+
       ${Array.from(this.element.querySelectorAll(":scope > AccessPoint")).map((ap) => html`<access-point-container
           .element=${ap}
         ></access-point-container>`)}
