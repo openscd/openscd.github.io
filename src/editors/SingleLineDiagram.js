@@ -173,17 +173,19 @@ export default class SingleLineDiagramPlugin extends LitElement {
   }
   drawSVGElements() {
     this.clearSVG();
-    this.drawSubstation();
-    const bbox = this.svg.getBBox();
-    this.svg.setAttribute("viewBox", bbox.x - 10 + " " + (bbox.y - 10) + " " + (bbox.width + 20) + " " + (bbox.height + 20));
-    this.svg.setAttribute("width", bbox.width + 20 + "px");
-    this.svg.setAttribute("height", bbox.height + 20 + "px");
-    panzoom(this.panzoomContainer, {
-      zoomSpeed: 0.2,
-      maxZoom: 1.5,
-      minZoom: 0.2,
-      initialZoom: 0.5
-    });
+    if (this.selectedSubstation) {
+      this.drawSubstation();
+      const bbox = this.svg.getBBox();
+      this.svg.setAttribute("viewBox", bbox.x - 10 + " " + (bbox.y - 10) + " " + (bbox.width + 20) + " " + (bbox.height + 20));
+      this.svg.setAttribute("width", bbox.width + 20 + "px");
+      this.svg.setAttribute("height", bbox.height + 20 + "px");
+      panzoom(this.panzoomContainer, {
+        zoomSpeed: 0.2,
+        maxZoom: 1.5,
+        minZoom: 0.2,
+        initialZoom: 0.5
+      });
+    }
   }
   openEditWizard(event, element) {
     const wizard = wizards[element.tagName].edit(element);
@@ -203,7 +205,7 @@ export default class SingleLineDiagramPlugin extends LitElement {
     const substationList = this.substations;
     if (substationList.length > 0) {
       if (this.selectedSubstation === void 0) {
-        this.selectedSubstation = this.substations[0];
+        this.selectedSubstation = substationList[0];
       }
       if (substationList.length > 1) {
         const selectedSubstationName = getNameAttribute(this.selectedSubstation);
@@ -211,7 +213,7 @@ export default class SingleLineDiagramPlugin extends LitElement {
           <mwc-select id="substationSelector"
                       label="${translate("sld.substationSelector")}"
                       @selected=${this.onSelect}>
-            ${this.substations.map((substation) => {
+            ${substationList.map((substation) => {
           const name2 = getNameAttribute(substation);
           const description2 = getDescriptionAttribute(substation);
           return html`
