@@ -9,7 +9,7 @@ var __decorate = (decorators, target, key, kind) => {
     __defProp(target, key, result);
   return result;
 };
-import {css, html, LitElement, property, query, state} from "../../_snowpack/pkg/lit-element.js";
+import {css, html, LitElement, property, state} from "../../_snowpack/pkg/lit-element.js";
 import "../../_snowpack/pkg/@material/mwc-fab.js";
 import "../../_snowpack/pkg/@material/mwc-select.js";
 import "../../_snowpack/pkg/@material/mwc-list/mwc-list-item.js";
@@ -17,39 +17,57 @@ import "../zeroline-pane.js";
 import "./ied/ied-container.js";
 import {translate} from "../../_snowpack/pkg/lit-translate.js";
 import {compareNames, getDescriptionAttribute, getNameAttribute} from "../foundation.js";
+let iedEditorSelectedIedName;
+function onOpenDocResetSelectedIed() {
+  iedEditorSelectedIedName = void 0;
+}
+addEventListener("open-doc", onOpenDocResetSelectedIed);
 export default class IedPlugin extends LitElement {
-  constructor() {
-    super(...arguments);
-    this.currentSelectedIEDs = ":root > IED";
-  }
   get alphabeticOrderedIeds() {
-    return Array.from(this.doc?.querySelectorAll(":root > IED")).sort((a, b) => compareNames(a, b));
+    return this.doc ? Array.from(this.doc.querySelectorAll(":root > IED")).sort((a, b) => compareNames(a, b)) : [];
+  }
+  set selectedIed(element) {
+    iedEditorSelectedIedName = element ? getNameAttribute(element) : void 0;
+  }
+  get selectedIed() {
+    if (iedEditorSelectedIedName === void 0) {
+      iedEditorSelectedIedName = getNameAttribute(this.alphabeticOrderedIeds[0]);
+    }
+    return this.doc.querySelector(`:root > IED[name="${iedEditorSelectedIedName}"]`);
   }
   onSelect(event) {
-    const ied = this.alphabeticOrderedIeds[event.detail.index];
-    this.currentSelectedIEDs = `:root > IED[name="${getNameAttribute(ied)}"]`;
+    this.selectedIed = this.alphabeticOrderedIeds[event.detail.index];
+    this.requestUpdate("selectedIed");
   }
   render() {
-    return this.doc?.querySelector(":root > IED") ? html`<section>
-        <mwc-select
-          id="iedSelect"
-          label="${translate("iededitor.searchHelper")}"
-          @selected=${this.onSelect}>
-          ${this.alphabeticOrderedIeds.map((ied) => html`<mwc-list-item
-                ?selected=${ied == this.alphabeticOrderedIeds[0]}
-                value="${getNameAttribute(ied)}"
-                >${getNameAttribute(ied)} ${ied.hasAttribute("desc") ? translate("iededitor.searchHelperDesc", {
-      description: getDescriptionAttribute(ied)
-    }) : ""}
-              </mwc-list-item>`)}
-        </mwc-select>
-        ${Array.from(this.doc?.querySelectorAll(this.currentSelectedIEDs)).map((ied) => html`<ied-container
-            .element=${ied}
-          ></ied-container>`)}</section>` : html`<h1>
-          <span style="color: var(--base1)"
-            >${translate("iededitor.missing")}</span
-          >
-        </h1>`;
+    const iedList = this.alphabeticOrderedIeds;
+    if (iedList.length > 0) {
+      let selectedIedElement = this.selectedIed;
+      if (!selectedIedElement) {
+        selectedIedElement = iedList[0];
+      }
+      return html`
+        <section>
+          <mwc-select
+            id="iedSelect"
+            label="${translate("iededitor.searchHelper")}"
+            @selected=${this.onSelect}>
+            ${iedList.map((ied) => html`
+                  <mwc-list-item
+                    ?selected=${ied == selectedIedElement}
+                    value="${getNameAttribute(ied)}"
+                  >${getNameAttribute(ied)} ${ied.hasAttribute("desc") ? translate("iededitor.searchHelperDesc", {
+        description: getDescriptionAttribute(ied)
+      }) : ""}
+                  </mwc-list-item>`)}
+          </mwc-select>
+          <ied-container .element=${selectedIedElement}></ied-container>
+        </section>`;
+    }
+    return html`
+          <h1>
+            <span style="color: var(--base1)">${translate("iededitor.missing")}</span>
+          </h1>`;
   }
 }
 IedPlugin.styles = css`
@@ -83,7 +101,4 @@ __decorate([
 ], IedPlugin.prototype, "doc", 2);
 __decorate([
   state()
-], IedPlugin.prototype, "currentSelectedIEDs", 2);
-__decorate([
-  query("#iedSelect")
-], IedPlugin.prototype, "iedSelector", 2);
+], IedPlugin.prototype, "selectedIed", 1);

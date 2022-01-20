@@ -18,7 +18,13 @@ import {
   state
 } from "../../_snowpack/pkg/lit-element.js";
 import panzoom from "../../_snowpack/pkg/panzoom.js";
-import {identity, getPathNameAttribute, newWizardEvent, getNameAttribute, getDescriptionAttribute} from "../foundation.js";
+import {
+  identity,
+  getPathNameAttribute,
+  newWizardEvent,
+  getNameAttribute,
+  getDescriptionAttribute
+} from "../foundation.js";
 import {
   compareNames
 } from "../foundation.js";
@@ -51,9 +57,26 @@ import {translate} from "../../_snowpack/pkg/lit-translate.js";
 import "../../_snowpack/pkg/@material/mwc-list/mwc-list-item.js";
 import "../../_snowpack/pkg/@material/mwc-select.js";
 import "../../_snowpack/pkg/@material/mwc-textfield.js";
+let sldEditorSelectedSubstationName;
+function onOpenDocResetSelectedSubstation() {
+  sldEditorSelectedSubstationName = void 0;
+}
+addEventListener("open-doc", onOpenDocResetSelectedSubstation);
 export default class SingleLineDiagramPlugin extends LitElement {
   get substations() {
-    return Array.from(this.doc.querySelectorAll(":root > Substation")).sort((a, b) => compareNames(a, b));
+    return this.doc ? Array.from(this.doc.querySelectorAll(":root > Substation")).sort((a, b) => compareNames(a, b)) : [];
+  }
+  set selectedSubstation(element) {
+    sldEditorSelectedSubstationName = element ? getNameAttribute(element) : void 0;
+  }
+  get selectedSubstation() {
+    if (sldEditorSelectedSubstationName === void 0) {
+      const substationList = this.substations;
+      if (substationList.length > 0) {
+        sldEditorSelectedSubstationName = getNameAttribute(substationList[0]);
+      }
+    }
+    return sldEditorSelectedSubstationName ? this.doc.querySelector(`:root > Substation[name="${sldEditorSelectedSubstationName}"]`) ?? void 0 : void 0;
   }
   getPowerTransformers(parentElement) {
     return Array.from(parentElement.querySelectorAll("PowerTransformer")).filter(isSCLNamespace);
@@ -76,11 +99,11 @@ export default class SingleLineDiagramPlugin extends LitElement {
   findEquipment(parentElement, pathName) {
     return Array.from(parentElement.querySelectorAll("ConductingEquipment, PowerTransformer")).filter(isSCLNamespace).filter((element) => element.querySelector(`Terminal[connectivityNode="${pathName}"]`));
   }
-  drawSubstation() {
-    const substationGroup = createSubstationElement(this.selectedSubstation);
+  drawSubstation(substation) {
+    const substationGroup = createSubstationElement(substation);
     this.svg.appendChild(substationGroup);
-    this.drawPowerTransformers(this.selectedSubstation, substationGroup);
-    this.drawVoltageLevels(this.selectedSubstation, substationGroup);
+    this.drawPowerTransformers(substation, substationGroup);
+    this.drawVoltageLevels(substation, substationGroup);
   }
   drawPowerTransformers(parentElement, parentGroup) {
     this.getPowerTransformers(parentElement).forEach((powerTransformerElement) => this.drawPowerTransformer(parentGroup, powerTransformerElement));
@@ -173,8 +196,9 @@ export default class SingleLineDiagramPlugin extends LitElement {
   }
   drawSVGElements() {
     this.clearSVG();
-    if (this.selectedSubstation) {
-      this.drawSubstation();
+    const selectedSubstationElement = this.selectedSubstation;
+    if (selectedSubstationElement) {
+      this.drawSubstation(selectedSubstationElement);
       const bbox = this.svg.getBBox();
       this.svg.setAttribute("viewBox", bbox.x - 10 + " " + (bbox.y - 10) + " " + (bbox.width + 20) + " " + (bbox.height + 20));
       this.svg.setAttribute("width", bbox.width + 20 + "px");
@@ -199,16 +223,13 @@ export default class SingleLineDiagramPlugin extends LitElement {
   }
   onSelect(event) {
     this.selectedSubstation = this.substations[event.detail.index];
+    this.requestUpdate("selectedSubstation");
     this.drawSVGElements();
   }
   renderSubstationSelector() {
     const substationList = this.substations;
     if (substationList.length > 0) {
-      if (this.selectedSubstation === void 0) {
-        this.selectedSubstation = substationList[0];
-      }
       if (substationList.length > 1) {
-        const selectedSubstationName = getNameAttribute(this.selectedSubstation);
         return html`
           <mwc-select id="substationSelector"
                       label="${translate("sld.substationSelector")}"
@@ -218,15 +239,16 @@ export default class SingleLineDiagramPlugin extends LitElement {
           const description2 = getDescriptionAttribute(substation);
           return html`
                   <mwc-list-item value="${name2}"
-                                 ?selected=${name2 === selectedSubstationName}>
+                                 ?selected=${substation == this.selectedSubstation}>
                     ${name2}${description2 !== void 0 ? " (" + description2 + ")" : ""}
                   </mwc-list-item>`;
         })}
           </mwc-select>
         `;
       }
-      const name = getNameAttribute(this.selectedSubstation);
-      const description = getDescriptionAttribute(this.selectedSubstation);
+      const selectedSubstationElement = this.selectedSubstation;
+      const name = getNameAttribute(selectedSubstationElement);
+      const description = getDescriptionAttribute(selectedSubstationElement);
       return html`
         <mwc-textfield label="${translate("substation.name")}"
                        value="${name}${description !== void 0 ? " (" + description + ")" : ""}"
@@ -269,13 +291,9 @@ SingleLineDiagramPlugin.styles = css`
       padding-left: 0.3em;
     }
 
-    #substationSelector {
-      width: 30vw;
-      margin: 0.67em 0 0 0.67em;
-    }
-
+    #substationSelector,
     #selectedSubstation {
-      width: 30vw;
+      width: 35vw;
       margin: 0.67em 0 0 0.67em;
     }
 
@@ -304,11 +322,11 @@ __decorate([
   property({attribute: false})
 ], SingleLineDiagramPlugin.prototype, "doc", 2);
 __decorate([
-  state()
-], SingleLineDiagramPlugin.prototype, "selectedSubstation", 2);
-__decorate([
   query("#panzoom")
 ], SingleLineDiagramPlugin.prototype, "panzoomContainer", 2);
 __decorate([
   query("#svg")
 ], SingleLineDiagramPlugin.prototype, "svg", 2);
+__decorate([
+  state()
+], SingleLineDiagramPlugin.prototype, "selectedSubstation", 1);
