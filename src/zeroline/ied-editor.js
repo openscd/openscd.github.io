@@ -20,11 +20,12 @@ import "../../_snowpack/pkg/@material/mwc-fab.js";
 import "../../_snowpack/pkg/@material/mwc-icon.js";
 import "../action-icon.js";
 import {createClientLnWizard} from "../wizards/clientln.js";
-import {gooseIcon, smvIcon} from "../icons.js";
-import {newWizardEvent} from "../foundation.js";
+import {gooseIcon, smvIcon, reportIcon} from "../icons.js";
 import {wizards} from "../wizards/wizard-library.js";
+import {newSubWizardEvent, newWizardEvent} from "../foundation.js";
 import {selectGseControlWizard} from "../wizards/gsecontrol.js";
 import {selectSampledValueControlWizard} from "../wizards/sampledvaluecontrol.js";
+import {selectReportControlWizard} from "../wizards/reportcontrol.js";
 export let IedEditor = class extends LitElement {
   get name() {
     return this.element.getAttribute("name") ?? "UNDEFINED";
@@ -34,11 +35,8 @@ export let IedEditor = class extends LitElement {
     if (wizard)
       this.dispatchEvent(newWizardEvent(wizard));
   }
-  openCommunicationMapping() {
-    const sendingIeds = Array.from(this.element.closest("SCL")?.querySelectorAll("IED") ?? []);
-    const wizard = createClientLnWizard(sendingIeds, this.element);
-    if (wizard)
-      this.dispatchEvent(newWizardEvent(wizard));
+  openReportControlSelection() {
+    this.dispatchEvent(newSubWizardEvent(() => selectReportControlWizard(this.element)));
   }
   openGseControlSelection() {
     const wizard = selectGseControlWizard(this.element);
@@ -50,21 +48,33 @@ export let IedEditor = class extends LitElement {
     if (wizard)
       this.dispatchEvent(newWizardEvent(wizard));
   }
+  openCommunicationMapping() {
+    const sendingIeds = Array.from(this.element.closest("SCL")?.querySelectorAll("IED") ?? []);
+    const wizard = createClientLnWizard(sendingIeds, this.element);
+    if (wizard)
+      this.dispatchEvent(newWizardEvent(wizard));
+  }
   render() {
-    return html`<action-icon label="${this.name}" icon="developer_board"
-      ><mwc-fab
-        slot="action"
-        class="connectreport"
-        mini
-        @click="${() => this.openCommunicationMapping()}"
-        icon="add_link"
-      ></mwc-fab>
+    return html`<action-icon label="${this.name}" icon="developer_board">
       <mwc-fab
+        slot="action"
+        class="edit"
+        mini
+        @click="${() => this.openEditWizard()}"
+        icon="edit"
+      ></mwc-fab
+      ><mwc-fab
         slot="action"
         class="selectgse"
         mini
         @click="${() => this.openGseControlSelection()}"
         ><mwc-icon slot="icon">${gooseIcon}</mwc-icon></mwc-fab
+      ><mwc-fab
+        slot="action"
+        class="selectreport"
+        mini
+        @click="${() => this.openReportControlSelection()}"
+        ><mwc-icon slot="icon">${reportIcon}</mwc-icon></mwc-fab
       ><mwc-fab
         slot="action"
         class="selectsmv"
@@ -73,13 +83,12 @@ export let IedEditor = class extends LitElement {
         ><mwc-icon slot="icon">${smvIcon}</mwc-icon></mwc-fab
       ><mwc-fab
         slot="action"
-        class="edit"
+        class="connectreport"
         mini
-        @click="${() => this.openEditWizard()}"
-        icon="edit"
+        @click="${() => this.openCommunicationMapping()}"
+        icon="add_link"
       ></mwc-fab
-      ></action-icon
-    > `;
+    ></action-icon> `;
   }
 };
 __decorate([

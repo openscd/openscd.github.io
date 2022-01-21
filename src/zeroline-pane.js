@@ -23,12 +23,13 @@ import "../_snowpack/pkg/@material/mwc-icon-button-toggle.js";
 import "./zeroline/substation-editor.js";
 import "./zeroline/ied-editor.js";
 import {communicationMappingWizard} from "./wizards/commmap-wizards.js";
-import {gooseIcon, smvIcon} from "./icons.js";
-import {isPublic, newWizardEvent} from "./foundation.js";
+import {gooseIcon, smvIcon, reportIcon} from "./icons.js";
+import {isPublic, newSubWizardEvent, newWizardEvent} from "./foundation.js";
 import {selectGseControlWizard} from "./wizards/gsecontrol.js";
 import {wizards} from "./wizards/wizard-library.js";
 import {getAttachedIeds} from "./zeroline/foundation.js";
 import {selectSampledValueControlWizard} from "./wizards/sampledvaluecontrol.js";
+import {selectReportControlWizard} from "./wizards/reportcontrol.js";
 function shouldShowIEDs() {
   return localStorage.getItem("showieds") === "on";
 }
@@ -50,6 +51,9 @@ export let ZerolinePane = class extends LitElement {
     const wizard = wizards["Substation"].create(this.doc.documentElement);
     if (wizard)
       this.dispatchEvent(newWizardEvent(wizard));
+  }
+  openReportControlSelection() {
+    this.dispatchEvent(newSubWizardEvent(() => selectReportControlWizard(this.doc.documentElement)));
   }
   openGseControlSelection() {
     const wizard = selectGseControlWizard(this.doc.documentElement);
@@ -87,7 +91,7 @@ export let ZerolinePane = class extends LitElement {
           </abbr>
         </nav>
         <nav>
-          <abbr title="${translate("zeroline.commmap")}">
+          <abbr title="${translate("zeroline.showieds")}">
             <mwc-icon-button-toggle
               ?on=${shouldShowIEDs()}
               @click=${() => this.toggleShowIEDs()}
@@ -103,6 +107,13 @@ export let ZerolinePane = class extends LitElement {
               @click=${() => this.openCommunicationMapping()}
             ></mwc-icon-button>
           </abbr>
+          <abbr title="${translate("zeroline.reportcontrol")}"
+            ><mwc-icon-button
+              id="reportcontrol"
+              @click="${() => this.openReportControlSelection()}"
+              >${reportIcon}</mwc-icon-button
+            ></abbr
+          >
           <abbr title="${translate("zeroline.gsecontrol")}"
             ><mwc-icon-button
               id="gsecontrol"
@@ -190,6 +201,9 @@ __decorate([
 __decorate([
   query("#smvcontrol")
 ], ZerolinePane.prototype, "smvcontrol", 2);
+__decorate([
+  query("#reportcontrol")
+], ZerolinePane.prototype, "reportcontrol", 2);
 __decorate([
   query("#createsubstation")
 ], ZerolinePane.prototype, "createsubstation", 2);

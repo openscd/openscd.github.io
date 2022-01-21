@@ -95,8 +95,6 @@ function getReader(server) {
 }
 export function createFCDAsWizard(parent) {
   const server = parent.closest("Server");
-  if (!server)
-    return;
   return [
     {
       title: get("wizard.title.add", {tagName: "FCDA"}),
@@ -106,13 +104,13 @@ export function createFCDAsWizard(parent) {
         action: createFCDAsAction(parent)
       },
       content: [
-        html`<finder-list
-          multi
-          .paths=${[["Server: " + identity(server)]]}
-          .read=${getReader(server)}
-          .getDisplayString=${getDisplayString}
-          .getTitle=${(path) => path[path.length - 1]}
-        ></finder-list>`
+        server ? html`<finder-list
+              multi
+              .paths=${[["Server: " + identity(server)]]}
+              .read=${getReader(server)}
+              .getDisplayString=${getDisplayString}
+              .getTitle=${(path) => path[path.length - 1]}
+            ></finder-list>` : html``
       ]
     }
   ];

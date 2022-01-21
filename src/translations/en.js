@@ -31,7 +31,9 @@ export const en = {
     fixedOffs: "Fixed offset",
     securityEnabled: "Security enabled",
     DataSet: "Dataset",
-    Communication: "Communication"
+    Communication: "Communication",
+    TrgOps: "Trigger options",
+    OptFields: "Optional fields"
   },
   settings: {
     title: "Settings",
@@ -62,7 +64,9 @@ export const en = {
   },
   zeroline: {
     iedsloading: "Loading IEDs...",
+    showieds: "Show/hide IEDs in substation editor",
     commmap: "Communication mapping",
+    reportcontrol: "Show all Reports",
     gsecontrol: "Show all GOOSEs",
     smvcontrol: "Show all Sampled Values"
   },

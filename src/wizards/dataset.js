@@ -8,10 +8,10 @@ import {
   cloneElement,
   getValue,
   identity,
-  newWizardEvent,
+  newSubWizardEvent,
   selector
 } from "../foundation.js";
-import {wizards} from "./wizard-library.js";
+import {createFCDAsWizard} from "./fcda.js";
 function updateDataSetAction(element) {
   return (inputs, wizard) => {
     const name = inputs.find((i) => i.label === "name").value;
@@ -63,6 +63,7 @@ export function editDataSetWizard(element) {
           .maybeValue=${name}
           helper="${translate("scl.name")}"
           required
+          disabled="true"
         >
         </wizard-textfield>`,
         html`<wizard-textfield
@@ -73,22 +74,18 @@ export function editDataSetWizard(element) {
           required
         >
         </wizard-textfield>`,
+        html`<filtered-list multi
+          >${Array.from(element.querySelectorAll("FCDA")).map((fcda) => html`<mwc-check-list-item selected value="${identity(fcda)}"
+                >${identity(fcda).split(">").pop()}</mwc-check-list-item
+              >`)}</filtered-list
+        >`,
         html`<mwc-button
           icon="add"
           label="${translate("wizard.title.add", {tagName: "FCDA"})}"
-          @click=${(e) => {
-          const wizard = wizards["FCDA"].create(element);
-          if (wizard) {
-            e.target?.dispatchEvent(newWizardEvent(wizard));
-            e.target?.dispatchEvent(newWizardEvent());
-          }
-        }}
-        ></mwc-button>`,
-        html`<filtered-list multi
-          >${Array.from(element.querySelectorAll("FCDA")).map((fcda) => html`<mwc-check-list-item selected value="${identity(fcda)}"
-                >${identity(fcda).split(">")[4]}</mwc-check-list-item
-              >`)}</filtered-list
-        >`
+          @click="${(e) => {
+          e.target?.dispatchEvent(newSubWizardEvent(() => createFCDAsWizard(element)));
+        }}"
+        ></mwc-button>`
       ]
     }
   ];

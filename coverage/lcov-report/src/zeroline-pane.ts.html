@@ -25,28 +25,28 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>195/195</span>
+                <span class='fraction'>212/212</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">91.66% </span>
+                <span class="strong">92.59% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>22/24</span>
+                <span class='fraction'>25/27</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">91.66% </span>
+                <span class="strong">92.3% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>11/12</span>
+                <span class='fraction'>12/13</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>195/195</span>
+                <span class='fraction'>212/212</span>
             </div>
         
             
@@ -258,7 +258,25 @@
 <a name='L193'></a><a href='#L193'>193</a>
 <a name='L194'></a><a href='#L194'>194</a>
 <a name='L195'></a><a href='#L195'>195</a>
-<a name='L196'></a><a href='#L196'>196</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">7x</span>
+<a name='L196'></a><a href='#L196'>196</a>
+<a name='L197'></a><a href='#L197'>197</a>
+<a name='L198'></a><a href='#L198'>198</a>
+<a name='L199'></a><a href='#L199'>199</a>
+<a name='L200'></a><a href='#L200'>200</a>
+<a name='L201'></a><a href='#L201'>201</a>
+<a name='L202'></a><a href='#L202'>202</a>
+<a name='L203'></a><a href='#L203'>203</a>
+<a name='L204'></a><a href='#L204'>204</a>
+<a name='L205'></a><a href='#L205'>205</a>
+<a name='L206'></a><a href='#L206'>206</a>
+<a name='L207'></a><a href='#L207'>207</a>
+<a name='L208'></a><a href='#L208'>208</a>
+<a name='L209'></a><a href='#L209'>209</a>
+<a name='L210'></a><a href='#L210'>210</a>
+<a name='L211'></a><a href='#L211'>211</a>
+<a name='L212'></a><a href='#L212'>212</a>
+<a name='L213'></a><a href='#L213'>213</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-yes">7x</span>
 <span class="cline-any cline-yes">7x</span>
 <span class="cline-any cline-yes">7x</span>
 <span class="cline-any cline-yes">7x</span>
@@ -304,6 +322,7 @@
 <span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">7x</span>
 <span class="cline-any cline-yes">7x</span>
 <span class="cline-any cline-yes">7x</span>
 <span class="cline-any cline-yes">7x</span>
@@ -325,6 +344,14 @@
 <span class="cline-any cline-yes">7x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">7x</span>
 <span class="cline-any cline-yes">7x</span>
 <span class="cline-any cline-yes">7x</span>
@@ -352,6 +379,13 @@
 <span class="cline-any cline-yes">7x</span>
 <span class="cline-any cline-yes">7x</span>
 <span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-yes">6x</span>
@@ -473,12 +507,13 @@ import './zeroline/substation-editor.js';
 import './zeroline/ied-editor.js';
 import { Settings } from './Setting.js';
 import { communicationMappingWizard } from './wizards/commmap-wizards.js';
-import { gooseIcon, smvIcon } from './icons.js';
-import { isPublic, newWizardEvent } from './foundation.js';
+import { gooseIcon, smvIcon, reportIcon } from './icons.js';
+import { isPublic, newSubWizardEvent, newWizardEvent } from './foundation.js';
 import { selectGseControlWizard } from './wizards/gsecontrol.js';
 import { wizards } from './wizards/wizard-library.js';
 import { getAttachedIeds } from './zeroline/foundation.js';
 import { selectSampledValueControlWizard } from './wizards/sampledvaluecontrol.js';
+import { selectReportControlWizard } from './wizards/reportcontrol.js';
 &nbsp;
 function shouldShowIEDs(): boolean {
   return localStorage.getItem('showieds') === 'on';
@@ -504,6 +539,7 @@ export class ZerolinePane extends LitElement {
   @query('#showieds') showieds!: IconButtonToggle;
   @query('#gsecontrol') gsecontrol!: IconButton;
   @query('#smvcontrol') smvcontrol!: IconButton;
+  @query('#reportcontrol') reportcontrol!: IconButton;
   @query('#createsubstation') createsubstation!: IconButton;
 &nbsp;
   openCommunicationMapping(): void {
@@ -515,6 +551,14 @@ export class ZerolinePane extends LitElement {
   openCreateSubstationWizard(): void {
     const wizard = wizards['Substation'].create(this.doc.documentElement);
     if (wizard) this.dispatchEvent(newWizardEvent(wizard));
+  }
+&nbsp;
+  openReportControlSelection(): void {
+    this.dispatchEvent(
+      newSubWizardEvent(() =&gt;
+        selectReportControlWizard(this.doc.documentElement)
+      )
+    );
   }
 &nbsp;
   openGseControlSelection(): void {
@@ -558,7 +602,7 @@ export class ZerolinePane extends LitElement {
           &lt;/abbr&gt;
         &lt;/nav&gt;
         &lt;nav&gt;
-          &lt;abbr title="${translate('zeroline.commmap')}"&gt;
+          &lt;abbr title="${translate('zeroline.showieds')}"&gt;
             &lt;mwc-icon-button-toggle
               ?on=${shouldShowIEDs()}
               @click=${() =&gt; this.toggleShowIEDs()}
@@ -574,6 +618,13 @@ export class ZerolinePane extends LitElement {
               @click=${() =&gt; this.openCommunicationMapping()}
             &gt;&lt;/mwc-icon-button&gt;
           &lt;/abbr&gt;
+          &lt;abbr title="${translate('zeroline.reportcontrol')}"
+            &gt;&lt;mwc-icon-button
+              id="reportcontrol"
+              @click="${() =&gt; this.openReportControlSelection()}"
+              &gt;${reportIcon}&lt;/mwc-icon-button
+            &gt;&lt;/abbr
+          &gt;
           &lt;abbr title="${translate('zeroline.gsecontrol')}"
             &gt;&lt;mwc-icon-button
               id="gsecontrol"
@@ -655,7 +706,7 @@ export class ZerolinePane extends LitElement {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener">istanbul</a>
-                at Thu Jan 20 2022 10:15:39 GMT+0000 (Coordinated Universal Time)
+                at Fri Jan 21 2022 14:24:52 GMT+0000 (Coordinated Universal Time)
             </div>
         </div>
         <script src="../prettify.js"></script>

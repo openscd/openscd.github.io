@@ -102,6 +102,9 @@ export function newWizardEvent(wizardOrFactory, eventInitDict) {
     detail: {wizard, ...eventInitDict?.detail}
   });
 }
+export function newSubWizardEvent(wizardOrFactory) {
+  return newWizardEvent(wizardOrFactory, {detail: {subwizard: true}});
+}
 export function newLogEvent(detail, eventInitDict) {
   return new CustomEvent("log", {
     bubbles: true,
