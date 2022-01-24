@@ -8,6 +8,7 @@ import {
   earthSwitchIcon,
   generalConductingEquipmentIcon
 } from "../icons.js";
+import {typeStr} from "../wizards/conductingequipment.js";
 function containsReference(element, iedName) {
   return Array.from(element.getElementsByTagName("LNode")).filter(isPublic).some((lnode) => lnode.getAttribute("iedName") === iedName);
 }
@@ -109,13 +110,6 @@ export function startMove(editor, Child, Parent) {
 }
 export function getIcon(condEq) {
   return typeIcons[typeStr(condEq)] ?? generalConductingEquipmentIcon;
-}
-function typeStr(condEq) {
-  if (condEq.getAttribute("type") === "DIS" && condEq.querySelector("Terminal")?.getAttribute("cNodeName") === "grounded") {
-    return "ERS";
-  } else {
-    return condEq.getAttribute("type") ?? "";
-  }
 }
 const typeIcons = {
   CBR: circuitBreakerIcon,

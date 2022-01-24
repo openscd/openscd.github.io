@@ -5,6 +5,7 @@ import "../../_snowpack/pkg/@material/mwc-select.js";
 import "../wizard-textfield.js";
 import {
   createElement,
+  crossProduct,
   getValue,
   isPublic
 } from "../foundation.js";
@@ -39,8 +40,63 @@ const types = {
   TCF: "Thyristor Controlled Frequency Converter",
   TCR: "Thyristor Controlled Reactive Component"
 };
-function typeStr(condEq) {
-  return condEq.getAttribute("type") === "DIS" && condEq.querySelector("Terminal")?.getAttribute("cNodeName") === "grounded" ? "ERS" : condEq.getAttribute("type") ?? "";
+function getLogicalNodeInstance(lNode) {
+  if (!lNode)
+    return null;
+  const [lnInst, lnClass, iedName, ldInst, prefix] = [
+    "lnInst",
+    "lnClass",
+    "iedName",
+    "ldInst",
+    "prefix"
+  ].map((attribute) => lNode?.getAttribute(attribute));
+  const iedSelector = [`IED[name="${iedName}"]`, "IED"];
+  const lDevicePath = ["AccessPoint > Server"];
+  const lNSelector = [
+    `LDevice[inst="${ldInst}"] > LN[inst="${lnInst}"][lnClass="${lnClass}"]`
+  ];
+  const lNPrefixSelector = prefix && prefix !== "" ? [`[prefix="${prefix}"]`] : ['[prefix=""]', ":not(prefix)"];
+  return lNode.ownerDocument.querySelector(crossProduct(iedSelector, [" > "], lDevicePath, [" > "], lNSelector, lNPrefixSelector).map((strings) => strings.join("")).join(","));
+}
+function getSwitchTypeValueFromDTT(lNorlNode) {
+  const rootNode = lNorlNode?.ownerDocument;
+  const lNodeType = lNorlNode.getAttribute("lnType");
+  const lnClass = lNorlNode.getAttribute("lnClass");
+  const dObj = rootNode.querySelector(`DataTypeTemplates > LNodeType[id="${lNodeType}"][lnClass="${lnClass}"] > DO[name="SwTyp"]`);
+  if (dObj) {
+    const dORef = dObj.getAttribute("type");
+    return rootNode.querySelector(`DataTypeTemplates > DOType[id="${dORef}"] > DA[name="stVal"] > Val`)?.innerHTML.trim();
+  }
+  return void 0;
+}
+function getSwitchTypeValue(lN) {
+  const daInstantiated = lN.querySelector('DOI[name="SwTyp"] > DAI[name="stVal"]');
+  if (daInstantiated) {
+    return daInstantiated.querySelector("Val")?.innerHTML.trim();
+  } else {
+    return getSwitchTypeValueFromDTT(lN);
+  }
+}
+function containsGroundedTerminal(condEq) {
+  return Array.from(condEq.querySelectorAll("Terminal")).some((t) => t.getAttribute("cNodeName") === "grounded");
+}
+function containsEarthSwitchDefinition(condEq) {
+  const lNodeXSWI = condEq.querySelector('LNode[lnClass="XSWI"]');
+  const lN = getLogicalNodeInstance(lNodeXSWI);
+  let swTypVal;
+  if (lN) {
+    swTypVal = getSwitchTypeValue(lN);
+  } else if (lNodeXSWI) {
+    swTypVal = getSwitchTypeValueFromDTT(lNodeXSWI);
+  }
+  return swTypVal ? ["Earthing Switch", "High Speed Earthing Switch"].includes(swTypVal) : false;
+}
+export function typeStr(condEq) {
+  if (containsGroundedTerminal(condEq) || condEq.getAttribute("type") === "DIS" && containsEarthSwitchDefinition(condEq)) {
+    return "ERS";
+  } else {
+    return condEq.getAttribute("type") ?? "";
+  }
 }
 export function typeName(condEq) {
   return types[typeStr(condEq)] ?? get("conductingequipment.unknownType");
