@@ -53,7 +53,7 @@ export function editDataSetWizard(element) {
       title: get("wizard.title.edit", {tagName: element.tagName}),
       element,
       primary: {
-        label: get("edit"),
+        label: get("save"),
         icon: "save",
         action: updateDataSetAction(element)
       },

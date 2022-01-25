@@ -39,9 +39,7 @@ export let IedEditor = class extends LitElement {
     this.dispatchEvent(newSubWizardEvent(() => selectReportControlWizard(this.element)));
   }
   openGseControlSelection() {
-    const wizard = selectGseControlWizard(this.element);
-    if (wizard)
-      this.dispatchEvent(newWizardEvent(wizard));
+    this.dispatchEvent(newSubWizardEvent(() => selectGseControlWizard(this.element)));
   }
   openSmvControlSelection() {
     const wizard = selectSampledValueControlWizard(this.element);

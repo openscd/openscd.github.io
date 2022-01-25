@@ -62,15 +62,15 @@ export function updateGSEAction(element) {
   };
 }
 export function editGseWizard(element) {
-  const minTime = element.querySelector("MinTime")?.innerHTML.trim();
-  const maxTime = element.querySelector("MaxTime")?.innerHTML.trim();
+  const minTime = element.querySelector("MinTime")?.innerHTML.trim() ?? null;
+  const maxTime = element.querySelector("MaxTime")?.innerHTML.trim() ?? null;
   return [
     {
       title: get("wizard.title.edit", {tagName: element.tagName}),
       element,
       primary: {
         label: get("save"),
-        icon: "edit",
+        icon: "save",
         action: updateGSEAction(element)
       },
       content: [

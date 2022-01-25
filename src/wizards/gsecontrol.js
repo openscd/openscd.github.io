@@ -11,6 +11,7 @@ import {
   identity,
   isPublic,
   newActionEvent,
+  newSubWizardEvent,
   newWizardEvent,
   selector
 } from "../foundation.js";
@@ -161,20 +162,16 @@ export function editGseControlWizard(element) {
           tagName: get("scl.DataSet")
         })}
               icon="edit"
-              @click=${(e) => {
-          if (dataSet) {
-            e.target?.dispatchEvent(newWizardEvent());
-            e.target?.dispatchEvent(newWizardEvent(editDataSetWizard(dataSet)));
-          }
-        }}
+              @click="${(e) => {
+          e.target?.dispatchEvent(newSubWizardEvent(() => editDataSetWizard(dataSet)));
+        }}}"
             ></mwc-button>` : html``,
         gSE ? html`<mwc-button
               id="editgse"
               label=${translate("scl.Communication")}
               icon="edit"
               @click="${(e) => {
-          e.target?.dispatchEvent(newWizardEvent());
-          e.target?.dispatchEvent(newWizardEvent(editGseWizard(gSE)));
+          e.target?.dispatchEvent(newSubWizardEvent(() => editGseWizard(gSE)));
         }}}"
             ></mwc-button>` : html``
       ]
@@ -192,8 +189,7 @@ export function selectGseControlWizard(element) {
           const gseControlIndentity = e.target.selected.value;
           const gseControl = element.querySelector(selector("GSEControl", gseControlIndentity));
           if (gseControl) {
-            e.target.dispatchEvent(newWizardEvent(editGseControlWizard(gseControl)));
-            e.target.dispatchEvent(newWizardEvent());
+            e.target.dispatchEvent(newSubWizardEvent(() => editGseControlWizard(gseControl)));
           }
         }}
           >${gseControls.map((gseControl) => html`<mwc-list-item twoline value="${identity(gseControl)}"
