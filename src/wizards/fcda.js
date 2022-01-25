@@ -22,7 +22,7 @@ function newFCDA(parent, path) {
   const ldInst = ln.closest("LDevice")?.getAttribute("inst");
   const prefix = ln.getAttribute("prefix") ?? "";
   const lnClass = ln.getAttribute("lnClass");
-  const lnInst = ln.getAttribute("inst") ?? "";
+  const lnInst = ln.getAttribute("inst") && ln.getAttribute("inst") !== "" ? ln.getAttribute("inst") : null;
   let doName = "";
   let daName = "";
   let fc = "";
