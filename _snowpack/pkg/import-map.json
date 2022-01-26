@@ -15,6 +15,7 @@
     "@material/mwc-list/mwc-check-list-item": "./@material/mwc-list/mwc-check-list-item.js",
     "@material/mwc-list/mwc-list-base": "./@material/mwc-list/mwc-list-base.js",
     "@material/mwc-list/mwc-list-item": "./@material/mwc-list/mwc-list-item.js",
+    "@material/mwc-list/mwc-list-item.js": "./@material/mwc-list/mwc-list-item.js",
     "@material/mwc-list/mwc-radio-list-item": "./@material/mwc-list/mwc-radio-list-item.js",
     "@material/mwc-menu": "./@material/mwc-menu.js",
     "@material/mwc-select": "./@material/mwc-select.js",

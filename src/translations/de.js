@@ -29,11 +29,15 @@ export const de = {
     qchg: "Qualitätsanderung ist Auslöser",
     dupd: "Datenupdate ist Auslöser",
     fixedOffs: "Fester Offset",
-    securityEnabled: "Aktive Sicherungsmaßnahmen",
+    securityEnable: "Aktive Sicherungsmaßnahmen",
     DataSet: "Datensetz",
     Communication: "Kommunikation",
     TrgOps: "Triggerbedingungen",
-    OptFields: "Optionale felder"
+    OptFields: "Optionale felder",
+    multicast: "SMV nach IEC 61850 9-2",
+    smpMod: "Abtast-Art",
+    smpRate: "Abtastrate",
+    nofASDU: "Abtastpunkte pro Datenpacket"
   },
   settings: {
     title: "Einstellungen",

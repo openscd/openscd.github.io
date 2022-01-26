@@ -22,7 +22,7 @@ import "../action-icon.js";
 import {createClientLnWizard} from "../wizards/clientln.js";
 import {gooseIcon, smvIcon, reportIcon} from "../icons.js";
 import {wizards} from "../wizards/wizard-library.js";
-import {newSubWizardEvent, newWizardEvent} from "../foundation.js";
+import {newWizardEvent} from "../foundation.js";
 import {selectGseControlWizard} from "../wizards/gsecontrol.js";
 import {selectSampledValueControlWizard} from "../wizards/sampledvaluecontrol.js";
 import {selectReportControlWizard} from "../wizards/reportcontrol.js";
@@ -36,15 +36,13 @@ export let IedEditor = class extends LitElement {
       this.dispatchEvent(newWizardEvent(wizard));
   }
   openReportControlSelection() {
-    this.dispatchEvent(newSubWizardEvent(() => selectReportControlWizard(this.element)));
+    this.dispatchEvent(newWizardEvent(() => selectReportControlWizard(this.element)));
   }
   openGseControlSelection() {
-    this.dispatchEvent(newSubWizardEvent(() => selectGseControlWizard(this.element)));
+    this.dispatchEvent(newWizardEvent(() => selectGseControlWizard(this.element)));
   }
   openSmvControlSelection() {
-    const wizard = selectSampledValueControlWizard(this.element);
-    if (wizard)
-      this.dispatchEvent(newWizardEvent(wizard));
+    this.dispatchEvent(newWizardEvent(() => selectSampledValueControlWizard(this.element)));
   }
   openCommunicationMapping() {
     const sendingIeds = Array.from(this.element.closest("SCL")?.querySelectorAll("IED") ?? []);

@@ -24,7 +24,7 @@ import "./zeroline/substation-editor.js";
 import "./zeroline/ied-editor.js";
 import {communicationMappingWizard} from "./wizards/commmap-wizards.js";
 import {gooseIcon, smvIcon, reportIcon} from "./icons.js";
-import {isPublic, newSubWizardEvent, newWizardEvent} from "./foundation.js";
+import {isPublic, newWizardEvent} from "./foundation.js";
 import {selectGseControlWizard} from "./wizards/gsecontrol.js";
 import {wizards} from "./wizards/wizard-library.js";
 import {getAttachedIeds} from "./zeroline/foundation.js";
@@ -53,15 +53,13 @@ export let ZerolinePane = class extends LitElement {
       this.dispatchEvent(newWizardEvent(wizard));
   }
   openReportControlSelection() {
-    this.dispatchEvent(newSubWizardEvent(() => selectReportControlWizard(this.doc.documentElement)));
+    this.dispatchEvent(newWizardEvent(() => selectReportControlWizard(this.doc.documentElement)));
   }
   openGseControlSelection() {
-    this.dispatchEvent(newSubWizardEvent(() => selectGseControlWizard(this.doc.documentElement)));
+    this.dispatchEvent(newWizardEvent(() => selectGseControlWizard(this.doc.documentElement)));
   }
   openSampledValueControlSelection() {
-    const wizard = selectSampledValueControlWizard(this.doc.documentElement);
-    if (wizard)
-      this.dispatchEvent(newWizardEvent(wizard));
+    this.dispatchEvent(newWizardEvent(() => selectSampledValueControlWizard(this.doc.documentElement)));
   }
   toggleShowIEDs() {
     if (shouldShowIEDs())

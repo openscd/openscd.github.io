@@ -1,6 +1,149 @@
 import {html} from "../../_snowpack/pkg/lit-element.js";
-import {get} from "../../_snowpack/pkg/lit-translate.js";
-import {identity, isPublic} from "../foundation.js";
+import {get, translate} from "../../_snowpack/pkg/lit-translate.js";
+import "../../_snowpack/pkg/@material/mwc-list/mwc-list-item.js";
+import "../filtered-list.js";
+import "../wizard-select.js";
+import "../wizard-textfield.js";
+import {
+  cloneElement,
+  getValue,
+  identity,
+  isPublic,
+  newSubWizardEvent,
+  selector
+} from "../foundation.js";
+import {securityEnableEnum, smpModEnum} from "./foundation/enums.js";
+import {maxLength, patterns} from "./foundation/limits.js";
+function contentSampledValueControlWizard(options) {
+  return [
+    html`<wizard-textfield
+      label="name"
+      .maybeValue=${options.name}
+      helper="${translate("scl.name")}"
+      required
+      validationMessage="${translate("textfield.required")}"
+      pattern="${patterns.asciName}"
+      maxLength="${maxLength.cbName}"
+      dialogInitialFocus
+    ></wizard-textfield>`,
+    html`<wizard-textfield
+      label="desc"
+      .maybeValue=${options.desc}
+      nullable
+      pattern="${patterns.normalizedString}"
+      helper="${translate("scl.desc")}"
+    ></wizard-textfield>`,
+    html`<wizard-select
+      label="multicast"
+      .maybeValue=${options.multicast}
+      helper="${translate("scl.multicast")}"
+      disabled
+      >${["true", "false"].map((option) => html`<mwc-list-item value="${option}">${option}</mwc-list-item>`)}</wizard-select
+    >`,
+    html`<wizard-textfield
+      label="smvID"
+      .maybeValue=${options.smvID}
+      helper="${translate("scl.id")}"
+      required
+      validationMessage="${translate("textfield.nonempty")}"
+    ></wizard-textfield>`,
+    html`<wizard-select
+      label="smpMod"
+      .maybeValue=${options.smpMod}
+      nullable
+      required
+      helper="${translate("scl.smpMod")}"
+      >${smpModEnum.map((option) => html`<mwc-list-item value="${option}">${option}</mwc-list-item>`)}</wizard-select
+    >`,
+    html`<wizard-textfield
+      label="smpRate"
+      .maybeValue=${options.smpRate}
+      helper="${translate("scl.smpRate")}"
+      required
+      type="number"
+      min="0"
+    ></wizard-textfield>`,
+    html`<wizard-textfield
+      label="nofASDU"
+      .maybeValue=${options.nofASDU}
+      helper="${translate("scl.nofASDU")}"
+      required
+      type="number"
+      min="0"
+    ></wizard-textfield>`,
+    html`<wizard-select
+      label="securityEnable"
+      .maybeValue=${options.securityEnable}
+      nullable
+      required
+      helper="${translate("scl.securityEnable")}"
+      >${securityEnableEnum.map((option) => html`<mwc-list-item value="${option}">${option}</mwc-list-item>`)}</wizard-select
+    >`
+  ];
+}
+function updateSampledValueControlAction(element) {
+  return (inputs) => {
+    const attributes = {};
+    const attributeKeys = [
+      "name",
+      "desc",
+      "multicast",
+      "smvID",
+      "smpMod",
+      "smpRate",
+      "nofASDU",
+      "securityEnable"
+    ];
+    attributeKeys.forEach((key) => {
+      attributes[key] = getValue(inputs.find((i) => i.label === key));
+    });
+    let sampledValueControlAction = null;
+    if (attributeKeys.some((key) => attributes[key] !== element.getAttribute(key))) {
+      const newElement = cloneElement(element, attributes);
+      sampledValueControlAction = {
+        old: {element},
+        new: {element: newElement}
+      };
+    }
+    const actions = [];
+    if (sampledValueControlAction)
+      actions.push(sampledValueControlAction);
+    return actions;
+  };
+}
+export function editSampledValueControlWizard(element) {
+  const name = element.getAttribute("name");
+  const desc = element.getAttribute("desc");
+  const multicast = element.getAttribute("multicast");
+  const smvID = element.getAttribute("smvID");
+  const smpMod = element.getAttribute("smpMod");
+  const smpRate = element.getAttribute("smpRate");
+  const nofASDU = element.getAttribute("nofASDU");
+  const securityEnable = element.getAttribute("securityEnabled");
+  return [
+    {
+      title: get("wizard.title.edit", {tagName: element.tagName}),
+      element,
+      primary: {
+        icon: "save",
+        label: get("save"),
+        action: updateSampledValueControlAction(element)
+      },
+      content: [
+        ...contentSampledValueControlWizard({
+          name,
+          desc,
+          multicast,
+          smvID,
+          smpMod,
+          smpRate,
+          nofASDU,
+          securityEnable
+        })
+      ]
+    }
+  ];
+}
 export function selectSampledValueControlWizard(element) {
   const smvControls = Array.from(element.querySelectorAll("SampledValueControl")).filter(isPublic);
   return [
@@ -8,6 +151,13 @@ export function selectSampledValueControlWizard(element) {
       title: get("wizard.title.select", {tagName: "SampledValueControl"}),
       content: [
         html`<filtered-list
+          @selected=${(e) => {
+          const identity2 = e.target.selected.value;
+          const sampledValueControl = element.querySelector(selector("SampledValueControl", identity2));
+          if (!sampledValueControl)
+            return;
+          e.target?.dispatchEvent(newSubWizardEvent(() => editSampledValueControlWizard(sampledValueControl)));
+        }}
           >${smvControls.map((smvControl) => html`<mwc-list-item twoline value="${identity(smvControl)}"
                 ><span>${smvControl.getAttribute("name")}</span
                 ><span slot="secondary"
