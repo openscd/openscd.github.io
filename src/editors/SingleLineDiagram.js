@@ -44,7 +44,9 @@ import {
   getAbsolutePositionTerminal,
   drawCNodeConnections,
   getConnectivityNodesDrawingPosition,
-  createSubstationElement
+  createSubstationElement,
+  addLabelToBay,
+  addLabelToBusBar
 } from "./singlelinediagram/sld-drawing.js";
 import {
   isBusBar,
@@ -123,9 +125,11 @@ export default class SingleLineDiagramPlugin extends LitElement {
     this.getVoltageLevels(substationElement).forEach((voltageLevelElement) => {
       this.getBusBars(voltageLevelElement).forEach((busbarElement) => {
         this.drawBusBarConnections(substationElement, this.svg, busbarElement);
+        addLabelToBusBar(this.svg, busbarElement, (event) => this.openEditWizard(event, busbarElement));
       });
       this.getBays(voltageLevelElement).forEach((bayElement) => {
         this.drawBayConnections(substationElement, this.svg, bayElement);
+        addLabelToBay(this.svg, bayElement, (event) => this.openEditWizard(event, bayElement));
       });
     });
   }
@@ -165,23 +169,22 @@ export default class SingleLineDiagramPlugin extends LitElement {
     });
   }
   drawBusBars(voltageLevelElement, voltageLevelGroup) {
-    this.getBusBars(voltageLevelElement).forEach((busbarElement) => this.drawBusBar(voltageLevelElement, voltageLevelGroup, busbarElement));
-  }
-  drawBusBar(parentElement, parentGroup, busbarElement) {
-    const busBarGroup = createBusBarElement(busbarElement, getBusBarLength(parentElement), (event) => this.openEditWizard(event, busbarElement));
-    parentGroup.appendChild(busBarGroup);
+    this.getBusBars(voltageLevelElement).forEach((busbarElement) => {
+      const busbarGroup = createBusBarElement(busbarElement, getBusBarLength(voltageLevelElement));
+      voltageLevelGroup.appendChild(busbarGroup);
+    });
   }
   drawBusBarConnections(rootElement, rootGroup, busbarElement) {
     const pathName = getPathNameAttribute(busbarElement.children[0]);
-    const busBarPosition = getAbsolutePositionBusBar(busbarElement);
+    const busbarPosition = getAbsolutePositionBusBar(busbarElement);
     this.findEquipment(rootElement, pathName).forEach((element) => {
       const parentElement = element.parentElement;
       const elementPosition = getAbsolutePosition(element);
-      const elementsTerminalSide = busBarPosition.y < elementPosition.y ? "top" : "bottom";
+      const elementsTerminalSide = busbarPosition.y < elementPosition.y ? "top" : "bottom";
       const elementsTerminalPosition = getAbsolutePositionTerminal(element, elementsTerminalSide);
       const busbarTerminalPosition = {
         x: elementsTerminalPosition.x,
-        y: busBarPosition.y
+        y: busbarPosition.y
       };
       const terminalElement = element.querySelector(`Terminal[connectivityNode="${pathName}"]`);
       rootGroup.querySelectorAll(`g[id="${identity(parentElement)}"]`).forEach((eq) => drawBusBarRoute(busbarTerminalPosition, elementsTerminalPosition, eq));
@@ -309,6 +312,22 @@ SingleLineDiagramPlugin.styles = css`
       pointer-events: bounding-box;
     }
 
+    g[type='Bay'] > g[type='BayLabel'] {
+      visibility: hidden;
+    }
+    g[type='Bay']:hover > g[type='BayLabel'] {
+      visibility: visible;
+    }
+
+    g[type='Busbar'] > g[type='BusbarLabel'] {
+      visibility: hidden;
+    }
+    g[type='Busbar'] > g[type='BusbarLabel'] > text ,
+    g[type='Busbar']:hover > g[type='BusbarLabel'] {
+      visibility: visible;
+    }
+
+    g[type='Bay']:hover,
     g[type='Busbar']:hover,
     g[type='ConductingEquipment']:hover,
     g[type='ConnectivityNode']:hover,

@@ -2,6 +2,7 @@ import {getDescriptionAttribute, getNameAttribute, identity} from "../../foundat
 import {getIcon} from "../../zeroline/foundation.js";
 import {
   connectivityNodeIcon,
+  editIcon,
   powerTransformerTwoWindingIcon
 } from "../../icons.js";
 import {
@@ -102,8 +103,26 @@ export function createSubstationElement(substation) {
 export function createVoltageLevelElement(voltageLevel) {
   return createGroupElement(voltageLevel);
 }
-export function createBayElement(bay) {
-  return createGroupElement(bay);
+export function createBayElement(bayElement) {
+  return createGroupElement(bayElement);
+}
+export function addLabelToBay(rootGroup, bayElement, clickAction) {
+  rootGroup.querySelectorAll(`g[id="${identity(bayElement)}"]`).forEach((bayGroup) => {
+    const labelGroup = document.createElementNS("http://www.w3.org/2000/svg", "g");
+    labelGroup.setAttribute("type", "BayLabel");
+    if (clickAction)
+      labelGroup.addEventListener("click", clickAction);
+    bayGroup.prepend(labelGroup);
+    const bayBox = bayGroup.getBBox();
+    const text = createTextElement(bayElement.getAttribute("name") || "", {x: bayBox.x, y: bayBox.y - 20}, "medium");
+    labelGroup.append(text);
+    const textBox = text.getBBox();
+    const parsedIcon = new DOMParser().parseFromString(editIcon.strings[0], "application/xml");
+    parsedIcon.querySelectorAll("circle,path,line").forEach((icon) => {
+      icon.setAttribute("transform", `translate(${textBox.x + textBox.width + 5},${textBox.y}) scale(0.75)`);
+      labelGroup.append(icon);
+    });
+  });
 }
 export function createTextElement(textContent, coordinates, textSize) {
   const finalElement = document.createElementNS("http://www.w3.org/2000/svg", "text");
@@ -128,13 +147,12 @@ export function createTerminalElement(terminal, sideToDraw, clickAction) {
     groupElement.addEventListener("click", clickAction);
   return groupElement;
 }
-export function createBusBarElement(busBarElement, busbarLength, clickAction) {
-  const groupElement = createGroupElement(busBarElement);
+export function createBusBarElement(busbarElement, busbarLength) {
+  const groupElement = createGroupElement(busbarElement);
   groupElement.setAttribute("type", "Busbar");
-  const busBarName = getNameAttribute(busBarElement);
-  const absolutePosition = getAbsolutePositionBusBar(busBarElement);
+  const absolutePosition = getAbsolutePositionBusBar(busbarElement);
   const icon = document.createElementNS("http://www.w3.org/2000/svg", "line");
-  icon.setAttribute("name", getNameAttribute(busBarElement));
+  icon.setAttribute("name", getNameAttribute(busbarElement));
   icon.setAttribute("stroke-width", "4");
   icon.setAttribute("stroke", "currentColor");
   icon.setAttribute("x1", `${absolutePosition.x}`);
@@ -142,11 +160,25 @@ export function createBusBarElement(busBarElement, busbarLength, clickAction) {
   icon.setAttribute("x2", `${busbarLength}`);
   icon.setAttribute("y2", `${absolutePosition.y}`);
   groupElement.appendChild(icon);
-  const text = createTextElement(busBarName, {x: absolutePosition.x, y: absolutePosition.y - 10}, "small");
-  groupElement.appendChild(text);
-  if (clickAction)
-    groupElement.addEventListener("click", clickAction);
   return groupElement;
+}
+export function addLabelToBusBar(rootGroup, busbarElement, clickAction) {
+  rootGroup.querySelectorAll(`g[id="${identity(busbarElement)}"]`).forEach((busbarGroup) => {
+    const labelGroup = document.createElementNS("http://www.w3.org/2000/svg", "g");
+    labelGroup.setAttribute("type", "BusbarLabel");
+    if (clickAction)
+      labelGroup.addEventListener("click", clickAction);
+    busbarGroup.prepend(labelGroup);
+    const busbarBox = busbarGroup.getBBox();
+    const text = createTextElement(busbarElement.getAttribute("name") || "", {x: busbarBox.x, y: busbarBox.y - 20}, "medium");
+    labelGroup.append(text);
+    const textBox = text.getBBox();
+    const parsedIcon = new DOMParser().parseFromString(editIcon.strings[0], "application/xml");
+    parsedIcon.querySelectorAll("circle,path,line").forEach((icon) => {
+      icon.setAttribute("transform", `translate(${textBox.x + textBox.width + 5},${textBox.y}) scale(0.75)`);
+      labelGroup.append(icon);
+    });
+  });
 }
 export function createConductingEquipmentElement(equipmentElement, clickAction) {
   const groupElement = createGroupElement(equipmentElement);

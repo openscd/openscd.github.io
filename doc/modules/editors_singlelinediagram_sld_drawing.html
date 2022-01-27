@@ -86,6 +86,8 @@
 						<section class="tsd-index-section ">
 							<h3>Functions</h3>
 							<ul class="tsd-index-list">
+								<li class="tsd-kind-function tsd-parent-kind-module"><a href="editors_singlelinediagram_sld_drawing.html#addLabelToBay" class="tsd-kind-icon">add<wbr>Label<wbr>ToBay</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module"><a href="editors_singlelinediagram_sld_drawing.html#addLabelToBusBar" class="tsd-kind-icon">add<wbr>Label<wbr>ToBus<wbr>Bar</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-module"><a href="editors_singlelinediagram_sld_drawing.html#createBayElement" class="tsd-kind-icon">create<wbr>Bay<wbr>Element</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-module"><a href="editors_singlelinediagram_sld_drawing.html#createBusBarElement" class="tsd-kind-icon">create<wbr>Bus<wbr>Bar<wbr>Element</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-module"><a href="editors_singlelinediagram_sld_drawing.html#createConductingEquipmentElement" class="tsd-kind-icon">create<wbr>Conducting<wbr>Equipment<wbr>Element</a></li>
@@ -118,7 +120,7 @@
 					<div class="tsd-signature tsd-kind-icon">CNODE_<wbr>SIZE<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">25</span><span class="tsd-signature-symbol"> = 25</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/fa468b7/src/editors/singlelinediagram/sld-drawing.ts#L23">src/editors/singlelinediagram/sld-drawing.ts:23</a></li>
+							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/c6f1e0d/src/editors/singlelinediagram/sld-drawing.ts#L24">src/editors/singlelinediagram/sld-drawing.ts:24</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -133,7 +135,7 @@
 					<div class="tsd-signature tsd-kind-icon">EQUIPMENT_<wbr>SIZE<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">50</span><span class="tsd-signature-symbol"> = 50</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/fa468b7/src/editors/singlelinediagram/sld-drawing.ts#L20">src/editors/singlelinediagram/sld-drawing.ts:20</a></li>
+							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/c6f1e0d/src/editors/singlelinediagram/sld-drawing.ts#L21">src/editors/singlelinediagram/sld-drawing.ts:21</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -148,7 +150,7 @@
 					<div class="tsd-signature tsd-kind-icon">SVG_<wbr>GRID_<wbr>SIZE<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">64</span><span class="tsd-signature-symbol"> = 64</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/fa468b7/src/editors/singlelinediagram/sld-drawing.ts#L17">src/editors/singlelinediagram/sld-drawing.ts:17</a></li>
+							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/c6f1e0d/src/editors/singlelinediagram/sld-drawing.ts#L18">src/editors/singlelinediagram/sld-drawing.ts:18</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -161,71 +163,42 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Functions</h2>
 				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
-					<a name="createBayElement" class="tsd-anchor"></a>
-					<h3>create<wbr>Bay<wbr>Element</h3>
+					<a name="addLabelToBay" class="tsd-anchor"></a>
+					<h3>add<wbr>Label<wbr>ToBay</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
-						<li class="tsd-signature tsd-kind-icon">create<wbr>Bay<wbr>Element<span class="tsd-signature-symbol">(</span>bay<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Element</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">SVGElement</span></li>
+						<li class="tsd-signature tsd-kind-icon">add<wbr>Label<wbr>ToBay<span class="tsd-signature-symbol">(</span>rootGroup<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">SVGElement</span>, bayElement<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Element</span>, clickAction<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Event</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/fa468b7/src/editors/singlelinediagram/sld-drawing.ts#L223">src/editors/singlelinediagram/sld-drawing.ts:223</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/c6f1e0d/src/editors/singlelinediagram/sld-drawing.ts#L235">src/editors/singlelinediagram/sld-drawing.ts:235</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Create a Bay <g> element.</p>
+									<p>Add a Text Element to the top of the Bay</p>
 								</div>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>bay: <span class="tsd-signature-type">Element</span></h5>
+									<h5>rootGroup: <span class="tsd-signature-type">SVGElement</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The Root group containing all groups.</p>
+									</div>
+								</li>
+								<li>
+									<h5>bayElement: <span class="tsd-signature-type">Element</span></h5>
 									<div class="tsd-comment tsd-typography">
 										<p>The Bay from the SCL document to use.</p>
 									</div>
 								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">SVGElement</span></h4>
-							<p>A Bay <g> element.</p>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
-					<a name="createBusBarElement" class="tsd-anchor"></a>
-					<h3>create<wbr>Bus<wbr>Bar<wbr>Element</h3>
-					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
-						<li class="tsd-signature tsd-kind-icon">create<wbr>Bus<wbr>Bar<wbr>Element<span class="tsd-signature-symbol">(</span>busBarElement<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Element</span>, busbarLength<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, clickAction<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Event</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">SVGElement</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/fa468b7/src/editors/singlelinediagram/sld-drawing.ts#L302">src/editors/singlelinediagram/sld-drawing.ts:302</a></li>
-								</ul>
-							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Create a bus bar element.</p>
-								</div>
-							</div>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>busBarElement: <span class="tsd-signature-type">Element</span></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>The Bus Bar SCL Element.</p>
-									</div>
-								</li>
-								<li>
-									<h5>busbarLength: <span class="tsd-signature-type">number</span></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>The length of the bus bar depending on the x coordinate of the most far out right equipment ()</p>
-									</div>
-								</li>
 								<li>
 									<h5><span class="tsd-flag ts-flagOptional">Optional</span> clickAction: <span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Event</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The action to execute when the Name of the Bay is being clicked.</p>
+									</div>
 									<ul class="tsd-parameters">
 										<li class="tsd-parameter-signature">
 											<ul class="tsd-signatures tsd-kind-type-literal">
@@ -246,7 +219,137 @@
 									</ul>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">SVGElement</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
+					<a name="addLabelToBusBar" class="tsd-anchor"></a>
+					<h3>add<wbr>Label<wbr>ToBus<wbr>Bar</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
+						<li class="tsd-signature tsd-kind-icon">add<wbr>Label<wbr>ToBus<wbr>Bar<span class="tsd-signature-symbol">(</span>rootGroup<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">SVGElement</span>, busbarElement<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Element</span>, clickAction<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Event</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/c6f1e0d/src/editors/singlelinediagram/sld-drawing.ts#L377">src/editors/singlelinediagram/sld-drawing.ts:377</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Add a Text Element to the top of the Bay</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>rootGroup: <span class="tsd-signature-type">SVGElement</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The Root group containing all groups.</p>
+									</div>
+								</li>
+								<li>
+									<h5>busbarElement: <span class="tsd-signature-type">Element</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The BusBar from the SCL document to use.</p>
+									</div>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> clickAction: <span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Event</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The action to execute when the Name of the BusBar is being clicked.</p>
+									</div>
+									<ul class="tsd-parameters">
+										<li class="tsd-parameter-signature">
+											<ul class="tsd-signatures tsd-kind-type-literal">
+												<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Event</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+											</ul>
+											<ul class="tsd-descriptions">
+												<li class="tsd-description">
+													<h4 class="tsd-parameters-title">Parameters</h4>
+													<ul class="tsd-parameters">
+														<li>
+															<h5>event: <span class="tsd-signature-type">Event</span></h5>
+														</li>
+													</ul>
+													<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+												</li>
+											</ul>
+										</li>
+									</ul>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
+					<a name="createBayElement" class="tsd-anchor"></a>
+					<h3>create<wbr>Bay<wbr>Element</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
+						<li class="tsd-signature tsd-kind-icon">create<wbr>Bay<wbr>Element<span class="tsd-signature-symbol">(</span>bayElement<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Element</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">SVGGraphicsElement</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/c6f1e0d/src/editors/singlelinediagram/sld-drawing.ts#L224">src/editors/singlelinediagram/sld-drawing.ts:224</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Create a Bay <g> element.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>bayElement: <span class="tsd-signature-type">Element</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The Bay from the SCL document to use.</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">SVGGraphicsElement</span></h4>
+							<p>A Bay <g> element.</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
+					<a name="createBusBarElement" class="tsd-anchor"></a>
+					<h3>create<wbr>Bus<wbr>Bar<wbr>Element</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
+						<li class="tsd-signature tsd-kind-icon">create<wbr>Bus<wbr>Bar<wbr>Element<span class="tsd-signature-symbol">(</span>busbarElement<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Element</span>, busbarLength<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">SVGGraphicsElement</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/c6f1e0d/src/editors/singlelinediagram/sld-drawing.ts#L344">src/editors/singlelinediagram/sld-drawing.ts:344</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Create a bus bar element.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>busbarElement: <span class="tsd-signature-type">Element</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The Bus Bar SCL Element.</p>
+									</div>
+								</li>
+								<li>
+									<h5>busbarLength: <span class="tsd-signature-type">number</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The length of the bus bar depending on the x coordinate of the most far out right equipment ()</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">SVGGraphicsElement</span></h4>
 							<p>The Bus Bar SVG element.</p>
 						</li>
 					</ul>
@@ -261,7 +364,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/fa468b7/src/editors/singlelinediagram/sld-drawing.ts#L344">src/editors/singlelinediagram/sld-drawing.ts:344</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/c6f1e0d/src/editors/singlelinediagram/sld-drawing.ts#L418">src/editors/singlelinediagram/sld-drawing.ts:418</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -279,6 +382,9 @@
 								</li>
 								<li>
 									<h5><span class="tsd-flag ts-flagOptional">Optional</span> clickAction: <span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Event</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The action to execute when the Conducting Equipment is being clicked.</p>
+									</div>
 									<ul class="tsd-parameters">
 										<li class="tsd-parameter-signature">
 											<ul class="tsd-signatures tsd-kind-type-literal">
@@ -314,7 +420,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/fa468b7/src/editors/singlelinediagram/sld-drawing.ts#L421">src/editors/singlelinediagram/sld-drawing.ts:421</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/c6f1e0d/src/editors/singlelinediagram/sld-drawing.ts#L496">src/editors/singlelinediagram/sld-drawing.ts:496</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -333,7 +439,7 @@
 								<li>
 									<h5><span class="tsd-flag ts-flagOptional">Optional</span> clickAction: <span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Event</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></h5>
 									<div class="tsd-comment tsd-typography">
-										<p>The action to execute when the terminal is being clicked.</p>
+										<p>The action to execute when the Terminal is being clicked.</p>
 									</div>
 									<ul class="tsd-parameters">
 										<li class="tsd-parameter-signature">
@@ -370,7 +476,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/fa468b7/src/editors/singlelinediagram/sld-drawing.ts#L382">src/editors/singlelinediagram/sld-drawing.ts:382</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/c6f1e0d/src/editors/singlelinediagram/sld-drawing.ts#L457">src/editors/singlelinediagram/sld-drawing.ts:457</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -388,6 +494,9 @@
 								</li>
 								<li>
 									<h5><span class="tsd-flag ts-flagOptional">Optional</span> clickAction: <span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Event</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The action to execute when the Power Transformer is being clicked.</p>
+									</div>
 									<ul class="tsd-parameters">
 										<li class="tsd-parameter-signature">
 											<ul class="tsd-signatures tsd-kind-type-literal">
@@ -423,7 +532,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/fa468b7/src/editors/singlelinediagram/sld-drawing.ts#L205">src/editors/singlelinediagram/sld-drawing.ts:205</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/c6f1e0d/src/editors/singlelinediagram/sld-drawing.ts#L206">src/editors/singlelinediagram/sld-drawing.ts:206</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -455,7 +564,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/fa468b7/src/editors/singlelinediagram/sld-drawing.ts#L263">src/editors/singlelinediagram/sld-drawing.ts:263</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/c6f1e0d/src/editors/singlelinediagram/sld-drawing.ts#L306">src/editors/singlelinediagram/sld-drawing.ts:306</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -511,13 +620,13 @@
 					<a name="createTextElement" class="tsd-anchor"></a>
 					<h3>create<wbr>Text<wbr>Element</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
-						<li class="tsd-signature tsd-kind-icon">create<wbr>Text<wbr>Element<span class="tsd-signature-symbol">(</span>textContent<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, coordinates<span class="tsd-signature-symbol">: </span><a href="../interfaces/editors_singlelinediagram_foundation.Point.html" class="tsd-signature-type" data-tsd-kind="Interface">Point</a>, textSize<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">SVGElement</span></li>
+						<li class="tsd-signature tsd-kind-icon">create<wbr>Text<wbr>Element<span class="tsd-signature-symbol">(</span>textContent<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, coordinates<span class="tsd-signature-symbol">: </span><a href="../interfaces/editors_singlelinediagram_foundation.Point.html" class="tsd-signature-type" data-tsd-kind="Interface">Point</a>, textSize<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">SVGGraphicsElement</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/fa468b7/src/editors/singlelinediagram/sld-drawing.ts#L234">src/editors/singlelinediagram/sld-drawing.ts:234</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/c6f1e0d/src/editors/singlelinediagram/sld-drawing.ts#L277">src/editors/singlelinediagram/sld-drawing.ts:277</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -546,7 +655,7 @@
 									</div>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">SVGElement</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">SVGGraphicsElement</span></h4>
 							<p>The text SVG element.</p>
 						</li>
 					</ul>
@@ -561,7 +670,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/fa468b7/src/editors/singlelinediagram/sld-drawing.ts#L214">src/editors/singlelinediagram/sld-drawing.ts:214</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/c6f1e0d/src/editors/singlelinediagram/sld-drawing.ts#L215">src/editors/singlelinediagram/sld-drawing.ts:215</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -593,7 +702,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/fa468b7/src/editors/singlelinediagram/sld-drawing.ts#L490">src/editors/singlelinediagram/sld-drawing.ts:490</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/c6f1e0d/src/editors/singlelinediagram/sld-drawing.ts#L565">src/editors/singlelinediagram/sld-drawing.ts:565</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -636,7 +745,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/fa468b7/src/editors/singlelinediagram/sld-drawing.ts#L452">src/editors/singlelinediagram/sld-drawing.ts:452</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/c6f1e0d/src/editors/singlelinediagram/sld-drawing.ts#L527">src/editors/singlelinediagram/sld-drawing.ts:527</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -679,7 +788,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/fa468b7/src/editors/singlelinediagram/sld-drawing.ts#L42">src/editors/singlelinediagram/sld-drawing.ts:42</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/c6f1e0d/src/editors/singlelinediagram/sld-drawing.ts#L43">src/editors/singlelinediagram/sld-drawing.ts:43</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -712,7 +821,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/fa468b7/src/editors/singlelinediagram/sld-drawing.ts#L59">src/editors/singlelinediagram/sld-drawing.ts:59</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/c6f1e0d/src/editors/singlelinediagram/sld-drawing.ts#L60">src/editors/singlelinediagram/sld-drawing.ts:60</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -744,7 +853,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/fa468b7/src/editors/singlelinediagram/sld-drawing.ts#L72">src/editors/singlelinediagram/sld-drawing.ts:72</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/c6f1e0d/src/editors/singlelinediagram/sld-drawing.ts#L73">src/editors/singlelinediagram/sld-drawing.ts:73</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -776,7 +885,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/fa468b7/src/editors/singlelinediagram/sld-drawing.ts#L145">src/editors/singlelinediagram/sld-drawing.ts:145</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/c6f1e0d/src/editors/singlelinediagram/sld-drawing.ts#L146">src/editors/singlelinediagram/sld-drawing.ts:146</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -813,7 +922,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/fa468b7/src/editors/singlelinediagram/sld-drawing.ts#L572">src/editors/singlelinediagram/sld-drawing.ts:572</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/c6f1e0d/src/editors/singlelinediagram/sld-drawing.ts#L647">src/editors/singlelinediagram/sld-drawing.ts:647</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -836,7 +945,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/fa468b7/src/editors/singlelinediagram/sld-drawing.ts#L159">src/editors/singlelinediagram/sld-drawing.ts:159</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/c6f1e0d/src/editors/singlelinediagram/sld-drawing.ts#L160">src/editors/singlelinediagram/sld-drawing.ts:160</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -873,7 +982,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/fa468b7/src/editors/singlelinediagram/sld-drawing.ts#L522">src/editors/singlelinediagram/sld-drawing.ts:522</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/c6f1e0d/src/editors/singlelinediagram/sld-drawing.ts#L597">src/editors/singlelinediagram/sld-drawing.ts:597</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -912,7 +1021,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/fa468b7/src/editors/singlelinediagram/sld-drawing.ts#L561">src/editors/singlelinediagram/sld-drawing.ts:561</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/c6f1e0d/src/editors/singlelinediagram/sld-drawing.ts#L636">src/editors/singlelinediagram/sld-drawing.ts:636</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -960,6 +1069,12 @@
 					</li>
 					<li class=" tsd-kind-variable tsd-parent-kind-module">
 						<a href="editors_singlelinediagram_sld_drawing.html#SVG_GRID_SIZE" class="tsd-kind-icon">SVG_<wbr>GRID_<wbr>SIZE</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-module">
+						<a href="editors_singlelinediagram_sld_drawing.html#addLabelToBay" class="tsd-kind-icon">add<wbr>Label<wbr>ToBay</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-module">
+						<a href="editors_singlelinediagram_sld_drawing.html#addLabelToBusBar" class="tsd-kind-icon">add<wbr>Label<wbr>ToBus<wbr>Bar</a>
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-module">
 						<a href="editors_singlelinediagram_sld_drawing.html#createBayElement" class="tsd-kind-icon">create<wbr>Bay<wbr>Element</a>
