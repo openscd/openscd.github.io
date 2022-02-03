@@ -44,8 +44,9 @@ export let LDeviceContainer = class extends LitElement {
         ></mwc-icon-button-toggle>
       </abbr>` : nothing}
       <div id="lnContainer">
-        ${this.toggleButton?.on ? lnElements.map((server) => html`<ln-container
-            .element=${server}
+        ${this.toggleButton?.on ? lnElements.map((ln) => html`<ln-container
+            .element=${ln}
+            .nsdoc=${this.nsdoc}
           ></ln-container>
           `) : nothing}
       </div>
@@ -68,6 +69,9 @@ LDeviceContainer.styles = css`
 __decorate([
   property({attribute: false})
 ], LDeviceContainer.prototype, "element", 2);
+__decorate([
+  property()
+], LDeviceContainer.prototype, "nsdoc", 2);
 __decorate([
   query("#toggleButton")
 ], LDeviceContainer.prototype, "toggleButton", 2);

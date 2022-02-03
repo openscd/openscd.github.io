@@ -4,6 +4,7 @@
 
 ## Properties
 
-| Property  | Type      | Description                                      |
-|-----------|-----------|--------------------------------------------------|
-| `element` | `Element` | The edited `Element`, a common property of all IED subcontainers. |
+| Property  | Attribute | Type      | Description                                      |
+|-----------|-----------|-----------|--------------------------------------------------|
+| `element` |           | `Element` | The edited `Element`, a common property of all IED subcontainers. |
+| `nsdoc`   | `nsdoc`   | `Nsdoc`   |                                                  |

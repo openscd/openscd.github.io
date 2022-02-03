@@ -26,6 +26,7 @@ export let ServerContainer = class extends LitElement {
     return html`<action-pane label="${this.header()}">
     ${Array.from(this.element.querySelectorAll(":scope > LDevice")).map((server) => html`<ldevice-container
         .element=${server}
+        .nsdoc=${this.nsdoc}
       ></ldevice-container>`)}
     </action-pane>`;
   }
@@ -34,6 +35,9 @@ ServerContainer.styles = css``;
 __decorate([
   property({attribute: false})
 ], ServerContainer.prototype, "element", 2);
+__decorate([
+  property()
+], ServerContainer.prototype, "nsdoc", 2);
 ServerContainer = __decorate([
   customElement("server-container")
 ], ServerContainer);

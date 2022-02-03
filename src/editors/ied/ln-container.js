@@ -22,13 +22,14 @@ import "../../action-pane.js";
 import "./do-container.js";
 import {getInstanceAttribute, getNameAttribute} from "../../foundation.js";
 import {translate} from "../../../_snowpack/pkg/lit-translate.js";
+import {until} from "../../../_snowpack/pkg/lit-html/directives/until.js";
 export let LNContainer = class extends LitElement {
-  header() {
+  async header() {
     const prefix = this.element.getAttribute("prefix");
-    const lnClass = this.element.getAttribute("lnClass");
     const inst = getInstanceAttribute(this.element);
+    const data = this.nsdoc.getDataDescription(this.element);
     return html`${prefix != null ? html`${prefix} &mdash; ` : nothing}
-            ${lnClass}
+            ${data.label}
             ${inst ? html` &mdash; ${inst}` : nothing}`;
   }
   getDOElements() {
@@ -45,7 +46,7 @@ export let LNContainer = class extends LitElement {
   }
   render() {
     const doElements = this.getDOElements();
-    return html`<action-pane .label="${this.header()}">
+    return html`<action-pane .label="${until(this.header())}">
       ${doElements.length > 0 ? html`<abbr slot="action" title="${translate("iededitor.toggleChildElements")}">
         <mwc-icon-button-toggle
           id="toggleButton"
@@ -66,6 +67,9 @@ LNContainer.styles = css``;
 __decorate([
   property({attribute: false})
 ], LNContainer.prototype, "element", 2);
+__decorate([
+  property()
+], LNContainer.prototype, "nsdoc", 2);
 __decorate([
   query("#toggleButton")
 ], LNContainer.prototype, "toggleButton", 2);

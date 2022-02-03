@@ -20,8 +20,8 @@ import {nothing} from "../../../_snowpack/pkg/lit-html.js";
 import {translate} from "../../../_snowpack/pkg/lit-translate.js";
 import {wizards} from "../../wizards/wizard-library.js";
 import "../../action-pane.js";
-import {getDescriptionAttribute, getNameAttribute, newWizardEvent} from "../../foundation.js";
 import "./access-point-container.js";
+import {getDescriptionAttribute, getNameAttribute, newWizardEvent} from "../../foundation.js";
 export let IedContainer = class extends LitElement {
   openEditWizard() {
     const wizard = wizards["IED"].edit(this.element);
@@ -44,6 +44,7 @@ export let IedContainer = class extends LitElement {
 
       ${Array.from(this.element.querySelectorAll(":scope > AccessPoint")).map((ap) => html`<access-point-container
           .element=${ap}
+          .nsdoc=${this.nsdoc}
         ></access-point-container>`)}
       </action-pane>`;
   }
@@ -52,6 +53,9 @@ IedContainer.styles = css``;
 __decorate([
   property({attribute: false})
 ], IedContainer.prototype, "element", 2);
+__decorate([
+  property()
+], IedContainer.prototype, "nsdoc", 2);
 IedContainer = __decorate([
   customElement("ied-container")
 ], IedContainer);

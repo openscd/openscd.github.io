@@ -4,6 +4,7 @@
 
 ## Properties
 
-| Property  | Type      |
-|-----------|-----------|
-| `element` | `Element` |
+| Property  | Attribute | Type      |
+|-----------|-----------|-----------|
+| `element` |           | `Element` |
+| `nsdoc`   | `nsdoc`   | `Nsdoc`   |

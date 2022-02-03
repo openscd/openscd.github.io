@@ -30,6 +30,7 @@ export let AccessPointContainer = class extends LitElement {
     return html`<action-pane .label="${this.header()}">
     ${Array.from(this.element.querySelectorAll(":scope > Server")).map((server) => html`<server-container
         .element=${server}
+        .nsdoc=${this.nsdoc}
       ></server-container>`)}
     </action-pane>`;
   }
@@ -38,6 +39,9 @@ AccessPointContainer.styles = css``;
 __decorate([
   property({attribute: false})
 ], AccessPointContainer.prototype, "element", 2);
+__decorate([
+  property()
+], AccessPointContainer.prototype, "nsdoc", 2);
 AccessPointContainer = __decorate([
   customElement("access-point-container")
 ], AccessPointContainer);

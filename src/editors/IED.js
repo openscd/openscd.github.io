@@ -61,7 +61,10 @@ export default class IedPlugin extends LitElement {
       }) : ""}
                   </mwc-list-item>`)}
           </mwc-select>
-          <ied-container .element=${selectedIedElement}></ied-container>
+          <ied-container
+            .element=${selectedIedElement}
+            .nsdoc=${this.nsdoc}
+          ></ied-container>
         </section>`;
     }
     return html`
@@ -99,6 +102,9 @@ IedPlugin.styles = css`
 __decorate([
   property()
 ], IedPlugin.prototype, "doc", 2);
+__decorate([
+  property()
+], IedPlugin.prototype, "nsdoc", 2);
 __decorate([
   state()
 ], IedPlugin.prototype, "selectedIed", 1);

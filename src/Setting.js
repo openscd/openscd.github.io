@@ -10,20 +10,25 @@ var __decorate = (decorators, target, key, kind) => {
   return result;
 };
 import {html, property, query} from "../_snowpack/pkg/lit-element.js";
-import {registerTranslateConfig, translate, use} from "../_snowpack/pkg/lit-translate.js";
+import {get, registerTranslateConfig, translate, use} from "../_snowpack/pkg/lit-translate.js";
 import "../_snowpack/pkg/@material/mwc-button.js";
 import "../_snowpack/pkg/@material/mwc-dialog.js";
 import "../_snowpack/pkg/@material/mwc-formfield.js";
 import "../_snowpack/pkg/@material/mwc-list/mwc-list-item.js";
 import "../_snowpack/pkg/@material/mwc-select.js";
 import "../_snowpack/pkg/@material/mwc-switch.js";
-import {ifImplemented} from "./foundation.js";
+import {ifImplemented, newLogEvent} from "./foundation.js";
 import {languages, loader} from "./translations/loader.js";
+import "./WizardDivider.js";
 export const defaults = {
   language: "en",
   theme: "light",
   mode: "safe",
-  showieds: "off"
+  showieds: "off",
+  "IEC 61850-7-2": void 0,
+  "IEC 61850-7-3": void 0,
+  "IEC 61850-7-4": void 0,
+  "IEC 61850-8-1": void 0
 };
 export function Setting(Base) {
   class SettingElement extends Base {
@@ -32,7 +37,11 @@ export function Setting(Base) {
         language: this.getSetting("language"),
         theme: this.getSetting("theme"),
         mode: this.getSetting("mode"),
-        showieds: this.getSetting("showieds")
+        showieds: this.getSetting("showieds"),
+        "IEC 61850-7-2": this.getSetting("IEC 61850-7-2"),
+        "IEC 61850-7-3": this.getSetting("IEC 61850-7-3"),
+        "IEC 61850-7-4": this.getSetting("IEC 61850-7-4"),
+        "IEC 61850-8-1": this.getSetting("IEC 61850-8-1")
       };
     }
     getSetting(setting) {
@@ -40,6 +49,11 @@ export function Setting(Base) {
     }
     setSetting(setting, value) {
       localStorage.setItem(setting, value);
+      this.shadowRoot?.querySelector("wizard-dialog")?.requestUpdate();
+      this.requestUpdate();
+    }
+    removeSetting(setting) {
+      localStorage.removeItem(setting);
       this.shadowRoot?.querySelector("wizard-dialog")?.requestUpdate();
       this.requestUpdate();
     }
@@ -59,6 +73,58 @@ export function Setting(Base) {
       super.updated(changedProperties);
       if (changedProperties.has("settings"))
         use(this.settings.language);
+    }
+    renderFileSelect() {
+      return html`
+        <input id="nsdoc-file" accept=".nsdoc" type="file" hidden required multiple
+          @change=${(evt) => this.loadNsdocFile(evt)}}>
+        <mwc-button label="${translate("settings.selectFileButton")}"
+                    id="selectFileButton"
+                    @click=${() => {
+        const input = this.shadowRoot.querySelector("#nsdoc-file");
+        input?.click();
+      }}>
+        </mwc-button>
+      `;
+    }
+    async loadNsdocFile(evt) {
+      const files = Array.from(evt.target?.files ?? []);
+      if (files.length == 0)
+        return;
+      files.forEach(async (file) => {
+        const text = await file.text();
+        const id = this.parseToXmlObject(text).querySelector("NSDoc")?.getAttribute("id");
+        if (!id) {
+          document.querySelector("open-scd").dispatchEvent(newLogEvent({kind: "error", title: get("settings.invalidFileNoIdFound")}));
+          return;
+        }
+        this.setSetting(id, text);
+      });
+      this.nsdocFileUI.value = "";
+      this.requestUpdate();
+    }
+    renderNsdocItem(key) {
+      const nsdSetting = this.settings[key];
+      let nsdVersion;
+      let nsdRevision;
+      let nsdRelease;
+      if (nsdSetting) {
+        const nsdoc = this.parseToXmlObject(nsdSetting).querySelector("NSDoc");
+        nsdVersion = nsdoc?.getAttribute("version");
+        nsdRevision = nsdoc?.getAttribute("revision");
+        nsdRelease = nsdoc?.getAttribute("release");
+      }
+      return html`<mwc-list-item id=${key} graphic="avatar" hasMeta twoline .disabled=${!nsdSetting}>
+        <span>${key}</span>
+        ${nsdSetting ? html`<span slot="secondary">${nsdVersion}${nsdRevision}${nsdRelease}</span>` : html``}
+        ${nsdSetting ? html`<mwc-icon slot="graphic" style="color:green;">done</mwc-icon>` : html`<mwc-icon slot="graphic" style="color:red;">close</mwc-icon>`}
+        ${nsdSetting ? html`<mwc-icon id="deleteNsdocItem" slot="meta" @click=${() => {
+        this.removeSetting(key);
+      }}>delete</mwc-icon>` : html``}
+      </mwc-list-item>`;
+    }
+    parseToXmlObject(text) {
+      return new DOMParser().parseFromString(text, "application/xml");
     }
     constructor(...params) {
       super(...params);
@@ -105,6 +171,17 @@ export function Setting(Base) {
               ></mwc-switch>
             </mwc-formfield>
           </form>
+          <wizard-divider></wizard-divider>
+          <section>
+            <h3>${translate("settings.loadNsdTranslations")}</h3>
+            ${this.renderFileSelect()}
+          </section>
+          <mwc-list id="nsdocList">
+            ${this.renderNsdocItem("IEC 61850-7-2")}
+            ${this.renderNsdocItem("IEC 61850-7-3")}
+            ${this.renderNsdocItem("IEC 61850-7-4")}
+            ${this.renderNsdocItem("IEC 61850-8-1")}
+          </mwc-list>
           <mwc-button slot="secondaryAction" dialogAction="close">
             ${translate("cancel")}
           </mwc-button>
@@ -144,5 +221,8 @@ export function Setting(Base) {
   __decorate([
     query("#showieds")
   ], SettingElement.prototype, "showiedsUI", 2);
+  __decorate([
+    query("#nsdoc-file")
+  ], SettingElement.prototype, "nsdocFileUI", 2);
   return SettingElement;
 }

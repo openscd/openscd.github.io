@@ -62,6 +62,7 @@ Open Substation Configuration Designer.
 |--------------------------|--------------------------------------------------|--------------------------------------------------|
 | `performUpdate`          | `(): Promise<void>`                              |                                                  |
 | `redo`                   | `(): boolean`                                    |                                                  |
+| `removeSetting`          | `<T extends "language" \| "theme" \| "mode" \| "showieds" \| "IEC 61850-7-2" \| "IEC 61850-7-3" \| "IEC 61850-7-4" \| "IEC 61850-8-1">(setting: T): void` | Remove the `setting` in `localStorage`.          |
 | `renderActionItem`       | `(me: MenuItem \| "divider"): TemplateResult`    |                                                  |
 | `renderDownloadUI`       | `(): TemplateResult`                             |                                                  |
 | `renderEditorTab`        | `({ name, icon }: Plugin): TemplateResult`       |                                                  |
@@ -70,5 +71,5 @@ Open Substation Configuration Designer.
 | `renderPluginKind`       | `(type: "editor" \| "menu" \| "validator" \| "top" \| "middle" \| "bottom", plugins: Plugin[]): TemplateResult` |                                                  |
 | `renderPluginUI`         | `(): TemplateResult`                             |                                                  |
 | `renderValidatorsIssues` | `(issues: IssueDetail[]): TemplateResult[]`      |                                                  |
-| `setSetting`             | `<T extends "language" \| "theme" \| "mode" \| "showieds">(setting: T, value: Settings[T]): void` | Update the `value` of `setting`, storing to `localStorage`. |
+| `setSetting`             | `<T extends "language" \| "theme" \| "mode" \| "showieds" \| "IEC 61850-7-2" \| "IEC 61850-7-3" \| "IEC 61850-7-4" \| "IEC 61850-8-1">(setting: T, value: Settings[T]): void` | Update the `value` of `setting`, storing to `localStorage`. |
 | `undo`                   | `(): boolean`                                    |                                                  |

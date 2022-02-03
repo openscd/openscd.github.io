@@ -26,6 +26,7 @@ import "../_snowpack/pkg/@material/mwc-switch.js";
 import "../_snowpack/pkg/@material/mwc-textfield.js";
 import {ifImplemented} from "./foundation.js";
 import {officialPlugins} from "../public/js/plugins.js";
+import {initializeNsdoc} from "./foundation/nsdoc.js";
 const menuPosition = ["top", "middle", "bottom"];
 export const pluginIcons = {
   editor: "tab",
@@ -137,6 +138,7 @@ export function Plugging(Base) {
             .docName=${this.docName}
             .docId=${this.docId}
             .pluginId=${plugin.src}
+            .nsdoc=${await initializeNsdoc()}
           ></${loadedPlugins.get(plugin.src)}>`;
         }
       };
