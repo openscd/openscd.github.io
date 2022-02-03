@@ -14,6 +14,14 @@ import {
 } from "../foundation.js";
 import {securityEnableEnum, smpModEnum} from "./foundation/enums.js";
 import {maxLength, patterns} from "./foundation/limits.js";
+import {editSMvWizard} from "./smv.js";
+function getSMV(element) {
+  const cbName = element.getAttribute("name");
+  const iedName = element.closest("IED")?.getAttribute("name");
+  const apName = element.closest("AccessPoint")?.getAttribute("name");
+  const ldInst = element.closest("LDevice")?.getAttribute("inst");
+  return element.closest("SCL")?.querySelector(`:root > Communication > SubNetwork > ConnectedAP[iedName="${iedName}"][apName="${apName}"] > SMV[ldInst="${ldInst}"][cbName="${cbName}"]`) ?? null;
+}
 function contentSampledValueControlWizard(options) {
   return [
     html`<wizard-textfield
@@ -120,6 +128,7 @@ export function editSampledValueControlWizard(element) {
   const smpRate = element.getAttribute("smpRate");
   const nofASDU = element.getAttribute("nofASDU");
   const securityEnable = element.getAttribute("securityEnabled");
+  const sMV = getSMV(element);
   return [
     {
       title: get("wizard.title.edit", {tagName: element.tagName}),
@@ -139,7 +148,15 @@ export function editSampledValueControlWizard(element) {
           smpRate,
           nofASDU,
           securityEnable
-        })
+        }),
+        sMV ? html`<mwc-button
+              id="editsmv"
+              label=${translate("scl.Communication")}
+              icon="edit"
+              @click="${(e) => {
+          e.target?.dispatchEvent(newSubWizardEvent(() => editSMvWizard(sMV)));
+        }}}"
+            ></mwc-button>` : html``
       ]
     }
   ];

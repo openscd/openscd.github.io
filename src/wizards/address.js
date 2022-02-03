@@ -26,6 +26,7 @@ export function renderGseSmvAddress(parent) {
           .maybeValue=${parent.querySelector(`Address > P[type="${ptype}"]`)?.innerHTML.trim() ?? null}
           ?nullable=${typeNullable[ptype]}
           pattern="${ifDefined(typePattern[ptype])}"
+          required
         ></wizard-textfield>`)}`
   ];
 }
