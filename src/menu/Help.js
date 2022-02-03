@@ -42,7 +42,7 @@ async function getLinkedPages(path) {
   const unlinkedMd = md.replace(/\[([^\]]*)\]\(https:..github.com.openscd.open-scd.wiki.([^)]*)\)/g, `<a style="cursor: help;" onclick="Array.from(event.target.closest('section').lastElementChild.children).find(child => child.text === '$2'.replace(/-/g, ' ')).click()">$1</a>`);
   const header = html`<div style="padding: 8px;">
     ${page === "Home" ? aboutBox(edition.version) : html``}
-    ${unsafeHTML(marked(unlinkedMd))}
+    ${unsafeHTML(marked.parse(unlinkedMd))}
   </div>`;
   const entries = Array.from(md.matchAll(/\(https:..github.com.openscd.open-scd.wiki.([^)]*)\)/g)).map(([_, child]) => child.replace(/-/g, " "));
   return {path, header, entries};
