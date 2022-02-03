@@ -130,7 +130,7 @@ ActionPane.styles = css`
       color: var(--mdc-theme-on-surface);
       font-family: 'Roboto', sans-serif;
       font-weight: 300;
-      overflow: visible;
+      overflow: clip visible;
       white-space: nowrap;
       text-overflow: ellipsis;
       margin: 0px;
