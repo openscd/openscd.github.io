@@ -12,14 +12,14 @@ var __decorate = (decorators, target, key, kind) => {
 import {LitElement, html, property, css} from "../../_snowpack/pkg/lit-element.js";
 import {translate, get} from "../../_snowpack/pkg/lit-translate.js";
 import "../../_snowpack/pkg/@material/mwc-fab.js";
+import "./communication/subnetwork-editor.js";
 import {
   newWizardEvent,
   newActionEvent,
-  createElement
+  createElement,
+  isPublic
 } from "../foundation.js";
-import {selectors, styles} from "./communication/foundation.js";
-import "./communication/subnetwork-editor.js";
-import {subNetworkWizard} from "./communication/subnetwork-editor.js";
+import {createSubNetworkWizard} from "../wizards/subnetwork.js";
 export default class CommunicationPlugin extends LitElement {
   createCommunication() {
     this.dispatchEvent(newActionEvent({
@@ -30,14 +30,13 @@ export default class CommunicationPlugin extends LitElement {
     }));
   }
   openCreateSubNetworkWizard() {
-    if (!this.doc.querySelector(selectors.Communication))
+    const parent = this.doc.querySelector(":root > Communication");
+    if (!parent)
       this.createCommunication();
-    this.dispatchEvent(newWizardEvent(subNetworkWizard({
-      parent: this.doc.querySelector("Communication")
-    })));
+    this.dispatchEvent(newWizardEvent(createSubNetworkWizard(parent)));
   }
   render() {
-    if (!this.doc?.querySelector(selectors.SubNetwork))
+    if (!this.doc?.querySelector(":root > Communication >SubNetwork"))
       return html`<h1>
         <span style="color: var(--base1)"
           >${translate("communication.missing")}</span
@@ -53,21 +52,32 @@ export default class CommunicationPlugin extends LitElement {
         icon="add"
         label="${get("subnetwork.wizard.title.add")}"
         @click=${() => this.openCreateSubNetworkWizard()}
-      ></mwc-fab
-      >${Array.from(this.doc.querySelectorAll(selectors.SubNetwork) ?? []).map((subnetwork) => html`<subnetwork-editor .element=${subnetwork}></subnetwork-editor>`)}`;
+      ></mwc-fab>
+      <section>
+        ${Array.from(this.doc.querySelectorAll("SubNetwork") ?? []).filter(isPublic).map((subnetwork) => html`<subnetwork-editor
+                .element=${subnetwork}
+              ></subnetwork-editor>`)}
+      </section> `;
   }
 }
 CommunicationPlugin.styles = css`
-    ${styles}
+    :host {
+      width: 100vw;
+    }
+
+    section {
+      outline: none;
+      padding: 8px 12px 16px;
+    }
+
+    subnetwork-editor {
+      margin: 8px 12px 16px;
+    }
 
     mwc-fab {
       position: fixed;
       bottom: 32px;
       right: 32px;
-    }
-
-    :host {
-      width: 100vw;
     }
   `;
 __decorate([

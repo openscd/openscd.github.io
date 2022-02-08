@@ -4,21 +4,16 @@
 
 ## Properties
 
-| Property  | Attribute | Modifiers | Type             |
-|-----------|-----------|-----------|------------------|
-| `bitrate` | `bitrate` | readonly  | `string \| null` |
-| `desc`    | `desc`    | readonly  | `string \| null` |
-| `element` | `element` |           | `Element`        |
-| `name`    | `name`    | readonly  | `string`         |
-| `type`    | `type`    | readonly  | `string \| null` |
+| Property  | Attribute | Modifiers | Type             | Description                             |
+|-----------|-----------|-----------|------------------|-----------------------------------------|
+| `bitrate` | `bitrate` | readonly  | `string \| null` | SubNetwork child elements BitRate label |
+| `desc`    | `desc`    | readonly  | `string \| null` | SubNetwork attribute desc               |
+| `element` |           |           | `Element`        | SCL element SubNetwork                  |
+| `name`    | `name`    | readonly  | `string`         | SubNetwork attribute name               |
+| `type`    | `type`    | readonly  | `string \| null` | SubNetwork attribute type               |
 
 ## Methods
 
-| Method                  | Type                   |
-|-------------------------|------------------------|
-| `openConnectedAPwizard` | `(): void`             |
-| `openEditWizard`        | `(): void`             |
-| `remove`                | `(): void`             |
-| `renderHeader`          | `(): TemplateResult`   |
-| `renderIedContainer`    | `(): TemplateResult[]` |
-| `renderSubNetworkSpecs` | `(): TemplateResult`   |
+| Method   | Type       |
+|----------|------------|
+| `remove` | `(): void` |

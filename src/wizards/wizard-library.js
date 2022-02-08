@@ -14,6 +14,7 @@ import {
   voltageLevelEditWizard
 } from "./voltagelevel.js";
 import {editPowerTransformerWizard} from "./powertransformer.js";
+import {editSubNetworkWizard} from "./subnetwork.js";
 import {editIEDWizard} from "./ied.js";
 import {editTrgOpsWizard} from "./trgops.js";
 export function emptyWizard() {
@@ -457,7 +458,7 @@ export const wizards = {
     create: emptyWizard
   },
   SubNetwork: {
-    edit: emptyWizard,
+    edit: editSubNetworkWizard,
     create: emptyWizard
   },
   Subject: {

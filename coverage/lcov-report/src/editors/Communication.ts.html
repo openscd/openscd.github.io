@@ -25,7 +25,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>83/83</span>
+                <span class='fraction'>91/91</span>
             </div>
         
             
@@ -46,7 +46,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>83/83</span>
+                <span class='fraction'>91/91</span>
             </div>
         
             
@@ -146,7 +146,23 @@
 <a name='L81'></a><a href='#L81'>81</a>
 <a name='L82'></a><a href='#L82'>82</a>
 <a name='L83'></a><a href='#L83'>83</a>
-<a name='L84'></a><a href='#L84'>84</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L84'></a><a href='#L84'>84</a>
+<a name='L85'></a><a href='#L85'>85</a>
+<a name='L86'></a><a href='#L86'>86</a>
+<a name='L87'></a><a href='#L87'>87</a>
+<a name='L88'></a><a href='#L88'>88</a>
+<a name='L89'></a><a href='#L89'>89</a>
+<a name='L90'></a><a href='#L90'>90</a>
+<a name='L91'></a><a href='#L91'>91</a>
+<a name='L92'></a><a href='#L92'>92</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -234,14 +250,14 @@ import { translate, get } from 'lit-translate';
 &nbsp;
 import '@material/mwc-fab';
 &nbsp;
+import './communication/subnetwork-editor.js';
 import {
   newWizardEvent,
   newActionEvent,
   createElement,
+  isPublic,
 } from '../foundation.js';
-import { selectors, styles } from './communication/foundation.js';
-import './communication/subnetwork-editor.js';
-import { subNetworkWizard } from './communication/subnetwork-editor.js';
+import { createSubNetworkWizard } from '../wizards/subnetwork.js';
 &nbsp;
 /** An editor [[`plugin`]] for editing the `Communication` section. */
 export default class CommunicationPlugin extends LitElement {
@@ -249,7 +265,7 @@ export default class CommunicationPlugin extends LitElement {
   @property()
   doc!: XMLDocument;
 &nbsp;
-  createCommunication(): void {
+  private createCommunication(): void {
     this.dispatchEvent(
       newActionEvent({
         new: {
@@ -261,21 +277,15 @@ export default class CommunicationPlugin extends LitElement {
   }
 &nbsp;
   /** Opens a [[`WizardDialog`]] for creating a new `SubNetwork` element. */
-  openCreateSubNetworkWizard(): void {
-    if (!this.doc.querySelector(selectors.Communication))
-      this.createCommunication();
+  private openCreateSubNetworkWizard(): void {
+    const parent = this.doc.querySelector(':root &gt; Communication');
+    if (!parent) this.createCommunication();
 &nbsp;
-    this.dispatchEvent(
-      newWizardEvent(
-        subNetworkWizard({
-          parent: this.doc.querySelector('Communication')!,
-        })
-      )
-    );
+    this.dispatchEvent(newWizardEvent(createSubNetworkWizard(parent!)));
   }
 &nbsp;
   render(): TemplateResult {
-    if (!this.doc?.querySelector(selectors.SubNetwork))
+    if (!this.doc?.querySelector(':root &gt; Communication &gt;SubNetwork'))
       return html`&lt;h1&gt;
         &lt;span style="color: var(--base1)"
           &gt;${translate('communication.missing')}&lt;/span
@@ -286,29 +296,43 @@ export default class CommunicationPlugin extends LitElement {
           @click=${() =&gt; this.openCreateSubNetworkWizard()}
         &gt;&lt;/mwc-fab&gt;
       &lt;/h1&gt;`;
+&nbsp;
     return html`&lt;mwc-fab
         extended
         icon="add"
         label="${get('subnetwork.wizard.title.add')}"
         @click=${() =&gt; this.openCreateSubNetworkWizard()}
-      &gt;&lt;/mwc-fab
-      &gt;${Array.from(this.doc.querySelectorAll(selectors.<span class="branch-0 cbranch-no" title="branch not covered" >SubNetwork) ?? []).m</span>ap(
-        subnetwork =&gt;
-          html`&lt;subnetwork-editor .element=${subnetwork}&gt;&lt;/subnetwork-editor&gt;`
-      )}`;
+      &gt;&lt;/mwc-fab&gt;
+      &lt;section&gt;
+        ${Array.from(this.doc.querySelectorAll(<span class="branch-0 cbranch-no" title="branch not covered" >'SubNetwork') ?? [])</span>
+          .filter(isPublic)
+          .map(
+            subnetwork =&gt;
+              html`&lt;subnetwork-editor
+                .element=${subnetwork}
+              &gt;&lt;/subnetwork-editor&gt;`
+          )}
+      &lt;/section&gt; `;
   }
 &nbsp;
   static styles = css`
-    ${styles}
+    :host {
+      width: 100vw;
+    }
+&nbsp;
+    section {
+      outline: none;
+      padding: 8px 12px 16px;
+    }
+&nbsp;
+    subnetwork-editor {
+      margin: 8px 12px 16px;
+    }
 &nbsp;
     mwc-fab {
       position: fixed;
       bottom: 32px;
       right: 32px;
-    }
-&nbsp;
-    :host {
-      width: 100vw;
     }
   `;
 }
@@ -319,7 +343,7 @@ export default class CommunicationPlugin extends LitElement {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener">istanbul</a>
-                at Fri Feb 04 2022 12:50:23 GMT+0000 (Coordinated Universal Time)
+                at Tue Feb 08 2022 17:44:12 GMT+0000 (Coordinated Universal Time)
             </div>
         </div>
         <script src="../../prettify.js"></script>
