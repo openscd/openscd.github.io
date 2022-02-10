@@ -24,6 +24,10 @@ import {getInstanceAttribute, getNameAttribute} from "../../foundation.js";
 import {translate} from "../../../_snowpack/pkg/lit-translate.js";
 import {until} from "../../../_snowpack/pkg/lit-html/directives/until.js";
 export let LNContainer = class extends LitElement {
+  constructor() {
+    super(...arguments);
+    this.ancestors = [];
+  }
   async header() {
     const prefix = this.element.getAttribute("prefix");
     const inst = getInstanceAttribute(this.element);
@@ -57,8 +61,10 @@ export let LNContainer = class extends LitElement {
       </abbr>` : nothing}
       ${this.toggleButton?.on ? this.getDOElements().map((dO) => html`<do-container
           .element=${dO}
-          .instanceElement=${this.getInstanceElement(dO)}>
-        </do-container>
+          .instanceElement=${this.getInstanceElement(dO)}
+          .nsdoc=${this.nsdoc}
+          .ancestors=${[this.element, ...this.ancestors]}
+        ></do-container>
         `) : nothing}
     </action-pane>`;
   }
@@ -67,6 +73,9 @@ LNContainer.styles = css``;
 __decorate([
   property({attribute: false})
 ], LNContainer.prototype, "element", 2);
+__decorate([
+  property()
+], LNContainer.prototype, "ancestors", 2);
 __decorate([
   property()
 ], LNContainer.prototype, "nsdoc", 2);

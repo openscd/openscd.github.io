@@ -23,6 +23,10 @@ import "./da-container.js";
 import {getDescriptionAttribute, getNameAttribute} from "../../foundation.js";
 import {translate} from "../../../_snowpack/pkg/lit-translate.js";
 export let DOContainer = class extends LitElement {
+  constructor() {
+    super(...arguments);
+    this.ancestors = [];
+  }
   header() {
     const name = getNameAttribute(this.element);
     const desc = getDescriptionAttribute(this.element);
@@ -66,6 +70,12 @@ export let DOContainer = class extends LitElement {
     const daElements = this.getDAElements();
     const doElements = this.getDOElements();
     return html`<action-pane .label="${this.header()}" icon="${this.instanceElement != null ? "done" : ""}">
+      <abbr slot="action">
+        <mwc-icon-button
+          title=${this.nsdoc.getDataDescription(this.element).label}
+          icon="info"
+        ></mwc-icon-button>
+      </abbr>
       ${daElements.length > 0 || doElements.length > 0 ? html`<abbr slot="action" title="${translate("iededitor.toggleChildElements")}">
           <mwc-icon-button-toggle
             id="toggleButton"
@@ -76,12 +86,16 @@ export let DOContainer = class extends LitElement {
         </abbr>` : nothing}
       ${this.toggleButton?.on ? daElements.map((da) => html`<da-container
           .element=${da}
-          .instanceElement=${this.getInstanceDAElement(da)}>
-        </da-container>`) : nothing}
+          .instanceElement=${this.getInstanceDAElement(da)}
+          .nsdoc=${this.nsdoc}
+          .ancestors=${[this.element, ...this.ancestors]}
+        ></da-container>`) : nothing}
       ${this.toggleButton?.on ? doElements.map((dO) => html`<do-container
           .element=${dO}
-          .instanceElement=${this.getInstanceDOElement(dO)}>
-        </do-container>`) : nothing}
+          .instanceElement=${this.getInstanceDOElement(dO)}
+          .nsdoc=${this.nsdoc}
+          .ancestors=${[this.element, ...this.ancestors]}
+        ></do-container>`) : nothing}
     </action-pane>
     `;
   }
@@ -92,6 +106,12 @@ __decorate([
 __decorate([
   property({attribute: false})
 ], DOContainer.prototype, "instanceElement", 2);
+__decorate([
+  property()
+], DOContainer.prototype, "ancestors", 2);
+__decorate([
+  property()
+], DOContainer.prototype, "nsdoc", 2);
 __decorate([
   query("#toggleButton")
 ], DOContainer.prototype, "toggleButton", 2);

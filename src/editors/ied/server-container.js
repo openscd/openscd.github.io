@@ -19,6 +19,10 @@ import {
 import "../../action-pane.js";
 import "./ldevice-container.js";
 export let ServerContainer = class extends LitElement {
+  constructor() {
+    super(...arguments);
+    this.ancestors = [];
+  }
   header() {
     return "Server";
   }
@@ -27,6 +31,7 @@ export let ServerContainer = class extends LitElement {
     ${Array.from(this.element.querySelectorAll(":scope > LDevice")).map((server) => html`<ldevice-container
         .element=${server}
         .nsdoc=${this.nsdoc}
+        .ancestors=${[this.element, ...this.ancestors]}
       ></ldevice-container>`)}
     </action-pane>`;
   }
@@ -35,6 +40,9 @@ ServerContainer.styles = css``;
 __decorate([
   property({attribute: false})
 ], ServerContainer.prototype, "element", 2);
+__decorate([
+  property()
+], ServerContainer.prototype, "ancestors", 2);
 __decorate([
   property()
 ], ServerContainer.prototype, "nsdoc", 2);

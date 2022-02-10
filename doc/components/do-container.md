@@ -4,8 +4,10 @@
 
 ## Properties
 
-| Property          | Type                            | Description                  |
-|-------------------|---------------------------------|------------------------------|
-| `element`         | `Element`                       | The DO itself.               |
-| `instanceElement` | `Element`                       | The optional DOI of this DO. |
-| `toggleButton`    | `IconButtonToggle \| undefined` |                              |
+| Property          | Attribute   | Type                            | Default | Description                  |
+|-------------------|-------------|---------------------------------|---------|------------------------------|
+| `ancestors`       | `ancestors` | `Element[]`                     | []      |                              |
+| `element`         |             | `Element`                       |         | The DO itself.               |
+| `instanceElement` |             | `Element`                       |         | The optional DOI of this DO. |
+| `nsdoc`           | `nsdoc`     | `Nsdoc`                         |         |                              |
+| `toggleButton`    |             | `IconButtonToggle \| undefined` |         |                              |

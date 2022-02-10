@@ -4,7 +4,8 @@
 
 ## Properties
 
-| Property  | Attribute | Type      |
-|-----------|-----------|-----------|
-| `element` |           | `Element` |
-| `nsdoc`   | `nsdoc`   | `Nsdoc`   |
+| Property    | Attribute   | Type        | Default |
+|-------------|-------------|-------------|---------|
+| `ancestors` | `ancestors` | `Element[]` | []      |
+| `element`   |             | `Element`   |         |
+| `nsdoc`     | `nsdoc`     | `Nsdoc`     |         |

@@ -23,6 +23,10 @@ import "../../../_snowpack/pkg/@material/mwc-icon-button-toggle.js";
 import "../../action-pane.js";
 import {getNameAttribute} from "../../foundation.js";
 export let DAContainer = class extends LitElement {
+  constructor() {
+    super(...arguments);
+    this.ancestors = [];
+  }
   header() {
     const name = getNameAttribute(this.element);
     const bType = this.element.getAttribute("bType") ?? nothing;
@@ -52,6 +56,12 @@ export let DAContainer = class extends LitElement {
   render() {
     const bType = this.element.getAttribute("bType");
     return html`<action-pane .label="${this.header()}" icon="${this.instanceElement != null ? "done" : ""}">
+      <abbr slot="action">
+        <mwc-icon-button
+          title=${this.nsdoc.getDataDescription(this.element, this.ancestors).label}
+          icon="info"
+        ></mwc-icon-button>
+      </abbr>
       ${bType == "Struct" ? html`<abbr slot="action" title="${translate("iededitor.toggleChildElements")}">
         <mwc-icon-button-toggle
           id="toggleButton"
@@ -62,8 +72,11 @@ export let DAContainer = class extends LitElement {
       </abbr>` : nothing}
       <h6>${this.renderValue()}</h6>
       ${this.toggleButton?.on && bType == "Struct" ? this.getBDAElements().map((element) => html`<da-container
-          .element=${element}>
-        </da-container>`) : nothing}
+          .element=${element}
+          .nsdoc=${this.nsdoc}
+          .daParent=${this.daParent ?? this.element}
+          .ancestors=${[this.element, ...this.ancestors]}
+        ></da-container>`) : nothing}
     </action-pane>
     `;
   }
@@ -87,6 +100,15 @@ __decorate([
 __decorate([
   property({attribute: false})
 ], DAContainer.prototype, "instanceElement", 2);
+__decorate([
+  property({attribute: false})
+], DAContainer.prototype, "daParent", 2);
+__decorate([
+  property()
+], DAContainer.prototype, "ancestors", 2);
+__decorate([
+  property()
+], DAContainer.prototype, "nsdoc", 2);
 __decorate([
   query("#toggleButton")
 ], DAContainer.prototype, "toggleButton", 2);

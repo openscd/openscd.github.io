@@ -23,6 +23,10 @@ import {nothing} from "../../../_snowpack/pkg/lit-html.js";
 import {getDescriptionAttribute, getInstanceAttribute, getNameAttribute} from "../../foundation.js";
 import {translate} from "../../../_snowpack/pkg/lit-translate.js";
 export let LDeviceContainer = class extends LitElement {
+  constructor() {
+    super(...arguments);
+    this.ancestors = [];
+  }
   header() {
     const nameOrInst = getNameAttribute(this.element) ?? getInstanceAttribute(this.element);
     const desc = getDescriptionAttribute(this.element);
@@ -47,6 +51,7 @@ export let LDeviceContainer = class extends LitElement {
         ${this.toggleButton?.on ? lnElements.map((ln) => html`<ln-container
             .element=${ln}
             .nsdoc=${this.nsdoc}
+            .ancestors=${[this.element, ...this.ancestors]}
           ></ln-container>
           `) : nothing}
       </div>
@@ -69,6 +74,9 @@ LDeviceContainer.styles = css`
 __decorate([
   property({attribute: false})
 ], LDeviceContainer.prototype, "element", 2);
+__decorate([
+  property()
+], LDeviceContainer.prototype, "ancestors", 2);
 __decorate([
   property()
 ], LDeviceContainer.prototype, "nsdoc", 2);

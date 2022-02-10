@@ -45,6 +45,7 @@ export let IedContainer = class extends LitElement {
       ${Array.from(this.element.querySelectorAll(":scope > AccessPoint")).map((ap) => html`<access-point-container
           .element=${ap}
           .nsdoc=${this.nsdoc}
+          .ancestors=${[this.element]}
         ></access-point-container>`)}
       </action-pane>`;
   }
