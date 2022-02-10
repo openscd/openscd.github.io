@@ -322,11 +322,17 @@ export function Plugging(Base) {
           >
           </mwc-button>
           <mwc-button
-            raised
+            slot="secondaryAction"
+            icon=""
+            label="${translate("close")}"
+            dialogAction="close"
+          ></mwc-button>
+          <mwc-button
+            outlined
             trailingIcon
             slot="primaryAction"
             icon="library_add"
-            label="${translate("add")}&hellip;"
+            label="${translate("plugins.add.heading")}&hellip;"
             @click=${() => this.pluginDownloadUI.show()}
           >
           </mwc-button>
