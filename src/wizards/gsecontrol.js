@@ -3,6 +3,7 @@ import {get, translate} from "../../_snowpack/pkg/lit-translate.js";
 import "../../_snowpack/pkg/@material/mwc-button.js";
 import "../../_snowpack/pkg/@material/mwc-list/mwc-list-item.js";
 import "../filtered-list.js";
+import "../wizard-checkbox.js";
 import "../wizard-select.js";
 import "../wizard-textfield.js";
 import {
@@ -59,14 +60,12 @@ export function renderGseAttributes(name, desc, type, appID, fixedOffs, security
       required
       validationMessage="${translate("textfield.nonempty")}"
     ></wizard-textfield>`,
-    html`<wizard-select
+    html`<wizard-checkbox
       label="fixedOffs"
       .maybeValue=${fixedOffs}
       nullable
-      required
       helper="${translate("scl.fixedOffs")}"
-      >${["true", "false"].map((type2) => html`<mwc-list-item value="${type2}">${type2}</mwc-list-item>`)}</wizard-select
-    >`,
+    ></wizard-checkbox>`,
     html`<wizard-select
       label="securityEnabled"
       .maybeValue=${securityEnabled}

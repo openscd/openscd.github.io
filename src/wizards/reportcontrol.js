@@ -2,6 +2,7 @@ import {html} from "../../_snowpack/pkg/lit-element.js";
 import {get, translate} from "../../_snowpack/pkg/lit-translate.js";
 import "../../_snowpack/pkg/@material/mwc-button.js";
 import "../../_snowpack/pkg/@material/mwc-list/mwc-list-item.js";
+import "../wizard-checkbox.js";
 import "../wizard-textfield.js";
 import "../wizard-select.js";
 import "../filtered-list.js";
@@ -116,13 +117,11 @@ function renderReportControlWizardInputs(options) {
       nullable
       helper="${translate("scl.desc")}"
     ></wizard-textfield>`,
-    html`<wizard-select
+    html`<wizard-checkbox
       label="buffered"
       .maybeValue=${options.buffered}
-      helper="${translate("scl.buffered")}"
       disabled
-      >${["true", "false"].map((option) => html`<mwc-list-item value="${option}">${option}</mwc-list-item>`)}</wizard-select
-    >`,
+    ></wizard-checkbox>`,
     html`<wizard-textfield
       label="rptID"
       .maybeValue=${options.rptID}
@@ -130,14 +129,11 @@ function renderReportControlWizardInputs(options) {
       required
       validationMessage="${translate("textfield.nonempty")}"
     ></wizard-textfield>`,
-    html`<wizard-select
+    html`<wizard-checkbox
       label="indexed"
       .maybeValue=${options.indexed}
       nullable
-      required
-      helper="${translate("scl.indexed")}"
-      >${["true", "false"].map((type) => html`<mwc-list-item value="${type}">${type}</mwc-list-item>`)}</wizard-select
-    >`,
+    ></wizard-checkbox>`,
     html`<wizard-textfield
       label="max Clients"
       .maybeValue=${options.max}

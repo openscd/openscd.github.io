@@ -25,14 +25,14 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>325/325</span>
+                <span class='fraction'>308/308</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">82.69% </span>
+                <span class="strong">81.63% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>43/52</span>
+                <span class='fraction'>40/49</span>
             </div>
         
             
@@ -46,7 +46,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>325/325</span>
+                <span class='fraction'>308/308</span>
             </div>
         
             
@@ -371,24 +371,7 @@
 <a name='L306'></a><a href='#L306'>306</a>
 <a name='L307'></a><a href='#L307'>307</a>
 <a name='L308'></a><a href='#L308'>308</a>
-<a name='L309'></a><a href='#L309'>309</a>
-<a name='L310'></a><a href='#L310'>310</a>
-<a name='L311'></a><a href='#L311'>311</a>
-<a name='L312'></a><a href='#L312'>312</a>
-<a name='L313'></a><a href='#L313'>313</a>
-<a name='L314'></a><a href='#L314'>314</a>
-<a name='L315'></a><a href='#L315'>315</a>
-<a name='L316'></a><a href='#L316'>316</a>
-<a name='L317'></a><a href='#L317'>317</a>
-<a name='L318'></a><a href='#L318'>318</a>
-<a name='L319'></a><a href='#L319'>319</a>
-<a name='L320'></a><a href='#L320'>320</a>
-<a name='L321'></a><a href='#L321'>321</a>
-<a name='L322'></a><a href='#L322'>322</a>
-<a name='L323'></a><a href='#L323'>323</a>
-<a name='L324'></a><a href='#L324'>324</a>
-<a name='L325'></a><a href='#L325'>325</a>
-<a name='L326'></a><a href='#L326'>326</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">8x</span>
+<a name='L309'></a><a href='#L309'>309</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">8x</span>
 <span class="cline-any cline-yes">8x</span>
 <span class="cline-any cline-yes">8x</span>
 <span class="cline-any cline-yes">8x</span>
@@ -411,24 +394,7 @@
 <span class="cline-any cline-yes">8x</span>
 <span class="cline-any cline-yes">8x</span>
 <span class="cline-any cline-yes">8x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">8x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
@@ -719,6 +685,7 @@ import { get, translate } from 'lit-translate';
 import '@material/mwc-button';
 import '@material/mwc-list/mwc-list-item';
 &nbsp;
+import '../wizard-checkbox.js';
 import '../wizard-select.js';
 import {
   cloneElement,
@@ -753,42 +720,24 @@ export function renderDa(
           html`&lt;mwc-list-item value="${fcOption}"&gt;${fcOption}&lt;/mwc-list-item&gt;`
       )}&lt;/wizard-select
     &gt;`,
-    html`&lt;wizard-select
+    html`&lt;wizard-checkbox
       label="dchg"
       .maybeValue=${dchg}
-      helper="${translate('scl.valImport')}"
+      helper="${translate('scl.dchg')}"
       nullable
-      required
-      fixedMenuPosition
-      &gt;${['true', 'false'].map(
-        option =&gt;
-          html`&lt;mwc-list-item value="${option}"&gt;${option}&lt;/mwc-list-item&gt;`
-      )}&lt;/wizard-select
-    &gt;`,
-    html`&lt;wizard-select
+    &gt;&lt;/wizard-checkbox&gt;`,
+    html`&lt;wizard-checkbox
       label="qchg"
       .maybeValue=${qchg}
-      helper="${translate('scl.valImport')}"
+      helper="${translate('scl.qchg')}"
       nullable
-      required
-      fixedMenuPosition
-      &gt;${['true', 'false'].map(
-        option =&gt;
-          html`&lt;mwc-list-item value="${option}"&gt;${option}&lt;/mwc-list-item&gt;`
-      )}&lt;/wizard-select
-    &gt;`,
-    html`&lt;wizard-select
+    &gt;&lt;/wizard-checkbox&gt;`,
+    html`&lt;wizard-checkbox
       label="dupd"
       .maybeValue=${dupd}
-      helper="${translate('scl.valImport')}"
+      helper="${translate('scl.dupd')}"
       nullable
-      required
-      fixedMenuPosition
-      &gt;${['true', 'false'].map(
-        option =&gt;
-          html`&lt;mwc-list-item value="${option}"&gt;${option}&lt;/mwc-list-item&gt;`
-      )}&lt;/wizard-select
-    &gt;`,
+    &gt;&lt;/wizard-checkbox&gt;`,
   ];
 }
 &nbsp;
@@ -1045,7 +994,7 @@ export function createDaWizard(element: Element): Wizard {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener">istanbul</a>
-                at Thu Feb 10 2022 19:31:33 GMT+0000 (Coordinated Universal Time)
+                at Sat Feb 12 2022 18:24:20 GMT+0000 (Coordinated Universal Time)
             </div>
         </div>
         <script src="../../prettify.js"></script>

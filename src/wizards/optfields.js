@@ -1,6 +1,7 @@
 import {html} from "../../_snowpack/pkg/lit-html.js";
 import {get} from "../../_snowpack/pkg/lit-translate.js";
 import "../../_snowpack/pkg/@material/mwc-list/mwc-list-item.js";
+import "../wizard-checkbox.js";
 import "../wizard-select.js";
 import {
   cloneElement,
@@ -50,13 +51,12 @@ export function editOptFieldsWizard(element) {
         label: get("save"),
         action: updateOptFieldsAction(element)
       },
-      content: optFields.map((optField) => html`<wizard-select
+      content: optFields.map((optField) => html`<wizard-checkbox
             label="${optField}"
             .maybeValue=${element.getAttribute(optField)}
             nullable
             required
-            >${["true", "false"].map((option) => html`<mwc-list-item value="${option}">${option}</mwc-list-item>`)}</wizard-select
-          >`)
+          ></wizard-checkbox>`)
     }
   ];
 }

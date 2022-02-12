@@ -2,6 +2,7 @@ import {html} from "../../_snowpack/pkg/lit-element.js";
 import {get, translate} from "../../_snowpack/pkg/lit-translate.js";
 import "../../_snowpack/pkg/@material/mwc-list/mwc-list-item.js";
 import "../filtered-list.js";
+import "../wizard-checkbox.js";
 import "../wizard-select.js";
 import "../wizard-textfield.js";
 import {
@@ -41,13 +42,12 @@ function contentSampledValueControlWizard(options) {
       pattern="${patterns.normalizedString}"
       helper="${translate("scl.desc")}"
     ></wizard-textfield>`,
-    html`<wizard-select
+    html`<wizard-checkbox
       label="multicast"
       .maybeValue=${options.multicast}
       helper="${translate("scl.multicast")}"
       disabled
-      >${["true", "false"].map((option) => html`<mwc-list-item value="${option}">${option}</mwc-list-item>`)}</wizard-select
-    >`,
+    ></wizard-checkbox>`,
     html`<wizard-textfield
       label="smvID"
       .maybeValue=${options.smvID}

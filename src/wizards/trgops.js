@@ -1,6 +1,7 @@
 import {html} from "../../_snowpack/pkg/lit-html.js";
 import {get} from "../../_snowpack/pkg/lit-translate.js";
 import "../../_snowpack/pkg/@material/mwc-list/mwc-list-item.js";
+import "../wizard-checkbox.js";
 import "../wizard-select.js";
 import {
   cloneElement,
@@ -36,13 +37,11 @@ export function editTrgOpsWizard(element) {
         label: get("save"),
         action: updateTrgOpsAction(element)
       },
-      content: trgOps.map((trgOp) => html`<wizard-select
+      content: trgOps.map((trgOp) => html`<wizard-checkbox
             label="${trgOp}"
             .maybeValue=${element.getAttribute(trgOp)}
             nullable
-            required
-            >${["true", "false"].map((option) => html`<mwc-list-item value="${option}">${option}</mwc-list-item>`)}</wizard-select
-          >`)
+          ></wizard-checkbox>`)
     }
   ];
 }

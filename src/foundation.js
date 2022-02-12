@@ -2,6 +2,7 @@ import {directive} from "../_snowpack/pkg/lit-html.js";
 import {Select} from "../_snowpack/pkg/@material/mwc-select.js";
 import {WizardTextField} from "./wizard-textfield.js";
 import {WizardSelect} from "./wizard-select.js";
+import {WizardCheckbox} from "./wizard-checkbox.js";
 export function isCreate(action) {
   return action.old === void 0 && action.new?.parent !== void 0 && action.new?.element !== void 0;
 }
@@ -58,7 +59,7 @@ export function newActionEvent(action, eventInitDict) {
     detail: {action, ...eventInitDict?.detail}
   });
 }
-export const wizardInputSelector = "wizard-textfield, mwc-textfield, ace-editor, mwc-select,wizard-select";
+export const wizardInputSelector = "wizard-textfield, mwc-textfield, ace-editor, mwc-select,wizard-select, wizard-checkbox";
 export function isWizardFactory(maybeFactory) {
   return typeof maybeFactory === "function";
 }
@@ -75,7 +76,7 @@ export function reportValidity(input) {
     return true;
 }
 export function getValue(input) {
-  if (input instanceof WizardTextField || input instanceof WizardSelect)
+  if (input instanceof WizardTextField || input instanceof WizardSelect || input instanceof WizardCheckbox)
     return input.maybeValue;
   else
     return input.value ?? null;

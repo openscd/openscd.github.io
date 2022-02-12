@@ -4,6 +4,7 @@ import "../../../_snowpack/pkg/@material/mwc-button.js";
 import "../../../_snowpack/pkg/@material/mwc-list.js";
 import "../../../_snowpack/pkg/@material/mwc-list/mwc-list-item.js";
 import "../../../_snowpack/pkg/@material/mwc-select.js";
+import "../../wizard-checkbox.js";
 import "../../wizard-textfield.js";
 import "../../wizard-select.js";
 import {
@@ -21,7 +22,6 @@ import {
 import {
   addReferencedDataTypes,
   allDataTypeSelector,
-  buildListFromStringArray,
   unifyCreateActionArray
 } from "./foundation.js";
 function updateDoAction(element) {
@@ -79,7 +79,7 @@ function dOWizard(options) {
     name,
     desc,
     accessControl,
-    transientList
+    transient
   ] = DO ? [
     get("do.wizard.title.edit"),
     updateDoAction(DO),
@@ -103,7 +103,7 @@ function dOWizard(options) {
     DO.getAttribute("name"),
     DO.getAttribute("desc"),
     DO.getAttribute("accessControl"),
-    buildListFromStringArray([null, "true", "false"], DO.getAttribute("transient"))
+    DO.getAttribute("transient")
   ] : [
     get("do.wizard.title.add"),
     createDoAction(options.parent),
@@ -112,7 +112,7 @@ function dOWizard(options) {
     "",
     null,
     null,
-    buildListFromStringArray([null, "true", "false"], null)
+    null
   ];
   const types = Array.from(doc.querySelectorAll("DOType")).filter(isPublic).filter((type2) => type2.getAttribute("id"));
   return [
@@ -157,12 +157,12 @@ function dOWizard(options) {
           nullable
           pattern="${patterns.normalizedString}"
         ></wizard-textfield>`,
-        html`<mwc-select
-          fixedMenuPosition
+        html`<wizard-checkbox
           label="transient"
+          .maybeValue="${transient}"
           helper="${translate("scl.transient")}"
-          >${transientList}</mwc-select
-        >`
+          nullable
+        ></wizard-checkbox>`
       ]
     }
   ];

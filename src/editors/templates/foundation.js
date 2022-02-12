@@ -1,5 +1,4 @@
-import {css, html} from "../../../_snowpack/pkg/lit-element.js";
-import {ifDefined} from "../../../_snowpack/pkg/lit-html/directives/if-defined.js";
+import {css} from "../../../_snowpack/pkg/lit-element.js";
 import "../../../_snowpack/pkg/@material/mwc-list/mwc-list-item.js";
 import {
   cloneElement,
@@ -51,13 +50,6 @@ export function addReferencedDataTypes(element, parent) {
     });
   });
   return actions;
-}
-export function buildListFromStringArray(list, selected) {
-  return list.map((item) => html`<mwc-list-item
-      value=${ifDefined(item === null ? void 0 : item)}
-      ?selected=${item === selected}
-      >${item}</mwc-list-item
-    >`);
 }
 export const styles = css`
   :host(.moving) section {
