@@ -10,7 +10,9 @@ import {
   getValue,
   identity,
   isPublic,
+  newActionEvent,
   newSubWizardEvent,
+  newWizardEvent,
   selector
 } from "../foundation.js";
 import {securityEnableEnum, smpModEnum} from "./foundation/enums.js";
@@ -22,6 +24,35 @@ function getSMV(element) {
   const apName = element.closest("AccessPoint")?.getAttribute("name");
   const ldInst = element.closest("LDevice")?.getAttribute("inst");
   return element.closest("SCL")?.querySelector(`:root > Communication > SubNetwork > ConnectedAP[iedName="${iedName}"][apName="${apName}"] > SMV[ldInst="${ldInst}"][cbName="${cbName}"]`) ?? null;
+}
+export function removeSampledValueControlAction(element) {
+  if (!element.parentElement)
+    return [];
+  const dataSet = element.parentElement.querySelector(`DataSet[name="${element.getAttribute("datSet")}"]`);
+  const sMV = getSMV(element);
+  const singleUse = Array.from(element.parentElement.querySelectorAll("ReportControl, GSEControl, SampledValueControl")).filter((controlblock) => controlblock.getAttribute("datSet") === dataSet?.getAttribute("name")).length <= 1;
+  const actions = [];
+  actions.push({
+    old: {
+      parent: element.parentElement,
+      element
+    }
+  });
+  if (dataSet && singleUse)
+    actions.push({
+      old: {
+        parent: element.parentElement,
+        element: dataSet
+      }
+    });
+  if (sMV)
+    actions.push({
+      old: {
+        parent: sMV.parentElement,
+        element: sMV
+      }
+    });
+  return actions;
 }
 function contentSampledValueControlWizard(options) {
   return [
@@ -156,7 +187,16 @@ export function editSampledValueControlWizard(element) {
               @click="${(e) => {
           e.target?.dispatchEvent(newSubWizardEvent(() => editSMvWizard(sMV)));
         }}}"
-            ></mwc-button>` : html``
+            ></mwc-button>` : html``,
+        html`<mwc-button
+          label="${translate("remove")}"
+          icon="delete"
+          @click=${(e) => {
+          const deleteActions = removeSampledValueControlAction(element);
+          deleteActions.forEach((deleteAction) => e.target?.dispatchEvent(newActionEvent(deleteAction)));
+          e.target?.dispatchEvent(newWizardEvent());
+        }}
+        ></mwc-button>`
       ]
     }
   ];
