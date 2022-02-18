@@ -20,6 +20,7 @@ import "../_snowpack/pkg/@material/mwc-switch.js";
 import {ifImplemented, newLogEvent} from "./foundation.js";
 import {languages, loader} from "./translations/loader.js";
 import "./WizardDivider.js";
+import {iec6185072, iec6185073, iec6185074, iec6185081} from "./validators/templates/foundation.js";
 export const defaults = {
   language: "en",
   theme: "light",
@@ -42,6 +43,32 @@ export function Setting(Base) {
         "IEC 61850-7-3": this.getSetting("IEC 61850-7-3"),
         "IEC 61850-7-4": this.getSetting("IEC 61850-7-4"),
         "IEC 61850-8-1": this.getSetting("IEC 61850-8-1")
+      };
+    }
+    async nsdVersions() {
+      const [nsd72, nsd73, nsd74, nsd81] = await Promise.all([iec6185072, iec6185073, iec6185074, iec6185081]);
+      const [nsd72Ns, nsd73Ns, nsd74Ns, nsd81Ns] = [nsd72.querySelector("NS"), nsd73.querySelector("NS"), nsd74.querySelector("NS"), nsd81.querySelector("ServiceNS")];
+      return {
+        "IEC 61850-7-2": {
+          version: nsd72Ns?.getAttribute("version") ?? void 0,
+          revision: nsd72Ns?.getAttribute("revision") ?? void 0,
+          release: nsd72Ns?.getAttribute("release") ?? void 0
+        },
+        "IEC 61850-7-3": {
+          version: nsd73Ns?.getAttribute("version") ?? void 0,
+          revision: nsd73Ns?.getAttribute("revision") ?? void 0,
+          release: nsd73Ns?.getAttribute("release") ?? void 0
+        },
+        "IEC 61850-7-4": {
+          version: nsd74Ns?.getAttribute("version") ?? void 0,
+          revision: nsd74Ns?.getAttribute("revision") ?? void 0,
+          release: nsd74Ns?.getAttribute("release") ?? void 0
+        },
+        "IEC 61850-8-1": {
+          version: nsd81Ns?.getAttribute("version") ?? void 0,
+          revision: nsd81Ns?.getAttribute("revision") ?? void 0,
+          release: nsd81Ns?.getAttribute("release") ?? void 0
+        }
       };
     }
     getSetting(setting) {
@@ -88,20 +115,39 @@ export function Setting(Base) {
       `;
     }
     async loadNsdocFile(evt) {
+      const nsdVersions = await this.nsdVersions();
       const files = Array.from(evt.target?.files ?? []);
       if (files.length == 0)
         return;
       files.forEach(async (file) => {
         const text = await file.text();
-        const id = this.parseToXmlObject(text).querySelector("NSDoc")?.getAttribute("id");
+        const nsdocElement = this.parseToXmlObject(text).querySelector("NSDoc");
+        const id = nsdocElement?.getAttribute("id");
         if (!id) {
           document.querySelector("open-scd").dispatchEvent(newLogEvent({kind: "error", title: get("settings.invalidFileNoIdFound")}));
+          return;
+        }
+        const nsdVersion = nsdVersions[id];
+        const nsdocVersion = {
+          version: nsdocElement.getAttribute("version") ?? void 0,
+          revision: nsdocElement.getAttribute("revision") ?? void 0,
+          release: nsdocElement.getAttribute("release") ?? void 0
+        };
+        if (!this.isEqual(nsdVersion, nsdocVersion)) {
+          document.querySelector("open-scd").dispatchEvent(newLogEvent({kind: "error", title: get("settings.invalidNsdocVersion", {
+            id,
+            nsdVersion: `${nsdVersion.version}${nsdVersion.revision}${nsdVersion.release}`,
+            nsdocVersion: `${nsdocVersion.version}${nsdocVersion.revision}${nsdocVersion.release}`
+          })}));
           return;
         }
         this.setSetting(id, text);
       });
       this.nsdocFileUI.value = "";
       this.requestUpdate();
+    }
+    isEqual(versionA, versionB) {
+      return versionA.version == versionB.version && versionA.revision == versionB.revision && versionA.release == versionB.release;
     }
     renderNsdocItem(key) {
       const nsdSetting = this.settings[key];
