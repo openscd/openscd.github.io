@@ -129,9 +129,9 @@ export function Setting(Base) {
         }
         const nsdVersion = nsdVersions[id];
         const nsdocVersion = {
-          version: nsdocElement.getAttribute("version") ?? void 0,
-          revision: nsdocElement.getAttribute("revision") ?? void 0,
-          release: nsdocElement.getAttribute("release") ?? void 0
+          version: nsdocElement.getAttribute("version") ?? "",
+          revision: nsdocElement.getAttribute("revision") ?? "",
+          release: nsdocElement.getAttribute("release") ?? ""
         };
         if (!this.isEqual(nsdVersion, nsdocVersion)) {
           document.querySelector("open-scd").dispatchEvent(newLogEvent({kind: "error", title: get("settings.invalidNsdocVersion", {
