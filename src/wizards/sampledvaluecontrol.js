@@ -18,6 +18,7 @@ import {
 import {securityEnableEnum, smpModEnum} from "./foundation/enums.js";
 import {maxLength, patterns} from "./foundation/limits.js";
 import {editSMvWizard} from "./smv.js";
+import {editSmvOptsWizard} from "./smvopts.js";
 function getSMV(element) {
   const cbName = element.getAttribute("name");
   const iedName = element.closest("IED")?.getAttribute("name");
@@ -160,6 +161,7 @@ export function editSampledValueControlWizard(element) {
   const nofASDU = element.getAttribute("nofASDU");
   const securityEnable = element.getAttribute("securityEnabled");
   const sMV = getSMV(element);
+  const smvOpts = element.querySelector("SmvOpts");
   return [
     {
       title: get("wizard.title.edit", {tagName: element.tagName}),
@@ -188,6 +190,14 @@ export function editSampledValueControlWizard(element) {
           e.target?.dispatchEvent(newSubWizardEvent(() => editSMvWizard(sMV)));
         }}}"
             ></mwc-button>` : html``,
+        html`<mwc-button
+          id="editsmvopts"
+          label=${translate("scl.SmvOpts")}
+          icon="edit"
+          @click="${(e) => {
+          e.target?.dispatchEvent(newSubWizardEvent(() => editSmvOptsWizard(smvOpts)));
+        }}}"
+        ></mwc-button>`,
         html`<mwc-button
           label="${translate("remove")}"
           icon="delete"
