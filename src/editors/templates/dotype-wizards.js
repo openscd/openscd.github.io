@@ -141,7 +141,7 @@ function addPredefinedDOType(parent, templates) {
     const cdc = getValue(inputs.find((i) => i.label === "cdc"));
     const values = inputs.find((i) => i.label === "values");
     const selectedElement = values.selected ? templates.querySelector(`DOType[id="${values.selected.value}"]`) : null;
-    const element = values.selected ? selectedElement.cloneNode(true) : parent.ownerDocument.createElement("DOType");
+    const element = values.selected ? selectedElement.cloneNode(true) : createElement(parent.ownerDocument, "DOType", {});
     element.setAttribute("id", id);
     element.setAttribute("cdc", cdc);
     if (desc)
