@@ -6,6 +6,7 @@ import "../../../_snowpack/pkg/@material/mwc-list/mwc-list-item.js";
 import "../../../_snowpack/pkg/@material/mwc-select.js";
 import "../../wizard-textfield.js";
 import {
+  createElement,
   getValue,
   identity,
   newActionEvent,
@@ -114,7 +115,7 @@ function addPredefinedDAType(parent, templates) {
     const desc = getValue(inputs.find((i) => i.label === "desc"));
     const values = inputs.find((i) => i.label === "values");
     const selectedElement = values.selected ? templates.querySelector(`DAType[id="${values.selected.value}"]`) : null;
-    const element = values.selected ? selectedElement.cloneNode(true) : parent.ownerDocument.createElement("DAType");
+    const element = values.selected ? selectedElement.cloneNode(true) : createElement(parent.ownerDocument, "DAType", {});
     element.setAttribute("id", id);
     if (desc)
       element.setAttribute("desc", desc);

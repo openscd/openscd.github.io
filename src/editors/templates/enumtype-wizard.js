@@ -132,7 +132,7 @@ function createAction(parent, templates) {
       return [];
     const desc = getValue(inputs.find((i) => i.label === "desc"));
     const values = inputs.find((i) => i.label === "values");
-    const element = values.selected ? templates.querySelector(`EnumType[id="${values.selected.value}"]`).cloneNode(true) : parent.ownerDocument.createElement("EnumType");
+    const element = values.selected ? templates.querySelector(`EnumType[id="${values.selected.value}"]`).cloneNode(true) : createElement(parent.ownerDocument, "EnumType", {});
     element.setAttribute("id", id);
     if (desc)
       element.setAttribute("desc", desc);
