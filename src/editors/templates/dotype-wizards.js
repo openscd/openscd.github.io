@@ -12,6 +12,7 @@ import {
   identity,
   isPublic,
   newActionEvent,
+  newSubWizardEvent,
   newWizardEvent,
   selector
 } from "../../foundation.js";
@@ -298,8 +299,7 @@ export function dOTypeWizard(dOTypeIdentity, doc) {
             parent: dotype
           });
           if (wizard)
-            e.target.dispatchEvent(newWizardEvent(wizard));
-          e.target.dispatchEvent(newWizardEvent());
+            e.target.dispatchEvent(newSubWizardEvent(wizard));
         }}
           ></mwc-button>
           <mwc-button
@@ -309,8 +309,7 @@ export function dOTypeWizard(dOTypeIdentity, doc) {
             label="${translate("scl.DA")}"
             @click=${(e) => {
           if (dotype)
-            e.target.dispatchEvent(newWizardEvent(createDaWizard(dotype)));
-          e.target.dispatchEvent(newWizardEvent());
+            e.target.dispatchEvent(newSubWizardEvent(createDaWizard(dotype)));
         }}
           ></mwc-button>
         </section>`,
@@ -326,8 +325,7 @@ export function dOTypeWizard(dOTypeIdentity, doc) {
             doc
           });
           if (wizard)
-            e.target.dispatchEvent(newWizardEvent(wizard));
-          e.target.dispatchEvent(newWizardEvent());
+            e.target.dispatchEvent(newSubWizardEvent(wizard));
         }}
           >
             ${Array.from(dotype.querySelectorAll("SDO, DA")).map((daorsdo) => html`<mwc-list-item

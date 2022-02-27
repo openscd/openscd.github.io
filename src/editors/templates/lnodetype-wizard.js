@@ -15,6 +15,7 @@ import {
   identity,
   isPublic,
   newActionEvent,
+  newSubWizardEvent,
   newWizardEvent,
   patterns,
   selector
@@ -445,8 +446,7 @@ export function lNodeTypeWizard(lNodeTypeIdentity, doc) {
             parent: lnodetype
           });
           if (wizard)
-            e.target.dispatchEvent(newWizardEvent(wizard));
-          e.target.dispatchEvent(newWizardEvent());
+            e.target.dispatchEvent(newSubWizardEvent(wizard));
         }}
         ></mwc-button>`,
         html`
@@ -458,8 +458,7 @@ export function lNodeTypeWizard(lNodeTypeIdentity, doc) {
             doc
           });
           if (wizard)
-            e.target.dispatchEvent(newWizardEvent(wizard));
-          e.target.dispatchEvent(newWizardEvent());
+            e.target.dispatchEvent(newSubWizardEvent(wizard));
         }}
           >
             ${Array.from(lnodetype.querySelectorAll("DO")).map((doelement) => html`<mwc-list-item

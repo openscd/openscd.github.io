@@ -12,6 +12,7 @@ import {
   identity,
   isPublic,
   newActionEvent,
+  newSubWizardEvent,
   newWizardEvent,
   patterns,
   selector
@@ -246,8 +247,7 @@ export function eNumTypeEditWizard(eNumTypeIdentity, doc) {
             parent: enumtype
           });
           if (wizard)
-            e.target.dispatchEvent(newWizardEvent(wizard));
-          e.target.dispatchEvent(newWizardEvent());
+            e.target.dispatchEvent(newSubWizardEvent(wizard));
         }}
           ></mwc-button>
           <mwc-list
@@ -258,8 +258,7 @@ export function eNumTypeEditWizard(eNumTypeIdentity, doc) {
             doc
           });
           if (wizard)
-            e.target.dispatchEvent(newWizardEvent(wizard));
-          e.target.dispatchEvent(newWizardEvent());
+            e.target.dispatchEvent(newSubWizardEvent(wizard));
         }}
             >${Array.from(enumtype.querySelectorAll("EnumVal")).map((enumval) => html`<mwc-list-item
                   graphic="icon"

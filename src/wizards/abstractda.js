@@ -8,6 +8,8 @@ import {createElement} from "../foundation.js";
 import {maxLength, patterns} from "./foundation/limits.js";
 import {predefinedBasicTypeEnum, valKindEnum} from "./foundation/enums.js";
 function selectType(e, data, Val) {
+  if (!e.target || !e.target.parentElement)
+    return;
   const typeSelected = e.target.selected?.value;
   const selectedBType = e.target.parentElement.querySelector('wizard-select[label="bType"]').value;
   if (selectedBType !== "Enum")

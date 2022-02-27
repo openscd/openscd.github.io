@@ -9,6 +9,7 @@ import {
   getValue,
   identity,
   newActionEvent,
+  newSubWizardEvent,
   newWizardEvent,
   patterns,
   selector
@@ -76,8 +77,7 @@ export function editDaTypeWizard(dATypeIdentity, doc) {
             label="${translate("scl.DA")}"
             @click=${(e) => {
           if (datype)
-            e.target.dispatchEvent(newWizardEvent(createBDAWizard(datype)));
-          e.target.dispatchEvent(newWizardEvent());
+            e.target.dispatchEvent(newSubWizardEvent(createBDAWizard(datype)));
         }}
           ></mwc-button>
           <mwc-list
@@ -86,8 +86,7 @@ export function editDaTypeWizard(dATypeIdentity, doc) {
           const bdaIdentity = e.target.selected.value;
           const bda = doc.querySelector(selector("BDA", bdaIdentity));
           if (bda)
-            e.target.dispatchEvent(newWizardEvent(editBDAWizard(bda)));
-          e.target.dispatchEvent(newWizardEvent());
+            e.target.dispatchEvent(newSubWizardEvent(editBDAWizard(bda)));
         }}
           >
             ${Array.from(datype.querySelectorAll("BDA")).map((bda) => html`<mwc-list-item
