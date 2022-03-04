@@ -30,10 +30,11 @@ export let DAContainer = class extends LitElement {
   header() {
     const name = getNameAttribute(this.element);
     const bType = this.element.getAttribute("bType") ?? nothing;
+    const fc = this.element.getAttribute("fc");
     if (this.instanceElement) {
-      return html`<b>${name}</b> &mdash; ${bType}`;
+      return html`<b>${name}</b> &mdash; ${bType}${fc ? html` [${fc}]` : ``}`;
     } else {
-      return html`${name} &mdash; ${bType}`;
+      return html`${name} &mdash; ${bType}${fc ? html` [${fc}]` : ``}`;
     }
   }
   renderValue() {

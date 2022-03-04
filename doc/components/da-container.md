@@ -8,7 +8,7 @@
 |-------------------|-------------|---------------------------------|---------|---------------------------------|
 | `ancestors`       | `ancestors` | `Element[]`                     | []      |                                 |
 | `daParent`        |             | `Element`                       |         |                                 |
-| `element`         |             | `Element`                       |         | The DA itself.                  |
+| `element`         |             | `Element`                       |         | The (B)DA itself.               |
 | `instanceElement` |             | `Element`                       |         | The optional DAI of this (B)DA. |
 | `nsdoc`           | `nsdoc`     | `Nsdoc`                         |         |                                 |
 | `toggleButton`    |             | `IconButtonToggle \| undefined` |         |                                 |

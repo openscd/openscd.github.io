@@ -59,7 +59,7 @@ export let LNContainer = class extends LitElement {
           @click=${() => this.requestUpdate()}
         ></mwc-icon-button-toggle>
       </abbr>` : nothing}
-      ${this.toggleButton?.on ? this.getDOElements().map((dO) => html`<do-container
+      ${this.toggleButton?.on ? doElements.map((dO) => html`<do-container
           .element=${dO}
           .instanceElement=${this.getInstanceElement(dO)}
           .nsdoc=${this.nsdoc}
