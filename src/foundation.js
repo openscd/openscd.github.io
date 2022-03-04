@@ -12,8 +12,11 @@ export function isDelete(action) {
 export function isMove(action) {
   return action.old?.parent !== void 0 && action.old?.element !== void 0 && action.new?.parent !== void 0 && action.new?.element == void 0;
 }
-export function isUpdate(action) {
+export function isReplace(action) {
   return action.old?.parent === void 0 && action.old?.element !== void 0 && action.new?.parent === void 0 && action.new?.element !== void 0;
+}
+export function isUpdate(action) {
+  return action.old === void 0 && action.new === void 0 && action.element !== void 0 && action.newAttributes !== void 0 && action.oldAttributes !== void 0;
 }
 export function isSimple(action) {
   return !(action.actions instanceof Array);
@@ -46,10 +49,24 @@ export function invert(action) {
       new: {parent: action.old.parent, reference: action.old.reference},
       ...metaData
     };
-  else if (isUpdate(action))
+  else if (isReplace(action))
     return {new: action.old, old: action.new, ...metaData};
+  else if (isUpdate(action))
+    return {
+      element: action.element,
+      oldAttributes: action.newAttributes,
+      newAttributes: action.oldAttributes,
+      ...metaData
+    };
   else
     return unreachable("Unknown EditorAction type in invert.");
+}
+export function createUpdateAction(element, newAttributes) {
+  const oldAttributes = {};
+  Array.from(element.attributes).forEach((attr) => {
+    oldAttributes[attr.name] = attr.value;
+  });
+  return {element, oldAttributes, newAttributes};
 }
 export function newActionEvent(action, eventInitDict) {
   return new CustomEvent("editor-action", {

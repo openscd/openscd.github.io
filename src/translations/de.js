@@ -85,6 +85,7 @@ export const de = {
     smvcontrol: "Sampled Values anzeigen"
   },
   editing: {
+    node: "Benutzerdefiniertes Objekt",
     created: "{{ name }} hinzugefügt",
     deleted: "{{ name }} entfernt",
     moved: "{{ name }} verschoben",
