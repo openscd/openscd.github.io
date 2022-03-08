@@ -1,16 +1,17 @@
 import {html} from "../../_snowpack/pkg/lit-element.js";
-import {get, translate} from "../../_snowpack/pkg/lit-translate.js";
-import "../finder-list.js";
+import {get} from "../../_snowpack/pkg/lit-translate.js";
 import {
   createElement,
-  identity,
   selector
 } from "../foundation.js";
-import {getChildren} from "./foundation/functions.js";
-function newFCDA(parent, path) {
+import {
+  dataAttributePicker,
+  getDataModelChildren
+} from "./foundation/finder.js";
+export function newFCDA(parent, path) {
   const [leafTag, leafId] = path[path.length - 1].split(": ");
   const leaf = parent.ownerDocument.querySelector(selector(leafTag, leafId));
-  if (!leaf || getChildren(leaf).length > 0)
+  if (!leaf || getDataModelChildren(leaf).length > 0)
     return;
   const lnSegment = path.find((segment) => segment.startsWith("LN"));
   if (!lnSegment)
@@ -77,22 +78,6 @@ function createFCDAsAction(parent) {
     return actions;
   };
 }
-function getDisplayString(entry) {
-  return entry.replace(/^.*>/, "").trim();
-}
-function getReader(server) {
-  return async (path) => {
-    const [tagName, id] = path[path.length - 1]?.split(": ", 2);
-    const element = server.ownerDocument.querySelector(selector(tagName, id));
-    if (!element)
-      return {path, header: html`<p>${translate("error")}</p>`, entries: []};
-    return {
-      path,
-      header: void 0,
-      entries: getChildren(element).map((child) => `${child.tagName}: ${identity(child)}`)
-    };
-  };
-}
 export function createFCDAsWizard(parent) {
   const server = parent.closest("Server");
   return [
@@ -103,15 +88,7 @@ export function createFCDAsWizard(parent) {
         icon: "add",
         action: createFCDAsAction(parent)
       },
-      content: [
-        server ? html`<finder-list
-              multi
-              .paths=${[["Server: " + identity(server)]]}
-              .read=${getReader(server)}
-              .getDisplayString=${getDisplayString}
-              .getTitle=${(path) => path[path.length - 1]}
-            ></finder-list>` : html``
-      ]
+      content: [server ? dataAttributePicker(server) : html``]
     }
   ];
 }

@@ -1862,6 +1862,14 @@ export function depth(t, mem = new WeakSet()) {
         return 0;
     }
 }
+export function getUniqueElementName(parent, tagName, iteration = 1) {
+  const newName = "new" + tagName + iteration;
+  const child = parent.querySelector(`:scope > ${tagName}[name="${newName}"]`);
+  if (!child)
+    return newName;
+  else
+    return getUniqueElementName(parent, tagName, ++iteration);
+}
 export function findFCDAs(extRef) {
   if (extRef.tagName !== "ExtRef" || extRef.closest("Private"))
     return [];

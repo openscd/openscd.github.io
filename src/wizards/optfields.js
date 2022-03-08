@@ -1,5 +1,5 @@
-import {html} from "../../_snowpack/pkg/lit-html.js";
-import {get} from "../../_snowpack/pkg/lit-translate.js";
+import {html} from "../../_snowpack/pkg/lit-element.js";
+import {get, translate} from "../../_snowpack/pkg/lit-translate.js";
 import "../../_snowpack/pkg/@material/mwc-list/mwc-list-item.js";
 import "../wizard-checkbox.js";
 import "../wizard-select.js";
@@ -7,6 +7,14 @@ import {
   cloneElement,
   getValue
 } from "../foundation.js";
+export function contentOptFieldsWizard(option) {
+  return Object.entries(option).map(([key, value]) => html`<wizard-checkbox
+        label="${key}"
+        .maybeValue=${value}
+        nullable
+        helper="${translate(`scl.${key}`)}"
+      ></wizard-checkbox>`);
+}
 function updateOptFieldsAction(element) {
   return (inputs) => {
     const seqNum = getValue(inputs.find((i) => i.label === "seqNum"));
@@ -33,7 +41,16 @@ function updateOptFieldsAction(element) {
   };
 }
 export function editOptFieldsWizard(element) {
-  const optFields = [
+  const [
+    seqNum,
+    timeStamp,
+    dataSet,
+    reasonCode,
+    dataRef,
+    entryID,
+    configRef,
+    bufOvfl
+  ] = [
     "seqNum",
     "timeStamp",
     "dataSet",
@@ -42,7 +59,7 @@ export function editOptFieldsWizard(element) {
     "entryID",
     "configRef",
     "bufOvfl"
-  ];
+  ].map((optField) => element.getAttribute(optField));
   return [
     {
       title: get("wizard.title.edit", {tagName: element.tagName}),
@@ -51,12 +68,16 @@ export function editOptFieldsWizard(element) {
         label: get("save"),
         action: updateOptFieldsAction(element)
       },
-      content: optFields.map((optField) => html`<wizard-checkbox
-            label="${optField}"
-            .maybeValue=${element.getAttribute(optField)}
-            nullable
-            required
-          ></wizard-checkbox>`)
+      content: contentOptFieldsWizard({
+        seqNum,
+        timeStamp,
+        dataSet,
+        reasonCode,
+        dataRef,
+        entryID,
+        configRef,
+        bufOvfl
+      })
     }
   ];
 }

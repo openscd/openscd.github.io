@@ -25,28 +25,28 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>68/68</span>
+                <span class='fraction'>87/87</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>9/9</span>
+                <span class='fraction'>11/11</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>2/2</span>
+                <span class='fraction'>3/3</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>68/68</span>
+                <span class='fraction'>87/87</span>
             </div>
         
             
@@ -131,7 +131,26 @@
 <a name='L66'></a><a href='#L66'>66</a>
 <a name='L67'></a><a href='#L67'>67</a>
 <a name='L68'></a><a href='#L68'>68</a>
-<a name='L69'></a><a href='#L69'>69</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">31x</span>
+<a name='L69'></a><a href='#L69'>69</a>
+<a name='L70'></a><a href='#L70'>70</a>
+<a name='L71'></a><a href='#L71'>71</a>
+<a name='L72'></a><a href='#L72'>72</a>
+<a name='L73'></a><a href='#L73'>73</a>
+<a name='L74'></a><a href='#L74'>74</a>
+<a name='L75'></a><a href='#L75'>75</a>
+<a name='L76'></a><a href='#L76'>76</a>
+<a name='L77'></a><a href='#L77'>77</a>
+<a name='L78'></a><a href='#L78'>78</a>
+<a name='L79'></a><a href='#L79'>79</a>
+<a name='L80'></a><a href='#L80'>80</a>
+<a name='L81'></a><a href='#L81'>81</a>
+<a name='L82'></a><a href='#L82'>82</a>
+<a name='L83'></a><a href='#L83'>83</a>
+<a name='L84'></a><a href='#L84'>84</a>
+<a name='L85'></a><a href='#L85'>85</a>
+<a name='L86'></a><a href='#L86'>86</a>
+<a name='L87'></a><a href='#L87'>87</a>
+<a name='L88'></a><a href='#L88'>88</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">31x</span>
 <span class="cline-any cline-yes">31x</span>
 <span class="cline-any cline-yes">31x</span>
 <span class="cline-any cline-yes">31x</span>
@@ -143,6 +162,26 @@
 <span class="cline-any cline-yes">31x</span>
 <span class="cline-any cline-yes">31x</span>
 <span class="cline-any cline-yes">31x</span>
+<span class="cline-any cline-yes">31x</span>
+<span class="cline-any cline-yes">31x</span>
+<span class="cline-any cline-yes">31x</span>
+<span class="cline-any cline-yes">31x</span>
+<span class="cline-any cline-yes">31x</span>
+<span class="cline-any cline-yes">31x</span>
+<span class="cline-any cline-yes">31x</span>
+<span class="cline-any cline-yes">31x</span>
+<span class="cline-any cline-yes">31x</span>
+<span class="cline-any cline-yes">31x</span>
+<span class="cline-any cline-yes">31x</span>
+<span class="cline-any cline-yes">31x</span>
+<span class="cline-any cline-yes">31x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">31x</span>
 <span class="cline-any cline-yes">31x</span>
 <span class="cline-any cline-yes">31x</span>
@@ -193,14 +232,13 @@
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">31x</span>
 <span class="cline-any cline-yes">31x</span>
 <span class="cline-any cline-yes">31x</span>
-<span class="cline-any cline-yes">31x</span>
-<span class="cline-any cline-yes">31x</span>
-<span class="cline-any cline-yes">31x</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { html } from 'lit-html';
-import { get } from 'lit-translate';
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { html, TemplateResult } from 'lit-element';
+import { get, translate } from 'lit-translate';
 &nbsp;
 import '@material/mwc-list/mwc-list-item';
 &nbsp;
@@ -214,6 +252,26 @@ import {
   WizardActor,
   WizardInput,
 } from '../foundation.js';
+&nbsp;
+interface ContentOptions {
+  dchg: string | null;
+  qchg: string | null;
+  dupd: string | null;
+  period: string | null;
+  gi: string | null;
+}
+&nbsp;
+export function contentTrgOpsWizard(option: ContentOptions): TemplateResult[] {
+  return Object.entries(option).map(
+    ([key, value]) =&gt;
+      html`&lt;wizard-checkbox
+        label="${key}"
+        .maybeValue=${value}
+        nullable
+        helper="${translate(`scl.${key}`)}"
+      &gt;&lt;/wizard-checkbox&gt;`
+  );
+}
 &nbsp;
 function updateTrgOpsAction(element: Element): WizardActor {
   return (inputs: WizardInput[]): WizardAction[] =&gt; {
@@ -246,7 +304,13 @@ function updateTrgOpsAction(element: Element): WizardActor {
 }
 &nbsp;
 export function editTrgOpsWizard(element: Element): Wizard {
-  const trgOps = ['dchg', 'qchg', 'dupd', 'period', 'gi'];
+  const [dchg, qchg, dupd, period, gi] = [
+    'dchg',
+    'qchg',
+    'dupd',
+    'period',
+    'gi',
+  ].map(trgOp =&gt; element.getAttribute(trgOp));
 &nbsp;
   return [
     {
@@ -256,14 +320,7 @@ export function editTrgOpsWizard(element: Element): Wizard {
         label: get('save'),
         action: updateTrgOpsAction(element),
       },
-      content: trgOps.map(
-        trgOp =&gt;
-          html`&lt;wizard-checkbox
-            label="${trgOp}"
-            .maybeValue=${element.getAttribute(trgOp)}
-            nullable
-          &gt;&lt;/wizard-checkbox&gt;`
-      ),
+      content: contentTrgOpsWizard({ dchg, qchg, dupd, period, gi }),
     },
   ];
 }
@@ -274,7 +331,7 @@ export function editTrgOpsWizard(element: Element): Wizard {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener">istanbul</a>
-                at Fri Mar 04 2022 12:17:34 GMT+0000 (Coordinated Universal Time)
+                at Tue Mar 08 2022 10:01:00 GMT+0000 (Coordinated Universal Time)
             </div>
         </div>
         <script src="../../prettify.js"></script>

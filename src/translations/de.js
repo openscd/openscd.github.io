@@ -28,9 +28,11 @@ export const de = {
     dchg: "Detenänderung ist Auslöser",
     qchg: "Qualitätsanderung ist Auslöser",
     dupd: "Datenupdate ist Auslöser",
+    period: "Periodisch übertragen",
+    gi: "Manuelle Abfrage",
     fixedOffs: "Fester Offset",
     securityEnable: "Aktive Sicherungsmaßnahmen",
-    DataSet: "Datensetz",
+    DataSet: "Datensatz",
     Communication: "Kommunikation",
     TrgOps: "Triggerbedingungen",
     OptFields: "Optionale felder",
@@ -38,10 +40,22 @@ export const de = {
     smpMod: "Abtast-Art",
     smpRate: "Abtastrate",
     nofASDU: "Abtastpunkte pro Datenpacket",
+    seqNum: "Sequenznummer mitschicken",
+    timeStamp: "Zeitstempel mitschicken",
+    dataSet: "Datensatz-Reference mitschicken",
+    reasonCode: "Was hat den Report getriggert?",
+    dataRef: "Beschreibung der Datensatzes",
+    entryID: "Entry ID mitschicken",
+    configRef: "Konfigurations-Revision mitschicken",
+    bufOvfl: "Überlauf des internen Speichers signalisieren",
+    indexed: "Mehrere Instanzen möglich",
+    buffered: "Gepufferter Report",
+    maxReport: "Anzahl Instanzen",
+    bufTime: "Min. Intervall zwischen zwei Reports",
+    intgPd: "Intervall zwischen zwei periodischen Reports",
     SmvOpts: "Optionale Informationen",
     refreshTime: "Zeitstempel des Abtastwertes zu Telegram hinzufügen",
     sampleRate: "Abtastrate zu Telegram hinzufügen",
-    dataSet: "Datensatznamen zu Telegram hinzufügen",
     security: "Potentiel in Zukunft für z.B. digitale Signature",
     synchSourceId: "Identität der Zeitquelle zu Telegram hinzufügen"
   },
@@ -439,6 +453,13 @@ export const de = {
       xCoordinateHelper: "X-Koordinate im Einphasenersatzschaltbild",
       yCoordinateHelper: "Y-Koordinate im Einphasenersatzschaltbild"
     }
+  },
+  dataset: {
+    fcda: {add: "Daten-Attribute hinzufügen"},
+    fcd: {add: "Daten-Objekte hinzufügen"}
+  },
+  report: {
+    wizard: {location: "Ablageort der Reports wählen"}
   },
   add: "Hinzufügen",
   new: "Neu",

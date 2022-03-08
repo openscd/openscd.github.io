@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>wizards/foundation/functions | open-scd</title>
+	<title>wizards/foundation/finder | open-scd</title>
 	<meta name="description" content="Documentation for open-scd">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -55,10 +55,10 @@
 					<a href="../modules.html">open-scd</a>
 				</li>
 				<li>
-					<a href="wizards_foundation_functions.html">wizards/foundation/functions</a>
+					<a href="wizards_foundation_finder.html">wizards/foundation/finder</a>
 				</li>
 			</ul>
-			<h1>Module wizards/foundation/functions</h1>
+			<h1>Module wizards/foundation/finder</h1>
 		</div>
 	</div>
 </header>
@@ -72,7 +72,9 @@
 						<section class="tsd-index-section ">
 							<h3>Functions</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-function tsd-parent-kind-module"><a href="wizards_foundation_functions.html#getChildren" class="tsd-kind-icon">get<wbr>Children</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module"><a href="wizards_foundation_finder.html#dataAttributePicker" class="tsd-kind-icon">data<wbr>Attribute<wbr>Picker</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module"><a href="wizards_foundation_finder.html#getDataModelChildren" class="tsd-kind-icon">get<wbr>Data<wbr>Model<wbr>Children</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module"><a href="wizards_foundation_finder.html#iEDPicker" class="tsd-kind-icon">iEDPicker</a></li>
 							</ul>
 						</section>
 					</div>
@@ -81,16 +83,39 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Functions</h2>
 				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
-					<a name="getChildren" class="tsd-anchor"></a>
-					<h3>get<wbr>Children</h3>
+					<a name="dataAttributePicker" class="tsd-anchor"></a>
+					<h3>data<wbr>Attribute<wbr>Picker</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
-						<li class="tsd-signature tsd-kind-icon">get<wbr>Children<span class="tsd-signature-symbol">(</span>parent<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Element</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Element</span><span class="tsd-signature-symbol">[]</span></li>
+						<li class="tsd-signature tsd-kind-icon">data<wbr>Attribute<wbr>Picker<span class="tsd-signature-symbol">(</span>server<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Element</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">TemplateResult</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/9be83ab/src/wizards/foundation/functions.ts#L1">src/wizards/foundation/functions.ts:1</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/546419f/src/wizards/foundation/finder.ts#L72">src/wizards/foundation/finder.ts:72</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>server: <span class="tsd-signature-type">Element</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">TemplateResult</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
+					<a name="getDataModelChildren" class="tsd-anchor"></a>
+					<h3>get<wbr>Data<wbr>Model<wbr>Children</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Data<wbr>Model<wbr>Children<span class="tsd-signature-symbol">(</span>parent<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Element</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Element</span><span class="tsd-signature-symbol">[]</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/546419f/src/wizards/foundation/finder.ts#L51">src/wizards/foundation/finder.ts:51</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -103,6 +128,29 @@
 						</li>
 					</ul>
 				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
+					<a name="iEDPicker" class="tsd-anchor"></a>
+					<h3>iEDPicker</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
+						<li class="tsd-signature tsd-kind-icon">iEDPicker<span class="tsd-signature-symbol">(</span>doc<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">XMLDocument</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">TemplateResult</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/546419f/src/wizards/foundation/finder.ts#L42">src/wizards/foundation/finder.ts:42</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>doc: <span class="tsd-signature-type">XMLDocument</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">TemplateResult</span></h4>
+						</li>
+					</ul>
+				</section>
 			</section>
 		</div>
 		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
@@ -112,14 +160,20 @@
 						<a href="../modules.html">Modules</a>
 					</li>
 					<li class="current tsd-kind-module">
-						<a href="wizards_foundation_functions.html">wizards/foundation/functions</a>
+						<a href="wizards_foundation_finder.html">wizards/foundation/finder</a>
 					</li>
 				</ul>
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
 					<li class=" tsd-kind-function tsd-parent-kind-module">
-						<a href="wizards_foundation_functions.html#getChildren" class="tsd-kind-icon">get<wbr>Children</a>
+						<a href="wizards_foundation_finder.html#dataAttributePicker" class="tsd-kind-icon">data<wbr>Attribute<wbr>Picker</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-module">
+						<a href="wizards_foundation_finder.html#getDataModelChildren" class="tsd-kind-icon">get<wbr>Data<wbr>Model<wbr>Children</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-module">
+						<a href="wizards_foundation_finder.html#iEDPicker" class="tsd-kind-icon">iEDPicker</a>
 					</li>
 				</ul>
 			</nav>

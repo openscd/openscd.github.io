@@ -1,5 +1,5 @@
-import {html} from "../../_snowpack/pkg/lit-html.js";
-import {get} from "../../_snowpack/pkg/lit-translate.js";
+import {html} from "../../_snowpack/pkg/lit-element.js";
+import {get, translate} from "../../_snowpack/pkg/lit-translate.js";
 import "../../_snowpack/pkg/@material/mwc-list/mwc-list-item.js";
 import "../wizard-checkbox.js";
 import "../wizard-select.js";
@@ -7,6 +7,14 @@ import {
   cloneElement,
   getValue
 } from "../foundation.js";
+export function contentTrgOpsWizard(option) {
+  return Object.entries(option).map(([key, value]) => html`<wizard-checkbox
+        label="${key}"
+        .maybeValue=${value}
+        nullable
+        helper="${translate(`scl.${key}`)}"
+      ></wizard-checkbox>`);
+}
 function updateTrgOpsAction(element) {
   return (inputs) => {
     const dchg = getValue(inputs.find((i) => i.label === "dchg"));
@@ -28,7 +36,13 @@ function updateTrgOpsAction(element) {
   };
 }
 export function editTrgOpsWizard(element) {
-  const trgOps = ["dchg", "qchg", "dupd", "period", "gi"];
+  const [dchg, qchg, dupd, period, gi] = [
+    "dchg",
+    "qchg",
+    "dupd",
+    "period",
+    "gi"
+  ].map((trgOp) => element.getAttribute(trgOp));
   return [
     {
       title: get("wizard.title.edit", {tagName: element.tagName}),
@@ -37,11 +51,7 @@ export function editTrgOpsWizard(element) {
         label: get("save"),
         action: updateTrgOpsAction(element)
       },
-      content: trgOps.map((trgOp) => html`<wizard-checkbox
-            label="${trgOp}"
-            .maybeValue=${element.getAttribute(trgOp)}
-            nullable
-          ></wizard-checkbox>`)
+      content: contentTrgOpsWizard({dchg, qchg, dupd, period, gi})
     }
   ];
 }
