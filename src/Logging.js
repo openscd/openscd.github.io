@@ -31,7 +31,7 @@ import {
   invert,
   newActionEvent
 } from "./foundation.js";
-import {getFilterIcon, iconColors} from "./icons.js";
+import {getFilterIcon, iconColors} from "./icons/icons.js";
 const icons = {
   info: "info",
   warning: "warning",

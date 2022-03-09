@@ -12,7 +12,7 @@ import {
 } from "../foundation.js";
 import {selectClientLNsWizard} from "./clientln.js";
 import {selectExtRefsWizard} from "./controlwithiedname.js";
-import {controlBlockIcons} from "../icons.js";
+import {controlBlockIcons} from "../icons/icons.js";
 export function openCommunicationMappingWizard(root) {
   return () => [() => communicationMappingWizard(root)];
 }

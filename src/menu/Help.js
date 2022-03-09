@@ -4,7 +4,7 @@ import * as marked from "../../_snowpack/pkg/marked.js";
 import "../../_snowpack/pkg/@material/mwc-icon.js";
 import "../finder-list.js";
 import {newWizardEvent} from "../foundation.js";
-import {openSCDIcon} from "../icons.js";
+import {openSCDIcon} from "../icons/icons.js";
 function aboutBox(version) {
   return html`<div>
       <div style="display:flex">

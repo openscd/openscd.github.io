@@ -7,7 +7,7 @@ import {
   voltageTransformerIcon,
   earthSwitchIcon,
   generalConductingEquipmentIcon
-} from "../icons.js";
+} from "../icons/icons.js";
 import {typeStr} from "../wizards/conductingequipment.js";
 function containsReference(element, iedName) {
   return Array.from(element.getElementsByTagName("LNode")).filter(isPublic).some((lnode) => lnode.getAttribute("iedName") === iedName);

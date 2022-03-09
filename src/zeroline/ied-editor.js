@@ -20,7 +20,7 @@ import "../../_snowpack/pkg/@material/mwc-fab.js";
 import "../../_snowpack/pkg/@material/mwc-icon.js";
 import "../action-icon.js";
 import {createClientLnWizard} from "../wizards/clientln.js";
-import {gooseIcon, smvIcon, reportIcon} from "../icons.js";
+import {gooseIcon, smvIcon, reportIcon} from "../icons/icons.js";
 import {wizards} from "../wizards/wizard-library.js";
 import {newWizardEvent} from "../foundation.js";
 import {selectGseControlWizard} from "../wizards/gsecontrol.js";

@@ -17,6 +17,7 @@ import {
   property
 } from "../../../_snowpack/pkg/lit-element.js";
 import "../../action-pane.js";
+import {serverIcon} from "../../icons/ied-icons.js";
 import "./ldevice-container.js";
 export let ServerContainer = class extends LitElement {
   constructor() {
@@ -28,11 +29,12 @@ export let ServerContainer = class extends LitElement {
   }
   render() {
     return html`<action-pane label="${this.header()}">
-    ${Array.from(this.element.querySelectorAll(":scope > LDevice")).map((server) => html`<ldevice-container
-        .element=${server}
-        .nsdoc=${this.nsdoc}
-        .ancestors=${[this.element, ...this.ancestors]}
-      ></ldevice-container>`)}
+      <mwc-icon slot="icon">${serverIcon}</mwc-icon>
+      ${Array.from(this.element.querySelectorAll(":scope > LDevice")).map((server) => html`<ldevice-container
+          .element=${server}
+          .nsdoc=${this.nsdoc}
+          .ancestors=${[this.element, ...this.ancestors]}
+        ></ldevice-container>`)}
     </action-pane>`;
   }
 };

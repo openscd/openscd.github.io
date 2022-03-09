@@ -22,6 +22,7 @@ import "./ln-container.js";
 import {nothing} from "../../../_snowpack/pkg/lit-html.js";
 import {getDescriptionAttribute, getInstanceAttribute, getNameAttribute} from "../../foundation.js";
 import {translate} from "../../../_snowpack/pkg/lit-translate.js";
+import {logicalDeviceIcon} from "../../icons/ied-icons.js";
 export let LDeviceContainer = class extends LitElement {
   constructor() {
     super(...arguments);
@@ -38,6 +39,7 @@ export let LDeviceContainer = class extends LitElement {
   render() {
     const lnElements = Array.from(this.element.querySelectorAll(":scope > LN,LN0"));
     return html`<action-pane .label="${this.header()}">
+      <mwc-icon slot="icon">${logicalDeviceIcon}</mwc-icon>
       ${lnElements.length > 0 ? html`<abbr slot="action" title="${translate("iededitor.toggleChildElements")}">
         <mwc-icon-button-toggle
           on

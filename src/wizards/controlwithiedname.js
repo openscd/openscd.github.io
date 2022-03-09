@@ -9,7 +9,7 @@ import {
   findControlBlocks,
   identity
 } from "../foundation.js";
-import {inputIcon} from "../icons.js";
+import {inputIcon} from "../icons/icons.js";
 import {
   getSourceReferences,
   openCommunicationMappingWizard

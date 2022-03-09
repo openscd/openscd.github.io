@@ -35,13 +35,13 @@ export let IedContainer = class extends LitElement {
   }
   render() {
     return html`<action-pane .label="${this.header()}">
+      <mwc-icon slot="icon">developer_board</mwc-icon>
       <abbr slot="action" title="${translate("edit")}">
         <mwc-icon-button
           icon="edit"
           @click=${() => this.openEditWizard()}
         ></mwc-icon-button>
       </abbr>
-
       ${Array.from(this.element.querySelectorAll(":scope > AccessPoint")).map((ap) => html`<access-point-container
           .element=${ap}
           .nsdoc=${this.nsdoc}

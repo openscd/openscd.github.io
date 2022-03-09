@@ -9,7 +9,7 @@ import {
   pathParts,
   selector
 } from "../foundation.js";
-import {clientIcon} from "../icons.js";
+import {clientIcon} from "../icons/icons.js";
 import {openCommunicationMappingWizard} from "./commmap-wizards.js";
 function getPath(identity2) {
   if (typeof identity2 !== "string")

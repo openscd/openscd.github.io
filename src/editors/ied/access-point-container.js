@@ -20,6 +20,7 @@ import "../../action-pane.js";
 import "./server-container.js";
 import {nothing} from "../../../_snowpack/pkg/lit-html.js";
 import {getDescriptionAttribute, getNameAttribute} from "../../foundation.js";
+import {accessPointIcon} from "../../icons/ied-icons.js";
 export let AccessPointContainer = class extends LitElement {
   constructor() {
     super(...arguments);
@@ -32,11 +33,12 @@ export let AccessPointContainer = class extends LitElement {
   }
   render() {
     return html`<action-pane .label="${this.header()}">
-    ${Array.from(this.element.querySelectorAll(":scope > Server")).map((server) => html`<server-container
-        .element=${server}
-        .nsdoc=${this.nsdoc}
-        .ancestors=${[this.element, ...this.ancestors]}
-      ></server-container>`)}
+      <mwc-icon slot="icon">${accessPointIcon}</mwc-icon>
+      ${Array.from(this.element.querySelectorAll(":scope > Server")).map((server) => html`<server-container
+          .element=${server}
+          .nsdoc=${this.nsdoc}
+          .ancestors=${[this.element, ...this.ancestors]}
+        ></server-container>`)}
     </action-pane>`;
   }
 };
