@@ -37,8 +37,8 @@ export function Editing(Base) {
         return create.checkValidity();
       if (!(create.new.element instanceof Element) || !(create.new.parent instanceof Element))
         return true;
-      const invalid = create.new.element.hasAttribute("name") && Array.from(create.new.parent.children).some((elm) => elm.tagName === create.new.element.tagName && elm.getAttribute("name") === create.new.element.getAttribute("name"));
-      if (invalid)
+      const invalidNaming = create.new.element.hasAttribute("name") && Array.from(create.new.parent.children).some((elm) => elm.tagName === create.new.element.tagName && elm.getAttribute("name") === create.new.element.getAttribute("name"));
+      if (invalidNaming) {
         this.dispatchEvent(newLogEvent({
           kind: "error",
           title: get("editing.error.create", {
@@ -50,7 +50,22 @@ export function Editing(Base) {
             name: create.new.element.getAttribute("name")
           })
         }));
-      return !invalid;
+        return false;
+      }
+      const invalidId = create.new.element.hasAttribute("id") && Array.from(create.new.parent.ownerDocument.querySelectorAll("LNodeType, DOType, DAType, EnumType")).some((elm) => elm.getAttribute("id") === create.new.element.getAttribute("id"));
+      if (invalidId) {
+        this.dispatchEvent(newLogEvent({
+          kind: "error",
+          title: get("editing.error.create", {
+            name: create.new.element.tagName
+          }),
+          message: get("editing.error.idClash", {
+            id: create.new.element.getAttribute("id")
+          })
+        }));
+        return false;
+      }
+      return true;
     }
     onCreate(action) {
       if (!this.checkCreateValidity(action))
@@ -126,8 +141,8 @@ export function Editing(Base) {
     checkReplaceValidity(replace) {
       if (replace.checkValidity !== void 0)
         return replace.checkValidity();
-      const invalid = replace.new.element.hasAttribute("name") && replace.new.element.getAttribute("name") !== replace.old.element.getAttribute("name") && Array.from(replace.old.element.parentElement?.children ?? []).some((elm) => elm.tagName === replace.new.element.tagName && elm.getAttribute("name") === replace.new.element.getAttribute("name"));
-      if (invalid)
+      const invalidNaming = replace.new.element.hasAttribute("name") && replace.new.element.getAttribute("name") !== replace.old.element.getAttribute("name") && Array.from(replace.old.element.parentElement?.children ?? []).some((elm) => elm.tagName === replace.new.element.tagName && elm.getAttribute("name") === replace.new.element.getAttribute("name"));
+      if (invalidNaming) {
         this.dispatchEvent(newLogEvent({
           kind: "error",
           title: get("editing.error.update", {
@@ -139,7 +154,22 @@ export function Editing(Base) {
             name: replace.new.element.getAttribute("name")
           })
         }));
-      return !invalid;
+        return false;
+      }
+      const invalidId = replace.new.element.hasAttribute("id") && replace.new.element.getAttribute("id") !== replace.old.element.getAttribute("id") && Array.from(replace.new.element.ownerDocument.querySelectorAll("LNodeType, DOType, DAType, EnumType")).some((elm) => elm.getAttribute("id") === replace.new.element.getAttribute("id"));
+      if (invalidId) {
+        this.dispatchEvent(newLogEvent({
+          kind: "error",
+          title: get("editing.error.update", {
+            name: replace.new.element.tagName
+          }),
+          message: get("editing.error.idClash", {
+            id: replace.new.element.getAttribute("id")
+          })
+        }));
+        return false;
+      }
+      return true;
     }
     onReplace(action) {
       if (!this.checkReplaceValidity(action))
@@ -161,8 +191,8 @@ export function Editing(Base) {
     checkUpdateValidity(update) {
       if (update.checkValidity !== void 0)
         return update.checkValidity();
-      const invalid = Array.from(update.element.parentElement?.children ?? []).some((elm) => elm.tagName === update.element.tagName && elm.getAttribute("name") === update.newAttributes["name"]);
-      if (invalid)
+      const invalidNaming = Array.from(update.element.parentElement?.children ?? []).some((elm) => elm.tagName === update.element.tagName && elm.getAttribute("name") === update.newAttributes["name"]);
+      if (invalidNaming) {
         this.dispatchEvent(newLogEvent({
           kind: "error",
           title: get("editing.error.update", {
@@ -174,7 +204,22 @@ export function Editing(Base) {
             name: update.newAttributes["name"]
           })
         }));
-      return !invalid;
+        return false;
+      }
+      const invalidId = update.newAttributes["id"] && Array.from(update.element.ownerDocument.querySelectorAll("LNodeType, DOType, DAType, EnumType")).some((elm) => elm.getAttribute("id") === update.newAttributes["id"]);
+      if (invalidId) {
+        this.dispatchEvent(newLogEvent({
+          kind: "error",
+          title: get("editing.error.update", {
+            name: update.element.tagName
+          }),
+          message: get("editing.error.idClash", {
+            id: update.newAttributes["id"]
+          })
+        }));
+        return false;
+      }
+      return true;
     }
     onUpdate(action) {
       if (!this.checkUpdateValidity(action))

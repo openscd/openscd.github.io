@@ -110,7 +110,8 @@ export const de = {
       update: "Konnte {{ name }} nicht bearbeiten",
       move: "Konnte {{ name }} nicht verschieben",
       duplicate: "Konnte {{name}} nicht kopieren",
-      nameClash: '{{ parent }} enthält bereits ein {{ child }} Kind namens "{{ name }}"'
+      nameClash: '{{ parent }} enthält bereits ein {{ child }} Kind namens "{{ name }}"',
+      idClash: 'Das Projekt enthält bereits die ID "{{ id }}"'
     }
   },
   validator: {
