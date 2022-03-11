@@ -65,7 +65,7 @@ export let WizardCheckbox = class extends LitElement {
       this.initChecked = value;
   }
   get formfieldLabel() {
-    return this.helper ? `${this.label} (${this.helper})` : this.label;
+    return this.helper ? `${this.helper} (${this.label})` : this.label;
   }
   enable() {
     if (this.nulled === null)
