@@ -49,7 +49,7 @@ export default class TemplatesPlugin extends LitElement {
   openLNodeTypeWizard(identity2) {
     const wizard = lNodeTypeWizard(identity2, this.doc);
     if (wizard)
-      this.dispatchEvent(newWizardEvent(wizard));
+      this.dispatchEvent(newWizardEvent(() => lNodeTypeWizard(identity2, this.doc)));
   }
   async openCreateDOTypeWizard() {
     this.createDataTypeTemplates();
@@ -58,12 +58,12 @@ export default class TemplatesPlugin extends LitElement {
   openDOTypeWizard(identity2) {
     const wizard = dOTypeWizard(identity2, this.doc);
     if (wizard)
-      this.dispatchEvent(newWizardEvent(wizard));
+      this.dispatchEvent(newWizardEvent(() => dOTypeWizard(identity2, this.doc)));
   }
   openDATypeWizard(identity2) {
     const wizard = editDaTypeWizard(identity2, this.doc);
     if (wizard)
-      this.dispatchEvent(newWizardEvent(wizard));
+      this.dispatchEvent(newWizardEvent(() => editDaTypeWizard(identity2, this.doc)));
   }
   async openCreateDATypeWizard() {
     this.createDataTypeTemplates();
@@ -72,7 +72,7 @@ export default class TemplatesPlugin extends LitElement {
   openEnumTypeWizard(identity2) {
     const wizard = eNumTypeEditWizard(identity2, this.doc);
     if (wizard)
-      this.dispatchEvent(newWizardEvent(wizard));
+      this.dispatchEvent(newWizardEvent(() => eNumTypeEditWizard(identity2, this.doc)));
   }
   async openCreateEnumWizard() {
     this.createDataTypeTemplates();
