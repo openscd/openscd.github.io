@@ -17,9 +17,6 @@ import {
   patterns,
   selector
 } from "../../foundation.js";
-import {
-  updateIDNamingAction
-} from "./foundation.js";
 function nextOrd(parent) {
   const maxOrd = Math.max(...Array.from(parent.children).map((child) => parseInt(child.getAttribute("ord") ?? "-2", 10)));
   return isFinite(maxOrd) ? (maxOrd + 1).toString(10) : "0";
@@ -191,6 +188,24 @@ export function createEnumTypeWizard(parent, templates) {
     }
   ];
 }
+function updateEnumTpyeAction(element) {
+  return (inputs) => {
+    const id = getValue(inputs.find((i) => i.label === "id"));
+    const desc = getValue(inputs.find((i) => i.label === "desc"));
+    if (id === element.getAttribute("id") && desc === element.getAttribute("desc"))
+      return [];
+    const newElement = cloneElement(element, {id, desc});
+    const actions = [];
+    actions.push({old: {element}, new: {element: newElement}});
+    const oldId = element.getAttribute("id");
+    Array.from(element.ownerDocument.querySelectorAll(`DOType > DA[type="${oldId}"], DAType > BDA[type="${oldId}"]`)).forEach((oldDa) => {
+      const newDa = oldDa.cloneNode(false);
+      newDa.setAttribute("type", id);
+      actions.push({old: {element: oldDa}, new: {element: newDa}});
+    });
+    return [{title: get("enum.action.edit", {oldId, newId: id}), actions}];
+  };
+}
 export function eNumTypeEditWizard(eNumTypeIdentity, doc) {
   const enumtype = doc.querySelector(selector("EnumType", eNumTypeIdentity));
   if (!enumtype)
@@ -202,7 +217,7 @@ export function eNumTypeEditWizard(eNumTypeIdentity, doc) {
       primary: {
         icon: "",
         label: get("save"),
-        action: updateIDNamingAction(enumtype)
+        action: updateEnumTpyeAction(enumtype)
       },
       content: [
         html`<mwc-button

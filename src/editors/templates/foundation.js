@@ -1,23 +1,11 @@
 import {css} from "../../../_snowpack/pkg/lit-element.js";
 import "../../../_snowpack/pkg/@material/mwc-list/mwc-list-item.js";
 import {
-  cloneElement,
-  getValue,
   isPublic
 } from "../../foundation.js";
 export const allDataTypeSelector = "LNodeType, DOType, DAType, EnumType";
 export function isCreateOptions(options) {
   return options.parent !== void 0;
-}
-export function updateIDNamingAction(element) {
-  return (inputs) => {
-    const id = getValue(inputs.find((i) => i.label === "id"));
-    const desc = getValue(inputs.find((i) => i.label === "desc"));
-    if (id === element.getAttribute("id") && desc === element.getAttribute("desc"))
-      return [];
-    const newElement = cloneElement(element, {id, desc});
-    return [{old: {element}, new: {element: newElement}}];
-  };
 }
 function containsCreateAction(actions, newAction) {
   return !actions.some((action) => action.new.parent === newAction.new.parent && action.new.element.getAttribute("id") === newAction.new.element.getAttribute("id"));

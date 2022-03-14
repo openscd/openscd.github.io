@@ -291,6 +291,9 @@ export const de = {
         add: "EnumType hinzufügen",
         edit: "EnumType bearbeiten"
       }
+    },
+    action: {
+      edit: 'DAType ID "{{oldId}}" und deren DA-Referenzen geändert zu {{newId}} '
     }
   },
   datype: {
@@ -299,6 +302,9 @@ export const de = {
         add: "DAType hinzufügen",
         edit: "DAType bearbeiten"
       }
+    },
+    action: {
+      edit: 'EnumType ID "{{oldId}}" und deren DA-Referenzen geändert zu {{newId}} '
     }
   },
   bda: {
@@ -340,6 +346,9 @@ export const de = {
         edit: "DOType bearbeiten"
       },
       enums: "Standard Enumerations"
+    },
+    action: {
+      edit: 'DOType ID "{{oldId}}" und deren DO-Referenzen geändert zu {{newId}} '
     }
   },
   lnodetype: {
@@ -349,6 +358,9 @@ export const de = {
         edit: "LNodeType bearbeiten",
         select: "Data Objects auswählen"
       }
+    },
+    action: {
+      edit: 'LNodeType ID "{{oldId}}" und deren LN-Referenzen geändert zu {{newId}} '
     },
     autoimport: "Vordefinierte OpenSCD LN Klasse verwenden",
     missinglnclass: "Vordefinierte LN Klasse fehlt"

@@ -6,6 +6,7 @@ import "../../../_snowpack/pkg/@material/mwc-list/mwc-list-item.js";
 import "../../../_snowpack/pkg/@material/mwc-select.js";
 import "../../wizard-textfield.js";
 import {
+  cloneElement,
   createElement,
   getValue,
   identity,
@@ -19,9 +20,28 @@ import {createBDAWizard, editBDAWizard} from "../../wizards/bda.js";
 import {
   addReferencedDataTypes,
   allDataTypeSelector,
-  unifyCreateActionArray,
-  updateIDNamingAction
+  unifyCreateActionArray
 } from "./foundation.js";
+function updateDATpyeAction(element) {
+  return (inputs) => {
+    const id = getValue(inputs.find((i) => i.label === "id"));
+    const desc = getValue(inputs.find((i) => i.label === "desc"));
+    if (id === element.getAttribute("id") && desc === element.getAttribute("desc"))
+      return [];
+    const newElement = cloneElement(element, {id, desc});
+    const actions = [];
+    actions.push({old: {element}, new: {element: newElement}});
+    const oldId = element.getAttribute("id");
+    Array.from(element.ownerDocument.querySelectorAll(`DOType > DA[type="${oldId}"], DAType > BDA[type="${oldId}"]`)).forEach((oldDa) => {
+      const newDa = oldDa.cloneNode(false);
+      newDa.setAttribute("type", id);
+      actions.push({old: {element: oldDa}, new: {element: newDa}});
+    });
+    return [
+      {title: get("datype.action.edit", {oldId, newId: id}), actions}
+    ];
+  };
+}
 export function editDaTypeWizard(dATypeIdentity, doc) {
   const datype = doc.querySelector(selector("DAType", dATypeIdentity));
   if (!datype)
@@ -35,7 +55,7 @@ export function editDaTypeWizard(dATypeIdentity, doc) {
       primary: {
         icon: "",
         label: get("save"),
-        action: updateIDNamingAction(datype)
+        action: updateDATpyeAction(datype)
       },
       content: [
         html`<mwc-button

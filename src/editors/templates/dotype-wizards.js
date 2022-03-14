@@ -232,7 +232,17 @@ function updateDOTypeAction(element) {
     if (id === element.getAttribute("id") && desc === element.getAttribute("desc") && cdc == element.getAttribute("cdc"))
       return [];
     const newElement = cloneElement(element, {id, desc, cdc});
-    return [{old: {element}, new: {element: newElement}}];
+    const actions = [];
+    actions.push({old: {element}, new: {element: newElement}});
+    const oldId = element.getAttribute("id");
+    Array.from(element.ownerDocument.querySelectorAll(`LNodeType > DO[type="${oldId}"], DOType > SDO[type="${oldId}"]`)).forEach((oldDo) => {
+      const newDo = oldDo.cloneNode(false);
+      newDo.setAttribute("type", id);
+      actions.push({old: {element: oldDo}, new: {element: newDo}});
+    });
+    return [
+      {title: get("dotype.action.edit", {oldId, newId: id}), actions}
+    ];
   };
 }
 export function dOTypeWizard(dOTypeIdentity, doc) {

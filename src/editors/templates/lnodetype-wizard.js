@@ -379,7 +379,17 @@ function updateLNodeTypeAction(element) {
     if (id === element.getAttribute("id") && desc === element.getAttribute("desc") && lnClass == element.getAttribute("lnClass"))
       return [];
     const newElement = cloneElement(element, {id, desc, lnClass});
-    return [{old: {element}, new: {element: newElement}}];
+    const actions = [];
+    actions.push({old: {element}, new: {element: newElement}});
+    const oldId = element.getAttribute("id");
+    Array.from(element.ownerDocument.querySelectorAll(`LN0[lnType="${oldId}"], LN[lnType="${oldId}"]`)).forEach((oldAnyLn) => {
+      const newAnyLn = oldAnyLn.cloneNode(false);
+      newAnyLn.setAttribute("lnType", id);
+      actions.push({old: {element: oldAnyLn}, new: {element: newAnyLn}});
+    });
+    return [
+      {title: get("lnodetype.action.edit", {oldId, newId: id}), actions}
+    ];
   };
 }
 export function lNodeTypeWizard(lNodeTypeIdentity, doc) {
