@@ -476,6 +476,12 @@ export const de = {
   report: {
     wizard: {location: "Ablageort der Reports wählen"}
   },
+  controlblock: {
+    action: {
+      edit: '{{type}} "{{name}}" in IED {{iedName}} bearbeitet',
+      remove: '{{type}} "{{name}}" and referenzierte Element von IED {{iedName}} entfernt'
+    }
+  },
   add: "Hinzufügen",
   new: "Neu",
   remove: "Entfernen",

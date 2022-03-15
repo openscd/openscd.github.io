@@ -25,7 +25,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>324/324</span>
+                <span class='fraction'>338/338</span>
             </div>
         
             
@@ -46,7 +46,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>324/324</span>
+                <span class='fraction'>338/338</span>
             </div>
         
             
@@ -387,7 +387,21 @@
 <a name='L322'></a><a href='#L322'>322</a>
 <a name='L323'></a><a href='#L323'>323</a>
 <a name='L324'></a><a href='#L324'>324</a>
-<a name='L325'></a><a href='#L325'>325</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">25x</span>
+<a name='L325'></a><a href='#L325'>325</a>
+<a name='L326'></a><a href='#L326'>326</a>
+<a name='L327'></a><a href='#L327'>327</a>
+<a name='L328'></a><a href='#L328'>328</a>
+<a name='L329'></a><a href='#L329'>329</a>
+<a name='L330'></a><a href='#L330'>330</a>
+<a name='L331'></a><a href='#L331'>331</a>
+<a name='L332'></a><a href='#L332'>332</a>
+<a name='L333'></a><a href='#L333'>333</a>
+<a name='L334'></a><a href='#L334'>334</a>
+<a name='L335'></a><a href='#L335'>335</a>
+<a name='L336'></a><a href='#L336'>336</a>
+<a name='L337'></a><a href='#L337'>337</a>
+<a name='L338'></a><a href='#L338'>338</a>
+<a name='L339'></a><a href='#L339'>339</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">25x</span>
 <span class="cline-any cline-yes">25x</span>
 <span class="cline-any cline-yes">25x</span>
 <span class="cline-any cline-yes">25x</span>
@@ -419,6 +433,7 @@
 <span class="cline-any cline-yes">25x</span>
 <span class="cline-any cline-yes">25x</span>
 <span class="cline-any cline-yes">25x</span>
+<span class="cline-any cline-yes">25x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
@@ -480,6 +495,18 @@
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">25x</span>
 <span class="cline-any cline-yes">25x</span>
 <span class="cline-any cline-yes">25x</span>
 <span class="cline-any cline-yes">25x</span>
@@ -662,6 +689,7 @@
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -725,6 +753,7 @@ import '../wizard-select.js';
 import '../wizard-textfield.js';
 import {
   cloneElement,
+  ComplexAction,
   Delete,
   EditorAction,
   getValue,
@@ -760,8 +789,10 @@ function getSMV(element: Element): Element | null {
   );
 }
 &nbsp;
-export function removeSampledValueControlAction(element: Element): Delete[] {
-  if (!element.parentElement) return [];
+export function removeSampledValueControlAction(
+  element: Element
+): ComplexAction | null {
+  if (!element.parentElement) return null;
 &nbsp;
   const dataSet = element.parentElement!.querySelector(
     `DataSet[name="${element.getAttribute('datSet')}"]`
@@ -803,7 +834,17 @@ export function removeSampledValueControlAction(element: Element): Delete[] {
       },
     });
 &nbsp;
-  return actions;
+  const name = element.getAttribute('name')!;
+  const iedName = element.closest('IED')?.getAttribute('name') ?? '';
+&nbsp;
+  return {
+    title: get('controlblock.action.remove', {
+      type: element.tagName,
+      name,
+      iedName,
+    }),
+    actions,
+  };
 }
 &nbsp;
 interface ContentOptions {
@@ -986,10 +1027,11 @@ export function editSampledValueControlWizard(element: Element): Wizard {
           label="${translate('remove')}"
           icon="delete"
           @click=${(e: MouseEvent) =&gt; {
-            const deleteActions = removeSampledValueControlAction(element);
-            deleteActions.forEach(deleteAction =&gt;
-              e.target?.dispatchEvent(newActionEvent(deleteAction))
-            );
+            const complexAction = removeSampledValueControlAction(element);
+&nbsp;
+            if (complexAction)
+              e.target?.dispatchEvent(newActionEvent(complexAction));
+&nbsp;
             e.target?.dispatchEvent(newWizardEvent());
           }}
         &gt;&lt;/mwc-button&gt;`,
@@ -1042,7 +1084,7 @@ export function selectSampledValueControlWizard(element: Element): Wizard {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener">istanbul</a>
-                at Tue Mar 15 2022 23:09:42 GMT+0000 (Coordinated Universal Time)
+                at Tue Mar 15 2022 23:36:24 GMT+0000 (Coordinated Universal Time)
             </div>
         </div>
         <script src="../../prettify.js"></script>

@@ -77,6 +77,8 @@ export function renderGseAttributes(name, desc, type, appID, fixedOffs, security
   ];
 }
 export function removeGseControl(element) {
+  if (!element.parentElement)
+    return null;
   const dataSet = element.parentElement.querySelector(`DataSet[name="${element.getAttribute("datSet")}"]`);
   const gSE = getGSE(element);
   const singleUse = Array.from(element.parentElement?.querySelectorAll("ReportControl, GSEControl, SampledValueControl") ?? []).filter((controlblock) => controlblock.getAttribute("datSet") === dataSet?.getAttribute("name")).length <= 1;
@@ -93,7 +95,7 @@ export function removeGseControl(element) {
       old: {
         parent: element.parentElement,
         element: dataSet,
-        reference: element.nextSibling
+        reference: dataSet.nextSibling
       }
     });
   if (gSE)
@@ -104,7 +106,16 @@ export function removeGseControl(element) {
         reference: gSE.nextSibling
       }
     });
-  return actions;
+  const name = element.getAttribute("name");
+  const iedName = element.closest("IED")?.getAttribute("name") ?? "";
+  return {
+    title: get("controlblock.action.remove", {
+      type: element.tagName,
+      name,
+      iedName
+    }),
+    actions
+  };
 }
 export function updateGseControlAction(element) {
   return (inputs) => {
@@ -150,8 +161,9 @@ export function editGseControlWizard(element) {
           label="${translate("remove")}"
           icon="delete"
           @click=${(e) => {
-          const deleteActions = removeGseControl(element);
-          deleteActions.forEach((deleteAction) => e.target?.dispatchEvent(newActionEvent(deleteAction)));
+          const complexAction = removeGseControl(element);
+          if (complexAction)
+            e.target?.dispatchEvent(newActionEvent(complexAction));
           e.target?.dispatchEvent(newWizardEvent());
         }}
         ></mwc-button>`,

@@ -265,7 +265,7 @@ function prepareReportControlCreateWizard(anyParent) {
 }
 export function removeReportControlAction(element) {
   if (!element.parentElement)
-    return [];
+    return null;
   const dataSet = element.parentElement.querySelector(`DataSet[name="${element.getAttribute("datSet")}"]`);
   const isDataSetUsedByThisControlBlockOnly = Array.from(element.parentElement.querySelectorAll("ReportControl, GSEControl, SampledValueControl")).filter((controlblock) => controlblock.getAttribute("datSet") === dataSet?.getAttribute("name")).length <= 1;
   const actions = [];
@@ -281,10 +281,15 @@ export function removeReportControlAction(element) {
       old: {
         parent: element.parentElement,
         element: dataSet,
-        reference: element.nextSibling
+        reference: dataSet.nextSibling
       }
     });
-  return actions;
+  const name = element.getAttribute("name");
+  const iedName = element.closest("IED")?.getAttribute("name") ?? "";
+  return {
+    title: get("controlblock.action.remove", {type: "Report", name, iedName}),
+    actions
+  };
 }
 function getRptEnabledAction(olRptEnabled, max, reportCb) {
   if (olRptEnabled === null) {
@@ -337,7 +342,17 @@ function updateReportControlAction(element) {
       actions.push(reportControlAction);
     if (rptEnabledAction)
       actions.push(rptEnabledAction);
-    return actions;
+    const name = attributes["name"];
+    const iedName = element.closest("IED").getAttribute("name");
+    const complexAction = {
+      title: get("controlblock.action.edit", {
+        type: "Report",
+        name,
+        iedName
+      }),
+      actions
+    };
+    return actions.length ? [complexAction] : [];
   };
 }
 export function editReportControlWizard(element) {
@@ -400,8 +415,9 @@ export function editReportControlWizard(element) {
           label="${translate("remove")}"
           icon="delete"
           @click=${(e) => {
-          const deleteActions = removeReportControlAction(element);
-          deleteActions.forEach((deleteAction) => e.target?.dispatchEvent(newActionEvent(deleteAction)));
+          const complexAction = removeReportControlAction(element);
+          if (complexAction)
+            e.target?.dispatchEvent(newActionEvent(complexAction));
           e.target?.dispatchEvent(newWizardEvent());
         }}
         ></mwc-button>`

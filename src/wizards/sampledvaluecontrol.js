@@ -28,7 +28,7 @@ function getSMV(element) {
 }
 export function removeSampledValueControlAction(element) {
   if (!element.parentElement)
-    return [];
+    return null;
   const dataSet = element.parentElement.querySelector(`DataSet[name="${element.getAttribute("datSet")}"]`);
   const sMV = getSMV(element);
   const singleUse = Array.from(element.parentElement.querySelectorAll("ReportControl, GSEControl, SampledValueControl")).filter((controlblock) => controlblock.getAttribute("datSet") === dataSet?.getAttribute("name")).length <= 1;
@@ -53,7 +53,16 @@ export function removeSampledValueControlAction(element) {
         element: sMV
       }
     });
-  return actions;
+  const name = element.getAttribute("name");
+  const iedName = element.closest("IED")?.getAttribute("name") ?? "";
+  return {
+    title: get("controlblock.action.remove", {
+      type: element.tagName,
+      name,
+      iedName
+    }),
+    actions
+  };
 }
 function contentSampledValueControlWizard(options) {
   return [
@@ -202,8 +211,9 @@ export function editSampledValueControlWizard(element) {
           label="${translate("remove")}"
           icon="delete"
           @click=${(e) => {
-          const deleteActions = removeSampledValueControlAction(element);
-          deleteActions.forEach((deleteAction) => e.target?.dispatchEvent(newActionEvent(deleteAction)));
+          const complexAction = removeSampledValueControlAction(element);
+          if (complexAction)
+            e.target?.dispatchEvent(newActionEvent(complexAction));
           e.target?.dispatchEvent(newWizardEvent());
         }}
         ></mwc-button>`
