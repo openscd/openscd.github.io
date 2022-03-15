@@ -64,7 +64,7 @@ export let ConductingEquipmentEditor = class extends LitElement {
       <mwc-fab
         slot="action"
         mini
-        @click="${() => startMove(this, ConductingEquipmentEditor, BayEditor)}"
+        @click="${() => startMove(this, ConductingEquipmentEditor, [BayEditor])}"
         icon="forward"
       ></mwc-fab>
       <mwc-fab

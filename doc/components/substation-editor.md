@@ -15,9 +15,10 @@
 
 ## Methods
 
-| Method               | Type                 | Description                                      |
-|----------------------|----------------------|--------------------------------------------------|
-| `openEditWizard`     | `(): void`           | Opens a [[`WizardDialog`]] for editing [[`element`]]. |
-| `openLNodeWizard`    | `(): void`           | Opens a [[`WizardDialog`]] for editing `LNode` connections. |
-| `remove`             | `(): void`           | Deletes [[`element`]].                           |
-| `renderIedContainer` | `(): TemplateResult` |                                                  |
+| Method                            | Type                 | Description                                      |
+|-----------------------------------|----------------------|--------------------------------------------------|
+| `openEditWizard`                  | `(): void`           | Opens a [[`WizardDialog`]] for editing [[`element`]]. |
+| `openLNodeWizard`                 | `(): void`           | Opens a [[`WizardDialog`]] for editing `LNode` connections. |
+| `remove`                          | `(): void`           | Deletes [[`element`]].                           |
+| `renderIedContainer`              | `(): TemplateResult` |                                                  |
+| `renderPowerTransformerContainer` | `(): TemplateResult` |                                                  |

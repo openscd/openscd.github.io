@@ -22,6 +22,7 @@ import "../../_snowpack/pkg/@material/mwc-icon-button.js";
 import "../action-pane.js";
 import "./ied-editor.js";
 import "./conducting-equipment-editor.js";
+import "./powertransformer-editor.js";
 import {VoltageLevelEditor} from "./voltage-level-editor.js";
 import {
   getChildElementsByTagName,
@@ -30,12 +31,16 @@ import {
   tags
 } from "../foundation.js";
 import {emptyWizard, wizards} from "../wizards/wizard-library.js";
+import {
+  cloneSubstationElement,
+  startMove,
+  styles
+} from "./foundation.js";
 function childTags(element) {
   if (!element)
     return [];
   return tags[element.tagName].children.filter((child) => wizards[child].create !== emptyWizard);
 }
-import {startMove, styles, cloneSubstationElement} from "./foundation.js";
 export let BayEditor = class extends LitElement {
   constructor() {
     super(...arguments);
@@ -111,7 +116,7 @@ export let BayEditor = class extends LitElement {
       <abbr slot="action" title="${translate("move")}">
         <mwc-icon-button
           icon="forward"
-          @click=${() => startMove(this, BayEditor, VoltageLevelEditor)}
+          @click=${() => startMove(this, BayEditor, [VoltageLevelEditor])}
         ></mwc-icon-button>
       </abbr>
       <abbr slot="action" title="${translate("remove")}">
@@ -141,6 +146,7 @@ export let BayEditor = class extends LitElement {
       </abbr>
       ${this.renderIedContainer()}
       <div id="ceContainer">
+        ${Array.from(getChildElementsByTagName(this.element, "PowerTransformer")).map((pwt) => html`<powertransformer-editor .element=${pwt}></powertransformer-editor>`)}
         ${Array.from(getChildElementsByTagName(this.element, "ConductingEquipment")).map((voltageLevel) => html`<conducting-equipment-editor
               .element=${voltageLevel}
               ?readonly=${this.readonly}

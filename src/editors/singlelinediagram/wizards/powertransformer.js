@@ -12,8 +12,8 @@ import {
   updateNamingAndCoordinatesAction,
   renderXYCoordinateFields
 } from "./foundation.js";
-function render(name, desc, xCoordinate, yCoordinate, reservedNames) {
-  return renderPowerTransformerWizard(name, desc, reservedNames).concat(renderXYCoordinateFields(xCoordinate, yCoordinate));
+function render(name, desc, type, xCoordinate, yCoordinate, reservedNames) {
+  return renderPowerTransformerWizard(name, desc, type, reservedNames).concat(renderXYCoordinateFields(xCoordinate, yCoordinate));
 }
 export function editPowerTransformerWizard(element) {
   return [
@@ -25,7 +25,7 @@ export function editPowerTransformerWizard(element) {
         label: get("save"),
         action: updateNamingAndCoordinatesAction(element)
       },
-      content: render(getNameAttribute(element), getDescAttribute(element), getXCoordinateAttribute(element), getYCoordinateAttribute(element), reservedNamesPowerTransformer(element))
+      content: render(getNameAttribute(element), getDescAttribute(element), element.getAttribute("type"), getXCoordinateAttribute(element), getYCoordinateAttribute(element), reservedNamesPowerTransformer(element))
     }
   ];
 }

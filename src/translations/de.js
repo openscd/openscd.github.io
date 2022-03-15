@@ -206,7 +206,9 @@ export const de = {
     wizard: {
       nameHelper: "`Name des Leistungstransformators",
       descHelper: "Beschreibung des Leistungstransformators",
+      typeHelper: "Type des Leistungstransformators",
       title: {
+        add: "Leistungstransformator hinzufügen",
         edit: "Leistungstransformator bearbeiten"
       }
     }

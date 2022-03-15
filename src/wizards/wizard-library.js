@@ -13,7 +13,7 @@ import {
   voltageLevelCreateWizard,
   voltageLevelEditWizard
 } from "./voltagelevel.js";
-import {editPowerTransformerWizard} from "./powertransformer.js";
+import {createPowerTransformerWizard, editPowerTransformerWizard} from "./powertransformer.js";
 import {editSubNetworkWizard} from "./subnetwork.js";
 import {editIEDWizard} from "./ied.js";
 import {editTrgOpsWizard} from "./trgops.js";
@@ -335,7 +335,7 @@ export const wizards = {
   },
   PowerTransformer: {
     edit: editPowerTransformerWizard,
-    create: emptyWizard
+    create: createPowerTransformerWizard
   },
   Private: {
     edit: emptyWizard,

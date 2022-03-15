@@ -22,6 +22,7 @@ import "../../_snowpack/pkg/@material/mwc-icon-button.js";
 import "../action-pane.js";
 import "./bay-editor.js";
 import "./ied-editor.js";
+import "./powertransformer-editor.js";
 import {
   selectors,
   startMove,
@@ -93,6 +94,12 @@ export let VoltageLevelEditor = class extends LitElement {
           ${ieds.map((ied) => html`<ied-editor .element=${ied}></ied-editor>`)}
         </div>` : html``;
   }
+  renderPowerTransformerContainer() {
+    const pwts = Array.from(this.element?.querySelectorAll(selectors.VoltageLevel + " > PowerTransformer") ?? []);
+    return pwts?.length ? html`<div id="powertransformercontainer">
+        ${pwts.map((pwt) => html`<powertransformer-editor .element=${pwt}></powertransformer-editor>`)}
+      </div>` : html``;
+  }
   renderAddButtons() {
     return childTags(this.element).map((child) => html`<mwc-list-item value="${child}"
           ><span>${child}</span></mwc-list-item
@@ -121,7 +128,7 @@ export let VoltageLevelEditor = class extends LitElement {
       <abbr slot="action" title="${translate("move")}">
         <mwc-icon-button
           icon="forward"
-          @click=${() => startMove(this, VoltageLevelEditor, SubstationEditor)}
+          @click=${() => startMove(this, VoltageLevelEditor, [SubstationEditor])}
         ></mwc-icon-button>
       </abbr>
       <abbr slot="action" title="${translate("remove")}">
@@ -150,6 +157,7 @@ export let VoltageLevelEditor = class extends LitElement {
         >
       </abbr>
       ${this.renderIedContainer()}
+      ${this.renderPowerTransformerContainer()}
       <div id="bayContainer">
         ${Array.from(this.element?.querySelectorAll(selectors.Bay) ?? []).map((bay) => html`<bay-editor
             .element=${bay}

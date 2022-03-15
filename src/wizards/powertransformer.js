@@ -1,10 +1,31 @@
 import {html} from "../../_snowpack/pkg/lit-element.js";
 import {get, translate} from "../../_snowpack/pkg/lit-translate.js";
 import {
+  createElement,
+  getValue,
   isPublic
 } from "../foundation.js";
 import {updateNamingAction} from "./foundation/actions.js";
-export function renderPowerTransformerWizard(name, desc, reservedNames) {
+const defaultPowerTransformerType = "PTR";
+export function createAction(parent) {
+  return (inputs) => {
+    const name = getValue(inputs.find((i) => i.label === "name"));
+    const desc = getValue(inputs.find((i) => i.label === "desc"));
+    const element = createElement(parent.ownerDocument, "PowerTransformer", {
+      name,
+      desc,
+      type: defaultPowerTransformerType
+    });
+    const action = {
+      new: {
+        parent,
+        element
+      }
+    };
+    return [action];
+  };
+}
+export function renderPowerTransformerWizard(name, desc, type, reservedNames) {
   return [
     html`<wizard-textfield
       label="name"
@@ -20,13 +41,35 @@ export function renderPowerTransformerWizard(name, desc, reservedNames) {
       .maybeValue=${desc}
       nullable
       helper="${translate("powertransformer.wizard.descHelper")}"
+    ></wizard-textfield>`,
+    html`<wizard-textfield
+      label="type"
+      .maybeValue=${type}
+      disabled
+      helper="${translate("powertransformer.wizard.typeHelper")}"
     ></wizard-textfield>`
   ];
 }
-export function reservedNamesPowerTransformer(currentElement) {
-  return Array.from(currentElement.parentNode.querySelectorAll("PowerTransformer")).filter(isPublic).map((cNode) => cNode.getAttribute("name") ?? "").filter((name) => name !== currentElement.getAttribute("name"));
+export function reservedNamesPowerTransformer(parent, currentName) {
+  return Array.from(parent.querySelectorAll("PowerTransformer")).filter(isPublic).map((pwt) => pwt.getAttribute("name") ?? "").filter((name) => currentName && name !== currentName);
+}
+export function createPowerTransformerWizard(parent) {
+  const reservedNames = reservedNamesPowerTransformer(parent);
+  return [
+    {
+      title: get("powertransformer.wizard.title.add"),
+      element: void 0,
+      primary: {
+        icon: "",
+        label: get("add"),
+        action: createAction(parent)
+      },
+      content: renderPowerTransformerWizard("", null, defaultPowerTransformerType, reservedNames)
+    }
+  ];
 }
 export function editPowerTransformerWizard(element) {
+  const reservedNames = reservedNamesPowerTransformer(element.parentNode, element.getAttribute("name"));
   return [
     {
       title: get("powertransformer.wizard.title.edit"),
@@ -36,7 +79,7 @@ export function editPowerTransformerWizard(element) {
         label: get("save"),
         action: updateNamingAction(element)
       },
-      content: renderPowerTransformerWizard(element.getAttribute("name"), element.getAttribute("desc"), reservedNamesPowerTransformer(element))
+      content: renderPowerTransformerWizard(element.getAttribute("name"), element.getAttribute("desc"), element.getAttribute("type"), reservedNames)
     }
   ];
 }

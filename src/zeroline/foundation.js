@@ -72,7 +72,7 @@ export function cloneSubstationElement(editor) {
     }
   }));
 }
-export function startMove(editor, Child, Parent) {
+export function startMove(editor, childClass, parentClasses) {
   if (!editor.element)
     return;
   editor.classList.add("moving");
@@ -86,10 +86,10 @@ export function startMove(editor, Child, Parent) {
     window.removeEventListener("click", moveToTarget, true);
     if (e instanceof KeyboardEvent && e.key === "Escape")
       return;
-    const targetEditor = e.composedPath().find((e2) => e2 instanceof Child || e2 instanceof Parent);
+    const targetEditor = e.composedPath().find((et) => et instanceof childClass || checkInstanceOfParentClass(et, parentClasses));
     if (targetEditor === void 0 || targetEditor === editor)
       return;
-    const destination = targetEditor instanceof Child ? {
+    const destination = targetEditor instanceof childClass ? {
       parent: targetEditor.element.parentElement,
       reference: targetEditor.element
     } : {parent: targetEditor.element, reference: null};
@@ -107,6 +107,10 @@ export function startMove(editor, Child, Parent) {
   };
   window.addEventListener("click", moveToTarget, true);
   window.addEventListener("keydown", moveToTarget, true);
+}
+function checkInstanceOfParentClass(et, classes) {
+  const targetEditor = classes.find((clazz) => et instanceof clazz);
+  return targetEditor !== void 0;
 }
 export function getIcon(condEq) {
   return typeIcons[typeStr(condEq)] ?? generalConductingEquipmentIcon;
@@ -130,6 +134,14 @@ export const styles = css`
   abbr {
     text-decoration: none;
     border-bottom: none;
+  }
+
+  #powertransformercontainer {
+    display: grid;
+    grid-gap: 12px;
+    padding: 8px 12px 16px;
+    box-sizing: border-box;
+    grid-template-columns: repeat(auto-fit, minmax(64px, auto));
   }
 
   #iedcontainer {
