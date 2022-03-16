@@ -13,6 +13,7 @@
     "@material/mwc-linear-progress": "./@material/mwc-linear-progress.js",
     "@material/mwc-list": "./@material/mwc-list.js",
     "@material/mwc-list/mwc-check-list-item": "./@material/mwc-list/mwc-check-list-item.js",
+    "@material/mwc-list/mwc-check-list-item.js": "./@material/mwc-list/mwc-check-list-item.js",
     "@material/mwc-list/mwc-list-base": "./@material/mwc-list/mwc-list-base.js",
     "@material/mwc-list/mwc-list-item": "./@material/mwc-list/mwc-list-item.js",
     "@material/mwc-list/mwc-list-item.js": "./@material/mwc-list/mwc-list-item.js",
