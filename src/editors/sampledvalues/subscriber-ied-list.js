@@ -24,7 +24,9 @@ import "../../../_snowpack/pkg/@material/mwc-list/mwc-list-item.js";
 import "./elements/ied-element.js";
 import {
   createElement,
-  newActionEvent
+  identity,
+  newActionEvent,
+  selector
 } from "../../foundation.js";
 import {
   newSampledValuesSelectEvent,
@@ -39,6 +41,9 @@ const fcdaReferences = [
   "doName",
   "daName"
 ];
+function getFcdaReferences(elementContainingFcdaReferences) {
+  return fcdaReferences.map((fcdaRef) => elementContainingFcdaReferences.getAttribute(fcdaRef) ? `[${fcdaRef}="${elementContainingFcdaReferences.getAttribute(fcdaRef)}"]` : "").join("");
+}
 const localState = {
   currentSampledValuesControl: void 0,
   currentDataset: void 0,
@@ -51,10 +56,10 @@ export let SubscriberIEDList = class extends LitElement {
     super();
     this.onSampledValuesDataSetEvent = this.onSampledValuesDataSetEvent.bind(this);
     this.onIEDSubscriptionEvent = this.onIEDSubscriptionEvent.bind(this);
-    const openScdElement = document.querySelector("open-scd");
-    if (openScdElement) {
-      openScdElement.addEventListener("sampled-values-select", this.onSampledValuesDataSetEvent);
-      openScdElement.addEventListener("ied-smv-subscription", this.onIEDSubscriptionEvent);
+    const parentDiv = this.closest('div[id="containerTemplates"]');
+    if (parentDiv) {
+      parentDiv.addEventListener("sampled-values-select", this.onSampledValuesDataSetEvent);
+      parentDiv.addEventListener("ied-smv-subscription", this.onIEDSubscriptionEvent);
     }
   }
   async onSampledValuesDataSetEvent(event) {
@@ -72,7 +77,7 @@ export let SubscriberIEDList = class extends LitElement {
       }
       localState.currentDataset.querySelectorAll("FCDA").forEach((fcda) => {
         inputElements.forEach((inputs) => {
-          if (inputs.querySelector(`ExtRef[iedName=${localState.currentSampledValuesIEDName}]${fcdaReferences.map((fcdaRef) => fcda.getAttribute(fcdaRef) ? `[${fcdaRef}="${fcda.getAttribute(fcdaRef)}"]` : "").join("")}`)) {
+          if (inputs.querySelector(`ExtRef[iedName=${localState.currentSampledValuesIEDName}]${getFcdaReferences(fcda)}`)) {
             numberOfLinkedExtRefs++;
           }
         });
@@ -81,7 +86,7 @@ export let SubscriberIEDList = class extends LitElement {
         localState.availableIeds.push({element: ied});
         return;
       }
-      if (numberOfLinkedExtRefs == localState.currentDataset.querySelectorAll("FCDA").length) {
+      if (numberOfLinkedExtRefs >= localState.currentDataset.querySelectorAll("FCDA").length) {
         localState.subscribedIeds.push({element: ied});
       } else {
         localState.availableIeds.push({element: ied, partial: true});
@@ -113,7 +118,7 @@ export let SubscriberIEDList = class extends LitElement {
       inputsElement = createElement(ied.ownerDocument, "Inputs", {});
     const actions = [];
     localState.currentDataset.querySelectorAll("FCDA").forEach((fcda) => {
-      if (!inputsElement.querySelector(`ExtRef[iedName=${localState.currentSampledValuesIEDName}]${fcdaReferences.map((fcdaRef) => fcda.getAttribute(fcdaRef) ? `[${fcdaRef}="${fcda.getAttribute(fcdaRef)}"]` : "").join("")}`)) {
+      if (!inputsElement.querySelector(`ExtRef[iedName=${localState.currentSampledValuesIEDName}]${getFcdaReferences(fcda)}`)) {
         const extRef = createElement(ied.ownerDocument, "ExtRef", {
           iedName: localState.currentSampledValuesIEDName,
           serviceType: "SMV",
@@ -145,16 +150,44 @@ export let SubscriberIEDList = class extends LitElement {
     const actions = [];
     ied.querySelectorAll("LN0 > Inputs, LN > Inputs").forEach((inputs) => {
       localState.currentDataset.querySelectorAll("FCDA").forEach((fcda) => {
-        const extRef = inputs.querySelector(`ExtRef[iedName=${localState.currentSampledValuesIEDName}]${fcdaReferences.map((fcdaRef) => fcda.getAttribute(fcdaRef) ? `[${fcdaRef}="${fcda.getAttribute(fcdaRef)}"]` : "").join("")}`);
+        const extRef = inputs.querySelector(`ExtRef[iedName=${localState.currentSampledValuesIEDName}]${getFcdaReferences(fcda)}`);
         if (extRef)
           actions.push({old: {parent: inputs, element: extRef}});
       });
     });
     this.dispatchEvent(newActionEvent({
       title: "Disconnect",
-      actions
+      actions: this.extendDeleteActions(actions)
     }));
     this.dispatchEvent(newSampledValuesSelectEvent(localState.currentSampledValuesControl, localState.currentDataset));
+  }
+  extendDeleteActions(extRefDeleteActions) {
+    if (!extRefDeleteActions.length)
+      return [];
+    const extendedDeleteActions = extRefDeleteActions;
+    const inputsMap = {};
+    for (const extRefDeleteAction of extRefDeleteActions) {
+      const extRef = extRefDeleteAction.old.element;
+      const inputsElement = extRefDeleteAction.old.parent;
+      const id = identity(inputsElement);
+      if (!inputsMap[id])
+        inputsMap[id] = inputsElement.cloneNode(true);
+      const linkedExtRef = inputsMap[id].querySelector(`ExtRef[iedName=${extRef.getAttribute("iedName")}]${getFcdaReferences(extRef)}`);
+      if (linkedExtRef)
+        inputsMap[id].removeChild(linkedExtRef);
+    }
+    Object.entries(inputsMap).forEach(([key, value]) => {
+      if (value.children.length == 0) {
+        const doc = extRefDeleteActions[0].old.parent.ownerDocument;
+        const inputs = doc.querySelector(selector("Inputs", key));
+        if (inputs && inputs.parentElement) {
+          extendedDeleteActions.push({
+            old: {parent: inputs.parentElement, element: inputs}
+          });
+        }
+      }
+    });
+    return extendedDeleteActions;
   }
   updated() {
     if (this.subscriberWrapper) {
@@ -163,6 +196,7 @@ export let SubscriberIEDList = class extends LitElement {
   }
   render() {
     const partialSubscribedIeds = localState.availableIeds.filter((ied) => ied.partial);
+    const availableIeds = localState.availableIeds.filter((ied) => !ied.partial);
     const smvControlName = localState.currentSampledValuesControl?.getAttribute("name") ?? void 0;
     return html`
       <section>
@@ -207,7 +241,7 @@ export let SubscriberIEDList = class extends LitElement {
                   >
                 </mwc-list-item>
                 <li divider role="separator"></li>
-                ${localState.availableIeds.length > 0 ? localState.availableIeds.map((ied) => html`<ied-element
+                ${availableIeds.length > 0 ? availableIeds.map((ied) => html`<ied-element
                           .status=${SubscribeStatus.None}
                           .element=${ied.element}
                         ></ied-element>`) : html`<mwc-list-item graphic="avatar" noninteractive>

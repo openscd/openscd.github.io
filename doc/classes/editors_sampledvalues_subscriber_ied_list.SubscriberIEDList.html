@@ -320,6 +320,7 @@
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external"><a href="editors_sampledvalues_subscriber_ied_list.SubscriberIEDList.html#disconnectedCallback" class="tsd-kind-icon">disconnected<wbr>Callback</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external"><a href="editors_sampledvalues_subscriber_ied_list.SubscriberIEDList.html#dispatchEvent" class="tsd-kind-icon">dispatch<wbr>Event</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-protected tsd-is-external"><a href="editors_sampledvalues_subscriber_ied_list.SubscriberIEDList.html#enableUpdating" class="tsd-kind-icon">enable<wbr>Updating</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="editors_sampledvalues_subscriber_ied_list.SubscriberIEDList.html#extendDeleteActions" class="tsd-kind-icon">extend<wbr>Delete<wbr>Actions</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-protected tsd-is-external"><a href="editors_sampledvalues_subscriber_ied_list.SubscriberIEDList.html#firstUpdated" class="tsd-kind-icon">first<wbr>Updated</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external"><a href="editors_sampledvalues_subscriber_ied_list.SubscriberIEDList.html#focus" class="tsd-kind-icon">focus</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external"><a href="editors_sampledvalues_subscriber_ied_list.SubscriberIEDList.html#getAnimations" class="tsd-kind-icon">get<wbr>Animations</a></li>
@@ -412,7 +413,7 @@
 							<aside class="tsd-sources">
 								<p>Overrides LitElement.constructor</p>
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/edc133c/src/editors/sampledvalues/subscriber-ied-list.ts#L90">src/editors/sampledvalues/subscriber-ied-list.ts:90</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/a58f305/src/editors/sampledvalues/subscriber-ied-list.ts#L107">src/editors/sampledvalues/subscriber-ied-list.ts:107</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <a href="editors_sampledvalues_subscriber_ied_list.SubscriberIEDList.html" class="tsd-signature-type" data-tsd-kind="Class">SubscriberIEDList</a></h4>
@@ -925,7 +926,7 @@
 					<div class="tsd-signature tsd-kind-icon">doc<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">XMLDocument</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/edc133c/src/editors/sampledvalues/subscriber-ied-list.ts#L86">src/editors/sampledvalues/subscriber-ied-list.ts:86</a></li>
+							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/a58f305/src/editors/sampledvalues/subscriber-ied-list.ts#L103">src/editors/sampledvalues/subscriber-ied-list.ts:103</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -2971,7 +2972,7 @@
 					<div class="tsd-signature tsd-kind-icon">subscriber<wbr>Wrapper<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Element</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/edc133c/src/editors/sampledvalues/subscriber-ied-list.ts#L88">src/editors/sampledvalues/subscriber-ied-list.ts:88</a></li>
+							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/a58f305/src/editors/sampledvalues/subscriber-ied-list.ts#L105">src/editors/sampledvalues/subscriber-ied-list.ts:105</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -3169,7 +3170,7 @@
 					<aside class="tsd-sources">
 						<p>Overrides LitElement.styles</p>
 						<ul>
-							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/edc133c/src/editors/sampledvalues/subscriber-ied-list.ts#L400">src/editors/sampledvalues/subscriber-ied-list.ts:400</a></li>
+							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/a58f305/src/editors/sampledvalues/subscriber-ied-list.ts#L444">src/editors/sampledvalues/subscriber-ied-list.ts:444</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -3943,6 +3944,38 @@
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private">
+					<a name="extendDeleteActions" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> extend<wbr>Delete<wbr>Actions</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private">
+						<li class="tsd-signature tsd-kind-icon">extend<wbr>Delete<wbr>Actions<span class="tsd-signature-symbol">(</span>extRefDeleteActions<span class="tsd-signature-symbol">: </span><a href="../interfaces/foundation.Delete.html" class="tsd-signature-type" data-tsd-kind="Interface">Delete</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/foundation.Delete.html" class="tsd-signature-type" data-tsd-kind="Interface">Delete</a><span class="tsd-signature-symbol">[]</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/a58f305/src/editors/sampledvalues/subscriber-ied-list.ts#L306">src/editors/sampledvalues/subscriber-ied-list.ts:306</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Creating Delete actions in case Inputs elements are empty.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>extRefDeleteActions: <a href="../interfaces/foundation.Delete.html" class="tsd-signature-type" data-tsd-kind="Interface">Delete</a><span class="tsd-signature-symbol">[]</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>All Delete actions for ExtRefs.</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="../interfaces/foundation.Delete.html" class="tsd-signature-type" data-tsd-kind="Interface">Delete</a><span class="tsd-signature-symbol">[]</span></h4>
+							<p>Possible delete actions for empty Inputs elements.</p>
 						</li>
 					</ul>
 				</section>
@@ -4894,7 +4927,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/edc133c/src/editors/sampledvalues/subscriber-ied-list.ts#L186">src/editors/sampledvalues/subscriber-ied-list.ts:186</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/a58f305/src/editors/sampledvalues/subscriber-ied-list.ts#L197">src/editors/sampledvalues/subscriber-ied-list.ts:197</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -4925,7 +4958,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/edc133c/src/editors/sampledvalues/subscriber-ied-list.ts#L113">src/editors/sampledvalues/subscriber-ied-list.ts:113</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/a58f305/src/editors/sampledvalues/subscriber-ied-list.ts#L130">src/editors/sampledvalues/subscriber-ied-list.ts:130</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -5416,7 +5449,7 @@
 							<aside class="tsd-sources">
 								<p>Overrides LitElement.render</p>
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/edc133c/src/editors/sampledvalues/subscriber-ied-list.ts#L308">src/editors/sampledvalues/subscriber-ied-list.ts:308</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/a58f305/src/editors/sampledvalues/subscriber-ied-list.ts#L349">src/editors/sampledvalues/subscriber-ied-list.ts:349</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">TemplateResult</span></h4>
@@ -5952,7 +5985,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/edc133c/src/editors/sampledvalues/subscriber-ied-list.ts#L207">src/editors/sampledvalues/subscriber-ied-list.ts:207</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/a58f305/src/editors/sampledvalues/subscriber-ied-list.ts#L218">src/editors/sampledvalues/subscriber-ied-list.ts:218</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -6016,7 +6049,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/edc133c/src/editors/sampledvalues/subscriber-ied-list.ts#L268">src/editors/sampledvalues/subscriber-ied-list.ts:268</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/a58f305/src/editors/sampledvalues/subscriber-ied-list.ts#L273">src/editors/sampledvalues/subscriber-ied-list.ts:273</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -6079,7 +6112,7 @@
 							<aside class="tsd-sources">
 								<p>Overrides LitElement.updated</p>
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/edc133c/src/editors/sampledvalues/subscriber-ied-list.ts#L302">src/editors/sampledvalues/subscriber-ied-list.ts:302</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/a58f305/src/editors/sampledvalues/subscriber-ied-list.ts#L343">src/editors/sampledvalues/subscriber-ied-list.ts:343</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -7009,6 +7042,9 @@
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-protected tsd-is-external">
 								<a href="editors_sampledvalues_subscriber_ied_list.SubscriberIEDList.html#enableUpdating" class="tsd-kind-icon">enable<wbr>Updating</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private">
+								<a href="editors_sampledvalues_subscriber_ied_list.SubscriberIEDList.html#extendDeleteActions" class="tsd-kind-icon">extend<wbr>Delete<wbr>Actions</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-protected tsd-is-external">
 								<a href="editors_sampledvalues_subscriber_ied_list.SubscriberIEDList.html#firstUpdated" class="tsd-kind-icon">first<wbr>Updated</a>
