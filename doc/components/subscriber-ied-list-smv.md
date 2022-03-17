@@ -1,4 +1,4 @@
-# subscriber-ied-list
+# subscriber-ied-list-smv
 
 An sub element for subscribing and unsubscribing IEDs to Sampled Values messages.
 

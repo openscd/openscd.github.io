@@ -11,7 +11,7 @@ var __decorate = (decorators, target, key, kind) => {
 };
 import {LitElement, html, property, css} from "../../_snowpack/pkg/lit-element.js";
 import "../../_snowpack/pkg/@material/mwc-fab.js";
-import "./sampledvalues/subscriber-ied-list.js";
+import "./sampledvalues/subscriber-ied-list-smv.js";
 import "./sampledvalues/sampled-values-list.js";
 export default class SampledValuesPlugin extends LitElement {
   render() {
@@ -21,7 +21,7 @@ export default class SampledValuesPlugin extends LitElement {
         <sampled-values-list .doc=${this.doc}></sampled-values-list>
       </section>
       <section>
-        <subscriber-ied-list .doc=${this.doc}></subscriber-ied-list>
+        <subscriber-ied-list-smv .doc=${this.doc}></subscriber-ied-list-smv>
       </section>
     </div>`;
   }

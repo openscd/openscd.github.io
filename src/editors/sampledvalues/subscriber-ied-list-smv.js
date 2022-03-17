@@ -21,7 +21,7 @@ import {translate} from "../../../_snowpack/pkg/lit-translate.js";
 import "../../../_snowpack/pkg/@material/mwc-icon.js";
 import "../../../_snowpack/pkg/@material/mwc-list.js";
 import "../../../_snowpack/pkg/@material/mwc-list/mwc-list-item.js";
-import "./elements/ied-element.js";
+import "./elements/ied-element-smv.js";
 import {
   createElement,
   identity,
@@ -51,7 +51,7 @@ const localState = {
   subscribedIeds: [],
   availableIeds: []
 };
-export let SubscriberIEDList = class extends LitElement {
+export let SubscriberIEDListSmv = class extends LitElement {
   constructor() {
     super();
     this.onSampledValuesDataSetEvent = this.onSampledValuesDataSetEvent.bind(this);
@@ -63,6 +63,7 @@ export let SubscriberIEDList = class extends LitElement {
     }
   }
   async onSampledValuesDataSetEvent(event) {
+    console.log("onSMVSelect");
     localState.currentSampledValuesControl = event.detail.sampledValuesControl;
     localState.currentDataset = event.detail.dataset;
     localState.currentSampledValuesIEDName = localState.currentSampledValuesControl.closest("IED")?.getAttribute("name");
@@ -95,6 +96,7 @@ export let SubscriberIEDList = class extends LitElement {
     this.requestUpdate();
   }
   async onIEDSubscriptionEvent(event) {
+    console.log("onSMVIEDSub");
     switch (event.detail.subscribeStatus) {
       case SubscribeStatus.Full: {
         this.unsubscribe(event.detail.ied);
@@ -213,10 +215,10 @@ export let SubscriberIEDList = class extends LitElement {
                   >
                 </mwc-list-item>
                 <li divider role="separator"></li>
-                ${localState.subscribedIeds.length > 0 ? localState.subscribedIeds.map((ied) => html`<ied-element
+                ${localState.subscribedIeds.length > 0 ? localState.subscribedIeds.map((ied) => html`<ied-element-smv
                           .status=${SubscribeStatus.Full}
                           .element=${ied.element}
-                        ></ied-element>`) : html`<mwc-list-item graphic="avatar" noninteractive>
+                        ></ied-element-smv>`) : html`<mwc-list-item graphic="avatar" noninteractive>
                       <span>${translate("sampledvalues.none")}</span>
                     </mwc-list-item>`}
               </mwc-list>
@@ -227,10 +229,10 @@ export let SubscriberIEDList = class extends LitElement {
                   >
                 </mwc-list-item>
                 <li divider role="separator"></li>
-                ${partialSubscribedIeds.length > 0 ? partialSubscribedIeds.map((ied) => html`<ied-element
+                ${partialSubscribedIeds.length > 0 ? partialSubscribedIeds.map((ied) => html`<ied-element-smv
                           .status=${SubscribeStatus.Partial}
                           .element=${ied.element}
-                        ></ied-element>`) : html`<mwc-list-item graphic="avatar" noninteractive>
+                        ></ied-element-smv>`) : html`<mwc-list-item graphic="avatar" noninteractive>
                       <span>${translate("sampledvalues.none")}</span>
                     </mwc-list-item>`}
               </mwc-list>
@@ -241,10 +243,10 @@ export let SubscriberIEDList = class extends LitElement {
                   >
                 </mwc-list-item>
                 <li divider role="separator"></li>
-                ${availableIeds.length > 0 ? availableIeds.map((ied) => html`<ied-element
+                ${availableIeds.length > 0 ? availableIeds.map((ied) => html`<ied-element-smv
                           .status=${SubscribeStatus.None}
                           .element=${ied.element}
-                        ></ied-element>`) : html`<mwc-list-item graphic="avatar" noninteractive>
+                        ></ied-element-smv>`) : html`<mwc-list-item graphic="avatar" noninteractive>
                       <span>${translate("sampledvalues.none")}</span>
                     </mwc-list-item>`}
               </mwc-list>
@@ -258,7 +260,7 @@ export let SubscriberIEDList = class extends LitElement {
     `;
   }
 };
-SubscriberIEDList.styles = css`
+SubscriberIEDListSmv.styles = css`
     ${styles}
 
     h1 {
@@ -278,10 +280,10 @@ SubscriberIEDList.styles = css`
   `;
 __decorate([
   property({attribute: false})
-], SubscriberIEDList.prototype, "doc", 2);
+], SubscriberIEDListSmv.prototype, "doc", 2);
 __decorate([
   query("div")
-], SubscriberIEDList.prototype, "subscriberWrapper", 2);
-SubscriberIEDList = __decorate([
-  customElement("subscriber-ied-list")
-], SubscriberIEDList);
+], SubscriberIEDListSmv.prototype, "subscriberWrapper", 2);
+SubscriberIEDListSmv = __decorate([
+  customElement("subscriber-ied-list-smv")
+], SubscriberIEDListSmv);

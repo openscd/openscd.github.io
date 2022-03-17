@@ -17,33 +17,27 @@ import {
 } from "../../../../_snowpack/pkg/lit-element.js";
 import "../../../../_snowpack/pkg/@material/mwc-icon.js";
 import "../../../../_snowpack/pkg/@material/mwc-list/mwc-list-item.js";
-import {newIEDSampledValuesSubscriptionEvent, SubscribeStatus} from "../foundation.js";
-export let IEDElement = class extends LitElement {
+import {newGOOSESelectEvent} from "../foundation.js";
+import {gooseIcon} from "../../../icons/icons.js";
+export let GOOSEMessage = class extends LitElement {
   constructor() {
     super(...arguments);
-    this.onIedSelect = () => {
-      this.dispatchEvent(newIEDSampledValuesSubscriptionEvent(this.element, this.status ?? SubscribeStatus.None));
+    this.onGooseSelect = () => {
+      const ln = this.element.parentElement;
+      const dataset = ln?.querySelector(`DataSet[name=${this.element.getAttribute("datSet")}]`);
+      this.dispatchEvent(newGOOSESelectEvent(this.element, dataset));
     };
   }
   render() {
-    return html`<mwc-list-item
-      @click=${this.onIedSelect}
-      graphic="avatar"
-      hasMeta
-    >
+    return html`<mwc-list-item @click=${this.onGooseSelect} graphic="large">
       <span>${this.element.getAttribute("name")}</span>
-      <mwc-icon slot="graphic"
-        >${this.status == SubscribeStatus.Full ? html`clear` : html`add`}</mwc-icon
-      >
+      <mwc-icon slot="graphic">${gooseIcon}</mwc-icon>
     </mwc-list-item>`;
   }
 };
 __decorate([
   property({attribute: false})
-], IEDElement.prototype, "element", 2);
-__decorate([
-  property({attribute: false})
-], IEDElement.prototype, "status", 2);
-IEDElement = __decorate([
-  customElement("ied-element")
-], IEDElement);
+], GOOSEMessage.prototype, "element", 2);
+GOOSEMessage = __decorate([
+  customElement("goose-message")
+], GOOSEMessage);
