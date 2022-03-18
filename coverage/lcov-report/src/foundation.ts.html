@@ -25,7 +25,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">97.07% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>2619/2698</span>
+                <span class='fraction'>2623/2702</span>
             </div>
         
             
@@ -46,7 +46,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">97.07% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>2619/2698</span>
+                <span class='fraction'>2623/2702</span>
             </div>
         
             
@@ -2761,7 +2761,11 @@
 <a name='L2696'></a><a href='#L2696'>2696</a>
 <a name='L2697'></a><a href='#L2697'>2697</a>
 <a name='L2698'></a><a href='#L2698'>2698</a>
-<a name='L2699'></a><a href='#L2699'>2699</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">124x</span>
+<a name='L2699'></a><a href='#L2699'>2699</a>
+<a name='L2700'></a><a href='#L2700'>2700</a>
+<a name='L2701'></a><a href='#L2701'>2701</a>
+<a name='L2702'></a><a href='#L2702'>2702</a>
+<a name='L2703'></a><a href='#L2703'>2703</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">124x</span>
 <span class="cline-any cline-yes">124x</span>
 <span class="cline-any cline-yes">124x</span>
 <span class="cline-any cline-yes">124x</span>
@@ -3016,26 +3020,37 @@
 <span class="cline-any cline-yes">124x</span>
 <span class="cline-any cline-yes">124x</span>
 <span class="cline-any cline-yes">124x</span>
-<span class="cline-any cline-yes">68x</span>
-<span class="cline-any cline-yes">68x</span>
-<span class="cline-any cline-yes">68x</span>
-<span class="cline-any cline-yes">68x</span>
-<span class="cline-any cline-yes">68x</span>
-<span class="cline-any cline-yes">61x</span>
-<span class="cline-any cline-yes">61x</span>
-<span class="cline-any cline-yes">61x</span>
-<span class="cline-any cline-yes">61x</span>
+<span class="cline-any cline-yes">124x</span>
+<span class="cline-any cline-yes">124x</span>
+<span class="cline-any cline-yes">124x</span>
+<span class="cline-any cline-yes">124x</span>
+<span class="cline-any cline-yes">124x</span>
+<span class="cline-any cline-yes">124x</span>
+<span class="cline-any cline-yes">124x</span>
+<span class="cline-any cline-yes">124x</span>
+<span class="cline-any cline-yes">124x</span>
+<span class="cline-any cline-yes">124x</span>
+<span class="cline-any cline-yes">124x</span>
+<span class="cline-any cline-yes">69x</span>
+<span class="cline-any cline-yes">69x</span>
+<span class="cline-any cline-yes">69x</span>
+<span class="cline-any cline-yes">69x</span>
+<span class="cline-any cline-yes">69x</span>
+<span class="cline-any cline-yes">62x</span>
+<span class="cline-any cline-yes">62x</span>
+<span class="cline-any cline-yes">62x</span>
+<span class="cline-any cline-yes">62x</span>
 <span class="cline-any cline-yes">40x</span>
 <span class="cline-any cline-yes">40x</span>
 <span class="cline-any cline-yes">40x</span>
 <span class="cline-any cline-yes">14x</span>
 <span class="cline-any cline-yes">35x</span>
-<span class="cline-any cline-yes">68x</span>
-<span class="cline-any cline-yes">68x</span>
-<span class="cline-any cline-yes">68x</span>
-<span class="cline-any cline-yes">68x</span>
-<span class="cline-any cline-yes">68x</span>
-<span class="cline-any cline-yes">68x</span>
+<span class="cline-any cline-yes">69x</span>
+<span class="cline-any cline-yes">69x</span>
+<span class="cline-any cline-yes">69x</span>
+<span class="cline-any cline-yes">69x</span>
+<span class="cline-any cline-yes">69x</span>
+<span class="cline-any cline-yes">69x</span>
 <span class="cline-any cline-yes">124x</span>
 <span class="cline-any cline-yes">124x</span>
 <span class="cline-any cline-yes">124x</span>
@@ -5152,13 +5167,6 @@
 <span class="cline-any cline-yes">124x</span>
 <span class="cline-any cline-yes">124x</span>
 <span class="cline-any cline-yes">124x</span>
-<span class="cline-any cline-yes">124x</span>
-<span class="cline-any cline-yes">124x</span>
-<span class="cline-any cline-yes">124x</span>
-<span class="cline-any cline-yes">124x</span>
-<span class="cline-any cline-yes">124x</span>
-<span class="cline-any cline-yes">124x</span>
-<span class="cline-any cline-yes">124x</span>
 <span class="cline-any cline-yes">24x</span>
 <span class="cline-any cline-yes">24x</span>
 <span class="cline-any cline-yes">24x</span>
@@ -5686,6 +5694,16 @@ export function getMultiplier(input: WizardInput): string | null {
 <span class="cstat-no" title="statement not covered" >  else return null;</span>
 }
 &nbsp;
+/** @returns [[`WizardAction`]]s to dispatch on [[`WizardDialog`]] menu action. */
+export type WizardMenuActor = () =&gt; WizardAction[];
+&nbsp;
+/** User interactions rendered in the wizard-dialog menu */
+interface MenuAction {
+  label: string;
+  icon?: string;
+  action: WizardMenuActor;
+}
+&nbsp;
 /** Represents a page of a wizard dialog */
 export interface WizardPage {
   title: string;
@@ -5703,6 +5721,7 @@ export interface WizardPage {
   };
   initial?: boolean;
   element?: Element;
+  menuActions?: MenuAction[];
 }
 export type Wizard = WizardPage[];
 export type WizardFactory = () =&gt; Wizard;
@@ -7768,10 +7787,7 @@ export const tags: Record&lt;
     identity: namingIdentity,
     selector: namingSelector,
     parents: ['SCL'],
-    children: [...tEquipmentContainerSequence,
-      'VoltageLevel',
-      'Function',
-    ],
+    children: [...tEquipmentContainerSequence, 'VoltageLevel', 'Function'],
   },
   SupSubscription: {
     identity: singletonIdentity,
@@ -7848,11 +7864,7 @@ export const tags: Record&lt;
     identity: namingIdentity,
     selector: namingSelector,
     parents: ['Substation'],
-    children: [...tEquipmentContainerSequence,
-      'Voltage',
-      'Bay',
-      'Function',
-    ],
+    children: [...tEquipmentContainerSequence, 'Voltage', 'Bay', 'Function'],
   },
 };
 &nbsp;
@@ -8164,7 +8176,7 @@ declare global {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener">istanbul</a>
-                at Fri Mar 18 2022 10:37:07 GMT+0000 (Coordinated Universal Time)
+                at Fri Mar 18 2022 10:51:41 GMT+0000 (Coordinated Universal Time)
             </div>
         </div>
         <script src="../prettify.js"></script>
