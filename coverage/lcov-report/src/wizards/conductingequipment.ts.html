@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">98.74% </span>
+                <span class="strong">98.77% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>314/318</span>
+                <span class='fraction'>323/327</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">98.74% </span>
+                <span class="strong">98.77% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>314/318</span>
+                <span class='fraction'>323/327</span>
             </div>
         
             
@@ -381,7 +381,16 @@
 <a name='L316'></a><a href='#L316'>316</a>
 <a name='L317'></a><a href='#L317'>317</a>
 <a name='L318'></a><a href='#L318'>318</a>
-<a name='L319'></a><a href='#L319'>319</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">32x</span>
+<a name='L319'></a><a href='#L319'>319</a>
+<a name='L320'></a><a href='#L320'>320</a>
+<a name='L321'></a><a href='#L321'>321</a>
+<a name='L322'></a><a href='#L322'>322</a>
+<a name='L323'></a><a href='#L323'>323</a>
+<a name='L324'></a><a href='#L324'>324</a>
+<a name='L325'></a><a href='#L325'>325</a>
+<a name='L326'></a><a href='#L326'>326</a>
+<a name='L327'></a><a href='#L327'>327</a>
+<a name='L328'></a><a href='#L328'>328</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">32x</span>
 <span class="cline-any cline-yes">32x</span>
 <span class="cline-any cline-yes">32x</span>
 <span class="cline-any cline-yes">32x</span>
@@ -517,9 +526,9 @@
 <span class="cline-any cline-yes">32x</span>
 <span class="cline-any cline-yes">32x</span>
 <span class="cline-any cline-yes">32x</span>
-<span class="cline-any cline-yes">21x</span>
-<span class="cline-any cline-yes">21x</span>
-<span class="cline-any cline-yes">21x</span>
+<span class="cline-any cline-yes">19x</span>
+<span class="cline-any cline-yes">19x</span>
+<span class="cline-any cline-yes">19x</span>
 <span class="cline-any cline-yes">32x</span>
 <span class="cline-any cline-yes">32x</span>
 <span class="cline-any cline-yes">32x</span>
@@ -550,7 +559,6 @@
 <span class="cline-any cline-yes">32x</span>
 <span class="cline-any cline-yes">32x</span>
 <span class="cline-any cline-yes">32x</span>
-<span class="cline-any cline-yes">21x</span>
 <span class="cline-any cline-yes">21x</span>
 <span class="cline-any cline-yes">21x</span>
 <span class="cline-any cline-yes">19x</span>
@@ -656,6 +664,9 @@
 <span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-yes">32x</span>
 <span class="cline-any cline-yes">32x</span>
 <span class="cline-any cline-yes">32x</span>
@@ -671,11 +682,18 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">32x</span>
 <span class="cline-any cline-yes">32x</span>
 <span class="cline-any cline-yes">32x</span>
 <span class="cline-any cline-yes">32x</span>
 <span class="cline-any cline-yes">32x</span>
+<span class="cline-any cline-yes">32x</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
@@ -869,9 +887,8 @@ function containsEarthSwitchDefinition(condEq: Element): boolean {
  */
 export function typeStr(condEq: Element): string {
   if (
-    containsGroundedTerminal(condEq) ||
-    (condEq.getAttribute('type') === 'DIS' &amp;&amp;
-      containsEarthSwitchDefinition(condEq))
+    condEq.getAttribute('type') === 'DIS' &amp;&amp;
+    (containsGroundedTerminal(condEq) || containsEarthSwitchDefinition(condEq))
   ) {
     // these checks only carried out for a three phase system
     return 'ERS';
@@ -969,7 +986,10 @@ export function createAction(parent: Element): WizardActor {
   };
 }
 &nbsp;
-export function reservedNamesConductingEquipment(parent: Element, currentName?: string | null): string[] {
+export function reservedNamesConductingEquipment(
+  parent: Element,
+  currentName?: string | null
+): string[] {
   return Array.from(parent.querySelectorAll('ConductingEquipment'))
     .filter(isPublic)
     .map(condEq =&gt; condEq.getAttribute('name') ?? '')
@@ -988,7 +1008,13 @@ export function createConductingEquipmentWizard(parent: Element): Wizard {
         label: get('add'),
         action: createAction(parent),
       },
-      content: renderConductingEquipmentWizard('', '', 'create', '', reservedNames),
+      content: renderConductingEquipmentWizard(
+        '',
+        '',
+        'create',
+        '',
+        reservedNames
+      ),
     },
   ];
 }
@@ -996,7 +1022,8 @@ export function createConductingEquipmentWizard(parent: Element): Wizard {
 export function editConductingEquipmentWizard(element: Element): Wizard {
   const reservedNames = reservedNamesConductingEquipment(
     &lt;Element&gt;element.parentNode!,
-    element.getAttribute('name'));
+    element.getAttribute('name')
+  );
 &nbsp;
   return [
     {
@@ -1024,7 +1051,7 @@ export function editConductingEquipmentWizard(element: Element): Wizard {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener">istanbul</a>
-                at Fri Mar 18 2022 10:25:11 GMT+0000 (Coordinated Universal Time)
+                at Fri Mar 18 2022 10:37:07 GMT+0000 (Coordinated Universal Time)
             </div>
         </div>
         <script src="../../prettify.js"></script>

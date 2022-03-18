@@ -92,7 +92,7 @@ function containsEarthSwitchDefinition(condEq) {
   return swTypVal ? ["Earthing Switch", "High Speed Earthing Switch"].includes(swTypVal) : false;
 }
 export function typeStr(condEq) {
-  if (containsGroundedTerminal(condEq) || condEq.getAttribute("type") === "DIS" && containsEarthSwitchDefinition(condEq)) {
+  if (condEq.getAttribute("type") === "DIS" && (containsGroundedTerminal(condEq) || containsEarthSwitchDefinition(condEq))) {
     return "ERS";
   } else {
     return condEq.getAttribute("type") ?? "";
