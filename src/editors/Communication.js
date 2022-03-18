@@ -65,6 +65,19 @@ CommunicationPlugin.styles = css`
       width: 100vw;
     }
 
+    h1 {
+      color: var(--mdc-theme-on-surface);
+      font-family: 'Roboto', sans-serif;
+      font-weight: 300;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      margin: 0px;
+      line-height: 48px;
+      padding-left: 0.3em;
+      transition: background-color 150ms linear;
+    }
+
     section {
       outline: none;
       padding: 8px 12px 16px;
