@@ -41,10 +41,11 @@ import {
 } from "./templates/lnodetype-wizard.js";
 const templates = fetch("public/xml/templates.scd").then((response) => response.text()).then((str) => new DOMParser().parseFromString(str, "application/xml"));
 const nsd74 = fetch("public/xml/IEC_61850-7-4_2007B3.nsd").then((response) => response.text()).then((str) => new DOMParser().parseFromString(str, "application/xml"));
+const nsd7420 = fetch("public/xml/IEC_61850-7-420_2019A4.nsd").then((response) => response.text()).then((str) => new DOMParser().parseFromString(str, "application/xml"));
 export default class TemplatesPlugin extends LitElement {
   async openCreateLNodeTypeWizard() {
     this.createDataTypeTemplates();
-    this.dispatchEvent(newWizardEvent(createLNodeTypeWizard(this.doc.querySelector(":root > DataTypeTemplates"), await templates, await nsd74)));
+    this.dispatchEvent(newWizardEvent(createLNodeTypeWizard(this.doc.querySelector(":root > DataTypeTemplates"), await templates, await nsd74, await nsd7420)));
   }
   openLNodeTypeWizard(identity2) {
     const wizard = lNodeTypeWizard(identity2, this.doc);
