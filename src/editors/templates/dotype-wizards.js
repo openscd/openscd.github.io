@@ -11,9 +11,7 @@ import {
   getValue,
   identity,
   isPublic,
-  newActionEvent,
   newSubWizardEvent,
-  newWizardEvent,
   selector
 } from "../../foundation.js";
 import {createDaWizard, editDAWizard} from "../../wizards/da.js";
@@ -23,6 +21,11 @@ import {
   allDataTypeSelector,
   unifyCreateActionArray
 } from "./foundation.js";
+function remove(element) {
+  return () => {
+    return [{old: {parent: element.parentElement, element}}];
+  };
+}
 function updateSDoAction(element) {
   return (inputs) => {
     const name = getValue(inputs.find((i) => i.label === "name"));
@@ -60,33 +63,18 @@ function createSDoAction(parent) {
 function sDOWizard(options) {
   const doc = options.doc ? options.doc : options.parent.ownerDocument;
   const sdo = Array.from(doc.querySelectorAll(selector("SDO", options.identity ?? NaN))).find(isPublic) ?? null;
-  const [title, action, type, deleteButton, name, desc] = sdo ? [
+  const [title, action, type, menuActions, name, desc] = sdo ? [
     get("sdo.wizard.title.edit"),
     updateSDoAction(sdo),
     sdo.getAttribute("type"),
-    html`<mwc-button
-          icon="delete"
-          trailingIcon
-          label="${translate("remove")}"
-          @click=${(e) => {
-      e.target.dispatchEvent(newWizardEvent());
-      e.target.dispatchEvent(newActionEvent({
-        old: {
-          parent: sdo.parentElement,
-          element: sdo,
-          reference: sdo.nextSibling
-        }
-      }));
-    }}
-          fullwidth
-        ></mwc-button> `,
+    [{icon: "delete", label: get("remove"), action: remove(sdo)}],
     sdo.getAttribute("name"),
     sdo.getAttribute("desc")
   ] : [
     get("sdo.wizard.title.add"),
     createSDoAction(options.parent),
     null,
-    html``,
+    void 0,
     "",
     null
   ];
@@ -96,8 +84,8 @@ function sDOWizard(options) {
       title,
       element: sdo ?? void 0,
       primary: {icon: "", label: get("save"), action},
+      menuActions,
       content: [
-        deleteButton,
         html`<wizard-textfield
           label="name"
           .maybeValue=${name}
@@ -224,6 +212,16 @@ export function createDOTypeWizard(parent, templates) {
     }
   ];
 }
+function openAddSdo(parent) {
+  return () => {
+    return [() => sDOWizard({parent})];
+  };
+}
+function openAddDa(parent) {
+  return () => {
+    return [() => createDaWizard(parent)];
+  };
+}
 function updateDOTypeAction(element) {
   return (inputs) => {
     const id = getValue(inputs.find((i) => i.label === "id"));
@@ -258,23 +256,24 @@ export function dOTypeWizard(dOTypeIdentity, doc) {
         label: get("save"),
         action: updateDOTypeAction(dotype)
       },
+      menuActions: [
+        {
+          label: get("remove"),
+          icon: "delete",
+          action: remove(dotype)
+        },
+        {
+          label: get("scl.DO"),
+          icon: "playlist_add",
+          action: openAddSdo(dotype)
+        },
+        {
+          label: get("scl.DA"),
+          icon: "playlist_add",
+          action: openAddDa(dotype)
+        }
+      ],
       content: [
-        html`<mwc-button
-          icon="delete"
-          trailingIcon
-          label="${translate("remove")}"
-          @click=${(e) => {
-          e.target.dispatchEvent(newWizardEvent());
-          e.target.dispatchEvent(newActionEvent({
-            old: {
-              parent: dotype.parentElement,
-              element: dotype,
-              reference: dotype.nextSibling
-            }
-          }));
-        }}
-          fullwidth
-        ></mwc-button> `,
         html`<wizard-textfield
           label="id"
           helper="${translate("scl.id")}"
@@ -298,31 +297,6 @@ export function dOTypeWizard(dOTypeIdentity, doc) {
           .maybeValue=${dotype.getAttribute("cdc")}
           pattern="${patterns.normalizedString}"
         ></wizard-textfield>`,
-        html`<section>
-          <mwc-button
-            slot="graphic"
-            icon="playlist_add"
-            trailingIcon
-            label="${translate("scl.DO")}"
-            @click=${(e) => {
-          const wizard = sDOWizard({
-            parent: dotype
-          });
-          if (wizard)
-            e.target.dispatchEvent(newSubWizardEvent(wizard));
-        }}
-          ></mwc-button>
-          <mwc-button
-            slot="graphic"
-            icon="playlist_add"
-            trailingIcon
-            label="${translate("scl.DA")}"
-            @click=${(e) => {
-          if (dotype)
-            e.target.dispatchEvent(newSubWizardEvent(createDaWizard(dotype)));
-        }}
-          ></mwc-button>
-        </section>`,
         html`
           <mwc-list
             style="margin-top: 0px;"
