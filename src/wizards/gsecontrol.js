@@ -11,9 +11,7 @@ import {
   getValue,
   identity,
   isPublic,
-  newActionEvent,
   newSubWizardEvent,
-  newWizardEvent,
   selector
 } from "../foundation.js";
 import {maxLength, patterns} from "./foundation/limits.js";
@@ -76,7 +74,7 @@ export function renderGseAttributes(name, desc, type, appID, fixedOffs, security
     >`
   ];
 }
-export function removeGseControl(element) {
+export function removeGseControlAction(element) {
   if (!element.parentElement)
     return null;
   const dataSet = element.parentElement.querySelector(`DataSet[name="${element.getAttribute("datSet")}"]`);
@@ -117,6 +115,24 @@ export function removeGseControl(element) {
     actions
   };
 }
+export function removeGseControl(element) {
+  return () => {
+    const complexAction = removeGseControlAction(element);
+    if (complexAction)
+      return [complexAction];
+    return [];
+  };
+}
+function openDataSetWizard(element) {
+  return () => {
+    return [() => editDataSetWizard(element)];
+  };
+}
+function openGseWizard(element) {
+  return () => {
+    return [() => editGseWizard(element)];
+  };
+}
 export function updateGseControlAction(element) {
   return (inputs) => {
     const name = inputs.find((i) => i.label === "name").value;
@@ -147,6 +163,24 @@ export function editGseControlWizard(element) {
   const securityEnabled = element.getAttribute("securityEnabled");
   const gSE = getGSE(element);
   const dataSet = element.parentElement?.querySelector(`DataSet[name="${element.getAttribute("datSet")}"]`);
+  const menuActions = [];
+  menuActions.push({
+    icon: "delete",
+    label: get("remove"),
+    action: removeGseControl(element)
+  });
+  if (dataSet)
+    menuActions.push({
+      icon: "edit",
+      label: get("scl.DataSet"),
+      action: openDataSetWizard(dataSet)
+    });
+  if (gSE)
+    menuActions.push({
+      icon: "edit",
+      label: get("scl.Communication"),
+      action: openGseWizard(gSE)
+    });
   return [
     {
       title: get("wizard.title.edit", {tagName: element.tagName}),
@@ -156,36 +190,9 @@ export function editGseControlWizard(element) {
         label: get("save"),
         action: updateGseControlAction(element)
       },
+      menuActions,
       content: [
-        html`<mwc-button
-          label="${translate("remove")}"
-          icon="delete"
-          @click=${(e) => {
-          const complexAction = removeGseControl(element);
-          if (complexAction)
-            e.target?.dispatchEvent(newActionEvent(complexAction));
-          e.target?.dispatchEvent(newWizardEvent());
-        }}
-        ></mwc-button>`,
-        ...renderGseAttributes(name, desc, type, appID, fixedOffs, securityEnabled),
-        dataSet ? html`<mwc-button
-              id="editdataset"
-              label=${translate("wizard.title.edit", {
-          tagName: get("scl.DataSet")
-        })}
-              icon="edit"
-              @click="${(e) => {
-          e.target?.dispatchEvent(newSubWizardEvent(() => editDataSetWizard(dataSet)));
-        }}}"
-            ></mwc-button>` : html``,
-        gSE ? html`<mwc-button
-              id="editgse"
-              label=${translate("scl.Communication")}
-              icon="edit"
-              @click="${(e) => {
-          e.target?.dispatchEvent(newSubWizardEvent(() => editGseWizard(gSE)));
-        }}}"
-            ></mwc-button>` : html``
+        ...renderGseAttributes(name, desc, type, appID, fixedOffs, securityEnabled)
       ]
     }
   ];
