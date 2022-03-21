@@ -25,6 +25,16 @@ import {
   allDataTypeSelector,
   unifyCreateActionArray
 } from "./foundation.js";
+function remove(element) {
+  return () => {
+    return [{old: {parent: element.parentElement, element}}];
+  };
+}
+function openAddDo(parent) {
+  return () => {
+    return [() => dOWizard({parent})];
+  };
+}
 function updateDoAction(element) {
   return (inputs) => {
     const name = getValue(inputs.find((i) => i.label === "name"));
@@ -425,23 +435,19 @@ export function lNodeTypeWizard(lNodeTypeIdentity, doc) {
         label: get("save"),
         action: updateLNodeTypeAction(lnodetype)
       },
+      menuActions: [
+        {
+          label: get("remove"),
+          icon: "delete",
+          action: remove(lnodetype)
+        },
+        {
+          label: get("scl.DO"),
+          icon: "playlist_add",
+          action: openAddDo(lnodetype)
+        }
+      ],
       content: [
-        html`<mwc-button
-          icon="delete"
-          trailingIcon
-          label="${translate("remove")}"
-          @click=${(e) => {
-          e.target.dispatchEvent(newWizardEvent());
-          e.target.dispatchEvent(newActionEvent({
-            old: {
-              parent: lnodetype.parentElement,
-              element: lnodetype,
-              reference: lnodetype.nextSibling
-            }
-          }));
-        }}
-          fullwidth
-        ></mwc-button> `,
         html`<wizard-textfield
           label="id"
           helper="${translate("scl.id")}"
@@ -466,19 +472,6 @@ export function lNodeTypeWizard(lNodeTypeIdentity, doc) {
           required
           pattern="${patterns.lnClass}"
         ></wizard-textfield>`,
-        html` <mwc-button
-          slot="graphic"
-          icon="playlist_add"
-          trailingIcon
-          label="${translate("scl.DO")}"
-          @click=${(e) => {
-          const wizard = dOWizard({
-            parent: lnodetype
-          });
-          if (wizard)
-            e.target.dispatchEvent(newSubWizardEvent(wizard));
-        }}
-        ></mwc-button>`,
         html`
           <mwc-list
             style="margin-top: 0px;"
