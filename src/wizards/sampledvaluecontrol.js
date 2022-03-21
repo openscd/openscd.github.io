@@ -10,15 +10,14 @@ import {
   getValue,
   identity,
   isPublic,
-  newActionEvent,
   newSubWizardEvent,
-  newWizardEvent,
   selector
 } from "../foundation.js";
 import {securityEnableEnum, smpModEnum} from "./foundation/enums.js";
 import {maxLength, patterns} from "./foundation/limits.js";
 import {editSMvWizard} from "./smv.js";
 import {editSmvOptsWizard} from "./smvopts.js";
+import {editDataSetWizard} from "./dataset.js";
 function getSMV(element) {
   const cbName = element.getAttribute("name");
   const iedName = element.closest("IED")?.getAttribute("name");
@@ -130,6 +129,29 @@ function contentSampledValueControlWizard(options) {
     >`
   ];
 }
+function removeSampledValueControl(element) {
+  return () => {
+    const complexAction = removeSampledValueControlAction(element);
+    if (complexAction)
+      return [complexAction];
+    return [];
+  };
+}
+function openDataSetWizard(element) {
+  return () => {
+    return [() => editDataSetWizard(element)];
+  };
+}
+function openSmvOptsWizard(element) {
+  return () => {
+    return [() => editSmvOptsWizard(element)];
+  };
+}
+function openSMvWizard(element) {
+  return () => {
+    return [() => editSMvWizard(element)];
+  };
+}
 function updateSampledValueControlAction(element) {
   return (inputs) => {
     const attributes = {};
@@ -171,6 +193,31 @@ export function editSampledValueControlWizard(element) {
   const securityEnable = element.getAttribute("securityEnabled");
   const sMV = getSMV(element);
   const smvOpts = element.querySelector("SmvOpts");
+  const dataSet = element.parentElement?.querySelector(`DataSet[name="${element.getAttribute("datSet")}"]`);
+  const menuActions = [];
+  menuActions.push({
+    icon: "delete",
+    label: get("remove"),
+    action: removeSampledValueControl(element)
+  });
+  if (dataSet)
+    menuActions.push({
+      icon: "edit",
+      label: get("scl.DataSet"),
+      action: openDataSetWizard(dataSet)
+    });
+  if (smvOpts)
+    menuActions.push({
+      icon: "edit",
+      label: get("scl.SmvOpts"),
+      action: openSmvOptsWizard(smvOpts)
+    });
+  if (sMV)
+    menuActions.push({
+      icon: "edit",
+      label: get("scl.Communication"),
+      action: openSMvWizard(sMV)
+    });
   return [
     {
       title: get("wizard.title.edit", {tagName: element.tagName}),
@@ -180,6 +227,7 @@ export function editSampledValueControlWizard(element) {
         label: get("save"),
         action: updateSampledValueControlAction(element)
       },
+      menuActions,
       content: [
         ...contentSampledValueControlWizard({
           name,
@@ -190,33 +238,7 @@ export function editSampledValueControlWizard(element) {
           smpRate,
           nofASDU,
           securityEnable
-        }),
-        sMV ? html`<mwc-button
-              id="editsmv"
-              label=${translate("scl.Communication")}
-              icon="edit"
-              @click="${(e) => {
-          e.target?.dispatchEvent(newSubWizardEvent(() => editSMvWizard(sMV)));
-        }}}"
-            ></mwc-button>` : html``,
-        html`<mwc-button
-          id="editsmvopts"
-          label=${translate("scl.SmvOpts")}
-          icon="edit"
-          @click="${(e) => {
-          e.target?.dispatchEvent(newSubWizardEvent(() => editSmvOptsWizard(smvOpts)));
-        }}}"
-        ></mwc-button>`,
-        html`<mwc-button
-          label="${translate("remove")}"
-          icon="delete"
-          @click=${(e) => {
-          const complexAction = removeSampledValueControlAction(element);
-          if (complexAction)
-            e.target?.dispatchEvent(newActionEvent(complexAction));
-          e.target?.dispatchEvent(newWizardEvent());
-        }}
-        ></mwc-button>`
+        })
       ]
     }
   ];
