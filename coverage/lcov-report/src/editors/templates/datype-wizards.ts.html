@@ -25,28 +25,28 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>270/270</span>
+                <span class='fraction'>261/261</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">88.88% </span>
+                <span class="strong">90% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>24/27</span>
+                <span class='fraction'>27/30</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>5/5</span>
+                <span class='fraction'>6/6</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>270/270</span>
+                <span class='fraction'>261/261</span>
             </div>
         
             
@@ -324,16 +324,7 @@
 <a name='L259'></a><a href='#L259'>259</a>
 <a name='L260'></a><a href='#L260'>260</a>
 <a name='L261'></a><a href='#L261'>261</a>
-<a name='L262'></a><a href='#L262'>262</a>
-<a name='L263'></a><a href='#L263'>263</a>
-<a name='L264'></a><a href='#L264'>264</a>
-<a name='L265'></a><a href='#L265'>265</a>
-<a name='L266'></a><a href='#L266'>266</a>
-<a name='L267'></a><a href='#L267'>267</a>
-<a name='L268'></a><a href='#L268'>268</a>
-<a name='L269'></a><a href='#L269'>269</a>
-<a name='L270'></a><a href='#L270'>270</a>
-<a name='L271'></a><a href='#L271'>271</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">8x</span>
+<a name='L262'></a><a href='#L262'>262</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">8x</span>
 <span class="cline-any cline-yes">8x</span>
 <span class="cline-any cline-yes">8x</span>
 <span class="cline-any cline-yes">8x</span>
@@ -367,6 +358,18 @@
 <span class="cline-any cline-yes">8x</span>
 <span class="cline-any cline-yes">8x</span>
 <span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">8x</span>
 <span class="cline-any cline-yes">8x</span>
 <span class="cline-any cline-yes">8x</span>
@@ -429,15 +432,6 @@
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
@@ -468,20 +462,8 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
@@ -623,15 +605,15 @@ import {
   EditorAction,
   getValue,
   identity,
-  newActionEvent,
   newSubWizardEvent,
-  newWizardEvent,
   patterns,
   Replace,
   selector,
   Wizard,
+  WizardAction,
   WizardActor,
   WizardInput,
+  WizardMenuActor,
 } from '../../foundation.js';
 import { createBDAWizard, editBDAWizard } from '../../wizards/bda.js';
 import {
@@ -639,6 +621,18 @@ import {
   allDataTypeSelector,
   unifyCreateActionArray,
 } from './foundation.js';
+&nbsp;
+function remove(element: Element): WizardMenuActor {
+  return (): EditorAction[] =&gt; {
+    return [{ old: { parent: element.parentElement!, element } }];
+  };
+}
+&nbsp;
+function openAddBda(parent: Element): WizardMenuActor {
+  return (): WizardAction[] =&gt; {
+    return [() =&gt; createBDAWizard(parent)];
+  };
+}
 &nbsp;
 function updateDATpyeAction(element: Element): WizardActor {
   return (inputs: WizardInput[]): EditorAction[] =&gt; {
@@ -693,25 +687,19 @@ export function editDaTypeWizard(
         label: get('save'),
         action: updateDATpyeAction(datype),
       },
+      menuActions: [
+        {
+          label: get('remove'),
+          icon: 'delete',
+          action: remove(datype),
+        },
+        {
+          label: get('scl.DA'),
+          icon: 'playlist_add',
+          action: openAddBda(datype),
+        },
+      ],
       content: [
-        html`&lt;mwc-button
-          icon="delete"
-          trailingIcon
-          label="${translate('remove')}"
-          @click=${(e: MouseEvent) =&gt; {
-            e.target!.dispatchEvent(newWizardEvent());
-            e.target!.dispatchEvent(
-              newActionEvent({
-                old: {
-                  parent: datype.parentElement!,
-                  element: datype,
-                  reference: datype.nextSibling,
-                },
-              })
-            );
-          }}
-          fullwidth
-        &gt;&lt;/mwc-button&gt; `,
         html`&lt;wizard-textfield
           label="id"
           helper="${translate('scl.id')}"
@@ -729,44 +717,29 @@ export function editDaTypeWizard(
           nullable
           pattern="${patterns.normalizedString}"
         &gt;&lt;/wizard-textfield&gt;`,
-        html`&lt;mwc-button
-            slot="graphic"
-            icon="playlist_add"
-            trailingIcon
-            label="${translate('scl.DA')}"
-            @click=${(e: Event) =&gt; {
-              if (datype)
-                e.target!.dispatchEvent(
-                  newSubWizardEvent(createBDAWizard(datype))
-                );
-            }}
-          &gt;&lt;/mwc-button&gt;
-          &lt;mwc-list
-            style="margin-top: 0px;"
-            @selected=${(e: SingleSelectedEvent) =&gt; {
-              const bdaIdentity = (&lt;ListItem&gt;(&lt;List&gt;e.target).selected).value;
-              const bda = doc.querySelector(selector('BDA', bdaIdentity));
+        html`&lt;mwc-list
+          style="margin-top: 0px;"
+          @selected=${(e: SingleSelectedEvent) =&gt; {
+            const bdaIdentity = (&lt;ListItem&gt;(&lt;List&gt;e.target).selected).value;
+            const bda = doc.querySelector(selector('BDA', bdaIdentity));
 &nbsp;
-              if (bda)
-                e.target!.dispatchEvent(newSubWizardEvent(editBDAWizard(bda)));
-            }}
-          &gt;
-            ${Array.from(datype.querySelectorAll('BDA')).map(
-              bda =&gt;
-                html`&lt;mwc-list-item
-                  twoline
-                  tabindex="0"
-                  value="${identity(bda)}"
-                  &gt;&lt;span&gt;${bda.getAttribute('name')}&lt;/span
-                  &gt;&lt;span slot="secondary"
-                    &gt;${bda.getAttribute('bType') === 'Enum' ||
-                    bda.getAttribute('bType') === 'Struct'
-                      ? '#' + bda.getAttribute('type')
-                      : bda.getAttribute('bType')}&lt;/span
-                  &gt;&lt;/mwc-list-item
-                &gt;`
-            )}
-          &lt;/mwc-list&gt; `,
+            if (bda)
+              e.target!.dispatchEvent(newSubWizardEvent(editBDAWizard(bda)));
+          }}
+        &gt;
+          ${Array.from(datype.querySelectorAll('BDA')).map(
+            bda =&gt;
+              html`&lt;mwc-list-item twoline tabindex="0" value="${identity(bda)}"
+                &gt;&lt;span&gt;${bda.getAttribute('name')}&lt;/span
+                &gt;&lt;span slot="secondary"
+                  &gt;${bda.getAttribute('bType') === 'Enum' ||
+                  bda.getAttribute('bType') === 'Struct'
+                    ? '#' + bda.getAttribute('type')
+                    : bda.getAttribute('bType')}&lt;/span
+                &gt;&lt;/mwc-list-item
+              &gt;`
+          )}
+        &lt;/mwc-list&gt; `,
       ],
     },
   ];
@@ -880,7 +853,7 @@ export function createDATypeWizard(
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener">istanbul</a>
-                at Mon Mar 21 2022 08:24:48 GMT+0000 (Coordinated Universal Time)
+                at Mon Mar 21 2022 08:28:07 GMT+0000 (Coordinated Universal Time)
             </div>
         </div>
         <script src="../../../prettify.js"></script>

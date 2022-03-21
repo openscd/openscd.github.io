@@ -10,9 +10,7 @@ import {
   createElement,
   getValue,
   identity,
-  newActionEvent,
   newSubWizardEvent,
-  newWizardEvent,
   patterns,
   selector
 } from "../../foundation.js";
@@ -22,6 +20,16 @@ import {
   allDataTypeSelector,
   unifyCreateActionArray
 } from "./foundation.js";
+function remove(element) {
+  return () => {
+    return [{old: {parent: element.parentElement, element}}];
+  };
+}
+function openAddBda(parent) {
+  return () => {
+    return [() => createBDAWizard(parent)];
+  };
+}
 function updateDATpyeAction(element) {
   return (inputs) => {
     const id = getValue(inputs.find((i) => i.label === "id"));
@@ -57,23 +65,19 @@ export function editDaTypeWizard(dATypeIdentity, doc) {
         label: get("save"),
         action: updateDATpyeAction(datype)
       },
+      menuActions: [
+        {
+          label: get("remove"),
+          icon: "delete",
+          action: remove(datype)
+        },
+        {
+          label: get("scl.DA"),
+          icon: "playlist_add",
+          action: openAddBda(datype)
+        }
+      ],
       content: [
-        html`<mwc-button
-          icon="delete"
-          trailingIcon
-          label="${translate("remove")}"
-          @click=${(e) => {
-          e.target.dispatchEvent(newWizardEvent());
-          e.target.dispatchEvent(newActionEvent({
-            old: {
-              parent: datype.parentElement,
-              element: datype,
-              reference: datype.nextSibling
-            }
-          }));
-        }}
-          fullwidth
-        ></mwc-button> `,
         html`<wizard-textfield
           label="id"
           helper="${translate("scl.id")}"
@@ -91,35 +95,22 @@ export function editDaTypeWizard(dATypeIdentity, doc) {
           nullable
           pattern="${patterns.normalizedString}"
         ></wizard-textfield>`,
-        html`<mwc-button
-            slot="graphic"
-            icon="playlist_add"
-            trailingIcon
-            label="${translate("scl.DA")}"
-            @click=${(e) => {
-          if (datype)
-            e.target.dispatchEvent(newSubWizardEvent(createBDAWizard(datype)));
-        }}
-          ></mwc-button>
-          <mwc-list
-            style="margin-top: 0px;"
-            @selected=${(e) => {
+        html`<mwc-list
+          style="margin-top: 0px;"
+          @selected=${(e) => {
           const bdaIdentity = e.target.selected.value;
           const bda = doc.querySelector(selector("BDA", bdaIdentity));
           if (bda)
             e.target.dispatchEvent(newSubWizardEvent(editBDAWizard(bda)));
         }}
-          >
-            ${Array.from(datype.querySelectorAll("BDA")).map((bda) => html`<mwc-list-item
-                  twoline
-                  tabindex="0"
-                  value="${identity(bda)}"
-                  ><span>${bda.getAttribute("name")}</span
-                  ><span slot="secondary"
-                    >${bda.getAttribute("bType") === "Enum" || bda.getAttribute("bType") === "Struct" ? "#" + bda.getAttribute("type") : bda.getAttribute("bType")}</span
-                  ></mwc-list-item
-                >`)}
-          </mwc-list> `
+        >
+          ${Array.from(datype.querySelectorAll("BDA")).map((bda) => html`<mwc-list-item twoline tabindex="0" value="${identity(bda)}"
+                ><span>${bda.getAttribute("name")}</span
+                ><span slot="secondary"
+                  >${bda.getAttribute("bType") === "Enum" || bda.getAttribute("bType") === "Struct" ? "#" + bda.getAttribute("type") : bda.getAttribute("bType")}</span
+                ></mwc-list-item
+              >`)}
+        </mwc-list> `
       ]
     }
   ];
