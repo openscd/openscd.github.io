@@ -1,15 +1,17 @@
-import {html} from "../../_snowpack/pkg/lit-html.js";
-import {get, translate} from "../../_snowpack/pkg/lit-translate.js";
+import {get} from "../../_snowpack/pkg/lit-translate.js";
 import "../../_snowpack/pkg/@material/mwc-button.js";
 import {
   cloneElement,
   createElement,
   getValue,
-  isPublic,
-  newActionEvent,
-  newWizardEvent
+  isPublic
 } from "../foundation.js";
 import {getValAction, wizardContent} from "./abstractda.js";
+function remove(element) {
+  return () => {
+    return [{old: {parent: element.parentElement, element}}];
+  };
+}
 export function updateBDaAction(element) {
   return (inputs) => {
     const name = getValue(inputs.find((i) => i.label === "name"));
@@ -53,22 +55,6 @@ export function updateBDaAction(element) {
 export function editBDAWizard(element) {
   const doc = element.ownerDocument;
   const type = element.getAttribute("type");
-  const deleteButton = html`<mwc-button
-    icon="delete"
-    trailingIcon
-    label="${translate("remove")}"
-    @click=${(e) => {
-    e.target.dispatchEvent(newWizardEvent());
-    e.target.dispatchEvent(newActionEvent({
-      old: {
-        parent: element.parentElement,
-        element,
-        reference: element.nextSibling
-      }
-    }));
-  }}
-    fullwidth
-  ></mwc-button>`;
   const name = element.getAttribute("name");
   const desc = element.getAttribute("desc");
   const bType = element.getAttribute("bType") ?? "";
@@ -87,8 +73,14 @@ export function editBDAWizard(element) {
         label: get("save"),
         action: updateBDaAction(element)
       },
+      menuActions: [
+        {
+          icon: "delete",
+          label: get("remove"),
+          action: remove(element)
+        }
+      ],
       content: [
-        deleteButton,
         ...wizardContent(name, desc, bType, types, type, sAddr, valKind, valImport, Val, data)
       ]
     }

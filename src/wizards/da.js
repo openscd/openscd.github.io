@@ -8,12 +8,15 @@ import {
   cloneElement,
   createElement,
   getValue,
-  isPublic,
-  newActionEvent,
-  newWizardEvent
+  isPublic
 } from "../foundation.js";
 import {getValAction, wizardContent} from "./abstractda.js";
 import {functionalConstraintEnum} from "./foundation/enums.js";
+function remove(element) {
+  return () => {
+    return [{old: {parent: element.parentElement, element}}];
+  };
+}
 export function renderDa(fc, dchg, qchg, dupd) {
   return [
     html`<wizard-select
@@ -106,22 +109,6 @@ export function editDAWizard(element) {
   const dchg = element.getAttribute("dchg");
   const qchg = element.getAttribute("qchg");
   const dupd = element.getAttribute("dupd");
-  const deleteButton = html`<mwc-button
-    icon="delete"
-    trailingIcon
-    label="${translate("remove")}"
-    @click=${(e) => {
-    e.target.dispatchEvent(newWizardEvent());
-    e.target.dispatchEvent(newActionEvent({
-      old: {
-        parent: element.parentElement,
-        element,
-        reference: element.nextSibling
-      }
-    }));
-  }}
-    fullwidth
-  ></mwc-button>`;
   const types = Array.from(doc.querySelectorAll("DAType, EnumType")).filter(isPublic).filter((type2) => type2.getAttribute("id"));
   const data = element.closest("DataTypeTemplates");
   return [
@@ -133,8 +120,14 @@ export function editDAWizard(element) {
         label: get("save"),
         action: updateDaAction(element)
       },
+      menuActions: [
+        {
+          icon: "delete",
+          label: get("remove"),
+          action: remove(element)
+        }
+      ],
       content: [
-        deleteButton,
         ...wizardContent(name, desc, bType, types, type, sAddr, valKind, valImport, Val, data),
         ...renderDa(fc, dchg, qchg, dupd)
       ]
