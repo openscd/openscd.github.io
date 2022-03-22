@@ -1,8 +1,6 @@
 import {css} from "../../../_snowpack/pkg/lit-element.js";
 import "../../../_snowpack/pkg/@material/mwc-list/mwc-list-item.js";
-import {
-  isPublic
-} from "../../foundation.js";
+import {isPublic} from "../../foundation.js";
 export const allDataTypeSelector = "LNodeType, DOType, DAType, EnumType";
 export function isCreateOptions(options) {
   return options.parent !== void 0;

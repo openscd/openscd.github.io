@@ -1,11 +1,11 @@
 import { _ as __decorate } from '../common/tslib.es6-ea9e4e3f.js';
-import { p as property, L as LitElement, c as css, b as customElement } from '../common/lit-element-63d74f47.js';
+import { p as property, L as LitElement, c as css, b as customElement } from '../common/lit-element-d8235cfe.js';
 import { a as ariaProperty } from '../common/aria-property-c2d6d3d3.js';
-import { c as classMap } from '../common/class-map-f3820f9a.js';
-import { i as ifDefined } from '../common/if-defined-4f9ccd15.js';
-import { s as styleMap } from '../common/style-map-b311a692.js';
-import { h as html } from '../common/lit-html-44a7bec9.js';
-import '../common/render-4f397355.js';
+import { c as classMap } from '../common/class-map-ad24d1e8.js';
+import { i as ifDefined } from '../common/if-defined-d8369db9.js';
+import { s as styleMap } from '../common/style-map-0182b6c2.js';
+import { h as html } from '../common/lit-html-fbfed138.js';
+import '../common/render-4b4a16b9.js';
 
 /** @soyCompatible */
 class CircularProgressBase extends LitElement {

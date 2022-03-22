@@ -5,18 +5,18 @@ A wizard style dialog consisting of several pages commiting some
 
 ## Properties
 
-| Property      | Attribute | Modifiers | Type                      | Default | Description                                      |
-|---------------|-----------|-----------|---------------------------|---------|--------------------------------------------------|
-| `act`         |           |           |                           |         |                                                  |
-| `actionsMenu` |           |           | `Menu`                    |         |                                                  |
-| `code`        |           | readonly  | `boolean`                 |         |                                                  |
-| `dialog`      |           | readonly  | `Dialog \| undefined`     |         | The `Dialog` showing the active [[`WizardPage`]]. |
-| `dialogs`     |           |           | `NodeListOf<Dialog>`      |         |                                                  |
-| `inputs`      |           |           | `NodeListOf<WizardInput>` |         |                                                  |
-| `menuButton`  |           |           | `IconButton`              |         |                                                  |
-| `pageIndex`   |           |           | `number`                  | 0       | Index of the currently active [[`WizardPage`]]   |
-| `renderPage`  |           |           |                           |         |                                                  |
-| `wizard`      | `wizard`  |           | `Wizard`                  | []      | The [[`Wizard`]] implemented by this dialog.     |
+| Property      | Attribute | Modifiers | Type                             | Default | Description                                      |
+|---------------|-----------|-----------|----------------------------------|---------|--------------------------------------------------|
+| `act`         |           |           |                                  |         |                                                  |
+| `actionsMenu` |           |           | `Menu`                           |         |                                                  |
+| `code`        |           | readonly  | `boolean`                        |         |                                                  |
+| `dialog`      |           | readonly  | `Dialog \| undefined`            |         | The `Dialog` showing the active [[`WizardPage`]]. |
+| `dialogs`     |           |           | `NodeListOf<Dialog>`             |         |                                                  |
+| `inputs`      |           |           | `NodeListOf<WizardInputElement>` |         |                                                  |
+| `menuButton`  |           |           | `IconButton`                     |         |                                                  |
+| `pageIndex`   |           |           | `number`                         | 0       | Index of the currently active [[`WizardPage`]]   |
+| `renderPage`  |           |           |                                  |         |                                                  |
+| `wizard`      | `wizard`  |           | `Wizard`                         | []      | The [[`Wizard`]] implemented by this dialog.     |
 
 ## Methods
 

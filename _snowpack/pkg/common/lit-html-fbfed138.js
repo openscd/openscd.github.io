@@ -1152,4 +1152,4 @@ const html = (strings, ...values) => new TemplateResult(strings, values, 'html',
  */
 const svg = (strings, ...values) => new SVGTemplateResult(strings, values, 'svg', defaultTemplateProcessor);
 
-export { AttributePart as A, BooleanAttributePart as B, EventPart as E, NodePart as N, PropertyPart as P, Template as T, TemplateInstance as a, reparentNodes as b, createMarker as c, directive as d, isPrimitive as e, html as h, isTemplatePartActive as i, marker as m, nothing as n, removeNodes as r, svg as s };
+export { AttributePart as A, BooleanAttributePart as B, EventPart as E, NodePart as N, PropertyPart as P, Template as T, TemplateInstance as a, TemplateResult as b, createMarker as c, directive as d, reparentNodes as e, isPrimitive as f, html as h, isTemplatePartActive as i, marker as m, nothing as n, removeNodes as r, svg as s };
