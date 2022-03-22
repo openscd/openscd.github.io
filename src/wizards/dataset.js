@@ -8,10 +8,14 @@ import {
   cloneElement,
   getValue,
   identity,
-  newSubWizardEvent,
   selector
 } from "../foundation.js";
 import {createFCDAsWizard} from "./fcda.js";
+function openFcdaWizard(element) {
+  return () => {
+    return [() => createFCDAsWizard(element)];
+  };
+}
 function updateDataSetAction(element) {
   return (inputs, wizard) => {
     const name = inputs.find((i) => i.label === "name").value;
@@ -57,6 +61,13 @@ export function editDataSetWizard(element) {
         icon: "save",
         action: updateDataSetAction(element)
       },
+      menuActions: [
+        {
+          icon: "add",
+          label: get("dataset.fcda.add"),
+          action: openFcdaWizard(element)
+        }
+      ],
       content: [
         html`<wizard-textfield
           label="name"
@@ -78,14 +89,7 @@ export function editDataSetWizard(element) {
           >${Array.from(element.querySelectorAll("FCDA")).map((fcda) => html`<mwc-check-list-item selected value="${identity(fcda)}"
                 >${identity(fcda).split(">").pop()}</mwc-check-list-item
               >`)}</filtered-list
-        >`,
-        html`<mwc-button
-          icon="add"
-          label="${translate("wizard.title.add", {tagName: "FCDA"})}"
-          @click="${(e) => {
-          e.target?.dispatchEvent(newSubWizardEvent(() => createFCDAsWizard(element)));
-        }}"
-        ></mwc-button>`
+        >`
       ]
     }
   ];
