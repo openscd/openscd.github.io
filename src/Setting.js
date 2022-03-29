@@ -31,6 +31,13 @@ export const defaults = {
   "IEC 61850-7-4": void 0,
   "IEC 61850-8-1": void 0
 };
+export function newLoadNsdocEvent(nsdoc, filename) {
+  return new CustomEvent("load-nsdoc", {
+    bubbles: true,
+    composed: true,
+    detail: {nsdoc, filename}
+  });
+}
 export function Setting(Base) {
   class SettingElement extends Base {
     get settings() {
@@ -104,7 +111,7 @@ export function Setting(Base) {
     renderFileSelect() {
       return html`
         <input id="nsdoc-file" accept=".nsdoc" type="file" hidden required multiple
-          @change=${(evt) => this.loadNsdocFile(evt)}}>
+          @change=${(evt) => this.uploadNsdocFile(evt)}}>
         <mwc-button label="${translate("settings.selectFileButton")}"
                     id="selectFileButton"
                     @click=${() => {
@@ -114,37 +121,43 @@ export function Setting(Base) {
         </mwc-button>
       `;
     }
-    async loadNsdocFile(evt) {
-      const nsdVersions = await this.nsdVersions();
+    async uploadNsdocFile(evt) {
       const files = Array.from(evt.target?.files ?? []);
       if (files.length == 0)
         return;
-      files.forEach(async (file) => {
+      for (const file of files) {
         const text = await file.text();
-        const nsdocElement = this.parseToXmlObject(text).querySelector("NSDoc");
-        const id = nsdocElement?.getAttribute("id");
-        if (!id) {
-          document.querySelector("open-scd").dispatchEvent(newLogEvent({kind: "error", title: get("settings.invalidFileNoIdFound")}));
-          return;
-        }
-        const nsdVersion = nsdVersions[id];
-        const nsdocVersion = {
-          version: nsdocElement.getAttribute("version") ?? "",
-          revision: nsdocElement.getAttribute("revision") ?? "",
-          release: nsdocElement.getAttribute("release") ?? ""
-        };
-        if (!this.isEqual(nsdVersion, nsdocVersion)) {
-          document.querySelector("open-scd").dispatchEvent(newLogEvent({kind: "error", title: get("settings.invalidNsdocVersion", {
-            id,
-            nsdVersion: `${nsdVersion.version}${nsdVersion.revision}${nsdVersion.release}`,
-            nsdocVersion: `${nsdocVersion.version}${nsdocVersion.revision}${nsdocVersion.release}`
-          })}));
-          return;
-        }
-        this.setSetting(id, text);
-      });
+        document.querySelector("open-scd").dispatchEvent(newLoadNsdocEvent(text, file.name));
+      }
       this.nsdocFileUI.value = "";
       this.requestUpdate();
+    }
+    async onLoadNsdoc(event) {
+      const nsdocElement = this.parseToXmlObject(event.detail.nsdoc).querySelector("NSDoc");
+      const id = nsdocElement?.getAttribute("id");
+      if (!id) {
+        document.querySelector("open-scd").dispatchEvent(newLogEvent({kind: "error", title: get("settings.invalidFileNoIdFound", {
+          filename: event.detail.filename
+        })}));
+        return;
+      }
+      const nsdVersions = await this.nsdVersions();
+      const nsdVersion = nsdVersions[id];
+      const nsdocVersion = {
+        version: nsdocElement.getAttribute("version") ?? "",
+        revision: nsdocElement.getAttribute("revision") ?? "",
+        release: nsdocElement.getAttribute("release") ?? ""
+      };
+      if (!this.isEqual(nsdVersion, nsdocVersion)) {
+        document.querySelector("open-scd").dispatchEvent(newLogEvent({kind: "error", title: get("settings.invalidNsdocVersion", {
+          id,
+          filename: event.detail.filename,
+          nsdVersion: `${nsdVersion.version}${nsdVersion.revision}${nsdVersion.release}`,
+          nsdocVersion: `${nsdocVersion.version}${nsdocVersion.revision}${nsdocVersion.release}`
+        })}));
+        return;
+      }
+      this.setSetting(id, event.detail.nsdoc);
     }
     isEqual(versionA, versionB) {
       return versionA.version == versionB.version && versionA.revision == versionB.revision && versionA.release == versionB.release;
@@ -176,6 +189,7 @@ export function Setting(Base) {
       super(...params);
       registerTranslateConfig({loader, empty: (key) => key});
       use(this.settings.language);
+      this.addEventListener("load-nsdoc", this.onLoadNsdoc);
     }
     render() {
       return html`${ifImplemented(super.render())}

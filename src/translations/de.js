@@ -68,8 +68,8 @@ export const de = {
     showieds: "Zeige IEDs im Substation-Editor",
     selectFileButton: "Datei auswählen",
     loadNsdTranslations: "NSDoc-Dateien hochladen",
-    invalidFileNoIdFound: "Ungültiges NSDoc; kein 'id'-Attribut in der Datei gefunden",
-    invalidNsdocVersion: "Die Version {{ id }} NSD ({{ nsdVersion }}) passt nicht zu der geladenen NSDoc ({{ nsdocVersion }})"
+    invalidFileNoIdFound: "Ungültiges NSDoc ({{ filename }}); kein 'id'-Attribut in der Datei gefunden",
+    invalidNsdocVersion: "Die Version {{ id }} NSD ({{ nsdVersion }}) passt nicht zu der geladenen NSDoc ({{ filename }}, {{ nsdocVersion }})"
   },
   menu: {
     new: "Neues projekt",

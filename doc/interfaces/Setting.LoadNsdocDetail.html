@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>CreateOptions | open-scd</title>
+	<title>LoadNsdocDetail | open-scd</title>
 	<meta name="description" content="Documentation for open-scd">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -55,24 +55,31 @@
 					<a href="../modules.html">open-scd</a>
 				</li>
 				<li>
-					<a href="../modules/editors_templates_foundation.html">editors/templates/foundation</a>
+					<a href="../modules/Setting.html">Setting</a>
 				</li>
 				<li>
-					<a href="editors_templates_foundation.CreateOptions.html">CreateOptions</a>
+					<a href="Setting.LoadNsdocDetail.html">LoadNsdocDetail</a>
 				</li>
 			</ul>
-			<h1>Interface CreateOptions</h1>
+			<h1>Interface LoadNsdocDetail</h1>
 		</div>
 	</div>
 </header>
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-comment">
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Represents a document to be opened.</p>
+					</div>
+				</div>
+			</section>
 			<section class="tsd-panel tsd-hierarchy">
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">CreateOptions</span>
+						<span class="target">LoadNsdocDetail</span>
 					</li>
 				</ul>
 			</section>
@@ -83,7 +90,8 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="editors_templates_foundation.CreateOptions.html#parent" class="tsd-kind-icon">parent</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="Setting.LoadNsdocDetail.html#filename" class="tsd-kind-icon">filename</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="Setting.LoadNsdocDetail.html#nsdoc" class="tsd-kind-icon">nsdoc</a></li>
 							</ul>
 						</section>
 					</div>
@@ -92,12 +100,22 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="parent" class="tsd-anchor"></a>
-					<h3>parent</h3>
-					<div class="tsd-signature tsd-kind-icon">parent<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Element</span></div>
+					<a name="filename" class="tsd-anchor"></a>
+					<h3>filename</h3>
+					<div class="tsd-signature tsd-kind-icon">filename<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/3b39d20/src/editors/templates/foundation.ts#L12">src/editors/templates/foundation.ts:12</a></li>
+							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/3b39d20/src/Setting.ts#L60">src/Setting.ts:60</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="nsdoc" class="tsd-anchor"></a>
+					<h3>nsdoc</h3>
+					<div class="tsd-signature tsd-kind-icon">nsdoc<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/3b39d20/src/Setting.ts#L59">src/Setting.ts:59</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -110,7 +128,7 @@
 						<a href="../modules.html">Modules</a>
 					</li>
 					<li class="current tsd-kind-module">
-						<a href="../modules/editors_templates_foundation.html">editors/templates/foundation</a>
+						<a href="../modules/Setting.html">Setting</a>
 					</li>
 				</ul>
 			</nav>
@@ -119,35 +137,35 @@
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-interface tsd-parent-kind-module">
-						<a href="editors_templates_foundation.CreateOptions.html" class="tsd-kind-icon">Create<wbr>Options</a>
+						<a href="Setting.LoadNsdocDetail.html" class="tsd-kind-icon">Load<wbr>Nsdoc<wbr>Detail</a>
 						<ul>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="editors_templates_foundation.CreateOptions.html#parent" class="tsd-kind-icon">parent</a>
+								<a href="Setting.LoadNsdocDetail.html#filename" class="tsd-kind-icon">filename</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="Setting.LoadNsdocDetail.html#nsdoc" class="tsd-kind-icon">nsdoc</a>
 							</li>
 						</ul>
 					</li>
 				</ul>
 				<ul class="after-current">
-					<li class=" tsd-kind-interface tsd-parent-kind-module">
-						<a href="editors_templates_foundation.UpdateOptions.html" class="tsd-kind-icon">Update<wbr>Options</a>
+					<li class=" tsd-kind-type-alias tsd-parent-kind-module">
+						<a href="../modules/Setting.html#LoadNsdocEvent" class="tsd-kind-icon">Load<wbr>Nsdoc<wbr>Event</a>
 					</li>
 					<li class=" tsd-kind-type-alias tsd-parent-kind-module">
-						<a href="../modules/editors_templates_foundation.html#WizardOptions" class="tsd-kind-icon">Wizard<wbr>Options</a>
+						<a href="../modules/Setting.html#SettingElement" class="tsd-kind-icon">Setting<wbr>Element</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-parent-kind-module">
+						<a href="../modules/Setting.html#Settings" class="tsd-kind-icon">Settings</a>
 					</li>
 					<li class=" tsd-kind-variable tsd-parent-kind-module">
-						<a href="../modules/editors_templates_foundation.html#allDataTypeSelector" class="tsd-kind-icon">all<wbr>Data<wbr>Type<wbr>Selector</a>
+						<a href="../modules/Setting.html#defaults" class="tsd-kind-icon">defaults</a>
 					</li>
-					<li class=" tsd-kind-variable tsd-parent-kind-module">
-						<a href="../modules/editors_templates_foundation.html#styles" class="tsd-kind-icon">styles</a>
-					</li>
-					<li class=" tsd-kind-function tsd-parent-kind-module">
-						<a href="../modules/editors_templates_foundation.html#addReferencedDataTypes" class="tsd-kind-icon">add<wbr>Referenced<wbr>Data<wbr>Types</a>
+					<li class=" tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter">
+						<a href="../modules/Setting.html#Setting-1" class="tsd-kind-icon">Setting</a>
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-module">
-						<a href="../modules/editors_templates_foundation.html#isCreateOptions" class="tsd-kind-icon">is<wbr>Create<wbr>Options</a>
-					</li>
-					<li class=" tsd-kind-function tsd-parent-kind-module">
-						<a href="../modules/editors_templates_foundation.html#unifyCreateActionArray" class="tsd-kind-icon">unify<wbr>Create<wbr>Action<wbr>Array</a>
+						<a href="../modules/Setting.html#newLoadNsdocEvent" class="tsd-kind-icon">new<wbr>Load<wbr>Nsdoc<wbr>Event</a>
 					</li>
 				</ul>
 			</nav>
