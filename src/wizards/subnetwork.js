@@ -82,7 +82,7 @@ export function createSubNetworkAction(parent) {
 export function createSubNetworkWizard(parent) {
   return [
     {
-      title: get("wizard.title.create", {tagName: "SubNetwork"}),
+      title: get("wizard.title.add", {tagName: "SubNetwork"}),
       primary: {
         icon: "add",
         label: get("add"),
