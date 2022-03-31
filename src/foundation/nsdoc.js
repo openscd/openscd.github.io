@@ -37,8 +37,9 @@ export async function initializeNsdoc() {
   function getLNDataDescription(element) {
     const lnClassAttribute = element.getAttribute("lnClass");
     const lnClass = nsd74.querySelector(`NS > LNClasses > LNClass[name="${lnClassAttribute}"]`);
+    const lnClassDescription = getNsdocDocumentation(nsdoc74, lnClass?.getAttribute("titleID"));
     return {
-      label: getNsdocDocumentation(nsdoc74, lnClass?.getAttribute("titleID")) ?? lnClassAttribute
+      label: lnClassDescription ? lnClassDescription + " (" + lnClassAttribute + ")" : lnClassAttribute
     };
   }
   function getDODataDescription(element) {
