@@ -25,28 +25,28 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>81/81</span>
+                <span class='fraction'>97/97</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>7/7</span>
+                <span class='fraction'>10/10</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>3/3</span>
+                <span class='fraction'>5/5</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>81/81</span>
+                <span class='fraction'>97/97</span>
             </div>
         
             
@@ -144,7 +144,23 @@
 <a name='L79'></a><a href='#L79'>79</a>
 <a name='L80'></a><a href='#L80'>80</a>
 <a name='L81'></a><a href='#L81'>81</a>
-<a name='L82'></a><a href='#L82'>82</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">2x</span>
+<a name='L82'></a><a href='#L82'>82</a>
+<a name='L83'></a><a href='#L83'>83</a>
+<a name='L84'></a><a href='#L84'>84</a>
+<a name='L85'></a><a href='#L85'>85</a>
+<a name='L86'></a><a href='#L86'>86</a>
+<a name='L87'></a><a href='#L87'>87</a>
+<a name='L88'></a><a href='#L88'>88</a>
+<a name='L89'></a><a href='#L89'>89</a>
+<a name='L90'></a><a href='#L90'>90</a>
+<a name='L91'></a><a href='#L91'>91</a>
+<a name='L92'></a><a href='#L92'>92</a>
+<a name='L93'></a><a href='#L93'>93</a>
+<a name='L94'></a><a href='#L94'>94</a>
+<a name='L95'></a><a href='#L95'>95</a>
+<a name='L96'></a><a href='#L96'>96</a>
+<a name='L97'></a><a href='#L97'>97</a>
+<a name='L98'></a><a href='#L98'>98</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
@@ -179,6 +195,22 @@
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
@@ -236,12 +268,12 @@
 import { translate } from 'lit-translate';
 &nbsp;
 import '@material/mwc-icon';
-import '@material/mwc-list';
 import '@material/mwc-list/mwc-list-item';
 &nbsp;
-import './elements/goose-message.js';
+import '../../filtered-list.js';
 import { compareNames, getNameAttribute } from '../../foundation.js';
-import { styles } from './foundation.js';
+import { newGOOSESelectEvent, styles } from './foundation.js';
+import { gooseIcon } from '../../icons/icons.js';
 &nbsp;
 /** An sub element for showing all published GOOSE messages per IED. */
 @customElement('publisher-goose-list')
@@ -270,33 +302,49 @@ export class PublisherGOOSEList extends LitElement {
     );
   }
 &nbsp;
+  private onGooseSelect(element: Element): void {
+    const ln = element.parentElement;
+    const dataset = ln?.querySelector(
+      `DataSet[name=${element.getAttribute('datSet')}]`
+    );
+    this.dispatchEvent(newGOOSESelectEvent(element, dataset!));
+  }
+&nbsp;
+  renderGoose(element: Element): TemplateResult {
+    return html`&lt;mwc-list-item
+      @click=${() =&gt; this.onGooseSelect(element)}
+      graphic="large"
+    &gt;
+      &lt;span&gt;${element.getAttribute('name')}&lt;/span&gt;
+      &lt;mwc-icon slot="graphic"&gt;${gooseIcon}&lt;/mwc-icon&gt;
+    &lt;/mwc-list-item&gt;`;
+  }
+&nbsp;
   render(): TemplateResult {
     return html` &lt;section&gt;
       &lt;h1&gt;${translate('subscription.publisherGoose.title')}&lt;/h1&gt;
-      &lt;mwc-list&gt;
-        ${this.ieds.map(ied =&gt;
-          ied.querySelector('GSEControl')
-            ? html`
-                &lt;mwc-list-item noninteractive graphic="icon"&gt;
-                  &lt;span class="iedListTitle"&gt;${getNameAttribute(ied)}&lt;/span&gt;
-                  &lt;mwc-icon slot="graphic"&gt;developer_board&lt;/mwc-icon&gt;
-                &lt;/mwc-list-item&gt;
-                &lt;li divider role="separator"&gt;&lt;/li&gt;
-                ${this.getGSEControls(ied).map(
-                  control =&gt;
-                    html`&lt;goose-message .element=${control}&gt;&lt;/goose-message&gt;`
-                )}
-              `
-            : ``
+      &lt;filtered-list&gt;
+        ${this.ieds.map(
+          ied =&gt;
+            html`
+              &lt;mwc-list-item noninteractive graphic="icon"&gt;
+                &lt;span class="iedListTitle"&gt;${getNameAttribute(ied)}&lt;/span&gt;
+                &lt;mwc-icon slot="graphic"&gt;developer_board&lt;/mwc-icon&gt;
+              &lt;/mwc-list-item&gt;
+              &lt;li divider role="separator"&gt;&lt;/li&gt;
+              ${this.getGSEControls(ied).map(control =&gt;
+                this.renderGoose(control)
+              )}
+            `
         )}
-      &lt;/mwc-list&gt;
+      &lt;/filtered-list&gt;
     &lt;/section&gt;`;
   }
 &nbsp;
   static styles = css`
     ${styles}
 &nbsp;
-    mwc-list {
+    filtered-list {
       height: 100vh;
       overflow-y: scroll;
     }
@@ -313,7 +361,7 @@ export class PublisherGOOSEList extends LitElement {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener">istanbul</a>
-                at Thu Mar 31 2022 12:07:17 GMT+0000 (Coordinated Universal Time)
+                at Thu Mar 31 2022 21:56:12 GMT+0000 (Coordinated Universal Time)
             </div>
         </div>
         <script src="../../../prettify.js"></script>

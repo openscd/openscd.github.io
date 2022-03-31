@@ -7,3 +7,9 @@ An sub element for showing all published GOOSE messages per IED.
 | Property | Type          |
 |----------|---------------|
 | `doc`    | `XMLDocument` |
+
+## Methods
+
+| Method        | Type                                 |
+|---------------|--------------------------------------|
+| `renderGoose` | `(element: Element): TemplateResult` |

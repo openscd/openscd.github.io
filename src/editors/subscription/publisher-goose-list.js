@@ -18,11 +18,11 @@ import {
 } from "../../../_snowpack/pkg/lit-element.js";
 import {translate} from "../../../_snowpack/pkg/lit-translate.js";
 import "../../../_snowpack/pkg/@material/mwc-icon.js";
-import "../../../_snowpack/pkg/@material/mwc-list.js";
 import "../../../_snowpack/pkg/@material/mwc-list/mwc-list-item.js";
-import "./elements/goose-message.js";
+import "../../filtered-list.js";
 import {compareNames, getNameAttribute} from "../../foundation.js";
-import {styles} from "./foundation.js";
+import {newGOOSESelectEvent, styles} from "./foundation.js";
+import {gooseIcon} from "../../icons/icons.js";
 export let PublisherGOOSEList = class extends LitElement {
   get ieds() {
     return this.doc ? Array.from(this.doc.querySelectorAll(":root > IED")).sort((a, b) => compareNames(a, b)) : [];
@@ -30,26 +30,40 @@ export let PublisherGOOSEList = class extends LitElement {
   getGSEControls(ied) {
     return Array.from(ied.querySelectorAll(":scope > AccessPoint > Server > LDevice > LN0 > GSEControl"));
   }
+  onGooseSelect(element) {
+    const ln = element.parentElement;
+    const dataset = ln?.querySelector(`DataSet[name=${element.getAttribute("datSet")}]`);
+    this.dispatchEvent(newGOOSESelectEvent(element, dataset));
+  }
+  renderGoose(element) {
+    return html`<mwc-list-item
+      @click=${() => this.onGooseSelect(element)}
+      graphic="large"
+    >
+      <span>${element.getAttribute("name")}</span>
+      <mwc-icon slot="graphic">${gooseIcon}</mwc-icon>
+    </mwc-list-item>`;
+  }
   render() {
     return html` <section>
       <h1>${translate("subscription.publisherGoose.title")}</h1>
-      <mwc-list>
-        ${this.ieds.map((ied) => ied.querySelector("GSEControl") ? html`
-                <mwc-list-item noninteractive graphic="icon">
-                  <span class="iedListTitle">${getNameAttribute(ied)}</span>
-                  <mwc-icon slot="graphic">developer_board</mwc-icon>
-                </mwc-list-item>
-                <li divider role="separator"></li>
-                ${this.getGSEControls(ied).map((control) => html`<goose-message .element=${control}></goose-message>`)}
-              ` : ``)}
-      </mwc-list>
+      <filtered-list>
+        ${this.ieds.map((ied) => html`
+              <mwc-list-item noninteractive graphic="icon">
+                <span class="iedListTitle">${getNameAttribute(ied)}</span>
+                <mwc-icon slot="graphic">developer_board</mwc-icon>
+              </mwc-list-item>
+              <li divider role="separator"></li>
+              ${this.getGSEControls(ied).map((control) => this.renderGoose(control))}
+            `)}
+      </filtered-list>
     </section>`;
   }
 };
 PublisherGOOSEList.styles = css`
     ${styles}
 
-    mwc-list {
+    filtered-list {
       height: 100vh;
       overflow-y: scroll;
     }

@@ -21,7 +21,7 @@ import {translate} from "../../../_snowpack/pkg/lit-translate.js";
 import "../../../_snowpack/pkg/@material/mwc-icon.js";
 import "../../../_snowpack/pkg/@material/mwc-list.js";
 import "../../../_snowpack/pkg/@material/mwc-list/mwc-list-item.js";
-import "./elements/ied-element-goose.js";
+import "../../filtered-list.js";
 import {
   createElement,
   identity,
@@ -29,6 +29,7 @@ import {
   selector
 } from "../../foundation.js";
 import {
+  newIEDSubscriptionEvent,
   newGOOSESelectEvent,
   styles,
   SubscribeStatus
@@ -96,7 +97,6 @@ export let SubscriberIEDListGoose = class extends LitElement {
     this.requestUpdate();
   }
   async onIEDSubscriptionEvent(event) {
-    console.log("onGOOSEIEDSub");
     switch (event.detail.subscribeStatus) {
       case SubscribeStatus.Full: {
         this.unsubscribe(event.detail.element);
@@ -196,6 +196,53 @@ export let SubscriberIEDListGoose = class extends LitElement {
       this.subscriberWrapper.scrollTo(0, 0);
     }
   }
+  renderSubscriber(status, element) {
+    return html` <mwc-list-item
+      @click=${() => {
+      this.dispatchEvent(newIEDSubscriptionEvent(element, status ?? SubscribeStatus.None));
+    }}
+      graphic="avatar"
+      hasMeta
+    >
+      <span>${element.getAttribute("name")}</span>
+      <mwc-icon slot="graphic"
+        >${status == SubscribeStatus.Full ? html`clear` : html`add`}</mwc-icon
+      >
+    </mwc-list-item>`;
+  }
+  renderUnSubscribers(ieds) {
+    return html`<mwc-list-item noninteractive>
+        <span class="iedListTitle"
+          >${translate("subscription.subscriberIed.availableToSubscribe")}</span
+        >
+      </mwc-list-item>
+      <li divider role="separator"></li>
+      ${ieds.length > 0 ? ieds.map((ied) => this.renderSubscriber(SubscribeStatus.None, ied.element)) : html`<mwc-list-item graphic="avatar" noninteractive>
+            <span>${translate("subscription.none")}</span>
+          </mwc-list-item>`}`;
+  }
+  renderPartiallySubscribers(ieds) {
+    return html`<mwc-list-item noninteractive>
+        <span class="iedListTitle"
+          >${translate("subscription.subscriberIed.partiallySubscribed")}</span
+        >
+      </mwc-list-item>
+      <li divider role="separator"></li>
+      ${ieds.length > 0 ? ieds.map((ied) => this.renderSubscriber(SubscribeStatus.Partial, ied.element)) : html`<mwc-list-item graphic="avatar" noninteractive>
+            <span>${translate("subscription.none")}</span>
+          </mwc-list-item>`}`;
+  }
+  renderFullSubscribers() {
+    return html`<mwc-list-item noninteractive>
+        <span class="iedListTitle"
+          >${translate("subscription.subscriberIed.subscribed")}</span
+        >
+      </mwc-list-item>
+      <li divider role="separator"></li>
+      ${localState.subscribedIeds.length > 0 ? localState.subscribedIeds.map((ied) => this.renderSubscriber(SubscribeStatus.Full, ied.element)) : html`<mwc-list-item graphic="avatar" noninteractive>
+            <span>${translate("subscription.none")}</span>
+          </mwc-list-item>`}`;
+  }
   render() {
     const partialSubscribedIeds = localState.availableIeds.filter((ied) => ied.partial);
     const availableIeds = localState.availableIeds.filter((ied) => !ied.partial);
@@ -208,48 +255,11 @@ export let SubscriberIEDListGoose = class extends LitElement {
     })}
         </h1>
         ${localState.currentGseControl ? html`<div class="subscriberWrapper">
-              <mwc-list id="subscribedIeds">
-                <mwc-list-item noninteractive>
-                  <span class="iedListTitle"
-                    >${translate("subscription.subscriberIed.subscribed")}</span
-                  >
-                </mwc-list-item>
-                <li divider role="separator"></li>
-                ${localState.subscribedIeds.length > 0 ? localState.subscribedIeds.map((ied) => html`<ied-element-goose
-                          .status=${SubscribeStatus.Full}
-                          .element=${ied.element}
-                        ></ied-element-goose>`) : html`<mwc-list-item graphic="avatar" noninteractive>
-                      <span>${translate("subscription.none")}</span>
-                    </mwc-list-item>`}
-              </mwc-list>
-              <mwc-list id="partialSubscribedIeds">
-                <mwc-list-item noninteractive>
-                  <span class="iedListTitle"
-                    >${translate("subscription.subscriberIed.partiallySubscribed")}</span
-                  >
-                </mwc-list-item>
-                <li divider role="separator"></li>
-                ${partialSubscribedIeds.length > 0 ? partialSubscribedIeds.map((ied) => html`<ied-element-goose
-                          .status=${SubscribeStatus.Partial}
-                          .element=${ied.element}
-                        ></ied-element-goose>`) : html`<mwc-list-item graphic="avatar" noninteractive>
-                      <span>${translate("subscription.none")}</span>
-                    </mwc-list-item>`}
-              </mwc-list>
-              <mwc-list id="notSubscribedIeds">
-                <mwc-list-item noninteractive>
-                  <span class="iedListTitle"
-                    >${translate("subscription.subscriberIed.availableToSubscribe")}</span
-                  >
-                </mwc-list-item>
-                <li divider role="separator"></li>
-                ${availableIeds.length > 0 ? availableIeds.map((ied) => html`<ied-element-goose
-                          .status=${SubscribeStatus.None}
-                          .element=${ied.element}
-                        ></ied-element-goose>`) : html`<mwc-list-item graphic="avatar" noninteractive>
-                      <span>${translate("subscription.none")}</span>
-                    </mwc-list-item>`}
-              </mwc-list>
+              <filtered-list id="subscribedIeds">
+                ${this.renderFullSubscribers()}
+                ${this.renderPartiallySubscribers(partialSubscribedIeds)}
+                ${this.renderUnSubscribers(availableIeds)}
+              </filtered-list>
             </div>` : html`<mwc-list>
               <mwc-list-item noninteractive>
                 <span class="iedListTitle">${translate("subscription.subscriberIed.noGooseMessageSelected")}</span>
