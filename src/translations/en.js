@@ -514,7 +514,15 @@ export const en = {
       edit: 'Edited {{type}} "{{name}}" in IED {{iedName}}',
       add: 'Added {{type}} "{{name}}" to IED {{iedName}}',
       remove: 'Removed {{type}} "{{name}}" and its referenced elements from IED {{iedName}}'
-    }
+    },
+    hints: {
+      source: "Source IED",
+      missingServer: "Not A Server",
+      exist: "{{type}} with name {{name}} already exist",
+      noMatchingData: "No matching data",
+      valid: "Can be copied"
+    },
+    label: {copy: "Copy to other IEDs"}
   },
   add: "Add",
   new: "New",

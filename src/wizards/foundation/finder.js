@@ -35,6 +35,15 @@ export function iEDPicker(doc) {
     .getTitle=${(path) => path[path.length - 1]}
   ></finder-list>`;
 }
+export function iEDsPicker(doc) {
+  return html`<finder-list
+    multi
+    path="${JSON.stringify(["SCL: "])}"
+    .read=${getReader(doc.querySelector("SCL"), getIED)}
+    .getDisplayString=${getDisplayString}
+    .getTitle=${(path) => path[path.length - 1]}
+  ></finder-list>`;
+}
 export function getDataModelChildren(parent) {
   if (["LDevice", "Server"].includes(parent.tagName))
     return Array.from(parent.children).filter((child) => child.tagName === "LDevice" || child.tagName === "LN0" || child.tagName === "LN");

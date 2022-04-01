@@ -2,6 +2,7 @@ import {html} from "../../_snowpack/pkg/lit-element.js";
 import {get, translate} from "../../_snowpack/pkg/lit-translate.js";
 import "../../_snowpack/pkg/@material/mwc-button.js";
 import "../../_snowpack/pkg/@material/mwc-list/mwc-list-item.js";
+import "../../_snowpack/pkg/@material/mwc-list/mwc-check-list-item.js";
 import "../wizard-checkbox.js";
 import "../wizard-textfield.js";
 import "../wizard-select.js";
@@ -23,6 +24,7 @@ import {editDataSetWizard} from "./dataset.js";
 import {newFCDA} from "./fcda.js";
 import {contentOptFieldsWizard, editOptFieldsWizard} from "./optfields.js";
 import {contentTrgOpsWizard, editTrgOpsWizard} from "./trgops.js";
+import {existFcdaReference} from "../foundation/scl.js";
 function contentReportControlWizard(options) {
   return [
     html`<wizard-textfield
@@ -314,6 +316,106 @@ function getRptEnabledAction(olRptEnabled, max, reportCb) {
     new: {element: newRptEnabled}
   };
 }
+function copyReportControlActions(element) {
+  return (_, wizard) => {
+    const doc = element.ownerDocument;
+    const iedItems = wizard.shadowRoot?.querySelector("filtered-list")?.selected;
+    const complexActions = [];
+    iedItems.forEach((iedItem) => {
+      const ied = doc.querySelector(selector("IED", iedItem.value));
+      if (!ied)
+        return;
+      const sinkLn0 = ied.querySelector("LN0");
+      if (!sinkLn0)
+        return [];
+      const sourceDataSet = element.parentElement?.querySelector(`DataSet[name="${element.getAttribute("datSet")}"]`);
+      if (sourceDataSet && sinkLn0.querySelector(`DataSet[name="${sourceDataSet.getAttribute("name")}"]`))
+        return [];
+      if (sinkLn0.querySelector(`ReportControl[name="${element.getAttribute("name")}"]`))
+        return [];
+      const sinkDataSet = sourceDataSet?.cloneNode(true);
+      Array.from(sinkDataSet.querySelectorAll("FCDA")).forEach((fcda) => {
+        if (!existFcdaReference(fcda, ied))
+          sinkDataSet.removeChild(fcda);
+      });
+      if (sinkDataSet.children.length === 0)
+        return [];
+      const sinkReportControl = element.cloneNode(true);
+      const source = element.closest("IED")?.getAttribute("name");
+      const sink = ied.getAttribute("name");
+      complexActions.push({
+        title: `ReportControl copied from ${source} to ${sink}`,
+        actions: [
+          {new: {parent: sinkLn0, element: sinkDataSet}},
+          {new: {parent: sinkLn0, element: sinkReportControl}}
+        ]
+      });
+    });
+    return complexActions;
+  };
+}
+function renderIedListItem(sourceCb, ied) {
+  const sourceDataSet = sourceCb.parentElement?.querySelector(`DataSet[name="${sourceCb.getAttribute("datSet")}"]`);
+  const isSourceIed = sourceCb.closest("IED")?.getAttribute("name") === ied.getAttribute("name");
+  const ln0 = ied.querySelector("AccessPoint > Server > LDevice > LN0");
+  const hasCbNameConflict = ln0?.querySelector(`ReportControl[name="${sourceCb.getAttribute("name")}"]`) ? true : false;
+  const hasDataSetConflict = ln0?.querySelector(`DataSet[name="${sourceDataSet?.getAttribute("name")}"]`) ? true : false;
+  const sinkDataSet = sourceDataSet?.cloneNode(true);
+  Array.from(sinkDataSet.querySelectorAll("FCDA")).forEach((fcda) => {
+    if (!existFcdaReference(fcda, ied))
+      sinkDataSet.removeChild(fcda);
+  });
+  const hasDataMatch = sinkDataSet.children.length > 0;
+  const primSpan = ied.getAttribute("name");
+  let secondSpan = "";
+  if (isSourceIed)
+    secondSpan = get("controlblock.hints.source");
+  else if (!ln0)
+    secondSpan = get("controlblock.hints.missingServer");
+  else if (hasDataSetConflict && !isSourceIed)
+    secondSpan = get("controlblock.hints.exist", {
+      type: "RerportControl",
+      name: sourceCb.getAttribute("name")
+    });
+  else if (hasCbNameConflict && !isSourceIed)
+    secondSpan = get("controlblock.hints.exist", {
+      type: "DataSet",
+      name: sourceCb.getAttribute("name")
+    });
+  else if (!hasDataMatch)
+    secondSpan = get("controlblock.hints.noMatchingData");
+  else
+    secondSpan = get("controlBlock.hints.valid");
+  return html`<mwc-check-list-item
+    twoline
+    value="${identity(ied)}"
+    ?disabled=${isSourceIed || !ln0 || hasCbNameConflict || hasDataSetConflict || !hasDataMatch}
+    ><span>${primSpan}</span
+    ><span slot="secondary">${secondSpan}</span></mwc-check-list-item
+  >`;
+}
+export function reportControlCopyToIedSelector(element) {
+  return [
+    {
+      title: get("report.wizard.location"),
+      primary: {
+        icon: "save",
+        label: get("save"),
+        action: copyReportControlActions(element)
+      },
+      content: [
+        html`<filtered-list multi
+          >${Array.from(element.ownerDocument.querySelectorAll("IED")).map((ied) => renderIedListItem(element, ied))}</filtered-list
+        >`
+      ]
+    }
+  ];
+}
+function openIedsSelector(element) {
+  return () => {
+    return [() => reportControlCopyToIedSelector(element)];
+  };
+}
 export function removeReportControl(element) {
   return () => {
     const complexAction = removeReportControlAction(element);
@@ -418,6 +520,11 @@ export function editReportControlWizard(element) {
       label: get("scl.OptFields"),
       action: openOptFieldsWizard(optFields)
     });
+  menuActions.push({
+    icon: "copy",
+    label: get("controlblock.label.copy"),
+    action: openIedsSelector(element)
+  });
   return [
     {
       title: get("wizard.title.edit", {tagName: element.tagName}),
