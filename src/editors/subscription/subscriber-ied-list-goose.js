@@ -57,7 +57,7 @@ export let SubscriberIEDListGoose = class extends LitElement {
     super();
     this.onGOOSEDataSetEvent = this.onGOOSEDataSetEvent.bind(this);
     this.onIEDSubscriptionEvent = this.onIEDSubscriptionEvent.bind(this);
-    const parentDiv = this.closest('div[id="containerTemplates"]');
+    const parentDiv = this.closest(".container");
     if (parentDiv) {
       parentDiv.addEventListener("goose-dataset", this.onGOOSEDataSetEvent);
       parentDiv.addEventListener("ied-subscription", this.onIEDSubscriptionEvent);
@@ -248,7 +248,7 @@ export let SubscriberIEDListGoose = class extends LitElement {
     const availableIeds = localState.availableIeds.filter((ied) => !ied.partial);
     const gseControlName = localState.currentGseControl?.getAttribute("name") ?? void 0;
     return html`
-      <section>
+      <section tabindex="0">
         <h1>
           ${translate("subscription.subscriberIed.title", {
       selected: gseControlName ? localState.currentGooseIEDName + " > " + gseControlName : "IED"
@@ -262,7 +262,7 @@ export let SubscriberIEDListGoose = class extends LitElement {
               </filtered-list>
             </div>` : html`<mwc-list>
               <mwc-list-item noninteractive>
-                <span class="iedListTitle">${translate("subscription.subscriberIed.noGooseMessageSelected")}</span>
+                <span>${translate("subscription.subscriberIed.noGooseMessageSelected")}</span>
               </mwc-list-item>
             </mwc-list>
           </div>`}
@@ -272,21 +272,6 @@ export let SubscriberIEDListGoose = class extends LitElement {
 };
 SubscriberIEDListGoose.styles = css`
     ${styles}
-
-    h1 {
-      overflow: unset;
-      white-space: unset;
-      text-overflow: unset;
-    }
-
-    .subscriberWrapper {
-      height: 100vh;
-      overflow-y: scroll;
-    }
-
-    .iedListTitle {
-      font-weight: bold;
-    }
   `;
 __decorate([
   property({attribute: false})
