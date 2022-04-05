@@ -25,28 +25,28 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>154/154</span>
+                <span class='fraction'>170/170</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">96.77% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>27/27</span>
+                <span class='fraction'>30/31</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>8/8</span>
+                <span class='fraction'>10/10</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>154/154</span>
+                <span class='fraction'>170/170</span>
             </div>
         
             
@@ -217,7 +217,23 @@
 <a name='L152'></a><a href='#L152'>152</a>
 <a name='L153'></a><a href='#L153'>153</a>
 <a name='L154'></a><a href='#L154'>154</a>
-<a name='L155'></a><a href='#L155'>155</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">72x</span>
+<a name='L155'></a><a href='#L155'>155</a>
+<a name='L156'></a><a href='#L156'>156</a>
+<a name='L157'></a><a href='#L157'>157</a>
+<a name='L158'></a><a href='#L158'>158</a>
+<a name='L159'></a><a href='#L159'>159</a>
+<a name='L160'></a><a href='#L160'>160</a>
+<a name='L161'></a><a href='#L161'>161</a>
+<a name='L162'></a><a href='#L162'>162</a>
+<a name='L163'></a><a href='#L163'>163</a>
+<a name='L164'></a><a href='#L164'>164</a>
+<a name='L165'></a><a href='#L165'>165</a>
+<a name='L166'></a><a href='#L166'>166</a>
+<a name='L167'></a><a href='#L167'>167</a>
+<a name='L168'></a><a href='#L168'>168</a>
+<a name='L169'></a><a href='#L169'>169</a>
+<a name='L170'></a><a href='#L170'>170</a>
+<a name='L171'></a><a href='#L171'>171</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">72x</span>
 <span class="cline-any cline-yes">72x</span>
 <span class="cline-any cline-yes">72x</span>
 <span class="cline-any cline-yes">72x</span>
@@ -235,6 +251,27 @@
 <span class="cline-any cline-yes">72x</span>
 <span class="cline-any cline-yes">72x</span>
 <span class="cline-any cline-yes">72x</span>
+<span class="cline-any cline-yes">72x</span>
+<span class="cline-any cline-yes">72x</span>
+<span class="cline-any cline-yes">72x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">72x</span>
+<span class="cline-any cline-yes">72x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">72x</span>
 <span class="cline-any cline-yes">72x</span>
 <span class="cline-any cline-yes">72x</span>
@@ -280,11 +317,6 @@
 <span class="cline-any cline-yes">72x</span>
 <span class="cline-any cline-yes">72x</span>
 <span class="cline-any cline-yes">72x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -389,7 +421,28 @@ import '@material/mwc-textfield';
 import { CheckListItem } from '@material/mwc-list/mwc-check-list-item';
 import { List } from '@material/mwc-list';
 import { ListBase } from '@material/mwc-list/mwc-list-base';
+import { ListItemBase } from '@material/mwc-list/mwc-list-item-base';
 import { TextField } from '@material/mwc-textfield';
+&nbsp;
+function slotItem(item: Element): Element {
+  if (!item.closest('filtered-list') || !item.parentElement) <span class="branch-0 cbranch-no" title="branch not covered" >return item;</span>
+  if (item.parentElement instanceof FilteredList) return item;
+  return slotItem(item.parentElement);
+}
+&nbsp;
+function hideFiltered(item: ListItemBase, searchText: string): void {
+  const itemInnerText = item.innerText + '\n';
+  const childInnerText = Array.from(item.children)
+    .map(child =&gt; (&lt;HTMLElement&gt;child).innerText)
+    .join('\n');
+  const filterTarget: string = (itemInnerText + childInnerText).toUpperCase();
+&nbsp;
+  const terms: string[] = searchText.toUpperCase().split(' ');
+&nbsp;
+  terms.some(term =&gt; !filterTarget.includes(term))
+    ? slotItem(item).classList.add('hidden')
+    : slotItem(item).classList.remove('hidden');
+}
 &nbsp;
 /**
  * A mwc-list with mwc-textfield that filters the list items for given or separated terms
@@ -434,20 +487,15 @@ export class FilteredList extends ListBase {
   }
 &nbsp;
   onFilterInput(): void {
-    this.items.forEach(item =&gt; {
-      const text: string = (
-        item.innerText +
-        '\n' +
-        Array.from(item.children)
-          .map(child =&gt; (&lt;HTMLElement&gt;child).innerText)
-          .join('\n')
-      ).toUpperCase();
-      const terms: string[] = this.searchField.value.toUpperCase().split(' ');
-&nbsp;
-      terms.some(term =&gt; !text.includes(term))
-        ? item.classList.add('hidden')
-        : item.classList.remove('hidden');
-    });
+    Array.from(
+      this.querySelectorAll(
+        'mwc-list-item, mwc-check-list-item, mwc-radio-list-item'
+      )
+    )
+      .filter(item =&gt; !(item as ListItemBase).noninteractive)
+      .forEach(item =&gt;
+        hideFiltered(item as ListItemBase, this.searchField.value)
+      );
   }
 &nbsp;
   protected onListItemConnected(e: CustomEvent): void {
@@ -532,7 +580,7 @@ export class FilteredList extends ListBase {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener">istanbul</a>
-                at Mon Apr 04 2022 13:57:06 GMT+0000 (Coordinated Universal Time)
+                at Tue Apr 05 2022 17:53:55 GMT+0000 (Coordinated Universal Time)
             </div>
         </div>
         <script src="../prettify.js"></script>

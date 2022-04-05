@@ -25,6 +25,20 @@ import "../_snowpack/pkg/@material/mwc-textfield.js";
 import {CheckListItem} from "../_snowpack/pkg/@material/mwc-list/mwc-check-list-item.js";
 import {List} from "../_snowpack/pkg/@material/mwc-list.js";
 import {ListBase} from "../_snowpack/pkg/@material/mwc-list/mwc-list-base.js";
+function slotItem(item) {
+  if (!item.closest("filtered-list") || !item.parentElement)
+    return item;
+  if (item.parentElement instanceof FilteredList)
+    return item;
+  return slotItem(item.parentElement);
+}
+function hideFiltered(item, searchText) {
+  const itemInnerText = item.innerText + "\n";
+  const childInnerText = Array.from(item.children).map((child) => child.innerText).join("\n");
+  const filterTarget = (itemInnerText + childInnerText).toUpperCase();
+  const terms = searchText.toUpperCase().split(" ");
+  terms.some((term) => !filterTarget.includes(term)) ? slotItem(item).classList.add("hidden") : slotItem(item).classList.remove("hidden");
+}
 export let FilteredList = class extends ListBase {
   constructor() {
     super();
@@ -47,11 +61,7 @@ export let FilteredList = class extends ListBase {
     this.items.filter((item) => !item.disabled && !item.classList.contains("hidden")).forEach((item) => item.selected = select);
   }
   onFilterInput() {
-    this.items.forEach((item) => {
-      const text = (item.innerText + "\n" + Array.from(item.children).map((child) => child.innerText).join("\n")).toUpperCase();
-      const terms = this.searchField.value.toUpperCase().split(" ");
-      terms.some((term) => !text.includes(term)) ? item.classList.add("hidden") : item.classList.remove("hidden");
-    });
+    Array.from(this.querySelectorAll("mwc-list-item, mwc-check-list-item, mwc-radio-list-item")).filter((item) => !item.noninteractive).forEach((item) => hideFiltered(item, this.searchField.value));
   }
   onListItemConnected(e) {
     super.onListItemConnected(e);
