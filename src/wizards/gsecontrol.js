@@ -18,7 +18,7 @@ import {maxLength, patterns} from "./foundation/limits.js";
 import {editDataSetWizard} from "./dataset.js";
 import {editGseWizard} from "./gse.js";
 import {securityEnableEnum} from "./foundation/enums.js";
-function getGSE(element) {
+export function getGSE(element) {
   const cbName = element.getAttribute("name");
   const iedName = element.closest("IED")?.getAttribute("name");
   const apName = element.closest("AccessPoint")?.getAttribute("name");
