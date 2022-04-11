@@ -23,16 +23,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">96.06% </span>
+                <span class="strong">97.6% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>122/127</span>
+                <span class='fraction'>122/125</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">70% </span>
+                <span class="strong">87.5% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>7/10</span>
+                <span class='fraction'>7/8</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">96.06% </span>
+                <span class="strong">97.6% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>122/127</span>
+                <span class='fraction'>122/125</span>
             </div>
         
             
@@ -188,9 +188,7 @@
 <a name='L123'></a><a href='#L123'>123</a>
 <a name='L124'></a><a href='#L124'>124</a>
 <a name='L125'></a><a href='#L125'>125</a>
-<a name='L126'></a><a href='#L126'>126</a>
-<a name='L127'></a><a href='#L127'>127</a>
-<a name='L128'></a><a href='#L128'>128</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L126'></a><a href='#L126'>126</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -257,8 +255,6 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -335,13 +331,13 @@ import { Nsdoc } from '../foundation/nsdoc.js';
  * We need a variable outside the plugin to save the selected IED, because the Plugin is created
  * more than once during working with the IED Editor, for instance when opening a Wizard to edit the IED.
  */
-let iedEditorSelectedIedName: string | undefined;
+let iedEditorSelectedIed: Element | undefined;
 /*
  * We will also add an Event Listener when a new document is opened. We then want to reset the selection
  * so setting it to undefined will set the selected IED again on the first in the list.
  */
 <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >function onOpenDocResetSelectedIed() {</span></span>
-<span class="cstat-no" title="statement not covered" >  iedEditorSelectedIedName = undefined;</span>
+<span class="cstat-no" title="statement not covered" >  iedEditorSelectedIed = undefined;</span>
 }
 addEventListener('open-doc', onOpenDocResetSelectedIed);
 &nbsp;
@@ -364,14 +360,17 @@ export default class IedPlugin extends LitElement {
 &nbsp;
   @state()
   private set selectedIed(element: Element | undefined) {
-    iedEditorSelectedIedName = (element) ? getNameAttribute(<span class="branch-0 cbranch-no" title="branch not covered" >element) : undefined;</span>
+    iedEditorSelectedIed = element;
   }
 &nbsp;
-  private get selectedIed(): Element {
-    if (iedEditorSelectedIedName === undefined) {
-      iedEditorSelectedIedName = getNameAttribute(this.alphabeticOrderedIeds[0]);
+  private get selectedIed(): Element | undefined {
+    if (iedEditorSelectedIed === undefined) {
+      const iedList = this.alphabeticOrderedIeds;
+      if (iedList.length &gt; 0) {
+        iedEditorSelectedIed = iedList[0];
+      }
     }
-    return this.doc.querySelector(`:root &gt; IED[name="${iedEditorSelectedIedName}"]`)!;
+    return iedEditorSelectedIed;
   }
 &nbsp;
   private onSelect(event: SingleSelectedEvent): void {
@@ -382,11 +381,6 @@ export default class IedPlugin extends LitElement {
   render(): TemplateResult {
     const iedList = this.alphabeticOrderedIeds;
     if (iedList.length &gt; 0) {
-      let selectedIedElement = this.selectedIed;
-      if (!selectedIedElement) <span class="branch-0 cbranch-no" title="branch not covered" >{</span>
-<span class="cstat-no" title="statement not covered" >        // Fix: If the selected IED can't be found, because the name is changed, will select the first one again.</span>
-<span class="cstat-no" title="statement not covered" >        selectedIedElement = iedList[0];</span>
-      }
       return html `
         &lt;section&gt;
           &lt;mwc-select
@@ -397,7 +391,7 @@ export default class IedPlugin extends LitElement {
               ied =&gt;
                 html`
                   &lt;mwc-list-item
-                    ?selected=${ied == selectedIedElement}
+                    ?selected=${ied == this.selectedIed}
                     value="${getNameAttribute(ied)}"
                   &gt;${getNameAttribute(ied)} ${ied.hasAttribute(<span class="branch-0 cbranch-no" title="branch not covered" >'desc') ? translate('iededitor.searchHelperDesc', {</span>
 <span class="cstat-no" title="statement not covered" >                    description: getDescriptionAttribute(ied)!,</span>
@@ -406,7 +400,7 @@ export default class IedPlugin extends LitElement {
             )}
           &lt;/mwc-select&gt;
           &lt;ied-container
-            .element=${selectedIedElement}
+            .element=${this.selectedIed}
             .nsdoc=${this.nsdoc}
           &gt;&lt;/ied-container&gt;
         &lt;/section&gt;`;
@@ -451,7 +445,7 @@ export default class IedPlugin extends LitElement {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener">istanbul</a>
-                at Wed Apr 06 2022 21:26:39 GMT+0000 (Coordinated Universal Time)
+                at Mon Apr 11 2022 05:35:16 GMT+0000 (Coordinated Universal Time)
             </div>
         </div>
         <script src="../../prettify.js"></script>

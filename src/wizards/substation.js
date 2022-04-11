@@ -8,8 +8,8 @@ import {
   getValue,
   newWizardEvent
 } from "../foundation.js";
-import {updateNamingAction} from "./foundation/actions.js";
 import {guessVoltageLevel} from "../editors/substation/guess-wizard.js";
+import {updateNamingAttributeWithReferencesAction} from "./foundation/actions.js";
 function render(name, desc, guessable) {
   return [
     html`<wizard-textfield
@@ -75,7 +75,7 @@ export function substationEditWizard(element) {
       primary: {
         icon: "edit",
         label: get("save"),
-        action: updateNamingAction(element)
+        action: updateNamingAttributeWithReferencesAction(element, "substation.action.updatesubstation")
       },
       content: render(element.getAttribute("name") ?? "", element.getAttribute("desc"), false)
     }

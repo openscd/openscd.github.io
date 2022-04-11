@@ -191,20 +191,22 @@ export function Editing(Base) {
     checkUpdateValidity(update) {
       if (update.checkValidity !== void 0)
         return update.checkValidity();
-      const invalidNaming = Array.from(update.element.parentElement?.children ?? []).some((elm) => elm.tagName === update.element.tagName && elm.getAttribute("name") === update.newAttributes["name"]);
-      if (invalidNaming) {
-        this.dispatchEvent(newLogEvent({
-          kind: "error",
-          title: get("editing.error.update", {
-            name: update.element.tagName
-          }),
-          message: get("editing.error.nameClash", {
-            parent: update.element.parentElement.tagName,
-            child: update.element.tagName,
-            name: update.newAttributes["name"]
-          })
-        }));
-        return false;
+      if (update.oldAttributes["name"] !== update.newAttributes["name"]) {
+        const invalidNaming = Array.from(update.element.parentElement?.children ?? []).some((elm) => elm.tagName === update.element.tagName && elm.getAttribute("name") === update.newAttributes["name"]);
+        if (invalidNaming) {
+          this.dispatchEvent(newLogEvent({
+            kind: "error",
+            title: get("editing.error.update", {
+              name: update.element.tagName
+            }),
+            message: get("editing.error.nameClash", {
+              parent: update.element.parentElement.tagName,
+              child: update.element.tagName,
+              name: update.newAttributes["name"]
+            })
+          }));
+          return false;
+        }
       }
       const invalidId = update.newAttributes["id"] && Array.from(update.element.ownerDocument.querySelectorAll("LNodeType, DOType, DAType, EnumType")).some((elm) => elm.getAttribute("id") === update.newAttributes["id"]);
       if (invalidId) {

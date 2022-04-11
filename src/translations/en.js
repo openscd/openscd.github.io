@@ -181,7 +181,8 @@ export const en = {
       }
     },
     action: {
-      addvoltagelevel: "Add voltage level"
+      addvoltagelevel: "Add voltage level",
+      updatesubstation: 'Edited substation "{{name}}"'
     }
   },
   iededitor: {
@@ -199,7 +200,7 @@ export const en = {
       }
     },
     action: {
-      updateied: 'Edited IED "{{iedName}}"'
+      updateied: 'Edited IED "{{name}}"'
     }
   },
   powertransformer: {

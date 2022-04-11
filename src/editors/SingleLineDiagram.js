@@ -59,9 +59,9 @@ import {translate} from "../../_snowpack/pkg/lit-translate.js";
 import "../../_snowpack/pkg/@material/mwc-list/mwc-list-item.js";
 import "../../_snowpack/pkg/@material/mwc-select.js";
 import "../../_snowpack/pkg/@material/mwc-textfield.js";
-let sldEditorSelectedSubstationName;
+let sldEditorSelectedSubstation;
 function onOpenDocResetSelectedSubstation() {
-  sldEditorSelectedSubstationName = void 0;
+  sldEditorSelectedSubstation = void 0;
 }
 addEventListener("open-doc", onOpenDocResetSelectedSubstation);
 export default class SingleLineDiagramPlugin extends LitElement {
@@ -69,16 +69,16 @@ export default class SingleLineDiagramPlugin extends LitElement {
     return this.doc ? Array.from(this.doc.querySelectorAll(":root > Substation")).sort((a, b) => compareNames(a, b)) : [];
   }
   set selectedSubstation(element) {
-    sldEditorSelectedSubstationName = element ? getNameAttribute(element) : void 0;
+    sldEditorSelectedSubstation = element;
   }
   get selectedSubstation() {
-    if (sldEditorSelectedSubstationName === void 0) {
+    if (sldEditorSelectedSubstation === void 0) {
       const substationList = this.substations;
       if (substationList.length > 0) {
-        sldEditorSelectedSubstationName = getNameAttribute(substationList[0]);
+        sldEditorSelectedSubstation = substationList[0];
       }
     }
-    return sldEditorSelectedSubstationName ? this.doc.querySelector(`:root > Substation[name="${sldEditorSelectedSubstationName}"]`) ?? void 0 : void 0;
+    return sldEditorSelectedSubstation;
   }
   getPowerTransformers(parentElement) {
     return Array.from(parentElement.querySelectorAll("PowerTransformer")).filter(isSCLNamespace);

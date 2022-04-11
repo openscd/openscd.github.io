@@ -1,5 +1,5 @@
 import {isPublic} from "../../foundation.js";
-const referenceInfoTags = ["IED"];
+const referenceInfoTags = ["IED", "Substation"];
 const referenceInfos = {
   IED: [{
     elementQuery: `Association`,
@@ -25,6 +25,10 @@ const referenceInfos = {
   }, {
     elementQuery: `SampledValueControl > IEDName`,
     attribute: null
+  }],
+  Substation: [{
+    elementQuery: `Terminal`,
+    attribute: "substationName"
   }]
 };
 function cloneElement(element, attributeName, value) {

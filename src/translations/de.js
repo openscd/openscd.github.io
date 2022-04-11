@@ -181,7 +181,8 @@ export const de = {
       }
     },
     action: {
-      addvoltagelevel: "Spannungsebene hinzufügen"
+      addvoltagelevel: "Spannungsebene hinzufügen",
+      updatesubstation: 'Schaltanlage "{{name}}" bearbeitet'
     }
   },
   iededitor: {
@@ -199,7 +200,7 @@ export const de = {
       }
     },
     action: {
-      updateied: 'IED "{{iedName}}" bearbeitet'
+      updateied: 'IED "{{name}}" bearbeitet'
     }
   },
   powertransformer: {

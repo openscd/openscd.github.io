@@ -17,9 +17,9 @@ import "../zeroline-pane.js";
 import "./ied/ied-container.js";
 import {translate} from "../../_snowpack/pkg/lit-translate.js";
 import {compareNames, getDescriptionAttribute, getNameAttribute} from "../foundation.js";
-let iedEditorSelectedIedName;
+let iedEditorSelectedIed;
 function onOpenDocResetSelectedIed() {
-  iedEditorSelectedIedName = void 0;
+  iedEditorSelectedIed = void 0;
 }
 addEventListener("open-doc", onOpenDocResetSelectedIed);
 export default class IedPlugin extends LitElement {
@@ -27,13 +27,16 @@ export default class IedPlugin extends LitElement {
     return this.doc ? Array.from(this.doc.querySelectorAll(":root > IED")).sort((a, b) => compareNames(a, b)) : [];
   }
   set selectedIed(element) {
-    iedEditorSelectedIedName = element ? getNameAttribute(element) : void 0;
+    iedEditorSelectedIed = element;
   }
   get selectedIed() {
-    if (iedEditorSelectedIedName === void 0) {
-      iedEditorSelectedIedName = getNameAttribute(this.alphabeticOrderedIeds[0]);
+    if (iedEditorSelectedIed === void 0) {
+      const iedList = this.alphabeticOrderedIeds;
+      if (iedList.length > 0) {
+        iedEditorSelectedIed = iedList[0];
+      }
     }
-    return this.doc.querySelector(`:root > IED[name="${iedEditorSelectedIedName}"]`);
+    return iedEditorSelectedIed;
   }
   onSelect(event) {
     this.selectedIed = this.alphabeticOrderedIeds[event.detail.index];
@@ -42,10 +45,6 @@ export default class IedPlugin extends LitElement {
   render() {
     const iedList = this.alphabeticOrderedIeds;
     if (iedList.length > 0) {
-      let selectedIedElement = this.selectedIed;
-      if (!selectedIedElement) {
-        selectedIedElement = iedList[0];
-      }
       return html`
         <section>
           <mwc-select
@@ -54,7 +53,7 @@ export default class IedPlugin extends LitElement {
             @selected=${this.onSelect}>
             ${iedList.map((ied) => html`
                   <mwc-list-item
-                    ?selected=${ied == selectedIedElement}
+                    ?selected=${ied == this.selectedIed}
                     value="${getNameAttribute(ied)}"
                   >${getNameAttribute(ied)} ${ied.hasAttribute("desc") ? translate("iededitor.searchHelperDesc", {
         description: getDescriptionAttribute(ied)
@@ -62,7 +61,7 @@ export default class IedPlugin extends LitElement {
                   </mwc-list-item>`)}
           </mwc-select>
           <ied-container
-            .element=${selectedIedElement}
+            .element=${this.selectedIed}
             .nsdoc=${this.nsdoc}
           ></ied-container>
         </section>`;
