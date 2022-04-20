@@ -21,7 +21,9 @@ import {nothing} from "../../../_snowpack/pkg/lit-html.js";
 import {translate} from "../../../_snowpack/pkg/lit-translate.js";
 import "../../../_snowpack/pkg/@material/mwc-icon-button-toggle.js";
 import "../../action-pane.js";
-import {getNameAttribute} from "../../foundation.js";
+import {getNameAttribute, newWizardEvent} from "../../foundation.js";
+import {createDaInfoWizard} from "./da-wizard.js";
+import {getValueElement} from "./foundation.js";
 export let DAContainer = class extends LitElement {
   constructor() {
     super(...arguments);
@@ -39,12 +41,9 @@ export let DAContainer = class extends LitElement {
   }
   renderValue() {
     if (this.instanceElement) {
-      return html`${this.getValueElement(this.instanceElement)?.textContent}`;
+      return html`${getValueElement(this.instanceElement)?.textContent}`;
     }
-    return html`${this.getValueElement(this.element)?.textContent}`;
-  }
-  getValueElement(element) {
-    return element.querySelector("Val") ?? null;
+    return html`${getValueElement(this.element)?.textContent}`;
   }
   getBDAElements() {
     const type = this.element.getAttribute("type") ?? void 0;
@@ -61,6 +60,7 @@ export let DAContainer = class extends LitElement {
         <mwc-icon-button
           title=${this.nsdoc.getDataDescription(this.element, this.ancestors).label}
           icon="info"
+          @click=${() => this.dispatchEvent(newWizardEvent(createDaInfoWizard(this.element, this.instanceElement, this.ancestors, this.nsdoc)))}
         ></mwc-icon-button>
       </abbr>
       ${bType == "Struct" ? html`<abbr slot="action" title="${translate("iededitor.toggleChildElements")}">
@@ -75,7 +75,6 @@ export let DAContainer = class extends LitElement {
       ${this.toggleButton?.on && bType == "Struct" ? this.getBDAElements().map((element) => html`<da-container
           .element=${element}
           .nsdoc=${this.nsdoc}
-          .daParent=${this.daParent ?? this.element}
           .ancestors=${[this.element, ...this.ancestors]}
         ></da-container>`) : nothing}
     </action-pane>
@@ -101,9 +100,6 @@ __decorate([
 __decorate([
   property({attribute: false})
 ], DAContainer.prototype, "instanceElement", 2);
-__decorate([
-  property({attribute: false})
-], DAContainer.prototype, "daParent", 2);
 __decorate([
   property()
 ], DAContainer.prototype, "ancestors", 2);

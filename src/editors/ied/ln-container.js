@@ -28,7 +28,7 @@ export let LNContainer = class extends LitElement {
     super(...arguments);
     this.ancestors = [];
   }
-  async header() {
+  header() {
     const prefix = this.element.getAttribute("prefix");
     const inst = getInstanceAttribute(this.element);
     const data = this.nsdoc.getDataDescription(this.element);

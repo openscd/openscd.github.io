@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">99.21% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>138/138</span>
+                <span class='fraction'>127/128</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">83.33% </span>
+                <span class="strong">82.35% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>15/18</span>
+                <span class='fraction'>14/17</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>6/6</span>
+                <span class='fraction'>5/5</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">99.21% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>138/138</span>
+                <span class='fraction'>127/128</span>
             </div>
         
             
@@ -191,17 +191,7 @@
 <a name='L126'></a><a href='#L126'>126</a>
 <a name='L127'></a><a href='#L127'>127</a>
 <a name='L128'></a><a href='#L128'>128</a>
-<a name='L129'></a><a href='#L129'>129</a>
-<a name='L130'></a><a href='#L130'>130</a>
-<a name='L131'></a><a href='#L131'>131</a>
-<a name='L132'></a><a href='#L132'>132</a>
-<a name='L133'></a><a href='#L133'>133</a>
-<a name='L134'></a><a href='#L134'>134</a>
-<a name='L135'></a><a href='#L135'>135</a>
-<a name='L136'></a><a href='#L136'>136</a>
-<a name='L137'></a><a href='#L137'>137</a>
-<a name='L138'></a><a href='#L138'>138</a>
-<a name='L139'></a><a href='#L139'>139</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">8x</span>
+<a name='L129'></a><a href='#L129'>129</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">8x</span>
 <span class="cline-any cline-yes">8x</span>
 <span class="cline-any cline-yes">8x</span>
 <span class="cline-any cline-yes">8x</span>
@@ -223,9 +213,8 @@
 <span class="cline-any cline-yes">8x</span>
 <span class="cline-any cline-yes">8x</span>
 <span class="cline-any cline-yes">8x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-yes">8x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
@@ -277,16 +266,6 @@
 <span class="cline-any cline-yes">8x</span>
 <span class="cline-any cline-yes">8x</span>
 <span class="cline-any cline-yes">8x</span>
-<span class="cline-any cline-yes">8x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">8x</span>
-<span class="cline-any cline-yes">8x</span>
-<span class="cline-any cline-yes">8x</span>
-<span class="cline-any cline-yes">8x</span>
-<span class="cline-any cline-yes">8x</span>
-<span class="cline-any cline-yes">8x</span>
-<span class="cline-any cline-yes">8x</span>
-<span class="cline-any cline-yes">8x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -304,6 +283,7 @@
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
@@ -315,7 +295,7 @@
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -355,8 +335,10 @@ import '@material/mwc-icon-button-toggle';
 import { IconButtonToggle } from '@material/mwc-icon-button-toggle';
 &nbsp;
 import '../../action-pane.js';
-import { getNameAttribute } from '../../foundation.js';
+import { getNameAttribute, newWizardEvent } from '../../foundation.js';
 import { Nsdoc } from '../../foundation/nsdoc.js';
+import { createDaInfoWizard } from "./da-wizard.js";
+import { getValueElement } from './foundation.js';
 &nbsp;
 /** [[`IED`]] plugin subeditor for editing `(B)DA` element. */
 @customElement('da-container')
@@ -372,9 +354,6 @@ export class DAContainer extends LitElement {
    */
   @property({ attribute: false })
   instanceElement!: Element;
-&nbsp;
-  @property({ attribute: false })
-  daParent!: Element
 &nbsp;
   @property()
   ancestors: Element[] = [];
@@ -404,21 +383,11 @@ export class DAContainer extends LitElement {
    */
   private renderValue(): TemplateResult {
     if (this.instanceElement) {
-      return html`${this.getValueElement(this.instanceElement)?.textContent}`
+      return html`${getValueElement(this.instanceElement)?.textContent}`
     }
 &nbsp;
-    return html`${this.getValueElement(this.<span class="branch-0 cbranch-no" title="branch not covered" >element)?.textContent}`;</span>
+    return html`${getValueElement(this.<span class="branch-0 cbranch-no" title="branch not covered" >element)?.textContent}`;</span>
   }
-&nbsp;
-  /**
-   * Get the 'Val' element of another element.
-   * @param element - The element to search for an 'Val' element.
-   * @returns the 'Val' element, or null if not found.
-   */
-  private getValueElement(element: Element): Element | null {
-    return element.querySelector('Val') ?? null;
-  }
-&nbsp;
 &nbsp;
   /**
    * Get the nested (B)DA element(s) if available.
@@ -441,6 +410,8 @@ export class DAContainer extends LitElement {
         &lt;mwc-icon-button
           title=${this.nsdoc.getDataDescription(this.element, this.ancestors).label}
           icon="info"
+          @click=${() =&gt; this.dispatchEvent(newWizardEvent(
+<span class="cstat-no" title="statement not covered" >            createDaInfoWizard(this.element, this.instanceElement, this.ancestors, this.nsdoc)))}</span>
         &gt;&lt;/mwc-icon-button&gt;
       &lt;/abbr&gt;
       ${bType == 'Struct' ? html`&lt;abbr slot="action" title="${translate('iededitor.toggleChildElements')}"&gt;
@@ -456,7 +427,6 @@ export class DAContainer extends LitElement {
         html`&lt;da-container
           .element=${element}
           .nsdoc=${this.nsdoc}
-          .daParent=${this.daParent ?? this.element}
           .ancestors=${[this.element, ...this.ancestors]}
         &gt;&lt;/da-container&gt;`) : nothing}
     &lt;/action-pane&gt;
@@ -484,7 +454,7 @@ export class DAContainer extends LitElement {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener">istanbul</a>
-                at Wed Apr 20 2022 08:55:40 GMT+0000 (Coordinated Universal Time)
+                at Wed Apr 20 2022 11:21:48 GMT+0000 (Coordinated Universal Time)
             </div>
         </div>
         <script src="../../../prettify.js"></script>

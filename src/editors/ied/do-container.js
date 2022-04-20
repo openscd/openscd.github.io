@@ -20,8 +20,10 @@ import {nothing} from "../../../_snowpack/pkg/lit-html.js";
 import "../../../_snowpack/pkg/@material/mwc-icon-button-toggle.js";
 import "../../action-pane.js";
 import "./da-container.js";
-import {getDescriptionAttribute, getNameAttribute} from "../../foundation.js";
+import {getDescriptionAttribute, getNameAttribute, newWizardEvent} from "../../foundation.js";
 import {translate} from "../../../_snowpack/pkg/lit-translate.js";
+import {createDoInfoWizard} from "./do-wizard.js";
+import {findDOTypeElement} from "./foundation.js";
 export let DOContainer = class extends LitElement {
   constructor() {
     super(...arguments);
@@ -37,8 +39,7 @@ export let DOContainer = class extends LitElement {
     }
   }
   getDOElements() {
-    const type = this.element.getAttribute("type") ?? void 0;
-    const doType = this.element.closest("SCL").querySelector(`:root > DataTypeTemplates > DOType[id="${type}"]`);
+    const doType = findDOTypeElement(this.element);
     if (doType != null) {
       return Array.from(doType.querySelectorAll(":scope > SDO"));
     }
@@ -74,6 +75,7 @@ export let DOContainer = class extends LitElement {
         <mwc-icon-button
           title=${this.nsdoc.getDataDescription(this.element).label}
           icon="info"
+          @click=${() => this.dispatchEvent(newWizardEvent(createDoInfoWizard(this.element, this.instanceElement, this.ancestors, this.nsdoc)))}
         ></mwc-icon-button>
       </abbr>
       ${daElements.length > 0 || doElements.length > 0 ? html`<abbr slot="action" title="${translate("iededitor.toggleChildElements")}">

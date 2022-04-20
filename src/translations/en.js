@@ -189,7 +189,26 @@ export const en = {
     searchHelper: "Select IED",
     searchHelperDesc: "({{description}})",
     missing: "No IED",
-    toggleChildElements: "Toggle child elements"
+    toggleChildElements: "Toggle child elements",
+    wizard: {
+      daTitle: "Show DA Info",
+      doTitle: "Show DO Info",
+      nsdocDescription: "NSDoc description",
+      doiDescription: "Data object description",
+      daiDescription: "Data attribute description",
+      ied: "IED",
+      accessPoint: "Access point",
+      lDevice: "Logical device",
+      lnPrefix: "Logical node prefix",
+      lnDescription: "Logical node description",
+      lnInst: "Logical node inst",
+      doName: "Data object name",
+      doCdc: "Data object common data class",
+      daName: "Data attribute name",
+      daFc: "Data attribute functional constraint",
+      daBType: "Data attribute type",
+      daValue: "Data attribute value"
+    }
   },
   ied: {
     wizard: {

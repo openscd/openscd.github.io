@@ -16,19 +16,22 @@ import {
   LitElement,
   property
 } from "../../../_snowpack/pkg/lit-element.js";
+import {nothing} from "../../../_snowpack/pkg/lit-html.js";
 import "../../action-pane.js";
-import {serverIcon} from "../../icons/ied-icons.js";
 import "./ldevice-container.js";
+import {serverIcon} from "../../icons/ied-icons.js";
+import {getDescriptionAttribute} from "../../foundation.js";
 export let ServerContainer = class extends LitElement {
   constructor() {
     super(...arguments);
     this.ancestors = [];
   }
   header() {
-    return "Server";
+    const desc = getDescriptionAttribute(this.element);
+    return html`Server${desc ? html` &mdash; ${desc}` : nothing}`;
   }
   render() {
-    return html`<action-pane label="${this.header()}">
+    return html`<action-pane .label="${this.header()}">
       <mwc-icon slot="icon">${serverIcon}</mwc-icon>
       ${Array.from(this.element.querySelectorAll(":scope > LDevice")).map((server) => html`<ldevice-container
           .element=${server}

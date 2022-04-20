@@ -189,7 +189,26 @@ export const de = {
     searchHelper: "IED auswählen",
     searchHelperDesc: "({{description}})",
     missing: "Kein IED vorhanden",
-    toggleChildElements: "???"
+    toggleChildElements: "???",
+    wizard: {
+      daTitle: "???",
+      doTitle: "???",
+      nsdocDescription: "Beschreibung",
+      doiDescription: "Beschreibung des DOI",
+      daiDescription: "Beschreibung des DAI",
+      ied: "IED",
+      accessPoint: "???",
+      lDevice: "???",
+      lnPrefix: "???",
+      lnDescription: "Beschreibung des LN",
+      lnInst: "???",
+      doName: "???",
+      doCdc: "???",
+      daName: "???",
+      daFc: "???",
+      daBType: "???",
+      daValue: "???"
+    }
   },
   ied: {
     wizard: {
