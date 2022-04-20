@@ -20,15 +20,38 @@ import {translate} from "../../../_snowpack/pkg/lit-translate.js";
 import "../../../_snowpack/pkg/@material/mwc-icon.js";
 import "../../../_snowpack/pkg/@material/mwc-list.js";
 import "../../../_snowpack/pkg/@material/mwc-list/mwc-list-item.js";
-import "./elements/sampled-values-message.js";
 import {compareNames, getNameAttribute} from "../../foundation.js";
-import {styles} from "./foundation.js";
+import {newSampledValuesSelectEvent, styles} from "./foundation.js";
+import {smvIcon} from "../../icons/icons.js";
+let selectedSmvMsg;
+let selectedDataSet;
+function onOpenDocResetSelectedSmvMsg() {
+  selectedSmvMsg = void 0;
+  selectedDataSet = void 0;
+}
+addEventListener("open-doc", onOpenDocResetSelectedSmvMsg);
 export let SampledValuesList = class extends LitElement {
   get ieds() {
     return this.doc ? Array.from(this.doc.querySelectorAll(":root > IED")).sort((a, b) => compareNames(a, b)) : [];
   }
   getSampledValuesControls(ied) {
     return Array.from(ied.querySelectorAll(":scope > AccessPoint > Server > LDevice > LN0 > SampledValueControl"));
+  }
+  onSmvSelect(element) {
+    const ln = element.parentElement;
+    const dataset = ln?.querySelector(`DataSet[name=${element.getAttribute("datSet")}]`);
+    selectedSmvMsg = element;
+    selectedDataSet = dataset;
+    this.dispatchEvent(newSampledValuesSelectEvent(selectedSmvMsg, selectedDataSet));
+  }
+  renderSmv(element) {
+    return html`<mwc-list-item @click=${() => this.onSmvSelect(element)} graphic="large">
+      <span>${element.getAttribute("name")}</span>
+      <mwc-icon slot="graphic">${smvIcon}</mwc-icon>
+    </mwc-list-item>`;
+  }
+  firstUpdated() {
+    this.dispatchEvent(newSampledValuesSelectEvent(selectedSmvMsg, selectedDataSet ?? void 0));
   }
   render() {
     return html` <section>
@@ -40,7 +63,7 @@ export let SampledValuesList = class extends LitElement {
                   <mwc-icon slot="graphic">developer_board</mwc-icon>
                 </mwc-list-item>
                 <li divider role="separator"></li>
-                ${this.getSampledValuesControls(ied).map((control) => html`<sampled-values-message .element=${control}></sampled-values-message>`)}
+                ${this.getSampledValuesControls(ied).map((control) => this.renderSmv(control))}
               ` : ``)}
       </mwc-list>
     </section>`;

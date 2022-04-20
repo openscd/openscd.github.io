@@ -23,6 +23,13 @@ import "../../filtered-list.js";
 import {compareNames, getNameAttribute} from "../../foundation.js";
 import {newGOOSESelectEvent, styles} from "./foundation.js";
 import {gooseIcon} from "../../icons/icons.js";
+let selectedGooseMsg;
+let selectedDataSet;
+function onOpenDocResetSelectedGooseMsg() {
+  selectedGooseMsg = void 0;
+  selectedDataSet = void 0;
+}
+addEventListener("open-doc", onOpenDocResetSelectedGooseMsg);
 export let PublisherGOOSEList = class extends LitElement {
   get ieds() {
     return this.doc ? Array.from(this.doc.querySelectorAll(":root > IED")).sort((a, b) => compareNames(a, b)) : [];
@@ -33,7 +40,9 @@ export let PublisherGOOSEList = class extends LitElement {
   onGooseSelect(element) {
     const ln = element.parentElement;
     const dataset = ln?.querySelector(`DataSet[name=${element.getAttribute("datSet")}]`);
-    this.dispatchEvent(newGOOSESelectEvent(element, dataset));
+    selectedGooseMsg = element;
+    selectedDataSet = dataset;
+    this.dispatchEvent(newGOOSESelectEvent(selectedGooseMsg, selectedDataSet));
   }
   renderGoose(element) {
     return html`<mwc-list-item
@@ -43,6 +52,9 @@ export let PublisherGOOSEList = class extends LitElement {
       <span>${element.getAttribute("name")}</span>
       <mwc-icon slot="graphic">${gooseIcon}</mwc-icon>
     </mwc-list-item>`;
+  }
+  firstUpdated() {
+    this.dispatchEvent(newGOOSESelectEvent(selectedGooseMsg, selectedDataSet ?? void 0));
   }
   render() {
     return html` <section tabindex="0">

@@ -30,7 +30,6 @@ import {
 } from "../../foundation.js";
 import {
   newIEDSubscriptionEvent,
-  newGOOSESelectEvent,
   styles,
   SubscribeStatus
 } from "./foundation.js";
@@ -45,16 +44,11 @@ const fcdaReferences = [
 function getFcdaReferences(elementContainingFcdaReferences) {
   return fcdaReferences.map((fcdaRef) => elementContainingFcdaReferences.getAttribute(fcdaRef) ? `[${fcdaRef}="${elementContainingFcdaReferences.getAttribute(fcdaRef)}"]` : "").join("");
 }
-const localState = {
-  currentGseControl: void 0,
-  currentDataset: void 0,
-  currentGooseIEDName: void 0,
-  subscribedIeds: [],
-  availableIeds: []
-};
 export let SubscriberIEDListGoose = class extends LitElement {
   constructor() {
     super();
+    this.subscribedIeds = [];
+    this.availableIeds = [];
     this.onGOOSEDataSetEvent = this.onGOOSEDataSetEvent.bind(this);
     this.onIEDSubscriptionEvent = this.onIEDSubscriptionEvent.bind(this);
     const parentDiv = this.closest(".container");
@@ -64,34 +58,33 @@ export let SubscriberIEDListGoose = class extends LitElement {
     }
   }
   async onGOOSEDataSetEvent(event) {
-    console.log("onGOOSESelect");
-    localState.currentGseControl = event.detail.gseControl;
-    localState.currentDataset = event.detail.dataset;
-    localState.currentGooseIEDName = localState.currentGseControl.closest("IED")?.getAttribute("name");
-    localState.subscribedIeds = [];
-    localState.availableIeds = [];
-    Array.from(this.doc.querySelectorAll(":root > IED")).filter((ied) => ied.getAttribute("name") != localState.currentGooseIEDName).forEach((ied) => {
+    this.currentGseControl = event.detail.gseControl;
+    this.currentDataset = event.detail.dataset;
+    this.currentGooseIEDName = this.currentGseControl?.closest("IED")?.getAttribute("name");
+    this.subscribedIeds = [];
+    this.availableIeds = [];
+    Array.from(this.doc.querySelectorAll(":root > IED")).filter((ied) => ied.getAttribute("name") != this.currentGooseIEDName).forEach((ied) => {
       const inputElements = ied.querySelectorAll(`LN0 > Inputs, LN > Inputs`);
       let numberOfLinkedExtRefs = 0;
       if (!inputElements) {
-        localState.availableIeds.push({element: ied});
+        this.availableIeds.push({element: ied});
         return;
       }
-      localState.currentDataset.querySelectorAll("FCDA").forEach((fcda) => {
+      this.currentDataset.querySelectorAll("FCDA").forEach((fcda) => {
         inputElements.forEach((inputs) => {
-          if (inputs.querySelector(`ExtRef[iedName=${localState.currentGooseIEDName}]${getFcdaReferences(fcda)}`)) {
+          if (inputs.querySelector(`ExtRef[iedName=${this.currentGooseIEDName}]${getFcdaReferences(fcda)}`)) {
             numberOfLinkedExtRefs++;
           }
         });
       });
       if (numberOfLinkedExtRefs == 0) {
-        localState.availableIeds.push({element: ied});
+        this.availableIeds.push({element: ied});
         return;
       }
-      if (numberOfLinkedExtRefs >= localState.currentDataset.querySelectorAll("FCDA").length) {
-        localState.subscribedIeds.push({element: ied});
+      if (numberOfLinkedExtRefs >= this.currentDataset.querySelectorAll("FCDA").length) {
+        this.subscribedIeds.push({element: ied});
       } else {
-        localState.availableIeds.push({element: ied, partial: true});
+        this.availableIeds.push({element: ied, partial: true});
       }
     });
     this.requestUpdate();
@@ -119,10 +112,10 @@ export let SubscriberIEDListGoose = class extends LitElement {
     if (!inputsElement)
       inputsElement = createElement(ied.ownerDocument, "Inputs", {});
     const actions = [];
-    localState.currentDataset.querySelectorAll("FCDA").forEach((fcda) => {
-      if (!inputsElement.querySelector(`ExtRef[iedName=${localState.currentGooseIEDName}]${getFcdaReferences(fcda)}`)) {
+    this.currentDataset.querySelectorAll("FCDA").forEach((fcda) => {
+      if (!inputsElement.querySelector(`ExtRef[iedName=${this.currentGooseIEDName}]${getFcdaReferences(fcda)}`)) {
         const extRef = createElement(ied.ownerDocument, "ExtRef", {
-          iedName: localState.currentGooseIEDName,
+          iedName: this.currentGooseIEDName,
           serviceType: "GOOSE",
           ldInst: fcda.getAttribute("ldInst") ?? "",
           lnClass: fcda.getAttribute("lnClass") ?? "",
@@ -146,13 +139,12 @@ export let SubscriberIEDListGoose = class extends LitElement {
       };
       this.dispatchEvent(newActionEvent({title, actions: [inputAction]}));
     }
-    this.dispatchEvent(newGOOSESelectEvent(localState.currentGseControl, localState.currentDataset));
   }
   unsubscribe(ied) {
     const actions = [];
     ied.querySelectorAll("LN0 > Inputs, LN > Inputs").forEach((inputs) => {
-      localState.currentDataset.querySelectorAll("FCDA").forEach((fcda) => {
-        const extRef = inputs.querySelector(`ExtRef[iedName=${localState.currentGooseIEDName}]${getFcdaReferences(fcda)}`);
+      this.currentDataset.querySelectorAll("FCDA").forEach((fcda) => {
+        const extRef = inputs.querySelector(`ExtRef[iedName=${this.currentGooseIEDName}]${getFcdaReferences(fcda)}`);
         if (extRef)
           actions.push({old: {parent: inputs, element: extRef}});
       });
@@ -161,7 +153,6 @@ export let SubscriberIEDListGoose = class extends LitElement {
       title: "Disconnect",
       actions: this.extendDeleteActions(actions)
     }));
-    this.dispatchEvent(newGOOSESelectEvent(localState.currentGseControl, localState.currentDataset));
   }
   extendDeleteActions(extRefDeleteActions) {
     if (!extRefDeleteActions.length)
@@ -239,22 +230,22 @@ export let SubscriberIEDListGoose = class extends LitElement {
         >
       </mwc-list-item>
       <li divider role="separator"></li>
-      ${localState.subscribedIeds.length > 0 ? localState.subscribedIeds.map((ied) => this.renderSubscriber(SubscribeStatus.Full, ied.element)) : html`<mwc-list-item graphic="avatar" noninteractive>
+      ${this.subscribedIeds.length > 0 ? this.subscribedIeds.map((ied) => this.renderSubscriber(SubscribeStatus.Full, ied.element)) : html`<mwc-list-item graphic="avatar" noninteractive>
             <span>${translate("subscription.none")}</span>
           </mwc-list-item>`}`;
   }
   render() {
-    const partialSubscribedIeds = localState.availableIeds.filter((ied) => ied.partial);
-    const availableIeds = localState.availableIeds.filter((ied) => !ied.partial);
-    const gseControlName = localState.currentGseControl?.getAttribute("name") ?? void 0;
+    const partialSubscribedIeds = this.availableIeds.filter((ied) => ied.partial);
+    const availableIeds = this.availableIeds.filter((ied) => !ied.partial);
+    const gseControlName = this.currentGseControl?.getAttribute("name") ?? void 0;
     return html`
       <section tabindex="0">
         <h1>
           ${translate("subscription.subscriberIed.title", {
-      selected: gseControlName ? localState.currentGooseIEDName + " > " + gseControlName : "IED"
+      selected: gseControlName ? this.currentGooseIEDName + " > " + gseControlName : "IED"
     })}
         </h1>
-        ${localState.currentGseControl ? html`<div class="subscriberWrapper">
+        ${this.currentGseControl ? html`<div class="subscriberWrapper">
               <filtered-list id="subscribedIeds">
                 ${this.renderFullSubscribers()}
                 ${this.renderPartiallySubscribers(partialSubscribedIeds)}

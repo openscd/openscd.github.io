@@ -29,7 +29,6 @@ import {
   selector
 } from "../../foundation.js";
 import {
-  newSampledValuesSelectEvent,
   styles,
   SubscribeStatus
 } from "./foundation.js";
@@ -44,16 +43,11 @@ const fcdaReferences = [
 function getFcdaReferences(elementContainingFcdaReferences) {
   return fcdaReferences.map((fcdaRef) => elementContainingFcdaReferences.getAttribute(fcdaRef) ? `[${fcdaRef}="${elementContainingFcdaReferences.getAttribute(fcdaRef)}"]` : "").join("");
 }
-const localState = {
-  currentSampledValuesControl: void 0,
-  currentDataset: void 0,
-  currentSampledValuesIEDName: void 0,
-  subscribedIeds: [],
-  availableIeds: []
-};
 export let SubscriberIEDListSmv = class extends LitElement {
   constructor() {
     super();
+    this.subscribedIeds = [];
+    this.availableIeds = [];
     this.onSampledValuesDataSetEvent = this.onSampledValuesDataSetEvent.bind(this);
     this.onIEDSubscriptionEvent = this.onIEDSubscriptionEvent.bind(this);
     const parentDiv = this.closest('div[id="containerTemplates"]');
@@ -63,40 +57,38 @@ export let SubscriberIEDListSmv = class extends LitElement {
     }
   }
   async onSampledValuesDataSetEvent(event) {
-    console.log("onSMVSelect");
-    localState.currentSampledValuesControl = event.detail.sampledValuesControl;
-    localState.currentDataset = event.detail.dataset;
-    localState.currentSampledValuesIEDName = localState.currentSampledValuesControl.closest("IED")?.getAttribute("name");
-    localState.subscribedIeds = [];
-    localState.availableIeds = [];
-    Array.from(this.doc.querySelectorAll(":root > IED")).filter((ied) => ied.getAttribute("name") != localState.currentSampledValuesIEDName).forEach((ied) => {
+    this.currentSampledValuesControl = event.detail.sampledValuesControl;
+    this.currentDataset = event.detail.dataset;
+    this.currentSampledValuesIEDName = this.currentSampledValuesControl?.closest("IED")?.getAttribute("name");
+    this.subscribedIeds = [];
+    this.availableIeds = [];
+    Array.from(this.doc.querySelectorAll(":root > IED")).filter((ied) => ied.getAttribute("name") != this.currentSampledValuesIEDName).forEach((ied) => {
       const inputElements = ied.querySelectorAll(`LN0 > Inputs, LN > Inputs`);
       let numberOfLinkedExtRefs = 0;
       if (!inputElements) {
-        localState.availableIeds.push({element: ied});
+        this.availableIeds.push({element: ied});
         return;
       }
-      localState.currentDataset.querySelectorAll("FCDA").forEach((fcda) => {
+      this.currentDataset.querySelectorAll("FCDA").forEach((fcda) => {
         inputElements.forEach((inputs) => {
-          if (inputs.querySelector(`ExtRef[iedName=${localState.currentSampledValuesIEDName}]${getFcdaReferences(fcda)}`)) {
+          if (inputs.querySelector(`ExtRef[iedName=${this.currentSampledValuesIEDName}]${getFcdaReferences(fcda)}`)) {
             numberOfLinkedExtRefs++;
           }
         });
       });
       if (numberOfLinkedExtRefs == 0) {
-        localState.availableIeds.push({element: ied});
+        this.availableIeds.push({element: ied});
         return;
       }
-      if (numberOfLinkedExtRefs >= localState.currentDataset.querySelectorAll("FCDA").length) {
-        localState.subscribedIeds.push({element: ied});
+      if (numberOfLinkedExtRefs >= this.currentDataset.querySelectorAll("FCDA").length) {
+        this.subscribedIeds.push({element: ied});
       } else {
-        localState.availableIeds.push({element: ied, partial: true});
+        this.availableIeds.push({element: ied, partial: true});
       }
     });
     this.requestUpdate();
   }
   async onIEDSubscriptionEvent(event) {
-    console.log("onSMVIEDSub");
     switch (event.detail.subscribeStatus) {
       case SubscribeStatus.Full: {
         this.unsubscribe(event.detail.ied);
@@ -119,10 +111,10 @@ export let SubscriberIEDListSmv = class extends LitElement {
     if (!inputsElement)
       inputsElement = createElement(ied.ownerDocument, "Inputs", {});
     const actions = [];
-    localState.currentDataset.querySelectorAll("FCDA").forEach((fcda) => {
-      if (!inputsElement.querySelector(`ExtRef[iedName=${localState.currentSampledValuesIEDName}]${getFcdaReferences(fcda)}`)) {
+    this.currentDataset.querySelectorAll("FCDA").forEach((fcda) => {
+      if (!inputsElement.querySelector(`ExtRef[iedName=${this.currentSampledValuesIEDName}]${getFcdaReferences(fcda)}`)) {
         const extRef = createElement(ied.ownerDocument, "ExtRef", {
-          iedName: localState.currentSampledValuesIEDName,
+          iedName: this.currentSampledValuesIEDName,
           serviceType: "SMV",
           ldInst: fcda.getAttribute("ldInst") ?? "",
           lnClass: fcda.getAttribute("lnClass") ?? "",
@@ -146,13 +138,12 @@ export let SubscriberIEDListSmv = class extends LitElement {
       };
       this.dispatchEvent(newActionEvent({title, actions: [inputAction]}));
     }
-    this.dispatchEvent(newSampledValuesSelectEvent(localState.currentSampledValuesControl, localState.currentDataset));
   }
   unsubscribe(ied) {
     const actions = [];
     ied.querySelectorAll("LN0 > Inputs, LN > Inputs").forEach((inputs) => {
-      localState.currentDataset.querySelectorAll("FCDA").forEach((fcda) => {
-        const extRef = inputs.querySelector(`ExtRef[iedName=${localState.currentSampledValuesIEDName}]${getFcdaReferences(fcda)}`);
+      this.currentDataset.querySelectorAll("FCDA").forEach((fcda) => {
+        const extRef = inputs.querySelector(`ExtRef[iedName=${this.currentSampledValuesIEDName}]${getFcdaReferences(fcda)}`);
         if (extRef)
           actions.push({old: {parent: inputs, element: extRef}});
       });
@@ -161,7 +152,6 @@ export let SubscriberIEDListSmv = class extends LitElement {
       title: "Disconnect",
       actions: this.extendDeleteActions(actions)
     }));
-    this.dispatchEvent(newSampledValuesSelectEvent(localState.currentSampledValuesControl, localState.currentDataset));
   }
   extendDeleteActions(extRefDeleteActions) {
     if (!extRefDeleteActions.length)
@@ -197,17 +187,17 @@ export let SubscriberIEDListSmv = class extends LitElement {
     }
   }
   render() {
-    const partialSubscribedIeds = localState.availableIeds.filter((ied) => ied.partial);
-    const availableIeds = localState.availableIeds.filter((ied) => !ied.partial);
-    const smvControlName = localState.currentSampledValuesControl?.getAttribute("name") ?? void 0;
+    const partialSubscribedIeds = this.availableIeds.filter((ied) => ied.partial);
+    const availableIeds = this.availableIeds.filter((ied) => !ied.partial);
+    const smvControlName = this.currentSampledValuesControl?.getAttribute("name") ?? void 0;
     return html`
       <section>
         <h1>
           ${translate("sampledvalues.subscriberIed.title", {
-      selected: smvControlName ? localState.currentSampledValuesIEDName + " > " + smvControlName : "IED"
+      selected: smvControlName ? this.currentSampledValuesIEDName + " > " + smvControlName : "IED"
     })}
         </h1>
-        ${localState.currentSampledValuesControl ? html`<div class="subscriberWrapper">
+        ${this.currentSampledValuesControl ? html`<div class="subscriberWrapper">
               <mwc-list>
                 <mwc-list-item noninteractive>
                   <span class="iedListTitle"
@@ -215,7 +205,7 @@ export let SubscriberIEDListSmv = class extends LitElement {
                   >
                 </mwc-list-item>
                 <li divider role="separator"></li>
-                ${localState.subscribedIeds.length > 0 ? localState.subscribedIeds.map((ied) => html`<ied-element-smv
+                ${this.subscribedIeds.length > 0 ? this.subscribedIeds.map((ied) => html`<ied-element-smv
                           .status=${SubscribeStatus.Full}
                           .element=${ied.element}
                         ></ied-element-smv>`) : html`<mwc-list-item graphic="avatar" noninteractive>

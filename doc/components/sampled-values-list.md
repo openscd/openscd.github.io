@@ -7,3 +7,9 @@ An sub element for showing all Sampled Values per IED.
 | Property | Type          |
 |----------|---------------|
 | `doc`    | `XMLDocument` |
+
+## Methods
+
+| Method      | Type                                 |
+|-------------|--------------------------------------|
+| `renderSmv` | `(element: Element): TemplateResult` |
