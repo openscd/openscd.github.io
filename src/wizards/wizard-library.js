@@ -17,6 +17,8 @@ import {createPowerTransformerWizard, editPowerTransformerWizard} from "./powert
 import {editSubNetworkWizard} from "./subnetwork.js";
 import {editIEDWizard} from "./ied.js";
 import {editTrgOpsWizard} from "./trgops.js";
+import {createDaWizard} from "./da.js";
+import {editDAIWizard} from "./dai.js";
 export function emptyWizard() {
   return;
 }
@@ -110,11 +112,11 @@ export const wizards = {
     create: emptyWizard
   },
   DA: {
-    edit: emptyWizard,
+    edit: createDaWizard,
     create: emptyWizard
   },
   DAI: {
-    edit: emptyWizard,
+    edit: editDAIWizard,
     create: emptyWizard
   },
   DAType: {

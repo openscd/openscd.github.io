@@ -371,6 +371,17 @@ export const en = {
       }
     }
   },
+  dai: {
+    wizard: {
+      valueHelper: "Value should be of type {{type}}",
+      title: {
+        edit: "Edit {{daiName}}"
+      }
+    },
+    action: {
+      updatedai: 'Edited DAI "{{daiName}}"'
+    }
+  },
   sdo: {
     wizard: {
       title: {
