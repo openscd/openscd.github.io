@@ -489,7 +489,8 @@ export const de = {
   gse: {
     action: {
       addaddress: "GSE bearbeitet ({{identity}})"
-    }
+    },
+    missingaccp: "AccessPoint is nicht verbunden. GSE kann nicht hinzugefügt werden."
   },
   smv: {
     action: {
@@ -563,6 +564,9 @@ export const de = {
     label: {
       copy: "Kopie in anderen IEDs ertellen"
     }
+  },
+  gsecontrol: {
+    wizard: {location: "Ablageort der GOOSE wählen"}
   },
   add: "Hinzufügen",
   new: "Neu",

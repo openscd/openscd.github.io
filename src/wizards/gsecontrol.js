@@ -8,6 +8,8 @@ import "../wizard-select.js";
 import "../wizard-textfield.js";
 import {
   cloneElement,
+  createElement,
+  getUniqueElementName,
   getValue,
   identity,
   isPublic,
@@ -18,6 +20,15 @@ import {maxLength, patterns} from "./foundation/limits.js";
 import {editDataSetWizard} from "./dataset.js";
 import {editGseWizard} from "./gse.js";
 import {securityEnableEnum} from "./foundation/enums.js";
+import {dataAttributePicker, iEDPicker} from "./foundation/finder.js";
+import {newFCDA} from "./fcda.js";
+import {
+  getConnectedAP,
+  isAccessPointConnected,
+  uniqueAppId,
+  uniqueMacAddress
+} from "./foundation/scl.js";
+import {contentGseWizard, createAddressElement} from "./address.js";
 export function getGSE(element) {
   const cbName = element.getAttribute("name");
   const iedName = element.closest("IED")?.getAttribute("name");
@@ -25,11 +36,11 @@ export function getGSE(element) {
   const ldInst = element.closest("LDevice")?.getAttribute("inst");
   return element.closest("SCL")?.querySelector(`:root > Communication > SubNetwork > ConnectedAP[iedName="${iedName}"][apName="${apName}"] > GSE[ldInst="${ldInst}"][cbName="${cbName}"]`);
 }
-export function renderGseAttributes(name, desc, type, appID, fixedOffs, securityEnabled) {
+export function contentGseControlWizard(content) {
   return [
     html`<wizard-textfield
       label="name"
-      .maybeValue=${name}
+      .maybeValue=${content.name}
       helper="${translate("scl.name")}"
       required
       validationMessage="${translate("textfield.required")}"
@@ -39,40 +50,248 @@ export function renderGseAttributes(name, desc, type, appID, fixedOffs, security
     ></wizard-textfield>`,
     html`<wizard-textfield
       label="desc"
-      .maybeValue=${desc}
+      .maybeValue=${content.desc}
       nullable
       helper="${translate("scl.desc")}"
     ></wizard-textfield>`,
     html`<wizard-select
       label="type"
-      .maybeValue=${type}
+      .maybeValue=${content.type}
       helper="${translate("scl.type")}"
       nullable
       required
-      >${["GOOSE", "GSSE"].map((type2) => html`<mwc-list-item value="${type2}">${type2}</mwc-list-item>`)}</wizard-select
+      >${["GOOSE", "GSSE"].map((type) => html`<mwc-list-item value="${type}">${type}</mwc-list-item>`)}</wizard-select
     >`,
     html`<wizard-textfield
       label="appID"
-      .maybeValue=${appID}
+      .maybeValue=${content.appID}
       helper="${translate("scl.id")}"
       required
       validationMessage="${translate("textfield.nonempty")}"
     ></wizard-textfield>`,
     html`<wizard-checkbox
       label="fixedOffs"
-      .maybeValue=${fixedOffs}
+      .maybeValue=${content.fixedOffs}
       nullable
       helper="${translate("scl.fixedOffs")}"
     ></wizard-checkbox>`,
     html`<wizard-select
       label="securityEnabled"
-      .maybeValue=${securityEnabled}
+      .maybeValue=${content.securityEnabled}
       nullable
       required
       helper="${translate("scl.securityEnable")}"
-      >${securityEnableEnum.map((type2) => html`<mwc-list-item value="${type2}">${type2}</mwc-list-item>`)}</wizard-select
+      >${securityEnableEnum.map((type) => html`<mwc-list-item value="${type}">${type}</mwc-list-item>`)}</wizard-select
     >`
   ];
+}
+function createGseControlAction(parent) {
+  return (inputs, wizard) => {
+    const gseControlAttrs = {};
+    const gseControlKeys = [
+      "name",
+      "desc",
+      "type",
+      "appID",
+      "fixedOffs",
+      "securityEnabled"
+    ];
+    gseControlKeys.forEach((key) => {
+      gseControlAttrs[key] = getValue(inputs.find((i) => i.label === key));
+    });
+    gseControlAttrs["confRev"] = "1";
+    const dataSetName = gseControlAttrs.name + "sDataSet";
+    gseControlAttrs["datSet"] = dataSetName;
+    const gseControl = createElement(parent.ownerDocument, "GSEControl", gseControlAttrs);
+    let gse = null;
+    let gseParent = null;
+    if (isAccessPointConnected(parent)) {
+      const instType = wizard.shadowRoot?.querySelector("#instType")?.checked ?? false;
+      const gseAttrs = {};
+      const gseKeys = ["MAC-Address", "APPID", "VLAN-ID", "VLAN-PRIORITY"];
+      gseKeys.forEach((key) => {
+        gseAttrs[key] = getValue(inputs.find((i) => i.label === key));
+      });
+      const minTime = getValue(inputs.find((i) => i.label === "MinTime"));
+      const maxTime = getValue(inputs.find((i) => i.label === "MaxTime"));
+      gse = createElement(parent.ownerDocument, "GSE", {
+        ldInst: parent.closest("LDevice")?.getAttribute("inst") ?? "",
+        cbName: gseControlAttrs["name"]
+      });
+      const address = createAddressElement(gseAttrs, gse, instType);
+      const MinTime = createElement(parent.ownerDocument, "MinTime", {
+        unit: "s",
+        multiplier: "m"
+      });
+      MinTime.textContent = minTime;
+      const MaxTime = createElement(parent.ownerDocument, "MaxTime", {
+        unit: "s",
+        multiplier: "m"
+      });
+      MaxTime.textContent = maxTime;
+      gse.appendChild(address);
+      gse.appendChild(MaxTime);
+      gse.appendChild(MinTime);
+      gseParent = getConnectedAP(parent);
+    }
+    const dataSet = createElement(parent.ownerDocument, "DataSet", {
+      name: dataSetName
+    });
+    const finder = wizard.shadowRoot.querySelector("finder-list");
+    const paths = finder?.paths ?? [];
+    for (const path of paths) {
+      const element = newFCDA(parent, path);
+      if (!element)
+        continue;
+      dataSet.appendChild(element);
+    }
+    const complexAction = gse ? {
+      title: "Create GSEControl",
+      actions: [
+        {new: {parent, element: gseControl}},
+        {new: {parent: gseParent, element: gse}},
+        {new: {parent, element: dataSet}}
+      ]
+    } : {
+      title: "Create GSEControl",
+      actions: [
+        {new: {parent, element: gseControl}},
+        {new: {parent, element: dataSet}}
+      ]
+    };
+    return [complexAction];
+  };
+}
+export function createGseControlWizard(ln0OrLn) {
+  const server = ln0OrLn.closest("Server");
+  const name = getUniqueElementName(ln0OrLn, "GSEControl");
+  const desc = null;
+  const type = "GOOSE";
+  const appID = "";
+  const fixedOffs = null;
+  const securityEnabled = null;
+  const hasInstType = true;
+  const attributes = {
+    "MAC-Address": uniqueMacAddress(ln0OrLn.ownerDocument, "GOOSE"),
+    APPID: uniqueAppId(ln0OrLn.ownerDocument),
+    "VLAN-ID": null,
+    "VLAN-PRIORITY": null
+  };
+  const minTime = "10";
+  const maxTime = "1000";
+  return isAccessPointConnected(ln0OrLn) ? [
+    {
+      title: get("wizard.title.add", {tagName: "GSEControl"}),
+      content: contentGseControlWizard({
+        name,
+        desc,
+        type,
+        appID,
+        fixedOffs,
+        securityEnabled
+      })
+    },
+    {
+      title: get("wizard.title.add", {tagName: "GSE"}),
+      content: [
+        ...contentGseWizard({hasInstType, attributes}),
+        html`<wizard-textfield
+              label="MinTime"
+              .maybeValue=${minTime}
+              nullable
+              suffix="ms"
+              type="number"
+            ></wizard-textfield>`,
+        html`<wizard-textfield
+              label="MaxTime"
+              .maybeValue=${maxTime}
+              nullable
+              suffix="ms"
+              type="number"
+            ></wizard-textfield>`
+      ]
+    },
+    {
+      title: get("dataset.fcda.add"),
+      primary: {
+        icon: "save",
+        label: get("save"),
+        action: createGseControlAction(ln0OrLn)
+      },
+      content: [server ? dataAttributePicker(server) : html``]
+    }
+  ] : [
+    {
+      title: get("wizard.title.add", {tagName: "GSEControl"}),
+      content: contentGseControlWizard({
+        name,
+        desc,
+        type,
+        appID,
+        fixedOffs,
+        securityEnabled
+      })
+    },
+    {
+      title: get("wizard.title.add", {tagName: "GSE"}),
+      content: [
+        html`<h3
+              style="color: var(--mdc-theme-on-surface);
+                      font-family: 'Roboto', sans-serif;
+                      font-weight: 300;"
+            >
+              ${translate("gse.missingaccp")}
+            </h3>`
+      ]
+    },
+    {
+      title: get("dataset.fcda.add"),
+      primary: {
+        icon: "save",
+        label: get("save"),
+        action: createGseControlAction(ln0OrLn)
+      },
+      content: [server ? dataAttributePicker(server) : html``]
+    }
+  ];
+}
+function openGseControlCreateWizard(doc) {
+  return (_, wizard) => {
+    const finder = wizard.shadowRoot?.querySelector("finder-list");
+    const path = finder?.path ?? [];
+    if (path.length === 0)
+      return [];
+    const [tagName, id] = path.pop().split(": ");
+    if (tagName !== "IED")
+      return [];
+    const ied = doc.querySelector(selector(tagName, id));
+    if (!ied)
+      return [];
+    const ln0 = ied.querySelector("LN0");
+    if (!ln0)
+      return [];
+    return [() => createGseControlWizard(ln0)];
+  };
+}
+export function gseControlParentSelector(doc) {
+  return [
+    {
+      title: get("gsecontrol.wizard.location"),
+      primary: {
+        icon: "",
+        label: get("next"),
+        action: openGseControlCreateWizard(doc)
+      },
+      content: [iEDPicker(doc)]
+    }
+  ];
+}
+function prepareGseControlCreateWizard(anyParent) {
+  return () => {
+    if (anyParent.tagName === "IED" && anyParent.querySelector("LN0"))
+      return [() => createGseControlWizard(anyParent.querySelector("LN0"))];
+    return [() => gseControlParentSelector(anyParent.ownerDocument)];
+  };
 }
 export function removeGseControlAction(element) {
   if (!element.parentElement)
@@ -192,16 +411,29 @@ export function editGseControlWizard(element) {
       },
       menuActions,
       content: [
-        ...renderGseAttributes(name, desc, type, appID, fixedOffs, securityEnabled)
+        ...contentGseControlWizard({
+          name,
+          desc,
+          type,
+          appID,
+          fixedOffs,
+          securityEnabled
+        })
       ]
     }
   ];
 }
 export function selectGseControlWizard(element) {
   const gseControls = Array.from(element.querySelectorAll("GSEControl")).filter(isPublic);
+  const primary = element.querySelector("LN0") ? {
+    icon: "add",
+    label: get("GOOSE"),
+    action: prepareGseControlCreateWizard(element)
+  } : void 0;
   return [
     {
       title: get("wizard.title.select", {tagName: "GSEcontrol"}),
+      primary,
       content: [
         html`<filtered-list
           @selected=${(e) => {

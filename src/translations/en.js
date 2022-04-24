@@ -489,7 +489,8 @@ export const en = {
   gse: {
     action: {
       addaddress: "Edit GSE ({{identity}})"
-    }
+    },
+    missingaccp: "AccessPoint is not connected. GSE cannot be created."
   },
   smv: {
     action: {
@@ -561,6 +562,9 @@ export const en = {
       valid: "Can be copied"
     },
     label: {copy: "Copy to other IEDs"}
+  },
+  gsecontrol: {
+    wizard: {location: "Select GOOSE Control Block Location"}
   },
   add: "Add",
   new: "New",

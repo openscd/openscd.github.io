@@ -72,7 +72,8 @@
 						<section class="tsd-index-section ">
 							<h3>Functions</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-function tsd-parent-kind-module"><a href="wizards_address.html#renderGseSmvAddress" class="tsd-kind-icon">render<wbr>Gse<wbr>Smv<wbr>Address</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module"><a href="wizards_address.html#contentGseWizard" class="tsd-kind-icon">content<wbr>Gse<wbr>Wizard</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module"><a href="wizards_address.html#createAddressElement" class="tsd-kind-icon">create<wbr>Address<wbr>Element</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-module"><a href="wizards_address.html#updateAddress" class="tsd-kind-icon">update<wbr>Address</a></li>
 							</ul>
 						</section>
@@ -82,22 +83,22 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Functions</h2>
 				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
-					<a name="renderGseSmvAddress" class="tsd-anchor"></a>
-					<h3>render<wbr>Gse<wbr>Smv<wbr>Address</h3>
+					<a name="contentGseWizard" class="tsd-anchor"></a>
+					<h3>content<wbr>Gse<wbr>Wizard</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
-						<li class="tsd-signature tsd-kind-icon">render<wbr>Gse<wbr>Smv<wbr>Address<span class="tsd-signature-symbol">(</span>parent<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Element</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">TemplateResult</span><span class="tsd-signature-symbol">[]</span></li>
+						<li class="tsd-signature tsd-kind-icon">content<wbr>Gse<wbr>Wizard<span class="tsd-signature-symbol">(</span>content<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ContentOptions</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">TemplateResult</span><span class="tsd-signature-symbol">[]</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/3689ef2/src/wizards/address.ts#L22">src/wizards/address.ts:22</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/887f46f/src/wizards/address.ts#L17">src/wizards/address.ts:17</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>parent: <span class="tsd-signature-type">Element</span></h5>
+									<h5>content: <span class="tsd-signature-type">ContentOptions</span></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">TemplateResult</span><span class="tsd-signature-symbol">[]</span></h4>
@@ -105,16 +106,45 @@
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
-					<a name="updateAddress" class="tsd-anchor"></a>
-					<h3>update<wbr>Address</h3>
+					<a name="createAddressElement" class="tsd-anchor"></a>
+					<h3>create<wbr>Address<wbr>Element</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
-						<li class="tsd-signature tsd-kind-icon">update<wbr>Address<span class="tsd-signature-symbol">(</span>parent<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Element</span>, inputs<span class="tsd-signature-symbol">: </span><a href="foundation.html#WizardInputElement" class="tsd-signature-type" data-tsd-kind="Type alias">WizardInputElement</a><span class="tsd-signature-symbol">[]</span>, instType<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span><a href="../interfaces/foundation.Create.html" class="tsd-signature-type" data-tsd-kind="Interface">Create</a><span class="tsd-signature-symbol"> | </span><a href="../interfaces/foundation.Delete.html" class="tsd-signature-type" data-tsd-kind="Interface">Delete</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">[]</span></li>
+						<li class="tsd-signature tsd-kind-icon">create<wbr>Address<wbr>Element<span class="tsd-signature-symbol">(</span>inputs<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol">&gt;</span>, parent<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Element</span>, instType<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Element</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/3689ef2/src/wizards/address.ts#L84">src/wizards/address.ts:84</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/887f46f/src/wizards/address.ts#L51">src/wizards/address.ts:51</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>inputs: <span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol">&gt;</span></h5>
+								</li>
+								<li>
+									<h5>parent: <span class="tsd-signature-type">Element</span></h5>
+								</li>
+								<li>
+									<h5>instType: <span class="tsd-signature-type">boolean</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Element</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
+					<a name="updateAddress" class="tsd-anchor"></a>
+					<h3>update<wbr>Address</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
+						<li class="tsd-signature tsd-kind-icon">update<wbr>Address<span class="tsd-signature-symbol">(</span>parent<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Element</span>, inputs<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol">&gt;</span>, instType<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span><a href="../interfaces/foundation.Create.html" class="tsd-signature-type" data-tsd-kind="Interface">Create</a><span class="tsd-signature-symbol"> | </span><a href="../interfaces/foundation.Delete.html" class="tsd-signature-type" data-tsd-kind="Interface">Delete</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">[]</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/887f46f/src/wizards/address.ts#L76">src/wizards/address.ts:76</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -123,7 +153,7 @@
 									<h5>parent: <span class="tsd-signature-type">Element</span></h5>
 								</li>
 								<li>
-									<h5>inputs: <a href="foundation.html#WizardInputElement" class="tsd-signature-type" data-tsd-kind="Type alias">WizardInputElement</a><span class="tsd-signature-symbol">[]</span></h5>
+									<h5>inputs: <span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol">&gt;</span></h5>
 								</li>
 								<li>
 									<h5>instType: <span class="tsd-signature-type">boolean</span></h5>
@@ -149,7 +179,10 @@
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
 					<li class=" tsd-kind-function tsd-parent-kind-module">
-						<a href="wizards_address.html#renderGseSmvAddress" class="tsd-kind-icon">render<wbr>Gse<wbr>Smv<wbr>Address</a>
+						<a href="wizards_address.html#contentGseWizard" class="tsd-kind-icon">content<wbr>Gse<wbr>Wizard</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-module">
+						<a href="wizards_address.html#createAddressElement" class="tsd-kind-icon">create<wbr>Address<wbr>Element</a>
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-module">
 						<a href="wizards_address.html#updateAddress" class="tsd-kind-icon">update<wbr>Address</a>
