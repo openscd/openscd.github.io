@@ -532,7 +532,8 @@ export const de = {
     fcd: {add: "Daten-Objekte hinzufügen"}
   },
   report: {
-    wizard: {location: "Ablageort der Reports wählen"}
+    wizard: {location: "Ablageort der Reports wählen"},
+    rptID: "Report-Kontrolblock Kennung"
   },
   cleanup: {
     unreferencedDataSets: {

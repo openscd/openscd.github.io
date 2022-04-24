@@ -532,7 +532,8 @@ export const en = {
     fcd: {add: "Add Data Objects"}
   },
   report: {
-    wizard: {location: "Select Report Control Location"}
+    wizard: {location: "Select Report Control Location"},
+    rptID: "Report control block identifier"
   },
   cleanup: {
     unreferencedDataSets: {
