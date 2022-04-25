@@ -289,14 +289,12 @@ export let WizardDialog = class extends LitElement {
             icon="code"
             label="${translate("save")}"
             trailingIcon
-            dialogInitialFocus
           ></mwc-button>` : page.primary ? html`<mwc-button
             slot="primaryAction"
             @click=${() => this.act(page.primary?.action)}
             icon="${page.primary.icon}"
             label="${page.primary.label}"
             trailingIcon
-            dialogInitialFocus
           ></mwc-button>` : index + 1 < (this.wizard?.length ?? 0) ? html`<mwc-button
             slot="primaryAction"
             dialogAction="next"
