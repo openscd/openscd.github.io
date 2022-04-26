@@ -25,7 +25,7 @@ import {getNameAttribute, newWizardEvent} from "../../foundation.js";
 import {wizards} from "../../wizards/wizard-library.js";
 import {getCustomField} from "./foundation/foundation.js";
 import {createDaInfoWizard} from "./da-wizard.js";
-import {getValueElement} from "./foundation.js";
+import {getInstanceDAElement, getValueElement} from "./foundation.js";
 export let DAContainer = class extends LitElement {
   constructor() {
     super(...arguments);
@@ -62,7 +62,6 @@ export let DAContainer = class extends LitElement {
   }
   render() {
     const bType = this.element.getAttribute("bType");
-    const value = this.getValue() ?? "";
     return html`<action-pane .label="${this.header()}" icon="${this.instanceElement != null ? "done" : ""}">
       <abbr slot="action">
         <mwc-icon-button
@@ -72,26 +71,26 @@ export let DAContainer = class extends LitElement {
         ></mwc-icon-button>
       </abbr>
       ${bType == "Struct" ? html`<abbr slot="action" title="${translate("iededitor.toggleChildElements")}">
-        <mwc-icon-button-toggle
-          id="toggleButton"
-          onIcon="keyboard_arrow_up"
-          offIcon="keyboard_arrow_down"
-          @click=${() => this.requestUpdate()}
-        ></mwc-icon-button-toggle>
-      </abbr>` : nothing}
-      ${this.instanceElement && getCustomField()[bType] ? html`<div style="display: flex; flex-direction: row;">
-          <div style="display: flex; align-items: center; flex: auto;">
-            <h4>${value}</h4>
-          </div>
-          <div style="display: flex; align-items: center;">
-            <mwc-icon-button
-              icon="edit"
-              @click=${() => this.openEditWizard()}
-            ></mwc-icon-button>
-          </div>
-        </div>` : html`<h4>${value}</h4>`}
-      ${this.toggleButton?.on && bType == "Struct" ? this.getBDAElements().map((element) => html`<da-container
-          .element=${element}
+          <mwc-icon-button-toggle
+            id="toggleButton"
+            onIcon="keyboard_arrow_up"
+            offIcon="keyboard_arrow_down"
+            @click=${() => this.requestUpdate()}
+          ></mwc-icon-button-toggle>
+        </abbr>` : this.instanceElement && getCustomField()[bType] ? html`<div style="display: flex; flex-direction: row;">
+            <div style="display: flex; align-items: center; flex: auto;">
+              <h6>${this.getValue() ?? ""}</h6>
+            </div>
+            <div style="display: flex; align-items: center;">
+              <mwc-icon-button
+                icon="edit"
+                @click=${() => this.openEditWizard()}
+              ></mwc-icon-button>
+            </div>
+          </div>` : html`<h6>${this.getValue() ?? ""}</h6>`}
+      ${this.toggleButton?.on && bType == "Struct" ? this.getBDAElements().map((bdaElement) => html`<da-container
+          .element=${bdaElement}
+          .instanceElement=${getInstanceDAElement(this.instanceElement, bdaElement)}
           .nsdoc=${this.nsdoc}
           .ancestors=${[this.element, ...this.ancestors]}
         ></da-container>`) : nothing}
@@ -100,7 +99,7 @@ export let DAContainer = class extends LitElement {
   }
 };
 DAContainer.styles = css`
-    h4 {
+    h6 {
       color: var(--mdc-theme-on-surface);
       font-family: 'Roboto', sans-serif;
       overflow: hidden;

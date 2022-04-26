@@ -75,6 +75,7 @@
 								<li class="tsd-kind-function tsd-parent-kind-module"><a href="editors_ied_foundation.html#findDOTypeElement" class="tsd-kind-icon">findDOType<wbr>Element</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-module"><a href="editors_ied_foundation.html#findElement" class="tsd-kind-icon">find<wbr>Element</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-module"><a href="editors_ied_foundation.html#findLogicaNodeElement" class="tsd-kind-icon">find<wbr>Logica<wbr>Node<wbr>Element</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module"><a href="editors_ied_foundation.html#getInstanceDAElement" class="tsd-kind-icon">get<wbr>InstanceDAElement</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-module"><a href="editors_ied_foundation.html#getValueElement" class="tsd-kind-icon">get<wbr>Value<wbr>Element</a></li>
 							</ul>
 						</section>
@@ -93,7 +94,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/a4783ab/src/editors/ied/foundation.ts#L30">src/editors/ied/foundation.ts:30</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/ccad42d/src/editors/ied/foundation.ts#L32">src/editors/ied/foundation.ts:32</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -125,7 +126,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/a4783ab/src/editors/ied/foundation.ts#L7">src/editors/ied/foundation.ts:7</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/ccad42d/src/editors/ied/foundation.ts#L9">src/editors/ied/foundation.ts:9</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -163,7 +164,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/a4783ab/src/editors/ied/foundation.ts#L17">src/editors/ied/foundation.ts:17</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/ccad42d/src/editors/ied/foundation.ts#L19">src/editors/ied/foundation.ts:19</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -186,6 +187,44 @@
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
+					<a name="getInstanceDAElement" class="tsd-anchor"></a>
+					<h3>get<wbr>InstanceDAElement</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>InstanceDAElement<span class="tsd-signature-symbol">(</span>parentInstance<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Element</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span>, da<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Element</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Element</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/ccad42d/src/editors/ied/foundation.ts#L46">src/editors/ied/foundation.ts:46</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Get the instance element (SDI / DAI) of a DA element (if available)</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>parentInstance: <span class="tsd-signature-type">Element</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The parent instance if available to search in for other instance elements.</p>
+									</div>
+								</li>
+								<li>
+									<h5>da: <span class="tsd-signature-type">Element</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The (B)DA object to search with.</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Element</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span></h4>
+							<p>The optional SDI / DAI element.</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
 					<a name="getValueElement" class="tsd-anchor"></a>
 					<h3>get<wbr>Value<wbr>Element</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
@@ -195,7 +234,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/a4783ab/src/editors/ied/foundation.ts#L43">src/editors/ied/foundation.ts:43</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/ccad42d/src/editors/ied/foundation.ts#L63">src/editors/ied/foundation.ts:63</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -240,6 +279,9 @@
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-module">
 						<a href="editors_ied_foundation.html#findLogicaNodeElement" class="tsd-kind-icon">find<wbr>Logica<wbr>Node<wbr>Element</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-module">
+						<a href="editors_ied_foundation.html#getInstanceDAElement" class="tsd-kind-icon">get<wbr>InstanceDAElement</a>
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-module">
 						<a href="editors_ied_foundation.html#getValueElement" class="tsd-kind-icon">get<wbr>Value<wbr>Element</a>

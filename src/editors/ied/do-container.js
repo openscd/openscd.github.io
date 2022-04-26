@@ -23,7 +23,7 @@ import "./da-container.js";
 import {getDescriptionAttribute, getNameAttribute, newWizardEvent} from "../../foundation.js";
 import {translate} from "../../../_snowpack/pkg/lit-translate.js";
 import {createDoInfoWizard} from "./do-wizard.js";
-import {findDOTypeElement} from "./foundation.js";
+import {findDOTypeElement, getInstanceDAElement} from "./foundation.js";
 export let DOContainer = class extends LitElement {
   constructor() {
     super(...arguments);
@@ -60,13 +60,6 @@ export let DOContainer = class extends LitElement {
     }
     return null;
   }
-  getInstanceDAElement(da) {
-    const daName = getNameAttribute(da);
-    if (this.instanceElement) {
-      return this.instanceElement.querySelector(`:scope > DAI[name="${daName}"]`);
-    }
-    return null;
-  }
   render() {
     const daElements = this.getDAElements();
     const doElements = this.getDOElements();
@@ -86,15 +79,15 @@ export let DOContainer = class extends LitElement {
             @click=${() => this.requestUpdate()}
           ></mwc-icon-button-toggle>
         </abbr>` : nothing}
-      ${this.toggleButton?.on ? daElements.map((da) => html`<da-container
-          .element=${da}
-          .instanceElement=${this.getInstanceDAElement(da)}
+      ${this.toggleButton?.on ? daElements.map((daElement) => html`<da-container
+          .element=${daElement}
+          .instanceElement=${getInstanceDAElement(this.instanceElement, daElement)}
           .nsdoc=${this.nsdoc}
           .ancestors=${[this.element, ...this.ancestors]}
         ></da-container>`) : nothing}
-      ${this.toggleButton?.on ? doElements.map((dO) => html`<do-container
-          .element=${dO}
-          .instanceElement=${this.getInstanceDOElement(dO)}
+      ${this.toggleButton?.on ? doElements.map((doElement) => html`<do-container
+          .element=${doElement}
+          .instanceElement=${this.getInstanceDOElement(doElement)}
           .nsdoc=${this.nsdoc}
           .ancestors=${[this.element, ...this.ancestors]}
         ></do-container>`) : nothing}
