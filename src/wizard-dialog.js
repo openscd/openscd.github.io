@@ -241,11 +241,13 @@ export let WizardDialog = class extends LitElement {
   }
   renderPage(page, index) {
     const showCodeToggleButton = page.element && localStorage.getItem("mode") === "pro";
+    const extraWidth = showCodeToggleButton && page.menuActions ? 96 : showCodeToggleButton || page.menuActions ? 48 : 0;
     return html`<mwc-dialog
       defaultAction="close"
       ?open=${index === this.pageIndex}
       heading=${page.title}
       @closed=${this.onClosed}
+      style="--mdc-dialog-min-width:calc(100% + ${extraWidth}px)"
     >
       ${showCodeToggleButton || page.menuActions ? html`<nav>
             ${showCodeToggleButton ? html`<mwc-icon-button-toggle
