@@ -21,9 +21,8 @@ export function updateValue(element) {
 }
 export function renderDAIWizard(element, instanceElement) {
   const bType = element.getAttribute("bType");
-  const value = instanceElement.querySelector("Val")?.textContent?.trim() ?? "";
   return [
-    html`${getCustomField()[bType].render(value)}`
+    html`${getCustomField()[bType].render(element, instanceElement)}`
   ];
 }
 export function editDAIWizard(element, instanceElement) {
