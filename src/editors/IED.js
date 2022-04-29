@@ -13,8 +13,8 @@ import {css, html, LitElement, property, state} from "../../_snowpack/pkg/lit-el
 import "../../_snowpack/pkg/@material/mwc-fab.js";
 import "../../_snowpack/pkg/@material/mwc-select.js";
 import "../../_snowpack/pkg/@material/mwc-list/mwc-list-item.js";
-import "../zeroline-pane.js";
 import "./ied/ied-container.js";
+import "./substation/zeroline-pane.js";
 import {translate} from "../../_snowpack/pkg/lit-translate.js";
 import {compareNames, getDescriptionAttribute, getNameAttribute} from "../foundation.js";
 let iedEditorSelectedIed;

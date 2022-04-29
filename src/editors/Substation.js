@@ -12,7 +12,7 @@ var __decorate = (decorators, target, key, kind) => {
 import {LitElement, html, property, css} from "../../_snowpack/pkg/lit-element.js";
 import {get} from "../../_snowpack/pkg/lit-translate.js";
 import "../../_snowpack/pkg/@material/mwc-fab.js";
-import "../zeroline-pane.js";
+import "./substation/zeroline-pane.js";
 import {newWizardEvent} from "../foundation.js";
 import {wizards} from "../wizards/wizard-library.js";
 export default class SubstationPlugin extends LitElement {
