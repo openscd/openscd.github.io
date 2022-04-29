@@ -13,6 +13,7 @@
 | `gsecontrol`       |            | `IconButton`                                     |            |                                                  |
 | `readonly`         | `readonly` | `boolean`                                        | false      |                                                  |
 | `reportcontrol`    |            | `IconButton`                                     |            |                                                  |
+| `showfunctions`    |            | `IconButtonToggle`                               |            |                                                  |
 | `showieds`         |            | `IconButtonToggle`                               |            |                                                  |
 | `smvcontrol`       |            | `IconButton`                                     |            |                                                  |
 
@@ -26,4 +27,5 @@
 | `openReportControlSelection`       | `(): void`           |                                                  |
 | `openSampledValueControlSelection` | `(): void`           |                                                  |
 | `renderIedContainer`               | `(): TemplateResult` |                                                  |
+| `toggleShowFunctions`              | `(): void`           |                                                  |
 | `toggleShowIEDs`                   | `(): void`           |                                                  |

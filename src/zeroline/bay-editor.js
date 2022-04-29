@@ -31,11 +31,7 @@ import {
   tags
 } from "../foundation.js";
 import {emptyWizard, wizards} from "../wizards/wizard-library.js";
-import {
-  cloneSubstationElement,
-  startMove,
-  styles
-} from "./foundation.js";
+import {cloneSubstationElement, startMove, styles} from "./foundation.js";
 function childTags(element) {
   if (!element)
     return [];
@@ -45,6 +41,7 @@ export let BayEditor = class extends LitElement {
   constructor() {
     super(...arguments);
     this.readonly = false;
+    this.showfunctions = false;
     this.getAttachedIeds = () => {
       return [];
     };
@@ -81,6 +78,12 @@ export let BayEditor = class extends LitElement {
   }
   firstUpdated() {
     this.addMenu.anchor = this.addButton;
+  }
+  renderFunctions() {
+    if (!this.showfunctions)
+      return html``;
+    const functions = getChildElementsByTagName(this.element, "Function");
+    return html` ${functions.map((fUnction) => html`<function-editor .element=${fUnction}></function-editor>`)}`;
   }
   renderIedContainer() {
     const ieds = this.getAttachedIeds?.(this.element) ?? [];
@@ -144,9 +147,11 @@ export let BayEditor = class extends LitElement {
           >${this.renderAddButtons()}</mwc-menu
         >
       </abbr>
-      ${this.renderIedContainer()}
+      ${this.renderIedContainer()} ${this.renderFunctions()}
       <div id="ceContainer">
-        ${Array.from(getChildElementsByTagName(this.element, "PowerTransformer")).map((pwt) => html`<powertransformer-editor .element=${pwt}></powertransformer-editor>`)}
+        ${Array.from(getChildElementsByTagName(this.element, "PowerTransformer")).map((pwt) => html`<powertransformer-editor
+              .element=${pwt}
+            ></powertransformer-editor>`)}
         ${Array.from(getChildElementsByTagName(this.element, "ConductingEquipment")).map((voltageLevel) => html`<conducting-equipment-editor
               .element=${voltageLevel}
               ?readonly=${this.readonly}
@@ -172,6 +177,9 @@ __decorate([
 __decorate([
   property({type: Boolean})
 ], BayEditor.prototype, "readonly", 2);
+__decorate([
+  property({type: Boolean})
+], BayEditor.prototype, "showfunctions", 2);
 __decorate([
   property({type: String})
 ], BayEditor.prototype, "header", 1);

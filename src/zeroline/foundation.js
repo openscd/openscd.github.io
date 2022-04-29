@@ -1,4 +1,5 @@
 import {css} from "../../_snowpack/pkg/lit-element.js";
+import "./function-editor.js";
 import {newActionEvent, isPublic} from "../foundation.js";
 import {
   circuitBreakerIcon,

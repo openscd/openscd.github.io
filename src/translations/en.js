@@ -93,6 +93,7 @@ export const en = {
   zeroline: {
     iedsloading: "Loading IEDs...",
     showieds: "Show/hide IEDs in substation editor",
+    showfunctions: "Filter function type elements",
     commmap: "Communication mapping",
     reportcontrol: "Show all Reports",
     gsecontrol: "Show all GOOSEs",

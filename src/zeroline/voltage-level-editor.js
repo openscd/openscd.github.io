@@ -29,7 +29,12 @@ import {
   cloneSubstationElement,
   styles
 } from "./foundation.js";
-import {newActionEvent, newWizardEvent, tags} from "../foundation.js";
+import {
+  getChildElementsByTagName,
+  newActionEvent,
+  newWizardEvent,
+  tags
+} from "../foundation.js";
 import {SubstationEditor} from "./substation-editor.js";
 import {emptyWizard, wizards} from "../wizards/wizard-library.js";
 function childTags(element) {
@@ -41,6 +46,7 @@ export let VoltageLevelEditor = class extends LitElement {
   constructor() {
     super(...arguments);
     this.readonly = false;
+    this.showfunctions = false;
     this.getAttachedIeds = () => {
       return [];
     };
@@ -88,6 +94,12 @@ export let VoltageLevelEditor = class extends LitElement {
   firstUpdated() {
     this.addMenu.anchor = this.addButton;
   }
+  renderFunctions() {
+    if (!this.showfunctions)
+      return html``;
+    const functions = getChildElementsByTagName(this.element, "Function");
+    return html` ${functions.map((fUnction) => html`<function-editor .element=${fUnction}></function-editor>`)}`;
+  }
   renderIedContainer() {
     const ieds = this.getAttachedIeds?.(this.element) ?? [];
     return ieds?.length ? html`<div id="iedcontainer">
@@ -97,8 +109,10 @@ export let VoltageLevelEditor = class extends LitElement {
   renderPowerTransformerContainer() {
     const pwts = Array.from(this.element?.querySelectorAll(selectors.VoltageLevel + " > PowerTransformer") ?? []);
     return pwts?.length ? html`<div id="powertransformercontainer">
-        ${pwts.map((pwt) => html`<powertransformer-editor .element=${pwt}></powertransformer-editor>`)}
-      </div>` : html``;
+          ${pwts.map((pwt) => html`<powertransformer-editor
+                .element=${pwt}
+              ></powertransformer-editor>`)}
+        </div>` : html``;
   }
   renderAddButtons() {
     return childTags(this.element).map((child) => html`<mwc-list-item value="${child}"
@@ -156,13 +170,14 @@ export let VoltageLevelEditor = class extends LitElement {
           >${this.renderAddButtons()}</mwc-menu
         >
       </abbr>
-      ${this.renderIedContainer()}
+      ${this.renderIedContainer()}${this.renderFunctions()}
       ${this.renderPowerTransformerContainer()}
       <div id="bayContainer">
         ${Array.from(this.element?.querySelectorAll(selectors.Bay) ?? []).map((bay) => html`<bay-editor
             .element=${bay}
             .getAttachedIeds=${this.getAttachedIeds}
             ?readonly=${this.readonly}
+            ?showfunctions=${this.showfunctions}
           ></bay-editor>`)}
       </div>
     </action-pane>`;
@@ -190,6 +205,9 @@ __decorate([
 __decorate([
   property({type: Boolean})
 ], VoltageLevelEditor.prototype, "readonly", 2);
+__decorate([
+  property({type: Boolean})
+], VoltageLevelEditor.prototype, "showfunctions", 2);
 __decorate([
   property()
 ], VoltageLevelEditor.prototype, "voltage", 1);

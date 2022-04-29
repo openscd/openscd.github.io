@@ -93,6 +93,7 @@ export const de = {
   zeroline: {
     iedsloading: "IEDs werden geladen...",
     showieds: "IEDs im Substation-Editor anzeigen/ausblenden",
+    showfunctions: "Funktionselemente in der Ansicht filtern",
     commmap: "Kommunikationszuordnung",
     reportcontrol: "Reports anzeigen",
     gsecontrol: "GOOSEs anzeigen",

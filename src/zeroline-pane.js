@@ -36,6 +36,12 @@ function shouldShowIEDs() {
 function setShowIEDs(value) {
   localStorage.setItem("showieds", value);
 }
+function shouldShowFunctions() {
+  return localStorage.getItem("showfunctions") === "on";
+}
+function setShowFunctions(value) {
+  localStorage.setItem("showfunctions", value);
+}
 export let ZerolinePane = class extends LitElement {
   constructor() {
     super(...arguments);
@@ -68,6 +74,13 @@ export let ZerolinePane = class extends LitElement {
       setShowIEDs("on");
     this.requestUpdate();
   }
+  toggleShowFunctions() {
+    if (shouldShowFunctions())
+      setShowFunctions("off");
+    else
+      setShowFunctions("on");
+    this.requestUpdate();
+  }
   renderIedContainer() {
     this.getAttachedIeds = shouldShowIEDs() ? getAttachedIeds(this.doc) : () => [];
     const ieds = this.getAttachedIeds?.(this.doc.documentElement) ?? [];
@@ -94,6 +107,15 @@ export let ZerolinePane = class extends LitElement {
               id="showieds"
               onIcon="developer_board"
               offIcon="developer_board_off"
+            ></mwc-icon-button-toggle>
+          </abbr>
+          <abbr title="${translate("zeroline.showfunctions")}">
+            <mwc-icon-button-toggle
+              ?on=${shouldShowFunctions()}
+              @click=${() => this.toggleShowFunctions()}
+              id="showfunctions"
+              onIcon="layers"
+              offIcon="layers_clear"
             ></mwc-icon-button-toggle>
           </abbr>
           <abbr title="${translate("zeroline.commmap")}">
@@ -132,6 +154,7 @@ export let ZerolinePane = class extends LitElement {
                     .element=${substation}
                     .getAttachedIeds=${this.getAttachedIeds}
                     ?readonly=${this.readonly}
+                    ?showfunctions=${shouldShowFunctions()}
                   ></substation-editor>`)}
           </section>` : html`<h1>
             <span style="color: var(--base1)"
@@ -191,6 +214,9 @@ __decorate([
 __decorate([
   query("#showieds")
 ], ZerolinePane.prototype, "showieds", 2);
+__decorate([
+  query("#showfunctions")
+], ZerolinePane.prototype, "showfunctions", 2);
 __decorate([
   query("#gsecontrol")
 ], ZerolinePane.prototype, "gsecontrol", 2);
