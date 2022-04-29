@@ -117,6 +117,10 @@ ActionPane.styles = css`
       outline-width: 2px;
     }
 
+    :host(:focus-within) .highlighted {
+      outline-style: solid;
+    }
+
     .contrasted {
       background-color: var(--mdc-theme-on-primary);
     }
