@@ -19,6 +19,7 @@
     "@material/mwc-list/mwc-list-item.js": "./@material/mwc-list/mwc-list-item.js",
     "@material/mwc-list/mwc-radio-list-item": "./@material/mwc-list/mwc-radio-list-item.js",
     "@material/mwc-menu": "./@material/mwc-menu.js",
+    "@material/mwc-radio": "./@material/mwc-radio.js",
     "@material/mwc-select": "./@material/mwc-select.js",
     "@material/mwc-snackbar": "./@material/mwc-snackbar.js",
     "@material/mwc-switch": "./@material/mwc-switch.js",

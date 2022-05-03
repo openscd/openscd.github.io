@@ -30,26 +30,26 @@ function onOpenDocResetSelectedGooseMsg() {
   selectedDataSet = void 0;
 }
 addEventListener("open-doc", onOpenDocResetSelectedGooseMsg);
-export let PublisherGOOSEList = class extends LitElement {
+export let GoosePublisherList = class extends LitElement {
   get ieds() {
     return this.doc ? Array.from(this.doc.querySelectorAll(":root > IED")).sort((a, b) => compareNames(a, b)) : [];
   }
   getGSEControls(ied) {
     return Array.from(ied.querySelectorAll(":scope > AccessPoint > Server > LDevice > LN0 > GSEControl"));
   }
-  onGooseSelect(element) {
-    const ln = element.parentElement;
-    const dataset = ln?.querySelector(`DataSet[name=${element.getAttribute("datSet")}]`);
-    selectedGooseMsg = element;
+  onGooseSelect(gseControl) {
+    const ln = gseControl.parentElement;
+    const dataset = ln?.querySelector(`DataSet[name=${gseControl.getAttribute("datSet")}]`);
+    selectedGooseMsg = gseControl;
     selectedDataSet = dataset;
     this.dispatchEvent(newGOOSESelectEvent(selectedGooseMsg, selectedDataSet));
   }
-  renderGoose(element) {
+  renderGoose(gseControl) {
     return html`<mwc-list-item
-      @click=${() => this.onGooseSelect(element)}
+      @click=${() => this.onGooseSelect(gseControl)}
       graphic="large"
     >
-      <span>${element.getAttribute("name")}</span>
+      <span>${gseControl.getAttribute("name")}</span>
       <mwc-icon slot="graphic">${gooseIcon}</mwc-icon>
     </mwc-list-item>`;
   }
@@ -66,18 +66,18 @@ export let PublisherGOOSEList = class extends LitElement {
                 <mwc-icon slot="graphic">developer_board</mwc-icon>
               </mwc-list-item>
               <li divider role="separator"></li>
-              ${this.getGSEControls(ied).map((control) => this.renderGoose(control))}
+              ${this.getGSEControls(ied).map((gseControl) => this.renderGoose(gseControl))}
             `)}
       </filtered-list>
     </section>`;
   }
 };
-PublisherGOOSEList.styles = css`
+GoosePublisherList.styles = css`
     ${styles}
   `;
 __decorate([
   property({attribute: false})
-], PublisherGOOSEList.prototype, "doc", 2);
-PublisherGOOSEList = __decorate([
-  customElement("publisher-goose-list")
-], PublisherGOOSEList);
+], GoosePublisherList.prototype, "doc", 2);
+GoosePublisherList = __decorate([
+  customElement("goose-publisher-list")
+], GoosePublisherList);

@@ -5,6 +5,11 @@ export var SubscribeStatus;
   SubscribeStatus2[SubscribeStatus2["Partial"] = 1] = "Partial";
   SubscribeStatus2[SubscribeStatus2["None"] = 2] = "None";
 })(SubscribeStatus || (SubscribeStatus = {}));
+export var View;
+(function(View2) {
+  View2[View2["GOOSE_PUBLISHER"] = 0] = "GOOSE_PUBLISHER";
+  View2[View2["GOOSE_SUBSCRIBER"] = 1] = "GOOSE_SUBSCRIBER";
+})(View || (View = {}));
 export function newGOOSESelectEvent(gseControl, dataset, eventInitDict) {
   return new CustomEvent("goose-dataset", {
     bubbles: true,
@@ -13,8 +18,24 @@ export function newGOOSESelectEvent(gseControl, dataset, eventInitDict) {
     detail: {gseControl, dataset, ...eventInitDict?.detail}
   });
 }
-export function newIEDSubscriptionEvent(element, subscribeStatus) {
-  return new CustomEvent("ied-subscription", {
+export function newIEDSelectEvent(ied, eventInitDict) {
+  return new CustomEvent("ied-select", {
+    bubbles: true,
+    composed: true,
+    ...eventInitDict,
+    detail: {ied, ...eventInitDict?.detail}
+  });
+}
+export function newViewEvent(view, eventInitDict) {
+  return new CustomEvent("view", {
+    bubbles: true,
+    composed: true,
+    ...eventInitDict,
+    detail: {view, ...eventInitDict?.detail}
+  });
+}
+export function newSubscriptionEvent(element, subscribeStatus) {
+  return new CustomEvent("subscription", {
     bubbles: true,
     composed: true,
     detail: {element, subscribeStatus}

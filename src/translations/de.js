@@ -303,14 +303,23 @@ export const de = {
   subscription: {
     none: "Keine Verbindung vorhanden",
     publisherGoose: {
-      title: "GOOSE-Publizierer"
+      title: "GOOSE-Publizierer",
+      subscriberTitle: "Verbunden mit {{ selected }}"
     },
-    subscriberIed: {
-      title: "Verbunden mit {{ selected }}",
+    subscriberGoose: {
+      title: "IED-Publizierer",
+      publisherTitle: "GOOSE(s) verbunden mit {{selected}}"
+    },
+    subscriber: {
       subscribed: "Verbunden",
       availableToSubscribe: "Kann verbunden werden",
       partiallySubscribed: "Teilweise verbunden",
-      noGooseMessageSelected: "Keine GOOSE ausgewählt"
+      noGooseMessageSelected: "Keine GOOSE ausgewählt",
+      noIedSelected: "Keine IED ausgewählt"
+    },
+    view: {
+      publisherView: "Zeigt verbundene IED(s) der ausgewählten GOOSE",
+      subscriberView: "Zeigt verbundene GOOSE(s) des ausgewählten IED"
     }
   },
   sampledvalues: {
