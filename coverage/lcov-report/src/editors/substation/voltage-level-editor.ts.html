@@ -23,16 +23,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">97.55% </span>
+                <span class="strong">99.6% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>239/245</span>
+                <span class='fraction'>251/252</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">74.35% </span>
+                <span class="strong">77.5% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>29/39</span>
+                <span class='fraction'>31/40</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">97.55% </span>
+                <span class="strong">99.6% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>239/245</span>
+                <span class='fraction'>251/252</span>
             </div>
         
             
@@ -308,7 +308,15 @@
 <a name='L243'></a><a href='#L243'>243</a>
 <a name='L244'></a><a href='#L244'>244</a>
 <a name='L245'></a><a href='#L245'>245</a>
-<a name='L246'></a><a href='#L246'>246</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">21x</span>
+<a name='L246'></a><a href='#L246'>246</a>
+<a name='L247'></a><a href='#L247'>247</a>
+<a name='L248'></a><a href='#L248'>248</a>
+<a name='L249'></a><a href='#L249'>249</a>
+<a name='L250'></a><a href='#L250'>250</a>
+<a name='L251'></a><a href='#L251'>251</a>
+<a name='L252'></a><a href='#L252'>252</a>
+<a name='L253'></a><a href='#L253'>253</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">21x</span>
+<span class="cline-any cline-yes">21x</span>
 <span class="cline-any cline-yes">21x</span>
 <span class="cline-any cline-yes">21x</span>
 <span class="cline-any cline-yes">21x</span>
@@ -449,11 +457,17 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-yes">12x</span>
 <span class="cline-any cline-yes">12x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">12x</span>
 <span class="cline-any cline-yes">12x</span>
 <span class="cline-any cline-yes">12x</span>
@@ -562,6 +576,7 @@
   css,
   query,
 } from 'lit-element';
+import { classMap } from 'lit-html/directives/class-map';
 import { translate } from 'lit-translate';
 &nbsp;
 import '@material/mwc-icon-button';
@@ -605,7 +620,7 @@ export class VoltageLevelEditor extends LitElement {
   element!: Element;
   @property({ type: Boolean })
   readonly = false;
-  /** Wheter `Function` and `SubFunction` are rendered */
+  /** Whether `Function` and `SubFunction` are rendered */
   @property({ type: Boolean })
   showfunctions = false;
 &nbsp;
@@ -693,12 +708,18 @@ export class VoltageLevelEditor extends LitElement {
         selectors.VoltageLevel + <span class="branch-0 cbranch-no" title="branch not covered" >' &gt; PowerTransformer'</span>
 <span class="cstat-no" title="statement not covered" >      ) ?? []</span>
     );
-    return pwts?.<span class="branch-0 cbranch-no" title="branch not covered" >length</span>
-<span class="cstat-no" title="statement not covered" >      ? html`&lt;div id="powertransformercontainer"&gt;</span>
-<span class="cstat-no" title="statement not covered" >          ${pwts.map(</span>
-<span class="cstat-no" title="statement not covered" >            pwt =&gt;</span>
-<span class="cstat-no" title="statement not covered" >              html`&lt;powertransformer-editor</span>
-<span class="cstat-no" title="statement not covered" >                .element=${pwt}</span>
+    return pwts?.length
+      ? html`&lt;div
+          class="${classMap({
+            ptrContent: true,
+            actionicon: !this.showfunctions,
+          })}"
+        &gt;
+          ${pwts.map(
+            pwt =&gt;
+              html`&lt;powertransformer-editor
+                .element=${pwt}
+                ?showfunctions=${this.showfunctions}
               &gt;&lt;/powertransformer-editor&gt;`
           )}
         &lt;/div&gt;`
@@ -805,7 +826,7 @@ export class VoltageLevelEditor extends LitElement {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener">istanbul</a>
-                at Tue May 03 2022 09:59:21 GMT+0000 (Coordinated Universal Time)
+                at Fri May 06 2022 07:52:31 GMT+0000 (Coordinated Universal Time)
             </div>
         </div>
         <script src="../../../prettify.js"></script>

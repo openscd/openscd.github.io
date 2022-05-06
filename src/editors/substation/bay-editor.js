@@ -17,6 +17,7 @@ import {
   property,
   query
 } from "../../../_snowpack/pkg/lit-element.js";
+import {classMap} from "../../../_snowpack/pkg/lit-html/directives/class-map.js";
 import {translate} from "../../../_snowpack/pkg/lit-translate.js";
 import "../../../_snowpack/pkg/@material/mwc-icon-button.js";
 import "../../action-pane.js";
@@ -148,13 +149,20 @@ export let BayEditor = class extends LitElement {
         >
       </abbr>
       ${this.renderIedContainer()} ${this.renderFunctions()}
-      <div id="ceContainer">
+      <div
+        class="${classMap({
+      content: true,
+      actionicon: !this.showfunctions
+    })}"
+      >
         ${Array.from(getChildElementsByTagName(this.element, "PowerTransformer")).map((pwt) => html`<powertransformer-editor
               .element=${pwt}
+              ?showfunctions=${this.showfunctions}
             ></powertransformer-editor>`)}
         ${Array.from(getChildElementsByTagName(this.element, "ConductingEquipment")).map((voltageLevel) => html`<conducting-equipment-editor
               .element=${voltageLevel}
               ?readonly=${this.readonly}
+              ?showfunctions=${this.showfunctions}
             ></conducting-equipment-editor>`)}
       </div>
     </action-pane> `;
@@ -163,12 +171,16 @@ export let BayEditor = class extends LitElement {
 BayEditor.styles = css`
     ${styles}
 
-    #ceContainer {
+    .content.actionicon {
       display: grid;
       grid-gap: 12px;
       padding: 12px;
       box-sizing: border-box;
       grid-template-columns: repeat(auto-fit, minmax(64px, auto));
+    }
+
+    conducting-equipment-editor[showfunctions] {
+      margin: 4px 8px 16px;
     }
   `;
 __decorate([

@@ -17,31 +17,37 @@ import {
   state
 } from "../../../_snowpack/pkg/lit-element.js";
 import "../../action-pane.js";
-import "./subfunction-editor.js";
+import "./eq-sub-function-editor.js";
 import {getChildElementsByTagName} from "../../foundation.js";
-export let SubFunctionEditor = class extends LitElement {
+export let EqFunctionEditor = class extends LitElement {
   get header() {
     const name = this.element.getAttribute("name");
     const desc = this.element.getAttribute("desc");
     const type = this.element.getAttribute("type");
     return `${name}${desc ? ` - ${desc}` : ""}${type ? ` (${type})` : ""}`;
   }
-  renderSubFunctions() {
-    const subfunctions = getChildElementsByTagName(this.element, "SubFunction");
-    return html` ${subfunctions.map((subFunction) => html`<subfunction-editor .element=${subFunction}></subfunction-editor>`)}`;
+  renderEqSubFunctions() {
+    const eqSubFunctions = getChildElementsByTagName(this.element, "EqSubFunction");
+    return html` ${eqSubFunctions.map((eqSubFunction) => html`<eq-sub-function-editor
+          .element=${eqSubFunction}
+        ></eq-sub-function-editor>`)}`;
   }
   render() {
-    return html`<action-pane label="${this.header}" icon="functions" secondary
-      >${this.renderSubFunctions()}</action-pane
+    return html`<action-pane
+      label="${this.header}"
+      icon="functions"
+      secondary
+      highlighted
+      >${this.renderEqSubFunctions()}</action-pane
     >`;
   }
 };
 __decorate([
   property({attribute: false})
-], SubFunctionEditor.prototype, "element", 2);
+], EqFunctionEditor.prototype, "element", 2);
 __decorate([
   state()
-], SubFunctionEditor.prototype, "header", 1);
-SubFunctionEditor = __decorate([
-  customElement("subfunction-editor")
-], SubFunctionEditor);
+], EqFunctionEditor.prototype, "header", 1);
+EqFunctionEditor = __decorate([
+  customElement("eq-function-editor")
+], EqFunctionEditor);

@@ -36,6 +36,7 @@ import {
   startMove,
   styles
 } from "./foundation.js";
+import {classMap} from "../../../_snowpack/pkg/lit-html/directives/class-map.js";
 function childTags(element) {
   if (!element)
     return [];
@@ -96,9 +97,15 @@ export let SubstationEditor = class extends LitElement {
   }
   renderPowerTransformerContainer() {
     const pwts = Array.from(this.element?.querySelectorAll(selectors.Substation + " > PowerTransformer") ?? []);
-    return pwts?.length ? html`<div id="powertransformercontainer">
+    return pwts?.length ? html`<div
+          class="${classMap({
+      ptrContent: true,
+      actionicon: !this.showfunctions
+    })}"
+        >
           ${pwts.map((pwt) => html`<powertransformer-editor
                 .element=${pwt}
+                ?showfunctions=${this.showfunctions}
               ></powertransformer-editor>`)}
         </div>` : html``;
   }

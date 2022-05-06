@@ -23,16 +23,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">99.06% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>211/213</span>
+                <span class='fraction'>225/225</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">86.2% </span>
+                <span class="strong">86.66% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>25/29</span>
+                <span class='fraction'>26/30</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">99.06% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>211/213</span>
+                <span class='fraction'>225/225</span>
             </div>
         
             
@@ -276,7 +276,20 @@
 <a name='L211'></a><a href='#L211'>211</a>
 <a name='L212'></a><a href='#L212'>212</a>
 <a name='L213'></a><a href='#L213'>213</a>
-<a name='L214'></a><a href='#L214'>214</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">21x</span>
+<a name='L214'></a><a href='#L214'>214</a>
+<a name='L215'></a><a href='#L215'>215</a>
+<a name='L216'></a><a href='#L216'>216</a>
+<a name='L217'></a><a href='#L217'>217</a>
+<a name='L218'></a><a href='#L218'>218</a>
+<a name='L219'></a><a href='#L219'>219</a>
+<a name='L220'></a><a href='#L220'>220</a>
+<a name='L221'></a><a href='#L221'>221</a>
+<a name='L222'></a><a href='#L222'>222</a>
+<a name='L223'></a><a href='#L223'>223</a>
+<a name='L224'></a><a href='#L224'>224</a>
+<a name='L225'></a><a href='#L225'>225</a>
+<a name='L226'></a><a href='#L226'>226</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">21x</span>
+<span class="cline-any cline-yes">21x</span>
 <span class="cline-any cline-yes">21x</span>
 <span class="cline-any cline-yes">21x</span>
 <span class="cline-any cline-yes">21x</span>
@@ -460,8 +473,14 @@
 <span class="cline-any cline-yes">16x</span>
 <span class="cline-any cline-yes">16x</span>
 <span class="cline-any cline-yes">16x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">16x</span>
+<span class="cline-any cline-yes">16x</span>
+<span class="cline-any cline-yes">16x</span>
+<span class="cline-any cline-yes">16x</span>
+<span class="cline-any cline-yes">16x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">16x</span>
 <span class="cline-any cline-yes">16x</span>
 <span class="cline-any cline-yes">16x</span>
@@ -471,6 +490,11 @@
 <span class="cline-any cline-yes">15x</span>
 <span class="cline-any cline-yes">15x</span>
 <span class="cline-any cline-yes">15x</span>
+<span class="cline-any cline-yes">15x</span>
+<span class="cline-any cline-yes">21x</span>
+<span class="cline-any cline-yes">21x</span>
+<span class="cline-any cline-yes">21x</span>
+<span class="cline-any cline-yes">21x</span>
 <span class="cline-any cline-yes">21x</span>
 <span class="cline-any cline-yes">21x</span>
 <span class="cline-any cline-yes">21x</span>
@@ -498,6 +522,7 @@
   query,
   TemplateResult,
 } from 'lit-element';
+import { classMap } from 'lit-html/directives/class-map';
 import { translate } from 'lit-translate';
 &nbsp;
 import '@material/mwc-icon-button';
@@ -535,7 +560,7 @@ export class BayEditor extends LitElement {
   element!: Element;
   @property({ type: Boolean })
   readonly = false;
-  /** Wheter `Function` and `SubFunction` are rendered */
+  /** Whether `Function` and `SubFunction` are rendered */
   @property({ type: Boolean })
   showfunctions = false;
 &nbsp;
@@ -668,13 +693,19 @@ export class BayEditor extends LitElement {
         &gt;
       &lt;/abbr&gt;
       ${this.renderIedContainer()} ${this.renderFunctions()}
-      &lt;div id="ceContainer"&gt;
+      &lt;div
+        class="${classMap({
+          content: true,
+          actionicon: !this.showfunctions,
+        })}"
+      &gt;
         ${Array.from(
           getChildElementsByTagName(this.element, 'PowerTransformer')
         ).map(
           pwt =&gt;
-<span class="cstat-no" title="statement not covered" >            html`&lt;powertransformer-editor</span>
-<span class="cstat-no" title="statement not covered" >              .element=${pwt}</span>
+            html`&lt;powertransformer-editor
+              .element=${pwt}
+              ?showfunctions=${this.showfunctions}
             &gt;&lt;/powertransformer-editor&gt;`
         )}
         ${Array.from(
@@ -684,6 +715,7 @@ export class BayEditor extends LitElement {
             html`&lt;conducting-equipment-editor
               .element=${voltageLevel}
               ?readonly=${this.readonly}
+              ?showfunctions=${this.showfunctions}
             &gt;&lt;/conducting-equipment-editor&gt;`
         )}
       &lt;/div&gt;
@@ -693,12 +725,16 @@ export class BayEditor extends LitElement {
   static styles = css`
     ${styles}
 &nbsp;
-    #ceContainer {
+    .content.actionicon {
       display: grid;
       grid-gap: 12px;
       padding: 12px;
       box-sizing: border-box;
       grid-template-columns: repeat(auto-fit, minmax(64px, auto));
+    }
+&nbsp;
+    conducting-equipment-editor[showfunctions] {
+      margin: 4px 8px 16px;
     }
   `;
 }
@@ -709,7 +745,7 @@ export class BayEditor extends LitElement {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener">istanbul</a>
-                at Tue May 03 2022 09:59:21 GMT+0000 (Coordinated Universal Time)
+                at Fri May 06 2022 07:52:31 GMT+0000 (Coordinated Universal Time)
             </div>
         </div>
         <script src="../../../prettify.js"></script>

@@ -12,7 +12,7 @@
 | `getAttachedIeds` |                 |           | `((element: Element) => Element[]) \| undefined` | "() => {\n    return [];\n  }" |                                                  |
 | `header`          | `header`        | readonly  | `string`                                         |                                |                                                  |
 | `readonly`        | `readonly`      |           | `boolean`                                        | false                          |                                                  |
-| `showfunctions`   | `showfunctions` |           | `boolean`                                        | false                          | Wheter `Function` and `SubFunction` are rendered |
+| `showfunctions`   | `showfunctions` |           | `boolean`                                        | false                          | Whether `Function` and `SubFunction` are rendered |
 | `voltage`         | `voltage`       | readonly  | `string \| null`                                 |                                |                                                  |
 
 ## Methods

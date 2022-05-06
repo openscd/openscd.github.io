@@ -16,17 +16,28 @@ import {
   LitElement,
   property
 } from "../../../_snowpack/pkg/lit-element.js";
+import {translate} from "../../../_snowpack/pkg/lit-translate.js";
 import "../../../_snowpack/pkg/@material/mwc-fab.js";
 import "../../../_snowpack/pkg/@material/mwc-icon.js";
+import "../../../_snowpack/pkg/@material/mwc-icon-button.js";
 import "../../action-icon.js";
+import "../../action-pane.js";
 import {powerTransformerTwoWindingIcon} from "../../icons/icons.js";
 import {wizards} from "../../wizards/wizard-library.js";
-import {newActionEvent, newWizardEvent} from "../../foundation.js";
+import {
+  getChildElementsByTagName,
+  newActionEvent,
+  newWizardEvent
+} from "../../foundation.js";
 import {startMove} from "./foundation.js";
 import {SubstationEditor} from "./substation-editor.js";
 import {BayEditor} from "./bay-editor.js";
 import {VoltageLevelEditor} from "./voltage-level-editor.js";
 export let PowerTransformerEditor = class extends LitElement {
+  constructor() {
+    super(...arguments);
+    this.showfunctions = false;
+  }
   get name() {
     return this.element.getAttribute("name") ?? "UNDEFINED";
   }
@@ -50,11 +61,59 @@ export let PowerTransformerEditor = class extends LitElement {
         }
       }));
   }
-  render() {
-    return html`<action-icon
-      label="${this.name}"
-      .icon="${powerTransformerTwoWindingIcon}"
-    >
+  renderEqFunctions() {
+    if (!this.showfunctions)
+      return html``;
+    const eqFunctions = getChildElementsByTagName(this.element, "EqFunction");
+    return html` ${eqFunctions.map((eqFunction) => html`<eq-function-editor .element=${eqFunction}></eq-function-editor>`)}`;
+  }
+  renderContentPane() {
+    return html`<mwc-icon slot="icon" style="width:24px;height:24px"
+        >${powerTransformerTwoWindingIcon}</mwc-icon
+      >
+      <abbr slot="action" title="${translate("lnode.tooltip")}">
+        <mwc-icon-button
+          slot="action"
+          mini
+          @click="${() => this.openLNodeWizard()}"
+          icon="account_tree"
+        ></mwc-icon-button>
+      </abbr>
+      <abbr slot="action" title="${translate("edit")}">
+        <mwc-icon-button
+          slot="action"
+          mini
+          icon="edit"
+          @click="${() => this.openEditWizard()}}"
+        ></mwc-icon-button>
+      </abbr>
+      <abbr slot="action" title="${translate("move")}">
+        <mwc-icon-button
+          slot="action"
+          mini
+          @click="${() => {
+      startMove(this, PowerTransformerEditor, [
+        SubstationEditor,
+        VoltageLevelEditor,
+        BayEditor
+      ]);
+    }}"
+          icon="forward"
+        ></mwc-icon-button>
+      </abbr>
+      <abbr slot="action" title="${translate("remove")}">
+        <mwc-icon-button
+          slot="action"
+          mini
+          icon="delete"
+          @click="${() => this.removeElement()}}"
+        ></mwc-icon-button>
+      </abbr> `;
+  }
+  renderContentIcon() {
+    return html`<mwc-icon slot="icon"
+        >${powerTransformerTwoWindingIcon}</mwc-icon
+      >
       <mwc-fab
         slot="action"
         class="edit"
@@ -85,13 +144,26 @@ export let PowerTransformerEditor = class extends LitElement {
         mini
         @click="${() => this.openLNodeWizard()}"
         icon="account_tree"
-      ></mwc-fab>
-    </action-icon> `;
+      ></mwc-fab>`;
+  }
+  render() {
+    if (this.showfunctions)
+      return html`<action-pane label="${this.name}"
+        >${this.renderContentPane()}${this.renderEqFunctions()}</action-pane
+      > `;
+    return html`<action-icon label="${this.name}"
+      >${this.renderContentIcon()}</action-icon
+    > `;
   }
 };
 PowerTransformerEditor.styles = css`
     :host(.moving) {
       opacity: 0.3;
+    }
+
+    abbr {
+      text-decoration: none;
+      border-bottom: none;
     }
   `;
 __decorate([
@@ -100,6 +172,9 @@ __decorate([
 __decorate([
   property({type: String})
 ], PowerTransformerEditor.prototype, "name", 1);
+__decorate([
+  property({type: Boolean})
+], PowerTransformerEditor.prototype, "showfunctions", 2);
 PowerTransformerEditor = __decorate([
   customElement("powertransformer-editor")
 ], PowerTransformerEditor);

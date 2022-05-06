@@ -17,6 +17,7 @@ import {
   css,
   query
 } from "../../../_snowpack/pkg/lit-element.js";
+import {classMap} from "../../../_snowpack/pkg/lit-html/directives/class-map.js";
 import {translate} from "../../../_snowpack/pkg/lit-translate.js";
 import "../../../_snowpack/pkg/@material/mwc-icon-button.js";
 import "../../action-pane.js";
@@ -108,9 +109,15 @@ export let VoltageLevelEditor = class extends LitElement {
   }
   renderPowerTransformerContainer() {
     const pwts = Array.from(this.element?.querySelectorAll(selectors.VoltageLevel + " > PowerTransformer") ?? []);
-    return pwts?.length ? html`<div id="powertransformercontainer">
+    return pwts?.length ? html`<div
+          class="${classMap({
+      ptrContent: true,
+      actionicon: !this.showfunctions
+    })}"
+        >
           ${pwts.map((pwt) => html`<powertransformer-editor
                 .element=${pwt}
+                ?showfunctions=${this.showfunctions}
               ></powertransformer-editor>`)}
         </div>` : html``;
   }

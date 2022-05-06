@@ -17,7 +17,7 @@ import {
   state
 } from "../../../_snowpack/pkg/lit-element.js";
 import "../../action-pane.js";
-import "./subfunction-editor.js";
+import "./sub-function-editor.js";
 import {getChildElementsByTagName} from "../../foundation.js";
 export let FunctionEditor = class extends LitElement {
   get header() {
@@ -28,7 +28,9 @@ export let FunctionEditor = class extends LitElement {
   }
   renderSubFunctions() {
     const subfunctions = getChildElementsByTagName(this.element, "SubFunction");
-    return html` ${subfunctions.map((subFunction) => html`<subfunction-editor .element=${subFunction}></subfunction-editor>`)}`;
+    return html` ${subfunctions.map((subFunction) => html`<sub-function-editor
+          .element=${subFunction}
+        ></sub-function-editor>`)}`;
   }
   render() {
     return html`<action-pane

@@ -4,13 +4,17 @@
 
 ## Properties
 
-| Property  | Attribute | Modifiers | Type      | Description                        |
-|-----------|-----------|-----------|-----------|------------------------------------|
-| `element` |           |           | `Element` | SCL element ConductingEquipment    |
-| `name`    | `name`    | readonly  | `string`  | ConductingEquipment name attribute |
+| Property        | Attribute       | Modifiers | Type      | Default | Description                                      |
+|-----------------|-----------------|-----------|-----------|---------|--------------------------------------------------|
+| `element`       |                 |           | `Element` |         | SCL element ConductingEquipment                  |
+| `name`          | `name`          | readonly  | `string`  |         | ConductingEquipment name attribute               |
+| `showfunctions` | `showfunctions` |           | `boolean` | false   | Whether `EqFunction` and `SubEqFunction` are rendered |
 
 ## Methods
 
-| Method   | Type       |
-|----------|------------|
-| `remove` | `(): void` |
+| Method              | Type                 |
+|---------------------|----------------------|
+| `remove`            | `(): void`           |
+| `renderContentIcon` | `(): TemplateResult` |
+| `renderContentPane` | `(): TemplateResult` |
+| `renderEqFunctions` | `(): TemplateResult` |

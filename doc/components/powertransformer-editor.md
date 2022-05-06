@@ -4,7 +4,16 @@
 
 ## Properties
 
-| Property  | Attribute | Modifiers | Type      | Description                     |
-|-----------|-----------|-----------|-----------|---------------------------------|
-| `element` |           |           | `Element` | SCL element PowerTransformer    |
-| `name`    | `name`    | readonly  | `string`  | PowerTransformer name attribute |
+| Property        | Attribute       | Modifiers | Type      | Default | Description                                      |
+|-----------------|-----------------|-----------|-----------|---------|--------------------------------------------------|
+| `element`       |                 |           | `Element` |         | SCL element PowerTransformer                     |
+| `name`          | `name`          | readonly  | `string`  |         | PowerTransformer name attribute                  |
+| `showfunctions` | `showfunctions` |           | `boolean` | false   | Whether `EqFunction` and `SubEqFunction` are rendered |
+
+## Methods
+
+| Method              | Type                 |
+|---------------------|----------------------|
+| `renderContentIcon` | `(): TemplateResult` |
+| `renderContentPane` | `(): TemplateResult` |
+| `renderEqFunctions` | `(): TemplateResult` |
