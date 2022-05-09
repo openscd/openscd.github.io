@@ -1,36 +1,68 @@
-import {isPublic} from "../../foundation.js";
-const referenceInfoTags = ["IED", "Substation"];
+import {
+  isPublic
+} from "../../foundation.js";
+const referenceInfoTags = ["IED", "Substation", "VoltageLevel", "Bay"];
 const referenceInfos = {
   IED: [{
-    elementQuery: `Association`,
-    attribute: "iedName"
+    attributeName: "iedName",
+    filter: simpleAttributeFilter(`Association`)
   }, {
-    elementQuery: `ClientLN`,
-    attribute: "iedName"
+    attributeName: "iedName",
+    filter: simpleAttributeFilter(`ClientLN`)
   }, {
-    elementQuery: `ConnectedAP`,
-    attribute: "iedName"
+    attributeName: "iedName",
+    filter: simpleAttributeFilter(`ConnectedAP`)
   }, {
-    elementQuery: `ExtRef`,
-    attribute: "iedName"
+    attributeName: "iedName",
+    filter: simpleAttributeFilter(`ExtRef`)
   }, {
-    elementQuery: `KDC`,
-    attribute: "iedName"
+    attributeName: "iedName",
+    filter: simpleAttributeFilter(`KDC`)
   }, {
-    elementQuery: `LNode`,
-    attribute: "iedName"
+    attributeName: "iedName",
+    filter: simpleAttributeFilter(`LNode`)
   }, {
-    elementQuery: `GSEControl > IEDName`,
-    attribute: null
+    attributeName: null,
+    filter: simpleTextContentFilter(`GSEControl > IEDName`)
   }, {
-    elementQuery: `SampledValueControl > IEDName`,
-    attribute: null
+    attributeName: null,
+    filter: simpleTextContentFilter(`SampledValueControl > IEDName`)
   }],
   Substation: [{
-    elementQuery: `Terminal`,
-    attribute: "substationName"
+    attributeName: "substationName",
+    filter: simpleAttributeFilter(`Terminal`)
+  }],
+  VoltageLevel: [{
+    attributeName: "voltageLevelName",
+    filter: attributeFilterWithParentNameAttribute(`Terminal`, {Substation: "substationName"})
+  }],
+  Bay: [{
+    attributeName: "bayName",
+    filter: attributeFilterWithParentNameAttribute(`Terminal`, {Substation: "substationName", VoltageLevel: "voltageLevelName"})
   }]
 };
+function simpleAttributeFilter(tagName) {
+  return function filter(element, attributeName, oldName) {
+    return `${tagName}[${attributeName}="${oldName}"]`;
+  };
+}
+function simpleTextContentFilter(elementQuery) {
+  return function filter() {
+    return `${elementQuery}`;
+  };
+}
+function attributeFilterWithParentNameAttribute(tagName, parentInfo) {
+  return function filter(element, attributeName, oldName) {
+    return `${tagName}${Object.entries(parentInfo).map(([parentTag, parentAttribute]) => {
+      const parentElement = element.closest(parentTag);
+      if (parentElement && parentElement.hasAttribute("name")) {
+        const name = parentElement.getAttribute("name");
+        return `[${parentAttribute}="${name}"]`;
+      }
+      return null;
+    }).join("")}[${attributeName}="${oldName}"]`;
+  };
+}
 function cloneElement(element, attributeName, value) {
   const newElement = element.cloneNode(false);
   if (value === null) {
@@ -45,8 +77,8 @@ function cloneElementAndTextContent(element, value) {
   newElement.textContent = value;
   return newElement;
 }
-export function updateReferences(element, oldValue, newValue) {
-  if (oldValue === newValue) {
+export function updateReferences(element, oldName, newName) {
+  if (oldName === newName) {
     return [];
   }
   const referenceInfo = referenceInfos[element.tagName];
@@ -55,14 +87,16 @@ export function updateReferences(element, oldValue, newValue) {
   }
   const actions = [];
   referenceInfo.forEach((info) => {
-    if (info.attribute !== null) {
-      Array.from(element.ownerDocument.querySelectorAll(`${info.elementQuery}[${info.attribute}="${oldValue}"]`)).filter(isPublic).forEach((element2) => {
-        const newElement = cloneElement(element2, info.attribute, newValue);
+    if (info.attributeName) {
+      const filter = info.filter(element, info.attributeName, oldName);
+      Array.from(element.ownerDocument.querySelectorAll(`${filter}`)).filter(isPublic).forEach((element2) => {
+        const newElement = cloneElement(element2, info.attributeName, newName);
         actions.push({old: {element: element2}, new: {element: newElement}});
       });
     } else {
-      Array.from(element.ownerDocument.querySelectorAll(`${info.elementQuery}`)).filter((element2) => element2.textContent === oldValue).filter(isPublic).forEach((element2) => {
-        const newElement = cloneElementAndTextContent(element2, newValue);
+      const filter = info.filter(element, info.attributeName, oldName);
+      Array.from(element.ownerDocument.querySelectorAll(`${filter}`)).filter((element2) => element2.textContent === oldName).filter(isPublic).forEach((element2) => {
+        const newElement = cloneElementAndTextContent(element2, newName);
         actions.push({old: {element: element2}, new: {element: newElement}});
       });
     }

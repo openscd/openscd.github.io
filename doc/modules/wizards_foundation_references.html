@@ -84,28 +84,46 @@
 					<a name="updateReferences" class="tsd-anchor"></a>
 					<h3>update<wbr>References</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
-						<li class="tsd-signature tsd-kind-icon">update<wbr>References<span class="tsd-signature-symbol">(</span>element<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Element</span>, oldValue<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span>, newValue<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="foundation.html#SimpleAction" class="tsd-signature-type" data-tsd-kind="Type alias">SimpleAction</a><span class="tsd-signature-symbol">[]</span></li>
+						<li class="tsd-signature tsd-kind-icon">update<wbr>References<span class="tsd-signature-symbol">(</span>element<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Element</span>, oldName<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span>, newName<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/foundation.Replace.html" class="tsd-signature-type" data-tsd-kind="Interface">Replace</a><span class="tsd-signature-symbol">[]</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/52a49ce/src/wizards/foundation/references.ts#L68">src/wizards/foundation/references.ts:68</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/c6d5102/src/wizards/foundation/references.ts#L165">src/wizards/foundation/references.ts:165</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Function to create Replace actions to update reference which point to the name of the element being updated.
+										For instance the IED Name is used in other SCL Elements as attribute &#39;iedName&#39; to reference the IED.
+									These attribute values need to be updated if the name of the IED changes.</p>
+								</div>
+								<p>An empty array will be returned if the old and new value are the same or no references need to be updated.</p>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
 									<h5>element: <span class="tsd-signature-type">Element</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The element for which the name is updated.</p>
+									</div>
 								</li>
 								<li>
-									<h5>oldValue: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span></h5>
+									<h5>oldName: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The old name of the element.</p>
+									</div>
 								</li>
 								<li>
-									<h5>newValue: <span class="tsd-signature-type">string</span></h5>
+									<h5>newName: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The new name of the element.</p>
+									</div>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <a href="foundation.html#SimpleAction" class="tsd-signature-type" data-tsd-kind="Type alias">SimpleAction</a><span class="tsd-signature-symbol">[]</span></h4>
+							<h4 class="tsd-returns-title">Returns <a href="../interfaces/foundation.Replace.html" class="tsd-signature-type" data-tsd-kind="Interface">Replace</a><span class="tsd-signature-symbol">[]</span></h4>
+							<p>Returns a list of Replace Actions that can be added to a Complex Action or returned directly for execution.</p>
 						</li>
 					</ul>
 				</section>

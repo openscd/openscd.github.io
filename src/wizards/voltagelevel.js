@@ -8,6 +8,7 @@ import {
   getValue,
   patterns
 } from "../foundation.js";
+import {updateReferences} from "./foundation/references.js";
 const initial = {
   nomFreq: "50",
   numPhases: "3",
@@ -168,12 +169,16 @@ export function updateAction(element) {
     } else {
       voltageAction = getVoltageAction(element.querySelector("VoltageLevel > Voltage"), Voltage, multiplier, voltageLevelAction?.new.element ?? element);
     }
-    const actions = [];
+    const complexAction = {
+      actions: [],
+      title: get("voltagelevel.action.updateVoltagelevel", {name})
+    };
     if (voltageLevelAction)
-      actions.push(voltageLevelAction);
+      complexAction.actions.push(voltageLevelAction);
     if (voltageAction)
-      actions.push(voltageAction);
-    return actions;
+      complexAction.actions.push(voltageAction);
+    complexAction.actions.push(...updateReferences(element, element.getAttribute("name"), name));
+    return complexAction.actions.length ? [complexAction] : [];
   };
 }
 export function voltageLevelEditWizard(element) {

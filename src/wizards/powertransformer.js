@@ -5,7 +5,7 @@ import {
   getValue,
   isPublic
 } from "../foundation.js";
-import {updateNamingAction} from "./foundation/actions.js";
+import {replaceNamingAction} from "./foundation/actions.js";
 const defaultPowerTransformerType = "PTR";
 export function createAction(parent) {
   return (inputs) => {
@@ -77,7 +77,7 @@ export function editPowerTransformerWizard(element) {
       primary: {
         icon: "edit",
         label: get("save"),
-        action: updateNamingAction(element)
+        action: replaceNamingAction(element)
       },
       content: renderPowerTransformerWizard(element.getAttribute("name"), element.getAttribute("desc"), element.getAttribute("type"), reservedNames)
     }

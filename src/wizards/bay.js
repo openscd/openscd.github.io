@@ -5,7 +5,7 @@ import {
   createElement,
   getValue
 } from "../foundation.js";
-import {updateNamingAction} from "./foundation/actions.js";
+import {replaceNamingAttributeWithReferencesAction} from "./foundation/actions.js";
 export function renderBayWizard(name, desc) {
   return [
     html`<wizard-textfield
@@ -63,7 +63,7 @@ export function editBayWizard(element) {
       primary: {
         icon: "edit",
         label: get("save"),
-        action: updateNamingAction(element)
+        action: replaceNamingAttributeWithReferencesAction(element, "bay.action.updateBay")
       },
       content: renderBayWizard(element.getAttribute("name"), element.getAttribute("desc"))
     }

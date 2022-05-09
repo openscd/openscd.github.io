@@ -5,7 +5,7 @@ import {
 } from "../../foundation.js";
 import {get} from "../../../_snowpack/pkg/lit-translate.js";
 import {updateReferences} from "./references.js";
-export function updateNamingAction(element) {
+export function replaceNamingAction(element) {
   return (inputs) => {
     const name = getValue(inputs.find((i) => i.label === "name"));
     const desc = getValue(inputs.find((i) => i.label === "desc"));
@@ -14,6 +14,24 @@ export function updateNamingAction(element) {
     }
     const newElement = cloneElement(element, {name, desc});
     return [{old: {element}, new: {element: newElement}}];
+  };
+}
+export function replaceNamingAttributeWithReferencesAction(element, messageTitleKey) {
+  return (inputs) => {
+    const newName = getValue(inputs.find((i) => i.label === "name"));
+    const oldName = element.getAttribute("name");
+    const newDesc = getValue(inputs.find((i) => i.label === "desc"));
+    if (newName === oldName && newDesc === element.getAttribute("desc")) {
+      return [];
+    }
+    const newElement = cloneElement(element, {name: newName, desc: newDesc});
+    const complexAction = {
+      actions: [],
+      title: get(messageTitleKey, {name: newName})
+    };
+    complexAction.actions.push({old: {element}, new: {element: newElement}});
+    complexAction.actions.push(...updateReferences(element, oldName, newName));
+    return complexAction.actions.length ? [complexAction] : [];
   };
 }
 export function updateNamingAttributeWithReferencesAction(element, messageTitleKey) {

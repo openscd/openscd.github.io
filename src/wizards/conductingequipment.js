@@ -9,7 +9,7 @@ import {
   getValue,
   isPublic
 } from "../foundation.js";
-import {updateNamingAction} from "./foundation/actions.js";
+import {replaceNamingAction} from "./foundation/actions.js";
 const types = {
   CBR: "Circuit Breaker",
   DIS: "Disconnector",
@@ -191,7 +191,7 @@ export function editConductingEquipmentWizard(element) {
       primary: {
         icon: "edit",
         label: get("save"),
-        action: updateNamingAction(element)
+        action: replaceNamingAction(element)
       },
       content: renderConductingEquipmentWizard(element.getAttribute("name"), element.getAttribute("desc"), "edit", typeName(element), reservedNames)
     }

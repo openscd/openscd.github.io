@@ -74,7 +74,8 @@
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-function tsd-parent-kind-module"><a href="wizards_foundation_actions.html#addMissingAttributes" class="tsd-kind-icon">add<wbr>Missing<wbr>Attributes</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-module"><a href="wizards_foundation_actions.html#processNamingAttributes" class="tsd-kind-icon">process<wbr>Naming<wbr>Attributes</a></li>
-								<li class="tsd-kind-function tsd-parent-kind-module"><a href="wizards_foundation_actions.html#updateNamingAction" class="tsd-kind-icon">update<wbr>Naming<wbr>Action</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module"><a href="wizards_foundation_actions.html#replaceNamingAction" class="tsd-kind-icon">replace<wbr>Naming<wbr>Action</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module"><a href="wizards_foundation_actions.html#replaceNamingAttributeWithReferencesAction" class="tsd-kind-icon">replace<wbr>Naming<wbr>Attribute<wbr>With<wbr>References<wbr>Action</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-module"><a href="wizards_foundation_actions.html#updateNamingAttributeWithReferencesAction" class="tsd-kind-icon">update<wbr>Naming<wbr>Attribute<wbr>With<wbr>References<wbr>Action</a></li>
 							</ul>
 						</section>
@@ -93,7 +94,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/52a49ce/src/wizards/foundation/actions.ts#L75">src/wizards/foundation/actions.ts:75</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/c6d5102/src/wizards/foundation/actions.ts#L103">src/wizards/foundation/actions.ts:103</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -119,7 +120,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/52a49ce/src/wizards/foundation/actions.ts#L59">src/wizards/foundation/actions.ts:59</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/c6d5102/src/wizards/foundation/actions.ts#L87">src/wizards/foundation/actions.ts:87</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -139,22 +140,48 @@
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
-					<a name="updateNamingAction" class="tsd-anchor"></a>
-					<h3>update<wbr>Naming<wbr>Action</h3>
+					<a name="replaceNamingAction" class="tsd-anchor"></a>
+					<h3>replace<wbr>Naming<wbr>Action</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
-						<li class="tsd-signature tsd-kind-icon">update<wbr>Naming<wbr>Action<span class="tsd-signature-symbol">(</span>element<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Element</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="foundation.html#WizardActor" class="tsd-signature-type" data-tsd-kind="Type alias">WizardActor</a></li>
+						<li class="tsd-signature tsd-kind-icon">replace<wbr>Naming<wbr>Action<span class="tsd-signature-symbol">(</span>element<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Element</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="foundation.html#WizardActor" class="tsd-signature-type" data-tsd-kind="Type alias">WizardActor</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/52a49ce/src/wizards/foundation/actions.ts#L13">src/wizards/foundation/actions.ts:13</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/c6d5102/src/wizards/foundation/actions.ts#L13">src/wizards/foundation/actions.ts:13</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
 									<h5>element: <span class="tsd-signature-type">Element</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="foundation.html#WizardActor" class="tsd-signature-type" data-tsd-kind="Type alias">WizardActor</a></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
+					<a name="replaceNamingAttributeWithReferencesAction" class="tsd-anchor"></a>
+					<h3>replace<wbr>Naming<wbr>Attribute<wbr>With<wbr>References<wbr>Action</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
+						<li class="tsd-signature tsd-kind-icon">replace<wbr>Naming<wbr>Attribute<wbr>With<wbr>References<wbr>Action<span class="tsd-signature-symbol">(</span>element<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Element</span>, messageTitleKey<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="foundation.html#WizardActor" class="tsd-signature-type" data-tsd-kind="Type alias">WizardActor</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/c6d5102/src/wizards/foundation/actions.ts#L31">src/wizards/foundation/actions.ts:31</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>element: <span class="tsd-signature-type">Element</span></h5>
+								</li>
+								<li>
+									<h5>messageTitleKey: <span class="tsd-signature-type">string</span></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <a href="foundation.html#WizardActor" class="tsd-signature-type" data-tsd-kind="Type alias">WizardActor</a></h4>
@@ -171,7 +198,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/52a49ce/src/wizards/foundation/actions.ts#L31">src/wizards/foundation/actions.ts:31</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/c6d5102/src/wizards/foundation/actions.ts#L59">src/wizards/foundation/actions.ts:59</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -209,7 +236,10 @@
 						<a href="wizards_foundation_actions.html#processNamingAttributes" class="tsd-kind-icon">process<wbr>Naming<wbr>Attributes</a>
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-module">
-						<a href="wizards_foundation_actions.html#updateNamingAction" class="tsd-kind-icon">update<wbr>Naming<wbr>Action</a>
+						<a href="wizards_foundation_actions.html#replaceNamingAction" class="tsd-kind-icon">replace<wbr>Naming<wbr>Action</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-module">
+						<a href="wizards_foundation_actions.html#replaceNamingAttributeWithReferencesAction" class="tsd-kind-icon">replace<wbr>Naming<wbr>Attribute<wbr>With<wbr>References<wbr>Action</a>
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-module">
 						<a href="wizards_foundation_actions.html#updateNamingAttributeWithReferencesAction" class="tsd-kind-icon">update<wbr>Naming<wbr>Attribute<wbr>With<wbr>References<wbr>Action</a>

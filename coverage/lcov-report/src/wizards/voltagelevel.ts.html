@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">99.61% </span>
+                <span class="strong">99.62% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>258/259</span>
+                <span class='fraction'>269/270</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">99.61% </span>
+                <span class="strong">99.62% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>258/259</span>
+                <span class='fraction'>269/270</span>
             </div>
         
             
@@ -322,7 +322,18 @@
 <a name='L257'></a><a href='#L257'>257</a>
 <a name='L258'></a><a href='#L258'>258</a>
 <a name='L259'></a><a href='#L259'>259</a>
-<a name='L260'></a><a href='#L260'>260</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">36x</span>
+<a name='L260'></a><a href='#L260'>260</a>
+<a name='L261'></a><a href='#L261'>261</a>
+<a name='L262'></a><a href='#L262'>262</a>
+<a name='L263'></a><a href='#L263'>263</a>
+<a name='L264'></a><a href='#L264'>264</a>
+<a name='L265'></a><a href='#L265'>265</a>
+<a name='L266'></a><a href='#L266'>266</a>
+<a name='L267'></a><a href='#L267'>267</a>
+<a name='L268'></a><a href='#L268'>268</a>
+<a name='L269'></a><a href='#L269'>269</a>
+<a name='L270'></a><a href='#L270'>270</a>
+<a name='L271'></a><a href='#L271'>271</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">36x</span>
 <span class="cline-any cline-yes">36x</span>
 <span class="cline-any cline-yes">36x</span>
 <span class="cline-any cline-yes">36x</span>
@@ -345,6 +356,10 @@
 <span class="cline-any cline-yes">36x</span>
 <span class="cline-any cline-yes">36x</span>
 <span class="cline-any cline-yes">36x</span>
+<span class="cline-any cline-yes">36x</span>
+<span class="cline-any cline-yes">36x</span>
+<span class="cline-any cline-yes">36x</span>
+<span class="cline-any cline-yes">36x</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
@@ -535,6 +550,13 @@
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
@@ -587,15 +609,19 @@ import { get, translate } from 'lit-translate';
 import '../wizard-textfield.js';
 import {
   cloneElement,
+  ComplexAction,
   createElement,
   EditorAction,
   getMultiplier,
   getValue,
   patterns,
+  SimpleAction,
   Wizard,
   WizardActor,
   WizardInputElement,
 } from '../foundation.js';
+&nbsp;
+import { updateReferences } from "./foundation/references.js";
 &nbsp;
 const initial = {
   nomFreq: '50',
@@ -727,7 +753,7 @@ function getVoltageAction(
   Voltage: string | null,
   multiplier: string | null,
   voltageLevel: Element
-): EditorAction {
+): SimpleAction {
   if (oldVoltage === null) {
     const element = createElement(voltageLevel.ownerDocument, 'Voltage', {
       unit: 'V',
@@ -770,8 +796,8 @@ export function updateAction(element: Element): WizardActor {
     const Voltage = getValue(inputs.find(i =&gt; i.label === 'Voltage')!);
     const multiplier = getMultiplier(inputs.find(i =&gt; i.label === 'Voltage')!);
 &nbsp;
-    let voltageLevelAction: EditorAction | null;
-    let voltageAction: EditorAction | null;
+    let voltageLevelAction: SimpleAction | null;
+    let voltageAction: SimpleAction | null;
 &nbsp;
     if (
       name === element.getAttribute('name') &amp;&amp;
@@ -809,10 +835,17 @@ export function updateAction(element: Element): WizardActor {
       );
     }
 &nbsp;
-    const actions: EditorAction[] = [];
-    if (voltageLevelAction) actions.push(voltageLevelAction);
-    if (voltageAction) actions.push(voltageAction);
-    return actions;
+    const complexAction: ComplexAction = {
+      actions: [],
+      title: get('voltagelevel.action.updateVoltagelevel', {name}),
+    };
+    if (voltageLevelAction) complexAction.actions.push(voltageLevelAction);
+    if (voltageAction) complexAction.actions.push(voltageAction);
+    complexAction.actions.push(...updateReferences(
+      element,
+      element.getAttribute('name'),
+      name));
+    return complexAction.actions.length ? [complexAction] : [];
   };
 }
 &nbsp;
@@ -847,7 +880,7 @@ export function voltageLevelEditWizard(element: Element): Wizard {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener">istanbul</a>
-                at Fri May 06 2022 07:52:31 GMT+0000 (Coordinated Universal Time)
+                at Mon May 09 2022 05:53:36 GMT+0000 (Coordinated Universal Time)
             </div>
         </div>
         <script src="../../prettify.js"></script>
