@@ -20,13 +20,15 @@ import {translate} from "../../../_snowpack/pkg/lit-translate.js";
 import "../../../_snowpack/pkg/@material/mwc-icon.js";
 import "../../../_snowpack/pkg/@material/mwc-list/mwc-list-item.js";
 import "../../filtered-list.js";
-import {compareNames, getNameAttribute} from "../../foundation.js";
+import {compareNames, getNameAttribute, newWizardEvent} from "../../foundation.js";
 import {newGOOSESelectEvent, styles} from "./foundation.js";
 import {gooseIcon} from "../../icons/icons.js";
-let selectedGooseMsg;
+import {wizards} from "../../wizards/wizard-library.js";
+import {classMap} from "../../../_snowpack/pkg/lit-html/directives/class-map.js";
+let selectedGseControl;
 let selectedDataSet;
 function onOpenDocResetSelectedGooseMsg() {
-  selectedGooseMsg = void 0;
+  selectedGseControl = void 0;
   selectedDataSet = void 0;
 }
 addEventListener("open-doc", onOpenDocResetSelectedGooseMsg);
@@ -38,23 +40,40 @@ export let GoosePublisherList = class extends LitElement {
     return Array.from(ied.querySelectorAll(":scope > AccessPoint > Server > LDevice > LN0 > GSEControl"));
   }
   onGooseSelect(gseControl) {
+    if (gseControl == selectedGseControl)
+      return;
     const ln = gseControl.parentElement;
     const dataset = ln?.querySelector(`DataSet[name=${gseControl.getAttribute("datSet")}]`);
-    selectedGooseMsg = gseControl;
+    selectedGseControl = gseControl;
     selectedDataSet = dataset;
-    this.dispatchEvent(newGOOSESelectEvent(selectedGooseMsg, selectedDataSet));
+    this.dispatchEvent(newGOOSESelectEvent(selectedGseControl, selectedDataSet));
+    this.requestUpdate();
   }
   renderGoose(gseControl) {
     return html`<mwc-list-item
       @click=${() => this.onGooseSelect(gseControl)}
       graphic="large"
+      hasMeta
     >
-      <span>${gseControl.getAttribute("name")}</span>
       <mwc-icon slot="graphic">${gooseIcon}</mwc-icon>
+      <span>${gseControl.getAttribute("name")}</span>
+      <mwc-icon-button
+        class="${classMap({
+      hidden: gseControl !== selectedGseControl
+    })}"
+        slot="meta"
+        icon="edit"
+        @click=${() => this.openEditWizard(gseControl)}
+      ></mwc-icon-button>
     </mwc-list-item>`;
   }
+  openEditWizard(gseControl) {
+    const wizard = wizards["GSEControl"].edit(gseControl);
+    if (wizard)
+      this.dispatchEvent(newWizardEvent(wizard));
+  }
   firstUpdated() {
-    this.dispatchEvent(newGOOSESelectEvent(selectedGooseMsg, selectedDataSet ?? void 0));
+    this.dispatchEvent(newGOOSESelectEvent(selectedGseControl, selectedDataSet ?? void 0));
   }
   render() {
     return html` <section tabindex="0">
@@ -74,6 +93,14 @@ export let GoosePublisherList = class extends LitElement {
 };
 GoosePublisherList.styles = css`
     ${styles}
+
+    mwc-list-item {
+      --mdc-list-item-meta-size: 48px;
+    }
+
+    mwc-icon-button.hidden {
+      display: none;
+    }
   `;
 __decorate([
   property({attribute: false})

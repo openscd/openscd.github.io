@@ -158,6 +158,8 @@ export let SubscriberList = class extends LitElement {
   }
   async onViewChange(event) {
     view = event.detail.view;
+    this.currentSelectedIed = void 0;
+    this.currentSelectedGseControl = void 0;
     this.resetElements();
     this.requestUpdate();
   }
@@ -296,11 +298,15 @@ export let SubscriberList = class extends LitElement {
   }
   renderTitle() {
     const gseControlName = this.currentSelectedGseControl?.getAttribute("name") ?? void 0;
-    return view == View.GOOSE_PUBLISHER ? html`<h1>${translate("subscription.publisherGoose.subscriberTitle", {
+    return view == View.GOOSE_PUBLISHER ? html`<h1>
+          ${translate("subscription.publisherGoose.subscriberTitle", {
       selected: gseControlName ? this.currentGooseIEDName + " > " + gseControlName : "GOOSE"
-    })}</h1>` : html`<h1>${translate("subscription.subscriberGoose.publisherTitle", {
+    })}
+        </h1>` : html`<h1>
+          ${translate("subscription.subscriberGoose.publisherTitle", {
       selected: this.currentSelectedIed ? this.currentSelectedIed.getAttribute("name") : "IED"
-    })}</h1>`;
+    })}
+        </h1>`;
   }
   render() {
     return html`
