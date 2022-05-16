@@ -13,7 +13,6 @@ import {
   css,
   customElement,
   html,
-  LitElement,
   property
 } from "../../../_snowpack/pkg/lit-element.js";
 import {nothing} from "../../../_snowpack/pkg/lit-html.js";
@@ -21,11 +20,8 @@ import "../../action-pane.js";
 import "./ldevice-container.js";
 import {serverIcon} from "../../icons/ied-icons.js";
 import {getDescriptionAttribute} from "../../foundation.js";
-export let ServerContainer = class extends LitElement {
-  constructor() {
-    super(...arguments);
-    this.ancestors = [];
-  }
+import {Container} from "./foundation.js";
+export let ServerContainer = class extends Container {
   header() {
     const desc = getDescriptionAttribute(this.element);
     return html`Server${desc ? html` &mdash; ${desc}` : nothing}`;
@@ -36,18 +32,12 @@ export let ServerContainer = class extends LitElement {
       ${Array.from(this.element.querySelectorAll(":scope > LDevice")).map((server) => html`<ldevice-container
           .element=${server}
           .nsdoc=${this.nsdoc}
-          .ancestors=${[this.element, ...this.ancestors]}
+          .ancestors=${[...this.ancestors, this.element]}
         ></ldevice-container>`)}
     </action-pane>`;
   }
 };
 ServerContainer.styles = css``;
-__decorate([
-  property({attribute: false})
-], ServerContainer.prototype, "element", 2);
-__decorate([
-  property()
-], ServerContainer.prototype, "ancestors", 2);
 __decorate([
   property()
 ], ServerContainer.prototype, "nsdoc", 2);

@@ -13,7 +13,6 @@ import {
   css,
   customElement,
   html,
-  LitElement,
   property
 } from "../../../_snowpack/pkg/lit-element.js";
 import {nothing} from "../../../_snowpack/pkg/lit-html.js";
@@ -21,6 +20,7 @@ import {translate} from "../../../_snowpack/pkg/lit-translate.js";
 import "../../action-pane.js";
 import "./access-point-container.js";
 import {wizards} from "../../wizards/wizard-library.js";
+import {Container} from "./foundation.js";
 import {
   getDescriptionAttribute,
   getNameAttribute,
@@ -28,7 +28,7 @@ import {
   newWizardEvent
 } from "../../foundation.js";
 import {removeIEDWizard} from "../../wizards/ied.js";
-export let IedContainer = class extends LitElement {
+export let IedContainer = class extends Container {
   openEditWizard() {
     const wizard = wizards["IED"].edit(this.element);
     if (wizard)
@@ -77,9 +77,6 @@ IedContainer.styles = css`
       border-bottom: none;
     }
   `;
-__decorate([
-  property({attribute: false})
-], IedContainer.prototype, "element", 2);
 __decorate([
   property()
 ], IedContainer.prototype, "nsdoc", 2);

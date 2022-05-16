@@ -12,7 +12,6 @@ var __decorate = (decorators, target, key, kind) => {
 import {
   customElement,
   html,
-  LitElement,
   property,
   query
 } from "../../../_snowpack/pkg/lit-element.js";
@@ -23,12 +22,8 @@ import "./da-container.js";
 import {getDescriptionAttribute, getNameAttribute, newWizardEvent} from "../../foundation.js";
 import {translate} from "../../../_snowpack/pkg/lit-translate.js";
 import {createDoInfoWizard} from "./do-wizard.js";
-import {findDOTypeElement, getInstanceDAElement} from "./foundation.js";
-export let DOContainer = class extends LitElement {
-  constructor() {
-    super(...arguments);
-    this.ancestors = [];
-  }
+import {Container, findDOTypeElement, getInstanceDAElement} from "./foundation.js";
+export let DOContainer = class extends Container {
   header() {
     const name = getNameAttribute(this.element);
     const desc = getDescriptionAttribute(this.element);
@@ -83,13 +78,13 @@ export let DOContainer = class extends LitElement {
           .element=${daElement}
           .instanceElement=${getInstanceDAElement(this.instanceElement, daElement)}
           .nsdoc=${this.nsdoc}
-          .ancestors=${[this.element, ...this.ancestors]}
+          .ancestors=${[...this.ancestors, this.element]}
         ></da-container>`) : nothing}
       ${this.toggleButton?.on ? doElements.map((doElement) => html`<do-container
           .element=${doElement}
           .instanceElement=${this.getInstanceDOElement(doElement)}
           .nsdoc=${this.nsdoc}
-          .ancestors=${[this.element, ...this.ancestors]}
+          .ancestors=${[...this.ancestors, this.element]}
         ></do-container>`) : nothing}
     </action-pane>
     `;
@@ -97,13 +92,7 @@ export let DOContainer = class extends LitElement {
 };
 __decorate([
   property({attribute: false})
-], DOContainer.prototype, "element", 2);
-__decorate([
-  property({attribute: false})
 ], DOContainer.prototype, "instanceElement", 2);
-__decorate([
-  property()
-], DOContainer.prototype, "ancestors", 2);
 __decorate([
   property()
 ], DOContainer.prototype, "nsdoc", 2);

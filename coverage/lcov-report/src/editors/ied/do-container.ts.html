@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">99.24% </span>
+                <span class="strong">99.18% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>132/133</span>
+                <span class='fraction'>122/123</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">81.25% </span>
+                <span class="strong">80% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>13/16</span>
+                <span class='fraction'>12/15</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>6/6</span>
+                <span class='fraction'>5/5</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">99.24% </span>
+                <span class="strong">99.18% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>132/133</span>
+                <span class='fraction'>122/123</span>
             </div>
         
             
@@ -186,17 +186,7 @@
 <a name='L121'></a><a href='#L121'>121</a>
 <a name='L122'></a><a href='#L122'>122</a>
 <a name='L123'></a><a href='#L123'>123</a>
-<a name='L124'></a><a href='#L124'>124</a>
-<a name='L125'></a><a href='#L125'>125</a>
-<a name='L126'></a><a href='#L126'>126</a>
-<a name='L127'></a><a href='#L127'>127</a>
-<a name='L128'></a><a href='#L128'>128</a>
-<a name='L129'></a><a href='#L129'>129</a>
-<a name='L130'></a><a href='#L130'>130</a>
-<a name='L131'></a><a href='#L131'>131</a>
-<a name='L132'></a><a href='#L132'>132</a>
-<a name='L133'></a><a href='#L133'>133</a>
-<a name='L134'></a><a href='#L134'>134</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">7x</span>
+<a name='L124'></a><a href='#L124'>124</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">7x</span>
 <span class="cline-any cline-yes">7x</span>
 <span class="cline-any cline-yes">7x</span>
 <span class="cline-any cline-yes">7x</span>
@@ -220,20 +210,10 @@
 <span class="cline-any cline-yes">7x</span>
 <span class="cline-any cline-yes">7x</span>
 <span class="cline-any cline-yes">7x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-yes">7x</span>
 <span class="cline-any cline-yes">7x</span>
 <span class="cline-any cline-yes">7x</span>
 <span class="cline-any cline-yes">7x</span>
@@ -332,7 +312,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import {
   customElement,
   html,
-  LitElement,
   property,
   query,
   TemplateResult,
@@ -348,25 +327,16 @@ import { getDescriptionAttribute, getNameAttribute, newWizardEvent } from '../..
 import { translate } from 'lit-translate';
 import { Nsdoc } from '../../foundation/nsdoc.js';
 import { createDoInfoWizard } from "./do-wizard.js";
-import { findDOTypeElement, getInstanceDAElement } from "./foundation.js";
+import { Container, findDOTypeElement, getInstanceDAElement } from "./foundation.js";
 &nbsp;
 /** [[`IED`]] plugin subeditor for editing `DO` element. */
 @customElement('do-container')
-export class DOContainer extends LitElement {
-  /**
-   * The DO itself.
-   */
-  @property({ attribute: false })
-  element!: Element;
-&nbsp;
+export class DOContainer extends Container {
   /**
    * The optional DOI of this DO.
    */
   @property({ attribute: false })
   instanceElement!: Element;
-&nbsp;
-  @property()
-  ancestors: Element[] = [];
 &nbsp;
   @property()
   nsdoc!: Nsdoc;
@@ -449,14 +419,14 @@ export class DOContainer extends LitElement {
           .element=${daElement}
           .instanceElement=${getInstanceDAElement(this.instanceElement, daElement)}
           .nsdoc=${this.nsdoc}
-          .ancestors=${[this.element, ...this.ancestors]}
+          .ancestors=${[...this.ancestors, this.element]}
         &gt;&lt;/da-container&gt;`) : nothing}
       ${this.toggleButton?.on ? doElements.map(doElement =&gt;
         html`&lt;do-container
           .element=${doElement}
           .instanceElement=${this.getInstanceDOElement(doElement)}
           .nsdoc=${this.nsdoc}
-          .ancestors=${[this.element, ...this.ancestors]}
+          .ancestors=${[...this.ancestors, this.element]}
         &gt;&lt;/do-container&gt;`) : nothing}
     &lt;/action-pane&gt;
     `;
@@ -469,7 +439,7 @@ export class DOContainer extends LitElement {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener">istanbul</a>
-                at Mon May 16 2022 06:25:40 GMT+0000 (Coordinated Universal Time)
+                at Mon May 16 2022 08:15:43 GMT+0000 (Coordinated Universal Time)
             </div>
         </div>
         <script src="../../../prettify.js"></script>

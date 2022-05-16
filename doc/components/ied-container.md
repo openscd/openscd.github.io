@@ -4,7 +4,8 @@
 
 ## Properties
 
-| Property  | Attribute | Type      | Description                                      |
-|-----------|-----------|-----------|--------------------------------------------------|
-| `element` |           | `Element` | The edited `Element`, a common property of all IED subcontainers. |
-| `nsdoc`   | `nsdoc`   | `Nsdoc`   |                                                  |
+| Property    | Attribute   | Type        | Default |
+|-------------|-------------|-------------|---------|
+| `ancestors` | `ancestors` | `Element[]` | []      |
+| `element`   |             | `Element`   |         |
+| `nsdoc`     | `nsdoc`     | `Nsdoc`     |         |

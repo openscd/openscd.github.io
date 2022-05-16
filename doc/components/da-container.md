@@ -7,7 +7,7 @@
 | Property          | Attribute   | Type                            | Default | Description                     |
 |-------------------|-------------|---------------------------------|---------|---------------------------------|
 | `ancestors`       | `ancestors` | `Element[]`                     | []      |                                 |
-| `element`         |             | `Element`                       |         | The (B)DA itself.               |
+| `element`         |             | `Element`                       |         |                                 |
 | `instanceElement` |             | `Element`                       |         | The optional DAI of this (B)DA. |
 | `nsdoc`           | `nsdoc`     | `Nsdoc`                         |         |                                 |
 | `toggleButton`    |             | `IconButtonToggle \| undefined` |         |                                 |

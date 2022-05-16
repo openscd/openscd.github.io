@@ -13,7 +13,6 @@ import {
   css,
   customElement,
   html,
-  LitElement,
   property
 } from "../../../_snowpack/pkg/lit-element.js";
 import "../../action-pane.js";
@@ -21,11 +20,8 @@ import "./server-container.js";
 import {nothing} from "../../../_snowpack/pkg/lit-html.js";
 import {getDescriptionAttribute, getNameAttribute} from "../../foundation.js";
 import {accessPointIcon} from "../../icons/ied-icons.js";
-export let AccessPointContainer = class extends LitElement {
-  constructor() {
-    super(...arguments);
-    this.ancestors = [];
-  }
+import {Container} from "./foundation.js";
+export let AccessPointContainer = class extends Container {
   header() {
     const name = getNameAttribute(this.element);
     const desc = getDescriptionAttribute(this.element);
@@ -37,18 +33,12 @@ export let AccessPointContainer = class extends LitElement {
       ${Array.from(this.element.querySelectorAll(":scope > Server")).map((server) => html`<server-container
           .element=${server}
           .nsdoc=${this.nsdoc}
-          .ancestors=${[this.element, ...this.ancestors]}
+          .ancestors=${[...this.ancestors, this.element]}
         ></server-container>`)}
     </action-pane>`;
   }
 };
 AccessPointContainer.styles = css``;
-__decorate([
-  property({attribute: false})
-], AccessPointContainer.prototype, "element", 2);
-__decorate([
-  property()
-], AccessPointContainer.prototype, "ancestors", 2);
 __decorate([
   property()
 ], AccessPointContainer.prototype, "nsdoc", 2);

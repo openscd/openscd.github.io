@@ -14,6 +14,7 @@ import "../../_snowpack/pkg/@material/mwc-fab.js";
 import "../../_snowpack/pkg/@material/mwc-select.js";
 import "../../_snowpack/pkg/@material/mwc-list/mwc-list-item.js";
 import "./ied/ied-container.js";
+import "./ied/element-path.js";
 import "./substation/zeroline-pane.js";
 import {translate} from "../../_snowpack/pkg/lit-translate.js";
 import {compareNames, getDescriptionAttribute, getNameAttribute} from "../foundation.js";
@@ -47,19 +48,22 @@ export default class IedPlugin extends LitElement {
     if (iedList.length > 0) {
       return html`
         <section>
-          <mwc-select
-            id="iedSelect"
-            label="${translate("iededitor.searchHelper")}"
-            @selected=${this.onSelect}>
-            ${iedList.map((ied) => html`
-                  <mwc-list-item
-                    ?selected=${ied == this.selectedIed}
-                    value="${getNameAttribute(ied)}"
-                  >${getNameAttribute(ied)} ${ied.hasAttribute("desc") ? translate("iededitor.searchHelperDesc", {
+          <div class="header">
+            <mwc-select
+              class="iedSelect"
+              label="${translate("iededitor.searchHelper")}"
+              @selected=${this.onSelect}>
+              ${iedList.map((ied) => html`
+                    <mwc-list-item
+                      ?selected=${ied == this.selectedIed}
+                      value="${getNameAttribute(ied)}"
+                    >${getNameAttribute(ied)} ${ied.hasAttribute("desc") ? translate("iededitor.searchHelperDesc", {
         description: getDescriptionAttribute(ied)
       }) : ""}
-                  </mwc-list-item>`)}
-          </mwc-select>
+                    </mwc-list-item>`)}
+            </mwc-select>
+            <element-path class="elementPath"></element-path>
+          </div>
           <ied-container
             .element=${this.selectedIed}
             .nsdoc=${this.nsdoc}
@@ -81,9 +85,18 @@ IedPlugin.styles = css`
       padding: 8px 12px 16px;
     }
 
-    #iedSelect {
+    .iedSelect {
       width: 35vw;
       padding-bottom: 20px;
+    }
+
+    .header {
+      display: flex;
+    }
+
+    .elementPath {
+      margin-left: auto;
+      padding-right: 12px;
     }
 
     h1 {

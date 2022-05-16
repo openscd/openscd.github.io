@@ -13,7 +13,6 @@ import {
   css,
   customElement,
   html,
-  LitElement,
   property,
   query
 } from "../../../_snowpack/pkg/lit-element.js";
@@ -23,11 +22,8 @@ import "./do-container.js";
 import {getInstanceAttribute, getNameAttribute} from "../../foundation.js";
 import {translate} from "../../../_snowpack/pkg/lit-translate.js";
 import {until} from "../../../_snowpack/pkg/lit-html/directives/until.js";
-export let LNContainer = class extends LitElement {
-  constructor() {
-    super(...arguments);
-    this.ancestors = [];
-  }
+import {Container} from "./foundation.js";
+export let LNContainer = class extends Container {
   header() {
     const prefix = this.element.getAttribute("prefix");
     const inst = getInstanceAttribute(this.element);
@@ -63,19 +59,13 @@ export let LNContainer = class extends LitElement {
           .element=${dO}
           .instanceElement=${this.getInstanceElement(dO)}
           .nsdoc=${this.nsdoc}
-          .ancestors=${[this.element, ...this.ancestors]}
+          .ancestors=${[...this.ancestors, this.element]}
         ></do-container>
         `) : nothing}
     </action-pane>`;
   }
 };
 LNContainer.styles = css``;
-__decorate([
-  property({attribute: false})
-], LNContainer.prototype, "element", 2);
-__decorate([
-  property()
-], LNContainer.prototype, "ancestors", 2);
 __decorate([
   property()
 ], LNContainer.prototype, "nsdoc", 2);

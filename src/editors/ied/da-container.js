@@ -13,7 +13,6 @@ import {
   css,
   customElement,
   html,
-  LitElement,
   property,
   query
 } from "../../../_snowpack/pkg/lit-element.js";
@@ -25,12 +24,8 @@ import {getNameAttribute, newWizardEvent} from "../../foundation.js";
 import {wizards} from "../../wizards/wizard-library.js";
 import {getCustomField} from "./foundation/foundation.js";
 import {createDaInfoWizard} from "./da-wizard.js";
-import {getInstanceDAElement, getValueElement} from "./foundation.js";
-export let DAContainer = class extends LitElement {
-  constructor() {
-    super(...arguments);
-    this.ancestors = [];
-  }
+import {Container, getInstanceDAElement, getValueElement} from "./foundation.js";
+export let DAContainer = class extends Container {
   header() {
     const name = getNameAttribute(this.element);
     const bType = this.element.getAttribute("bType") ?? nothing;
@@ -92,7 +87,7 @@ export let DAContainer = class extends LitElement {
           .element=${bdaElement}
           .instanceElement=${getInstanceDAElement(this.instanceElement, bdaElement)}
           .nsdoc=${this.nsdoc}
-          .ancestors=${[this.element, ...this.ancestors]}
+          .ancestors=${[...this.ancestors, this.element]}
         ></da-container>`) : nothing}
     </action-pane>
     `;
@@ -115,13 +110,7 @@ DAContainer.styles = css`
   `;
 __decorate([
   property({attribute: false})
-], DAContainer.prototype, "element", 2);
-__decorate([
-  property({attribute: false})
 ], DAContainer.prototype, "instanceElement", 2);
-__decorate([
-  property()
-], DAContainer.prototype, "ancestors", 2);
 __decorate([
   property()
 ], DAContainer.prototype, "nsdoc", 2);
