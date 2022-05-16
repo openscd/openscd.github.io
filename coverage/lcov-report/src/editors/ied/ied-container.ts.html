@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">96.61% </span>
+                <span class="strong">90.8% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>57/59</span>
+                <span class='fraction'>79/87</span>
             </div>
         
             
@@ -37,16 +37,16 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">66.66% </span>
+                <span class="strong">50% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>2/3</span>
+                <span class='fraction'>2/4</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">96.61% </span>
+                <span class="strong">90.8% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>57/59</span>
+                <span class='fraction'>79/87</span>
             </div>
         
             
@@ -122,7 +122,41 @@
 <a name='L57'></a><a href='#L57'>57</a>
 <a name='L58'></a><a href='#L58'>58</a>
 <a name='L59'></a><a href='#L59'>59</a>
-<a name='L60'></a><a href='#L60'>60</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">2x</span>
+<a name='L60'></a><a href='#L60'>60</a>
+<a name='L61'></a><a href='#L61'>61</a>
+<a name='L62'></a><a href='#L62'>62</a>
+<a name='L63'></a><a href='#L63'>63</a>
+<a name='L64'></a><a href='#L64'>64</a>
+<a name='L65'></a><a href='#L65'>65</a>
+<a name='L66'></a><a href='#L66'>66</a>
+<a name='L67'></a><a href='#L67'>67</a>
+<a name='L68'></a><a href='#L68'>68</a>
+<a name='L69'></a><a href='#L69'>69</a>
+<a name='L70'></a><a href='#L70'>70</a>
+<a name='L71'></a><a href='#L71'>71</a>
+<a name='L72'></a><a href='#L72'>72</a>
+<a name='L73'></a><a href='#L73'>73</a>
+<a name='L74'></a><a href='#L74'>74</a>
+<a name='L75'></a><a href='#L75'>75</a>
+<a name='L76'></a><a href='#L76'>76</a>
+<a name='L77'></a><a href='#L77'>77</a>
+<a name='L78'></a><a href='#L78'>78</a>
+<a name='L79'></a><a href='#L79'>79</a>
+<a name='L80'></a><a href='#L80'>80</a>
+<a name='L81'></a><a href='#L81'>81</a>
+<a name='L82'></a><a href='#L82'>82</a>
+<a name='L83'></a><a href='#L83'>83</a>
+<a name='L84'></a><a href='#L84'>84</a>
+<a name='L85'></a><a href='#L85'>85</a>
+<a name='L86'></a><a href='#L86'>86</a>
+<a name='L87'></a><a href='#L87'>87</a>
+<a name='L88'></a><a href='#L88'>88</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
@@ -152,6 +186,28 @@
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
@@ -192,11 +248,17 @@
 import { nothing } from 'lit-html';
 import { translate } from "lit-translate";
 &nbsp;
-import {wizards} from "../../wizards/wizard-library.js";
 import '../../action-pane.js';
 import './access-point-container.js';
+&nbsp;
+import { wizards } from "../../wizards/wizard-library.js";
 import { Nsdoc } from '../../foundation/nsdoc.js';
-import { getDescriptionAttribute, getNameAttribute, newWizardEvent } from '../../foundation.js';
+import {
+  getDescriptionAttribute,
+  getNameAttribute,
+  newActionEvent,
+  newWizardEvent} from '../../foundation.js';
+import { removeIEDWizard } from "../../wizards/ied.js";
 &nbsp;
 /** [[`IED`]] plugin subeditor for editing `IED` element. */
 @customElement('ied-container')
@@ -207,10 +269,20 @@ export class IedContainer extends LitElement {
 &nbsp;
   @property()
   nsdoc!: Nsdoc;
-  
+&nbsp;
   private <span class="fstat-no" title="function not covered" >openEditWizard(): void {</span>
 <span class="cstat-no" title="statement not covered" >    const wizard = wizards['IED'].edit(this.element);</span>
 <span class="cstat-no" title="statement not covered" >    if (wizard) this.dispatchEvent(newWizardEvent(wizard));</span>
+  }
+&nbsp;
+  private <span class="fstat-no" title="function not covered" >removeIED(): void {</span>
+<span class="cstat-no" title="statement not covered" >    const wizard = removeIEDWizard(this.element);</span>
+<span class="cstat-no" title="statement not covered" >    if (wizard) {</span>
+<span class="cstat-no" title="statement not covered" >      this.dispatchEvent(newWizardEvent(() =&gt; wizard));</span>
+<span class="cstat-no" title="statement not covered" >    } else {</span>
+<span class="cstat-no" title="statement not covered" >      // If no Wizard is needed, just remove the element.</span>
+<span class="cstat-no" title="statement not covered" >      this.dispatchEvent(newActionEvent({ old: { parent: this.element.parentElement!, element: this.element } }));</span>
+    }
   }
 &nbsp;
   private header(): TemplateResult {
@@ -221,24 +293,36 @@ export class IedContainer extends LitElement {
   }
 &nbsp;
   render(): TemplateResult {
-    return html`&lt;action-pane .label="${this.header()}"&gt;
-      &lt;mwc-icon slot="icon"&gt;developer_board&lt;/mwc-icon&gt;
-      &lt;abbr slot="action" title="${translate('edit')}"&gt;
-        &lt;mwc-icon-button
-          icon="edit"
-          @click=${() =&gt; this.openEditWizard()}
-        &gt;&lt;/mwc-icon-button&gt;
-      &lt;/abbr&gt;
-      ${Array.from(this.element.querySelectorAll(':scope &gt; AccessPoint')).map(
-        ap =&gt; html`&lt;access-point-container
-          .element=${ap}
-          .nsdoc=${this.nsdoc}
-          .ancestors=${[this.element]}
-        &gt;&lt;/access-point-container&gt;`)}
+    return html`
+      &lt;action-pane .label="${this.header()}"&gt;
+        &lt;mwc-icon slot="icon"&gt;developer_board&lt;/mwc-icon&gt;
+        &lt;abbr slot="action" title="${translate('remove')}"&gt;
+          &lt;mwc-icon-button
+            icon="delete"
+            @click=${() =&gt; this.removeIED()}
+          &gt;&lt;/mwc-icon-button&gt;
+        &lt;/abbr&gt;
+        &lt;abbr slot="action" title="${translate('edit')}"&gt;
+          &lt;mwc-icon-button
+            icon="edit"
+            @click=${() =&gt; this.openEditWizard()}
+          &gt;&lt;/mwc-icon-button&gt;
+        &lt;/abbr&gt;
+        ${Array.from(this.element.querySelectorAll(':scope &gt; AccessPoint')).map(
+          ap =&gt; html`&lt;access-point-container
+            .element=${ap}
+            .nsdoc=${this.nsdoc}
+            .ancestors=${[this.element]}
+          &gt;&lt;/access-point-container&gt;`)}
       &lt;/action-pane&gt;`;
   }
 &nbsp;
-  static styles = css``;
+  static styles = css`
+    abbr {
+      text-decoration: none;
+      border-bottom: none;
+    }
+  `;
 }
 &nbsp;</pre></td></tr></table></pre>
 
@@ -247,7 +331,7 @@ export class IedContainer extends LitElement {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener">istanbul</a>
-                at Tue May 10 2022 15:28:27 GMT+0000 (Coordinated Universal Time)
+                at Mon May 16 2022 06:25:40 GMT+0000 (Coordinated Universal Time)
             </div>
         </div>
         <script src="../../../prettify.js"></script>

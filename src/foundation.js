@@ -259,7 +259,7 @@ function kDCSelector(tagName, identity2) {
   return `${selector("IED", parentIdentity)}>${tagName}[iedName="${iedName}"][apName="${apName}"]`;
 }
 function associationIdentity(e) {
-  return `${identity(e.parentElement)}>${e.getAttribute("associationID")}`;
+  return `${identity(e.parentElement)}>${e.getAttribute("associationID") ?? ""}`;
 }
 function associationSelector(tagName, identity2) {
   const [parentIdentity, associationID] = pathParts(identity2);

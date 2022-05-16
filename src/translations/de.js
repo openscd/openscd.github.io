@@ -216,11 +216,14 @@ export const de = {
       nameHelper: "Name des IED",
       descHelper: "Beschreibung des IED",
       title: {
-        edit: "IED bearbeiten"
+        edit: "IED bearbeiten",
+        delete: "IED mit Abhängigkeiten entfernen",
+        references: "Gelöschte Abhängikeiten"
       }
     },
     action: {
-      updateied: 'IED "{{name}}" bearbeitet'
+      updateied: 'IED "{{name}}" bearbeitet',
+      deleteied: 'IED "{{name}}" entfernt'
     }
   },
   powertransformer: {

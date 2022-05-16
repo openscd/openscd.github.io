@@ -1,4 +1,5 @@
 import {
+  getNameAttribute,
   isPublic
 } from "../../foundation.js";
 const referenceInfoTags = ["IED", "Substation", "VoltageLevel", "Bay"];
@@ -65,11 +66,7 @@ function attributeFilterWithParentNameAttribute(tagName, parentInfo) {
 }
 function cloneElement(element, attributeName, value) {
   const newElement = element.cloneNode(false);
-  if (value === null) {
-    newElement.removeAttribute(attributeName);
-  } else {
-    newElement.setAttribute(attributeName, value);
-  }
+  newElement.setAttribute(attributeName, value);
   return newElement;
 }
 function cloneElementAndTextContent(element, value) {
@@ -78,7 +75,7 @@ function cloneElementAndTextContent(element, value) {
   return newElement;
 }
 export function updateReferences(element, oldName, newName) {
-  if (oldName === newName) {
+  if (oldName === null || oldName === newName) {
     return [];
   }
   const referenceInfo = referenceInfos[element.tagName];
@@ -87,17 +84,42 @@ export function updateReferences(element, oldName, newName) {
   }
   const actions = [];
   referenceInfo.forEach((info) => {
+    const filter = info.filter(element, info.attributeName, oldName);
     if (info.attributeName) {
-      const filter = info.filter(element, info.attributeName, oldName);
       Array.from(element.ownerDocument.querySelectorAll(`${filter}`)).filter(isPublic).forEach((element2) => {
         const newElement = cloneElement(element2, info.attributeName, newName);
         actions.push({old: {element: element2}, new: {element: newElement}});
       });
     } else {
-      const filter = info.filter(element, info.attributeName, oldName);
       Array.from(element.ownerDocument.querySelectorAll(`${filter}`)).filter((element2) => element2.textContent === oldName).filter(isPublic).forEach((element2) => {
         const newElement = cloneElementAndTextContent(element2, newName);
         actions.push({old: {element: element2}, new: {element: newElement}});
+      });
+    }
+  });
+  return actions;
+}
+export function deleteReferences(element) {
+  const name = getNameAttribute(element) ?? null;
+  if (name === null) {
+    return [];
+  }
+  const referenceInfo = referenceInfos[element.tagName];
+  if (referenceInfo === void 0) {
+    return [];
+  }
+  const actions = [];
+  referenceInfo.forEach((info) => {
+    const filter = info.filter(element, info.attributeName, name);
+    if (info.attributeName) {
+      Array.from(element.ownerDocument.querySelectorAll(`${filter}`)).filter(isPublic).forEach((element2) => {
+        actions.push({old: {parent: element2.parentElement, element: element2}});
+      });
+    } else {
+      Array.from(element.ownerDocument.querySelectorAll(`${filter}`)).filter((element2) => element2.textContent === name).filter(isPublic).forEach((element2) => {
+        if (element2.parentElement) {
+          actions.push({old: {parent: element2.parentElement.parentElement, element: element2.parentElement}});
+        }
       });
     }
   });

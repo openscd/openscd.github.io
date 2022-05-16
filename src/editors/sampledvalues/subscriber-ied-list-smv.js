@@ -24,25 +24,16 @@ import "../../../_snowpack/pkg/@material/mwc-list/mwc-list-item.js";
 import "./elements/ied-element-smv.js";
 import {
   createElement,
-  identity,
-  newActionEvent,
-  selector
+  newActionEvent
 } from "../../foundation.js";
 import {
   styles,
   SubscribeStatus
 } from "./foundation.js";
-const fcdaReferences = [
-  "ldInst",
-  "lnClass",
-  "lnInst",
-  "prefix",
-  "doName",
-  "daName"
-];
-function getFcdaReferences(elementContainingFcdaReferences) {
-  return fcdaReferences.map((fcdaRef) => elementContainingFcdaReferences.getAttribute(fcdaRef) ? `[${fcdaRef}="${elementContainingFcdaReferences.getAttribute(fcdaRef)}"]` : "").join("");
-}
+import {
+  emptyInputsDeleteActions,
+  getFcdaReferences
+} from "../../foundation/ied.js";
 export let SubscriberIEDListSmv = class extends LitElement {
   constructor() {
     super();
@@ -148,38 +139,11 @@ export let SubscriberIEDListSmv = class extends LitElement {
           actions.push({old: {parent: inputs, element: extRef}});
       });
     });
+    actions.push(...emptyInputsDeleteActions(actions));
     this.dispatchEvent(newActionEvent({
       title: "Disconnect",
-      actions: this.extendDeleteActions(actions)
+      actions
     }));
-  }
-  extendDeleteActions(extRefDeleteActions) {
-    if (!extRefDeleteActions.length)
-      return [];
-    const extendedDeleteActions = extRefDeleteActions;
-    const inputsMap = {};
-    for (const extRefDeleteAction of extRefDeleteActions) {
-      const extRef = extRefDeleteAction.old.element;
-      const inputsElement = extRefDeleteAction.old.parent;
-      const id = identity(inputsElement);
-      if (!inputsMap[id])
-        inputsMap[id] = inputsElement.cloneNode(true);
-      const linkedExtRef = inputsMap[id].querySelector(`ExtRef[iedName=${extRef.getAttribute("iedName")}]${getFcdaReferences(extRef)}`);
-      if (linkedExtRef)
-        inputsMap[id].removeChild(linkedExtRef);
-    }
-    Object.entries(inputsMap).forEach(([key, value]) => {
-      if (value.children.length == 0) {
-        const doc = extRefDeleteActions[0].old.parent.ownerDocument;
-        const inputs = doc.querySelector(selector("Inputs", key));
-        if (inputs && inputs.parentElement) {
-          extendedDeleteActions.push({
-            old: {parent: inputs.parentElement, element: inputs}
-          });
-        }
-      }
-    });
-    return extendedDeleteActions;
   }
   updated() {
     if (this.subscriberWrapper) {

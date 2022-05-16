@@ -22,10 +22,11 @@ import "../../action-icon.js";
 import {createClientLnWizard} from "../../wizards/clientln.js";
 import {gooseIcon, smvIcon, reportIcon} from "../../icons/icons.js";
 import {wizards} from "../../wizards/wizard-library.js";
-import {newWizardEvent} from "../../foundation.js";
+import {newActionEvent, newWizardEvent} from "../../foundation.js";
 import {selectGseControlWizard} from "../../wizards/gsecontrol.js";
 import {selectSampledValueControlWizard} from "../../wizards/sampledvaluecontrol.js";
 import {selectReportControlWizard} from "../../wizards/reportcontrol.js";
+import {removeIEDWizard} from "../../wizards/ied.js";
 export let IedEditor = class extends LitElement {
   get name() {
     return this.element.getAttribute("name") ?? "UNDEFINED";
@@ -50,6 +51,14 @@ export let IedEditor = class extends LitElement {
     if (wizard)
       this.dispatchEvent(newWizardEvent(wizard));
   }
+  removeIED() {
+    const wizard = removeIEDWizard(this.element);
+    if (wizard) {
+      this.dispatchEvent(newWizardEvent(() => wizard));
+    } else {
+      this.dispatchEvent(newActionEvent({old: {parent: this.element.parentElement, element: this.element}}));
+    }
+  }
   render() {
     return html`<action-icon label="${this.name}" icon="developer_board">
       <mwc-fab
@@ -61,10 +70,11 @@ export let IedEditor = class extends LitElement {
       ></mwc-fab
       ><mwc-fab
         slot="action"
-        class="selectgse"
+        class="delete"
         mini
-        @click="${() => this.openGseControlSelection()}"
-        ><mwc-icon slot="icon">${gooseIcon}</mwc-icon></mwc-fab
+        @click="${() => this.removeIED()}"
+        icon="delete"
+      ></mwc-fab
       ><mwc-fab
         slot="action"
         class="selectreport"
@@ -84,6 +94,12 @@ export let IedEditor = class extends LitElement {
         @click="${() => this.openCommunicationMapping()}"
         icon="add_link"
       ></mwc-fab
+      ><mwc-fab
+        slot="action"
+        class="selectgse"
+        mini
+        @click="${() => this.openGseControlSelection()}"
+      ><mwc-icon slot="icon">${gooseIcon}</mwc-icon></mwc-fab
     ></action-icon> `;
   }
 };

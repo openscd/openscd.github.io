@@ -30,7 +30,7 @@ export default class IedPlugin extends LitElement {
     iedEditorSelectedIed = element;
   }
   get selectedIed() {
-    if (iedEditorSelectedIed === void 0) {
+    if (iedEditorSelectedIed === void 0 || iedEditorSelectedIed.parentElement === null) {
       const iedList = this.alphabeticOrderedIeds;
       if (iedList.length > 0) {
         iedEditorSelectedIed = iedList[0];

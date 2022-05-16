@@ -72,6 +72,7 @@
 						<section class="tsd-index-section ">
 							<h3>Functions</h3>
 							<ul class="tsd-index-list">
+								<li class="tsd-kind-function tsd-parent-kind-module"><a href="wizards_foundation_references.html#deleteReferences" class="tsd-kind-icon">delete<wbr>References</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-module"><a href="wizards_foundation_references.html#updateReferences" class="tsd-kind-icon">update<wbr>References</a></li>
 							</ul>
 						</section>
@@ -80,6 +81,40 @@
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Functions</h2>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
+					<a name="deleteReferences" class="tsd-anchor"></a>
+					<h3>delete<wbr>References</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
+						<li class="tsd-signature tsd-kind-icon">delete<wbr>References<span class="tsd-signature-symbol">(</span>element<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Element</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/foundation.Delete.html" class="tsd-signature-type" data-tsd-kind="Interface">Delete</a><span class="tsd-signature-symbol">[]</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/bba9b3c/src/wizards/foundation/references.ts#L208">src/wizards/foundation/references.ts:208</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Function to create Delete actions to remove reference which point to the name of the element being removed.
+										For instance the IED Name is used in other SCL Elements as attribute &#39;iedName&#39; to reference the IED.
+									These elements need to be removed if the IED is removed.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>element: <span class="tsd-signature-type">Element</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The element that will be removed and it&#39;s name is used to search for references.</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="../interfaces/foundation.Delete.html" class="tsd-signature-type" data-tsd-kind="Interface">Delete</a><span class="tsd-signature-symbol">[]</span></h4>
+							<p>Returns a list of Delete Actions that can be added to a Complex Action or returned directly for execution.</p>
+						</li>
+					</ul>
+				</section>
 				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
 					<a name="updateReferences" class="tsd-anchor"></a>
 					<h3>update<wbr>References</h3>
@@ -90,7 +125,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/5c19822/src/wizards/foundation/references.ts#L165">src/wizards/foundation/references.ts:165</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/bba9b3c/src/wizards/foundation/references.ts#L163">src/wizards/foundation/references.ts:163</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -142,6 +177,9 @@
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
+					<li class=" tsd-kind-function tsd-parent-kind-module">
+						<a href="wizards_foundation_references.html#deleteReferences" class="tsd-kind-icon">delete<wbr>References</a>
+					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-module">
 						<a href="wizards_foundation_references.html#updateReferences" class="tsd-kind-icon">update<wbr>References</a>
 					</li>

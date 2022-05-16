@@ -216,11 +216,14 @@ export const en = {
       nameHelper: "IED name",
       descHelper: "IED description",
       title: {
-        edit: "Edit IED"
+        edit: "Edit IED",
+        delete: "Remove IED with references",
+        references: "References to be removed"
       }
     },
     action: {
-      updateied: 'Edited IED "{{name}}"'
+      updateied: 'Edited IED "{{name}}"',
+      deleteied: 'Removed IED "{{name}}"'
     }
   },
   powertransformer: {

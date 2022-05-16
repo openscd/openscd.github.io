@@ -1,9 +1,17 @@
 import {html} from "../../_snowpack/pkg/lit-element.js";
 import {get, translate} from "../../_snowpack/pkg/lit-translate.js";
+import "../../_snowpack/pkg/@material/mwc-list.js";
+import "../../_snowpack/pkg/@material/mwc-list/mwc-list-item.js";
 import "../wizard-textfield.js";
-import {isPublic} from "../foundation.js";
+import {
+  identity,
+  isPublic,
+  newWizardEvent
+} from "../foundation.js";
 import {patterns} from "./foundation/limits.js";
 import {updateNamingAttributeWithReferencesAction} from "./foundation/actions.js";
+import {deleteReferences} from "./foundation/references.js";
+import {emptyInputsDeleteActions} from "../foundation/ied.js";
 const iedNamePattern = "[A-Za-z][0-9A-Za-z_]{0,2}|[A-Za-z][0-9A-Za-z_]{4,63}|[A-MO-Za-z][0-9A-Za-z_]{3}|N[0-9A-Za-np-z_][0-9A-Za-z_]{2}|No[0-9A-Za-mo-z_][0-9A-Za-z_]|Non[0-9A-Za-df-z_]";
 export function renderIEDWizard(name, desc, reservedNames) {
   return [
@@ -26,14 +34,80 @@ export function renderIEDWizard(name, desc, reservedNames) {
     ></wizard-textfield>`
   ];
 }
+function renderIEDReferencesWizard(references) {
+  return [html`
+      <section>
+        <h1>${translate("ied.wizard.title.references")}</h1>
+        <mwc-list>
+          ${references.map((reference) => {
+    const oldElement = reference.old.element;
+    return html`
+              <mwc-list-item noninteractive twoline>
+                <span>${oldElement.tagName}</span>
+                <span slot="secondary">${identity(reference.old.element)}</span>
+              </mwc-list-item>`;
+  })}
+        </mwc-list>
+      </section>`];
+}
 export function reservedNamesIED(currentElement) {
   return Array.from(currentElement.parentNode.querySelectorAll("IED")).filter(isPublic).map((ied) => ied.getAttribute("name") ?? "").filter((name) => name !== currentElement.getAttribute("name"));
 }
+export function removeIEDAndReferences(element) {
+  return (inputs, wizard) => {
+    wizard.dispatchEvent(newWizardEvent());
+    const referencesDeleteActions = deleteReferences(element);
+    const extRefsDeleteActions = referencesDeleteActions.filter((deleteAction) => deleteAction.old.element.tagName === "ExtRef");
+    const inputsDeleteActions = emptyInputsDeleteActions(extRefsDeleteActions);
+    const name = element.getAttribute("name") ?? "Unknown";
+    const complexAction = {
+      actions: [],
+      title: get("ied.action.deleteied", {name})
+    };
+    complexAction.actions.push({old: {parent: element.parentElement, element}});
+    complexAction.actions.push(...referencesDeleteActions);
+    complexAction.actions.push(...inputsDeleteActions);
+    return [complexAction];
+  };
+}
+export function removeIEDWizard(element) {
+  const references = deleteReferences(element);
+  if (references.length > 0) {
+    return [
+      {
+        title: get("ied.wizard.title.delete"),
+        content: renderIEDReferencesWizard(references),
+        primary: {
+          icon: "delete",
+          label: get("remove"),
+          action: removeIEDAndReferences(element)
+        }
+      }
+    ];
+  }
+  return null;
+}
 export function editIEDWizard(element) {
+  function removeIED(element2) {
+    return () => {
+      const wizard = removeIEDWizard(element2);
+      if (wizard) {
+        return [() => wizard];
+      }
+      return [{old: {parent: element2.parentElement, element: element2}}];
+    };
+  }
   return [
     {
       title: get("ied.wizard.title.edit"),
       element,
+      menuActions: [
+        {
+          icon: "delete",
+          label: get("remove"),
+          action: removeIED(element)
+        }
+      ],
       primary: {
         icon: "edit",
         label: get("save"),
