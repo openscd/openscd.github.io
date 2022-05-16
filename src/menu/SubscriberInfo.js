@@ -26,7 +26,7 @@ function addIEDName(extRef, gseControl) {
       ldInst: lDevice.getAttribute("inst") ?? "",
       prefix: anyln.getAttribute("prefix") ?? "",
       lnClass: anyln.getAttribute("lnClass") ?? "",
-      lnInst: anyln.getAttribute("inst") ?? ""
+      lnInst: anyln.getAttribute("inst") || null
     });
     iedName.innerHTML = ied.getAttribute("name");
     return iedName;
