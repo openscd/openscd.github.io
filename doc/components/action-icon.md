@@ -10,6 +10,7 @@ The default slot will be rendered into the pane body in a single column.
 
 | Property      | Attribute     | Type                  | Default | Description                                      |
 |---------------|---------------|-----------------------|---------|--------------------------------------------------|
+| `hideActions` | `hideActions` | `boolean`             | false   | disables CSS adoption to action buttons          |
 | `highlighted` | `highlighted` | `boolean`             | false   | highlight pane with dotted outline               |
 | `icon`        | `icon`        | `string \| undefined` |         | icon name, displayed unless the "icon" slot is filled |
 | `label`       | `label`       | `string \| undefined` |         | caption text, displayed in the header            |

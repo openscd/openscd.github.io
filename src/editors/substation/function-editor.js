@@ -14,7 +14,8 @@ import {
   LitElement,
   property,
   customElement,
-  state
+  state,
+  css
 } from "../../../_snowpack/pkg/lit-element.js";
 import "../../action-pane.js";
 import "./sub-function-editor.js";
@@ -25,6 +26,12 @@ export let FunctionEditor = class extends LitElement {
     const desc = this.element.getAttribute("desc");
     const type = this.element.getAttribute("type");
     return `${name}${desc ? ` - ${desc}` : ""}${type ? ` (${type})` : ""}`;
+  }
+  renderLNodes() {
+    const lNodes = getChildElementsByTagName(this.element, "LNode");
+    return lNodes.length ? html`<div class="container lnode">
+          ${lNodes.map((lNode) => html`<l-node-editor .element=${lNode}></l-node-editor>`)}
+        </div>` : html``;
   }
   renderSubFunctions() {
     const subfunctions = getChildElementsByTagName(this.element, "SubFunction");
@@ -38,10 +45,19 @@ export let FunctionEditor = class extends LitElement {
       icon="functions"
       secondary
       highlighted
-      >${this.renderSubFunctions()}</action-pane
+      >${this.renderLNodes()}${this.renderSubFunctions()}</action-pane
     >`;
   }
 };
+FunctionEditor.styles = css`
+    .container.lnode {
+      display: grid;
+      grid-gap: 12px;
+      padding: 8px 12px 16px;
+      box-sizing: border-box;
+      grid-template-columns: repeat(auto-fit, minmax(64px, auto));
+    }
+  `;
 __decorate([
   property({attribute: false})
 ], FunctionEditor.prototype, "element", 2);

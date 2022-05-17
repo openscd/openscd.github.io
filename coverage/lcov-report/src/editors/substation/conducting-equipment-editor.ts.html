@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">99.39% </span>
+                <span class="strong">99.44% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>163/164</span>
+                <span class='fraction'>178/179</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">94.73% </span>
+                <span class="strong">95.23% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>18/19</span>
+                <span class='fraction'>20/21</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>8/8</span>
+                <span class='fraction'>9/9</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">99.39% </span>
+                <span class="strong">99.44% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>163/164</span>
+                <span class='fraction'>178/179</span>
             </div>
         
             
@@ -227,7 +227,23 @@
 <a name='L162'></a><a href='#L162'>162</a>
 <a name='L163'></a><a href='#L163'>163</a>
 <a name='L164'></a><a href='#L164'>164</a>
-<a name='L165'></a><a href='#L165'>165</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">21x</span>
+<a name='L165'></a><a href='#L165'>165</a>
+<a name='L166'></a><a href='#L166'>166</a>
+<a name='L167'></a><a href='#L167'>167</a>
+<a name='L168'></a><a href='#L168'>168</a>
+<a name='L169'></a><a href='#L169'>169</a>
+<a name='L170'></a><a href='#L170'>170</a>
+<a name='L171'></a><a href='#L171'>171</a>
+<a name='L172'></a><a href='#L172'>172</a>
+<a name='L173'></a><a href='#L173'>173</a>
+<a name='L174'></a><a href='#L174'>174</a>
+<a name='L175'></a><a href='#L175'>175</a>
+<a name='L176'></a><a href='#L176'>176</a>
+<a name='L177'></a><a href='#L177'>177</a>
+<a name='L178'></a><a href='#L178'>178</a>
+<a name='L179'></a><a href='#L179'>179</a>
+<a name='L180'></a><a href='#L180'>180</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">21x</span>
+<span class="cline-any cline-yes">21x</span>
 <span class="cline-any cline-yes">21x</span>
 <span class="cline-any cline-yes">21x</span>
 <span class="cline-any cline-yes">21x</span>
@@ -289,6 +305,18 @@
 <span class="cline-any cline-yes">21x</span>
 <span class="cline-any cline-yes">21x</span>
 <span class="cline-any cline-yes">21x</span>
+<span class="cline-any cline-yes">21x</span>
+<span class="cline-any cline-yes">21x</span>
+<span class="cline-any cline-yes">21x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-yes">21x</span>
 <span class="cline-any cline-yes">21x</span>
 <span class="cline-any cline-yes">21x</span>
@@ -391,6 +419,8 @@
 <span class="cline-any cline-yes">21x</span>
 <span class="cline-any cline-yes">21x</span>
 <span class="cline-any cline-yes">21x</span>
+<span class="cline-any cline-yes">21x</span>
+<span class="cline-any cline-yes">21x</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import {
   css,
   customElement,
@@ -408,7 +438,8 @@ import '@material/mwc-icon-button';
 import '../../action-icon.js';
 import '../../action-pane.js';
 import './eq-function-editor.js';
-import { startMove, getIcon } from './foundation.js';
+import './l-node-editor.js';
+import { startMove, getIcon, styles } from './foundation.js';
 import {
   getChildElementsByTagName,
   newActionEvent,
@@ -453,6 +484,18 @@ export class ConductingEquipmentEditor extends LitElement {
           },
         })
       );
+  }
+&nbsp;
+  private renderLNodes(): TemplateResult {
+    const lNodes = getChildElementsByTagName(this.element, 'LNode');
+&nbsp;
+    return lNodes.length
+      ? html`&lt;div class="container lnode"&gt;
+          ${lNodes.map(
+            lNode =&gt; html`&lt;l-node-editor .element=${lNode}&gt;&lt;/l-node-editor&gt;`
+          )}
+        &lt;/div&gt;`
+      : html``;
   }
 &nbsp;
   renderEqFunctions(): TemplateResult {
@@ -536,7 +579,7 @@ export class ConductingEquipmentEditor extends LitElement {
   render(): TemplateResult {
     if (this.showfunctions)
       return html`&lt;action-pane label="${this.name}"
-        &gt;${this.renderContentPane()}${this.renderEqFunctions()}&lt;/action-pane
+        &gt;${this.renderContentPane()}${this.renderLNodes()}${this.renderEqFunctions()}&lt;/action-pane
       &gt;`;
 &nbsp;
     return html`&lt;action-icon label="${this.name}"
@@ -545,6 +588,8 @@ export class ConductingEquipmentEditor extends LitElement {
   }
 &nbsp;
   static styles = css`
+    ${styles}
+&nbsp;
     :host(.moving) {
       opacity: 0.3;
     }
@@ -562,7 +607,7 @@ export class ConductingEquipmentEditor extends LitElement {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener">istanbul</a>
-                at Tue May 17 2022 13:16:48 GMT+0000 (Coordinated Universal Time)
+                at Tue May 17 2022 15:19:17 GMT+0000 (Coordinated Universal Time)
             </div>
         </div>
         <script src="../../../prettify.js"></script>

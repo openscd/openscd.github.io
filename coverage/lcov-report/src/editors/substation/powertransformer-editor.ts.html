@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">95.55% </span>
+                <span class="strong">95.87% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>172/180</span>
+                <span class='fraction'>186/194</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">88.88% </span>
+                <span class="strong">90.47% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>16/18</span>
+                <span class='fraction'>19/21</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>8/8</span>
+                <span class='fraction'>9/9</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">95.55% </span>
+                <span class="strong">95.87% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>172/180</span>
+                <span class='fraction'>186/194</span>
             </div>
         
             
@@ -243,7 +243,21 @@
 <a name='L178'></a><a href='#L178'>178</a>
 <a name='L179'></a><a href='#L179'>179</a>
 <a name='L180'></a><a href='#L180'>180</a>
-<a name='L181'></a><a href='#L181'>181</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">21x</span>
+<a name='L181'></a><a href='#L181'>181</a>
+<a name='L182'></a><a href='#L182'>182</a>
+<a name='L183'></a><a href='#L183'>183</a>
+<a name='L184'></a><a href='#L184'>184</a>
+<a name='L185'></a><a href='#L185'>185</a>
+<a name='L186'></a><a href='#L186'>186</a>
+<a name='L187'></a><a href='#L187'>187</a>
+<a name='L188'></a><a href='#L188'>188</a>
+<a name='L189'></a><a href='#L189'>189</a>
+<a name='L190'></a><a href='#L190'>190</a>
+<a name='L191'></a><a href='#L191'>191</a>
+<a name='L192'></a><a href='#L192'>192</a>
+<a name='L193'></a><a href='#L193'>193</a>
+<a name='L194'></a><a href='#L194'>194</a>
+<a name='L195'></a><a href='#L195'>195</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">21x</span>
 <span class="cline-any cline-yes">21x</span>
 <span class="cline-any cline-yes">21x</span>
 <span class="cline-any cline-yes">21x</span>
@@ -308,6 +322,18 @@
 <span class="cline-any cline-yes">21x</span>
 <span class="cline-any cline-yes">21x</span>
 <span class="cline-any cline-yes">21x</span>
+<span class="cline-any cline-yes">21x</span>
+<span class="cline-any cline-yes">21x</span>
+<span class="cline-any cline-yes">21x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-yes">21x</span>
 <span class="cline-any cline-yes">21x</span>
 <span class="cline-any cline-yes">21x</span>
@@ -423,6 +449,8 @@
 <span class="cline-any cline-yes">21x</span>
 <span class="cline-any cline-yes">21x</span>
 <span class="cline-any cline-yes">21x</span>
+<span class="cline-any cline-yes">21x</span>
+<span class="cline-any cline-yes">21x</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import {
   css,
   customElement,
@@ -446,7 +474,7 @@ import {
   newActionEvent,
   newWizardEvent,
 } from '../../foundation.js';
-import { startMove } from './foundation.js';
+import { startMove, styles } from './foundation.js';
 import { SubstationEditor } from './substation-editor.js';
 import { BayEditor } from './bay-editor.js';
 import { VoltageLevelEditor } from './voltage-level-editor.js';
@@ -488,6 +516,18 @@ export class PowerTransformerEditor extends LitElement {
           },
         })
       );
+  }
+&nbsp;
+  private renderLNodes(): TemplateResult {
+    const lNodes = getChildElementsByTagName(this.element, 'LNode');
+&nbsp;
+    return lNodes.length
+      ? html`&lt;div class="container lnode"&gt;
+          ${lNodes.map(
+            lNode =&gt; html`&lt;l-node-editor .element=${lNode}&gt;&lt;/l-node-editor&gt;`
+          )}
+        &lt;/div&gt;`
+      : html``;
   }
 &nbsp;
   renderEqFunctions(): TemplateResult {
@@ -584,7 +624,7 @@ export class PowerTransformerEditor extends LitElement {
   render(): TemplateResult {
     if (this.showfunctions)
       return html`&lt;action-pane label="${this.name}"
-        &gt;${this.renderContentPane()}${this.renderEqFunctions()}&lt;/action-pane
+        &gt;${this.renderContentPane()}${this.renderLNodes()}${this.renderEqFunctions()}&lt;/action-pane
       &gt; `;
 &nbsp;
     return html`&lt;action-icon label="${this.name}"
@@ -593,6 +633,8 @@ export class PowerTransformerEditor extends LitElement {
   }
 &nbsp;
   static styles = css`
+    ${styles}
+&nbsp;
     :host(.moving) {
       opacity: 0.3;
     }
@@ -610,7 +652,7 @@ export class PowerTransformerEditor extends LitElement {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener">istanbul</a>
-                at Tue May 17 2022 13:16:48 GMT+0000 (Coordinated Universal Time)
+                at Tue May 17 2022 15:19:17 GMT+0000 (Coordinated Universal Time)
             </div>
         </div>
         <script src="../../../prettify.js"></script>

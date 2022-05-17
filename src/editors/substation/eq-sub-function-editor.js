@@ -14,7 +14,8 @@ import {
   LitElement,
   property,
   customElement,
-  state
+  state,
+  css
 } from "../../../_snowpack/pkg/lit-element.js";
 import "../../action-pane.js";
 import {getChildElementsByTagName} from "../../foundation.js";
@@ -31,12 +32,27 @@ export let EqSubFunctionEditor = class extends LitElement {
           .element=${eqSubFunction}
         ></eq-sub-function-editor>`)}`;
   }
+  renderLNodes() {
+    const lNodes = getChildElementsByTagName(this.element, "LNode");
+    return lNodes.length ? html`<div class="container lnode">
+          ${lNodes.map((lNode) => html`<l-node-editor .element=${lNode}></l-node-editor>`)}
+        </div>` : html``;
+  }
   render() {
     return html`<action-pane label="${this.header}" icon="functions" secondary
-      >${this.renderEqSubFunctions()}</action-pane
+      >${this.renderLNodes()}${this.renderEqSubFunctions()}</action-pane
     >`;
   }
 };
+EqSubFunctionEditor.styles = css`
+    .container.lnode {
+      display: grid;
+      grid-gap: 12px;
+      padding: 8px 12px 16px;
+      box-sizing: border-box;
+      grid-template-columns: repeat(auto-fit, minmax(64px, auto));
+    }
+  `;
 __decorate([
   property({attribute: false})
 ], EqSubFunctionEditor.prototype, "element", 2);

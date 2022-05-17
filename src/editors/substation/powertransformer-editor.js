@@ -29,7 +29,7 @@ import {
   newActionEvent,
   newWizardEvent
 } from "../../foundation.js";
-import {startMove} from "./foundation.js";
+import {startMove, styles} from "./foundation.js";
 import {SubstationEditor} from "./substation-editor.js";
 import {BayEditor} from "./bay-editor.js";
 import {VoltageLevelEditor} from "./voltage-level-editor.js";
@@ -60,6 +60,12 @@ export let PowerTransformerEditor = class extends LitElement {
           reference: this.element.nextSibling
         }
       }));
+  }
+  renderLNodes() {
+    const lNodes = getChildElementsByTagName(this.element, "LNode");
+    return lNodes.length ? html`<div class="container lnode">
+          ${lNodes.map((lNode) => html`<l-node-editor .element=${lNode}></l-node-editor>`)}
+        </div>` : html``;
   }
   renderEqFunctions() {
     if (!this.showfunctions)
@@ -149,7 +155,7 @@ export let PowerTransformerEditor = class extends LitElement {
   render() {
     if (this.showfunctions)
       return html`<action-pane label="${this.name}"
-        >${this.renderContentPane()}${this.renderEqFunctions()}</action-pane
+        >${this.renderContentPane()}${this.renderLNodes()}${this.renderEqFunctions()}</action-pane
       > `;
     return html`<action-icon label="${this.name}"
       >${this.renderContentIcon()}</action-icon
@@ -157,6 +163,8 @@ export let PowerTransformerEditor = class extends LitElement {
   }
 };
 PowerTransformerEditor.styles = css`
+    ${styles}
+
     :host(.moving) {
       opacity: 0.3;
     }

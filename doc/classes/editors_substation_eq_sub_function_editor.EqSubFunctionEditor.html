@@ -283,7 +283,7 @@
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-static tsd-is-external"><a href="editors_substation_eq_sub_function_editor.EqSubFunctionEditor.html#properties" class="tsd-kind-icon">properties</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-static tsd-is-external"><a href="editors_substation_eq_sub_function_editor.EqSubFunctionEditor.html#render" class="tsd-kind-icon">render</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-static tsd-is-external"><a href="editors_substation_eq_sub_function_editor.EqSubFunctionEditor.html#shadowRootOptions" class="tsd-kind-icon">shadow<wbr>Root<wbr>Options</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-static tsd-is-external"><a href="editors_substation_eq_sub_function_editor.EqSubFunctionEditor.html#styles" class="tsd-kind-icon">styles</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-overwrite tsd-is-static"><a href="editors_substation_eq_sub_function_editor.EqSubFunctionEditor.html#styles" class="tsd-kind-icon">styles</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
@@ -366,6 +366,7 @@
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-inherited tsd-is-external"><a href="editors_substation_eq_sub_function_editor.EqSubFunctionEditor.html#removeEventListener" class="tsd-kind-icon">remove<wbr>Event<wbr>Listener</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-overwrite"><a href="editors_substation_eq_sub_function_editor.EqSubFunctionEditor.html#render-1" class="tsd-kind-icon">render</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="editors_substation_eq_sub_function_editor.EqSubFunctionEditor.html#renderEqSubFunctions" class="tsd-kind-icon">render<wbr>EqSub<wbr>Functions</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="editors_substation_eq_sub_function_editor.EqSubFunctionEditor.html#renderLNodes" class="tsd-kind-icon">renderLNodes</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-inherited tsd-is-external"><a href="editors_substation_eq_sub_function_editor.EqSubFunctionEditor.html#replaceChild" class="tsd-kind-icon">replace<wbr>Child</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external"><a href="editors_substation_eq_sub_function_editor.EqSubFunctionEditor.html#replaceWith" class="tsd-kind-icon">replace<wbr>With</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external"><a href="editors_substation_eq_sub_function_editor.EqSubFunctionEditor.html#requestFullscreen" class="tsd-kind-icon">request<wbr>Fullscreen</a></li>
@@ -933,7 +934,7 @@
 					<div class="tsd-signature tsd-kind-icon">element<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Element</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/8f89f27/src/editors/substation/eq-sub-function-editor.ts#L18">src/editors/substation/eq-sub-function-editor.ts:18</a></li>
+							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/ecfeb5d/src/editors/substation/eq-sub-function-editor.ts#L19">src/editors/substation/eq-sub-function-editor.ts:19</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -3154,22 +3155,16 @@
 						</dl>
 					</div>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-static tsd-is-external">
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-overwrite tsd-is-static">
 					<a name="styles" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagStatic">Static</span> <span class="tsd-flag ts-flagOptional">Optional</span> styles</h3>
-					<div class="tsd-signature tsd-kind-icon">styles<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">CSSResultGroup</span></div>
+					<h3><span class="tsd-flag ts-flagStatic">Static</span> styles</h3>
+					<div class="tsd-signature tsd-kind-icon">styles<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">CSSResult</span><span class="tsd-signature-symbol"> = ...</span></div>
 					<aside class="tsd-sources">
-						<p>Inherited from LitElement.styles</p>
+						<p>Overrides LitElement.styles</p>
 						<ul>
-							<li>Defined in node_modules/lit-element/lit-element.d.ts:112</li>
+							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/ecfeb5d/src/editors/substation/eq-sub-function-editor.ts#L60">src/editors/substation/eq-sub-function-editor.ts:60</a></li>
 						</ul>
 					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>Array of styles to apply to the element. The styles should be defined
-							using the [[<code>css</code>]] tag function or via constructible stylesheets.</p>
-						</div>
-					</div>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
@@ -3218,7 +3213,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/8f89f27/src/editors/substation/eq-sub-function-editor.ts#L20">src/editors/substation/eq-sub-function-editor.ts:20</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/ecfeb5d/src/editors/substation/eq-sub-function-editor.ts#L21">src/editors/substation/eq-sub-function-editor.ts:21</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
@@ -5368,7 +5363,7 @@
 							<aside class="tsd-sources">
 								<p>Overrides LitElement.render</p>
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/8f89f27/src/editors/substation/eq-sub-function-editor.ts#L41">src/editors/substation/eq-sub-function-editor.ts:41</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/ecfeb5d/src/editors/substation/eq-sub-function-editor.ts#L54">src/editors/substation/eq-sub-function-editor.ts:54</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">TemplateResult</span></h4>
@@ -5385,7 +5380,24 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/8f89f27/src/editors/substation/eq-sub-function-editor.ts#L28">src/editors/substation/eq-sub-function-editor.ts:28</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/ecfeb5d/src/editors/substation/eq-sub-function-editor.ts#L29">src/editors/substation/eq-sub-function-editor.ts:29</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">TemplateResult</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private">
+					<a name="renderLNodes" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> renderLNodes</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private">
+						<li class="tsd-signature tsd-kind-icon">renderLNodes<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">TemplateResult</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/ecfeb5d/src/editors/substation/eq-sub-function-editor.ts#L42">src/editors/substation/eq-sub-function-editor.ts:42</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">TemplateResult</span></h4>
@@ -6853,7 +6865,7 @@
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-static tsd-is-external">
 								<a href="editors_substation_eq_sub_function_editor.EqSubFunctionEditor.html#shadowRootOptions" class="tsd-kind-icon">shadow<wbr>Root<wbr>Options</a>
 							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-static tsd-is-external">
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-overwrite tsd-is-static">
 								<a href="editors_substation_eq_sub_function_editor.EqSubFunctionEditor.html#styles" class="tsd-kind-icon">styles</a>
 							</li>
 							<li class=" tsd-kind-get-signature tsd-parent-kind-class tsd-is-private tsd-is-external">
@@ -7072,6 +7084,9 @@
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private">
 								<a href="editors_substation_eq_sub_function_editor.EqSubFunctionEditor.html#renderEqSubFunctions" class="tsd-kind-icon">render<wbr>EqSub<wbr>Functions</a>
 							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private">
+								<a href="editors_substation_eq_sub_function_editor.EqSubFunctionEditor.html#renderLNodes" class="tsd-kind-icon">renderLNodes</a>
+							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-inherited tsd-is-external">
 								<a href="editors_substation_eq_sub_function_editor.EqSubFunctionEditor.html#replaceChild" class="tsd-kind-icon">replace<wbr>Child</a>
 							</li>
@@ -7184,6 +7199,9 @@
 			</ul>
 			<ul class="tsd-legend">
 				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private method</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static property</span></li>
 			</ul>
 		</div>
 	</div>

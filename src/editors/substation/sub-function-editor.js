@@ -14,10 +14,10 @@ import {
   LitElement,
   property,
   customElement,
-  state
+  state,
+  css
 } from "../../../_snowpack/pkg/lit-element.js";
 import "../../action-pane.js";
-import "./sub-function-editor.js";
 import {getChildElementsByTagName} from "../../foundation.js";
 export let SubFunctionEditor = class extends LitElement {
   get header() {
@@ -25,6 +25,12 @@ export let SubFunctionEditor = class extends LitElement {
     const desc = this.element.getAttribute("desc");
     const type = this.element.getAttribute("type");
     return `${name}${desc ? ` - ${desc}` : ""}${type ? ` (${type})` : ""}`;
+  }
+  renderLNodes() {
+    const lNodes = getChildElementsByTagName(this.element, "LNode");
+    return lNodes.length ? html`<div class="container lnode">
+          ${lNodes.map((lNode) => html`<l-node-editor .element=${lNode}></l-node-editor>`)}
+        </div>` : html``;
   }
   renderSubFunctions() {
     const subfunctions = getChildElementsByTagName(this.element, "SubFunction");
@@ -34,10 +40,19 @@ export let SubFunctionEditor = class extends LitElement {
   }
   render() {
     return html`<action-pane label="${this.header}" icon="functions" secondary
-      >${this.renderSubFunctions()}</action-pane
+      >${this.renderLNodes()}${this.renderSubFunctions()}</action-pane
     >`;
   }
 };
+SubFunctionEditor.styles = css`
+    .container.lnode {
+      display: grid;
+      grid-gap: 12px;
+      padding: 8px 12px 16px;
+      box-sizing: border-box;
+      grid-template-columns: repeat(auto-fit, minmax(64px, auto));
+    }
+  `;
 __decorate([
   property({attribute: false})
 ], SubFunctionEditor.prototype, "element", 2);

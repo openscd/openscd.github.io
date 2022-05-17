@@ -80,6 +80,14 @@ export let BayEditor = class extends LitElement {
   firstUpdated() {
     this.addMenu.anchor = this.addButton;
   }
+  renderLNodes() {
+    if (!this.showfunctions)
+      return html``;
+    const lNodes = getChildElementsByTagName(this.element, "LNode");
+    return lNodes.length ? html`<div class="container lnode">
+          ${lNodes.map((lNode) => html`<l-node-editor .element=${lNode}></l-node-editor>`)}
+        </div>` : html``;
+  }
   renderFunctions() {
     if (!this.showfunctions)
       return html``;
@@ -148,7 +156,7 @@ export let BayEditor = class extends LitElement {
           >${this.renderAddButtons()}</mwc-menu
         >
       </abbr>
-      ${this.renderIedContainer()} ${this.renderFunctions()}
+      ${this.renderIedContainer()}${this.renderLNodes()}${this.renderFunctions()}
       <div
         class="${classMap({
       content: true,

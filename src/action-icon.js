@@ -23,6 +23,7 @@ export let ActionIcon = class extends LitElement {
     super(...arguments);
     this.secondary = false;
     this.highlighted = false;
+    this.hideActions = false;
   }
   async firstUpdated() {
     this.tabIndex = 0;
@@ -65,16 +66,6 @@ ActionIcon.styles = css`
       --mdc-icon-size: 64px;
     }
 
-    :host(:focus-within) ::slotted([slot='icon']),
-    :host(:focus-within) mwc-icon {
-      outline-style: solid;
-      outline-width: 4px;
-      transform: scale(0.8);
-      transition: all 250ms linear;
-      box-shadow: 0 8px 10px 1px rgba(0, 0, 0, 0.14),
-        0 3px 14px 2px rgba(0, 0, 0, 0.12), 0 5px 5px -3px rgba(0, 0, 0, 0.2);
-    }
-
     :host([secondary]) ::slotted([slot='icon']),
     :host([secondary]) mwc-icon {
       outline-color: var(--mdc-theme-secondary);
@@ -84,6 +75,20 @@ ActionIcon.styles = css`
     :host([highlighted]) mwc-icon {
       outline-style: dotted;
       outline-width: 2px;
+    }
+
+    :host(:focus-within) ::slotted([slot='icon']),
+    :host(:focus-within) mwc-icon {
+      outline-style: solid;
+      outline-width: 4px;
+    }
+
+    :host(:focus-within:not([hideActions])) ::slotted([slot='icon']),
+    :host(:focus-within:not([hideActions])) mwc-icon {
+      transform: scale(0.8);
+      transition: all 250ms linear;
+      box-shadow: 0 8px 10px 1px rgba(0, 0, 0, 0.14),
+        0 3px 14px 2px rgba(0, 0, 0, 0.12), 0 5px 5px -3px rgba(0, 0, 0, 0.2);
     }
 
     ::slotted([slot='icon']:hover),
@@ -168,6 +173,10 @@ ActionIcon.styles = css`
         opacity 200ms linear;
     }
 
+    :host([secondary]) header {
+      background-color: var(--mdc-theme-secondary);
+    }
+
     :host(:hover) header {
       position: absolute;
       opacity: 1;
@@ -181,11 +190,18 @@ ActionIcon.styles = css`
     :host(:focus-within) header {
       position: absolute;
       opacity: 1;
-      transform: translate(0, -80px);
       box-shadow: 0 8px 10px 1px rgba(0, 0, 0, 0.14),
         0 3px 14px 2px rgba(0, 0, 0, 0.12), 0 5px 5px -3px rgba(0, 0, 0, 0.2);
       transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1),
         opacity 250ms linear;
+    }
+
+    :host(:focus-within:not([hideActions])) header {
+      transform: translate(0, -80px);
+    }
+
+    :host(:focus-within[hideActions]) header {
+      transform: translate(0, -40px);
     }
   `;
 __decorate([
@@ -200,6 +216,9 @@ __decorate([
 __decorate([
   property({type: Boolean})
 ], ActionIcon.prototype, "highlighted", 2);
+__decorate([
+  property({type: Boolean})
+], ActionIcon.prototype, "hideActions", 2);
 ActionIcon = __decorate([
   customElement("action-icon")
 ], ActionIcon);
