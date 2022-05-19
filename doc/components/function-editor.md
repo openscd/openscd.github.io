@@ -4,6 +4,8 @@ Pane rendering `Function` element with its children
 
 ## Properties
 
-| Property  | Type      | Description                   |
-|-----------|-----------|-------------------------------|
-| `element` | `Element` | The edited `Function` element |
+| Property    | Type         | Description                   |
+|-------------|--------------|-------------------------------|
+| `addButton` | `IconButton` |                               |
+| `addMenu`   | `Menu`       |                               |
+| `element`   | `Element`    | The edited `Function` element |

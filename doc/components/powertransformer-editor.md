@@ -4,11 +4,13 @@
 
 ## Properties
 
-| Property        | Attribute       | Modifiers | Type      | Default | Description                                      |
-|-----------------|-----------------|-----------|-----------|---------|--------------------------------------------------|
-| `element`       |                 |           | `Element` |         | SCL element PowerTransformer                     |
-| `name`          | `name`          | readonly  | `string`  |         | PowerTransformer name attribute                  |
-| `showfunctions` | `showfunctions` |           | `boolean` | false   | Whether `EqFunction` and `SubEqFunction` are rendered |
+| Property        | Attribute       | Modifiers | Type         | Default | Description                                      |
+|-----------------|-----------------|-----------|--------------|---------|--------------------------------------------------|
+| `addButton`     |                 |           | `IconButton` |         |                                                  |
+| `addMenu`       |                 |           | `Menu`       |         |                                                  |
+| `element`       |                 |           | `Element`    |         | SCL element PowerTransformer                     |
+| `name`          | `name`          | readonly  | `string`     |         | PowerTransformer name attribute                  |
+| `showfunctions` | `showfunctions` |           | `boolean`    | false   | Whether `EqFunction` and `SubEqFunction` are rendered |
 
 ## Methods
 

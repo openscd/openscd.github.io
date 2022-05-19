@@ -4,6 +4,8 @@ Pane rendering `EqSubFunction` element with its children
 
 ## Properties
 
-| Property  | Type      | Description                        |
-|-----------|-----------|------------------------------------|
-| `element` | `Element` | The edited `EqSubFunction` element |
+| Property    | Type         | Description                        |
+|-------------|--------------|------------------------------------|
+| `addButton` | `IconButton` |                                    |
+| `addMenu`   | `Menu`       |                                    |
+| `element`   | `Element`    | The edited `EqSubFunction` element |
