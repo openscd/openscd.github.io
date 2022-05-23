@@ -22,6 +22,7 @@ import "../../action-pane.js";
 import "./sub-function-editor.js";
 import {
   getChildElementsByTagName,
+  newActionEvent,
   newWizardEvent,
   tags
 } from "../../foundation.js";
@@ -38,6 +39,15 @@ export let FunctionEditor = class extends LitElement {
     const desc = this.element.getAttribute("desc");
     const type = this.element.getAttribute("type");
     return `${name}${desc ? ` - ${desc}` : ""}${type ? ` (${type})` : ""}`;
+  }
+  remove() {
+    if (this.element.parentElement)
+      this.dispatchEvent(newActionEvent({
+        old: {
+          parent: this.element.parentElement,
+          element: this.element
+        }
+      }));
   }
   openCreateWizard(tagName) {
     const wizard = wizards[tagName].create(this.element);
@@ -70,6 +80,11 @@ export let FunctionEditor = class extends LitElement {
       icon="functions"
       secondary
       highlighted
+      ><abbr slot="action" title="${translate("remove")}">
+        <mwc-icon-button
+          icon="delete"
+          @click=${() => this.remove()}
+        ></mwc-icon-button> </abbr
       ><abbr
         slot="action"
         style="position:relative;"

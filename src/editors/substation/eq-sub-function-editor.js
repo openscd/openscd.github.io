@@ -25,6 +25,7 @@ import "../../../_snowpack/pkg/@material/mwc-menu.js";
 import "../../action-pane.js";
 import {
   getChildElementsByTagName,
+  newActionEvent,
   newWizardEvent,
   tags
 } from "../../foundation.js";
@@ -40,6 +41,15 @@ export let EqSubFunctionEditor = class extends LitElement {
     const desc = this.element.getAttribute("desc");
     const type = this.element.getAttribute("type");
     return `${name}${desc ? ` - ${desc}` : ""}${type ? ` (${type})` : ""}`;
+  }
+  remove() {
+    if (this.element.parentElement)
+      this.dispatchEvent(newActionEvent({
+        old: {
+          parent: this.element.parentElement,
+          element: this.element
+        }
+      }));
   }
   openCreateWizard(tagName) {
     const wizard = wizards[tagName].create(this.element);
@@ -68,6 +78,11 @@ export let EqSubFunctionEditor = class extends LitElement {
   }
   render() {
     return html`<action-pane label="${this.header}" icon="functions" secondary
+      ><abbr slot="action" title="${translate("remove")}">
+        <mwc-icon-button
+          icon="delete"
+          @click=${() => this.remove()}
+        ></mwc-icon-button> </abbr
       ><abbr
         slot="action"
         style="position:relative;"

@@ -9,3 +9,9 @@ Pane rendering `EqSubFunction` element with its children
 | `addButton` | `IconButton` |                                    |
 | `addMenu`   | `Menu`       |                                    |
 | `element`   | `Element`    | The edited `EqSubFunction` element |
+
+## Methods
+
+| Method   | Type       |
+|----------|------------|
+| `remove` | `(): void` |

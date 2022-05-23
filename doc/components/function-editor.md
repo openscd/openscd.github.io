@@ -9,3 +9,9 @@ Pane rendering `Function` element with its children
 | `addButton` | `IconButton` |                               |
 | `addMenu`   | `Menu`       |                               |
 | `element`   | `Element`    | The edited `Function` element |
+
+## Methods
+
+| Method   | Type       |
+|----------|------------|
+| `remove` | `(): void` |
