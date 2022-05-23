@@ -1,9 +1,54 @@
 import {get} from "../../_snowpack/pkg/lit-translate.js";
 import {
+  cloneElement,
   createElement,
+  getChildElementsByTagName,
   getValue
 } from "../foundation.js";
 import {contentFunctionWizard} from "./function.js";
+function updateEqFunctionAction(element) {
+  return (inputs) => {
+    const functionAttrs = {};
+    const functionKeys = ["name", "desc", "type"];
+    functionKeys.forEach((key) => {
+      functionAttrs[key] = getValue(inputs.find((i) => i.label === key));
+    });
+    if (functionKeys.some((key) => functionAttrs[key] !== element.getAttribute(key))) {
+      const newElement = cloneElement(element, functionAttrs);
+      return [
+        {
+          old: {element},
+          new: {element: newElement}
+        }
+      ];
+    }
+    return [];
+  };
+}
+export function editEqFunctionWizard(element) {
+  const name = element.getAttribute("name");
+  const desc = element.getAttribute("desc");
+  const type = element.getAttribute("type");
+  const reservedNames = getChildElementsByTagName(element.parentElement, "EqFunction").filter((sibling) => sibling !== element).map((sibling) => sibling.getAttribute("name"));
+  return [
+    {
+      title: get("wizard.title.edit", {tagName: "EqFunction"}),
+      primary: {
+        icon: "save",
+        label: get("save"),
+        action: updateEqFunctionAction(element)
+      },
+      content: [
+        ...contentFunctionWizard({
+          name,
+          desc,
+          type,
+          reservedNames
+        })
+      ]
+    }
+  ];
+}
 function createEqFunctionAction(parent) {
   return (inputs) => {
     const eqFunctionAttrs = {};

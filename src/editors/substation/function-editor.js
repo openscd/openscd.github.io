@@ -40,6 +40,11 @@ export let FunctionEditor = class extends LitElement {
     const type = this.element.getAttribute("type");
     return `${name}${desc ? ` - ${desc}` : ""}${type ? ` (${type})` : ""}`;
   }
+  openEditWizard() {
+    const wizard = wizards["Function"].edit(this.element);
+    if (wizard)
+      this.dispatchEvent(newWizardEvent(wizard));
+  }
   remove() {
     if (this.element.parentElement)
       this.dispatchEvent(newActionEvent({
@@ -80,6 +85,11 @@ export let FunctionEditor = class extends LitElement {
       icon="functions"
       secondary
       highlighted
+      ><abbr slot="action" title="${translate("edit")}">
+        <mwc-icon-button
+          icon="edit"
+          @click=${() => this.openEditWizard()}
+        ></mwc-icon-button> </abbr
       ><abbr slot="action" title="${translate("remove")}">
         <mwc-icon-button
           icon="delete"
@@ -108,6 +118,11 @@ export let FunctionEditor = class extends LitElement {
   }
 };
 FunctionEditor.styles = css`
+    abbr {
+      text-decoration: none;
+      border-bottom: none;
+    }
+
     .container.lnode {
       display: grid;
       grid-gap: 12px;
