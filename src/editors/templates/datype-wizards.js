@@ -10,7 +10,9 @@ import {
   createElement,
   getValue,
   identity,
+  newActionEvent,
   newSubWizardEvent,
+  newWizardEvent,
   patterns,
   selector
 } from "../../foundation.js";
@@ -21,13 +23,14 @@ import {
   unifyCreateActionArray
 } from "./foundation.js";
 function remove(element) {
-  return () => {
-    return [{old: {parent: element.parentElement, element}}];
+  return (wizard) => {
+    wizard.dispatchEvent(newActionEvent({old: {parent: element.parentElement, element}}));
+    wizard.dispatchEvent(newWizardEvent());
   };
 }
 function openAddBda(parent) {
-  return () => {
-    return [() => createBDAWizard(parent)];
+  return (wizard) => {
+    wizard.dispatchEvent(newSubWizardEvent(() => createBDAWizard(parent)));
   };
 }
 function updateDATpyeAction(element) {

@@ -16,7 +16,9 @@ import {
   isPublic,
   newSubWizardEvent,
   selector,
-  getUniqueElementName
+  getUniqueElementName,
+  newActionEvent,
+  newWizardEvent
 } from "../foundation.js";
 import {dataAttributePicker, iEDPicker} from "./foundation/finder.js";
 import {maxLength, patterns} from "./foundation/limits.js";
@@ -412,31 +414,31 @@ export function reportControlCopyToIedSelector(element) {
   ];
 }
 function openIedsSelector(element) {
-  return () => {
-    return [() => reportControlCopyToIedSelector(element)];
+  return (wizard) => {
+    wizard.dispatchEvent(newSubWizardEvent(() => reportControlCopyToIedSelector(element)));
   };
 }
 export function removeReportControl(element) {
-  return () => {
+  return (wizard) => {
     const complexAction = removeReportControlAction(element);
     if (complexAction)
-      return [complexAction];
-    return [];
+      wizard.dispatchEvent(newActionEvent(complexAction));
+    wizard.dispatchEvent(newWizardEvent());
   };
 }
 function openDataSetWizard(element) {
-  return () => {
-    return [() => editDataSetWizard(element)];
+  return (wizard) => {
+    wizard.dispatchEvent(newSubWizardEvent(() => editDataSetWizard(element)));
   };
 }
 function openTrgOpsWizard(element) {
-  return () => {
-    return [() => editTrgOpsWizard(element)];
+  return (wizard) => {
+    wizard.dispatchEvent(newSubWizardEvent(() => editTrgOpsWizard(element)));
   };
 }
 function openOptFieldsWizard(element) {
-  return () => {
-    return [() => editOptFieldsWizard(element)];
+  return (wizard) => {
+    wizard.dispatchEvent(newSubWizardEvent(() => editOptFieldsWizard(element)));
   };
 }
 function updateReportControlAction(element) {

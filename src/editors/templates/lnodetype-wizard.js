@@ -14,6 +14,7 @@ import {
   getValue,
   identity,
   isPublic,
+  newActionEvent,
   newSubWizardEvent,
   newWizardEvent,
   patterns,
@@ -25,13 +26,14 @@ import {
   unifyCreateActionArray
 } from "./foundation.js";
 function remove(element) {
-  return () => {
-    return [{old: {parent: element.parentElement, element}}];
+  return (wizard) => {
+    wizard.dispatchEvent(newActionEvent({old: {parent: element.parentElement, element}}));
+    wizard.dispatchEvent(newWizardEvent());
   };
 }
 function openAddDo(parent) {
-  return () => {
-    return [() => dOWizard({parent})];
+  return (wizard) => {
+    wizard.dispatchEvent(newSubWizardEvent(() => dOWizard({parent})));
   };
 }
 function updateDoAction(element) {

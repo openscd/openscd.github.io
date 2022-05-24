@@ -24,7 +24,7 @@ A wizard style dialog consisting of several pages commiting some
 |-----------------|--------------------------------------------------|--------------------------------------------------|
 | `act`           | `(action?: WizardActor \| undefined, primary?: boolean): Promise<boolean>` | Commits `action` if all inputs are valid, reports validity otherwise. |
 | `checkValidity` | `(): boolean`                                    | Checks the inputs of all [[`WizardPage`]]s for validity. |
-| `menuAct`       | `(action?: WizardMenuActor \| undefined): Promise<boolean>` | Triggers sub-wizard or editor-action with valid manu action |
+| `menuAct`       | `(action?: WizardMenuActor \| undefined): Promise<void>` | Triggers menu action callback                    |
 | `next`          | `(): Promise<void>`                              |                                                  |
 | `prev`          | `(): void`                                       |                                                  |
 | `renderMenu`    | `(page: WizardPage): TemplateResult`             |                                                  |

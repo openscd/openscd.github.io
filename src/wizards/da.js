@@ -8,13 +8,16 @@ import {
   cloneElement,
   createElement,
   getValue,
-  isPublic
+  isPublic,
+  newActionEvent,
+  newWizardEvent
 } from "../foundation.js";
 import {getValAction, wizardContent} from "./abstractda.js";
 import {functionalConstraintEnum} from "./foundation/enums.js";
 function remove(element) {
-  return () => {
-    return [{old: {parent: element.parentElement, element}}];
+  return (wizard) => {
+    wizard.dispatchEvent(newActionEvent({old: {parent: element.parentElement, element}}));
+    wizard.dispatchEvent(newWizardEvent());
   };
 }
 export function renderDa(fc, dchg, qchg, dupd) {

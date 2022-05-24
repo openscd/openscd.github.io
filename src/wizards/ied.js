@@ -6,6 +6,8 @@ import "../wizard-textfield.js";
 import {
   identity,
   isPublic,
+  newActionEvent,
+  newSubWizardEvent,
   newWizardEvent
 } from "../foundation.js";
 import {patterns} from "./foundation/limits.js";
@@ -89,12 +91,12 @@ export function removeIEDWizard(element) {
 }
 export function editIEDWizard(element) {
   function removeIED(element2) {
-    return () => {
-      const wizard = removeIEDWizard(element2);
-      if (wizard) {
-        return [() => wizard];
-      }
-      return [{old: {parent: element2.parentElement, element: element2}}];
+    return (wizard) => {
+      const removeWizard = removeIEDWizard(element2);
+      if (removeWizard)
+        wizard.dispatchEvent(newSubWizardEvent(() => removeWizard));
+      wizard.dispatchEvent(newActionEvent({old: {parent: element2.parentElement, element: element2}}));
+      wizard.dispatchEvent(newWizardEvent());
     };
   }
   return [

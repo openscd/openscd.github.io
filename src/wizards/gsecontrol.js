@@ -13,7 +13,9 @@ import {
   getValue,
   identity,
   isPublic,
+  newActionEvent,
   newSubWizardEvent,
+  newWizardEvent,
   selector
 } from "../foundation.js";
 import {maxLength, patterns} from "./foundation/limits.js";
@@ -335,21 +337,21 @@ export function removeGseControlAction(element) {
   };
 }
 export function removeGseControl(element) {
-  return () => {
+  return (wizard) => {
     const complexAction = removeGseControlAction(element);
     if (complexAction)
-      return [complexAction];
-    return [];
+      wizard.dispatchEvent(newActionEvent(complexAction));
+    wizard.dispatchEvent(newWizardEvent());
   };
 }
 function openDataSetWizard(element) {
-  return () => {
-    return [() => editDataSetWizard(element)];
+  return (wizard) => {
+    wizard.dispatchEvent(newSubWizardEvent(() => editDataSetWizard(element)));
   };
 }
 function openGseWizard(element) {
-  return () => {
-    return [() => editGseWizard(element)];
+  return (wizard) => {
+    wizard.dispatchEvent(newSubWizardEvent(() => editGseWizard(element)));
   };
 }
 export function updateGseControlAction(element) {

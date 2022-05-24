@@ -10,7 +10,9 @@ import {
   getValue,
   identity,
   isPublic,
+  newActionEvent,
   newSubWizardEvent,
+  newWizardEvent,
   selector
 } from "../foundation.js";
 import {securityEnableEnum, smpModEnum} from "./foundation/enums.js";
@@ -130,26 +132,26 @@ function contentSampledValueControlWizard(options) {
   ];
 }
 function removeSampledValueControl(element) {
-  return () => {
+  return (wizard) => {
     const complexAction = removeSampledValueControlAction(element);
     if (complexAction)
-      return [complexAction];
-    return [];
+      wizard.dispatchEvent(newActionEvent(complexAction));
+    wizard.dispatchEvent(newWizardEvent());
   };
 }
 function openDataSetWizard(element) {
-  return () => {
-    return [() => editDataSetWizard(element)];
+  return (wizard) => {
+    wizard.dispatchEvent(newSubWizardEvent(() => editDataSetWizard(element)));
   };
 }
 function openSmvOptsWizard(element) {
-  return () => {
-    return [() => editSmvOptsWizard(element)];
+  return (wizard) => {
+    wizard.dispatchEvent(newSubWizardEvent(() => editSmvOptsWizard(element)));
   };
 }
 function openSMvWizard(element) {
-  return () => {
-    return [() => editSMvWizard(element)];
+  return (wizard) => {
+    wizard.dispatchEvent(newSubWizardEvent(() => editSMvWizard(element)));
   };
 }
 function updateSampledValueControlAction(element) {

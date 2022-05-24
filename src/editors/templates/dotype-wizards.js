@@ -11,7 +11,9 @@ import {
   getValue,
   identity,
   isPublic,
+  newActionEvent,
   newSubWizardEvent,
+  newWizardEvent,
   selector
 } from "../../foundation.js";
 import {createDaWizard, editDAWizard} from "../../wizards/da.js";
@@ -22,8 +24,9 @@ import {
   unifyCreateActionArray
 } from "./foundation.js";
 function remove(element) {
-  return () => {
-    return [{old: {parent: element.parentElement, element}}];
+  return (wizard) => {
+    wizard.dispatchEvent(newActionEvent({old: {parent: element.parentElement, element}}));
+    wizard.dispatchEvent(newWizardEvent());
   };
 }
 function updateSDoAction(element) {
@@ -213,13 +216,13 @@ export function createDOTypeWizard(parent, templates) {
   ];
 }
 function openAddSdo(parent) {
-  return () => {
-    return [() => sDOWizard({parent})];
+  return (wizard) => {
+    wizard.dispatchEvent(newSubWizardEvent(() => sDOWizard({parent})));
   };
 }
 function openAddDa(parent) {
-  return () => {
-    return [() => createDaWizard(parent)];
+  return (wizard) => {
+    wizard.dispatchEvent(newSubWizardEvent(() => createDaWizard(parent)));
   };
 }
 function updateDOTypeAction(element) {

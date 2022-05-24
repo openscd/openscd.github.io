@@ -11,13 +11,16 @@ import {
   getValue,
   identity,
   isPublic,
+  newActionEvent,
   newSubWizardEvent,
+  newWizardEvent,
   patterns,
   selector
 } from "../../foundation.js";
 function remove(element) {
-  return () => {
-    return [{old: {parent: element.parentElement, element}}];
+  return (wizard) => {
+    wizard.dispatchEvent(newActionEvent({old: {parent: element.parentElement, element}}));
+    wizard.dispatchEvent(newWizardEvent());
   };
 }
 function nextOrd(parent) {
@@ -183,8 +186,8 @@ export function createEnumTypeWizard(parent, templates) {
   ];
 }
 function openAddEnumVal(parent) {
-  return () => {
-    return [() => eNumValWizard({parent})];
+  return (wizard) => {
+    wizard.dispatchEvent(newSubWizardEvent(() => eNumValWizard({parent})));
   };
 }
 function updateEnumTpyeAction(element) {

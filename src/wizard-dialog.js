@@ -39,8 +39,7 @@ import {
   isWizardFactory,
   checkValidity,
   reportValidity,
-  identity,
-  newSubWizardEvent
+  identity
 } from "./foundation.js";
 function renderWizardInput(input) {
   if (input instanceof TemplateResult)
@@ -181,17 +180,8 @@ export let WizardDialog = class extends LitElement {
   }
   async menuAct(action) {
     if (!action)
-      return false;
-    const wizardActions = action();
-    wizardActions.forEach((wa) => {
-      if (isWizardFactory(wa))
-        this.dispatchEvent(newSubWizardEvent(wa));
-      else {
-        this.dispatchEvent(newWizardEvent());
-        this.dispatchEvent(newActionEvent(wa));
-      }
-    });
-    return true;
+      return;
+    action(this);
   }
   onClosed(ae) {
     if (!(ae.target instanceof Dialog && ae.detail?.action))

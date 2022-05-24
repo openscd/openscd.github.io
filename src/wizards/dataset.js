@@ -8,12 +8,13 @@ import {
   cloneElement,
   getValue,
   identity,
-  selector
+  selector,
+  newSubWizardEvent
 } from "../foundation.js";
 import {createFCDAsWizard} from "./fcda.js";
 function openFcdaWizard(element) {
-  return () => {
-    return [() => createFCDAsWizard(element)];
+  return (wizard) => {
+    wizard.dispatchEvent(newSubWizardEvent(() => createFCDAsWizard(element)));
   };
 }
 function updateDataSetAction(element) {
