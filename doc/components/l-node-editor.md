@@ -7,3 +7,9 @@ Pane rendering `LNode` element with its children
 | Property  | Type      | Description                |
 |-----------|-----------|----------------------------|
 | `element` | `Element` | The edited `LNode` element |
+
+## Methods
+
+| Method   | Type       |
+|----------|------------|
+| `remove` | `(): void` |

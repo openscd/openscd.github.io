@@ -17,7 +17,7 @@ import {
   state
 } from "../../../_snowpack/pkg/lit-element.js";
 import "../../action-icon.js";
-import {identity} from "../../foundation.js";
+import {identity, newActionEvent} from "../../foundation.js";
 import {
   automationLogicalNode,
   controlLogicalNode,
@@ -69,16 +69,28 @@ export let LNodeEditor = class extends LitElement {
   get missingIedReference() {
     return this.element.getAttribute("iedName") === "None";
   }
+  remove() {
+    if (this.element)
+      this.dispatchEvent(newActionEvent({
+        old: {
+          parent: this.element.parentElement,
+          element: this.element
+        }
+      }));
+  }
   render() {
     return html`<action-icon
       label="${this.header}"
       ?secondary=${this.missingIedReference}
       ?highlighted=${this.missingIedReference}
-      hideActions
-      ><mwc-icon slot="icon"
-        >${getLNodeIcon(this.element)}</mwc-icon
-      ></action-icon
-    >`;
+      ><mwc-icon slot="icon">${getLNodeIcon(this.element)}</mwc-icon
+      ><mwc-fab
+        slot="action"
+        mini
+        icon="delete"
+        @click="${() => this.remove()}}"
+      ></mwc-fab
+    ></action-icon>`;
   }
 };
 __decorate([
