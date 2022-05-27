@@ -20,12 +20,14 @@ import "../_snowpack/pkg/@material/mwc-switch.js";
 import {Select} from "../_snowpack/pkg/@material/mwc-select.js";
 export let WizardSelect = class extends Select {
   constructor() {
-    super(...arguments);
+    super();
     this.nullable = false;
     this.isNull = false;
     this.defaultValue = "";
     this.reservedValues = [];
+    this.disabledSwitch = false;
     this.nulled = null;
+    this.disabledSwitch = this.hasAttribute("disabled");
   }
   get null() {
     return this.nullable && this.isNull;
@@ -77,6 +79,7 @@ export let WizardSelect = class extends Select {
       return html`<mwc-switch
         style="margin-left: 12px;"
         ?checked=${!this.null}
+        ?disabled=${this.disabledSwitch}
         @change=${() => {
         this.null = !this.nullSwitch.checked;
       }}

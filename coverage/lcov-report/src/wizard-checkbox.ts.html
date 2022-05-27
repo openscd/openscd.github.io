@@ -25,14 +25,14 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>132/132</span>
+                <span class='fraction'>136/136</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">94.59% </span>
+                <span class="strong">94.87% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>35/37</span>
+                <span class='fraction'>37/39</span>
             </div>
         
             
@@ -46,7 +46,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>132/132</span>
+                <span class='fraction'>136/136</span>
             </div>
         
             
@@ -195,7 +195,11 @@
 <a name='L130'></a><a href='#L130'>130</a>
 <a name='L131'></a><a href='#L131'>131</a>
 <a name='L132'></a><a href='#L132'>132</a>
-<a name='L133'></a><a href='#L133'>133</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">151x</span>
+<a name='L133'></a><a href='#L133'>133</a>
+<a name='L134'></a><a href='#L134'>134</a>
+<a name='L135'></a><a href='#L135'>135</a>
+<a name='L136'></a><a href='#L136'>136</a>
+<a name='L137'></a><a href='#L137'>137</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">151x</span>
 <span class="cline-any cline-yes">151x</span>
 <span class="cline-any cline-yes">151x</span>
 <span class="cline-any cline-yes">151x</span>
@@ -235,6 +239,9 @@
 <span class="cline-any cline-yes">16x</span>
 <span class="cline-any cline-yes">16x</span>
 <span class="cline-any cline-yes">16x</span>
+<span class="cline-any cline-yes">17x</span>
+<span class="cline-any cline-yes">17x</span>
+<span class="cline-any cline-yes">17x</span>
 <span class="cline-any cline-yes">17x</span>
 <span class="cline-any cline-yes">17x</span>
 <span class="cline-any cline-yes">17x</span>
@@ -298,6 +305,7 @@
 <span class="cline-any cline-yes">16x</span>
 <span class="cline-any cline-yes">16x</span>
 <span class="cline-any cline-yes">16x</span>
+<span class="cline-any cline-yes">16x</span>
 <span class="cline-any cline-yes">7x</span>
 <span class="cline-any cline-yes">7x</span>
 <span class="cline-any cline-yes">7x</span>
@@ -312,8 +320,8 @@
 <span class="cline-any cline-yes">17x</span>
 <span class="cline-any cline-yes">17x</span>
 <span class="cline-any cline-yes">17x</span>
-<span class="cline-any cline-yes">15x</span>
-<span class="cline-any cline-yes">14x</span>
+<span class="cline-any cline-yes">16x</span>
+<span class="cline-any cline-yes">12x</span>
 <span class="cline-any cline-yes">17x</span>
 <span class="cline-any cline-yes">17x</span>
 <span class="cline-any cline-yes">17x</span>
@@ -369,6 +377,9 @@ export class WizardCheckbox extends LitElement {
       this.checked = check === 'true' ? true : false;
     }
   }
+  /** Disables component including null switch */
+  @property({ type: Boolean })
+  disabled = false;
 &nbsp;
   private isNull = false;
 &nbsp;
@@ -395,7 +406,7 @@ export class WizardCheckbox extends LitElement {
   }
 &nbsp;
   @state()
-  disabled = false;
+  private deactivateCheckbox = false;
   @state()
   get formfieldLabel(): string {
     return this.helper ? `${this.helper} (${this.label})` : this.label;
@@ -410,14 +421,14 @@ export class WizardCheckbox extends LitElement {
     if (this.nulled === null) <span class="branch-0 cbranch-no" title="branch not covered" >return;</span>
     this.checked = this.nulled;
     this.nulled = null;
-    this.disabled = false;
+    this.deactivateCheckbox = false;
   }
 &nbsp;
   private disable(): void {
     if (this.nulled !== null) <span class="branch-0 cbranch-no" title="branch not covered" >return;</span>
     this.nulled = this.checked;
     this.checked = this.defaultChecked;
-    this.disabled = true;
+    this.deactivateCheckbox = true;
   }
 &nbsp;
   firstUpdated(): void {
@@ -429,6 +440,7 @@ export class WizardCheckbox extends LitElement {
       return html`&lt;mwc-switch
         style="margin-left: 12px;"
         ?checked=${!this.null}
+        ?disabled=${this.disabled}
         @change=${() =&gt; {
           this.null = !this.nullSwitch!.checked;
         }}
@@ -443,12 +455,12 @@ export class WizardCheckbox extends LitElement {
         &lt;div style="flex: auto;"&gt;
           &lt;mwc-formfield
             label="${this.formfieldLabel}"
-            style="${this.disabled
+            style="${this.deactivateCheckbox || this.disabled
               ? `--mdc-theme-text-primary-on-background:rgba(0, 0, 0, 0.38)`
               : ``}"
             &gt;&lt;mwc-checkbox
               ?checked=${this.initChecked}
-              ?disabled=${this.disabled}
+              ?disabled=${this.deactivateCheckbox || this.disabled}
             &gt;&lt;/mwc-checkbox
           &gt;&lt;/mwc-formfield&gt;
         &lt;/div&gt;
@@ -466,7 +478,7 @@ export class WizardCheckbox extends LitElement {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener">istanbul</a>
-                at Tue May 24 2022 11:04:39 GMT+0000 (Coordinated Universal Time)
+                at Fri May 27 2022 09:43:06 GMT+0000 (Coordinated Universal Time)
             </div>
         </div>
         <script src="../prettify.js"></script>

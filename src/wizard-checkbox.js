@@ -27,9 +27,10 @@ export let WizardCheckbox = class extends LitElement {
     this.helper = "";
     this.nullable = false;
     this.defaultChecked = false;
+    this.disabled = false;
     this.isNull = false;
     this.initChecked = false;
-    this.disabled = false;
+    this.deactivateCheckbox = false;
     this.nulled = null;
   }
   get maybeValue() {
@@ -72,14 +73,14 @@ export let WizardCheckbox = class extends LitElement {
       return;
     this.checked = this.nulled;
     this.nulled = null;
-    this.disabled = false;
+    this.deactivateCheckbox = false;
   }
   disable() {
     if (this.nulled !== null)
       return;
     this.nulled = this.checked;
     this.checked = this.defaultChecked;
-    this.disabled = true;
+    this.deactivateCheckbox = true;
   }
   firstUpdated() {
     this.requestUpdate();
@@ -89,6 +90,7 @@ export let WizardCheckbox = class extends LitElement {
       return html`<mwc-switch
         style="margin-left: 12px;"
         ?checked=${!this.null}
+        ?disabled=${this.disabled}
         @change=${() => {
         this.null = !this.nullSwitch.checked;
       }}
@@ -102,10 +104,10 @@ export let WizardCheckbox = class extends LitElement {
         <div style="flex: auto;">
           <mwc-formfield
             label="${this.formfieldLabel}"
-            style="${this.disabled ? `--mdc-theme-text-primary-on-background:rgba(0, 0, 0, 0.38)` : ``}"
+            style="${this.deactivateCheckbox || this.disabled ? `--mdc-theme-text-primary-on-background:rgba(0, 0, 0, 0.38)` : ``}"
             ><mwc-checkbox
               ?checked=${this.initChecked}
-              ?disabled=${this.disabled}
+              ?disabled=${this.deactivateCheckbox || this.disabled}
             ></mwc-checkbox
           ></mwc-formfield>
         </div>
@@ -132,6 +134,9 @@ __decorate([
   property({type: String})
 ], WizardCheckbox.prototype, "maybeValue", 1);
 __decorate([
+  property({type: Boolean})
+], WizardCheckbox.prototype, "disabled", 2);
+__decorate([
   state()
 ], WizardCheckbox.prototype, "null", 1);
 __decorate([
@@ -139,7 +144,7 @@ __decorate([
 ], WizardCheckbox.prototype, "checked", 1);
 __decorate([
   state()
-], WizardCheckbox.prototype, "disabled", 2);
+], WizardCheckbox.prototype, "deactivateCheckbox", 2);
 __decorate([
   state()
 ], WizardCheckbox.prototype, "formfieldLabel", 1);

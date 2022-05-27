@@ -9,7 +9,7 @@ A potentially `nullable` labelled checkbox.
 | `checkbox`       |                  |           | `Checkbox \| undefined` |         |                                                  |
 | `checked`        |                  |           | `boolean`               |         |                                                  |
 | `defaultChecked` | `defaultChecked` |           | `boolean`               | false   | The default `checked` state while [[`maybeValue`]] is `null`. |
-| `disabled`       |                  |           | `boolean`               | false   |                                                  |
+| `disabled`       | `disabled`       |           | `boolean`               | false   | Disables component including null switch         |
 | `formfieldLabel` |                  | readonly  | `string`                |         |                                                  |
 | `helper`         | `helper`         |           | `string`                | ""      | Parenthetical information rendered after the label: `label (helper)` |
 | `label`          | `label`          |           | `string`                | ""      |                                                  |
