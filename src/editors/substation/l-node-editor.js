@@ -17,7 +17,13 @@ import {
   state
 } from "../../../_snowpack/pkg/lit-element.js";
 import "../../action-icon.js";
-import {identity, newActionEvent, newWizardEvent} from "../../foundation.js";
+import {
+  cloneElement,
+  identity,
+  newActionEvent,
+  newLnInstGenerator,
+  newWizardEvent
+} from "../../foundation.js";
 import {
   automationLogicalNode,
   controlLogicalNode,
@@ -70,6 +76,21 @@ export let LNodeEditor = class extends LitElement {
   get missingIedReference() {
     return this.element.getAttribute("iedName") === "None";
   }
+  get isIEDReference() {
+    return this.element.getAttribute("iedName") !== "None";
+  }
+  cloneLNodeElement() {
+    const lnClass = this.element.getAttribute("lnClass");
+    if (!lnClass)
+      return;
+    const uniqueLnInst = newLnInstGenerator(this.element.parentElement)(lnClass);
+    if (!uniqueLnInst)
+      return;
+    const newElement = cloneElement(this.element, {lnInst: uniqueLnInst});
+    this.dispatchEvent(newActionEvent({
+      new: {parent: this.element.parentElement, element: newElement}
+    }));
+  }
   openEditWizard() {
     const wizard = wizards["LNode"].edit(this.element);
     if (wizard)
@@ -102,7 +123,13 @@ export let LNodeEditor = class extends LitElement {
         icon="delete"
         @click="${() => this.remove()}}"
       ></mwc-fab
-    ></action-icon>`;
+      >${this.isIEDReference ? html`` : html`<mwc-fab
+            slot="action"
+            mini
+            icon="content_copy"
+            @click=${() => this.cloneLNodeElement()}
+          ></mwc-fab>`}
+    </action-icon>`;
   }
 };
 __decorate([
@@ -114,6 +141,9 @@ __decorate([
 __decorate([
   state()
 ], LNodeEditor.prototype, "missingIedReference", 1);
+__decorate([
+  state()
+], LNodeEditor.prototype, "isIEDReference", 1);
 LNodeEditor = __decorate([
   customElement("l-node-editor")
 ], LNodeEditor);

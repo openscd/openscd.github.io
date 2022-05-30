@@ -1916,3 +1916,20 @@ export function getChildElementsByTagName(element, tag) {
     return [];
   return Array.from(element.children).filter((element2) => element2.tagName === tag);
 }
+const maxLnInst = 99;
+const lnInstRange = Array(maxLnInst).fill(1).map((_, i) => `${i + 1}`);
+export function newLnInstGenerator(parent) {
+  const generators = new Map();
+  return (lnClass) => {
+    if (!generators.has(lnClass)) {
+      const lnInsts = new Set(getChildElementsByTagName(parent, "LNode").filter((lnode) => lnode.getAttribute("lnClass") === lnClass).map((lNode) => lNode.getAttribute("lnInst")));
+      generators.set(lnClass, () => {
+        const uniqueLnInst = lnInstRange.find((lnInst) => !lnInsts.has(lnInst));
+        if (uniqueLnInst)
+          lnInsts.add(uniqueLnInst);
+        return uniqueLnInst;
+      });
+    }
+    return generators.get(lnClass)();
+  };
+}

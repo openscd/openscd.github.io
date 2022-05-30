@@ -15,32 +15,16 @@ import {
   newLogEvent,
   newWizardEvent,
   referencePath,
-  selector
+  selector,
+  newLnInstGenerator
 } from "../foundation.js";
 import {patterns} from "./foundation/limits.js";
-const maxLnInst = 99;
-const lnInstRange = Array(maxLnInst).fill(1).map((_, i) => `${i + 1}`);
-function uniqueLnInstGenerator(parent) {
-  const generators = new Map();
-  return (lnClass) => {
-    if (!generators.has(lnClass)) {
-      const lnInsts = new Set(getChildElementsByTagName(parent, "LNode").filter((lnode) => lnode.getAttribute("lnClass") === lnClass).map((lNode) => lNode.getAttribute("lnInst")));
-      generators.set(lnClass, () => {
-        const uniqueLnInst = lnInstRange.find((lnInst) => !lnInsts.has(lnInst));
-        if (uniqueLnInst)
-          lnInsts.add(uniqueLnInst);
-        return uniqueLnInst;
-      });
-    }
-    return generators.get(lnClass)();
-  };
-}
 function createLNodeAction(parent) {
   return (inputs, wizard, list) => {
     const selectedLNodeTypes = list.items.filter((item) => item.selected).map((item) => item.value).map((identity2) => {
       return parent.ownerDocument.querySelector(selector("LNodeType", identity2));
     }).filter((item) => item !== null);
-    const lnInstGenerator = uniqueLnInstGenerator(parent);
+    const lnInstGenerator = newLnInstGenerator(parent);
     const createActions = selectedLNodeTypes.map((selectedLNodeType) => {
       const lnClass = selectedLNodeType.getAttribute("lnClass");
       if (!lnClass)
