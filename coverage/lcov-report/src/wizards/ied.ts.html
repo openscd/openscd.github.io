@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">91.71% </span>
+                <span class="strong">92.04% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>155/169</span>
+                <span class='fraction'>162/176</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">91.71% </span>
+                <span class="strong">92.04% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>155/169</span>
+                <span class='fraction'>162/176</span>
             </div>
         
             
@@ -232,7 +232,15 @@
 <a name='L167'></a><a href='#L167'>167</a>
 <a name='L168'></a><a href='#L168'>168</a>
 <a name='L169'></a><a href='#L169'>169</a>
-<a name='L170'></a><a href='#L170'>170</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">48x</span>
+<a name='L170'></a><a href='#L170'>170</a>
+<a name='L171'></a><a href='#L171'>171</a>
+<a name='L172'></a><a href='#L172'>172</a>
+<a name='L173'></a><a href='#L173'>173</a>
+<a name='L174'></a><a href='#L174'>174</a>
+<a name='L175'></a><a href='#L175'>175</a>
+<a name='L176'></a><a href='#L176'>176</a>
+<a name='L177'></a><a href='#L177'>177</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">48x</span>
+<span class="cline-any cline-yes">48x</span>
 <span class="cline-any cline-yes">48x</span>
 <span class="cline-any cline-yes">48x</span>
 <span class="cline-any cline-yes">48x</span>
@@ -310,8 +318,8 @@
 <span class="cline-any cline-yes">48x</span>
 <span class="cline-any cline-yes">48x</span>
 <span class="cline-any cline-yes">48x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">48x</span>
+<span class="cline-any cline-yes">48x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -320,6 +328,9 @@
 <span class="cline-any cline-yes">48x</span>
 <span class="cline-any cline-yes">48x</span>
 <span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -374,6 +385,9 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -424,16 +438,17 @@ import {
 } from '../foundation.js';
 import { patterns } from './foundation/limits.js';
 &nbsp;
-import { updateNamingAttributeWithReferencesAction } from "./foundation/actions.js";
-import { deleteReferences } from "./foundation/references.js";
-import { emptyInputsDeleteActions } from "../foundation/ied.js";
+import { updateNamingAttributeWithReferencesAction } from './foundation/actions.js';
+import { deleteReferences } from './foundation/references.js';
+import { emptyInputsDeleteActions } from '../foundation/ied.js';
 &nbsp;
-const iedNamePattern = "[A-Za-z][0-9A-Za-z_]{0,2}|" +
-  "[A-Za-z][0-9A-Za-z_]{4,63}|" +
-  "[A-MO-Za-z][0-9A-Za-z_]{3}|" +
-  "N[0-9A-Za-np-z_][0-9A-Za-z_]{2}|" +
-  "No[0-9A-Za-mo-z_][0-9A-Za-z_]|" +
-  "Non[0-9A-Za-df-z_]";
+const iedNamePattern =
+  '[A-Za-z][0-9A-Za-z_]{0,2}|' +
+  '[A-Za-z][0-9A-Za-z_]{4,63}|' +
+  '[A-MO-Za-z][0-9A-Za-z_]{3}|' +
+  'N[0-9A-Za-np-z_][0-9A-Za-z_]{2}|' +
+  'No[0-9A-Za-mo-z_][0-9A-Za-z_]|' +
+  'Non[0-9A-Za-df-z_]';
 &nbsp;
 export function renderIEDWizard(
   name: string | null,
@@ -462,26 +477,26 @@ export function renderIEDWizard(
 }
 &nbsp;
 function renderIEDReferencesWizard(references: Delete[]): TemplateResult[] {
-  return [html `
-      &lt;section&gt;
-        &lt;h1&gt;${translate('ied.wizard.title.references')}&lt;/h1&gt;
-        &lt;mwc-list&gt;
-          ${references.map(reference =&gt; {
-            const oldElement = &lt;Element&gt;reference.old.element
-            return html `
-              &lt;mwc-list-item noninteractive twoline&gt;
-                &lt;span&gt;${oldElement.tagName}&lt;/span&gt;
-                &lt;span slot="secondary"&gt;${identity(&lt;Element&gt;reference.old.element)}&lt;/span&gt;
-              &lt;/mwc-list-item&gt;`;
-          })}
-        &lt;/mwc-list&gt;
-      &lt;/section&gt;`];
+  return [
+    html` &lt;section&gt;
+      &lt;h1&gt;${translate('ied.wizard.title.references')}&lt;/h1&gt;
+      &lt;mwc-list&gt;
+        ${references.map(reference =&gt; {
+          const oldElement = &lt;Element&gt;reference.old.element;
+          return html` &lt;mwc-list-item noninteractive twoline&gt;
+            &lt;span&gt;${oldElement.tagName}&lt;/span&gt;
+            &lt;span slot="secondary"
+              &gt;${identity(&lt;Element&gt;reference.old.element)}&lt;/span
+            &gt;
+          &lt;/mwc-list-item&gt;`;
+        })}
+      &lt;/mwc-list&gt;
+    &lt;/section&gt;`,
+  ];
 }
 &nbsp;
 export function reservedNamesIED(currentElement: Element): string[] {
-  return Array.from(
-    currentElement.parentNode!.querySelectorAll('IED')
-  )
+  return Array.from(currentElement.parentNode!.querySelectorAll('IED'))
     .filter(isPublic)
     .map(ied =&gt; ied.getAttribute('name') ?? '')
     .filter(name =&gt; name !== currentElement.getAttribute('name'));
@@ -495,21 +510,24 @@ export function removeIEDAndReferences(element: Element): WizardActor {
     // Get Delete Actions for other elements that also need to be removed
     const referencesDeleteActions = deleteReferences(element);
     // Use the ExtRef Elements to check if after removing the ExtRef there are empty Inputs that can also be removed.
-    const extRefsDeleteActions = referencesDeleteActions
-      .filter(deleteAction =&gt; (&lt;Element&gt;deleteAction.old.element).tagName === 'ExtRef')
-    const inputsDeleteActions = emptyInputsDeleteActions(extRefsDeleteActions)
+    const extRefsDeleteActions = referencesDeleteActions.filter(
+      deleteAction =&gt; (&lt;Element&gt;deleteAction.old.element).tagName === 'ExtRef'
+    );
+    const inputsDeleteActions = emptyInputsDeleteActions(extRefsDeleteActions);
 &nbsp;
     // Create Complex Action to remove IED and all references.
     const name = element.getAttribute('name') ?? 'Unknown';
     const complexAction: ComplexAction = {
       actions: [],
-      title: get('ied.action.deleteied', {name}),
+      title: get('ied.action.deleteied', { name }),
     };
-    complexAction.actions.push({ old: { parent: element.parentElement!, element } });
+    complexAction.actions.push({
+      old: { parent: element.parentElement!, element },
+    });
     complexAction.actions.push(...referencesDeleteActions);
     complexAction.actions.push(...inputsDeleteActions);
     return [complexAction];
-  }
+  };
 }
 &nbsp;
 export function removeIEDWizard(element: Element): Wizard | null {
@@ -560,7 +578,10 @@ export function editIEDWizard(element: Element): Wizard {
       primary: {
         icon: 'edit',
         label: get('save'),
-        action: updateNamingAttributeWithReferencesAction(element, 'ied.action.updateied'),
+        action: updateNamingAttributeWithReferencesAction(
+          element,
+          'ied.action.updateied'
+        ),
       },
       content: renderIEDWizard(
         element.getAttribute('name'),
@@ -577,7 +598,7 @@ export function editIEDWizard(element: Element): Wizard {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener">istanbul</a>
-                at Mon May 30 2022 07:29:19 GMT+0000 (Coordinated Universal Time)
+                at Mon May 30 2022 08:10:58 GMT+0000 (Coordinated Universal Time)
             </div>
         </div>
         <script src="../../prettify.js"></script>

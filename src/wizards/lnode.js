@@ -10,9 +10,121 @@ import {
   getChildElementsByTagName,
   identity,
   isPublic,
+  newLogEvent,
+  newWizardEvent,
   referencePath,
   selector
 } from "../foundation.js";
+const maxLnInst = 99;
+const lnInstRange = Array(maxLnInst).fill(1).map((_, i) => `${i + 1}`);
+function uniqueLnInstGenerator(parent) {
+  const generators = new Map();
+  return (lnClass) => {
+    if (!generators.has(lnClass)) {
+      const lnInsts = new Set(getChildElementsByTagName(parent, "LNode").filter((lnode) => lnode.getAttribute("lnClass") === lnClass).map((lNode) => lNode.getAttribute("lnInst")));
+      generators.set(lnClass, () => {
+        const uniqueLnInst = lnInstRange.find((lnInst) => !lnInsts.has(lnInst));
+        if (uniqueLnInst)
+          lnInsts.add(uniqueLnInst);
+        return uniqueLnInst;
+      });
+    }
+    return generators.get(lnClass)();
+  };
+}
+function createLNodeAction(parent) {
+  return (inputs, wizard, list) => {
+    const selectedLNodeTypes = list.items.filter((item) => item.selected).map((item) => item.value).map((identity2) => {
+      return parent.ownerDocument.querySelector(selector("LNodeType", identity2));
+    }).filter((item) => item !== null);
+    const lnInstGenerator = uniqueLnInstGenerator(parent);
+    const createActions = selectedLNodeTypes.map((selectedLNodeType) => {
+      const lnClass = selectedLNodeType.getAttribute("lnClass");
+      if (!lnClass)
+        return null;
+      const uniqueLnInst = lnInstGenerator(lnClass);
+      if (!uniqueLnInst) {
+        wizard.dispatchEvent(newLogEvent({
+          kind: "error",
+          title: get("lnode.log.title", {lnClass}),
+          message: get("lnode.log.nonuniquelninst")
+        }));
+        return;
+      }
+      const hasLLN0 = getChildElementsByTagName(parent, "LNode").some((lnode) => lnode.getAttribute("lnClass") === "LLN0");
+      if (lnClass === "LLN0" && hasLLN0) {
+        wizard.dispatchEvent(newLogEvent({
+          kind: "error",
+          title: get("lnode.log.title", {lnClass}),
+          message: get("lnode.log.uniqueln0", {lnClass})
+        }));
+        return;
+      }
+      const hasLPHD = getChildElementsByTagName(parent, "LNode").some((lnode) => lnode.getAttribute("lnClass") === "LPHD");
+      if (lnClass === "LPHD" && hasLPHD) {
+        wizard.dispatchEvent(newLogEvent({
+          kind: "error",
+          title: get("lnode.log.title", {lnClass}),
+          message: get("lnode.log.uniqueln0", {lnClass})
+        }));
+        return;
+      }
+      const lnInst = lnClass === "LLN0" ? "" : uniqueLnInst;
+      const element = createElement(parent.ownerDocument, "LNode", {
+        iedName: "None",
+        ldInst: null,
+        prefix: null,
+        lnClass,
+        lnInst,
+        lnType: selectedLNodeType.getAttribute("id")
+      });
+      return {new: {parent, element}};
+    }).filter((action) => action);
+    return createActions;
+  };
+}
+function openLNodeReferenceWizard(parent) {
+  return (wizard) => {
+    wizard.dispatchEvent(newWizardEvent());
+    wizard.dispatchEvent(newWizardEvent(lNodeReferenceWizard(parent)));
+  };
+}
+function lNodeInstanceWizard(parent) {
+  const lNodeTypes = Array.from(parent.ownerDocument.querySelectorAll("LNodeType"));
+  return [
+    {
+      title: get("lnode.wizard.title.selectLNodeTypes"),
+      menuActions: [
+        {
+          icon: "",
+          label: get("lnode.wizard.reference"),
+          action: openLNodeReferenceWizard(parent)
+        }
+      ],
+      primary: {
+        icon: "save",
+        label: get("save"),
+        action: createLNodeAction(parent)
+      },
+      content: [
+        html`<filtered-list multi
+          >${lNodeTypes.map((lNodeType) => {
+          const isDisabled = lNodeType.getAttribute("lnClass") === "LLN0" && getChildElementsByTagName(parent, "LNode").some((lnode) => lnode.getAttribute("lnClass") === "LLN0") || lNodeType.getAttribute("lnClass") === "LPHD" && getChildElementsByTagName(parent, "LNode").some((lnode) => lnode.getAttribute("lnClass") === "LPHD");
+          return html`<mwc-check-list-item
+              twoline
+              value="${identity(lNodeType)}"
+              ?disabled=${isDisabled}
+              ><span>${lNodeType.getAttribute("lnClass")}</span
+              ><span slot="secondary"
+                >${isDisabled ? get("lnode.wizard.uniquewarning") : identity(lNodeType)}</span
+              ></mwc-check-list-item
+            >`;
+        })}</filtered-list
+        >`
+      ]
+    }
+  ];
+}
 const preferredLn = {
   CBR: ["CSWI", "CILO", "XCBR"],
   DIS: ["CSWI", "CILO", "XSWI"],
@@ -146,23 +258,39 @@ function renderIEDPage(element) {
       <mwc-icon slot="graphic">info</mwc-icon>
     </mwc-list-item>`;
 }
-export function lNodeWizard(element) {
+function openLNodeInstanceWizard(parent) {
+  return (wizard) => {
+    wizard.dispatchEvent(newWizardEvent());
+    wizard.dispatchEvent(newWizardEvent(lNodeInstanceWizard(parent)));
+  };
+}
+function lNodeReferenceWizard(parent) {
   return [
     {
       title: get("lnode.wizard.title.selectIEDs"),
-      element,
-      content: [renderIEDPage(element)]
+      menuActions: [
+        {
+          icon: "",
+          label: get("lnode.wizard.instance"),
+          action: openLNodeInstanceWizard(parent)
+        }
+      ],
+      content: [renderIEDPage(parent)]
     },
     {
-      initial: Array.from(element.children).some((child) => child.tagName === "LNode"),
+      initial: Array.from(parent.children).some((child) => child.tagName === "LNode"),
       title: get("lnode.wizard.title.selectLNs"),
-      element,
       primary: {
         icon: "save",
         label: get("save"),
-        action: lNodeWizardAction(element)
+        action: lNodeWizardAction(parent)
       },
       content: [html`<filtered-list multi id="lnList"></filtered-list>`]
     }
   ];
+}
+export function lNodeWizard(parent) {
+  if (parent.tagName === "Function" || parent.tagName === "SubFunction" || parent.tagName === "EqFunction" || parent.tagName === "EqSubFunction")
+    return lNodeInstanceWizard(parent);
+  return lNodeReferenceWizard(parent);
 }

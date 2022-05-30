@@ -37,20 +37,22 @@ export function renderIEDWizard(name, desc, reservedNames) {
   ];
 }
 function renderIEDReferencesWizard(references) {
-  return [html`
-      <section>
-        <h1>${translate("ied.wizard.title.references")}</h1>
-        <mwc-list>
-          ${references.map((reference) => {
-    const oldElement = reference.old.element;
-    return html`
-              <mwc-list-item noninteractive twoline>
-                <span>${oldElement.tagName}</span>
-                <span slot="secondary">${identity(reference.old.element)}</span>
-              </mwc-list-item>`;
-  })}
-        </mwc-list>
-      </section>`];
+  return [
+    html` <section>
+      <h1>${translate("ied.wizard.title.references")}</h1>
+      <mwc-list>
+        ${references.map((reference) => {
+      const oldElement = reference.old.element;
+      return html` <mwc-list-item noninteractive twoline>
+            <span>${oldElement.tagName}</span>
+            <span slot="secondary"
+              >${identity(reference.old.element)}</span
+            >
+          </mwc-list-item>`;
+    })}
+      </mwc-list>
+    </section>`
+  ];
 }
 export function reservedNamesIED(currentElement) {
   return Array.from(currentElement.parentNode.querySelectorAll("IED")).filter(isPublic).map((ied) => ied.getAttribute("name") ?? "").filter((name) => name !== currentElement.getAttribute("name"));
@@ -66,7 +68,9 @@ export function removeIEDAndReferences(element) {
       actions: [],
       title: get("ied.action.deleteied", {name})
     };
-    complexAction.actions.push({old: {parent: element.parentElement, element}});
+    complexAction.actions.push({
+      old: {parent: element.parentElement, element}
+    });
     complexAction.actions.push(...referencesDeleteActions);
     complexAction.actions.push(...inputsDeleteActions);
     return [complexAction];

@@ -144,13 +144,16 @@ export let WizardDialog = class extends LitElement {
     return Array.from(this.dialogs).findIndex((dialog) => !dialogValid(dialog));
   }
   prev() {
-    if (this.pageIndex > 0)
-      this.pageIndex--;
+    if (this.pageIndex <= 0)
+      return;
+    this.pageIndex--;
+    this.dialog?.show();
   }
   async next() {
     if (dialogValid(this.dialog)) {
       if (this.wizard.length > this.pageIndex + 1)
         this.pageIndex++;
+      this.dialog?.show();
     } else {
       this.dialog?.show();
       await this.dialog?.updateComplete;
@@ -233,8 +236,7 @@ export let WizardDialog = class extends LitElement {
     const showCodeToggleButton = page.element && localStorage.getItem("mode") === "pro";
     const extraWidth = showCodeToggleButton && page.menuActions ? 96 : showCodeToggleButton || page.menuActions ? 48 : 0;
     return html`<mwc-dialog
-      defaultAction="close"
-      ?open=${index === this.pageIndex}
+      defaultAction="next"
       heading=${page.title}
       @closed=${this.onClosed}
       style="--mdc-dialog-min-width:calc(100% + ${extraWidth}px)"

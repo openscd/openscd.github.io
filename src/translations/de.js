@@ -448,9 +448,18 @@ export const de = {
       title: {
         selectIEDs: "Auswahl IEDs",
         selectLDs: "Auswahl logische Geräte",
-        selectLNs: "Auswahl logische Knoten"
+        selectLNs: "Auswahl logische Knoten",
+        selectLNodeTypes: "Auswahl logische Knoten Type"
       },
-      placeholder: "Bitte laden Sie eine SCL-Datei, die IED-Elemente enthält."
+      placeholder: "Bitte laden Sie eine SCL-Datei, die IED-Elemente enthält.",
+      uniquewarning: "Logische Knoten Klasse existiert bereits",
+      reference: "Referenz auf bestehenden logischen Knoten erstellen",
+      instance: "Referenz auf logischen Knoten Typ erstellen"
+    },
+    log: {
+      title: "LNode vom Type {{lnClass}} kann nicht hinzugefügt werden",
+      nonuniquelninst: "Keine eindeutige Instanz (lnInst)",
+      uniqueln0: "Nur eine Instanz von {{lnClass}} zulässig"
     },
     tooltip: "Referenz zu logischen Knoten erstellen"
   },
