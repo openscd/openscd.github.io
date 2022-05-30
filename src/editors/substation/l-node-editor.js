@@ -17,7 +17,7 @@ import {
   state
 } from "../../../_snowpack/pkg/lit-element.js";
 import "../../action-icon.js";
-import {identity, newActionEvent} from "../../foundation.js";
+import {identity, newActionEvent, newWizardEvent} from "../../foundation.js";
 import {
   automationLogicalNode,
   controlLogicalNode,
@@ -36,6 +36,7 @@ import {
   systemLogicalNode,
   transformerLogicalNode
 } from "../../icons/lnode.js";
+import {wizards} from "../../wizards/wizard-library.js";
 export function getLNodeIcon(lNode) {
   const lnClassGroup = lNode.getAttribute("lnClass")?.charAt(0) ?? "";
   return lnClassIcons[lnClassGroup] ?? systemLogicalNode;
@@ -69,6 +70,11 @@ export let LNodeEditor = class extends LitElement {
   get missingIedReference() {
     return this.element.getAttribute("iedName") === "None";
   }
+  openEditWizard() {
+    const wizard = wizards["LNode"].edit(this.element);
+    if (wizard)
+      this.dispatchEvent(newWizardEvent(wizard));
+  }
   remove() {
     if (this.element)
       this.dispatchEvent(newActionEvent({
@@ -84,6 +90,12 @@ export let LNodeEditor = class extends LitElement {
       ?secondary=${this.missingIedReference}
       ?highlighted=${this.missingIedReference}
       ><mwc-icon slot="icon">${getLNodeIcon(this.element)}</mwc-icon
+      ><mwc-fab
+        slot="action"
+        mini
+        icon="edit"
+        @click="${() => this.openEditWizard()}}"
+      ></mwc-fab
       ><mwc-fab
         slot="action"
         mini

@@ -5,7 +5,7 @@ import {
 } from "./conductingequipment.js";
 import {editConnectivityNodeWizard} from "./connectivitynode.js";
 import {createFCDAsWizard} from "./fcda.js";
-import {lNodeWizard} from "./lnode.js";
+import {editLNodeWizard, lNodeWizard} from "./lnode.js";
 import {editOptFieldsWizard} from "./optfields.js";
 import {createSubstationWizard, substationEditWizard} from "./substation.js";
 import {editTerminalWizard} from "./terminal.js";
@@ -298,7 +298,7 @@ export const wizards = {
     create: emptyWizard
   },
   LNode: {
-    edit: lNodeWizard,
+    edit: editLNodeWizard,
     create: lNodeWizard
   },
   LNodeType: {

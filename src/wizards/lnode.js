@@ -6,8 +6,10 @@ import "../../_snowpack/pkg/@material/mwc-list/mwc-list-item.js";
 import {ListBase} from "../../_snowpack/pkg/@material/mwc-list/mwc-list-base.js";
 import "../filtered-list.js";
 import {
+  cloneElement,
   createElement,
   getChildElementsByTagName,
+  getValue,
   identity,
   isPublic,
   newLogEvent,
@@ -15,6 +17,7 @@ import {
   referencePath,
   selector
 } from "../foundation.js";
+import {patterns} from "./foundation/limits.js";
 const maxLnInst = 99;
 const lnInstRange = Array(maxLnInst).fill(1).map((_, i) => `${i + 1}`);
 function uniqueLnInstGenerator(parent) {
@@ -293,4 +296,102 @@ export function lNodeWizard(parent) {
   if (parent.tagName === "Function" || parent.tagName === "SubFunction" || parent.tagName === "EqFunction" || parent.tagName === "EqSubFunction")
     return lNodeInstanceWizard(parent);
   return lNodeReferenceWizard(parent);
+}
+function contentLNodeWizard(options) {
+  const isIedRef = options.iedName !== "None";
+  return [
+    html`<wizard-textfield
+      label="iedName"
+      .maybeValue=${options.iedName}
+      helper="${translate("scl.iedName")}"
+      helperPersistent
+      disabled
+    ></wizard-textfield>`,
+    html`<wizard-textfield
+      label="ldInst"
+      .maybeValue=${options.ldInst}
+      helper="${translate("scl.ldInst")}"
+      helperPersistent
+      nullable
+      disabled
+    ></wizard-textfield>`,
+    html`<wizard-textfield
+      label="prefix"
+      .maybeValue=${options.prefix}
+      helper="${translate("scl.prefix")}"
+      pattern="${patterns.asciName}"
+      maxLength="11"
+      helperPersistent
+      nullable
+      ?disabled=${isIedRef}
+    ></wizard-textfield>`,
+    html`<wizard-textfield
+      label="lnClass"
+      .maybeValue=${options.lnClass}
+      helper="${translate("scl.lnClass")}"
+      helperPersistent
+      disabled
+    ></wizard-textfield>`,
+    html`<wizard-textfield
+      label="lnInst"
+      .maybeValue=${options.lnInst}
+      helper="${translate("scl.lnInst")}"
+      helperPersistent
+      type="number"
+      min="1"
+      max="99"
+      .reservedValues=${options.reservedLnInst}
+      ?disabled=${isIedRef}
+    ></wizard-textfield>`
+  ];
+}
+function updateLNodeAction(element) {
+  return (inputs) => {
+    const attributes = {};
+    const attributeKeys = ["iedName", "ldInst", "prefix", "lnClass", "lnInst"];
+    attributeKeys.forEach((key) => {
+      attributes[key] = getValue(inputs.find((i) => i.label === key));
+    });
+    let lNodeAction = null;
+    if (attributeKeys.some((key) => attributes[key] !== element.getAttribute(key))) {
+      const newElement = cloneElement(element, attributes);
+      lNodeAction = {
+        old: {element},
+        new: {element: newElement}
+      };
+      return [lNodeAction];
+    }
+    return [];
+  };
+}
+export function editLNodeWizard(element) {
+  const [iedName, ldInst, prefix, lnClass, lnInst] = [
+    "iedName",
+    "ldInst",
+    "prefix",
+    "lnClass",
+    "lnInst"
+  ].map((attr) => element.getAttribute(attr));
+  const reservedLnInst = getChildElementsByTagName(element.parentElement, "LNode").filter((sibling) => sibling !== element && sibling.getAttribute("lnClass") === element.getAttribute("lnClass")).map((sibling) => sibling.getAttribute("lnInst"));
+  return [
+    {
+      title: get("wizard.title.edit", {tagName: "LNode"}),
+      element,
+      primary: {
+        label: get("save"),
+        icon: "save",
+        action: updateLNodeAction(element)
+      },
+      content: [
+        ...contentLNodeWizard({
+          iedName,
+          ldInst,
+          prefix,
+          lnClass,
+          lnInst,
+          reservedLnInst
+        })
+      ]
+    }
+  ];
 }

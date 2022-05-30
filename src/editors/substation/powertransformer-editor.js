@@ -55,7 +55,7 @@ export let PowerTransformerEditor = class extends LitElement {
       this.dispatchEvent(newWizardEvent(wizard));
   }
   openLNodeWizard() {
-    const wizard = wizards["LNode"].edit(this.element);
+    const wizard = wizards["LNode"].create(this.element);
     if (wizard)
       this.dispatchEvent(newWizardEvent(wizard));
   }

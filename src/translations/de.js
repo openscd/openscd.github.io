@@ -57,7 +57,11 @@ export const de = {
     refreshTime: "Zeitstempel des Abtastwertes zu Telegram hinzufügen",
     sampleRate: "Abtastrate zu Telegram hinzufügen",
     security: "Potentiel in Zukunft für z.B. digitale Signature",
-    synchSourceId: "Identität der Zeitquelle zu Telegram hinzufügen"
+    synchSourceId: "Identität der Zeitquelle zu Telegram hinzufügen",
+    iedName: "Referenziertes IED",
+    ldInst: "Referenziertes logisches Gerät",
+    prefix: "Präfix des logischen Knotens",
+    lnInst: "Instanz des logischen Knotens"
   },
   settings: {
     title: "Einstellungen",
