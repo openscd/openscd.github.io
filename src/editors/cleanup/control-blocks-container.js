@@ -101,6 +101,16 @@ export let CleanupControlBlocks = class extends LitElement {
       </span>
       <span>
         <mwc-icon-button
+          label="warning"
+          icon="warning_amber"
+          class="cautionItem"
+          title="${translate("cleanup.unreferencedControls.addressDefinitionTooltip")}"
+          ?disabled="${!(getCommAddress(controlBlock) !== null)}"
+        >
+        </mwc-icon-button>
+      </span>
+      <span>
+        <mwc-icon-button
           label="Edit"
           icon="edit"
           class="editItem"
@@ -117,16 +127,6 @@ export let CleanupControlBlocks = class extends LitElement {
       }
     }}
         ></mwc-icon-button>
-      </span>
-      <span>
-        <mwc-icon-button
-          label="warning"
-          icon="warning_amber"
-          class="cautionItem"
-          title="${translate("cleanup.unreferencedControls.addressDefinitionTooltip")}"
-          ?disabled="${!(getCommAddress(controlBlock) !== null)}"
-        >
-        </mwc-icon-button>
       </span>
       <span slot="secondary"
         >${controlBlock.tagName} -
@@ -234,6 +234,17 @@ CleanupControlBlocks.styles = css`
     .editItem,
     .cautionItem {
       --mdc-icon-size: 16px;
+    }
+
+    .editItem {
+      visibility: hidden;
+      opacity: 0;
+    }
+
+    .cleanupListItem:hover .editItem {
+      visibility: visible;
+      opacity: 1;
+      transition: visibility 0s, opacity 0.5s linear;
     }
 
     .cautionItem {
