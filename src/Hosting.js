@@ -10,7 +10,6 @@ var __decorate = (decorators, target, key, kind) => {
   return result;
 };
 import {html, property, query} from "../_snowpack/pkg/lit-element.js";
-import {until} from "../_snowpack/pkg/lit-html/directives/until.js";
 import {translate} from "../_snowpack/pkg/lit-translate.js";
 import "../_snowpack/pkg/@material/mwc-drawer.js";
 import "../_snowpack/pkg/@material/mwc-icon.js";
@@ -156,7 +155,7 @@ export function Hosting(Base) {
           ><mwc-icon slot="graphic">${me.icon}</mwc-icon>
           <span>${translate(me.name)}</span>
           ${me.hint ? html`<span slot="secondary"><tt>${me.hint}</tt></span>` : ""}
-          ${me.content ? until(me.content(), html`<mwc-linear-progress indeterminate></mwc-linear-progress>`) : ""}
+          ${me.content ?? ""}
         </mwc-list-item>
       `;
     }
@@ -209,7 +208,7 @@ export function Hosting(Base) {
           </mwc-top-app-bar-fixed>
         </mwc-drawer>
 
-        ${this.doc ? until(this.editors[this.activeTab] && this.editors[this.activeTab].content(), html`<mwc-linear-progress indeterminate></mwc-linear-progress>`) : html`<div class="landing">
+        ${this.doc ? this.editors[this.activeTab].content : html`<div class="landing">
               ${this.menu.filter((mi) => mi !== "divider").map((mi, index) => mi.kind === "top" && !mi.disabled?.() ? html`
                         <mwc-icon-button
                           class="landing_icon"

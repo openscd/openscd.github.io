@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">93.54% </span>
+                <span class="strong">93.65% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>362/387</span>
+                <span class='fraction'>369/394</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>47/47</span>
+                <span class='fraction'>46/46</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">94.44% </span>
+                <span class="strong">94.11% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>17/18</span>
+                <span class='fraction'>16/17</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">93.54% </span>
+                <span class="strong">93.65% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>362/387</span>
+                <span class='fraction'>369/394</span>
             </div>
         
             
@@ -450,7 +450,15 @@
 <a name='L385'></a><a href='#L385'>385</a>
 <a name='L386'></a><a href='#L386'>386</a>
 <a name='L387'></a><a href='#L387'>387</a>
-<a name='L388'></a><a href='#L388'>388</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">9x</span>
+<a name='L388'></a><a href='#L388'>388</a>
+<a name='L389'></a><a href='#L389'>389</a>
+<a name='L390'></a><a href='#L390'>390</a>
+<a name='L391'></a><a href='#L391'>391</a>
+<a name='L392'></a><a href='#L392'>392</a>
+<a name='L393'></a><a href='#L393'>393</a>
+<a name='L394'></a><a href='#L394'>394</a>
+<a name='L395'></a><a href='#L395'>395</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">9x</span>
+<span class="cline-any cline-yes">9x</span>
 <span class="cline-any cline-yes">9x</span>
 <span class="cline-any cline-yes">9x</span>
 <span class="cline-any cline-yes">9x</span>
@@ -541,6 +549,9 @@
 <span class="cline-any cline-yes">9x</span>
 <span class="cline-any cline-yes">9x</span>
 <span class="cline-any cline-yes">9x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -612,6 +623,8 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">9x</span>
 <span class="cline-any cline-yes">9x</span>
 <span class="cline-any cline-yes">9x</span>
@@ -665,6 +678,7 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -858,6 +872,7 @@ import './WizardDivider.js';
 import { WizardDialog } from './wizard-dialog.js';
 &nbsp;
 import { iec6185072, iec6185073, iec6185074, iec6185081 } from "./validators/templates/foundation.js";
+import { initializeNsdoc, Nsdoc } from './foundation/nsdoc.js';
 &nbsp;
 export type Settings = {
   language: Language;
@@ -930,6 +945,9 @@ export function Setting&lt;TBase extends LitElementConstructor&gt;(Base: TBase) 
         'IEC 61850-8-1': this.getSetting('IEC 61850-8-1')
       };
     }
+    /** Object containing all *.nsdoc files and a function extracting element's label form them*/
+    @property({ attribute: false })
+    nsdoc: Nsdoc = initializeNsdoc();
 &nbsp;
     /**
      * Get the versions of the current OpenSCD NSD files.
@@ -999,6 +1017,8 @@ export function Setting&lt;TBase extends LitElementConstructor&gt;(Base: TBase) 
         ?.querySelector&lt;WizardDialog&gt;('wizard-dialog')
 <span class="cstat-no" title="statement not covered" >        ?.requestUpdate();</span>
       this.requestUpdate();
+&nbsp;
+      this.nsdoc = initializeNsdoc(); // update nsdoc
     }
 &nbsp;
     private onClosing(ae: CustomEvent&lt;{ action: string } | null&gt;): void {
@@ -1092,6 +1112,7 @@ export function Setting&lt;TBase extends LitElementConstructor&gt;(Base: TBase) 
       }
 &nbsp;
       this.setSetting(id as keyof Settings, event.detail.nsdoc);
+      this.nsdoc = initializeNsdoc(); // update nsdoc
     }
 &nbsp;
     /**
@@ -1231,7 +1252,7 @@ export function Setting&lt;TBase extends LitElementConstructor&gt;(Base: TBase) 
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener">istanbul</a>
-                at Mon May 30 2022 09:55:00 GMT+0000 (Coordinated Universal Time)
+                at Tue May 31 2022 15:05:26 GMT+0000 (Coordinated Universal Time)
             </div>
         </div>
         <script src="../prettify.js"></script>

@@ -21,6 +21,7 @@ import {ifImplemented, newLogEvent} from "./foundation.js";
 import {languages, loader} from "./translations/loader.js";
 import "./WizardDivider.js";
 import {iec6185072, iec6185073, iec6185074, iec6185081} from "./validators/templates/foundation.js";
+import {initializeNsdoc} from "./foundation/nsdoc.js";
 export const defaults = {
   language: "en",
   theme: "light",
@@ -40,6 +41,13 @@ export function newLoadNsdocEvent(nsdoc, filename) {
 }
 export function Setting(Base) {
   class SettingElement extends Base {
+    constructor(...params) {
+      super(...params);
+      this.nsdoc = initializeNsdoc();
+      registerTranslateConfig({loader, empty: (key) => key});
+      use(this.settings.language);
+      this.addEventListener("load-nsdoc", this.onLoadNsdoc);
+    }
     get settings() {
       return {
         language: this.getSetting("language"),
@@ -90,6 +98,7 @@ export function Setting(Base) {
       localStorage.removeItem(setting);
       this.shadowRoot?.querySelector("wizard-dialog")?.requestUpdate();
       this.requestUpdate();
+      this.nsdoc = initializeNsdoc();
     }
     onClosing(ae) {
       if (ae.detail?.action === "reset") {
@@ -158,6 +167,7 @@ export function Setting(Base) {
         return;
       }
       this.setSetting(id, event.detail.nsdoc);
+      this.nsdoc = initializeNsdoc();
     }
     isEqual(versionA, versionB) {
       return versionA.version == versionB.version && versionA.revision == versionB.revision && versionA.release == versionB.release;
@@ -184,12 +194,6 @@ export function Setting(Base) {
     }
     parseToXmlObject(text) {
       return new DOMParser().parseFromString(text, "application/xml");
-    }
-    constructor(...params) {
-      super(...params);
-      registerTranslateConfig({loader, empty: (key) => key});
-      use(this.settings.language);
-      this.addEventListener("load-nsdoc", this.onLoadNsdoc);
     }
     render() {
       return html`${ifImplemented(super.render())}
@@ -266,6 +270,9 @@ export function Setting(Base) {
   __decorate([
     property()
   ], SettingElement.prototype, "settings", 1);
+  __decorate([
+    property({attribute: false})
+  ], SettingElement.prototype, "nsdoc", 2);
   __decorate([
     query("#settings")
   ], SettingElement.prototype, "settingsUI", 2);

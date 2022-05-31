@@ -1,6 +1,6 @@
 import {iec6185072, iec6185073, iec6185074, iec6185081} from "../validators/templates/foundation.js";
 const [nsd72, nsd73, nsd74, nsd81] = await Promise.all([iec6185072, iec6185073, iec6185074, iec6185081]);
-export async function initializeNsdoc() {
+export function initializeNsdoc() {
   const [nsdoc72, nsdoc73, nsdoc74, nsdoc81] = [
     localStorage.getItem("IEC 61850-7-2") ? new DOMParser().parseFromString(localStorage.getItem("IEC 61850-7-2"), "application/xml") : void 0,
     localStorage.getItem("IEC 61850-7-3") ? new DOMParser().parseFromString(localStorage.getItem("IEC 61850-7-3"), "application/xml") : void 0,

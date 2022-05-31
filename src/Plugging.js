@@ -9,10 +9,8 @@ var __decorate = (decorators, target, key, kind) => {
     __defProp(target, key, result);
   return result;
 };
-import {html as litHtml, query} from "../_snowpack/pkg/lit-element.js";
+import {html, query} from "../_snowpack/pkg/lit-element.js";
 import {translate} from "../_snowpack/pkg/lit-translate.js";
-import wrapHtml from "../_snowpack/pkg/carehtml.js";
-const html = wrapHtml(litHtml);
 import "../_snowpack/pkg/@material/mwc-button.js";
 import "../_snowpack/pkg/@material/mwc-dialog.js";
 import "../_snowpack/pkg/@material/mwc-formfield.js";
@@ -26,8 +24,43 @@ import "../_snowpack/pkg/@material/mwc-switch.js";
 import "../_snowpack/pkg/@material/mwc-textfield.js";
 import {ifImplemented} from "./foundation.js";
 import {officialPlugins} from "../public/js/plugins.js";
-import {initializeNsdoc} from "./foundation/nsdoc.js";
+const pluginTags = new Map();
+function pluginTag(uri) {
+  if (!pluginTags.has(uri)) {
+    let h1 = 3735928559, h2 = 1103547991;
+    for (let i = 0, ch; i < uri.length; i++) {
+      ch = uri.charCodeAt(i);
+      h1 = Math.imul(h1 ^ ch, 2654435761);
+      h2 = Math.imul(h2 ^ ch, 1597334677);
+    }
+    h1 = Math.imul(h1 ^ h1 >>> 16, 2246822507) ^ Math.imul(h2 ^ h2 >>> 13, 3266489909);
+    h2 = Math.imul(h2 ^ h2 >>> 16, 2246822507) ^ Math.imul(h1 ^ h1 >>> 13, 3266489909);
+    pluginTags.set(uri, "oscd-plugin" + ((h2 >>> 0).toString(16).padStart(8, "0") + (h1 >>> 0).toString(16).padStart(8, "0")));
+  }
+  return pluginTags.get(uri);
+}
+function staticTagHtml(oldStrings, ...oldArgs) {
+  const args = [...oldArgs];
+  const firstArg = args.shift();
+  const lastArg = args.pop();
+  if (firstArg !== lastArg)
+    throw new Error(`Opening tag <${firstArg}> does not match closing tag </${lastArg}>.`);
+  const strings = [...oldStrings];
+  const firstString = strings.shift();
+  const secondString = strings.shift();
+  const lastString = strings.pop();
+  const penultimateString = strings.pop();
+  strings.unshift(`${firstString}${firstArg}${secondString}`);
+  strings.push(`${penultimateString}${lastArg}${lastString}`);
+  return html(strings, ...args);
+}
 const menuPosition = ["top", "middle", "bottom"];
+function withoutContent(plugin) {
+  return {...plugin, content: void 0};
+}
+function storePlugins(plugins) {
+  localStorage.setItem("plugins", JSON.stringify(plugins.map(withoutContent)));
+}
 export const pluginIcons = {
   editor: "tab",
   menu: "play_circle",
@@ -37,13 +70,13 @@ export const pluginIcons = {
   bottom: "play_circle"
 };
 function resetPlugins() {
-  localStorage.setItem("plugins", JSON.stringify(officialPlugins.map((plugin) => {
+  storePlugins(officialPlugins.map((plugin) => {
     return {
       src: plugin.src,
       installed: plugin.default ?? false,
       official: true
     };
-  })));
+  }));
 }
 const menuOrder = [
   "editor",
@@ -63,7 +96,7 @@ function compareNeedsDoc(a, b) {
     return 0;
   return a.requireDoc ? 1 : -1;
 }
-const loadedPlugins = new Map();
+const loadedPlugins = new Set();
 export function Plugging(Base) {
   class PluggingElement extends Base {
     get editors() {
@@ -100,9 +133,9 @@ export function Plugging(Base) {
     }
     setPlugins(indices) {
       const newPlugins = this.plugins.map((plugin, index) => {
-        return {...plugin, installed: indices.has(index), content: void 0};
+        return {...plugin, installed: indices.has(index)};
       });
-      localStorage.setItem("plugins", JSON.stringify(newPlugins));
+      storePlugins(newPlugins);
       this.requestUpdate();
     }
     updatePlugins() {
@@ -118,29 +151,30 @@ export function Plugging(Base) {
       const oldOfficial = officialStored.filter((p) => !officialPlugins.find((o) => p.src === o.src));
       const newPlugins = stored.filter((p) => !oldOfficial.find((o) => p.src === o.src));
       newOfficial.map((p) => newPlugins.push(p));
-      localStorage.setItem("plugins", JSON.stringify(newPlugins));
+      storePlugins(newPlugins);
     }
     addExternalPlugin(plugin) {
       if (this.storedPlugins.some((p) => p.src === plugin.src))
         return;
       const newPlugins = this.storedPlugins;
       newPlugins.push(plugin);
-      localStorage.setItem("plugins", JSON.stringify(newPlugins));
+      storePlugins(newPlugins);
     }
     addContent(plugin) {
+      const tag = pluginTag(plugin.src);
+      if (!loadedPlugins.has(tag)) {
+        loadedPlugins.add(tag);
+        import(plugin.src).then((mod) => customElements.define(tag, mod.default));
+      }
       return {
         ...plugin,
-        content: async () => {
-          if (!loadedPlugins.has(plugin.src))
-            loadedPlugins.set(plugin.src, await import(plugin.src).then((mod) => mod.default));
-          return html`<${loadedPlugins.get(plugin.src)}
+        content: staticTagHtml`<${tag}
             .doc=${this.doc}
             .docName=${this.docName}
             .docId=${this.docId}
             .pluginId=${plugin.src}
-            .nsdoc=${await initializeNsdoc()}
-          ></${loadedPlugins.get(plugin.src)}>`;
-        }
+            .nsdoc=${this.nsdoc}
+          ></${tag}>`
       };
     }
     handleAddPlugin() {
