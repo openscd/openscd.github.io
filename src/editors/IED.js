@@ -9,7 +9,13 @@ var __decorate = (decorators, target, key, kind) => {
     __defProp(target, key, result);
   return result;
 };
-import {css, html, LitElement, property, state} from "../../_snowpack/pkg/lit-element.js";
+import {
+  css,
+  html,
+  LitElement,
+  property,
+  state
+} from "../../_snowpack/pkg/lit-element.js";
 import "../../_snowpack/pkg/@material/mwc-fab.js";
 import "../../_snowpack/pkg/@material/mwc-select.js";
 import "../../_snowpack/pkg/@material/mwc-list/mwc-list-item.js";
@@ -17,7 +23,11 @@ import "./ied/ied-container.js";
 import "./ied/element-path.js";
 import "./substation/zeroline-pane.js";
 import {translate} from "../../_snowpack/pkg/lit-translate.js";
-import {compareNames, getDescriptionAttribute, getNameAttribute} from "../foundation.js";
+import {
+  compareNames,
+  getDescriptionAttribute,
+  getNameAttribute
+} from "../foundation.js";
 let iedEditorSelectedIed;
 function onOpenDocResetSelectedIed() {
   iedEditorSelectedIed = void 0;
@@ -46,34 +56,33 @@ export default class IedPlugin extends LitElement {
   render() {
     const iedList = this.alphabeticOrderedIeds;
     if (iedList.length > 0) {
-      return html`
-        <section>
-          <div class="header">
-            <mwc-select
-              class="iedSelect"
-              label="${translate("iededitor.searchHelper")}"
-              @selected=${this.onSelect}>
-              ${iedList.map((ied) => html`
-                    <mwc-list-item
-                      ?selected=${ied == this.selectedIed}
-                      value="${getNameAttribute(ied)}"
-                    >${getNameAttribute(ied)} ${ied.hasAttribute("desc") ? translate("iededitor.searchHelperDesc", {
+      return html`<section>
+        <div class="header">
+          <mwc-select
+            class="iedSelect"
+            label="${translate("iededitor.searchHelper")}"
+            @selected=${this.onSelect}
+          >
+            ${iedList.map((ied) => html` <mwc-list-item
+                  ?selected=${ied == this.selectedIed}
+                  value="${getNameAttribute(ied)}"
+                  >${getNameAttribute(ied)}
+                  ${getDescriptionAttribute(ied) ? translate("iededitor.searchHelperDesc", {
         description: getDescriptionAttribute(ied)
       }) : ""}
-                    </mwc-list-item>`)}
-            </mwc-select>
-            <element-path class="elementPath"></element-path>
-          </div>
-          <ied-container
-            .element=${this.selectedIed}
-            .nsdoc=${this.nsdoc}
-          ></ied-container>
-        </section>`;
+                </mwc-list-item>`)}
+          </mwc-select>
+          <element-path class="elementPath"></element-path>
+        </div>
+        <ied-container
+          .element=${this.selectedIed}
+          .nsdoc=${this.nsdoc}
+        ></ied-container>
+      </section>`;
     }
-    return html`
-          <h1>
-            <span style="color: var(--base1)">${translate("iededitor.missing")}</span>
-          </h1>`;
+    return html`<h1>
+      <span style="color: var(--base1)">${translate("iededitor.missing")}</span>
+    </h1>`;
   }
 }
 IedPlugin.styles = css`
