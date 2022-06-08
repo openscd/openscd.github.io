@@ -208,7 +208,7 @@ export function Hosting(Base) {
           </mwc-top-app-bar-fixed>
         </mwc-drawer>
 
-        ${this.doc ? this.editors[this.activeTab].content : html`<div class="landing">
+        ${this.doc && this.editors[this.activeTab]?.content ? this.editors[this.activeTab].content : html`<div class="landing">
               ${this.menu.filter((mi) => mi !== "divider").map((mi, index) => mi.kind === "top" && !mi.disabled?.() ? html`
                         <mwc-icon-button
                           class="landing_icon"

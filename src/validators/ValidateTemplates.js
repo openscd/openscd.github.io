@@ -12,23 +12,9 @@ var __decorate = (decorators, target, key, kind) => {
 import {LitElement, property} from "../../_snowpack/pkg/lit-element.js";
 import {get} from "../../_snowpack/pkg/lit-translate.js";
 import {
-  newIssueEvent,
-  newLogEvent
+  newIssueEvent
 } from "../foundation.js";
 import {validateChildren} from "./templates/foundation.js";
-export function dispatch(detail, validatorId) {
-  const kind = detail.kind;
-  const title = detail.title;
-  const message = detail.message;
-  if (kind)
-    document.querySelector("open-scd")?.dispatchEvent(newLogEvent(detail));
-  else
-    document.querySelector("open-scd")?.dispatchEvent(newIssueEvent({
-      validatorId,
-      title,
-      message
-    }));
-}
 export default class ValidateTemplates extends LitElement {
   async validate() {
     const promises = [];
@@ -48,12 +34,15 @@ export default class ValidateTemplates extends LitElement {
     const data = this.doc.querySelector("DataTypeTemplates");
     if (!data)
       return;
-    const issuesTemaplte = await validateChildren(data);
-    if (issuesTemaplte.length === 0)
-      issuesTemaplte.push({
+    const templateIssues = await validateChildren(data);
+    if (templateIssues.length === 0)
+      templateIssues.push({
         title: get("diag.zeroissues")
       });
-    issuesTemaplte.forEach((error) => dispatch(error, this.pluginId));
+    templateIssues.forEach((error) => this.dispatchEvent(newIssueEvent({
+      ...error,
+      validatorId: this.pluginId
+    })));
   }
 }
 __decorate([

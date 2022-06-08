@@ -129,7 +129,7 @@ export function Plugging(Base) {
       }).sort(compareNeedsDoc).sort(menuCompare);
     }
     get storedPlugins() {
-      return JSON.parse(localStorage.getItem("plugins") ?? "[]", (key, value) => value.src ? this.addContent(value) : value);
+      return JSON.parse(localStorage.getItem("plugins") ?? "[]", (key, value) => value.src && value.installed ? this.addContent(value) : value);
     }
     setPlugins(indices) {
       const newPlugins = this.plugins.map((plugin, index) => {

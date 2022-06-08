@@ -9,7 +9,7 @@ var __decorate = (decorators, target, key, kind) => {
     __defProp(target, key, result);
   return result;
 };
-import {LitElement, property} from "../_snowpack/pkg/lit-element.js";
+import {property} from "../_snowpack/pkg/lit-element.js";
 import {get} from "../_snowpack/pkg/lit-translate.js";
 import {
   getReference,
@@ -270,9 +270,11 @@ export function Editing(Base) {
         }));
       }
       this.dispatchEvent(newValidateEvent());
-      for (const element of event.composedPath())
-        if (element instanceof LitElement)
-          element.requestUpdate();
+      if (!this.doc)
+        return;
+      const newDoc = document.implementation.createDocument(this.doc.lookupNamespaceURI(""), this.doc.documentElement.tagName, this.doc.doctype);
+      newDoc.documentElement.replaceWith(this.doc.documentElement);
+      this.doc = newDoc;
     }
     async onOpenDoc(event) {
       this.doc = event.detail.doc;
