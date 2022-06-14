@@ -5,8 +5,7 @@ import "../../../_snowpack/pkg/@material/mwc-textfield.js";
 import {
   getDescriptionAttribute,
   getInstanceAttribute,
-  getNameAttribute,
-  newWizardEvent
+  getNameAttribute
 } from "../../foundation.js";
 import {
   findDOTypeElement,
@@ -28,7 +27,8 @@ function renderFields(element, instanceElement, ancestors, nsdoc) {
         cols="50"
         id="nsdocDescription"
         readonly
-        disabled>
+        disabled
+      >
       </mwc-textarea>
     `,
     html`
@@ -37,7 +37,8 @@ function renderFields(element, instanceElement, ancestors, nsdoc) {
         value="${getNameAttribute(element) ?? "-"}"
         id="doName"
         readonly
-        disabled>
+        disabled
+      >
       </mwc-textfield>
     `,
     html`
@@ -46,7 +47,8 @@ function renderFields(element, instanceElement, ancestors, nsdoc) {
         value="${instanceElement ? getDescriptionAttribute(instanceElement) ?? "-" : "-"}"
         id="doiDescription"
         readonly
-        disabled>
+        disabled
+      >
       </mwc-textfield>
     `,
     html`
@@ -55,19 +57,19 @@ function renderFields(element, instanceElement, ancestors, nsdoc) {
         value="${doTypeElement?.getAttribute("cdc") ?? "-"}"
         id="doCdc"
         readonly
-        disabled>
+        disabled
+      >
       </mwc-textfield>
     `,
-    html`
-      <br/>
-    `,
+    html` <br /> `,
     html`
       <mwc-textfield
         label="${translate("iededitor.wizard.lnPrefix")}"
         value="${logicalNodeElement ? logicalNodeElement.getAttribute("prefix") ?? "-" : "-"}"
         id="ln"
         readonly
-        disabled>
+        disabled
+      >
       </mwc-textfield>
     `,
     html`
@@ -76,7 +78,8 @@ function renderFields(element, instanceElement, ancestors, nsdoc) {
         value="${logicalNodeElement ? nsdoc.getDataDescription(logicalNodeElement, ancestors).label : "-"}"
         id="lnPrefix"
         readonly
-        disabled>
+        disabled
+      >
       </mwc-textfield>
     `,
     html`
@@ -85,19 +88,19 @@ function renderFields(element, instanceElement, ancestors, nsdoc) {
         value="${logicalNodeElement ? getInstanceAttribute(logicalNodeElement) ?? "-" : "-"}"
         id="lnInst"
         readonly
-        disabled>
+        disabled
+      >
       </mwc-textfield>
     `,
-    html`
-      <br/>
-    `,
+    html` <br /> `,
     html`
       <mwc-textfield
         label="${translate("iededitor.wizard.lDevice")}"
         value="${lDeviceElement ? getNameAttribute(lDeviceElement) ?? getInstanceAttribute(lDeviceElement) ?? "-" : "-"}"
         id="lDevice"
         readonly
-        disabled>
+        disabled
+      >
       </mwc-textfield>
     `,
     html`
@@ -106,7 +109,8 @@ function renderFields(element, instanceElement, ancestors, nsdoc) {
         value="${accessPointElement ? getNameAttribute(accessPointElement) ?? "-" : "-"}"
         id="accessPoint"
         readonly
-        disabled>
+        disabled
+      >
       </mwc-textfield>
     `,
     html`
@@ -115,29 +119,17 @@ function renderFields(element, instanceElement, ancestors, nsdoc) {
         value="${iedElement ? getNameAttribute(iedElement) ?? "-" : "-"}"
         id="ied"
         readonly
-        disabled>
+        disabled
+      >
       </mwc-textfield>
     `
   ];
 }
 export function createDoInfoWizard(element, instanceElement, ancestors, nsdoc) {
-  function close() {
-    return function() {
-      document.querySelector("open-scd").dispatchEvent(newWizardEvent());
-      return [];
-    };
-  }
   return [
     {
       title: get("iededitor.wizard.doTitle"),
-      secondary: {
-        icon: "",
-        label: get("close"),
-        action: close()
-      },
-      content: [
-        ...renderFields(element, instanceElement, ancestors, nsdoc)
-      ]
+      content: [...renderFields(element, instanceElement, ancestors, nsdoc)]
     }
   ];
 }

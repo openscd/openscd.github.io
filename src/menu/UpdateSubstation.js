@@ -60,7 +60,7 @@ export default class UpdateSubstationPlugin extends LitElement {
     if (file)
       file.text().then((text) => {
         const doc = new DOMParser().parseFromString(text, "application/xml");
-        document.querySelector("open-scd").dispatchEvent(newWizardEvent(mergeWizard(this.doc.documentElement, doc.documentElement, {
+        this.dispatchEvent(newWizardEvent(mergeWizard(this.doc.documentElement, doc.documentElement, {
           title: get("updatesubstation.title"),
           selected: (diff) => diff.theirs instanceof Element ? diff.theirs.tagName === "LNode" ? this.doc.querySelector(selector("LNode", identity(diff.theirs))) === null && isValidReference(doc, identity(diff.theirs)) : diff.theirs.tagName === "Substation" || !tags["SCL"].children.includes(diff.theirs.tagName) : diff.theirs !== null,
           disabled: (diff) => diff.theirs instanceof Element && diff.theirs.tagName === "LNode" && (this.doc.querySelector(selector("LNode", identity(diff.theirs))) !== null || !isValidReference(doc, identity(diff.theirs))),

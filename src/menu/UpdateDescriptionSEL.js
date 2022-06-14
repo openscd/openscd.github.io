@@ -140,7 +140,7 @@ export default class UpdateDescriptionSel extends LitElement {
   processSignalList(csvString) {
     const signalList = parseCsv(csvString, getGuessDelimiter(csvString));
     const items = Array.from(this.doc.querySelectorAll("IED")).filter((ied) => isPublic(ied)).flatMap((ied) => addDescriptionToSEL(ied, signalList));
-    document.querySelector("open-scd")?.dispatchEvent(newWizardEvent(createLogWizard(this.doc, items)));
+    this.dispatchEvent(newWizardEvent(createLogWizard(this.doc, items)));
   }
   async onFileInput(e) {
     const file = e.target?.files?.item(0) ?? false;

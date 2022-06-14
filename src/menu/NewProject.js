@@ -13,8 +13,8 @@ export default class NewProjectPlugin extends LitElement {
   createNewProject(inputs, wizard) {
     const docName = inputs[0].value?.match(/\.s[sc]d$/i) ? inputs[0].value : inputs[0].value + ".scd";
     const version = wizard.shadowRoot.querySelector("mwc-list").selected.value;
-    document.querySelector("open-scd")?.dispatchEvent(newLogEvent({kind: "reset"}));
-    document.querySelector("open-scd")?.dispatchEvent(newOpenDocEvent(newEmptySCD(docName.slice(0, -4), version), docName));
+    this.dispatchEvent(newLogEvent({kind: "reset"}));
+    this.dispatchEvent(newOpenDocEvent(newEmptySCD(docName.slice(0, -4), version), docName));
     return [{actions: [], title: "", derived: true}];
   }
   newProjectWizard() {
@@ -50,6 +50,6 @@ export default class NewProjectPlugin extends LitElement {
     ];
   }
   async run() {
-    document.querySelector("open-scd")?.dispatchEvent(newWizardEvent(this.newProjectWizard()));
+    this.dispatchEvent(newWizardEvent(this.newProjectWizard()));
   }
 }

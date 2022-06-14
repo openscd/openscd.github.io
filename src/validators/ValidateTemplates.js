@@ -12,10 +12,24 @@ var __decorate = (decorators, target, key, kind) => {
 import {LitElement, property} from "../../_snowpack/pkg/lit-element.js";
 import {get} from "../../_snowpack/pkg/lit-translate.js";
 import {
-  newIssueEvent
+  newIssueEvent,
+  newLogEvent
 } from "../foundation.js";
 import {validateChildren} from "./templates/foundation.js";
 export default class ValidateTemplates extends LitElement {
+  dispatch(detail) {
+    const kind = detail.kind;
+    const title = detail.title;
+    const message = detail.message;
+    if (kind)
+      this.dispatchEvent(newLogEvent(detail));
+    else
+      this.dispatchEvent(newIssueEvent({
+        validatorId: this.pluginId,
+        title,
+        message
+      }));
+  }
   async validate() {
     const promises = [];
     const [version, revision, release] = [
@@ -24,7 +38,7 @@ export default class ValidateTemplates extends LitElement {
       this.doc.documentElement.getAttribute("release") ?? ""
     ];
     if (!(version === "2007" && revision === "B" && Number(release) > 3)) {
-      document.querySelector("open-scd")?.dispatchEvent(newIssueEvent({
+      this.dispatchEvent(newIssueEvent({
         validatorId: this.pluginId,
         title: get("diag.missingnsd"),
         message: ""

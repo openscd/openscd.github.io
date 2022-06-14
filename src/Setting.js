@@ -17,10 +17,18 @@ import "../_snowpack/pkg/@material/mwc-formfield.js";
 import "../_snowpack/pkg/@material/mwc-list/mwc-list-item.js";
 import "../_snowpack/pkg/@material/mwc-select.js";
 import "../_snowpack/pkg/@material/mwc-switch.js";
-import {ifImplemented, newLogEvent} from "./foundation.js";
+import {
+  ifImplemented,
+  newLogEvent
+} from "./foundation.js";
 import {languages, loader} from "./translations/loader.js";
 import "./WizardDivider.js";
-import {iec6185072, iec6185073, iec6185074, iec6185081} from "./validators/templates/foundation.js";
+import {
+  iec6185072,
+  iec6185073,
+  iec6185074,
+  iec6185081
+} from "./validators/templates/foundation.js";
 import {initializeNsdoc} from "./foundation/nsdoc.js";
 export const defaults = {
   language: "en",
@@ -61,8 +69,18 @@ export function Setting(Base) {
       };
     }
     async nsdVersions() {
-      const [nsd72, nsd73, nsd74, nsd81] = await Promise.all([iec6185072, iec6185073, iec6185074, iec6185081]);
-      const [nsd72Ns, nsd73Ns, nsd74Ns, nsd81Ns] = [nsd72.querySelector("NS"), nsd73.querySelector("NS"), nsd74.querySelector("NS"), nsd81.querySelector("ServiceNS")];
+      const [nsd72, nsd73, nsd74, nsd81] = await Promise.all([
+        iec6185072,
+        iec6185073,
+        iec6185074,
+        iec6185081
+      ]);
+      const [nsd72Ns, nsd73Ns, nsd74Ns, nsd81Ns] = [
+        nsd72.querySelector("NS"),
+        nsd73.querySelector("NS"),
+        nsd74.querySelector("NS"),
+        nsd81.querySelector("ServiceNS")
+      ];
       return {
         "IEC 61850-7-2": {
           version: nsd72Ns?.getAttribute("version") ?? void 0,
@@ -119,14 +137,23 @@ export function Setting(Base) {
     }
     renderFileSelect() {
       return html`
-        <input id="nsdoc-file" accept=".nsdoc" type="file" hidden required multiple
-          @change=${(evt) => this.uploadNsdocFile(evt)}}>
-        <mwc-button label="${translate("settings.selectFileButton")}"
-                    id="selectFileButton"
-                    @click=${() => {
+        <input
+          id="nsdoc-file"
+          accept=".nsdoc"
+          type="file"
+          hidden
+          required
+          multiple
+          @change="${(evt) => this.uploadNsdocFile(evt)}}"
+        />
+        <mwc-button
+          label="${translate("settings.selectFileButton")}"
+          id="selectFileButton"
+          @click=${() => {
         const input = this.shadowRoot.querySelector("#nsdoc-file");
         input?.click();
-      }}>
+      }}
+        >
         </mwc-button>
       `;
     }
@@ -136,7 +163,7 @@ export function Setting(Base) {
         return;
       for (const file of files) {
         const text = await file.text();
-        document.querySelector("open-scd").dispatchEvent(newLoadNsdocEvent(text, file.name));
+        this.dispatchEvent(newLoadNsdocEvent(text, file.name));
       }
       this.nsdocFileUI.value = "";
       this.requestUpdate();
@@ -145,9 +172,12 @@ export function Setting(Base) {
       const nsdocElement = this.parseToXmlObject(event.detail.nsdoc).querySelector("NSDoc");
       const id = nsdocElement?.getAttribute("id");
       if (!id) {
-        document.querySelector("open-scd").dispatchEvent(newLogEvent({kind: "error", title: get("settings.invalidFileNoIdFound", {
-          filename: event.detail.filename
-        })}));
+        this.dispatchEvent(newLogEvent({
+          kind: "error",
+          title: get("settings.invalidFileNoIdFound", {
+            filename: event.detail.filename
+          })
+        }));
         return;
       }
       const nsdVersions = await this.nsdVersions();
@@ -158,12 +188,15 @@ export function Setting(Base) {
         release: nsdocElement.getAttribute("release") ?? ""
       };
       if (!this.isEqual(nsdVersion, nsdocVersion)) {
-        document.querySelector("open-scd").dispatchEvent(newLogEvent({kind: "error", title: get("settings.invalidNsdocVersion", {
-          id,
-          filename: event.detail.filename,
-          nsdVersion: `${nsdVersion.version}${nsdVersion.revision}${nsdVersion.release}`,
-          nsdocVersion: `${nsdocVersion.version}${nsdocVersion.revision}${nsdocVersion.release}`
-        })}));
+        this.dispatchEvent(newLogEvent({
+          kind: "error",
+          title: get("settings.invalidNsdocVersion", {
+            id,
+            filename: event.detail.filename,
+            nsdVersion: `${nsdVersion.version}${nsdVersion.revision}${nsdVersion.release}`,
+            nsdocVersion: `${nsdocVersion.version}${nsdocVersion.revision}${nsdocVersion.release}`
+          })
+        }));
         return;
       }
       this.setSetting(id, event.detail.nsdoc);
@@ -183,13 +216,26 @@ export function Setting(Base) {
         nsdRevision = nsdoc?.getAttribute("revision");
         nsdRelease = nsdoc?.getAttribute("release");
       }
-      return html`<mwc-list-item id=${key} graphic="avatar" hasMeta twoline .disabled=${!nsdSetting}>
+      return html`<mwc-list-item
+        id=${key}
+        graphic="avatar"
+        hasMeta
+        twoline
+        .disabled=${!nsdSetting}
+      >
         <span>${key}</span>
-        ${nsdSetting ? html`<span slot="secondary">${nsdVersion}${nsdRevision}${nsdRelease}</span>` : html``}
+        ${nsdSetting ? html`<span slot="secondary"
+              >${nsdVersion}${nsdRevision}${nsdRelease}</span
+            >` : html``}
         ${nsdSetting ? html`<mwc-icon slot="graphic" style="color:green;">done</mwc-icon>` : html`<mwc-icon slot="graphic" style="color:red;">close</mwc-icon>`}
-        ${nsdSetting ? html`<mwc-icon id="deleteNsdocItem" slot="meta" @click=${() => {
+        ${nsdSetting ? html`<mwc-icon
+              id="deleteNsdocItem"
+              slot="meta"
+              @click=${() => {
         this.removeSetting(key);
-      }}>delete</mwc-icon>` : html``}
+      }}
+              >delete</mwc-icon
+            >` : html``}
       </mwc-list-item>`;
     }
     parseToXmlObject(text) {

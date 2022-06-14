@@ -274,7 +274,7 @@ export let WizardDialog = class extends LitElement {
           ></mwc-button>` : html`<mwc-button
             slot="secondaryAction"
             dialogAction="close"
-            label="${translate("cancel")}"
+            label="${translate("close")}"
             style="--mdc-theme-primary: var(--mdc-theme-error)"
           ></mwc-button>`}
       ${this.code && page.element ? html`<mwc-button

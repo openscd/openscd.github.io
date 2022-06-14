@@ -18,7 +18,7 @@ export default class MergePlugin extends LitElement {
     if (file)
       file.text().then((text) => {
         const doc = new DOMParser().parseFromString(text, "application/xml");
-        document.querySelector("open-scd").dispatchEvent(newWizardEvent(mergeWizard(this.doc.documentElement, doc.documentElement)));
+        this.dispatchEvent(newWizardEvent(mergeWizard(this.doc.documentElement, doc.documentElement)));
       });
     this.pluginFileUI.onchange = null;
   }
