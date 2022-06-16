@@ -15,7 +15,7 @@ import {updateNamingAttributeWithReferencesAction} from "./foundation/actions.js
 import {deleteReferences} from "./foundation/references.js";
 import {emptyInputsDeleteActions} from "../foundation/ied.js";
 const iedNamePattern = "[A-Za-z][0-9A-Za-z_]{0,2}|[A-Za-z][0-9A-Za-z_]{4,63}|[A-MO-Za-z][0-9A-Za-z_]{3}|N[0-9A-Za-np-z_][0-9A-Za-z_]{2}|No[0-9A-Za-mo-z_][0-9A-Za-z_]|Non[0-9A-Za-df-z_]";
-export function renderIEDWizard(name, desc, reservedNames) {
+export function renderIEDWizard(name, desc, type, manufacturer, configVersion, originalSclVersion, engRight, owner, reservedNames) {
   return [
     html`<wizard-textfield
       label="name"
@@ -33,6 +33,42 @@ export function renderIEDWizard(name, desc, reservedNames) {
       nullable
       helper="${translate("ied.wizard.descHelper")}"
       pattern="${patterns.normalizedString}"
+    ></wizard-textfield>`,
+    html`<wizard-textfield
+      label="type"
+      .maybeValue=${type || "-"}
+      readOnly
+      disabled
+    ></wizard-textfield>`,
+    html`<wizard-textfield
+      label="manufacturer"
+      .maybeValue=${manufacturer || "-"}
+      readOnly
+      disabled
+    ></wizard-textfield>`,
+    html`<wizard-textfield
+    label="configVersion"
+      .maybeValue=${configVersion || "-"}
+      readOnly
+      disabled
+    ></wizard-textfield>`,
+    html`<wizard-textfield
+    label="originalSclVersion"
+      .maybeValue=${originalSclVersion || "-"}
+      readOnly
+      disabled
+    ></wizard-textfield>`,
+    html`<wizard-textfield
+    label="engRight"
+      .maybeValue=${engRight || "-"}
+      readOnly
+      disabled
+    ></wizard-textfield>`,
+    html`<wizard-textfield
+    label="owner"
+      .maybeValue=${owner || "-"}
+      readOnly
+      disabled
     ></wizard-textfield>`
   ];
 }
@@ -53,6 +89,9 @@ function renderIEDReferencesWizard(references) {
       </mwc-list>
     </section>`
   ];
+}
+function validatedVersionAttribute(element) {
+  return (element.getAttribute("originalSclVersion") ?? "").concat(element.getAttribute("originalSclRevision") ?? "").concat(element.getAttribute("originalSclRelease") ?? "");
 }
 export function reservedNamesIED(currentElement) {
   return Array.from(currentElement.parentNode.querySelectorAll("IED")).filter(isPublic).map((ied) => ied.getAttribute("name") ?? "").filter((name) => name !== currentElement.getAttribute("name"));
@@ -119,7 +158,7 @@ export function editIEDWizard(element) {
         label: get("save"),
         action: updateNamingAttributeWithReferencesAction(element, "ied.action.updateied")
       },
-      content: renderIEDWizard(element.getAttribute("name"), element.getAttribute("desc"), reservedNamesIED(element))
+      content: renderIEDWizard(element.getAttribute("name"), element.getAttribute("desc"), element.getAttribute("type"), element.getAttribute("manufacturer"), element.getAttribute("configVersion"), validatedVersionAttribute(element), element.getAttribute("engRight"), element.getAttribute("owner"), reservedNamesIED(element))
     }
   ];
 }
