@@ -9,19 +9,17 @@ var __decorate = (decorators, target, key, kind) => {
     __defProp(target, key, result);
   return result;
 };
+import {css, customElement, html, query} from "../../../_snowpack/pkg/lit-element.js";
+import {nothing} from "../../../_snowpack/pkg/lit-html.js";
+import {translate} from "../../../_snowpack/pkg/lit-translate.js";
 import {
-  css,
-  customElement,
-  html,
-  property,
-  query
-} from "../../../_snowpack/pkg/lit-element.js";
+  getDescriptionAttribute,
+  getInstanceAttribute,
+  getNameAttribute
+} from "../../foundation.js";
+import {logicalDeviceIcon} from "../../icons/ied-icons.js";
 import "../../action-pane.js";
 import "./ln-container.js";
-import {nothing} from "../../../_snowpack/pkg/lit-html.js";
-import {getDescriptionAttribute, getInstanceAttribute, getNameAttribute} from "../../foundation.js";
-import {translate} from "../../../_snowpack/pkg/lit-translate.js";
-import {logicalDeviceIcon} from "../../icons/ied-icons.js";
 import {Container} from "./foundation.js";
 export let LDeviceContainer = class extends Container {
   header() {
@@ -36,22 +34,25 @@ export let LDeviceContainer = class extends Container {
     const lnElements = Array.from(this.element.querySelectorAll(":scope > LN,LN0"));
     return html`<action-pane .label="${this.header()}">
       <mwc-icon slot="icon">${logicalDeviceIcon}</mwc-icon>
-      ${lnElements.length > 0 ? html`<abbr slot="action" title="${translate("iededitor.toggleChildElements")}">
-        <mwc-icon-button-toggle
-          on
-          id="toggleButton"
-          onIcon="keyboard_arrow_up"
-          offIcon="keyboard_arrow_down"
-          @click=${() => this.requestUpdate()}
-        ></mwc-icon-button-toggle>
-      </abbr>` : nothing}
+      ${lnElements.length > 0 ? html`<abbr
+            slot="action"
+            title="${translate("iededitor.toggleChildElements")}"
+          >
+            <mwc-icon-button-toggle
+              on
+              id="toggleButton"
+              onIcon="keyboard_arrow_up"
+              offIcon="keyboard_arrow_down"
+              @click=${() => this.requestUpdate()}
+            ></mwc-icon-button-toggle>
+          </abbr>` : nothing}
       <div id="lnContainer">
         ${this.toggleButton?.on ? lnElements.map((ln) => html`<ln-container
-            .element=${ln}
-            .nsdoc=${this.nsdoc}
-            .ancestors=${[...this.ancestors, this.element]}
-          ></ln-container>
-          `) : nothing}
+                .doc=${this.doc}
+                .element=${ln}
+                .nsdoc=${this.nsdoc}
+                .ancestors=${[...this.ancestors, this.element]}
+              ></ln-container> `) : nothing}
       </div>
     </action-pane>`;
   }
@@ -68,10 +69,8 @@ LDeviceContainer.styles = css`
       #lnContainer {
         grid-template-columns: repeat(auto-fit, minmax(196px, auto));
       }
-    }`;
-__decorate([
-  property()
-], LDeviceContainer.prototype, "nsdoc", 2);
+    }
+  `;
 __decorate([
   query("#toggleButton")
 ], LDeviceContainer.prototype, "toggleButton", 2);

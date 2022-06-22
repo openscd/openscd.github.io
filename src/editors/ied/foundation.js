@@ -27,8 +27,14 @@ export class Container extends LitElement {
   }
 }
 __decorate([
+  property()
+], Container.prototype, "doc", 2);
+__decorate([
   property({attribute: false})
 ], Container.prototype, "element", 2);
+__decorate([
+  property()
+], Container.prototype, "nsdoc", 2);
 __decorate([
   property()
 ], Container.prototype, "ancestors", 2);

@@ -7,6 +7,7 @@
 | Property          | Attribute   | Type                            | Default | Description                     |
 |-------------------|-------------|---------------------------------|---------|---------------------------------|
 | `ancestors`       | `ancestors` | `Element[]`                     | []      |                                 |
+| `doc`             | `doc`       | `XMLDocument`                   |         |                                 |
 | `element`         |             | `Element`                       |         |                                 |
 | `instanceElement` |             | `Element`                       |         | The optional DAI of this (B)DA. |
 | `nsdoc`           | `nsdoc`     | `Nsdoc`                         |         |                                 |

@@ -9,12 +9,7 @@ var __decorate = (decorators, target, key, kind) => {
     __defProp(target, key, result);
   return result;
 };
-import {
-  css,
-  customElement,
-  html,
-  property
-} from "../../../_snowpack/pkg/lit-element.js";
+import {css, customElement, html} from "../../../_snowpack/pkg/lit-element.js";
 import {nothing} from "../../../_snowpack/pkg/lit-html.js";
 import {translate} from "../../../_snowpack/pkg/lit-translate.js";
 import "../../action-pane.js";
@@ -39,7 +34,9 @@ export let IedContainer = class extends Container {
     if (wizard) {
       this.dispatchEvent(newWizardEvent(() => wizard));
     } else {
-      this.dispatchEvent(newActionEvent({old: {parent: this.element.parentElement, element: this.element}}));
+      this.dispatchEvent(newActionEvent({
+        old: {parent: this.element.parentElement, element: this.element}
+      }));
     }
   }
   header() {
@@ -48,27 +45,27 @@ export let IedContainer = class extends Container {
     return html`${name}${desc ? html` &mdash; ${desc}` : nothing}`;
   }
   render() {
-    return html`
-      <action-pane .label="${this.header()}">
-        <mwc-icon slot="icon">developer_board</mwc-icon>
-        <abbr slot="action" title="${translate("remove")}">
-          <mwc-icon-button
-            icon="delete"
-            @click=${() => this.removeIED()}
-          ></mwc-icon-button>
-        </abbr>
-        <abbr slot="action" title="${translate("edit")}">
-          <mwc-icon-button
-            icon="edit"
-            @click=${() => this.openEditWizard()}
-          ></mwc-icon-button>
-        </abbr>
-        ${Array.from(this.element.querySelectorAll(":scope > AccessPoint")).map((ap) => html`<access-point-container
-            .element=${ap}
-            .nsdoc=${this.nsdoc}
-            .ancestors=${[this.element]}
-          ></access-point-container>`)}
-      </action-pane>`;
+    return html` <action-pane .label="${this.header()}">
+      <mwc-icon slot="icon">developer_board</mwc-icon>
+      <abbr slot="action" title="${translate("remove")}">
+        <mwc-icon-button
+          icon="delete"
+          @click=${() => this.removeIED()}
+        ></mwc-icon-button>
+      </abbr>
+      <abbr slot="action" title="${translate("edit")}">
+        <mwc-icon-button
+          icon="edit"
+          @click=${() => this.openEditWizard()}
+        ></mwc-icon-button>
+      </abbr>
+      ${Array.from(this.element.querySelectorAll(":scope > AccessPoint")).map((ap) => html`<access-point-container
+          .doc=${this.doc}
+          .element=${ap}
+          .nsdoc=${this.nsdoc}
+          .ancestors=${[this.element]}
+        ></access-point-container>`)}
+    </action-pane>`;
   }
 };
 IedContainer.styles = css`
@@ -77,9 +74,6 @@ IedContainer.styles = css`
       border-bottom: none;
     }
   `;
-__decorate([
-  property()
-], IedContainer.prototype, "nsdoc", 2);
 IedContainer = __decorate([
   customElement("ied-container")
 ], IedContainer);

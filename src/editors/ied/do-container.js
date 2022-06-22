@@ -16,13 +16,21 @@ import {
   query
 } from "../../../_snowpack/pkg/lit-element.js";
 import {nothing} from "../../../_snowpack/pkg/lit-html.js";
+import {translate} from "../../../_snowpack/pkg/lit-translate.js";
 import "../../../_snowpack/pkg/@material/mwc-icon-button-toggle.js";
 import "../../action-pane.js";
 import "./da-container.js";
-import {getDescriptionAttribute, getNameAttribute, newWizardEvent} from "../../foundation.js";
-import {translate} from "../../../_snowpack/pkg/lit-translate.js";
+import {
+  getDescriptionAttribute,
+  getNameAttribute,
+  newWizardEvent
+} from "../../foundation.js";
 import {createDoInfoWizard} from "./do-wizard.js";
-import {Container, findDOTypeElement, getInstanceDAElement} from "./foundation.js";
+import {
+  Container,
+  findDOTypeElement,
+  getInstanceDAElement
+} from "./foundation.js";
 export let DOContainer = class extends Container {
   header() {
     const name = getNameAttribute(this.element);
@@ -58,7 +66,10 @@ export let DOContainer = class extends Container {
   render() {
     const daElements = this.getDAElements();
     const doElements = this.getDOElements();
-    return html`<action-pane .label="${this.header()}" icon="${this.instanceElement != null ? "done" : ""}">
+    return html`<action-pane
+      .label="${this.header()}"
+      icon="${this.instanceElement != null ? "done" : ""}"
+    >
       <abbr slot="action">
         <mwc-icon-button
           title=${this.nsdoc.getDataDescription(this.element).label}
@@ -66,36 +77,37 @@ export let DOContainer = class extends Container {
           @click=${() => this.dispatchEvent(newWizardEvent(createDoInfoWizard(this.element, this.instanceElement, this.ancestors, this.nsdoc)))}
         ></mwc-icon-button>
       </abbr>
-      ${daElements.length > 0 || doElements.length > 0 ? html`<abbr slot="action" title="${translate("iededitor.toggleChildElements")}">
-          <mwc-icon-button-toggle
-            id="toggleButton"
-            onIcon="keyboard_arrow_up"
-            offIcon="keyboard_arrow_down"
-            @click=${() => this.requestUpdate()}
-          ></mwc-icon-button-toggle>
-        </abbr>` : nothing}
+      ${daElements.length > 0 || doElements.length > 0 ? html`<abbr
+            slot="action"
+            title="${translate("iededitor.toggleChildElements")}"
+          >
+            <mwc-icon-button-toggle
+              id="toggleButton"
+              onIcon="keyboard_arrow_up"
+              offIcon="keyboard_arrow_down"
+              @click=${() => this.requestUpdate()}
+            ></mwc-icon-button-toggle>
+          </abbr>` : nothing}
       ${this.toggleButton?.on ? daElements.map((daElement) => html`<da-container
-          .element=${daElement}
-          .instanceElement=${getInstanceDAElement(this.instanceElement, daElement)}
-          .nsdoc=${this.nsdoc}
-          .ancestors=${[...this.ancestors, this.element]}
-        ></da-container>`) : nothing}
+                .doc=${this.doc}
+                .element=${daElement}
+                .instanceElement=${getInstanceDAElement(this.instanceElement, daElement)}
+                .nsdoc=${this.nsdoc}
+                .ancestors=${[...this.ancestors, this.element]}
+              ></da-container>`) : nothing}
       ${this.toggleButton?.on ? doElements.map((doElement) => html`<do-container
-          .element=${doElement}
-          .instanceElement=${this.getInstanceDOElement(doElement)}
-          .nsdoc=${this.nsdoc}
-          .ancestors=${[...this.ancestors, this.element]}
-        ></do-container>`) : nothing}
-    </action-pane>
-    `;
+                .doc=${this.doc}
+                .element=${doElement}
+                .instanceElement=${this.getInstanceDOElement(doElement)}
+                .nsdoc=${this.nsdoc}
+                .ancestors=${[...this.ancestors, this.element]}
+              ></do-container>`) : nothing}
+    </action-pane> `;
   }
 };
 __decorate([
   property({attribute: false})
 ], DOContainer.prototype, "instanceElement", 2);
-__decorate([
-  property()
-], DOContainer.prototype, "nsdoc", 2);
 __decorate([
   query("#toggleButton")
 ], DOContainer.prototype, "toggleButton", 2);

@@ -127,6 +127,7 @@ export let DAContainer = class extends Container {
               </div>
             </div>`}
         ${this.toggleButton?.on && bType === "Struct" ? this.getBDAElements().map((bdaElement) => html`<da-container
+                  .doc=${this.doc}
                   .element=${bdaElement}
                   .instanceElement=${getInstanceDAElement(this.instanceElement, bdaElement)}
                   .nsdoc=${this.nsdoc}
@@ -156,9 +157,6 @@ DAContainer.styles = css`
 __decorate([
   property({attribute: false})
 ], DAContainer.prototype, "instanceElement", 2);
-__decorate([
-  property()
-], DAContainer.prototype, "nsdoc", 2);
 __decorate([
   query("#toggleButton")
 ], DAContainer.prototype, "toggleButton", 2);

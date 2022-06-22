@@ -9,19 +9,13 @@ var __decorate = (decorators, target, key, kind) => {
     __defProp(target, key, result);
   return result;
 };
-import {
-  css,
-  customElement,
-  html,
-  property,
-  query
-} from "../../../_snowpack/pkg/lit-element.js";
+import {css, customElement, html, query} from "../../../_snowpack/pkg/lit-element.js";
 import {nothing} from "../../../_snowpack/pkg/lit-html.js";
+import {until} from "../../../_snowpack/pkg/lit-html/directives/until.js";
+import {translate} from "../../../_snowpack/pkg/lit-translate.js";
+import {getInstanceAttribute, getNameAttribute} from "../../foundation.js";
 import "../../action-pane.js";
 import "./do-container.js";
-import {getInstanceAttribute, getNameAttribute} from "../../foundation.js";
-import {translate} from "../../../_snowpack/pkg/lit-translate.js";
-import {until} from "../../../_snowpack/pkg/lit-html/directives/until.js";
 import {Container} from "./foundation.js";
 export let LNContainer = class extends Container {
   header() {
@@ -29,8 +23,7 @@ export let LNContainer = class extends Container {
     const inst = getInstanceAttribute(this.element);
     const data = this.nsdoc.getDataDescription(this.element);
     return html`${prefix != null ? html`${prefix} &mdash; ` : nothing}
-            ${data.label}
-            ${inst ? html` &mdash; ${inst}` : nothing}`;
+    ${data.label} ${inst ? html` &mdash; ${inst}` : nothing}`;
   }
   getDOElements() {
     const lnType = this.element.getAttribute("lnType") ?? void 0;
@@ -47,28 +40,28 @@ export let LNContainer = class extends Container {
   render() {
     const doElements = this.getDOElements();
     return html`<action-pane .label="${until(this.header())}">
-      ${doElements.length > 0 ? html`<abbr slot="action" title="${translate("iededitor.toggleChildElements")}">
-        <mwc-icon-button-toggle
-          id="toggleButton"
-          onIcon="keyboard_arrow_up"
-          offIcon="keyboard_arrow_down"
-          @click=${() => this.requestUpdate()}
-        ></mwc-icon-button-toggle>
-      </abbr>` : nothing}
+      ${doElements.length > 0 ? html`<abbr
+            slot="action"
+            title="${translate("iededitor.toggleChildElements")}"
+          >
+            <mwc-icon-button-toggle
+              id="toggleButton"
+              onIcon="keyboard_arrow_up"
+              offIcon="keyboard_arrow_down"
+              @click=${() => this.requestUpdate()}
+            ></mwc-icon-button-toggle>
+          </abbr>` : nothing}
       ${this.toggleButton?.on ? doElements.map((dO) => html`<do-container
-          .element=${dO}
-          .instanceElement=${this.getInstanceElement(dO)}
-          .nsdoc=${this.nsdoc}
-          .ancestors=${[...this.ancestors, this.element]}
-        ></do-container>
-        `) : nothing}
+              .doc=${this.doc}
+              .element=${dO}
+              .instanceElement=${this.getInstanceElement(dO)}
+              .nsdoc=${this.nsdoc}
+              .ancestors=${[...this.ancestors, this.element]}
+            ></do-container> `) : nothing}
     </action-pane>`;
   }
 };
 LNContainer.styles = css``;
-__decorate([
-  property()
-], LNContainer.prototype, "nsdoc", 2);
 __decorate([
   query("#toggleButton")
 ], LNContainer.prototype, "toggleButton", 2);

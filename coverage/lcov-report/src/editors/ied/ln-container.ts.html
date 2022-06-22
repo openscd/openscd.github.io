@@ -25,7 +25,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>86/86</span>
+                <span class='fraction'>87/87</span>
             </div>
         
             
@@ -46,7 +46,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>86/86</span>
+                <span class='fraction'>87/87</span>
             </div>
         
             
@@ -149,15 +149,8 @@
 <a name='L84'></a><a href='#L84'>84</a>
 <a name='L85'></a><a href='#L85'>85</a>
 <a name='L86'></a><a href='#L86'>86</a>
-<a name='L87'></a><a href='#L87'>87</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">6x</span>
-<span class="cline-any cline-yes">6x</span>
-<span class="cline-any cline-yes">6x</span>
-<span class="cline-any cline-yes">6x</span>
-<span class="cline-any cline-yes">6x</span>
-<span class="cline-any cline-yes">6x</span>
-<span class="cline-any cline-yes">6x</span>
-<span class="cline-any cline-yes">6x</span>
-<span class="cline-any cline-yes">6x</span>
+<a name='L87'></a><a href='#L87'>87</a>
+<a name='L88'></a><a href='#L88'>88</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-yes">6x</span>
@@ -223,6 +216,11 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -230,36 +228,31 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-yes">6x</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import {
-  css,
-  customElement,
-  html,
-  property,
-  query,
-  TemplateResult,
-} from 'lit-element';
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { css, customElement, html, query, TemplateResult } from 'lit-element';
 import { nothing } from 'lit-html';
+import { until } from 'lit-html/directives/until';
+import { translate } from 'lit-translate';
+&nbsp;
+import { getInstanceAttribute, getNameAttribute } from '../../foundation.js';
+import { IconButtonToggle } from '@material/mwc-icon-button-toggle';
 &nbsp;
 import '../../action-pane.js';
 import './do-container.js';
-import { getInstanceAttribute, getNameAttribute } from '../../foundation.js';
-import { translate } from 'lit-translate';
-import { IconButtonToggle } from '@material/mwc-icon-button-toggle';
-import { until } from 'lit-html/directives/until';
-import { Nsdoc } from '../../foundation/nsdoc.js';
+&nbsp;
 import { Container } from './foundation.js';
 &nbsp;
 /** [[`IED`]] plugin subeditor for editing `LN` and `LN0` element. */
 @customElement('ln-container')
 export class LNContainer extends Container {
-  @property()
-  nsdoc!: Nsdoc;
-&nbsp;
   @query('#toggleButton')
   toggleButton!: IconButtonToggle | undefined;
 &nbsp;
@@ -270,8 +263,7 @@ export class LNContainer extends Container {
     const data = this.nsdoc.getDataDescription(this.element);
 &nbsp;
     return html`${prefix != null ? html`${prefix} &amp;mdash; ` : nothing}
-            ${data.label}
-            ${inst ? html` &amp;mdash; ${inst}` : nothing}`;
+    ${data.label} ${inst ? html` &amp;mdash; ${inst}` : nothing}`;
   }
 &nbsp;
   /**
@@ -280,7 +272,9 @@ export class LNContainer extends Container {
    */
   private getDOElements(): Element[] {
     const lnType = this.element.getAttribute(<span class="branch-0 cbranch-no" title="branch not covered" >'lnType') ?? undefined;</span>
-    const lNodeType = this.element.closest('SCL')!.querySelector(`:root &gt; DataTypeTemplates &gt; LNodeType[id="${lnType}"]`);
+    const lNodeType = this.element
+      .closest('SCL')!
+      .querySelector(`:root &gt; DataTypeTemplates &gt; LNodeType[id="${lnType}"]`);
     if (lNodeType != null) {
       return Array.from(lNodeType.querySelectorAll(':scope &gt; DO'));
     }
@@ -294,28 +288,37 @@ export class LNContainer extends Container {
    */
   private getInstanceElement(dO: Element): Element | null {
     const doName = getNameAttribute(dO);
-    return this.element.querySelector(`:scope &gt; DOI[name="${doName}"]`)
+    return this.element.querySelector(`:scope &gt; DOI[name="${doName}"]`);
   }
 &nbsp;
   render(): TemplateResult {
     const doElements = this.getDOElements();
 &nbsp;
     return html`&lt;action-pane .label="${until(this.header())}"&gt;
-      ${doElements.length &gt; 0 ? html`&lt;abbr slot="action" title="${translate('iededitor.toggleChildElements')}"&gt;
-        &lt;mwc-icon-button-toggle
-          id="toggleButton"
-          onIcon="keyboard_arrow_up"
-          offIcon="keyboard_arrow_down"
-          @click=${() =&gt; this.requestUpdate()}
-        &gt;&lt;/mwc-icon-button-toggle&gt;
-      &lt;/abbr&gt;` : nothing}
-      ${this.toggleButton?.on ? doElements.map(dO =&gt; html`&lt;do-container
-          .element=${dO}
-          .instanceElement=${this.getInstanceElement(dO)}
-          .nsdoc=${this.nsdoc}
-          .ancestors=${[...this.ancestors, this.element]}
-        &gt;&lt;/do-container&gt;
-        `) : nothing}
+      ${doElements.length &gt; 0
+        ? html`&lt;abbr
+            slot="action"
+            title="${translate('iededitor.toggleChildElements')}"
+          &gt;
+            &lt;mwc-icon-button-toggle
+              id="toggleButton"
+              onIcon="keyboard_arrow_up"
+              offIcon="keyboard_arrow_down"
+              @click=${() =&gt; this.requestUpdate()}
+            &gt;&lt;/mwc-icon-button-toggle&gt;
+          &lt;/abbr&gt;`
+        : nothing}
+      ${this.toggleButton?.on
+        ? doElements.map(
+            dO =&gt; html`&lt;do-container
+              .doc=${this.doc}
+              .element=${dO}
+              .instanceElement=${this.getInstanceElement(dO)}
+              .nsdoc=${this.nsdoc}
+              .ancestors=${[...this.ancestors, this.element]}
+            &gt;&lt;/do-container&gt; `
+          )
+        : nothing}
     &lt;/action-pane&gt;`;
   }
 &nbsp;
@@ -328,7 +331,7 @@ export class LNContainer extends Container {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener">istanbul</a>
-                at Thu Jun 16 2022 10:40:51 GMT+0000 (Coordinated Universal Time)
+                at Wed Jun 22 2022 08:32:14 GMT+0000 (Coordinated Universal Time)
             </div>
         </div>
         <script src="../../../prettify.js"></script>

@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">97.12% </span>
+                <span class="strong">97.36% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>135/139</span>
+                <span class='fraction'>148/152</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">97.12% </span>
+                <span class="strong">97.36% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>135/139</span>
+                <span class='fraction'>148/152</span>
             </div>
         
             
@@ -202,7 +202,28 @@
 <a name='L137'></a><a href='#L137'>137</a>
 <a name='L138'></a><a href='#L138'>138</a>
 <a name='L139'></a><a href='#L139'>139</a>
-<a name='L140'></a><a href='#L140'>140</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">11x</span>
+<a name='L140'></a><a href='#L140'>140</a>
+<a name='L141'></a><a href='#L141'>141</a>
+<a name='L142'></a><a href='#L142'>142</a>
+<a name='L143'></a><a href='#L143'>143</a>
+<a name='L144'></a><a href='#L144'>144</a>
+<a name='L145'></a><a href='#L145'>145</a>
+<a name='L146'></a><a href='#L146'>146</a>
+<a name='L147'></a><a href='#L147'>147</a>
+<a name='L148'></a><a href='#L148'>148</a>
+<a name='L149'></a><a href='#L149'>149</a>
+<a name='L150'></a><a href='#L150'>150</a>
+<a name='L151'></a><a href='#L151'>151</a>
+<a name='L152'></a><a href='#L152'>152</a>
+<a name='L153'></a><a href='#L153'>153</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">11x</span>
+<span class="cline-any cline-yes">11x</span>
+<span class="cline-any cline-yes">11x</span>
+<span class="cline-any cline-yes">11x</span>
+<span class="cline-any cline-yes">11x</span>
+<span class="cline-any cline-yes">11x</span>
+<span class="cline-any cline-yes">11x</span>
+<span class="cline-any cline-yes">11x</span>
+<span class="cline-any cline-yes">11x</span>
 <span class="cline-any cline-yes">11x</span>
 <span class="cline-any cline-yes">11x</span>
 <span class="cline-any cline-yes">11x</span>
@@ -227,8 +248,6 @@
 <span class="cline-any cline-yes">8x</span>
 <span class="cline-any cline-yes">8x</span>
 <span class="cline-any cline-yes">8x</span>
-<span class="cline-any cline-yes">8x</span>
-<span class="cline-any cline-yes">8x</span>
 <span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-yes">4x</span>
@@ -245,6 +264,8 @@
 <span class="cline-any cline-yes">11x</span>
 <span class="cline-any cline-yes">11x</span>
 <span class="cline-any cline-yes">11x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">11x</span>
@@ -268,6 +289,8 @@
 <span class="cline-any cline-yes">11x</span>
 <span class="cline-any cline-yes">11x</span>
 <span class="cline-any cline-yes">11x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-yes">5x</span>
@@ -283,6 +306,9 @@
 <span class="cline-any cline-yes">11x</span>
 <span class="cline-any cline-yes">11x</span>
 <span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -341,13 +367,21 @@
 <span class="cline-any cline-yes">11x</span>
 <span class="cline-any cline-yes">11x</span>
 <span class="cline-any cline-yes">11x</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { LitElement, property } from "lit-element";
-import { getInstanceAttribute, getNameAttribute } from "../../foundation.js";
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { LitElement, property } from 'lit-element';
+&nbsp;
+import { getInstanceAttribute, getNameAttribute } from '../../foundation.js';
+import { Nsdoc } from '../../foundation/nsdoc.js';
 &nbsp;
 /** Base class for all containers inside the IED Editor. */
 export class Container extends LitElement {
+  @property()
+  doc!: XMLDocument;
+&nbsp;
   @property({ attribute: false })
   element!: Element;
+&nbsp;
+  @property()
+  nsdoc!: Nsdoc;
 &nbsp;
   @property()
   ancestors: Element[] = [];
@@ -355,16 +389,14 @@ export class Container extends LitElement {
   constructor() {
     super();
 &nbsp;
-    this.addEventListener('focus', (event) =&gt; {
+    this.addEventListener('focus', event =&gt; {
       event.stopPropagation();
-      const pathOfAncestorNames = this.ancestors.map(ancestor =&gt; getTitleForElementPath(ancestor)!);
+      const pathOfAncestorNames = this.ancestors.map(
+        ancestor =&gt; getTitleForElementPath(ancestor)!
+      );
       pathOfAncestorNames.push(getTitleForElementPath(this.element)!);
 &nbsp;
-      this.dispatchEvent(
-        newFullElementPathEvent(
-          pathOfAncestorNames
-        )
-      );
+      this.dispatchEvent(newFullElementPathEvent(pathOfAncestorNames));
     });
 &nbsp;
     this.addEventListener('blur', () =&gt; {
@@ -383,9 +415,11 @@ export class Container extends LitElement {
  * @param tagName - The Tag-name of the element to search for.
  * @returns The found element with the tag-name or null if not found.
  */
-export function findElement(ancestors: Element[], tagName: string): Element | null {
-  return ancestors
-    .find(element =&gt; element.tagName === tagName) ?? null;
+export function findElement(
+  ancestors: Element[],
+  tagName: string
+): Element | null {
+  return ancestors.find(element =&gt; element.tagName === tagName) ?? null;
 }
 &nbsp;
 /**
@@ -409,7 +443,9 @@ export function findLogicaNodeElement(ancestors: Element[]): Element | null {
 export function findDOTypeElement(element: Element | null): Element | null {
   if (element &amp;&amp; element.hasAttribute('type')) {
     const type = element.getAttribute('type');
-    return element.closest('SCL')!.querySelector(`:root &gt; DataTypeTemplates &gt; DOType[id="${type}"]`);
+    return element
+      .closest('SCL')!
+      .querySelector(`:root &gt; DataTypeTemplates &gt; DOType[id="${type}"]`);
   }
   return null;
 }
@@ -420,14 +456,17 @@ export function findDOTypeElement(element: Element | null): Element | null {
  * @param da             - The (B)DA object to search with.
  * @returns The optional SDI / DAI element.
  */
-export function getInstanceDAElement(parentInstance: Element | null, da: Element): Element | null {
+export function getInstanceDAElement(
+  parentInstance: Element | null,
+  da: Element
+): Element | null {
   if (parentInstance) {
     const daName = getNameAttribute(da);
     const bType = da.getAttribute('bType');
     if (bType == 'Struct') <span class="branch-0 cbranch-no" title="branch not covered" >{</span>
-<span class="cstat-no" title="statement not covered" >      return parentInstance.querySelector(`:scope &gt; SDI[name="${daName}"]`)</span>
+<span class="cstat-no" title="statement not covered" >      return parentInstance.querySelector(`:scope &gt; SDI[name="${daName}"]`);</span>
     }
-    return parentInstance.querySelector(`:scope &gt; DAI[name="${daName}"]`)
+    return parentInstance.querySelector(`:scope &gt; DAI[name="${daName}"]`);
   }
   return null;
 }
@@ -439,7 +478,7 @@ export function getTitleForElementPath(element: Element): string {
       return element.getAttribute(<span class="branch-0 cbranch-no" title="branch not covered" >'lnClass')!;</span>
 <span class="cstat-no" title="statement not covered" >    }</span>
 <span class="cstat-no" title="statement not covered" >    case 'LDevice': {</span>
-<span class="cstat-no" title="statement not covered" >      return (getNameAttribute(element) ?? getInstanceAttribute(element))!</span>
+<span class="cstat-no" title="statement not covered" >      return (getNameAttribute(element) ?? getInstanceAttribute(element))!;</span>
     }
     case 'Server': {
       return 'Server';
@@ -487,7 +526,7 @@ declare global {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener">istanbul</a>
-                at Thu Jun 16 2022 10:40:51 GMT+0000 (Coordinated Universal Time)
+                at Wed Jun 22 2022 08:32:14 GMT+0000 (Coordinated Universal Time)
             </div>
         </div>
         <script src="../../../prettify.js"></script>

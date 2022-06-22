@@ -9,12 +9,7 @@ var __decorate = (decorators, target, key, kind) => {
     __defProp(target, key, result);
   return result;
 };
-import {
-  css,
-  customElement,
-  html,
-  property
-} from "../../../_snowpack/pkg/lit-element.js";
+import {css, customElement, html} from "../../../_snowpack/pkg/lit-element.js";
 import {nothing} from "../../../_snowpack/pkg/lit-html.js";
 import "../../action-pane.js";
 import "./ldevice-container.js";
@@ -30,17 +25,15 @@ export let ServerContainer = class extends Container {
     return html`<action-pane .label="${this.header()}">
       <mwc-icon slot="icon">${serverIcon}</mwc-icon>
       ${Array.from(this.element.querySelectorAll(":scope > LDevice")).map((server) => html`<ldevice-container
-          .element=${server}
-          .nsdoc=${this.nsdoc}
-          .ancestors=${[...this.ancestors, this.element]}
-        ></ldevice-container>`)}
+            .doc=${this.doc}
+            .element=${server}
+            .nsdoc=${this.nsdoc}
+            .ancestors=${[...this.ancestors, this.element]}
+          ></ldevice-container>`)}
     </action-pane>`;
   }
 };
 ServerContainer.styles = css``;
-__decorate([
-  property()
-], ServerContainer.prototype, "nsdoc", 2);
 ServerContainer = __decorate([
   customElement("server-container")
 ], ServerContainer);
