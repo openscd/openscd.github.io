@@ -6,7 +6,7 @@ import "../../_snowpack/pkg/@material/mwc-formfield.js";
 import "../wizard-textfield.js";
 import {createElement} from "../foundation.js";
 import {typeNullable, typePattern} from "./foundation/p-types.js";
-export function contentGseWizard(content) {
+export function contentGseOrSmvWizard(content) {
   return [
     html`<mwc-formfield
       label="${translate("connectedap.wizard.addschemainsttype")}"

@@ -4,7 +4,7 @@ import {
   cloneElement,
   getValue
 } from "../foundation.js";
-function contentSmvOptsWizard(option) {
+export function contentSmvOptsWizard(option) {
   return Object.entries(option).map(([key, value]) => html`<wizard-checkbox
         label="${key}"
         .maybeValue=${value}

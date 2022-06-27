@@ -6,7 +6,7 @@ import {
   getValue,
   identity
 } from "../foundation.js";
-import {contentGseWizard, updateAddress} from "./address.js";
+import {contentGseOrSmvWizard, updateAddress} from "./address.js";
 export function getMTimeAction(type, oldTime, Time, gse) {
   if (oldTime === null) {
     const element = createElement(gse.ownerDocument, type, {
@@ -85,7 +85,7 @@ export function editGseWizard(element) {
         action: updateGSEAction(element)
       },
       content: [
-        ...contentGseWizard({hasInstType, attributes}),
+        ...contentGseOrSmvWizard({hasInstType, attributes}),
         html`<wizard-textfield
           label="MinTime"
           .maybeValue=${minTime}

@@ -58,6 +58,7 @@ export const de = {
     sampleRate: "Abtastrate zu Telegram hinzufügen",
     security: "Potentiel in Zukunft für z.B. digitale Signature",
     synchSourceId: "Identität der Zeitquelle zu Telegram hinzufügen",
+    SampledValueControl: "Sampled Value Kontrollblock",
     iedName: "Referenziertes IED",
     ldInst: "Referenziertes logisches Gerät",
     prefix: "Präfix des logischen Knotens",
@@ -529,7 +530,8 @@ export const de = {
   smv: {
     action: {
       addaddress: "SMV bearbeitet ({{identity}})"
-    }
+    },
+    missingaccp: "AccessPoint is nicht verbunden. SMV kann nicht hinzugefügt werden."
   },
   subscriber: {
     title: "Subscriber Update",
@@ -602,6 +604,11 @@ export const de = {
   },
   gsecontrol: {
     wizard: {location: "Ablageort der GOOSE wählen"}
+  },
+  samvpledvaluecontrol: {
+    wizard: {
+      location: "Ablageort des Select Sampled Value Control Block wählen"
+    }
   },
   add: "Hinzufügen",
   new: "Neu",

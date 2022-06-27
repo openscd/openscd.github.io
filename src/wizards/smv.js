@@ -3,7 +3,7 @@ import {
   getValue,
   identity
 } from "../foundation.js";
-import {contentGseWizard, updateAddress} from "./address.js";
+import {contentGseOrSmvWizard, updateAddress} from "./address.js";
 export function updateSmvAction(element) {
   return (inputs, wizard) => {
     const complexAction = {
@@ -43,7 +43,7 @@ export function editSMvWizard(element) {
         icon: "edit",
         action: updateSmvAction(element)
       },
-      content: [...contentGseWizard({hasInstType, attributes})]
+      content: [...contentGseOrSmvWizard({hasInstType, attributes})]
     }
   ];
 }

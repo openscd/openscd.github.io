@@ -58,6 +58,7 @@ export const en = {
     sampleRate: "Add sample rate to SMV packet",
     security: "Potential future use. e.g. digital signature",
     synchSourceId: "Add sync source id to SMV packet",
+    SampledValueControl: "Sampled Value Control Block",
     iedName: "Referenced IED",
     ldInst: "Referenced Logical Device",
     prefix: "Prefix of the Logical Node",
@@ -529,7 +530,8 @@ export const en = {
   smv: {
     action: {
       addaddress: "Edit SMV ({{identity}})"
-    }
+    },
+    missingaccp: "AccessPoint is not connected. SMV cannot be created."
   },
   subscriber: {
     title: "Subscriber update",
@@ -600,6 +602,9 @@ export const en = {
   },
   gsecontrol: {
     wizard: {location: "Select GOOSE Control Block Location"}
+  },
+  samvpledvaluecontrol: {
+    wizard: {location: "Select Sampled Value Control Block Location"}
   },
   add: "Add",
   new: "New",

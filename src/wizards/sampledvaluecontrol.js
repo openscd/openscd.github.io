@@ -7,6 +7,8 @@ import "../wizard-select.js";
 import "../wizard-textfield.js";
 import {
   cloneElement,
+  createElement,
+  getUniqueElementName,
   getValue,
   identity,
   isPublic,
@@ -15,11 +17,20 @@ import {
   newWizardEvent,
   selector
 } from "../foundation.js";
-import {securityEnableEnum, smpModEnum} from "./foundation/enums.js";
+import {securityEnabledEnum, smpModEnum} from "./foundation/enums.js";
 import {maxLength, patterns} from "./foundation/limits.js";
 import {editSMvWizard} from "./smv.js";
-import {editSmvOptsWizard} from "./smvopts.js";
+import {contentSmvOptsWizard, editSmvOptsWizard} from "./smvopts.js";
 import {editDataSetWizard} from "./dataset.js";
+import {iEDPicker, sampledValueDataPicker} from "./foundation/finder.js";
+import {
+  getConnectedAP,
+  isAccessPointConnected,
+  uniqueAppId,
+  uniqueMacAddress
+} from "./foundation/scl.js";
+import {contentGseOrSmvWizard, createAddressElement} from "./address.js";
+import {newFCDA} from "./fcda.js";
 export function getSMV(element) {
   const cbName = element.getAttribute("name");
   const iedName = element.closest("IED")?.getAttribute("name");
@@ -84,12 +95,12 @@ function contentSampledValueControlWizard(options) {
       pattern="${patterns.normalizedString}"
       helper="${translate("scl.desc")}"
     ></wizard-textfield>`,
-    html`<wizard-checkbox
-      label="multicast"
-      .maybeValue=${options.multicast}
-      helper="${translate("scl.multicast")}"
-      disabled
-    ></wizard-checkbox>`,
+    options.multicast === "true" ? html`` : html`<wizard-checkbox
+          label="multicast"
+          .maybeValue=${options.multicast}
+          helper="${translate("scl.multicast")}"
+          disabled
+        ></wizard-checkbox>`,
     html`<wizard-textfield
       label="smvID"
       .maybeValue=${options.smvID}
@@ -122,14 +133,243 @@ function contentSampledValueControlWizard(options) {
       min="0"
     ></wizard-textfield>`,
     html`<wizard-select
-      label="securityEnable"
-      .maybeValue=${options.securityEnable}
+      label="securityEnabled"
+      .maybeValue=${options.securityEnabled}
       nullable
       required
       helper="${translate("scl.securityEnable")}"
-      >${securityEnableEnum.map((option) => html`<mwc-list-item value="${option}">${option}</mwc-list-item>`)}</wizard-select
+      >${securityEnabledEnum.map((option) => html`<mwc-list-item value="${option}">${option}</mwc-list-item>`)}</wizard-select
     >`
   ];
+}
+function createSampledValueControlAction(parent) {
+  return (inputs, wizard) => {
+    const sampledValueControlAttrs = {};
+    const sampledValueControlKeys = [
+      "name",
+      "desc",
+      "multicast",
+      "smvID",
+      "smpMod",
+      "smpRate",
+      "nofASDU",
+      "securityEnabled"
+    ];
+    sampledValueControlKeys.forEach((key) => {
+      const missingMulticast = key === "multicast" && !inputs.find((i) => i.label === key);
+      if (missingMulticast) {
+        sampledValueControlAttrs["multicast"] = "true";
+        return;
+      }
+      sampledValueControlAttrs[key] = getValue(inputs.find((i) => i.label === key));
+    });
+    sampledValueControlAttrs["confRev"] = "1";
+    const dataSetName = sampledValueControlAttrs.name + "sDataSet";
+    sampledValueControlAttrs["datSet"] = dataSetName;
+    const sampledValueControl = createElement(parent.ownerDocument, "SampledValueControl", sampledValueControlAttrs);
+    const smvOptsAttrs = {};
+    const smvOptsKeys = [
+      "refreshTime",
+      "sampleRate",
+      "dataSet",
+      "security",
+      "synchSourceId"
+    ];
+    smvOptsKeys.forEach((key) => {
+      smvOptsAttrs[key] = getValue(inputs.find((i) => i.label === key));
+    });
+    const smvOpts = createElement(parent.ownerDocument, "SmvOpts", smvOptsAttrs);
+    sampledValueControl.appendChild(smvOpts);
+    let smv = null;
+    let smvParent = null;
+    if (isAccessPointConnected(parent)) {
+      const instType = wizard.shadowRoot?.querySelector("#instType")?.checked ?? false;
+      const smvAttrs = {};
+      const smvKeys = ["MAC-Address", "APPID", "VLAN-ID", "VLAN-PRIORITY"];
+      smvKeys.forEach((key) => {
+        smvAttrs[key] = getValue(inputs.find((i) => i.label === key));
+      });
+      smv = createElement(parent.ownerDocument, "SMV", {
+        ldInst: parent.closest("LDevice")?.getAttribute("inst") ?? "",
+        cbName: sampledValueControlAttrs["name"]
+      });
+      const address = createAddressElement(smvAttrs, smv, instType);
+      smv.appendChild(address);
+      smvParent = getConnectedAP(parent);
+    }
+    const dataSet = createElement(parent.ownerDocument, "DataSet", {
+      name: dataSetName
+    });
+    const finder = wizard.shadowRoot.querySelector("finder-list");
+    const paths = finder?.paths ?? [];
+    for (const path of paths) {
+      const element = newFCDA(parent, path);
+      if (!element)
+        continue;
+      dataSet.appendChild(element);
+    }
+    const complexAction = smv ? {
+      title: "Create SampledValueControl",
+      actions: [
+        {new: {parent, element: sampledValueControl}},
+        {new: {parent: smvParent, element: smv}},
+        {new: {parent, element: dataSet}}
+      ]
+    } : {
+      title: "Create SampledValueControl",
+      actions: [
+        {new: {parent, element: sampledValueControl}},
+        {new: {parent, element: dataSet}}
+      ]
+    };
+    return [complexAction];
+  };
+}
+export function createSampledValueControlWizard(ln0OrLn) {
+  const server = ln0OrLn.closest("Server");
+  const name = getUniqueElementName(ln0OrLn, "SampledValueControl");
+  const desc = null;
+  const multicast = "true";
+  const smvID = "";
+  const smpMod = "SmpPerPeriod";
+  const smpRate = "80";
+  const nofASDU = "1";
+  const securityEnabled = null;
+  const refreshTime = null;
+  const sampleRate = "true";
+  const dataSet = "true";
+  const security = null;
+  const synchSourceId = "true";
+  const hasInstType = true;
+  const attributes = {
+    "MAC-Address": uniqueMacAddress(ln0OrLn.ownerDocument, "SMV"),
+    APPID: uniqueAppId(ln0OrLn.ownerDocument),
+    "VLAN-ID": null,
+    "VLAN-PRIORITY": null
+  };
+  return isAccessPointConnected(ln0OrLn) ? [
+    {
+      title: get("wizard.title.add", {tagName: "SampledValueControl"}),
+      content: contentSampledValueControlWizard({
+        name,
+        desc,
+        multicast,
+        smvID,
+        smpMod,
+        smpRate,
+        nofASDU,
+        securityEnabled
+      })
+    },
+    {
+      title: get("wizard.title.add", {tagName: "SmvOpts"}),
+      content: contentSmvOptsWizard({
+        refreshTime,
+        sampleRate,
+        dataSet,
+        security,
+        synchSourceId
+      })
+    },
+    {
+      title: get("wizard.title.add", {tagName: "SMV"}),
+      content: [...contentGseOrSmvWizard({hasInstType, attributes})]
+    },
+    {
+      title: get("dataset.fcda.add"),
+      primary: {
+        icon: "save",
+        label: get("save"),
+        action: createSampledValueControlAction(ln0OrLn)
+      },
+      content: [server ? sampledValueDataPicker(server) : html``]
+    }
+  ] : [
+    {
+      title: get("wizard.title.add", {tagName: "SampledValueControl"}),
+      content: contentSampledValueControlWizard({
+        name,
+        desc,
+        multicast,
+        smvID,
+        smpMod,
+        smpRate,
+        nofASDU,
+        securityEnabled
+      })
+    },
+    {
+      title: get("wizard.title.add", {tagName: "SmvOpts"}),
+      content: contentSmvOptsWizard({
+        refreshTime,
+        sampleRate,
+        dataSet,
+        security,
+        synchSourceId
+      })
+    },
+    {
+      title: get("wizard.title.add", {tagName: "SMV"}),
+      content: [
+        html`<h3
+              style="color: var(--mdc-theme-on-surface);
+                      font-family: 'Roboto', sans-serif;
+                      font-weight: 300;"
+            >
+              ${translate("smv.missingaccp")}
+            </h3>`
+      ]
+    },
+    {
+      title: get("dataset.fcda.add"),
+      primary: {
+        icon: "save",
+        label: get("save"),
+        action: createSampledValueControlAction(ln0OrLn)
+      },
+      content: [server ? sampledValueDataPicker(server) : html``]
+    }
+  ];
+}
+function openSampledValueControlCreateWizard(doc) {
+  return (_, wizard) => {
+    const finder = wizard.shadowRoot?.querySelector("finder-list");
+    const path = finder?.path ?? [];
+    if (path.length === 0)
+      return [];
+    const [tagName, id] = path.pop().split(": ");
+    if (tagName !== "IED")
+      return [];
+    const ied = doc.querySelector(selector(tagName, id));
+    if (!ied)
+      return [];
+    const ln0 = ied.querySelector("LN0");
+    if (!ln0)
+      return [];
+    return [() => createSampledValueControlWizard(ln0)];
+  };
+}
+export function sampledValueControlParentSelector(doc) {
+  return [
+    {
+      title: get("samvpledvaluecontrol.wizard.location"),
+      primary: {
+        icon: "",
+        label: get("next"),
+        action: openSampledValueControlCreateWizard(doc)
+      },
+      content: [iEDPicker(doc)]
+    }
+  ];
+}
+function prepareSampledValueControlCreateWizard(anyParent) {
+  return () => {
+    if (anyParent.tagName === "IED" && anyParent.querySelector("LN0"))
+      return [
+        () => createSampledValueControlWizard(anyParent.querySelector("LN0"))
+      ];
+    return [() => sampledValueControlParentSelector(anyParent.ownerDocument)];
+  };
 }
 function removeSampledValueControl(element) {
   return (wizard) => {
@@ -165,9 +405,14 @@ function updateSampledValueControlAction(element) {
       "smpMod",
       "smpRate",
       "nofASDU",
-      "securityEnable"
+      "securityEnabled"
     ];
     attributeKeys.forEach((key) => {
+      const missingMulticast = key === "multicast" && !inputs.find((i) => i.label === key);
+      if (missingMulticast) {
+        attributes["multicast"] = "true";
+        return;
+      }
       attributes[key] = getValue(inputs.find((i) => i.label === key));
     });
     let sampledValueControlAction = null;
@@ -192,7 +437,7 @@ export function editSampledValueControlWizard(element) {
   const smpMod = element.getAttribute("smpMod");
   const smpRate = element.getAttribute("smpRate");
   const nofASDU = element.getAttribute("nofASDU");
-  const securityEnable = element.getAttribute("securityEnabled");
+  const securityEnabled = element.getAttribute("securityEnabled");
   const sMV = getSMV(element);
   const smvOpts = element.querySelector("SmvOpts");
   const dataSet = element.parentElement?.querySelector(`DataSet[name="${element.getAttribute("datSet")}"]`);
@@ -239,7 +484,7 @@ export function editSampledValueControlWizard(element) {
           smpMod,
           smpRate,
           nofASDU,
-          securityEnable
+          securityEnabled
         })
       ]
     }
@@ -247,9 +492,15 @@ export function editSampledValueControlWizard(element) {
 }
 export function selectSampledValueControlWizard(element) {
   const smvControls = Array.from(element.querySelectorAll("SampledValueControl")).filter(isPublic);
+  const primary = element.querySelector("LN0") ? {
+    icon: "add",
+    label: get("scl.SampledValueControl"),
+    action: prepareSampledValueControlCreateWizard(element)
+  } : void 0;
   return [
     {
       title: get("wizard.title.select", {tagName: "SampledValueControl"}),
+      primary,
       content: [
         html`<filtered-list
           @selected=${(e) => {
