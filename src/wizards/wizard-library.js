@@ -33,6 +33,7 @@ import {
   createSubFunctionWizard,
   editSubFunctionWizard
 } from "./subfunction.js";
+import {editSampledValueControlWizard} from "./sampledvaluecontrol.js";
 export function emptyWizard() {
   return;
 }
@@ -394,7 +395,7 @@ export const wizards = {
     create: emptyWizard
   },
   SampledValueControl: {
-    edit: emptyWizard,
+    edit: editSampledValueControlWizard,
     create: emptyWizard
   },
   SecPerSamples: {

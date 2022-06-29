@@ -32,6 +32,7 @@
     "lit-element": "./lit-element.js",
     "lit-html": "./lit-html.js",
     "lit-html/directives/class-map": "./lit-html/directives/class-map.js",
+    "lit-html/directives/class-map.js": "./lit-html/directives/class-map.js",
     "lit-html/directives/if-defined": "./lit-html/directives/if-defined.js",
     "lit-html/directives/if-defined.js": "./lit-html/directives/if-defined.js",
     "lit-html/directives/live": "./lit-html/directives/live.js",

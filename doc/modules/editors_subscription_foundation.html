@@ -77,20 +77,23 @@
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
+							<h3>Classes</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-class tsd-parent-kind-module"><a href="../classes/editors_subscription_foundation.SubscriberListContainer.html" class="tsd-kind-icon">Subscriber<wbr>List<wbr>Container</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section ">
 							<h3>Interfaces</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-interface tsd-parent-kind-module"><a href="../interfaces/editors_subscription_foundation.GOOSESelectDetail.html" class="tsd-kind-icon">GOOSESelect<wbr>Detail</a></li>
 								<li class="tsd-kind-interface tsd-parent-kind-module"><a href="../interfaces/editors_subscription_foundation.IEDSelectDetail.html" class="tsd-kind-icon">IEDSelect<wbr>Detail</a></li>
-								<li class="tsd-kind-interface tsd-parent-kind-module"><a href="../interfaces/editors_subscription_foundation.SubscriptionDetail.html" class="tsd-kind-icon">Subscription<wbr>Detail</a></li>
+								<li class="tsd-kind-interface tsd-parent-kind-module"><a href="../interfaces/editors_subscription_foundation.ListElement.html" class="tsd-kind-icon">List<wbr>Element</a></li>
 								<li class="tsd-kind-interface tsd-parent-kind-module"><a href="../interfaces/editors_subscription_foundation.ViewDetail.html" class="tsd-kind-icon">View<wbr>Detail</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
 							<h3>Type aliases</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-type-alias tsd-parent-kind-module"><a href="editors_subscription_foundation.html#GOOSESelectEvent" class="tsd-kind-icon">GOOSESelect<wbr>Event</a></li>
 								<li class="tsd-kind-type-alias tsd-parent-kind-module"><a href="editors_subscription_foundation.html#IEDSelectEvent" class="tsd-kind-icon">IEDSelect<wbr>Event</a></li>
-								<li class="tsd-kind-type-alias tsd-parent-kind-module"><a href="editors_subscription_foundation.html#SubscriptionEvent" class="tsd-kind-icon">Subscription<wbr>Event</a></li>
 								<li class="tsd-kind-type-alias tsd-parent-kind-module"><a href="editors_subscription_foundation.html#ViewEvent" class="tsd-kind-icon">View<wbr>Event</a></li>
 							</ul>
 						</section>
@@ -103,9 +106,8 @@
 						<section class="tsd-index-section ">
 							<h3>Functions</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-function tsd-parent-kind-module"><a href="editors_subscription_foundation.html#newGOOSESelectEvent" class="tsd-kind-icon">newGOOSESelect<wbr>Event</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module"><a href="editors_subscription_foundation.html#getOrderedIeds" class="tsd-kind-icon">get<wbr>Ordered<wbr>Ieds</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-module"><a href="editors_subscription_foundation.html#newIEDSelectEvent" class="tsd-kind-icon">newIEDSelect<wbr>Event</a></li>
-								<li class="tsd-kind-function tsd-parent-kind-module"><a href="editors_subscription_foundation.html#newSubscriptionEvent" class="tsd-kind-icon">new<wbr>Subscription<wbr>Event</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-module"><a href="editors_subscription_foundation.html#newViewEvent" class="tsd-kind-icon">new<wbr>View<wbr>Event</a></li>
 							</ul>
 						</section>
@@ -115,32 +117,12 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Type aliases</h2>
 				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-module">
-					<a name="GOOSESelectEvent" class="tsd-anchor"></a>
-					<h3>GOOSESelect<wbr>Event</h3>
-					<div class="tsd-signature tsd-kind-icon">GOOSESelect<wbr>Event<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">CustomEvent</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/editors_subscription_foundation.GOOSESelectDetail.html" class="tsd-signature-type" data-tsd-kind="Interface">GOOSESelectDetail</a><span class="tsd-signature-symbol">&gt;</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/2d98615/src/editors/subscription/foundation.ts#L24">src/editors/subscription/foundation.ts:24</a></li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-module">
 					<a name="IEDSelectEvent" class="tsd-anchor"></a>
 					<h3>IEDSelect<wbr>Event</h3>
 					<div class="tsd-signature tsd-kind-icon">IEDSelect<wbr>Event<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">CustomEvent</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/editors_subscription_foundation.IEDSelectDetail.html" class="tsd-signature-type" data-tsd-kind="Interface">IEDSelectDetail</a><span class="tsd-signature-symbol">&gt;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/2d98615/src/editors/subscription/foundation.ts#L41">src/editors/subscription/foundation.ts:41</a></li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-module">
-					<a name="SubscriptionEvent" class="tsd-anchor"></a>
-					<h3>Subscription<wbr>Event</h3>
-					<div class="tsd-signature tsd-kind-icon">Subscription<wbr>Event<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">CustomEvent</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/editors_subscription_foundation.SubscriptionDetail.html" class="tsd-signature-type" data-tsd-kind="Interface">SubscriptionDetail</a><span class="tsd-signature-symbol">&gt;</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/2d98615/src/editors/subscription/foundation.ts#L74">src/editors/subscription/foundation.ts:74</a></li>
+							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/a5ce813/src/editors/subscription/foundation.ts#L37">src/editors/subscription/foundation.ts:37</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -150,7 +132,7 @@
 					<div class="tsd-signature tsd-kind-icon">View<wbr>Event<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">CustomEvent</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/editors_subscription_foundation.ViewDetail.html" class="tsd-signature-type" data-tsd-kind="Interface">ViewDetail</a><span class="tsd-signature-symbol">&gt;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/2d98615/src/editors/subscription/foundation.ts#L57">src/editors/subscription/foundation.ts:57</a></li>
+							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/a5ce813/src/editors/subscription/foundation.ts#L21">src/editors/subscription/foundation.ts:21</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -163,7 +145,7 @@
 					<div class="tsd-signature tsd-kind-icon">styles<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">CSSResult</span><span class="tsd-signature-symbol"> = ...</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/2d98615/src/editors/subscription/foundation.ts#L87">src/editors/subscription/foundation.ts:87</a></li>
+							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/a5ce813/src/editors/subscription/foundation.ts#L96">src/editors/subscription/foundation.ts:96</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -176,31 +158,25 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Functions</h2>
 				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
-					<a name="newGOOSESelectEvent" class="tsd-anchor"></a>
-					<h3>newGOOSESelect<wbr>Event</h3>
+					<a name="getOrderedIeds" class="tsd-anchor"></a>
+					<h3>get<wbr>Ordered<wbr>Ieds</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
-						<li class="tsd-signature tsd-kind-icon">newGOOSESelect<wbr>Event<span class="tsd-signature-symbol">(</span>gseControl<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Element</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span>, dataset<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Element</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span>, eventInitDict<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">CustomEventInit</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/editors_subscription_foundation.GOOSESelectDetail.html" class="tsd-signature-type" data-tsd-kind="Interface">GOOSESelectDetail</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="editors_subscription_foundation.html#GOOSESelectEvent" class="tsd-signature-type" data-tsd-kind="Type alias">GOOSESelectEvent</a></li>
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Ordered<wbr>Ieds<span class="tsd-signature-symbol">(</span>doc<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">XMLDocument</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Element</span><span class="tsd-signature-symbol">[]</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/2d98615/src/editors/subscription/foundation.ts#L25">src/editors/subscription/foundation.ts:25</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/a5ce813/src/editors/subscription/foundation.ts#L50">src/editors/subscription/foundation.ts:50</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>gseControl: <span class="tsd-signature-type">Element</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span></h5>
-								</li>
-								<li>
-									<h5>dataset: <span class="tsd-signature-type">Element</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span></h5>
-								</li>
-								<li>
-									<h5><span class="tsd-flag ts-flagOptional">Optional</span> eventInitDict: <span class="tsd-signature-type">CustomEventInit</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/editors_subscription_foundation.GOOSESelectDetail.html" class="tsd-signature-type" data-tsd-kind="Interface">GOOSESelectDetail</a><span class="tsd-signature-symbol">&gt;</span></h5>
+									<h5>doc: <span class="tsd-signature-type">XMLDocument</span></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <a href="editors_subscription_foundation.html#GOOSESelectEvent" class="tsd-signature-type" data-tsd-kind="Type alias">GOOSESelectEvent</a></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Element</span><span class="tsd-signature-symbol">[]</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -214,7 +190,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/2d98615/src/editors/subscription/foundation.ts#L42">src/editors/subscription/foundation.ts:42</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/a5ce813/src/editors/subscription/foundation.ts#L38">src/editors/subscription/foundation.ts:38</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -231,32 +207,6 @@
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
-					<a name="newSubscriptionEvent" class="tsd-anchor"></a>
-					<h3>new<wbr>Subscription<wbr>Event</h3>
-					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
-						<li class="tsd-signature tsd-kind-icon">new<wbr>Subscription<wbr>Event<span class="tsd-signature-symbol">(</span>element<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Element</span>, subscribeStatus<span class="tsd-signature-symbol">: </span><a href="../enums/editors_subscription_foundation.SubscribeStatus.html" class="tsd-signature-type" data-tsd-kind="Enumeration">SubscribeStatus</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="editors_subscription_foundation.html#SubscriptionEvent" class="tsd-signature-type" data-tsd-kind="Type alias">SubscriptionEvent</a></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/2d98615/src/editors/subscription/foundation.ts#L75">src/editors/subscription/foundation.ts:75</a></li>
-								</ul>
-							</aside>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>element: <span class="tsd-signature-type">Element</span></h5>
-								</li>
-								<li>
-									<h5>subscribeStatus: <a href="../enums/editors_subscription_foundation.SubscribeStatus.html" class="tsd-signature-type" data-tsd-kind="Enumeration">SubscribeStatus</a></h5>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <a href="editors_subscription_foundation.html#SubscriptionEvent" class="tsd-signature-type" data-tsd-kind="Type alias">SubscriptionEvent</a></h4>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
 					<a name="newViewEvent" class="tsd-anchor"></a>
 					<h3>new<wbr>View<wbr>Event</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
@@ -266,7 +216,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/2d98615/src/editors/subscription/foundation.ts#L58">src/editors/subscription/foundation.ts:58</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/a5ce813/src/editors/subscription/foundation.ts#L22">src/editors/subscription/foundation.ts:22</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -303,26 +253,20 @@
 					<li class=" tsd-kind-enum tsd-parent-kind-module">
 						<a href="../enums/editors_subscription_foundation.View.html" class="tsd-kind-icon">View</a>
 					</li>
-					<li class=" tsd-kind-interface tsd-parent-kind-module">
-						<a href="../interfaces/editors_subscription_foundation.GOOSESelectDetail.html" class="tsd-kind-icon">GOOSESelect<wbr>Detail</a>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="../classes/editors_subscription_foundation.SubscriberListContainer.html" class="tsd-kind-icon">Subscriber<wbr>List<wbr>Container</a>
 					</li>
 					<li class=" tsd-kind-interface tsd-parent-kind-module">
 						<a href="../interfaces/editors_subscription_foundation.IEDSelectDetail.html" class="tsd-kind-icon">IEDSelect<wbr>Detail</a>
 					</li>
 					<li class=" tsd-kind-interface tsd-parent-kind-module">
-						<a href="../interfaces/editors_subscription_foundation.SubscriptionDetail.html" class="tsd-kind-icon">Subscription<wbr>Detail</a>
+						<a href="../interfaces/editors_subscription_foundation.ListElement.html" class="tsd-kind-icon">List<wbr>Element</a>
 					</li>
 					<li class=" tsd-kind-interface tsd-parent-kind-module">
 						<a href="../interfaces/editors_subscription_foundation.ViewDetail.html" class="tsd-kind-icon">View<wbr>Detail</a>
 					</li>
 					<li class=" tsd-kind-type-alias tsd-parent-kind-module">
-						<a href="editors_subscription_foundation.html#GOOSESelectEvent" class="tsd-kind-icon">GOOSESelect<wbr>Event</a>
-					</li>
-					<li class=" tsd-kind-type-alias tsd-parent-kind-module">
 						<a href="editors_subscription_foundation.html#IEDSelectEvent" class="tsd-kind-icon">IEDSelect<wbr>Event</a>
-					</li>
-					<li class=" tsd-kind-type-alias tsd-parent-kind-module">
-						<a href="editors_subscription_foundation.html#SubscriptionEvent" class="tsd-kind-icon">Subscription<wbr>Event</a>
 					</li>
 					<li class=" tsd-kind-type-alias tsd-parent-kind-module">
 						<a href="editors_subscription_foundation.html#ViewEvent" class="tsd-kind-icon">View<wbr>Event</a>
@@ -331,13 +275,10 @@
 						<a href="editors_subscription_foundation.html#styles" class="tsd-kind-icon">styles</a>
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-module">
-						<a href="editors_subscription_foundation.html#newGOOSESelectEvent" class="tsd-kind-icon">newGOOSESelect<wbr>Event</a>
+						<a href="editors_subscription_foundation.html#getOrderedIeds" class="tsd-kind-icon">get<wbr>Ordered<wbr>Ieds</a>
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-module">
 						<a href="editors_subscription_foundation.html#newIEDSelectEvent" class="tsd-kind-icon">newIEDSelect<wbr>Event</a>
-					</li>
-					<li class=" tsd-kind-function tsd-parent-kind-module">
-						<a href="editors_subscription_foundation.html#newSubscriptionEvent" class="tsd-kind-icon">new<wbr>Subscription<wbr>Event</a>
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-module">
 						<a href="editors_subscription_foundation.html#newViewEvent" class="tsd-kind-icon">new<wbr>View<wbr>Event</a>
