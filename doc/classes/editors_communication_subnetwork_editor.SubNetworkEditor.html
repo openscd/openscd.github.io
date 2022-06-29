@@ -138,6 +138,7 @@
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-external"><a href="editors_communication_subnetwork_editor.SubNetworkEditor.html#contentEditable" class="tsd-kind-icon">content<wbr>Editable</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-external"><a href="editors_communication_subnetwork_editor.SubNetworkEditor.html#dataset" class="tsd-kind-icon">dataset</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-external"><a href="editors_communication_subnetwork_editor.SubNetworkEditor.html#dir" class="tsd-kind-icon">dir</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="editors_communication_subnetwork_editor.SubNetworkEditor.html#doc" class="tsd-kind-icon">doc</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-external"><a href="editors_communication_subnetwork_editor.SubNetworkEditor.html#draggable" class="tsd-kind-icon">draggable</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="editors_communication_subnetwork_editor.SubNetworkEditor.html#element" class="tsd-kind-icon">element</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-external"><a href="editors_communication_subnetwork_editor.SubNetworkEditor.html#enterKeyHint" class="tsd-kind-icon">enter<wbr>Key<wbr>Hint</a></li>
@@ -371,7 +372,7 @@
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-inherited tsd-is-external"><a href="editors_communication_subnetwork_editor.SubNetworkEditor.html#removeChild" class="tsd-kind-icon">remove<wbr>Child</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-inherited tsd-is-external"><a href="editors_communication_subnetwork_editor.SubNetworkEditor.html#removeEventListener" class="tsd-kind-icon">remove<wbr>Event<wbr>Listener</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-overwrite"><a href="editors_communication_subnetwork_editor.SubNetworkEditor.html#render-1" class="tsd-kind-icon">render</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="editors_communication_subnetwork_editor.SubNetworkEditor.html#renderIedContainer" class="tsd-kind-icon">render<wbr>Ied<wbr>Container</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="editors_communication_subnetwork_editor.SubNetworkEditor.html#renderIEDs" class="tsd-kind-icon">renderIEDs</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-inherited tsd-is-external"><a href="editors_communication_subnetwork_editor.SubNetworkEditor.html#replaceChild" class="tsd-kind-icon">replace<wbr>Child</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external"><a href="editors_communication_subnetwork_editor.SubNetworkEditor.html#replaceWith" class="tsd-kind-icon">replace<wbr>With</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external"><a href="editors_communication_subnetwork_editor.SubNetworkEditor.html#requestFullscreen" class="tsd-kind-icon">request<wbr>Fullscreen</a></li>
@@ -923,6 +924,16 @@
 						</ul>
 					</aside>
 				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="doc" class="tsd-anchor"></a>
+					<h3>doc</h3>
+					<div class="tsd-signature tsd-kind-icon">doc<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">XMLDocument</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/f082d20/src/editors/communication/subnetwork-editor.ts#L26">src/editors/communication/subnetwork-editor.ts:26</a></li>
+						</ul>
+					</aside>
+				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-external">
 					<a name="draggable" class="tsd-anchor"></a>
 					<h3>draggable</h3>
@@ -940,7 +951,7 @@
 					<div class="tsd-signature tsd-kind-icon">element<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Element</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/f510446/src/editors/communication/subnetwork-editor.ts#L27">src/editors/communication/subnetwork-editor.ts:27</a></li>
+							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/f082d20/src/editors/communication/subnetwork-editor.ts#L29">src/editors/communication/subnetwork-editor.ts:29</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -3168,7 +3179,7 @@
 					<aside class="tsd-sources">
 						<p>Overrides LitElement.styles</p>
 						<ul>
-							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/f510446/src/editors/communication/subnetwork-editor.ts#L136">src/editors/communication/subnetwork-editor.ts:136</a></li>
+							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/f082d20/src/editors/communication/subnetwork-editor.ts#L139">src/editors/communication/subnetwork-editor.ts:139</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -3202,7 +3213,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/f510446/src/editors/communication/subnetwork-editor.ts#L45">src/editors/communication/subnetwork-editor.ts:45</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/f082d20/src/editors/communication/subnetwork-editor.ts#L47">src/editors/communication/subnetwork-editor.ts:47</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -3224,7 +3235,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/f510446/src/editors/communication/subnetwork-editor.ts#L35">src/editors/communication/subnetwork-editor.ts:35</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/f082d20/src/editors/communication/subnetwork-editor.ts#L37">src/editors/communication/subnetwork-editor.ts:37</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -3263,7 +3274,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/f510446/src/editors/communication/subnetwork-editor.ts#L30">src/editors/communication/subnetwork-editor.ts:30</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/f082d20/src/editors/communication/subnetwork-editor.ts#L32">src/editors/communication/subnetwork-editor.ts:32</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -3285,7 +3296,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/f510446/src/editors/communication/subnetwork-editor.ts#L40">src/editors/communication/subnetwork-editor.ts:40</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/f082d20/src/editors/communication/subnetwork-editor.ts#L42">src/editors/communication/subnetwork-editor.ts:42</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -4647,7 +4658,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/f510446/src/editors/communication/subnetwork-editor.ts#L108">src/editors/communication/subnetwork-editor.ts:108</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/f082d20/src/editors/communication/subnetwork-editor.ts#L110">src/editors/communication/subnetwork-editor.ts:110</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
@@ -4998,7 +5009,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/f510446/src/editors/communication/subnetwork-editor.ts#L54">src/editors/communication/subnetwork-editor.ts:54</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/f082d20/src/editors/communication/subnetwork-editor.ts#L56">src/editors/communication/subnetwork-editor.ts:56</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -5015,7 +5026,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/f510446/src/editors/communication/subnetwork-editor.ts#L58">src/editors/communication/subnetwork-editor.ts:58</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/f082d20/src/editors/communication/subnetwork-editor.ts#L60">src/editors/communication/subnetwork-editor.ts:60</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -5277,7 +5288,7 @@
 							<aside class="tsd-sources">
 								<p>Overrides LitElement.remove</p>
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/f510446/src/editors/communication/subnetwork-editor.ts#L63">src/editors/communication/subnetwork-editor.ts:63</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/f082d20/src/editors/communication/subnetwork-editor.ts#L65">src/editors/communication/subnetwork-editor.ts:65</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -5486,7 +5497,7 @@
 							<aside class="tsd-sources">
 								<p>Overrides LitElement.render</p>
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/f510446/src/editors/communication/subnetwork-editor.ts#L113">src/editors/communication/subnetwork-editor.ts:113</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/f082d20/src/editors/communication/subnetwork-editor.ts#L115">src/editors/communication/subnetwork-editor.ts:115</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">TemplateResult</span></h4>
@@ -5494,16 +5505,16 @@
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private">
-					<a name="renderIedContainer" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagPrivate">Private</span> render<wbr>Ied<wbr>Container</h3>
+					<a name="renderIEDs" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> renderIEDs</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private">
-						<li class="tsd-signature tsd-kind-icon">render<wbr>Ied<wbr>Container<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">TemplateResult</span><span class="tsd-signature-symbol">[]</span></li>
+						<li class="tsd-signature tsd-kind-icon">renderIEDs<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">TemplateResult</span><span class="tsd-signature-symbol">[]</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/f510446/src/editors/communication/subnetwork-editor.ts#L76">src/editors/communication/subnetwork-editor.ts:76</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/f082d20/src/editors/communication/subnetwork-editor.ts#L78">src/editors/communication/subnetwork-editor.ts:78</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">TemplateResult</span><span class="tsd-signature-symbol">[]</span></h4>
@@ -6039,7 +6050,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/f510446/src/editors/communication/subnetwork-editor.ts#L100">src/editors/communication/subnetwork-editor.ts:100</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/f082d20/src/editors/communication/subnetwork-editor.ts#L102">src/editors/communication/subnetwork-editor.ts:102</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
@@ -6552,6 +6563,9 @@
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-external">
 								<a href="editors_communication_subnetwork_editor.SubNetworkEditor.html#dir" class="tsd-kind-icon">dir</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="editors_communication_subnetwork_editor.SubNetworkEditor.html#doc" class="tsd-kind-icon">doc</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-external">
 								<a href="editors_communication_subnetwork_editor.SubNetworkEditor.html#draggable" class="tsd-kind-icon">draggable</a>
@@ -7223,7 +7237,7 @@
 								<a href="editors_communication_subnetwork_editor.SubNetworkEditor.html#render-1" class="tsd-kind-icon">render</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private">
-								<a href="editors_communication_subnetwork_editor.SubNetworkEditor.html#renderIedContainer" class="tsd-kind-icon">render<wbr>Ied<wbr>Container</a>
+								<a href="editors_communication_subnetwork_editor.SubNetworkEditor.html#renderIEDs" class="tsd-kind-icon">renderIEDs</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-inherited tsd-is-external">
 								<a href="editors_communication_subnetwork_editor.SubNetworkEditor.html#replaceChild" class="tsd-kind-icon">replace<wbr>Child</a>

@@ -645,7 +645,7 @@ function sCLIdentity() {
   return "";
 }
 function sCLSelector() {
-  return "SCL";
+  return ":root";
 }
 function namingIdentity(e) {
   return e.parentElement.tagName === "SCL" ? e.getAttribute("name") : `${identity(e.parentElement)}>${e.getAttribute("name")}`;

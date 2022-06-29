@@ -42,7 +42,7 @@ export let SubNetworkEditor = class extends LitElement {
       return null;
     const bitRateValue = bitRate.textContent ?? "";
     const m = bitRate.getAttribute("multiplier");
-    const unit = m === null ? "b/s" : " " + m + "b/s";
+    const unit = ` ${m ?? ""}b/s`;
     return bitRateValue ? bitRateValue + unit : null;
   }
   openConnectedAPwizard() {
@@ -63,7 +63,7 @@ export let SubNetworkEditor = class extends LitElement {
         }
       }));
   }
-  renderIedContainer() {
+  renderIEDs() {
     return Array.from(this.element.querySelectorAll(":scope > ConnectedAP")).map((connAP) => connAP.getAttribute("iedName")).filter((v, i, a) => a.indexOf(v) === i).sort(compareNames).map((iedName) => html` <action-pane id="iedSection" label="${iedName}">
           ${Array.from(this.element.parentElement?.querySelectorAll(`:scope > SubNetwork > ConnectedAP[iedName="${iedName}"]`) ?? []).map((connectedAP) => html`<connectedap-editor
                 class="${connectedAP.parentElement !== this.element ? "disabled" : ""}"
@@ -77,7 +77,7 @@ export let SubNetworkEditor = class extends LitElement {
     return `(${this.type}${this.type && this.bitrate ? ` — ${this.bitrate}` : ``})`;
   }
   header() {
-    return ` ${this.name} ${this.desc === null ? "" : `— ${this.desc}`}
+    return `${this.name} ${this.desc === null ? "" : `— ${this.desc}`}
     ${this.subNetworkSpecs()}`;
   }
   render() {
@@ -92,14 +92,15 @@ export let SubNetworkEditor = class extends LitElement {
         <mwc-icon-button
           icon="delete"
           @click=${() => this.remove()}
-        ></mwc-icon-button> </abbr
-      ><abbr slot="action" title="${translate("add")}">
+        ></mwc-icon-button>
+      </abbr>
+      <abbr slot="action" title="${translate("add")}">
         <mwc-icon-button
           icon="playlist_add"
           @click="${() => this.openConnectedAPwizard()}"
         ></mwc-icon-button>
       </abbr>
-      <div id="iedContainer">${this.renderIedContainer()}</div>
+      <div id="iedContainer">${this.renderIEDs()}</div>
     </action-pane> `;
   }
 };
@@ -128,18 +129,21 @@ SubNetworkEditor.styles = css`
   `;
 __decorate([
   property({attribute: false})
+], SubNetworkEditor.prototype, "doc", 2);
+__decorate([
+  property({attribute: false})
 ], SubNetworkEditor.prototype, "element", 2);
 __decorate([
-  property()
+  property({type: String})
 ], SubNetworkEditor.prototype, "name", 1);
 __decorate([
-  property()
+  property({type: String})
 ], SubNetworkEditor.prototype, "desc", 1);
 __decorate([
-  property()
+  property({type: String})
 ], SubNetworkEditor.prototype, "type", 1);
 __decorate([
-  property()
+  property({type: String})
 ], SubNetworkEditor.prototype, "bitrate", 1);
 SubNetworkEditor = __decorate([
   customElement("subnetwork-editor")

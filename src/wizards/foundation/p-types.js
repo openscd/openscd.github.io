@@ -1,7 +1,7 @@
 export function getTypes(element) {
-  if (!element.ownerDocument)
+  if (!element.ownerDocument.documentElement)
     return [];
-  const scl = element.ownerDocument.querySelector(":root");
+  const scl = element.ownerDocument.documentElement;
   const type = (scl.getAttribute("version") ?? "2003") + (scl.getAttribute("revision") ?? "") + (scl.getAttribute("release") ?? "");
   if (type === "2003")
     return pTypes2003;

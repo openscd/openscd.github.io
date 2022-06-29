@@ -55,6 +55,7 @@ export default class CommunicationPlugin extends LitElement {
       ></mwc-fab>
       <section>
         ${Array.from(this.doc.querySelectorAll("SubNetwork") ?? []).filter(isPublic).map((subnetwork) => html`<subnetwork-editor
+                .doc=${this.doc}
                 .element=${subnetwork}
               ></subnetwork-editor>`)}
       </section> `;

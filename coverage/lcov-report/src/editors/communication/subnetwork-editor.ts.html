@@ -23,16 +23,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">99.37% </span>
+                <span class="strong">99.38% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>158/159</span>
+                <span class='fraction'>161/162</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">90.32% </span>
+                <span class="strong">90% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>28/31</span>
+                <span class='fraction'>27/30</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">99.37% </span>
+                <span class="strong">99.38% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>158/159</span>
+                <span class='fraction'>161/162</span>
             </div>
         
             
@@ -222,7 +222,12 @@
 <a name='L157'></a><a href='#L157'>157</a>
 <a name='L158'></a><a href='#L158'>158</a>
 <a name='L159'></a><a href='#L159'>159</a>
-<a name='L160'></a><a href='#L160'>160</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">4x</span>
+<a name='L160'></a><a href='#L160'>160</a>
+<a name='L161'></a><a href='#L161'>161</a>
+<a name='L162'></a><a href='#L162'>162</a>
+<a name='L163'></a><a href='#L163'>163</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-yes">4x</span>
@@ -381,6 +386,7 @@
 <span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import {
   LitElement,
   TemplateResult,
@@ -405,32 +411,34 @@ import { wizards } from '../../wizards/wizard-library.js';
 /** [[`Communication`]] subeditor for a `SubNetwork` element. */
 @customElement('subnetwork-editor')
 export class SubNetworkEditor extends LitElement {
+  @property({ attribute: false })
+  doc!: XMLDocument;
   /** SCL element SubNetwork */
   @property({ attribute: false })
   element!: Element;
   /** SubNetwork attribute name */
-  @property()
+  @property({ type: String })
   get name(): string {
     return this.element.getAttribute('name') ?? 'UNDEFINED';
   }
   /** SubNetwork attribute desc */
-  @property()
+  @property({ type: String })
   get desc(): string | null {
     return this.element.getAttribute('desc') ?? null;
   }
   /** SubNetwork attribute type */
-  @property()
+  @property({ type: String })
   get type(): string | null {
     return this.element.getAttribute('type') ?? null;
   }
   /** SubNetwork child elements BitRate label */
-  @property()
+  @property({ type: String })
   get bitrate(): string | null {
     const bitRate = this.element.querySelector('BitRate');
     if (bitRate === null) return null;
     const bitRateValue = bitRate.<span class="branch-0 cbranch-no" title="branch not covered" >textContent ?? '';</span>
     const m = bitRate.getAttribute('multiplier');
-    const unit = m === null ? 'b/s' : ' ' + m + 'b/s';
+    const unit = ` ${m ?? ''}b/s`;
     return bitRateValue ? bitRateValue + unit : null;
   }
 &nbsp;
@@ -456,7 +464,7 @@ export class SubNetworkEditor extends LitElement {
       );
   }
 &nbsp;
-  private renderIedContainer(): TemplateResult[] {
+  private renderIEDs(): TemplateResult[] {
     return Array.from(this.element.querySelectorAll(':scope &gt; ConnectedAP'))
       .map(connAP =&gt; connAP.getAttribute('iedName')!)
       .filter((v, i, a) =&gt; a.indexOf(v) === i)
@@ -489,7 +497,7 @@ export class SubNetworkEditor extends LitElement {
   }
 &nbsp;
   private header(): string {
-    return ` ${this.name} ${this.desc === null ? '' : `— ${this.desc}`}
+    return `${this.name} ${this.desc === null ? '' : `— ${this.desc}`}
     ${this.subNetworkSpecs()}`;
   }
 &nbsp;
@@ -505,14 +513,15 @@ export class SubNetworkEditor extends LitElement {
         &lt;mwc-icon-button
           icon="delete"
           @click=${() =&gt; this.remove()}
-        &gt;&lt;/mwc-icon-button&gt; &lt;/abbr
-      &gt;&lt;abbr slot="action" title="${translate('add')}"&gt;
+        &gt;&lt;/mwc-icon-button&gt;
+      &lt;/abbr&gt;
+      &lt;abbr slot="action" title="${translate('add')}"&gt;
         &lt;mwc-icon-button
           icon="playlist_add"
           @click="${() =&gt; this.openConnectedAPwizard()}"
         &gt;&lt;/mwc-icon-button&gt;
       &lt;/abbr&gt;
-      &lt;div id="iedContainer"&gt;${this.renderIedContainer()}&lt;/div&gt;
+      &lt;div id="iedContainer"&gt;${this.renderIEDs()}&lt;/div&gt;
     &lt;/action-pane&gt; `;
   }
 &nbsp;
@@ -547,7 +556,7 @@ export class SubNetworkEditor extends LitElement {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener">istanbul</a>
-                at Mon Jun 27 2022 00:37:36 GMT+0000 (Coordinated Universal Time)
+                at Wed Jun 29 2022 09:29:44 GMT+0000 (Coordinated Universal Time)
             </div>
         </div>
         <script src="../../../prettify.js"></script>
