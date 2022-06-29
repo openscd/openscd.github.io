@@ -2,17 +2,17 @@ import {html} from "../../../_snowpack/pkg/lit-element.js";
 import {translate} from "../../../_snowpack/pkg/lit-translate.js";
 import "../../finder-list.js";
 import {identity, isPublic, selector} from "../../foundation.js";
-function getDisplayString(entry) {
+export function getDisplayString(entry) {
   if (entry.startsWith("IED:"))
     return entry.replace(/^.*:/, "").trim();
   if (entry.startsWith("LN0:"))
     return "LLN0";
   return entry.replace(/^.*>/, "").trim();
 }
-function getReader(server, getChildren) {
+export function getReader(doc, getChildren) {
   return async (path) => {
     const [tagName, id] = path[path.length - 1]?.split(": ", 2);
-    const element = server.ownerDocument.querySelector(selector(tagName, id));
+    const element = doc.querySelector(selector(tagName, id));
     if (!element)
       return {path, header: html`<p>${translate("error")}</p>`, entries: []};
     return {
@@ -30,7 +30,7 @@ function getIED(parent) {
 export function iEDPicker(doc) {
   return html`<finder-list
     path="${JSON.stringify(["SCL: "])}"
-    .read=${getReader(doc.querySelector("SCL"), getIED)}
+    .read=${getReader(doc, getIED)}
     .getDisplayString=${getDisplayString}
     .getTitle=${(path) => path[path.length - 1]}
   ></finder-list>`;
@@ -39,7 +39,7 @@ export function iEDsPicker(doc) {
   return html`<finder-list
     multi
     path="${JSON.stringify(["SCL: "])}"
-    .read=${getReader(doc.querySelector("SCL"), getIED)}
+    .read=${getReader(doc, getIED)}
     .getDisplayString=${getDisplayString}
     .getTitle=${(path) => path[path.length - 1]}
   ></finder-list>`;
@@ -54,7 +54,7 @@ export function dataAttributePicker(server) {
   return html`<finder-list
     multi
     .paths=${[["Server: " + identity(server)]]}
-    .read=${getReader(server, getDataModelChildren)}
+    .read=${getReader(server.ownerDocument, getDataModelChildren)}
     .getDisplayString=${getDisplayString}
     .getTitle=${(path) => path[path.length - 1]}
   ></finder-list>`;
@@ -80,7 +80,7 @@ export function sampledValueDataPicker(server) {
   return html`<finder-list
     multi
     paths=${JSON.stringify([["Server: " + identity(server)]])}
-    .read=${getReader(server, getSMVDataChildren)}
+    .read=${getReader(server.ownerDocument, getSMVDataChildren)}
     .getDisplayString=${getDisplayString}
     .getTitle=${(path) => path[path.length - 1]}
   ></finder-list>`;

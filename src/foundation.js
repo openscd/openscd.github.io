@@ -76,7 +76,7 @@ export function newActionEvent(action, eventInitDict) {
     detail: {action, ...eventInitDict?.detail}
   });
 }
-export const wizardInputSelector = "wizard-textfield, mwc-textfield, ace-editor, mwc-select,wizard-select, wizard-checkbox";
+export const wizardInputSelector = "wizard-textfield, mwc-textfield, ace-editor, mwc-select, wizard-select, wizard-checkbox";
 export function isWizardFactory(maybeFactory) {
   return typeof maybeFactory === "function";
 }
@@ -1828,6 +1828,7 @@ export const patterns = {
   nmTokens: nmToken + "( " + nmToken + ")*",
   decimal: "[+-]?[0-9]+(([.][0-9]*)?|([.][0-9]+))",
   unsigned: "[+]?[0-9]+(([.][0-9]*)?|([.][0-9]+))",
+  integer: "[+-]?[0-9]+([0-9]*)",
   alphanumericFirstUpperCase: "[A-Z][0-9,A-Z,a-z]*",
   alphanumericFirstLowerCase: "[a-z][0-9,A-Z,a-z]*",
   lnClass: "(LLN0)|[A-Z]{4,4}"

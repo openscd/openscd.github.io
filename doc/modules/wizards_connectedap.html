@@ -73,6 +73,8 @@
 							<h3>Functions</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-function tsd-parent-kind-module"><a href="wizards_connectedap.html#createConnectedApWizard" class="tsd-kind-icon">create<wbr>Connected<wbr>ApWizard</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module"><a href="wizards_connectedap.html#createPTextField" class="tsd-kind-icon">createPText<wbr>Field</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module"><a href="wizards_connectedap.html#createTypeRestrictionCheckbox" class="tsd-kind-icon">create<wbr>Type<wbr>Restriction<wbr>Checkbox</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-module"><a href="wizards_connectedap.html#editConnectedApWizard" class="tsd-kind-icon">edit<wbr>Connected<wbr>ApWizard</a></li>
 							</ul>
 						</section>
@@ -91,7 +93,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/f082d20/src/wizards/connectedap.ts#L89">src/wizards/connectedap.ts:89</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/2d98615/src/wizards/connectedap.ts#L117">src/wizards/connectedap.ts:117</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -106,6 +108,64 @@
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
+					<a name="createPTextField" class="tsd-anchor"></a>
+					<h3>createPText<wbr>Field</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
+						<li class="tsd-signature tsd-kind-icon">createPText<wbr>Field<span class="tsd-signature-symbol">(</span>element<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Element</span>, pType<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">TemplateResult</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/2d98615/src/wizards/connectedap.ts#L103">src/wizards/connectedap.ts:103</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>element: <span class="tsd-signature-type">Element</span></h5>
+								</li>
+								<li>
+									<h5>pType: <span class="tsd-signature-type">string</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">TemplateResult</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
+					<a name="createTypeRestrictionCheckbox" class="tsd-anchor"></a>
+					<h3>create<wbr>Type<wbr>Restriction<wbr>Checkbox</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
+						<li class="tsd-signature tsd-kind-icon">create<wbr>Type<wbr>Restriction<wbr>Checkbox<span class="tsd-signature-symbol">(</span>element<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Element</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">TemplateResult</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/2d98615/src/wizards/connectedap.ts#L93">src/wizards/connectedap.ts:93</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Creates a TypeRestriction checkbox for a given ConnectedAP wizard.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>element: <span class="tsd-signature-type">Element</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The ConnectedAP of the wizard.</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">TemplateResult</span></h4>
+							<p>The checkbox within a formfield.</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
 					<a name="editConnectedApWizard" class="tsd-anchor"></a>
 					<h3>edit<wbr>Connected<wbr>ApWizard</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
@@ -115,7 +175,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/f082d20/src/wizards/connectedap.ts#L214">src/wizards/connectedap.ts:214</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/2d98615/src/wizards/connectedap.ts#L242">src/wizards/connectedap.ts:242</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -146,6 +206,12 @@
 				<ul class="before-current">
 					<li class=" tsd-kind-function tsd-parent-kind-module">
 						<a href="wizards_connectedap.html#createConnectedApWizard" class="tsd-kind-icon">create<wbr>Connected<wbr>ApWizard</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-module">
+						<a href="wizards_connectedap.html#createPTextField" class="tsd-kind-icon">createPText<wbr>Field</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-module">
+						<a href="wizards_connectedap.html#createTypeRestrictionCheckbox" class="tsd-kind-icon">create<wbr>Type<wbr>Restriction<wbr>Checkbox</a>
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-module">
 						<a href="wizards_connectedap.html#editConnectedApWizard" class="tsd-kind-icon">edit<wbr>Connected<wbr>ApWizard</a>

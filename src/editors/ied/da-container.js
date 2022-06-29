@@ -72,7 +72,7 @@ export let DAContainer = class extends Container {
     const templateStructure = this.getTemplateStructure();
     const [parentElement, uninitializedTemplateStructure] = determineUninitializedStructure(lnElement, templateStructure);
     const newElement = initializeElements(uninitializedTemplateStructure);
-    if (parentElement && newElement) {
+    if (newElement) {
       const wizard = createDAIWizard(parentElement, newElement, this.element);
       if (wizard)
         this.dispatchEvent(newWizardEvent(wizard));

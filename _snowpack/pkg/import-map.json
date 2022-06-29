@@ -33,6 +33,8 @@
     "lit-html": "./lit-html.js",
     "lit-html/directives/class-map": "./lit-html/directives/class-map.js",
     "lit-html/directives/if-defined": "./lit-html/directives/if-defined.js",
+    "lit-html/directives/if-defined.js": "./lit-html/directives/if-defined.js",
+    "lit-html/directives/live": "./lit-html/directives/live.js",
     "lit-html/directives/repeat": "./lit-html/directives/repeat.js",
     "lit-html/directives/unsafe-html": "./lit-html/directives/unsafe-html.js",
     "lit-html/directives/until": "./lit-html/directives/until.js",

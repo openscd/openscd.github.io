@@ -52,6 +52,25 @@ function existConnectedAp(accesspoint) {
   const connAp = accesspoint.ownerDocument.querySelector(`ConnectedAP[iedName="${iedName}"][apName="${apName}"]`);
   return (connAp && isPublic(connAp)) ?? false;
 }
+export function createTypeRestrictionCheckbox(element) {
+  return html`<mwc-formfield
+    label="${translate("connectedap.wizard.addschemainsttype")}"
+    ><mwc-checkbox
+      id="typeRestriction"
+      ?checked=${hasTypeRestriction(element)}
+    ></mwc-checkbox>
+  </mwc-formfield>`;
+}
+export function createPTextField(element, pType) {
+  return html`<wizard-textfield
+    required
+    label="${pType}"
+    pattern="${ifDefined(typePattern[pType])}"
+    ?nullable=${typeNullable[pType]}
+    .maybeValue=${element.querySelector(`Address > P[type="${pType}"]`)?.innerHTML ?? null}
+    maxLength="${ifDefined(typeMaxLength[pType])}"
+  ></wizard-textfield>`;
+}
 export function createConnectedApWizard(element) {
   const doc = element.ownerDocument;
   const accessPoints = Array.from(doc.querySelectorAll(":root > IED")).sort(compareNames).flatMap((ied) => Array.from(ied.querySelectorAll(":root > IED > AccessPoint"))).map((accesspoint) => {
@@ -147,20 +166,8 @@ export function editConnectedApWizard(element) {
         action: updateConnectedApAction(element)
       },
       content: [
-        html`<mwc-formfield
-            label="${translate("connectedap.wizard.addschemainsttype")}"
-            ><mwc-checkbox
-              id="typeRestriction"
-              ?checked=${hasTypeRestriction(element)}
-            ></mwc-checkbox></mwc-formfield
-          >${getTypes(element).map((ptype) => html`<wizard-textfield
-                required
-                label="${ptype}"
-                pattern="${ifDefined(typePattern[ptype])}"
-                ?nullable=${typeNullable[ptype]}
-                .maybeValue=${element.querySelector(`Address > P[type="${ptype}"]`)?.innerHTML ?? null}
-                maxLength="${ifDefined(typeMaxLength[ptype])}"
-              ></wizard-textfield>`)}`
+        html`${createTypeRestrictionCheckbox(element)}
+          ${getTypes(element).map((pType) => html`${createPTextField(element, pType)}`)}`
       ]
     }
   ];

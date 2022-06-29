@@ -74,6 +74,8 @@
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-function tsd-parent-kind-module"><a href="wizards_foundation_finder.html#dataAttributePicker" class="tsd-kind-icon">data<wbr>Attribute<wbr>Picker</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-module"><a href="wizards_foundation_finder.html#getDataModelChildren" class="tsd-kind-icon">get<wbr>Data<wbr>Model<wbr>Children</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module"><a href="wizards_foundation_finder.html#getDisplayString" class="tsd-kind-icon">get<wbr>Display<wbr>String</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module"><a href="wizards_foundation_finder.html#getReader" class="tsd-kind-icon">get<wbr>Reader</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-module"><a href="wizards_foundation_finder.html#getSMVDataChildren" class="tsd-kind-icon">getSMVData<wbr>Children</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-module"><a href="wizards_foundation_finder.html#iEDPicker" class="tsd-kind-icon">iEDPicker</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-module"><a href="wizards_foundation_finder.html#iEDsPicker" class="tsd-kind-icon">iEDs<wbr>Picker</a></li>
@@ -95,7 +97,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/f082d20/src/wizards/foundation/finder.ts#L82">src/wizards/foundation/finder.ts:82</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/2d98615/src/wizards/foundation/finder.ts#L82">src/wizards/foundation/finder.ts:82</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -118,7 +120,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/f082d20/src/wizards/foundation/finder.ts#L61">src/wizards/foundation/finder.ts:61</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/2d98615/src/wizards/foundation/finder.ts#L61">src/wizards/foundation/finder.ts:61</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -132,6 +134,91 @@
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
+					<a name="getDisplayString" class="tsd-anchor"></a>
+					<h3>get<wbr>Display<wbr>String</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Display<wbr>String<span class="tsd-signature-symbol">(</span>entry<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/2d98615/src/wizards/foundation/finder.ts#L8">src/wizards/foundation/finder.ts:8</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>entry: <span class="tsd-signature-type">string</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
+					<a name="getReader" class="tsd-anchor"></a>
+					<h3>get<wbr>Reader</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Reader<span class="tsd-signature-symbol">(</span>doc<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Document</span>, getChildren<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>element<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Element</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">Element</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>path<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/finder_list.Directory.html" class="tsd-signature-type" data-tsd-kind="Interface">Directory</a><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/2d98615/src/wizards/foundation/finder.ts#L14">src/wizards/foundation/finder.ts:14</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>doc: <span class="tsd-signature-type">Document</span></h5>
+								</li>
+								<li>
+									<h5>getChildren: <span class="tsd-signature-symbol">(</span>element<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Element</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">Element</span><span class="tsd-signature-symbol">[]</span></h5>
+									<ul class="tsd-parameters">
+										<li class="tsd-parameter-signature">
+											<ul class="tsd-signatures tsd-kind-type-literal">
+												<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>element<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Element</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Element</span><span class="tsd-signature-symbol">[]</span></li>
+											</ul>
+											<ul class="tsd-descriptions">
+												<li class="tsd-description">
+													<h4 class="tsd-parameters-title">Parameters</h4>
+													<ul class="tsd-parameters">
+														<li>
+															<h5>element: <span class="tsd-signature-type">Element</span></h5>
+														</li>
+													</ul>
+													<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Element</span><span class="tsd-signature-symbol">[]</span></h4>
+												</li>
+											</ul>
+										</li>
+									</ul>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-symbol">(</span>path<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/finder_list.Directory.html" class="tsd-signature-type" data-tsd-kind="Interface">Directory</a><span class="tsd-signature-symbol">&gt;</span></h4>
+							<ul class="tsd-parameters">
+								<li class="tsd-parameter-signature">
+									<ul class="tsd-signatures tsd-kind-type-literal">
+										<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>path<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/finder_list.Directory.html" class="tsd-signature-type" data-tsd-kind="Interface">Directory</a><span class="tsd-signature-symbol">&gt;</span></li>
+									</ul>
+									<ul class="tsd-descriptions">
+										<li class="tsd-description">
+											<h4 class="tsd-parameters-title">Parameters</h4>
+											<ul class="tsd-parameters">
+												<li>
+													<h5>path: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></h5>
+												</li>
+											</ul>
+											<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/finder_list.Directory.html" class="tsd-signature-type" data-tsd-kind="Interface">Directory</a><span class="tsd-signature-symbol">&gt;</span></h4>
+										</li>
+									</ul>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
 					<a name="getSMVDataChildren" class="tsd-anchor"></a>
 					<h3>getSMVData<wbr>Children</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
@@ -141,7 +228,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/f082d20/src/wizards/foundation/finder.ts#L92">src/wizards/foundation/finder.ts:92</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/2d98615/src/wizards/foundation/finder.ts#L92">src/wizards/foundation/finder.ts:92</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -164,7 +251,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/f082d20/src/wizards/foundation/finder.ts#L42">src/wizards/foundation/finder.ts:42</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/2d98615/src/wizards/foundation/finder.ts#L42">src/wizards/foundation/finder.ts:42</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -187,7 +274,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/f082d20/src/wizards/foundation/finder.ts#L51">src/wizards/foundation/finder.ts:51</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/2d98615/src/wizards/foundation/finder.ts#L51">src/wizards/foundation/finder.ts:51</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -210,7 +297,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/f082d20/src/wizards/foundation/finder.ts#L140">src/wizards/foundation/finder.ts:140</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/2d98615/src/wizards/foundation/finder.ts#L140">src/wizards/foundation/finder.ts:140</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -243,6 +330,12 @@
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-module">
 						<a href="wizards_foundation_finder.html#getDataModelChildren" class="tsd-kind-icon">get<wbr>Data<wbr>Model<wbr>Children</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-module">
+						<a href="wizards_foundation_finder.html#getDisplayString" class="tsd-kind-icon">get<wbr>Display<wbr>String</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-module">
+						<a href="wizards_foundation_finder.html#getReader" class="tsd-kind-icon">get<wbr>Reader</a>
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-module">
 						<a href="wizards_foundation_finder.html#getSMVDataChildren" class="tsd-kind-icon">getSMVData<wbr>Children</a>
