@@ -10,6 +10,7 @@ var __decorate = (decorators, target, key, kind) => {
   return result;
 };
 import {html, query} from "../_snowpack/pkg/lit-element.js";
+import {classMap} from "../_snowpack/pkg/lit-html/directives/class-map.js";
 import {translate} from "../_snowpack/pkg/lit-translate.js";
 import "../_snowpack/pkg/@material/mwc-button.js";
 import "../_snowpack/pkg/@material/mwc-dialog.js";
@@ -174,6 +175,12 @@ export function Plugging(Base) {
             .docId=${this.docId}
             .pluginId=${plugin.src}
             .nsdoc=${this.nsdoc}
+            class="${classMap({
+          plugin: true,
+          menu: plugin.kind === "menu",
+          validator: plugin.kind === "validator",
+          editor: plugin.kind === "editor"
+        })}"
           ></${tag}>`
       };
     }

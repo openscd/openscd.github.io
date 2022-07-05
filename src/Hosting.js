@@ -20,6 +20,7 @@ import "../_snowpack/pkg/@material/mwc-list/mwc-list-item.js";
 import "../_snowpack/pkg/@material/mwc-tab.js";
 import "../_snowpack/pkg/@material/mwc-tab-bar.js";
 import "../_snowpack/pkg/@material/mwc-top-app-bar-fixed.js";
+import {List} from "../_snowpack/pkg/@material/mwc-list.js";
 import {newPendingStateEvent} from "./foundation.js";
 import {pluginIcons} from "./Plugging.js";
 export function Hosting(Base) {
@@ -36,7 +37,7 @@ export function Hosting(Base) {
           return;
         this.diagnoses.clear();
         this.shouldValidate = false;
-        this.validated = Promise.allSettled(this.menuUI.querySelector("mwc-list").items.filter((item) => item.className === "validator").map((item) => item.lastElementChild.validate())).then();
+        this.validated = Promise.allSettled(this.menuUI.querySelector("mwc-list").items.filter((item) => item.className === "validator").map((item) => item.nextElementSibling.validate())).then();
         this.dispatchEvent(newPendingStateEvent(this.validated));
       });
     }
@@ -49,7 +50,7 @@ export function Hosting(Base) {
         icon: plugin.icon || pluginIcons["menu"],
         name: plugin.name,
         action: (ae) => {
-          this.dispatchEvent(newPendingStateEvent(ae.target.items[ae.detail.index].lastElementChild.run()));
+          this.dispatchEvent(newPendingStateEvent(ae.target.items[ae.detail.index].nextElementSibling.run()));
         },
         disabled: () => plugin.requireDoc && this.doc === null,
         content: plugin.content,
@@ -59,7 +60,7 @@ export function Hosting(Base) {
         icon: plugin.icon || pluginIcons["menu"],
         name: plugin.name,
         action: (ae) => {
-          this.dispatchEvent(newPendingStateEvent(ae.target.items[ae.detail.index].lastElementChild.run()));
+          this.dispatchEvent(newPendingStateEvent(ae.target.items[ae.detail.index].nextElementSibling.run()));
         },
         disabled: () => plugin.requireDoc && this.doc === null,
         content: plugin.content,
@@ -69,7 +70,7 @@ export function Hosting(Base) {
         icon: plugin.icon || pluginIcons["menu"],
         name: plugin.name,
         action: (ae) => {
-          this.dispatchEvent(newPendingStateEvent(ae.target.items[ae.detail.index].lastElementChild.run()));
+          this.dispatchEvent(newPendingStateEvent(ae.target.items[ae.detail.index].nextElementSibling.run()));
         },
         disabled: () => plugin.requireDoc && this.doc === null,
         content: plugin.content,
@@ -81,7 +82,7 @@ export function Hosting(Base) {
         action: (ae) => {
           if (this.diagnoses.get(plugin.src))
             this.diagnoses.get(plugin.src).length = 0;
-          this.dispatchEvent(newPendingStateEvent(ae.target.items[ae.detail.index].lastElementChild.validate()));
+          this.dispatchEvent(newPendingStateEvent(ae.target.items[ae.detail.index].nextElementSibling.validate()));
         },
         disabled: () => this.doc === null,
         content: plugin.content,
@@ -155,8 +156,8 @@ export function Hosting(Base) {
           ><mwc-icon slot="graphic">${me.icon}</mwc-icon>
           <span>${translate(me.name)}</span>
           ${me.hint ? html`<span slot="secondary"><tt>${me.hint}</tt></span>` : ""}
-          ${me.content ?? ""}
         </mwc-list-item>
+        ${me.content ?? ""}
       `;
     }
     renderActionItem(me) {
@@ -186,7 +187,10 @@ export function Hosting(Base) {
           ${this.docName ? html`<span slot="subtitle">${this.docName}</span>` : ""}
           <mwc-list
             wrapFocus
-            @action=${(ae) => this.menu.filter((item) => item !== "divider")[ae.detail.index]?.action?.(ae)}
+            @action=${(ae) => {
+        if (ae.target instanceof List)
+          this.menu.filter((item) => item !== "divider")[ae.detail.index]?.action?.(ae);
+      }}
           >
             ${this.menu.map(this.renderMenuItem)}
           </mwc-list>

@@ -157,6 +157,14 @@ OpenSCD.styles = css`
       margin-left: -30px;
       font-family: 'Roboto', sans-serif;
     }
+
+    .plugin.menu {
+      display: flex;
+    }
+
+    .plugin.validator {
+      display: flex;
+    }
   `;
 __decorate([
   property({type: String})
