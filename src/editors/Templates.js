@@ -117,7 +117,7 @@ export default class TemplatesPlugin extends LitElement {
           </h1>
           <filtered-list
             id="lnodetypelist"
-            @selected=${(e) => this.openLNodeTypeWizard(e.target.selected.value)}
+            @action=${(e) => this.openLNodeTypeWizard(e.target.selected.value)}
           >
             ${Array.from(this.doc.querySelectorAll(":root > DataTypeTemplates > LNodeType") ?? []).map((lnodetype) => html`<mwc-list-item
               twoline
@@ -145,7 +145,7 @@ export default class TemplatesPlugin extends LitElement {
           </h1>
           <filtered-list
             id="dotypelist"
-            @selected=${(e) => this.openDOTypeWizard(e.target.selected.value)}
+            @action=${(e) => this.openDOTypeWizard(e.target.selected.value)}
           >
             ${Array.from(this.doc.querySelectorAll(":root > DataTypeTemplates > DOType") ?? []).map((dotype) => html`<mwc-list-item
                   twoline
@@ -173,7 +173,7 @@ export default class TemplatesPlugin extends LitElement {
           </h1>
           <filtered-list
             id="datypelist"
-            @selected=${(e) => this.openDATypeWizard(e.target.selected.value)}
+            @action=${(e) => this.openDATypeWizard(e.target.selected.value)}
           >
             ${Array.from(this.doc.querySelectorAll(":root > DataTypeTemplates > DAType") ?? []).map((datype) => html`<mwc-list-item
                   value="${identity(datype)}"
@@ -200,7 +200,7 @@ export default class TemplatesPlugin extends LitElement {
           </h1>
           <filtered-list
             id="enumtypelist"
-            @selected=${(e) => this.openEnumTypeWizard(e.target.selected.value)}
+            @action=${(e) => this.openEnumTypeWizard(e.target.selected.value)}
           >
             ${Array.from(this.doc.querySelectorAll(":root > DataTypeTemplates > EnumType") ?? []).map((enumtype) => html`<mwc-list-item
                   value="${identity(enumtype)}"
@@ -245,5 +245,5 @@ TemplatesPlugin.styles = css`
     }
   `;
 __decorate([
-  property()
+  property({attribute: false})
 ], TemplatesPlugin.prototype, "doc", 2);
