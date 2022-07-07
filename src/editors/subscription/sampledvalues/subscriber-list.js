@@ -32,6 +32,9 @@ import {
   getFcdaReferences
 } from "../../../foundation/ied.js";
 import {
+  canCreateValidExtRef,
+  createExtRefElement,
+  existExtRef,
   styles,
   SubscriberListContainer,
   SubscribeStatus,
@@ -125,11 +128,12 @@ export let SubscriberList = class extends SubscriberListContainer {
     this.requestUpdate();
   }
   async onIEDSubscriptionEvent(event) {
-    let iedToSubscribe = event.detail.ied;
+    let iedToSubscribe = event.detail.element;
     if (view == View.SUBSCRIBER) {
-      const dataSetName = event.detail.ied.getAttribute("datSet");
-      this.currentUsedDataset = event.detail.ied.parentElement?.querySelector(`DataSet[name="${dataSetName}"]`);
-      this.currentSmvIedName = event.detail.ied.closest("IED")?.getAttribute("name");
+      const dataSetName = event.detail.element.getAttribute("datSet");
+      this.currentUsedDataset = event.detail.element.parentElement?.querySelector(`DataSet[name="${dataSetName}"]`);
+      this.currentSelectedSmvControl = event.detail.element;
+      this.currentSmvIedName = event.detail.element.closest("IED")?.getAttribute("name");
       iedToSubscribe = this.currentSelectedIed;
     }
     switch (event.detail.subscribeStatus) {
@@ -162,17 +166,8 @@ export let SubscriberList = class extends SubscriberListContainer {
       inputsElement = createElement(ied.ownerDocument, "Inputs", {});
     const actions = [];
     this.currentUsedDataset.querySelectorAll("FCDA").forEach((fcda) => {
-      if (!inputsElement.querySelector(`ExtRef[iedName=${this.currentSmvIedName}]${getFcdaReferences(fcda)}`)) {
-        const extRef = createElement(ied.ownerDocument, "ExtRef", {
-          iedName: this.currentSmvIedName,
-          serviceType: "SMV",
-          ldInst: fcda.getAttribute("ldInst") ?? "",
-          lnClass: fcda.getAttribute("lnClass") ?? "",
-          lnInst: fcda.getAttribute("lnInst") ?? "",
-          prefix: fcda.getAttribute("prefix") ?? "",
-          doName: fcda.getAttribute("doName") ?? "",
-          daName: fcda.getAttribute("daName") ?? ""
-        });
+      if (!existExtRef(inputsElement, fcda) && canCreateValidExtRef(fcda, this.currentSelectedSmvControl)) {
+        const extRef = createExtRefElement(this.currentSelectedSmvControl, fcda);
         if (inputsElement?.parentElement)
           actions.push({new: {parent: inputsElement, element: extRef}});
         else
@@ -290,7 +285,7 @@ SubscriberList.styles = css`
     }
   `;
 __decorate([
-  property()
+  property({attribute: false})
 ], SubscriberList.prototype, "doc", 2);
 SubscriberList = __decorate([
   customElement("subscriber-list-smv")

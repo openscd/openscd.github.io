@@ -6,10 +6,10 @@ export function newGOOSESelectEvent(gseControl, dataset, eventInitDict) {
     detail: {gseControl, dataset, ...eventInitDict?.detail}
   });
 }
-export function newGooseSubscriptionEvent(ied, subscribeStatus) {
+export function newGooseSubscriptionEvent(element, subscribeStatus) {
   return new CustomEvent("goose-subscription", {
     bubbles: true,
     composed: true,
-    detail: {ied, subscribeStatus}
+    detail: {element, subscribeStatus}
   });
 }

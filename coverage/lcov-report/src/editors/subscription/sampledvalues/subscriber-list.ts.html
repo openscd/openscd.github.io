@@ -23,16 +23,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">97.7% </span>
+                <span class="strong">97.69% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>426/436</span>
+                <span class='fraction'>423/433</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">70% </span>
+                <span class="strong">79.54% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>35/50</span>
+                <span class='fraction'>35/44</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">97.7% </span>
+                <span class="strong">97.69% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>426/436</span>
+                <span class='fraction'>423/433</span>
             </div>
         
             
@@ -496,10 +496,10 @@
 <a name='L431'></a><a href='#L431'>431</a>
 <a name='L432'></a><a href='#L432'>432</a>
 <a name='L433'></a><a href='#L433'>433</a>
-<a name='L434'></a><a href='#L434'>434</a>
-<a name='L435'></a><a href='#L435'>435</a>
-<a name='L436'></a><a href='#L436'>436</a>
-<a name='L437'></a><a href='#L437'>437</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">2x</span>
+<a name='L434'></a><a href='#L434'>434</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
@@ -658,12 +658,6 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -965,6 +959,9 @@ import {
   getFcdaReferences,
 } from '../../../foundation/ied.js';
 import {
+  canCreateValidExtRef,
+  createExtRefElement,
+  existExtRef,
   IEDSelectEvent,
   ListElement,
   styles,
@@ -980,7 +977,7 @@ let view: View = View.PUBLISHER;
 /** An sub element for subscribing and unsubscribing IEDs to Sampled Values messages. */
 @customElement('subscriber-list-smv')
 export class SubscriberList extends SubscriberListContainer {
-  @property()
+  @property({ attribute: false })
   doc!: XMLDocument;
 &nbsp;
   /** Current selected Sampled Values element (when in GOOSE Publisher view) */
@@ -1135,14 +1132,16 @@ export class SubscriberList extends SubscriberListContainer {
   }
 &nbsp;
   private async onIEDSubscriptionEvent(event: SmvSubscriptionEvent) {
-    let iedToSubscribe = event.detail.ied;
+    let iedToSubscribe = event.detail.element;
 &nbsp;
     if (view == View.SUBSCRIBER) {
-      const dataSetName = event.detail.ied.getAttribute('datSet');
-      this.currentUsedDataset = event.detail.ied.parentElement?.querySelector(
-        `DataSet[name="${dataSetName}"]`
-      );
-      this.currentSmvIedName = event.detail.ied
+      const dataSetName = event.detail.element.getAttribute('datSet');
+      this.currentUsedDataset =
+        event.detail.element.parentElement?.querySelector(
+          `DataSet[name="${dataSetName}"]`
+        );
+      this.currentSelectedSmvControl = event.detail.element;
+      this.currentSmvIedName = event.detail.element
         .closest('IED')
         ?.getAttribute('name');
       iedToSubscribe = this.currentSelectedIed!;
@@ -1184,21 +1183,13 @@ export class SubscriberList extends SubscriberListContainer {
     const actions: Create[] = [];
     this.currentUsedDataset!.querySelectorAll('FCDA').forEach(fcda =&gt; {
       if (
-        !inputsElement!.querySelector(
-          `ExtRef[iedName=${this.currentSmvIedName}]` +
-            `${getFcdaReferences(fcda)}`
-        )
+        !existExtRef(inputsElement!, fcda) &amp;&amp;
+        canCreateValidExtRef(fcda, this.currentSelectedSmvControl)
       ) {
-        const extRef = createElement(ied.ownerDocument, 'ExtRef', {
-          iedName: this.currentSmvIedName!,
-          serviceType: 'SMV',
-          ldInst: fcda.getAttribute(<span class="branch-0 cbranch-no" title="branch not covered" >'ldInst') ?? '',</span>
-          lnClass: fcda.getAttribute(<span class="branch-0 cbranch-no" title="branch not covered" >'lnClass') ?? '',</span>
-          lnInst: fcda.getAttribute(<span class="branch-0 cbranch-no" title="branch not covered" >'lnInst') ?? '',</span>
-          prefix: fcda.getAttribute(<span class="branch-0 cbranch-no" title="branch not covered" >'prefix') ?? '',</span>
-          doName: fcda.getAttribute(<span class="branch-0 cbranch-no" title="branch not covered" >'doName') ?? '',</span>
-          daName: fcda.getAttribute(<span class="branch-0 cbranch-no" title="branch not covered" >'daName') ?? '',</span>
-        });
+        const extRef = createExtRefElement(
+          this.currentSelectedSmvControl,
+          fcda
+        );
 &nbsp;
         if (inputsElement?.parentElement)
           actions.push({ new: { parent: inputsElement!, element: <span class="branch-0 cbranch-no" title="branch not covered" >extRef } });</span>
@@ -1378,7 +1369,7 @@ export class SubscriberList extends SubscriberListContainer {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener">istanbul</a>
-                at Tue Jul 05 2022 12:31:03 GMT+0000 (Coordinated Universal Time)
+                at Thu Jul 07 2022 13:44:54 GMT+0000 (Coordinated Universal Time)
             </div>
         </div>
         <script src="../../../../prettify.js"></script>

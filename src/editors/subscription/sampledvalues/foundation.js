@@ -6,10 +6,10 @@ export function newSmvSelectEvent(smvControl, dataset, eventInitDict) {
     detail: {smvControl, dataset, ...eventInitDict?.detail}
   });
 }
-export function newSmvSubscriptionEvent(ied, subscribeStatus) {
+export function newSmvSubscriptionEvent(element, subscribeStatus) {
   return new CustomEvent("smv-subscription", {
     bubbles: true,
     composed: true,
-    detail: {ied, subscribeStatus}
+    detail: {element, subscribeStatus}
   });
 }

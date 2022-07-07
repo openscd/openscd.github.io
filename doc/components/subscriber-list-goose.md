@@ -4,20 +4,20 @@ An sub element for subscribing and unsubscribing IEDs to GOOSE messages.
 
 ## Properties
 
-| Property                    | Attribute | Type                           | Default | Description                                      |
-|-----------------------------|-----------|--------------------------------|---------|--------------------------------------------------|
-| `availableElements`         |           | `ListElement[]`                | []      | List holding all current avaialble Elements which are not subscribed. |
-| `currentGooseIedName`       |           | `string \| null \| undefined`  |         | The name of the IED belonging to the current selected GOOSE |
-| `currentSelectedGseControl` |           | `Element \| undefined`         |         | Current selected GOOSE message (when in GOOSE Publisher view) |
-| `currentSelectedIed`        |           | `Element \| undefined`         |         | Current selected IED (when in Subscriber view)   |
-| `currentUsedDataset`        |           | `Element \| null \| undefined` |         | The current used dataset for subscribing / unsubscribing |
-| `doc`                       | `doc`     | `XMLDocument`                  |         |                                                  |
-| `onGOOSESelectEvent`        |           |                                |         |                                                  |
-| `onGooseSubscriptionEvent`  |           |                                |         |                                                  |
-| `onIEDSelectEvent`          |           |                                |         |                                                  |
-| `onViewChange`              |           |                                |         |                                                  |
-| `subscribedElements`        |           | `ListElement[]`                | []      | List holding all current subscribed Elements.    |
-| `subscriberWrapper`         |           | `Element`                      |         |                                                  |
+| Property                    | Type                           | Default | Description                                      |
+|-----------------------------|--------------------------------|---------|--------------------------------------------------|
+| `availableElements`         | `ListElement[]`                | []      | List holding all current avaialble Elements which are not subscribed. |
+| `currentGooseIedName`       | `string \| null \| undefined`  |         | The name of the IED belonging to the current selected GOOSE |
+| `currentSelectedGseControl` | `Element \| undefined`         |         | Current selected GOOSE message (when in GOOSE Publisher view) |
+| `currentSelectedIed`        | `Element \| undefined`         |         | Current selected IED (when in Subscriber view)   |
+| `currentUsedDataset`        | `Element \| null \| undefined` |         | The current used dataset for subscribing / unsubscribing |
+| `doc`                       | `XMLDocument`                  |         |                                                  |
+| `onGOOSESelectEvent`        |                                |         |                                                  |
+| `onGooseSubscriptionEvent`  |                                |         |                                                  |
+| `onIEDSelectEvent`          |                                |         |                                                  |
+| `onViewChange`              |                                |         |                                                  |
+| `subscribedElements`        | `ListElement[]`                | []      | List holding all current subscribed Elements.    |
+| `subscriberWrapper`         | `Element`                      |         |                                                  |
 
 ## Methods
 

@@ -10,7 +10,8 @@ var __decorate = (decorators, target, key, kind) => {
   return result;
 };
 import {css, LitElement, query} from "../../../_snowpack/pkg/lit-element.js";
-import {compareNames} from "../../foundation.js";
+import {compareNames, createElement} from "../../foundation.js";
+import {getFcdaReferences} from "../../foundation/ied.js";
 export var View;
 (function(View2) {
   View2[View2["PUBLISHER"] = 0] = "PUBLISHER";
@@ -36,6 +37,89 @@ export function newIEDSelectEvent(ied, eventInitDict) {
     composed: true,
     ...eventInitDict,
     detail: {ied, ...eventInitDict?.detail}
+  });
+}
+export function existExtRef(parentInputs, fcda) {
+  const iedName = fcda.closest("IED")?.getAttribute("name");
+  if (!iedName)
+    return false;
+  return !!parentInputs.querySelector(`ExtRef[iedName=${iedName}]${getFcdaReferences(fcda)}`);
+}
+export function canCreateValidExtRef(fcda, controlBlock) {
+  const iedName = fcda.closest("IED")?.getAttribute("name");
+  const [ldInst, lnClass, lnInst, doName] = [
+    "ldInst",
+    "lnClass",
+    "lnInst",
+    "doName"
+  ].map((attr) => fcda.getAttribute(attr));
+  if (!iedName || !ldInst || !lnClass || !lnInst || !doName)
+    return false;
+  if (controlBlock === void 0)
+    return true;
+  const srcLDInst = controlBlock.closest("LDevice")?.getAttribute("inst");
+  const srcLNClass = controlBlock.closest("LN0,LN")?.getAttribute("lnClass");
+  const srcLNInst = controlBlock.closest("LN0,LN")?.getAttribute("inst");
+  const srcCBName = controlBlock.getAttribute("name");
+  if (!srcLDInst || !srcLNClass || !srcCBName || typeof srcLNInst !== "string")
+    return false;
+  return true;
+}
+const serviceTypes = {
+  ReportControl: "Report",
+  GSEControl: "GOOSE",
+  SampledValueControl: "SMV"
+};
+export function createExtRefElement(controlBlock, fCDA) {
+  const iedName = fCDA.closest("IED")?.getAttribute("name") ?? null;
+  const [ldInst, prefix, lnClass, lnInst, doName, daName] = [
+    "ldInst",
+    "prefix",
+    "lnClass",
+    "lnInst",
+    "doName",
+    "daName"
+  ].map((attr) => fCDA.getAttribute(attr));
+  if (fCDA.ownerDocument.documentElement.getAttribute("version") !== "2007")
+    return createElement(fCDA.ownerDocument, "ExtRef", {
+      iedName,
+      ldInst,
+      lnClass,
+      lnInst,
+      prefix,
+      doName,
+      daName
+    });
+  if (!controlBlock || !serviceTypes[controlBlock.tagName])
+    return createElement(fCDA.ownerDocument, "ExtRef", {
+      iedName,
+      serviceType: "Poll",
+      ldInst,
+      lnClass,
+      lnInst,
+      prefix,
+      doName,
+      daName
+    });
+  const srcLDInst = controlBlock.closest("LDevice")?.getAttribute("inst") ?? "";
+  const srcPrefix = controlBlock.closest("LN0,LN")?.getAttribute("prefix") ?? "";
+  const srcLNClass = controlBlock.closest("LN0,LN")?.getAttribute("lnClass") ?? "";
+  const srcLNInst = controlBlock.closest("LN0,LN")?.getAttribute("inst") ?? "";
+  const srcCBName = controlBlock.getAttribute("name") ?? "";
+  return createElement(fCDA.ownerDocument, "ExtRef", {
+    iedName,
+    serviceType: serviceTypes[controlBlock.tagName],
+    ldInst,
+    lnClass,
+    lnInst,
+    prefix,
+    doName,
+    daName,
+    srcLDInst,
+    srcPrefix,
+    srcLNClass,
+    srcLNInst,
+    srcCBName
   });
 }
 export function getOrderedIeds(doc) {
