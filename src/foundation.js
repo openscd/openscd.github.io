@@ -227,10 +227,11 @@ function lNodeIdentity(e) {
 function lNodeSelector(tagName, identity2) {
   if (identity2.endsWith(")")) {
     const [parentIdentity, childIdentity] = pathParts(identity2);
-    const [lnClass2, lnType] = childIdentity.substring(1, identity2.length - 2).split(" ");
+    const [lnClass2, lnType] = childIdentity.substring(1, childIdentity.length - 1).split(" ");
     if (!lnClass2 || !lnType)
       return voidSelector;
-    return tags[tagName].parents.map((parentTag) => `${selector(parentTag, parentIdentity)}>${tagName}[iedName="None"][lnClass="${lnClass2}"][lnType="${lnType}"]`).join(",");
+    const parentSelectors = tags[tagName].parents.flatMap((parentTag) => selector(parentTag, parentIdentity).split(","));
+    return crossProduct(parentSelectors, [">"], [`${tagName}[iedName="None"][lnClass="${lnClass2}"][lnType="${lnType}"]`]).map((strings) => strings.join("")).join(",");
   }
   const [iedName, ldInst, prefix, lnClass, lnInst] = identity2.split(/[ /]/);
   if (!iedName || !ldInst || !lnClass)
