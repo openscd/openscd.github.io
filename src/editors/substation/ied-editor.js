@@ -56,7 +56,9 @@ export let IedEditor = class extends LitElement {
     if (wizard) {
       this.dispatchEvent(newWizardEvent(() => wizard));
     } else {
-      this.dispatchEvent(newActionEvent({old: {parent: this.element.parentElement, element: this.element}}));
+      this.dispatchEvent(newActionEvent({
+        old: {parent: this.element.parentElement, element: this.element}
+      }));
     }
   }
   render() {
@@ -99,10 +101,14 @@ export let IedEditor = class extends LitElement {
         class="selectgse"
         mini
         @click="${() => this.openGseControlSelection()}"
-      ><mwc-icon slot="icon">${gooseIcon}</mwc-icon></mwc-fab
-    ></action-icon> `;
+        ><mwc-icon slot="icon">${gooseIcon}</mwc-icon></mwc-fab
+      ></action-icon
+    > `;
   }
 };
+__decorate([
+  property({attribute: false})
+], IedEditor.prototype, "doc", 2);
 __decorate([
   property({attribute: false})
 ], IedEditor.prototype, "element", 2);

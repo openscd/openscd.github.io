@@ -85,19 +85,25 @@ export let BayEditor = class extends LitElement {
       return html``;
     const lNodes = getChildElementsByTagName(this.element, "LNode");
     return lNodes.length ? html`<div class="container lnode">
-          ${lNodes.map((lNode) => html`<l-node-editor .element=${lNode}></l-node-editor>`)}
+          ${lNodes.map((lNode) => html`<l-node-editor
+                .doc=${this.doc}
+                .element=${lNode}
+              ></l-node-editor>`)}
         </div>` : html``;
   }
   renderFunctions() {
     if (!this.showfunctions)
       return html``;
     const functions = getChildElementsByTagName(this.element, "Function");
-    return html` ${functions.map((fUnction) => html`<function-editor .element=${fUnction}></function-editor>`)}`;
+    return html` ${functions.map((fUnction) => html`<function-editor
+          .doc=${this.doc}
+          .element=${fUnction}
+        ></function-editor>`)}`;
   }
   renderIedContainer() {
     const ieds = this.getAttachedIeds?.(this.element) ?? [];
     return ieds?.length ? html`<div id="iedcontainer">
-          ${ieds.map((ied) => html`<ied-editor .element=${ied}></ied-editor>`)}
+          ${ieds.map((ied) => html`<ied-editor .doc=${this.doc} .element=${ied}></ied-editor>`)}
         </div>` : html``;
   }
   renderAddButtons() {
@@ -164,10 +170,12 @@ export let BayEditor = class extends LitElement {
     })}"
       >
         ${Array.from(getChildElementsByTagName(this.element, "PowerTransformer")).map((pwt) => html`<powertransformer-editor
+              .doc=${this.doc}
               .element=${pwt}
               ?showfunctions=${this.showfunctions}
             ></powertransformer-editor>`)}
         ${Array.from(getChildElementsByTagName(this.element, "ConductingEquipment")).map((voltageLevel) => html`<conducting-equipment-editor
+              .doc=${this.doc}
               .element=${voltageLevel}
               ?readonly=${this.readonly}
               ?showfunctions=${this.showfunctions}
@@ -191,6 +199,9 @@ BayEditor.styles = css`
       margin: 4px 8px 16px;
     }
   `;
+__decorate([
+  property({attribute: false})
+], BayEditor.prototype, "doc", 2);
 __decorate([
   property({attribute: false})
 ], BayEditor.prototype, "element", 2);

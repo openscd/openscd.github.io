@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">95.9% </span>
+                <span class="strong">94.61% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>117/122</span>
+                <span class='fraction'>123/130</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">95.9% </span>
+                <span class="strong">94.61% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>117/122</span>
+                <span class='fraction'>123/130</span>
             </div>
         
             
@@ -185,7 +185,15 @@
 <a name='L120'></a><a href='#L120'>120</a>
 <a name='L121'></a><a href='#L121'>121</a>
 <a name='L122'></a><a href='#L122'>122</a>
-<a name='L123'></a><a href='#L123'>123</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">24x</span>
+<a name='L123'></a><a href='#L123'>123</a>
+<a name='L124'></a><a href='#L124'>124</a>
+<a name='L125'></a><a href='#L125'>125</a>
+<a name='L126'></a><a href='#L126'>126</a>
+<a name='L127'></a><a href='#L127'>127</a>
+<a name='L128'></a><a href='#L128'>128</a>
+<a name='L129'></a><a href='#L129'>129</a>
+<a name='L130'></a><a href='#L130'>130</a>
+<a name='L131'></a><a href='#L131'>131</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">24x</span>
 <span class="cline-any cline-yes">24x</span>
 <span class="cline-any cline-yes">24x</span>
 <span class="cline-any cline-yes">24x</span>
@@ -211,6 +219,9 @@
 <span class="cline-any cline-yes">24x</span>
 <span class="cline-any cline-yes">24x</span>
 <span class="cline-any cline-yes">24x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-yes">4x</span>
@@ -260,10 +271,14 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-yes">24x</span>
 <span class="cline-any cline-yes">24x</span>
 <span class="cline-any cline-yes">24x</span>
 <span class="cline-any cline-yes">24x</span>
+<span class="cline-any cline-yes">24x</span>
+<span class="cline-any cline-yes">24x</span>
 <span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-yes">4x</span>
@@ -304,6 +319,7 @@
 <span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">24x</span>
 <span class="cline-any cline-yes">24x</span>
 <span class="cline-any cline-yes">24x</span>
 <span class="cline-any cline-yes">24x</span>
@@ -328,11 +344,14 @@ import { newActionEvent, newWizardEvent } from '../../foundation.js';
 import { selectGseControlWizard } from '../../wizards/gsecontrol.js';
 import { selectSampledValueControlWizard } from '../../wizards/sampledvaluecontrol.js';
 import { selectReportControlWizard } from '../../wizards/reportcontrol.js';
-import { removeIEDWizard } from "../../wizards/ied.js";
+import { removeIEDWizard } from '../../wizards/ied.js';
 &nbsp;
 /** [[`SubstationEditor`]] subeditor for a child-less `IED` element. */
 @customElement('ied-editor')
 export class IedEditor extends LitElement {
+  /** The document being edited as provided to editor by [[`Zeroline`]]. */
+  @property({ attribute: false })
+  doc!: XMLDocument;
   /** SCL element IED */
   @property({ attribute: false })
   element!: Element;
@@ -381,7 +400,11 @@ export class IedEditor extends LitElement {
       this.dispatchEvent(newWizardEvent(() =&gt; <span class="branch-0 cbranch-no" title="branch not covered" >wizard));</span>
 <span class="cstat-no" title="statement not covered" >    } else {</span>
 <span class="cstat-no" title="statement not covered" >      // If no Wizard is needed, just remove the element.</span>
-<span class="cstat-no" title="statement not covered" >      this.dispatchEvent(newActionEvent({ old: { parent: this.element.parentElement!, element: this.element } }));</span>
+<span class="cstat-no" title="statement not covered" >      this.dispatchEvent(</span>
+<span class="cstat-no" title="statement not covered" >        newActionEvent({</span>
+<span class="cstat-no" title="statement not covered" >          old: { parent: this.element.parentElement!, element: this.element },</span>
+        })
+      );
     }
   }
 &nbsp;
@@ -398,7 +421,7 @@ export class IedEditor extends LitElement {
         slot="action"
         class="delete"
         mini
-        @click="${() =&gt; this.removeIED() }"
+        @click="${() =&gt; this.removeIED()}"
         icon="delete"
       &gt;&lt;/mwc-fab
       &gt;&lt;mwc-fab
@@ -425,8 +448,9 @@ export class IedEditor extends LitElement {
         class="selectgse"
         mini
         @click="${() =&gt; this.openGseControlSelection()}"
-      &gt;&lt;mwc-icon slot="icon"&gt;${gooseIcon}&lt;/mwc-icon&gt;&lt;/mwc-fab
-    &gt;&lt;/action-icon&gt; `;
+        &gt;&lt;mwc-icon slot="icon"&gt;${gooseIcon}&lt;/mwc-icon&gt;&lt;/mwc-fab
+      &gt;&lt;/action-icon
+    &gt; `;
   }
 }
 &nbsp;</pre></td></tr></table></pre>
@@ -436,7 +460,7 @@ export class IedEditor extends LitElement {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener">istanbul</a>
-                at Fri Jul 08 2022 18:40:59 GMT+0000 (Coordinated Universal Time)
+                at Mon Jul 11 2022 10:09:06 GMT+0000 (Coordinated Universal Time)
             </div>
         </div>
         <script src="../../../prettify.js"></script>

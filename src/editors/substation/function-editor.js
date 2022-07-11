@@ -65,12 +65,16 @@ export let FunctionEditor = class extends LitElement {
   renderLNodes() {
     const lNodes = getChildElementsByTagName(this.element, "LNode");
     return lNodes.length ? html`<div class="container lnode">
-          ${lNodes.map((lNode) => html`<l-node-editor .element=${lNode}></l-node-editor>`)}
+          ${lNodes.map((lNode) => html`<l-node-editor
+                .doc=${this.doc}
+                .element=${lNode}
+              ></l-node-editor>`)}
         </div>` : html``;
   }
   renderSubFunctions() {
     const subfunctions = getChildElementsByTagName(this.element, "SubFunction");
     return html` ${subfunctions.map((subFunction) => html`<sub-function-editor
+          .doc=${this.doc}
           .element=${subFunction}
         ></sub-function-editor>`)}`;
   }
@@ -131,6 +135,9 @@ FunctionEditor.styles = css`
       grid-template-columns: repeat(auto-fit, minmax(64px, auto));
     }
   `;
+__decorate([
+  property({attribute: false})
+], FunctionEditor.prototype, "doc", 2);
 __decorate([
   property({attribute: false})
 ], FunctionEditor.prototype, "element", 2);

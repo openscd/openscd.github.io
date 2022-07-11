@@ -68,12 +68,16 @@ export let EqFunctionEditor = class extends LitElement {
   renderLNodes() {
     const lNodes = getChildElementsByTagName(this.element, "LNode");
     return lNodes.length ? html`<div class="container lnode">
-          ${lNodes.map((lNode) => html`<l-node-editor .element=${lNode}></l-node-editor>`)}
+          ${lNodes.map((lNode) => html`<l-node-editor
+                .doc=${this.doc}
+                .element=${lNode}
+              ></l-node-editor>`)}
         </div>` : html``;
   }
   renderEqSubFunctions() {
     const eqSubFunctions = getChildElementsByTagName(this.element, "EqSubFunction");
     return html` ${eqSubFunctions.map((eqSubFunction) => html`<eq-sub-function-editor
+          .doc=${this.doc}
           .element=${eqSubFunction}
         ></eq-sub-function-editor>`)}`;
   }
@@ -134,6 +138,9 @@ EqFunctionEditor.styles = css`
       grid-template-columns: repeat(auto-fit, minmax(64px, auto));
     }
   `;
+__decorate([
+  property({attribute: false})
+], EqFunctionEditor.prototype, "doc", 2);
 __decorate([
   property({attribute: false})
 ], EqFunctionEditor.prototype, "element", 2);

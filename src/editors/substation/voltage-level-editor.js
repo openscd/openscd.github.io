@@ -100,19 +100,25 @@ export let VoltageLevelEditor = class extends LitElement {
       return html``;
     const lNodes = getChildElementsByTagName(this.element, "LNode");
     return lNodes.length ? html`<div class="container lnode">
-          ${lNodes.map((lNode) => html`<l-node-editor .element=${lNode}></l-node-editor>`)}
+          ${lNodes.map((lNode) => html`<l-node-editor
+                .doc=${this.doc}
+                .element=${lNode}
+              ></l-node-editor>`)}
         </div>` : html``;
   }
   renderFunctions() {
     if (!this.showfunctions)
       return html``;
     const functions = getChildElementsByTagName(this.element, "Function");
-    return html` ${functions.map((fUnction) => html`<function-editor .element=${fUnction}></function-editor>`)}`;
+    return html` ${functions.map((fUnction) => html`<function-editor
+          .doc=${this.doc}
+          .element=${fUnction}
+        ></function-editor>`)}`;
   }
   renderIedContainer() {
     const ieds = this.getAttachedIeds?.(this.element) ?? [];
     return ieds?.length ? html`<div id="iedcontainer">
-          ${ieds.map((ied) => html`<ied-editor .element=${ied}></ied-editor>`)}
+          ${ieds.map((ied) => html`<ied-editor .doc=${this.doc} .element=${ied}></ied-editor>`)}
         </div>` : html``;
   }
   renderPowerTransformerContainer() {
@@ -124,6 +130,7 @@ export let VoltageLevelEditor = class extends LitElement {
     })}"
         >
           ${pwts.map((pwt) => html`<powertransformer-editor
+                .doc=${this.doc}
                 .element=${pwt}
                 ?showfunctions=${this.showfunctions}
               ></powertransformer-editor>`)}
@@ -189,6 +196,7 @@ export let VoltageLevelEditor = class extends LitElement {
       ${this.renderPowerTransformerContainer()}
       <div id="bayContainer">
         ${Array.from(this.element?.querySelectorAll(selectors.Bay) ?? []).map((bay) => html`<bay-editor
+            .doc=${this.doc}
             .element=${bay}
             .getAttachedIeds=${this.getAttachedIeds}
             ?readonly=${this.readonly}
@@ -214,6 +222,9 @@ VoltageLevelEditor.styles = css`
       }
     }
   `;
+__decorate([
+  property({attribute: false})
+], VoltageLevelEditor.prototype, "doc", 2);
 __decorate([
   property({attribute: false})
 ], VoltageLevelEditor.prototype, "element", 2);

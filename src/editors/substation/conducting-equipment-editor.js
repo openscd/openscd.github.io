@@ -80,14 +80,20 @@ export let ConductingEquipmentEditor = class extends LitElement {
   renderLNodes() {
     const lNodes = getChildElementsByTagName(this.element, "LNode");
     return lNodes.length ? html`<div class="container lnode">
-          ${lNodes.map((lNode) => html`<l-node-editor .element=${lNode}></l-node-editor>`)}
+          ${lNodes.map((lNode) => html`<l-node-editor
+                .doc=${this.doc}
+                .element=${lNode}
+              ></l-node-editor>`)}
         </div>` : html``;
   }
   renderEqFunctions() {
     if (!this.showfunctions)
       return html``;
     const eqFunctions = getChildElementsByTagName(this.element, "EqFunction");
-    return html` ${eqFunctions.map((eqFunction) => html`<eq-function-editor .element=${eqFunction}></eq-function-editor>`)}`;
+    return html` ${eqFunctions.map((eqFunction) => html`<eq-function-editor
+          .doc=${this.doc}
+          .element=${eqFunction}
+        ></eq-function-editor>`)}`;
   }
   renderAddButtons() {
     return childTags(this.element).map((child) => html`<mwc-list-item value="${child}"
@@ -198,6 +204,9 @@ ConductingEquipmentEditor.styles = css`
       border-bottom: none;
     }
   `;
+__decorate([
+  property({attribute: false})
+], ConductingEquipmentEditor.prototype, "doc", 2);
 __decorate([
   property({attribute: false})
 ], ConductingEquipmentEditor.prototype, "element", 2);

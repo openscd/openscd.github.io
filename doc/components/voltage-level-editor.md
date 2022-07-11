@@ -8,6 +8,7 @@
 |-------------------|-----------------|-----------|--------------------------------------------------|--------------------------------|--------------------------------------------------|
 | `addButton`       |                 |           | `IconButton`                                     |                                |                                                  |
 | `addMenu`         |                 |           | `Menu`                                           |                                |                                                  |
+| `doc`             |                 |           | `XMLDocument`                                    |                                | The document being edited as provided to editor by [[`Zeroline`]]. |
 | `element`         |                 |           | `Element`                                        |                                |                                                  |
 | `getAttachedIeds` |                 |           | `((element: Element) => Element[]) \| undefined` | "() => {\n    return [];\n  }" |                                                  |
 | `header`          | `header`        | readonly  | `string`                                         |                                |                                                  |

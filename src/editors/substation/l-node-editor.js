@@ -134,6 +134,9 @@ export let LNodeEditor = class extends LitElement {
 };
 __decorate([
   property({attribute: false})
+], LNodeEditor.prototype, "doc", 2);
+__decorate([
+  property({attribute: false})
 ], LNodeEditor.prototype, "element", 2);
 __decorate([
   state()
