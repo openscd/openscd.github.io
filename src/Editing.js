@@ -269,12 +269,12 @@ export function Editing(Base) {
           action: event.detail.action
         }));
       }
-      this.dispatchEvent(newValidateEvent());
       if (!this.doc)
         return;
       const newDoc = document.implementation.createDocument(this.doc.lookupNamespaceURI(""), this.doc.documentElement.tagName, this.doc.doctype);
       newDoc.documentElement.replaceWith(this.doc.documentElement);
       this.doc = newDoc;
+      this.dispatchEvent(newValidateEvent());
     }
     async onOpenDoc(event) {
       this.doc = event.detail.doc;
