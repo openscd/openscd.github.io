@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">92.5% </span>
+                <span class="strong">92.23% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>469/507</span>
+                <span class='fraction'>475/515</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">92.5% </span>
+                <span class="strong">92.23% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>469/507</span>
+                <span class='fraction'>475/515</span>
             </div>
         
             
@@ -570,7 +570,15 @@
 <a name='L505'></a><a href='#L505'>505</a>
 <a name='L506'></a><a href='#L506'>506</a>
 <a name='L507'></a><a href='#L507'>507</a>
-<a name='L508'></a><a href='#L508'>508</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">17x</span>
+<a name='L508'></a><a href='#L508'>508</a>
+<a name='L509'></a><a href='#L509'>509</a>
+<a name='L510'></a><a href='#L510'>510</a>
+<a name='L511'></a><a href='#L511'>511</a>
+<a name='L512'></a><a href='#L512'>512</a>
+<a name='L513'></a><a href='#L513'>513</a>
+<a name='L514'></a><a href='#L514'>514</a>
+<a name='L515'></a><a href='#L515'>515</a>
+<a name='L516'></a><a href='#L516'>516</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">17x</span>
 <span class="cline-any cline-yes">17x</span>
 <span class="cline-any cline-yes">17x</span>
 <span class="cline-any cline-yes">17x</span>
@@ -648,11 +656,11 @@
 <span class="cline-any cline-yes">17x</span>
 <span class="cline-any cline-yes">17x</span>
 <span class="cline-any cline-yes">17x</span>
-<span class="cline-any cline-yes">9x</span>
-<span class="cline-any cline-yes">9x</span>
-<span class="cline-any cline-yes">9x</span>
-<span class="cline-any cline-yes">9x</span>
-<span class="cline-any cline-yes">9x</span>
+<span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-yes">10x</span>
 <span class="cline-any cline-yes">17x</span>
 <span class="cline-any cline-yes">17x</span>
 <span class="cline-any cline-yes">17x</span>
@@ -792,6 +800,8 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -872,8 +882,12 @@
 <span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-yes">5x</span>
@@ -887,6 +901,8 @@
 <span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-yes">4x</span>
@@ -1145,7 +1161,7 @@ export function getCdcValueFromDOIElement(doiElement: Element): string | null {
     const doName = doiElement.getAttribute('name');
 &nbsp;
     const doElement = doiElement.ownerDocument.querySelector(
-      `LNodeType[id="${lnType}"] &gt; DO[name="${doName}"]`
+      `:root &gt; DataTypeTemplates &gt; LNodeType[id="${lnType}"] &gt; DO[name="${doName}"]`
     );
     if (doElement) {
       return getCdcValueFromDOElement(<span class="branch-0 cbranch-no" title="branch not covered" >doElement);</span>
@@ -1157,7 +1173,7 @@ export function getCdcValueFromDOIElement(doiElement: Element): string | null {
 export function getCdcValueFromDOElement(doElement: Element): string | null {
   const doType = getTypeAttribute(doElement);
   const doTypeElement = doElement.ownerDocument.querySelector(
-    `DOType[id="${doType}"]`
+    `:root &gt; DataTypeTemplates &gt; DOType[id="${doType}"]`
   );
   return doTypeElement ? doTypeElement.getAttribute(<span class="branch-0 cbranch-no" title="branch not covered" >'cdc') : null;</span>
 }
@@ -1224,7 +1240,7 @@ export <span class="fstat-no" title="function not covered" >function getDaElemen
 <span class="cstat-no" title="statement not covered" >  const doType = getTypeAttribute(doElement);</span>
 <span class="cstat-no" title="statement not covered" >  if (doType) {</span>
 <span class="cstat-no" title="statement not covered" >    return doElement.ownerDocument.querySelector(</span>
-<span class="cstat-no" title="statement not covered" >      `DOType[id="${doType}"] &gt; DA[name="${name}"]`</span>
+<span class="cstat-no" title="statement not covered" >      `:root &gt; DataTypeTemplates &gt; DOType[id="${doType}"] &gt; DA[name="${name}"]`</span>
 <span class="cstat-no" title="statement not covered" >    );</span>
 <span class="cstat-no" title="statement not covered" >  }</span>
 <span class="cstat-no" title="statement not covered" >  return null;</span>
@@ -1278,7 +1294,7 @@ export function getDoiElement(
   lnElement: Element,
   doName: string
 ): Element | null {
-  return lnElement.querySelector(`DOI[name="${doName}"]`);
+  return lnElement.querySelector(`:scope &gt; DOI[name="${doName}"]`);
 }
 &nbsp;
 export function getDoElement(
@@ -1288,7 +1304,7 @@ export function getDoElement(
   const lnType = lnElement.getAttribute('lnType');
   if (lnType) {
     return lnElement.ownerDocument.querySelector(
-      `LNodeType[id="${lnType}"] &gt; DO[name="${<span class="branch-0 cbranch-no" title="branch not covered" >doName}"]`</span>
+      `:root &gt; DataTypeTemplates &gt; LNodeType[id="${lnType}"] &gt; DO[name="${<span class="branch-0 cbranch-no" title="branch not covered" >doName}"]`</span>
 <span class="cstat-no" title="statement not covered" >    );</span>
 <span class="cstat-no" title="statement not covered" >  }</span>
 <span class="cstat-no" title="statement not covered" >  return null;</span>
@@ -1298,7 +1314,9 @@ export function getDoElements(lnElement: Element): Element[] {
   const lnType = lnElement.getAttribute('lnType');
   if (lnType) {
     return Array.from(
-      lnElement.ownerDocument.querySelectorAll(`LNodeType[id="${<span class="branch-0 cbranch-no" title="branch not covered" >lnType}"] &gt; DO`)</span>
+      lnElement.ownerDocument.querySelectorAll(
+        `:root &gt; DataTypeTemplates &gt; LNodeType[id="${<span class="branch-0 cbranch-no" title="branch not covered" >lnType}"] &gt; DO`</span>
+<span class="cstat-no" title="statement not covered" >      )</span>
 <span class="cstat-no" title="statement not covered" >    );</span>
 <span class="cstat-no" title="statement not covered" >  }</span>
 <span class="cstat-no" title="statement not covered" >  return [];</span>
@@ -1365,7 +1383,9 @@ function buildTemplateChainFromInstanceElements(
       // The LN Element will only be used as starting point to find the LNodeType.
       const lnElement = element.closest('LN, LN0')!;
       const typeId = lnElement.getAttribute(<span class="branch-0 cbranch-no" title="branch not covered" >'lnType') ?? '';</span>
-      typeElement = doc.querySelector(`LNodeType[id="${typeId}"]`);
+      typeElement = doc.querySelector(
+        `:root &gt; DataTypeTemplates &gt; LNodeType[id="${typeId}"]`
+      );
 &nbsp;
       if (typeElement) {
         // Next search for the DO Element below the LNodeType Element.
@@ -1378,7 +1398,9 @@ function buildTemplateChainFromInstanceElements(
 &nbsp;
           // For the next element search the DOType that is linked to the DO Element.
           const typeId = getTypeAttribute(<span class="branch-0 cbranch-no" title="branch not covered" >doElement) ?? '';</span>
-          typeElement = doc.querySelector(`DOType[id="${<span class="branch-0 cbranch-no" title="branch not covered" >typeId}"]`);</span>
+          typeElement = doc.querySelector(
+            `:root &gt; DataTypeTemplates &gt; DOType[id="${<span class="branch-0 cbranch-no" title="branch not covered" >typeId}"]`</span>
+<span class="cstat-no" title="statement not covered" >          );</span>
 <span class="cstat-no" title="statement not covered" >        } else {</span>
 <span class="cstat-no" title="statement not covered" >          typeElement = null;</span>
         }
@@ -1396,7 +1418,9 @@ function buildTemplateChainFromInstanceElements(
           if (daElement.getAttribute('bType') === 'Struct') {
             // Only if the bType is a struct we need to search for the DAType for the next element.
             const typeId = getTypeAttribute(element) ?? '';
-            typeElement = doc.querySelector(`DAType[id="${typeId}"]`);
+            typeElement = doc.querySelector(
+              `:root &gt; DataTypeTemplates &gt; DAType[id="${typeId}"]`
+            );
           } else {
             typeElement = <span class="branch-0 cbranch-no" title="branch not covered" >null;</span>
 <span class="cstat-no" title="statement not covered" >          }</span>
@@ -1464,7 +1488,7 @@ export function getEnumVal(daiElement: Element, ord: string): string | null {
   if (isEnumType(daElement)) {
     const enumType = getTypeAttribute(daElement!);
     const enumVal = daiElement.ownerDocument.querySelector(
-      `EnumType[id="${enumType}"] &gt; EnumVal[ord="${ord}"]`
+      `:root &gt; DataTypeTemplates &gt; EnumType[id="${enumType}"] &gt; EnumVal[ord="${ord}"]`
     );
     if (enumVal) {
       return enumVal.textContent;
@@ -1484,7 +1508,7 @@ export function getEnumOrds(daiElement: Element): string[] {
   if (isEnumType(daElement)) {
     const enumType = getTypeAttribute(daElement!);
     const enumVals = daiElement.ownerDocument.querySelectorAll(
-      `EnumType[id="${enumType}"] &gt; EnumVal`
+      `:root &gt; DataTypeTemplates &gt; EnumType[id="${enumType}"] &gt; EnumVal`
     );
     Array.from(enumVals)
       .filter(valElement =&gt; valElement.getAttribute('ord'))
@@ -1591,7 +1615,7 @@ declare global {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener">istanbul</a>
-                at Mon Jul 18 2022 15:22:41 GMT+0000 (Coordinated Universal Time)
+                at Mon Jul 18 2022 15:25:36 GMT+0000 (Coordinated Universal Time)
             </div>
         </div>
         <script src="../../../../prettify.js"></script>

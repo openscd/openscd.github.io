@@ -37,7 +37,7 @@ export function getCdcValueFromDOIElement(doiElement) {
   if (lnElement) {
     const lnType = lnElement.getAttribute("lnType");
     const doName = doiElement.getAttribute("name");
-    const doElement = doiElement.ownerDocument.querySelector(`LNodeType[id="${lnType}"] > DO[name="${doName}"]`);
+    const doElement = doiElement.ownerDocument.querySelector(`:root > DataTypeTemplates > LNodeType[id="${lnType}"] > DO[name="${doName}"]`);
     if (doElement) {
       return getCdcValueFromDOElement(doElement);
     }
@@ -46,7 +46,7 @@ export function getCdcValueFromDOIElement(doiElement) {
 }
 export function getCdcValueFromDOElement(doElement) {
   const doType = getTypeAttribute(doElement);
-  const doTypeElement = doElement.ownerDocument.querySelector(`DOType[id="${doType}"]`);
+  const doTypeElement = doElement.ownerDocument.querySelector(`:root > DataTypeTemplates > DOType[id="${doType}"]`);
   return doTypeElement ? doTypeElement.getAttribute("cdc") : null;
 }
 const addressAttributes = [
@@ -78,7 +78,7 @@ export function getTypeAttribute(element) {
 export function getDaElement(doElement, name) {
   const doType = getTypeAttribute(doElement);
   if (doType) {
-    return doElement.ownerDocument.querySelector(`DOType[id="${doType}"] > DA[name="${name}"]`);
+    return doElement.ownerDocument.querySelector(`:root > DataTypeTemplates > DOType[id="${doType}"] > DA[name="${name}"]`);
   }
   return null;
 }
@@ -100,19 +100,19 @@ export function getDaiValue(doiElement, name) {
   return null;
 }
 export function getDoiElement(lnElement, doName) {
-  return lnElement.querySelector(`DOI[name="${doName}"]`);
+  return lnElement.querySelector(`:scope > DOI[name="${doName}"]`);
 }
 export function getDoElement(lnElement, doName) {
   const lnType = lnElement.getAttribute("lnType");
   if (lnType) {
-    return lnElement.ownerDocument.querySelector(`LNodeType[id="${lnType}"] > DO[name="${doName}"]`);
+    return lnElement.ownerDocument.querySelector(`:root > DataTypeTemplates > LNodeType[id="${lnType}"] > DO[name="${doName}"]`);
   }
   return null;
 }
 export function getDoElements(lnElement) {
   const lnType = lnElement.getAttribute("lnType");
   if (lnType) {
-    return Array.from(lnElement.ownerDocument.querySelectorAll(`LNodeType[id="${lnType}"] > DO`));
+    return Array.from(lnElement.ownerDocument.querySelectorAll(`:root > DataTypeTemplates > LNodeType[id="${lnType}"] > DO`));
   }
   return [];
 }
@@ -146,14 +146,14 @@ function buildTemplateChainFromInstanceElements(doc, instanceChain) {
     if (element.tagName === "DOI") {
       const lnElement = element.closest("LN, LN0");
       const typeId = lnElement.getAttribute("lnType") ?? "";
-      typeElement = doc.querySelector(`LNodeType[id="${typeId}"]`);
+      typeElement = doc.querySelector(`:root > DataTypeTemplates > LNodeType[id="${typeId}"]`);
       if (typeElement) {
         const name = element.getAttribute("name");
         const doElement = typeElement.querySelector(`:scope > DO[name="${name}"]`);
         if (doElement) {
           templateChain.push(doElement);
           const typeId2 = getTypeAttribute(doElement) ?? "";
-          typeElement = doc.querySelector(`DOType[id="${typeId2}"]`);
+          typeElement = doc.querySelector(`:root > DataTypeTemplates > DOType[id="${typeId2}"]`);
         } else {
           typeElement = null;
         }
@@ -166,7 +166,7 @@ function buildTemplateChainFromInstanceElements(doc, instanceChain) {
           templateChain.push(daElement);
           if (daElement.getAttribute("bType") === "Struct") {
             const typeId = getTypeAttribute(element) ?? "";
-            typeElement = doc.querySelector(`DAType[id="${typeId}"]`);
+            typeElement = doc.querySelector(`:root > DataTypeTemplates > DAType[id="${typeId}"]`);
           } else {
             typeElement = null;
           }
@@ -200,7 +200,7 @@ export function getEnumVal(daiElement, ord) {
   const daElement = getDaElementByDaiElement(daiElement);
   if (isEnumType(daElement)) {
     const enumType = getTypeAttribute(daElement);
-    const enumVal = daiElement.ownerDocument.querySelector(`EnumType[id="${enumType}"] > EnumVal[ord="${ord}"]`);
+    const enumVal = daiElement.ownerDocument.querySelector(`:root > DataTypeTemplates > EnumType[id="${enumType}"] > EnumVal[ord="${ord}"]`);
     if (enumVal) {
       return enumVal.textContent;
     }
@@ -212,7 +212,7 @@ export function getEnumOrds(daiElement) {
   const daElement = getDaElementByDaiElement(daiElement);
   if (isEnumType(daElement)) {
     const enumType = getTypeAttribute(daElement);
-    const enumVals = daiElement.ownerDocument.querySelectorAll(`EnumType[id="${enumType}"] > EnumVal`);
+    const enumVals = daiElement.ownerDocument.querySelectorAll(`:root > DataTypeTemplates > EnumType[id="${enumType}"] > EnumVal`);
     Array.from(enumVals).filter((valElement) => valElement.getAttribute("ord")).map((valElement) => ords.push(valElement.getAttribute("ord")));
   }
   return ords;
