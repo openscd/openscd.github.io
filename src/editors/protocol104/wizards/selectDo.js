@@ -15,38 +15,38 @@ import {
 import {createAddressesWizard} from "./createAddresses.js";
 import {supportedCdcTypes} from "../foundation/cdc.js";
 import {PROTOCOL_104_PRIVATE} from "../foundation/private.js";
-import {
-  getCdcValueFromDOElement,
-  getDoElements
-} from "../foundation/foundation.js";
-function filterAvailableDOElements(lnElement, doElement) {
-  const cdc = getCdcValueFromDOElement(doElement) ?? "";
-  if (!supportedCdcTypes.includes(cdc)) {
-    return false;
-  }
-  const doName = getNameAttribute(doElement);
-  return lnElement.querySelectorAll(`:scope > DOI[name="${doName}"] DAI > Private[type="${PROTOCOL_104_PRIVATE}"] > Address`).length <= 0;
-}
-function filterAvailableElements(child) {
-  let lnElements;
-  if (["LN0", "LN"].includes(child.tagName)) {
-    lnElements = [child];
+import {getDoElements, getTypeAttribute} from "../foundation/foundation.js";
+function filterAvailableDOElements(parent, child) {
+  if (child.tagName === "DO") {
+    const doType = getTypeAttribute(child) ?? "";
+    const doTypeElement = child.ownerDocument.querySelector(`DOType[id="${doType}"]`);
+    const cdc = doTypeElement?.getAttribute("cdc") ?? "";
+    if (!supportedCdcTypes.includes(cdc)) {
+      return false;
+    }
+    const doName = getNameAttribute(child);
+    return Array.from(parent.querySelectorAll(`:scope > DOI[name="${doName}"] DAI > Private[type="${PROTOCOL_104_PRIVATE}"] > Address`)).length <= 0;
   } else {
-    lnElements = Array.from(child.querySelectorAll("LN0, LN"));
+    let lnElements;
+    if (["LN0", "LN"].includes(child.tagName)) {
+      lnElements = [child];
+    } else {
+      lnElements = Array.from(child.querySelectorAll("LN0, LN"));
+    }
+    return lnElements.filter((lnElement) => getDoElements(lnElement).filter((doElement) => filterAvailableDOElements(lnElement, doElement)).length > 0).length > 0;
   }
-  return lnElements.filter((lnElement) => getDoElements(lnElement).filter((doElement) => filterAvailableDOElements(lnElement, doElement)).length > 0).length > 0;
 }
 export function getDataChildren(parent) {
   let children;
   if (["LN0", "LN"].includes(parent.tagName)) {
     const lnType = parent.getAttribute("lnType") ?? "";
-    children = Array.from(parent.ownerDocument.querySelectorAll(`:root > DataTypeTemplates > LNodeType[id="${lnType}"] > DO`)).filter((child) => filterAvailableDOElements(parent, child)).sort((a, b) => compareNames(`${identity(a)}`, `${identity(b)}`));
+    children = Array.from(parent.ownerDocument.querySelectorAll(`LNodeType[id="${lnType}"] > DO`)).sort((a, b) => compareNames(`${identity(a)}`, `${identity(b)}`));
   } else if (parent.tagName === "AccessPoint") {
-    children = Array.from(parent.querySelectorAll("LDevice, :scope > LN")).filter((child) => filterAvailableElements(child)).sort((a, b) => compareNames(`${identity(a)}`, `${identity(b)}`));
+    children = Array.from(parent.querySelectorAll("LDevice")).sort((a, b) => compareNames(`${identity(a)}`, `${identity(b)}`));
   } else {
-    children = Array.from(parent.children).filter((child) => ["IED", "AccessPoint", "LN0", "LN"].includes(child.tagName)).filter((child) => filterAvailableElements(child)).sort((a, b) => compareNames(`${identity(a)}`, `${identity(b)}`));
+    children = Array.from(parent.children).filter((child) => ["IED", "AccessPoint", "LN0", "LN"].includes(child.tagName)).sort((a, b) => compareNames(`${identity(a)}`, `${identity(b)}`));
   }
-  return children;
+  return children.filter((child) => filterAvailableDOElements(parent, child));
 }
 function openPrepareAddressWizard(doc) {
   return (_, wizard) => {
