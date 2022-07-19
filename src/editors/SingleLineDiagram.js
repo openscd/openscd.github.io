@@ -19,39 +19,37 @@ import {
 } from "../../_snowpack/pkg/lit-element.js";
 import panzoom from "../../_snowpack/pkg/panzoom.js";
 import {
-  identity,
-  getPathNameAttribute,
-  newWizardEvent,
+  compareNames,
+  getDescriptionAttribute,
   getNameAttribute,
-  getDescriptionAttribute
+  getPathNameAttribute,
+  identity,
+  newWizardEvent
 } from "../foundation.js";
 import {
-  compareNames
-} from "../foundation.js";
-import {
-  getAbsolutePosition,
-  createTerminalElement,
-  createBusBarElement,
-  createVoltageLevelElement,
+  addLabelToBay,
+  addLabelToBusBar,
   createBayElement,
+  createBusBarElement,
   createConductingEquipmentElement,
   createConnectivityNodeElement,
-  getBusBarLength,
   createPowerTransformerElement,
-  getAbsolutePositionBusBar,
-  drawBusBarRoute,
-  getDirections,
-  getAbsolutePositionTerminal,
-  drawCNodeConnections,
-  getConnectivityNodesDrawingPosition,
   createSubstationElement,
-  addLabelToBay,
-  addLabelToBusBar
+  createTerminalElement,
+  createVoltageLevelElement,
+  drawBusBarRoute,
+  drawCNodeConnections,
+  getAbsolutePosition,
+  getAbsolutePositionBusBar,
+  getAbsolutePositionTerminal,
+  getBusBarLength,
+  getConnectivityNodesDrawingPosition,
+  getDirections
 } from "./singlelinediagram/sld-drawing.js";
 import {
-  isBusBar,
+  getCommonParentElement,
   getConnectedTerminals,
-  getCommonParentElement
+  isBusBar
 } from "./singlelinediagram/foundation.js";
 import {isSCLNamespace} from "../schemas.js";
 import {wizards} from "./singlelinediagram/wizards/wizard-library.js";
@@ -221,30 +219,35 @@ export default class SingleLineDiagramPlugin extends LitElement {
       event.stopPropagation();
     }
   }
-  firstUpdated() {
-    this.drawSVGElements();
+  updated(_changedProperties) {
+    super.updated(_changedProperties);
+    if (_changedProperties.has("doc") || _changedProperties.has("selectedSubstation")) {
+      this.drawSVGElements();
+    }
   }
   onSelect(event) {
     this.selectedSubstation = this.substations[event.detail.index];
     this.requestUpdate("selectedSubstation");
-    this.drawSVGElements();
   }
   renderSubstationSelector() {
     const substationList = this.substations;
     if (substationList.length > 0) {
       if (substationList.length > 1) {
         return html`
-          <mwc-select id="substationSelector"
-                      label="${translate("sld.substationSelector")}"
-                      @selected=${this.onSelect}>
+          <mwc-select
+            id="substationSelector"
+            label="${translate("sld.substationSelector")}"
+            @selected=${this.onSelect}
+          >
             ${substationList.map((substation) => {
           const name2 = getNameAttribute(substation);
           const description2 = getDescriptionAttribute(substation);
-          return html`
-                  <mwc-list-item value="${name2}"
-                                 ?selected=${substation == this.selectedSubstation}>
-                    ${name2}${description2 !== void 0 ? " (" + description2 + ")" : ""}
-                  </mwc-list-item>`;
+          return html` <mwc-list-item
+                value="${name2}"
+                ?selected=${substation == this.selectedSubstation}
+              >
+                ${name2}${description2 !== void 0 ? " (" + description2 + ")" : ""}
+              </mwc-list-item>`;
         })}
           </mwc-select>
         `;
@@ -253,30 +256,30 @@ export default class SingleLineDiagramPlugin extends LitElement {
       const name = getNameAttribute(selectedSubstationElement);
       const description = getDescriptionAttribute(selectedSubstationElement);
       return html`
-        <mwc-textfield label="${translate("substation.name")}"
-                       value="${name}${description !== void 0 ? " (" + description + ")" : ""}"
-                       id="selectedSubstation"
-                       readonly
-                       disabled>
+        <mwc-textfield
+          label="${translate("substation.name")}"
+          value="${name}${description !== void 0 ? " (" + description + ")" : ""}"
+          id="selectedSubstation"
+          readonly
+          disabled
+        >
         </mwc-textfield>
       `;
     }
     return html`
       <h1>
-        <span id="noSubstationSelector">${translate("substation.missing")}</span>
+        <span id="noSubstationSelector"
+          >${translate("substation.missing")}</span
+        >
       </h1>
     `;
   }
   render() {
-    return html`
-      ${this.renderSubstationSelector()}
+    return html` ${this.renderSubstationSelector()}
 
       <div class="sldContainer">
         <div id="panzoom">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            id="svg"
-          ></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" id="svg"></svg>
         </div>
       </div>`;
   }
@@ -301,7 +304,7 @@ SingleLineDiagramPlugin.styles = css`
     }
 
     #noSubstationSelector {
-      color: var(--base1)
+      color: var(--base1);
     }
 
     .sldContainer {
@@ -322,7 +325,7 @@ SingleLineDiagramPlugin.styles = css`
     g[type='Busbar'] > g[type='BusbarLabel'] {
       visibility: hidden;
     }
-    g[type='Busbar'] > g[type='BusbarLabel'] > text ,
+    g[type='Busbar'] > g[type='BusbarLabel'] > text,
     g[type='Busbar']:hover > g[type='BusbarLabel'] {
       visibility: visible;
     }
