@@ -268,7 +268,8 @@ export function Editing(Base) {
           title: event.detail.action.title,
           action: event.detail.action
         }));
-      }
+      } else
+        return;
       if (!this.doc)
         return;
       const newDoc = document.implementation.createDocument(this.doc.lookupNamespaceURI(""), this.doc.documentElement.tagName, this.doc.doctype);
