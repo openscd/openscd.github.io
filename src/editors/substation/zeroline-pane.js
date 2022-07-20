@@ -85,7 +85,7 @@ export let ZerolinePane = class extends LitElement {
     this.getAttachedIeds = shouldShowIEDs() ? getAttachedIeds(this.doc) : () => [];
     const ieds = this.getAttachedIeds?.(this.doc.documentElement) ?? [];
     return ieds.length ? html`<div id="iedcontainer">
-          ${ieds.map((ied) => html`<ied-editor .element=${ied}></ied-editor>`)}
+          ${ieds.map((ied) => html`<ied-editor .doc=${this.doc} .element=${ied}></ied-editor>`)}
         </div>` : html``;
   }
   render() {
