@@ -4,9 +4,9 @@ An sub element for showing all published GOOSE messages per IED.
 
 ## Properties
 
-| Property | Attribute | Type          |
-|----------|-----------|---------------|
-| `doc`    | `doc`     | `XMLDocument` |
+| Property | Type          |
+|----------|---------------|
+| `doc`    | `XMLDocument` |
 
 ## Methods
 

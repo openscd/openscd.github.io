@@ -35,7 +35,8 @@ function slotItem(item) {
 function hideFiltered(item, searchText) {
   const itemInnerText = item.innerText + "\n";
   const childInnerText = Array.from(item.children).map((child) => child.innerText).join("\n");
-  const filterTarget = (itemInnerText + childInnerText).toUpperCase();
+  const value = item.value;
+  const filterTarget = (itemInnerText + childInnerText + value).toUpperCase();
   const terms = searchText.toUpperCase().split(" ");
   terms.some((term) => !filterTarget.includes(term)) ? slotItem(item).classList.add("hidden") : slotItem(item).classList.remove("hidden");
 }
@@ -61,7 +62,7 @@ export let FilteredList = class extends ListBase {
     this.items.filter((item) => !item.disabled && !item.classList.contains("hidden")).forEach((item) => item.selected = select);
   }
   onFilterInput() {
-    Array.from(this.querySelectorAll("mwc-list-item, mwc-check-list-item, mwc-radio-list-item")).filter((item) => !item.noninteractive).forEach((item) => hideFiltered(item, this.searchField.value));
+    Array.from(this.querySelectorAll("mwc-list-item, mwc-check-list-item, mwc-radio-list-item")).forEach((item) => hideFiltered(item, this.searchField.value));
   }
   onListItemConnected(e) {
     super.onListItemConnected(e);

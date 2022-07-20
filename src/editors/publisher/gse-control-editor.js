@@ -29,6 +29,10 @@ export let GseControlEditor = class extends LitElement {
               class="listitem header"
               noninteractive
               graphic="icon"
+              value="${Array.from(ied.querySelectorAll("GSEControl")).map((element) => {
+        const id = identity(element);
+        return typeof id === "string" ? id : "";
+      }).join(" ")}"
             >
               <span>${ied.getAttribute("name")}</span>
               <mwc-icon slot="graphic">developer_board</mwc-icon>
@@ -58,6 +62,10 @@ GseControlEditor.styles = css`
 
     .listitem.header {
       font-weight: 500;
+    }
+
+    mwc-list-item.hidden[noninteractive] + li[divider] {
+      display: none;
     }
   `;
 __decorate([

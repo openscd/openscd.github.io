@@ -22,17 +22,17 @@ import {
 import {createSubNetworkWizard} from "../wizards/subnetwork.js";
 export default class CommunicationPlugin extends LitElement {
   createCommunication() {
+    const element = createElement(this.doc, "Communication", {});
     this.dispatchEvent(newActionEvent({
       new: {
         parent: this.doc.documentElement,
-        element: createElement(this.doc, "Communication", {})
+        element
       }
     }));
+    return element;
   }
   openCreateSubNetworkWizard() {
-    const parent = this.doc.querySelector(":root > Communication");
-    if (!parent)
-      this.createCommunication();
+    const parent = this.doc.querySelector(":root > Communication") || this.createCommunication();
     this.dispatchEvent(newWizardEvent(createSubNetworkWizard(parent)));
   }
   render() {
