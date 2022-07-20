@@ -40,7 +40,7 @@ function mergeWizardAction(attrDiffs, childDiffs, sink, source, options) {
       for (const diff of selectedChildDiffs)
         if (!diff.ours)
           actions.push({
-            new: {parent, element: diff.theirs, reference: null}
+            new: {parent, element: diff.theirs}
           });
         else if (!diff.theirs)
           actions.push({
