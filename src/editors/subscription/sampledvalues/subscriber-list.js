@@ -22,7 +22,6 @@ import "../../../../_snowpack/pkg/@material/mwc-list/mwc-list-item.js";
 import "../../../filtered-list.js";
 import {
   createElement,
-  identity,
   newActionEvent
 } from "../../../foundation.js";
 import {
@@ -217,13 +216,7 @@ export let SubscriberList = class extends SubscriberListContainer {
     </mwc-list-item>`;
   }
   renderUnSubscribers(elements) {
-    return html`<mwc-list-item
-        noninteractive
-        value="${elements.map((element) => {
-      const id = identity(element.element);
-      return typeof id === "string" ? id : "";
-    }).join(" ")}"
-      >
+    return html`<mwc-list-item noninteractive>
         <span
           >${translate("subscription.subscriber.availableToSubscribe")}</span
         >
@@ -234,13 +227,7 @@ export let SubscriberList = class extends SubscriberListContainer {
           </mwc-list-item>`}`;
   }
   renderPartiallySubscribers(elements) {
-    return html`<mwc-list-item
-        noninteractive
-        value="${elements.map((element) => {
-      const id = identity(element.element);
-      return typeof id === "string" ? id : "";
-    }).join(" ")}"
-      >
+    return html`<mwc-list-item noninteractive>
         <span>${translate("subscription.subscriber.partiallySubscribed")}</span>
       </mwc-list-item>
       <li divider role="separator"></li>
@@ -249,13 +236,7 @@ export let SubscriberList = class extends SubscriberListContainer {
           </mwc-list-item>`}`;
   }
   renderFullSubscribers() {
-    return html`<mwc-list-item
-        noninteractive
-        value="${this.subscribedElements.map((element) => {
-      const id = identity(element.element);
-      return typeof id === "string" ? id : "";
-    }).join(" ")}"
-      >
+    return html`<mwc-list-item noninteractive>
         <span>${translate("subscription.subscriber.subscribed")}</span>
       </mwc-list-item>
       <li divider role="separator"></li>

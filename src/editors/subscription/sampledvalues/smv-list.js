@@ -20,11 +20,7 @@ import {translate} from "../../../../_snowpack/pkg/lit-translate.js";
 import "../../../../_snowpack/pkg/@material/mwc-icon.js";
 import "../../../../_snowpack/pkg/@material/mwc-list.js";
 import "../../../../_snowpack/pkg/@material/mwc-list/mwc-list-item.js";
-import {
-  getNameAttribute,
-  identity,
-  newWizardEvent
-} from "../../../foundation.js";
+import {getNameAttribute, newWizardEvent} from "../../../foundation.js";
 import {newSmvSelectEvent} from "./foundation.js";
 import {smvIcon} from "../../../icons/icons.js";
 import {getOrderedIeds, styles} from "../foundation.js";
@@ -59,7 +55,6 @@ export let SmvPublisherList = class extends LitElement {
       @click=${() => this.onSelect(smvControl)}
       graphic="large"
       hasMeta
-      value="${identity(smvControl)}"
     >
       <mwc-icon slot="graphic">${smvIcon}</mwc-icon>
       <span>${smvControl.getAttribute("name")}</span>
@@ -78,14 +73,7 @@ export let SmvPublisherList = class extends LitElement {
       <h1>${translate("subscription.smv.publisherSmv.title")}</h1>
       <filtered-list>
         ${getOrderedIeds(this.doc).map((ied) => html`
-              <mwc-list-item
-                noninteractive
-                graphic="icon"
-                value="${Array.from(ied.querySelectorAll("SampledValueControl")).map((element) => {
-      const id = identity(element);
-      return typeof id === "string" ? id : "";
-    }).join(" ")}"
-              >
+              <mwc-list-item noninteractive graphic="icon">
                 <span>${getNameAttribute(ied)}</span>
                 <mwc-icon slot="graphic">developer_board</mwc-icon>
               </mwc-list-item>
@@ -106,13 +94,9 @@ SmvPublisherList.styles = css`
     mwc-icon-button.hidden {
       display: none;
     }
-
-    mwc-list-item.hidden[noninteractive] + li[divider] {
-      display: none;
-    }
   `;
 __decorate([
-  property({attribute: false})
+  property()
 ], SmvPublisherList.prototype, "doc", 2);
 SmvPublisherList = __decorate([
   customElement("smv-list")
