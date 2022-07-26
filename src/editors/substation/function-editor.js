@@ -111,7 +111,7 @@ export let FunctionEditor = class extends LitElement {
         ><mwc-menu
           corner="BOTTOM_RIGHT"
           menuCorner="END"
-          @selected=${(e) => {
+          @action=${(e) => {
       const tagName = e.target.selected.value;
       this.openCreateWizard(tagName);
     }}
