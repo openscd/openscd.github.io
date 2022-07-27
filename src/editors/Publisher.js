@@ -88,7 +88,7 @@ PublisherPlugin.styles = css`
     }
 
     .publishertypeselector {
-      margin: 4px 8px 16px;
+      margin: 4px 8px 8px;
       background-color: var(--mdc-theme-surface);
       width: calc(100% - 16px);
       justify-content: space-around;

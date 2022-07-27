@@ -713,6 +713,10 @@ export const de = {
       location: "Ablageort des Select Sampled Value Control Block wählen"
     }
   },
+  publisher: {
+    selectbutton: "{{type}} auswählen",
+    nodataset: "Kein verbundener Datensatz"
+  },
   add: "Hinzufügen",
   new: "Neu",
   remove: "Entfernen",

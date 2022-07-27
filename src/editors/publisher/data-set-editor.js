@@ -14,12 +14,41 @@ import {
   customElement,
   html,
   LitElement,
-  property
+  property,
+  query,
+  state
 } from "../../../_snowpack/pkg/lit-element.js";
-import {compareNames, identity} from "../../foundation.js";
+import {translate} from "../../../_snowpack/pkg/lit-translate.js";
+import "../../../_snowpack/pkg/@material/mwc-button.js";
+import "../../../_snowpack/pkg/@material/mwc-list/mwc-list-item.js";
+import "./data-set-element-editor.js";
+import "../../filtered-list.js";
+import {compareNames, identity, selector} from "../../foundation.js";
+import {styles} from "./foundation.js";
 export let DataSetEditor = class extends LitElement {
-  renderList() {
+  selectDataSet(evt) {
+    const id = evt.target.selected.value;
+    const dataSet = this.doc.querySelector(selector("DataSet", id));
+    if (dataSet) {
+      this.selectedDataSet = dataSet;
+      evt.target.classList.add("hidden");
+      this.selectDataSetButton.classList.remove("hidden");
+    }
+  }
+  renderElementEditorContainer() {
+    if (this.selectedDataSet)
+      return html`<div class="elementeditorcontainer">
+        <data-set-element-editor
+          .element=${this.selectedDataSet}
+        ></data-set-element-editor>
+      </div>`;
+    return html``;
+  }
+  renderSelectionList() {
     return html`<filtered-list
+      activatable
+      @action=${this.selectDataSet}
+      class="selectionlist"
       >${Array.from(this.doc.querySelectorAll("IED")).sort(compareNames).flatMap((ied) => {
       const ieditem = html`<mwc-list-item
               class="listitem header"
@@ -34,35 +63,46 @@ export let DataSetEditor = class extends LitElement {
               <mwc-icon slot="graphic">developer_board</mwc-icon>
             </mwc-list-item>
             <li divider role="separator"></li>`;
-      const dataSets = Array.from(ied.querySelectorAll("DataSet")).map((reportCb) => html`<mwc-list-item twoline value="${identity(reportCb)}"
-                ><span>${reportCb.getAttribute("name")}</span
-                ><span slot="secondary">${identity(reportCb)}</span>
+      const dataSets = Array.from(ied.querySelectorAll("DataSet")).map((dataSet) => html`<mwc-list-item twoline value="${identity(dataSet)}"
+                ><span>${dataSet.getAttribute("name")}</span
+                ><span slot="secondary">${identity(dataSet)}</span>
               </mwc-list-item>`);
       return [ieditem, ...dataSets];
     })}</filtered-list
     >`;
   }
+  renderToggleButton() {
+    return html`<mwc-button
+      outlined
+      label="${translate("publisher.selectbutton", {type: "DataSet"})}"
+      @click=${() => {
+      this.selectionList.classList.remove("hidden");
+      this.selectDataSetButton.classList.add("hidden");
+    }}
+    ></mwc-button>`;
+  }
   render() {
-    return html`${this.renderList()}`;
+    return html`${this.renderToggleButton()}
+      <div class="content">
+        ${this.renderSelectionList()}${this.renderElementEditorContainer()}
+      </div>`;
   }
 };
 DataSetEditor.styles = css`
-    filtered-list {
-      margin: 4px 8px 16px;
-      background-color: var(--mdc-theme-surface);
-    }
-
-    .listitem.header {
-      font-weight: 500;
-    }
-
-    mwc-list-item.hidden[noninteractive] + li[divider] {
-      display: none;
-    }
+    ${styles}
   `;
 __decorate([
   property({attribute: false})
 ], DataSetEditor.prototype, "doc", 2);
+__decorate([
+  state()
+], DataSetEditor.prototype, "selectedDataSet", 2);
+__decorate([
+  query(".selectionlist")
+], DataSetEditor.prototype, "selectionList", 2);
+__decorate([
+  query("mwc-button")
+], DataSetEditor.prototype, "selectDataSetButton", 2);
 DataSetEditor = __decorate([
   customElement("data-set-editor")
 ], DataSetEditor);

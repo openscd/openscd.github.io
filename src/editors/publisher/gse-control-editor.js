@@ -14,16 +14,41 @@ import {
   customElement,
   html,
   LitElement,
-  property
+  property as state,
+  query
 } from "../../../_snowpack/pkg/lit-element.js";
+import {translate} from "../../../_snowpack/pkg/lit-translate.js";
+import "../../../_snowpack/pkg/@material/mwc-button.js";
 import "../../../_snowpack/pkg/@material/mwc-list/mwc-list-item.js";
-import "../../../_snowpack/pkg/@material/mwc-icon.js";
+import "./data-set-element-editor.js";
 import "../../filtered-list.js";
-import {compareNames, identity} from "../../foundation.js";
 import {gooseIcon} from "../../icons/icons.js";
+import {compareNames, identity, selector} from "../../foundation.js";
+import {styles} from "./foundation.js";
 export let GseControlEditor = class extends LitElement {
-  renderList() {
+  selectGSEControl(evt) {
+    const id = evt.target.selected.value;
+    const gseControl = this.doc.querySelector(selector("GSEControl", id));
+    if (gseControl) {
+      this.selectedGseControl = gseControl.parentElement?.querySelector(`DataSet[name="${gseControl.getAttribute("datSet")}"]`);
+      evt.target.classList.add("hidden");
+      this.selectGSEControlButton.classList.remove("hidden");
+    }
+  }
+  renderElementEditorContainer() {
+    if (this.selectedGseControl !== void 0)
+      return html`<div class="elementeditorcontainer">
+        <data-set-element-editor
+          .element=${this.selectedGseControl}
+        ></data-set-element-editor>
+      </div>`;
+    return html``;
+  }
+  renderSelectionList() {
     return html`<filtered-list
+      activatable
+      @action=${this.selectGSEControl}
+      class="selectionlist"
       >${Array.from(this.doc.querySelectorAll("IED")).sort(compareNames).flatMap((ied) => {
       const ieditem = html`<mwc-list-item
               class="listitem header"
@@ -50,27 +75,38 @@ export let GseControlEditor = class extends LitElement {
     })}</filtered-list
     >`;
   }
+  renderToggleButton() {
+    return html`<mwc-button
+      outlined
+      label="${translate("publisher.selectbutton", {type: "GOOSE"})}"
+      @click=${() => {
+      this.selectionList.classList.remove("hidden");
+      this.selectGSEControlButton.classList.add("hidden");
+    }}
+    ></mwc-button>`;
+  }
   render() {
-    return html`${this.renderList()}`;
+    return html`${this.renderToggleButton()}
+      <div class="content">
+        ${this.renderSelectionList()}${this.renderElementEditorContainer()}
+      </div>`;
   }
 };
 GseControlEditor.styles = css`
-    filtered-list {
-      margin: 4px 8px 16px;
-      background-color: var(--mdc-theme-surface);
-    }
-
-    .listitem.header {
-      font-weight: 500;
-    }
-
-    mwc-list-item.hidden[noninteractive] + li[divider] {
-      display: none;
-    }
+    ${styles}
   `;
 __decorate([
-  property({attribute: false})
+  state({attribute: false})
 ], GseControlEditor.prototype, "doc", 2);
+__decorate([
+  state()
+], GseControlEditor.prototype, "selectedGseControl", 2);
+__decorate([
+  query(".selectionlist")
+], GseControlEditor.prototype, "selectionList", 2);
+__decorate([
+  query("mwc-button")
+], GseControlEditor.prototype, "selectGSEControlButton", 2);
 GseControlEditor = __decorate([
   customElement("gse-control-editor")
 ], GseControlEditor);
