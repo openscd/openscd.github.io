@@ -22,16 +22,31 @@ import {translate} from "../../../_snowpack/pkg/lit-translate.js";
 import "../../../_snowpack/pkg/@material/mwc-button.js";
 import "../../../_snowpack/pkg/@material/mwc-list/mwc-list-item.js";
 import "./data-set-element-editor.js";
+import "./report-control-element-editor.js";
 import "../../filtered-list.js";
 import {compareNames, identity, selector} from "../../foundation.js";
 import {reportIcon} from "../../icons/icons.js";
 import {styles} from "./foundation.js";
 export let ReportControlEditor = class extends LitElement {
+  set doc(newDoc) {
+    if (this._doc === newDoc)
+      return;
+    this.selectedDataSet = void 0;
+    this.selectedReportControl = void 0;
+    this._doc = newDoc;
+    this.requestUpdate();
+  }
+  get doc() {
+    return this._doc;
+  }
   selectReportControl(evt) {
     const id = evt.target.selected.value;
     const reportControl = this.doc.querySelector(selector("ReportControl", id));
-    if (reportControl) {
-      this.selectedReportControl = reportControl.parentElement?.querySelector(`DataSet[name="${reportControl.getAttribute("datSet")}"]`);
+    if (!reportControl)
+      return;
+    this.selectedReportControl = reportControl;
+    if (this.selectedReportControl) {
+      this.selectedDataSet = this.selectedReportControl.parentElement?.querySelector(`DataSet[name="${this.selectedReportControl.getAttribute("datSet")}"]`);
       evt.target.classList.add("hidden");
       this.selectReportControlButton.classList.remove("hidden");
     }
@@ -40,8 +55,13 @@ export let ReportControlEditor = class extends LitElement {
     if (this.selectedReportControl !== void 0)
       return html`<div class="elementeditorcontainer">
         <data-set-element-editor
-          .element=${this.selectedReportControl}
+          .doc=${this.doc}
+          .element=${this.selectedDataSet}
         ></data-set-element-editor>
+        <report-control-element-editor
+          .doc=${this.doc}
+          .element=${this.selectedReportControl}
+        ></report-control-element-editor>
       </div>`;
     return html``;
   }
@@ -95,13 +115,41 @@ export let ReportControlEditor = class extends LitElement {
 };
 ReportControlEditor.styles = css`
     ${styles}
+
+    .elementeditorcontainer {
+      flex: 65%;
+      margin: 4px 8px 4px 4px;
+      background-color: var(--mdc-theme-surface);
+      overflow-y: scroll;
+      display: grid;
+      grid-gap: 12px;
+      padding: 8px 12px 16px;
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    data-set-element-editor {
+      grid-column: 1 / 2;
+    }
+
+    report-control-element-editor {
+      grid-column: 2 / 4;
+    }
+
+    @media (max-width: 950px) {
+      .elementeditorcontainer {
+        display: block;
+      }
+    }
   `;
 __decorate([
   property({attribute: false})
-], ReportControlEditor.prototype, "doc", 2);
+], ReportControlEditor.prototype, "doc", 1);
 __decorate([
   state()
 ], ReportControlEditor.prototype, "selectedReportControl", 2);
+__decorate([
+  state()
+], ReportControlEditor.prototype, "selectedDataSet", 2);
 __decorate([
   query(".selectionlist")
 ], ReportControlEditor.prototype, "selectionList", 2);

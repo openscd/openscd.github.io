@@ -6,5 +6,6 @@
 |-----------------------------|--------------------------------|--------------------------------------------------|
 | `doc`                       | `XMLDocument`                  | The document being edited as provided to plugins by [[`OpenSCD`]]. |
 | `selectReportControlButton` | `Button`                       |                                                  |
-| `selectedReportControl`     | `Element \| null \| undefined` |                                                  |
+| `selectedDataSet`           | `Element \| null \| undefined` |                                                  |
+| `selectedReportControl`     | `Element \| undefined`         |                                                  |
 | `selectionList`             | `FilteredList`                 |                                                  |

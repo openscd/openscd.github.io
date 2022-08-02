@@ -29,6 +29,42 @@ export let DataSetElementEditor = class extends LitElement {
   get desc() {
     return this.element ? this.element.getAttribute("desc") : "UNDEFINED";
   }
+  renderContent() {
+    return html`<wizard-textfield
+        label="name"
+        .maybeValue=${this.name}
+        helper="${translate("scl.name")}"
+        required
+      >
+      </wizard-textfield>
+      <wizard-textfield
+        label="desc"
+        .maybeValue=${this.desc}
+        helper="${translate("scl.desc")}"
+        nullable
+      >
+      </wizard-textfield>
+      <filtered-list
+        >${Array.from(this.element.querySelectorAll("FCDA")).map((fcda) => {
+      const [ldInst, prefix, lnClass, lnInst, doName, daName, fc] = [
+        "ldInst",
+        "prefix",
+        "lnClass",
+        "lnInst",
+        "doName",
+        "daName",
+        "fc"
+      ].map((attributeName) => fcda.getAttribute(attributeName) ?? "");
+      return html`<mwc-list-item selected twoline value="${identity(fcda)}"
+            ><span
+              >${doName}${daName ? "." + daName + " [" + fc + "]" : " [" + fc + "]"}</span
+            ><span slot="secondary"
+              >${ldInst + "/" + prefix + lnClass + lnInst}</span
+            >
+          </mwc-list-item>`;
+    })}</filtered-list
+      >`;
+  }
   render() {
     if (this.element)
       return html`<div class="content">
@@ -36,44 +72,13 @@ export let DataSetElementEditor = class extends LitElement {
           <div>DataSet</div>
           <div class="headersubtitle">${identity(this.element)}</div>
         </h2>
-        <wizard-textfield
-          label="name"
-          .maybeValue=${this.name}
-          helper="${translate("scl.name")}"
-          required
-        >
-        </wizard-textfield>
-        <wizard-textfield
-          label="desc"
-          .maybeValue=${this.desc}
-          helper="${translate("scl.desc")}"
-          nullable
-        >
-        </wizard-textfield>
-        <filtered-list
-          >${Array.from(this.element.querySelectorAll("FCDA")).map((fcda) => {
-        const [ldInst, prefix, lnClass, lnInst, doName, daName] = [
-          "ldInst",
-          "prefix",
-          "lnClass",
-          "lnInst",
-          "doName",
-          "daName"
-        ].map((attributeName) => fcda.getAttribute(attributeName) ?? "");
-        return html`<mwc-list-item
-              selected
-              twoline
-              value="${identity(fcda)}"
-              ><span>${doName + "." + daName}</span
-              ><span slot="secondary"
-                >${ldInst + "/" + prefix + lnClass + lnInst}</span
-              >
-            </mwc-list-item>`;
-      })}</filtered-list
-        >
+        ${this.renderContent()}
       </div>`;
     return html`<div class="content">
-      <h2>${translate("publisher.nodataset")}</h2>
+      <h2>
+        <div>DataSet</div>
+        <div class="headersubtitle">${translate("publisher.nodataset")}</div>
+      </h2>
     </div>`;
   }
 };
@@ -111,6 +116,9 @@ DataSetElementEditor.styles = css`
       --mdc-shape-small: 28px;
     }
   `;
+__decorate([
+  property({attribute: false})
+], DataSetElementEditor.prototype, "doc", 2);
 __decorate([
   property({attribute: false})
 ], DataSetElementEditor.prototype, "element", 2);

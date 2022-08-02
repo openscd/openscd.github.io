@@ -90,6 +90,10 @@ export let DataSetEditor = class extends LitElement {
 };
 DataSetEditor.styles = css`
     ${styles}
+
+    data-set-element-editor {
+      flex: auto;
+    }
   `;
 __decorate([
   property({attribute: false})

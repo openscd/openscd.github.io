@@ -131,6 +131,7 @@
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-external"><a href="editors_publisher_data_set_element_editor.DataSetElementEditor.html#contentEditable" class="tsd-kind-icon">content<wbr>Editable</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-external"><a href="editors_publisher_data_set_element_editor.DataSetElementEditor.html#dataset" class="tsd-kind-icon">dataset</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-external"><a href="editors_publisher_data_set_element_editor.DataSetElementEditor.html#dir" class="tsd-kind-icon">dir</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="editors_publisher_data_set_element_editor.DataSetElementEditor.html#doc" class="tsd-kind-icon">doc</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-external"><a href="editors_publisher_data_set_element_editor.DataSetElementEditor.html#draggable" class="tsd-kind-icon">draggable</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="editors_publisher_data_set_element_editor.DataSetElementEditor.html#element" class="tsd-kind-icon">element</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-external"><a href="editors_publisher_data_set_element_editor.DataSetElementEditor.html#enterKeyHint" class="tsd-kind-icon">enter<wbr>Key<wbr>Hint</a></li>
@@ -359,6 +360,7 @@
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-inherited tsd-is-external"><a href="editors_publisher_data_set_element_editor.DataSetElementEditor.html#removeChild" class="tsd-kind-icon">remove<wbr>Child</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-inherited tsd-is-external"><a href="editors_publisher_data_set_element_editor.DataSetElementEditor.html#removeEventListener" class="tsd-kind-icon">remove<wbr>Event<wbr>Listener</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-overwrite"><a href="editors_publisher_data_set_element_editor.DataSetElementEditor.html#render-1" class="tsd-kind-icon">render</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="editors_publisher_data_set_element_editor.DataSetElementEditor.html#renderContent" class="tsd-kind-icon">render<wbr>Content</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-inherited tsd-is-external"><a href="editors_publisher_data_set_element_editor.DataSetElementEditor.html#replaceChild" class="tsd-kind-icon">replace<wbr>Child</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external"><a href="editors_publisher_data_set_element_editor.DataSetElementEditor.html#replaceWith" class="tsd-kind-icon">replace<wbr>With</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external"><a href="editors_publisher_data_set_element_editor.DataSetElementEditor.html#requestFullscreen" class="tsd-kind-icon">request<wbr>Fullscreen</a></li>
@@ -909,6 +911,21 @@
 						</ul>
 					</aside>
 				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="doc" class="tsd-anchor"></a>
+					<h3>doc</h3>
+					<div class="tsd-signature tsd-kind-icon">doc<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">XMLDocument</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/21732c9/src/editors/publisher/data-set-element-editor.ts#L23">src/editors/publisher/data-set-element-editor.ts:23</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The document being edited as provided to plugins by <a href="open_scd.OpenSCD.html"><code>OpenSCD</code></a>.</p>
+						</div>
+					</div>
+				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-external">
 					<a name="draggable" class="tsd-anchor"></a>
 					<h3>draggable</h3>
@@ -926,9 +943,14 @@
 					<div class="tsd-signature tsd-kind-icon">element<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Element</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/f5af0c8/src/editors/publisher/data-set-element-editor.ts#L22">src/editors/publisher/data-set-element-editor.ts:22</a></li>
+							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/21732c9/src/editors/publisher/data-set-element-editor.ts#L26">src/editors/publisher/data-set-element-editor.ts:26</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The element being edited as provided to plugins by <a href="open_scd.OpenSCD.html"><code>OpenSCD</code></a>.</p>
+						</div>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-external">
 					<a name="enterKeyHint" class="tsd-anchor"></a>
@@ -3149,7 +3171,7 @@
 					<aside class="tsd-sources">
 						<p>Overrides LitElement.styles</p>
 						<ul>
-							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/f5af0c8/src/editors/publisher/data-set-element-editor.ts#L83">src/editors/publisher/data-set-element-editor.ts:83</a></li>
+							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/21732c9/src/editors/publisher/data-set-element-editor.ts#L95">src/editors/publisher/data-set-element-editor.ts:95</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -3183,7 +3205,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/f5af0c8/src/editors/publisher/data-set-element-editor.ts#L29">src/editors/publisher/data-set-element-editor.ts:29</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/21732c9/src/editors/publisher/data-set-element-editor.ts#L33">src/editors/publisher/data-set-element-editor.ts:33</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></h4>
@@ -3217,7 +3239,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/f5af0c8/src/editors/publisher/data-set-element-editor.ts#L25">src/editors/publisher/data-set-element-editor.ts:25</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/21732c9/src/editors/publisher/data-set-element-editor.ts#L29">src/editors/publisher/data-set-element-editor.ts:29</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></h4>
@@ -5367,7 +5389,24 @@
 							<aside class="tsd-sources">
 								<p>Overrides LitElement.render</p>
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/f5af0c8/src/editors/publisher/data-set-element-editor.ts#L33">src/editors/publisher/data-set-element-editor.ts:33</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/21732c9/src/editors/publisher/data-set-element-editor.ts#L77">src/editors/publisher/data-set-element-editor.ts:77</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">TemplateResult</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private">
+					<a name="renderContent" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> render<wbr>Content</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private">
+						<li class="tsd-signature tsd-kind-icon">render<wbr>Content<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">TemplateResult</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/21732c9/src/editors/publisher/data-set-element-editor.ts#L37">src/editors/publisher/data-set-element-editor.ts:37</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">TemplateResult</span></h4>
@@ -6400,6 +6439,9 @@
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-external">
 								<a href="editors_publisher_data_set_element_editor.DataSetElementEditor.html#dir" class="tsd-kind-icon">dir</a>
 							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="editors_publisher_data_set_element_editor.DataSetElementEditor.html#doc" class="tsd-kind-icon">doc</a>
+							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-external">
 								<a href="editors_publisher_data_set_element_editor.DataSetElementEditor.html#draggable" class="tsd-kind-icon">draggable</a>
 							</li>
@@ -7054,6 +7096,9 @@
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
 								<a href="editors_publisher_data_set_element_editor.DataSetElementEditor.html#render-1" class="tsd-kind-icon">render</a>
 							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private">
+								<a href="editors_publisher_data_set_element_editor.DataSetElementEditor.html#renderContent" class="tsd-kind-icon">render<wbr>Content</a>
+							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-inherited tsd-is-external">
 								<a href="editors_publisher_data_set_element_editor.DataSetElementEditor.html#replaceChild" class="tsd-kind-icon">replace<wbr>Child</a>
 							</li>
@@ -7163,6 +7208,9 @@
 			</ul>
 			<ul class="tsd-legend">
 				<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited constructor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private method</span></li>
 			</ul>
 			<ul class="tsd-legend">
 				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static property</span></li>

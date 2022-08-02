@@ -94,6 +94,10 @@ export let GseControlEditor = class extends LitElement {
 };
 GseControlEditor.styles = css`
     ${styles}
+
+    data-set-element-editor {
+      flex: auto;
+    }
   `;
 __decorate([
   state({attribute: false})

@@ -95,6 +95,10 @@ export let SampledValueControlEditor = class extends LitElement {
 };
 SampledValueControlEditor.styles = css`
     ${styles}
+
+    data-set-element-editor {
+      flex: auto;
+    }
   `;
 __decorate([
   property({attribute: false})

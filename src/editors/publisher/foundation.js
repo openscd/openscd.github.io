@@ -20,10 +20,6 @@ export const styles = css`
     display: flex;
   }
 
-  data-set-element-editor {
-    width: calc(100% - 6px);
-  }
-
   .listitem.header {
     font-weight: 500;
   }
@@ -34,6 +30,12 @@ export const styles = css`
 
   mwc-button {
     display: none;
+  }
+
+  @media (max-width: 950px) {
+    .elementeditorcontainer {
+      display: block;
+    }
   }
 
   @media (max-width: 599px) {
@@ -51,6 +53,10 @@ export const styles = css`
       z-index: 1;
       box-shadow: 0 8px 10px 1px rgba(0, 0, 0, 0.14),
         0 3px 14px 2px rgba(0, 0, 0, 0.12), 0 5px 5px -3px rgba(0, 0, 0, 0.2);
+    }
+
+    .elementeditorcontainer {
+      display: block;
     }
 
     data-set-element-editor {

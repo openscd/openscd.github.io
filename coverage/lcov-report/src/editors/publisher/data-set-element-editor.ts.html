@@ -25,28 +25,28 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>117/117</span>
+                <span class='fraction'>129/129</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">77.77% </span>
+                <span class="strong">81.81% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>7/9</span>
+                <span class='fraction'>9/11</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>3/3</span>
+                <span class='fraction'>4/4</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>117/117</span>
+                <span class='fraction'>129/129</span>
             </div>
         
             
@@ -180,7 +180,19 @@
 <a name='L115'></a><a href='#L115'>115</a>
 <a name='L116'></a><a href='#L116'>116</a>
 <a name='L117'></a><a href='#L117'>117</a>
-<a name='L118'></a><a href='#L118'>118</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">6x</span>
+<a name='L118'></a><a href='#L118'>118</a>
+<a name='L119'></a><a href='#L119'>119</a>
+<a name='L120'></a><a href='#L120'>120</a>
+<a name='L121'></a><a href='#L121'>121</a>
+<a name='L122'></a><a href='#L122'>122</a>
+<a name='L123'></a><a href='#L123'>123</a>
+<a name='L124'></a><a href='#L124'>124</a>
+<a name='L125'></a><a href='#L125'>125</a>
+<a name='L126'></a><a href='#L126'>126</a>
+<a name='L127'></a><a href='#L127'>127</a>
+<a name='L128'></a><a href='#L128'>128</a>
+<a name='L129'></a><a href='#L129'>129</a>
+<a name='L130'></a><a href='#L130'>130</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-yes">6x</span>
@@ -210,17 +222,13 @@
 <span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-yes">6x</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-yes">5x</span>
@@ -252,13 +260,29 @@
 <span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-yes">6x</span>
@@ -317,6 +341,10 @@ import { identity } from '../../foundation.js';
 &nbsp;
 @customElement('data-set-element-editor')
 export class DataSetElementEditor extends LitElement {
+  /** The document being edited as provided to plugins by [[`OpenSCD`]]. */
+  @property({ attribute: false })
+  doc!: XMLDocument;
+  /** The element being edited as provided to plugins by [[`OpenSCD`]]. */
   @property({ attribute: false })
   element!: Element | null;
 &nbsp;
@@ -329,6 +357,46 @@ export class DataSetElementEditor extends LitElement {
     return this.element ? this.element.getAttribute(<span class="branch-0 cbranch-no" title="branch not covered" >'desc') : 'UNDEFINED';</span>
   }
 &nbsp;
+  private renderContent(): TemplateResult {
+    return html`&lt;wizard-textfield
+        label="name"
+        .maybeValue=${this.name}
+        helper="${translate('scl.name')}"
+        required
+      &gt;
+      &lt;/wizard-textfield&gt;
+      &lt;wizard-textfield
+        label="desc"
+        .maybeValue=${this.desc}
+        helper="${translate('scl.desc')}"
+        nullable
+      &gt;
+      &lt;/wizard-textfield&gt;
+      &lt;filtered-list
+        &gt;${Array.from(this.element!.querySelectorAll('FCDA')).map(fcda =&gt; {
+          const [ldInst, prefix, lnClass, lnInst, doName, daName, fc] = [
+            'ldInst',
+            'prefix',
+            'lnClass',
+            'lnInst',
+            'doName',
+            'daName',
+            'fc',
+          ].map(attributeName =&gt; fcda.getAttribute(attributeName) ?? '');
+&nbsp;
+          return html`&lt;mwc-list-item selected twoline value="${identity(fcda)}"
+            &gt;&lt;span
+              &gt;${doName}${daName
+                ? '.' + daName + ' ' + '[' + fc + ']'
+                : ' ' + '[' + fc + ']'}&lt;/span
+            &gt;&lt;span slot="secondary"
+              &gt;${ldInst + '/' + prefix + lnClass + lnInst}&lt;/span
+            &gt;
+          &lt;/mwc-list-item&gt;`;
+        })}&lt;/filtered-list
+      &gt;`;
+  }
+&nbsp;
   render(): TemplateResult {
     if (this.element)
       return html`&lt;div class="content"&gt;
@@ -336,46 +404,14 @@ export class DataSetElementEditor extends LitElement {
           &lt;div&gt;DataSet&lt;/div&gt;
           &lt;div class="headersubtitle"&gt;${identity(this.element)}&lt;/div&gt;
         &lt;/h2&gt;
-        &lt;wizard-textfield
-          label="name"
-          .maybeValue=${this.name}
-          helper="${translate('scl.name')}"
-          required
-        &gt;
-        &lt;/wizard-textfield&gt;
-        &lt;wizard-textfield
-          label="desc"
-          .maybeValue=${this.desc}
-          helper="${translate('scl.desc')}"
-          nullable
-        &gt;
-        &lt;/wizard-textfield&gt;
-        &lt;filtered-list
-          &gt;${Array.from(this.element.querySelectorAll('FCDA')).map(fcda =&gt; {
-            const [ldInst, prefix, lnClass, lnInst, doName, daName] = [
-              'ldInst',
-              'prefix',
-              'lnClass',
-              'lnInst',
-              'doName',
-              'daName',
-            ].map(attributeName =&gt; fcda.getAttribute(attributeName) ?? '');
-&nbsp;
-            return html`&lt;mwc-list-item
-              selected
-              twoline
-              value="${identity(fcda)}"
-              &gt;&lt;span&gt;${doName + '.' + daName}&lt;/span
-              &gt;&lt;span slot="secondary"
-                &gt;${ldInst + '/' + prefix + lnClass + lnInst}&lt;/span
-              &gt;
-            &lt;/mwc-list-item&gt;`;
-          })}&lt;/filtered-list
-        &gt;
+        ${this.renderContent()}
       &lt;/div&gt;`;
 &nbsp;
     return html`&lt;div class="content"&gt;
-      &lt;h2&gt;${translate('publisher.nodataset')}&lt;/h2&gt;
+      &lt;h2&gt;
+        &lt;div&gt;DataSet&lt;/div&gt;
+        &lt;div class="headersubtitle"&gt;${translate('publisher.nodataset')}&lt;/div&gt;
+      &lt;/h2&gt;
     &lt;/div&gt;`;
   }
 &nbsp;
@@ -421,7 +457,7 @@ export class DataSetElementEditor extends LitElement {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener">istanbul</a>
-                at Sun Jul 31 2022 22:14:17 GMT+0000 (Coordinated Universal Time)
+                at Tue Aug 02 2022 09:03:57 GMT+0000 (Coordinated Universal Time)
             </div>
         </div>
         <script src="../../../prettify.js"></script>
