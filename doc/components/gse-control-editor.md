@@ -6,7 +6,8 @@
 |--------------------------|--------------------------------|--------------------------------------------------|
 | `doc`                    | `XMLDocument`                  | The document being edited as provided to plugins by [[`OpenSCD`]]. |
 | `selectGSEControlButton` | `Button`                       |                                                  |
-| `selectedGseControl`     | `Element \| null \| undefined` |                                                  |
+| `selectedDataSet`        | `Element \| null \| undefined` |                                                  |
+| `selectedGseControl`     | `Element \| undefined`         |                                                  |
 | `selectionList`          | `FilteredList`                 |                                                  |
 
 ## Methods

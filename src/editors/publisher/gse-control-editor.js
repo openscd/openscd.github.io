@@ -14,23 +14,39 @@ import {
   customElement,
   html,
   LitElement,
-  property as state,
+  property,
+  state,
   query
 } from "../../../_snowpack/pkg/lit-element.js";
 import {translate} from "../../../_snowpack/pkg/lit-translate.js";
 import "../../../_snowpack/pkg/@material/mwc-button.js";
 import "../../../_snowpack/pkg/@material/mwc-list/mwc-list-item.js";
 import "./data-set-element-editor.js";
+import "./gse-control-element-editor.js";
 import "../../filtered-list.js";
 import {gooseIcon} from "../../icons/icons.js";
 import {compareNames, identity, selector} from "../../foundation.js";
 import {styles} from "./foundation.js";
 export let GseControlEditor = class extends LitElement {
+  set doc(newDoc) {
+    if (this._doc === newDoc)
+      return;
+    this.selectedDataSet = void 0;
+    this.selectedGseControl = void 0;
+    this._doc = newDoc;
+    this.requestUpdate();
+  }
+  get doc() {
+    return this._doc;
+  }
   selectGSEControl(evt) {
     const id = evt.target.selected.value;
     const gseControl = this.doc.querySelector(selector("GSEControl", id));
+    if (!gseControl)
+      return;
+    this.selectedGseControl = gseControl;
     if (gseControl) {
-      this.selectedGseControl = gseControl.parentElement?.querySelector(`DataSet[name="${gseControl.getAttribute("datSet")}"]`);
+      this.selectedDataSet = gseControl.parentElement?.querySelector(`DataSet[name="${gseControl.getAttribute("datSet")}"]`);
       evt.target.classList.add("hidden");
       this.selectGSEControlButton.classList.remove("hidden");
     }
@@ -39,8 +55,12 @@ export let GseControlEditor = class extends LitElement {
     if (this.selectedGseControl !== void 0)
       return html`<div class="elementeditorcontainer">
         <data-set-element-editor
-          .element=${this.selectedGseControl}
+          .element=${this.selectedDataSet}
         ></data-set-element-editor>
+        <gse-control-element-editor
+          .doc=${this.doc}
+          .element=${this.selectedGseControl}
+        ></gse-control-element-editor>
       </div>`;
     return html``;
   }
@@ -95,16 +115,40 @@ export let GseControlEditor = class extends LitElement {
 GseControlEditor.styles = css`
     ${styles}
 
+    .elementeditorcontainer {
+      flex: 65%;
+      margin: 4px 8px 4px 4px;
+      background-color: var(--mdc-theme-surface);
+      overflow-y: scroll;
+      display: grid;
+      grid-gap: 12px;
+      padding: 8px 12px 16px;
+      grid-template-columns: repeat(3, 1fr);
+    }
+
     data-set-element-editor {
-      flex: auto;
+      grid-column: 1 / 2;
+    }
+
+    gse-control-element-editor {
+      grid-column: 2 / 4;
+    }
+
+    @media (max-width: 950px) {
+      .elementeditorcontainer {
+        display: block;
+      }
     }
   `;
 __decorate([
-  state({attribute: false})
-], GseControlEditor.prototype, "doc", 2);
+  property({attribute: false})
+], GseControlEditor.prototype, "doc", 1);
 __decorate([
   state()
 ], GseControlEditor.prototype, "selectedGseControl", 2);
+__decorate([
+  state()
+], GseControlEditor.prototype, "selectedDataSet", 2);
 __decorate([
   query(".selectionlist")
 ], GseControlEditor.prototype, "selectionList", 2);
