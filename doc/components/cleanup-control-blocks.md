@@ -15,6 +15,6 @@ An editor component for cleaning SCL Control Blocks.
 | `cleanupReportControlFilter`       |                        | `Button`                      |         |                                                  |
 | `cleanupSampledValueControlFilter` |                        | `Button`                      |         |                                                  |
 | `disableControlClean`              | `disableControlClean`  | `boolean`                     | false   |                                                  |
-| `doc`                              | `doc`                  | `XMLDocument`                 |         | The document being edited as provided to plugins by [[`OpenSCD`]]. |
-| `selectedControlItems`             | `selectedControlItems` | `number \| Set<number> \| []` | []      |                                                  |
+| `doc`                              |                        | `XMLDocument`                 |         | The document being edited as provided to plugins by [[`OpenSCD`]]. |
+| `selectedControlItems`             |                        | `number \| Set<number> \| []` | []      |                                                  |
 | `unreferencedControls`             | `unreferencedControls` | `Element[]`                   | []      |                                                  |

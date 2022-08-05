@@ -23,16 +23,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">96.24% </span>
+                <span class="strong">96.25% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>410/426</span>
+                <span class='fraction'>411/427</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">90% </span>
+                <span class="strong">90.47% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>18/20</span>
+                <span class='fraction'>19/21</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">96.24% </span>
+                <span class="strong">96.25% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>410/426</span>
+                <span class='fraction'>411/427</span>
             </div>
         
             
@@ -489,7 +489,11 @@
 <a name='L424'></a><a href='#L424'>424</a>
 <a name='L425'></a><a href='#L425'>425</a>
 <a name='L426'></a><a href='#L426'>426</a>
-<a name='L427'></a><a href='#L427'>427</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">2x</span>
+<a name='L427'></a><a href='#L427'>427</a>
+<a name='L428'></a><a href='#L428'>428</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
@@ -641,6 +645,12 @@
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
@@ -730,31 +740,23 @@
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
@@ -927,6 +929,7 @@ import {
   query,
   queryAll,
 } from 'lit-element';
+import { classMap } from 'lit-html/directives/class-map';
 import { translate } from 'lit-translate';
 &nbsp;
 import '@material/mwc-button';
@@ -993,7 +996,7 @@ function getCommAddress(controlBlock: Element): Element | null | undefined {
 @customElement('cleanup-control-blocks')
 export class CleanupControlBlocks extends LitElement {
   /** The document being edited as provided to plugins by [[`OpenSCD`]]. */
-  @property()
+  @property({ attribute: false })
   doc!: XMLDocument;
 &nbsp;
   @property({ type: Boolean })
@@ -1002,7 +1005,7 @@ export class CleanupControlBlocks extends LitElement {
   @property({ type: Array })
   unreferencedControls: Element[] = [];
 &nbsp;
-  @property()
+  @property({ attribute: false })
   selectedControlItems: MWCListIndex | [] = [];
 &nbsp;
   @query('.deleteButton')
@@ -1035,7 +1038,9 @@ export class CleanupControlBlocks extends LitElement {
    */
   private toggleHiddenClass(selectorType: string) {
     this.cleanupList!.querySelectorAll(`.${selectorType}`).forEach(element =&gt; {
-      element.classList.toggle('hidden');
+      element.classList.toggle('hiddenontypefilter');
+      if (element.hasAttribute('disabled')) element.removeAttribute('disabled');
+      else element.setAttribute('disabled', 'true');
     });
   }
 &nbsp;
@@ -1081,7 +1086,13 @@ export class CleanupControlBlocks extends LitElement {
   private renderListItem(controlBlock: Element): TemplateResult {
     return html`&lt;mwc-check-list-item
       twoline
-      class="cleanupListItem t${controlBlock.tagName}"
+      class="${classMap({
+        cleanupListItem: true,
+        tReportControl: controlBlock.tagName === 'ReportControl',
+        tLogControl: controlBlock.tagName === 'LogControl',
+        tGSEControl: controlBlock.tagName === 'GSEControl',
+        tSampledValueControl: controlBlock.tagName === 'SampledValueControl',
+      })}"
       value="${identity(controlBlock)}"
       graphic="large"
       &gt;&lt;span class="unreferencedControl"
@@ -1145,13 +1156,15 @@ export class CleanupControlBlocks extends LitElement {
    * @returns html for the Delete Button of this container.
    */
   private renderDeleteButton(): TemplateResult {
+    const sizeSelectedItems = (&lt;Set&lt;number&gt;&gt;this.selectedControlItems).size;
+&nbsp;
     return html`&lt;mwc-button
       outlined
       icon="delete"
       class="deleteButton"
-      label="${translate('cleanup.unreferencedControls.deleteButton')} (${(&lt;
-        Set&lt;number&gt;
-      &gt;this.selectedControlItems).size || '0'})"
+      label="${translate(
+        'cleanup.unreferencedControls.deleteButton'
+      )} (${sizeSelectedItems || '0'})"
       ?disabled=${(&lt;Set&lt;number&gt;&gt;this.selectedControlItems).size === 0 ||
       (Array.isArray(this.selectedControlItems) &amp;&amp;
         !this.selectedControlItems.length)}
@@ -1316,20 +1329,10 @@ export class CleanupControlBlocks extends LitElement {
       opacity: 1;
     }
 &nbsp;
-    /* items are disabled if the filter is deselected */
-    .tGSEControl,
-    .tSampledValueControl,
-    .tLogControl,
-    .tReportControl {
+    /* Make sure to type filter here
+    .hidden is set on string filter in filtered-list and must always filter*/
+    .cleanupListItem.hiddenontypefilter:not(.hidden) {
       display: none;
-    }
-&nbsp;
-    /* items enabled if filter is selected */
-    .tGSEControlFilter[on] ~ .cleanupList &gt; .tGSEControl,
-    .tSampledValueControlFilter[on] ~ .cleanupList &gt; .tSampledValueControl,
-    .tLogControlFilter[on] ~ .cleanupList &gt; .tLogControl,
-    .tReportControlFilter[on] ~ .cleanupList &gt; .tReportControl {
-      display: flex;
     }
 &nbsp;
     /* filter disabled, Material Design guidelines for opacity */
@@ -1348,7 +1351,7 @@ export class CleanupControlBlocks extends LitElement {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener">istanbul</a>
-                at Wed Aug 03 2022 10:50:09 GMT+0000 (Coordinated Universal Time)
+                at Fri Aug 05 2022 10:06:04 GMT+0000 (Coordinated Universal Time)
             </div>
         </div>
         <script src="../../../prettify.js"></script>

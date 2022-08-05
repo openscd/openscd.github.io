@@ -75,11 +75,12 @@ export let CleanupDatasets = class extends LitElement {
     </mwc-check-list-item>`;
   }
   renderDeleteButton() {
+    const sizeSelectedItems = this.selectedDatasetItems.size;
     return html` <mwc-button
       outlined
       icon="delete"
       class="deleteButton cleanupDeleteButton"
-      label="${translate("cleanup.unreferencedDataSets.deleteButton")} (${this.selectedDatasetItems.size || "0"})"
+      label="${translate("cleanup.unreferencedDataSets.deleteButton")} (${sizeSelectedItems || "0"})"
       ?disabled=${this.selectedDatasetItems.size === 0 || Array.isArray(this.selectedDatasetItems) && !this.selectedDatasetItems.length}
       @click=${(e) => {
       const cleanItems = Array.from(this.selectedDatasetItems.values()).map((index) => this.unreferencedDataSets[index]);
@@ -181,7 +182,7 @@ CleanupDatasets.styles = css`
     }
   `;
 __decorate([
-  property()
+  property({attribute: false})
 ], CleanupDatasets.prototype, "doc", 2);
 __decorate([
   property({type: Boolean})
@@ -190,7 +191,7 @@ __decorate([
   property({type: Array})
 ], CleanupDatasets.prototype, "unreferencedDataSets", 2);
 __decorate([
-  property()
+  property({attribute: false})
 ], CleanupDatasets.prototype, "selectedDatasetItems", 2);
 __decorate([
   query(".deleteButton")

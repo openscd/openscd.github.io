@@ -19,6 +19,7 @@ import {
   query,
   queryAll
 } from "../../../_snowpack/pkg/lit-element.js";
+import {classMap} from "../../../_snowpack/pkg/lit-html/directives/class-map.js";
 import {translate} from "../../../_snowpack/pkg/lit-translate.js";
 import "../../../_snowpack/pkg/@material/mwc-button.js";
 import "../../../_snowpack/pkg/@material/mwc-icon.js";
@@ -67,7 +68,11 @@ export let CleanupControlBlocks = class extends LitElement {
   }
   toggleHiddenClass(selectorType) {
     this.cleanupList.querySelectorAll(`.${selectorType}`).forEach((element) => {
-      element.classList.toggle("hidden");
+      element.classList.toggle("hiddenontypefilter");
+      if (element.hasAttribute("disabled"))
+        element.removeAttribute("disabled");
+      else
+        element.setAttribute("disabled", "true");
     });
   }
   async firstUpdated() {
@@ -93,7 +98,13 @@ export let CleanupControlBlocks = class extends LitElement {
   renderListItem(controlBlock) {
     return html`<mwc-check-list-item
       twoline
-      class="cleanupListItem t${controlBlock.tagName}"
+      class="${classMap({
+      cleanupListItem: true,
+      tReportControl: controlBlock.tagName === "ReportControl",
+      tLogControl: controlBlock.tagName === "LogControl",
+      tGSEControl: controlBlock.tagName === "GSEControl",
+      tSampledValueControl: controlBlock.tagName === "SampledValueControl"
+    })}"
       value="${identity(controlBlock)}"
       graphic="large"
       ><span class="unreferencedControl"
@@ -141,11 +152,12 @@ export let CleanupControlBlocks = class extends LitElement {
     </mwc-check-list-item>`;
   }
   renderDeleteButton() {
+    const sizeSelectedItems = this.selectedControlItems.size;
     return html`<mwc-button
       outlined
       icon="delete"
       class="deleteButton"
-      label="${translate("cleanup.unreferencedControls.deleteButton")} (${this.selectedControlItems.size || "0"})"
+      label="${translate("cleanup.unreferencedControls.deleteButton")} (${sizeSelectedItems || "0"})"
       ?disabled=${this.selectedControlItems.size === 0 || Array.isArray(this.selectedControlItems) && !this.selectedControlItems.length}
       @click=${(e) => {
       const cleanItems = Array.from(this.selectedControlItems.values()).map((index) => this.unreferencedControls[index]);
@@ -283,20 +295,10 @@ CleanupControlBlocks.styles = css`
       opacity: 1;
     }
 
-    /* items are disabled if the filter is deselected */
-    .tGSEControl,
-    .tSampledValueControl,
-    .tLogControl,
-    .tReportControl {
+    /* Make sure to type filter here
+    .hidden is set on string filter in filtered-list and must always filter*/
+    .cleanupListItem.hiddenontypefilter:not(.hidden) {
       display: none;
-    }
-
-    /* items enabled if filter is selected */
-    .tGSEControlFilter[on] ~ .cleanupList > .tGSEControl,
-    .tSampledValueControlFilter[on] ~ .cleanupList > .tSampledValueControl,
-    .tLogControlFilter[on] ~ .cleanupList > .tLogControl,
-    .tReportControlFilter[on] ~ .cleanupList > .tReportControl {
-      display: flex;
     }
 
     /* filter disabled, Material Design guidelines for opacity */
@@ -308,7 +310,7 @@ CleanupControlBlocks.styles = css`
     }
   `;
 __decorate([
-  property()
+  property({attribute: false})
 ], CleanupControlBlocks.prototype, "doc", 2);
 __decorate([
   property({type: Boolean})
@@ -317,7 +319,7 @@ __decorate([
   property({type: Array})
 ], CleanupControlBlocks.prototype, "unreferencedControls", 2);
 __decorate([
-  property()
+  property({attribute: false})
 ], CleanupControlBlocks.prototype, "selectedControlItems", 2);
 __decorate([
   query(".deleteButton")
