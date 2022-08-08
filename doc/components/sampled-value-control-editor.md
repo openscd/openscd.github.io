@@ -6,5 +6,6 @@
 |-----------------------------------|--------------------------------|--------------------------------------------------|
 | `doc`                             | `XMLDocument`                  | The document being edited as provided to plugins by [[`OpenSCD`]]. |
 | `selectSampledValueControlButton` | `Button`                       |                                                  |
-| `selectedSampledValueControl`     | `Element \| null \| undefined` |                                                  |
+| `selectedDataSet`                 | `Element \| null \| undefined` |                                                  |
+| `selectedSampledValueControl`     | `Element \| undefined`         |                                                  |
 | `selectionList`                   | `FilteredList`                 |                                                  |

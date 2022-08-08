@@ -26,6 +26,18 @@ import "../../filtered-list.js";
 import {compareNames, identity, selector} from "../../foundation.js";
 import {styles} from "./foundation.js";
 export let DataSetEditor = class extends LitElement {
+  set doc(newDoc) {
+    if (this._doc === newDoc)
+      return;
+    this.selectedDataSet = void 0;
+    if (this.selectionList && this.selectionList.selected)
+      this.selectionList.selected.selected = false;
+    this._doc = newDoc;
+    this.requestUpdate();
+  }
+  get doc() {
+    return this._doc;
+  }
   selectDataSet(evt) {
     const id = evt.target.selected.value;
     const dataSet = this.doc.querySelector(selector("DataSet", id));
@@ -97,7 +109,7 @@ DataSetEditor.styles = css`
   `;
 __decorate([
   property({attribute: false})
-], DataSetEditor.prototype, "doc", 2);
+], DataSetEditor.prototype, "doc", 1);
 __decorate([
   state()
 ], DataSetEditor.prototype, "selectedDataSet", 2);

@@ -33,6 +33,8 @@ export let ReportControlEditor = class extends LitElement {
       return;
     this.selectedDataSet = void 0;
     this.selectedReportControl = void 0;
+    if (this.selectionList && this.selectionList.selected)
+      this.selectionList.selected.selected = false;
     this._doc = newDoc;
     this.requestUpdate();
   }

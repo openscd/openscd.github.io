@@ -23,15 +23,32 @@ import "../../../_snowpack/pkg/@material/mwc-button.js";
 import "../../../_snowpack/pkg/@material/mwc-list/mwc-list-item.js";
 import "./data-set-element-editor.js";
 import "../../filtered-list.js";
+import "./sampled-value-control-element-editor.js";
 import {compareNames, identity, selector} from "../../foundation.js";
 import {smvIcon} from "../../icons/icons.js";
 import {styles} from "./foundation.js";
 export let SampledValueControlEditor = class extends LitElement {
+  set doc(newDoc) {
+    if (this._doc === newDoc)
+      return;
+    this.selectedDataSet = void 0;
+    this.selectedSampledValueControl = void 0;
+    if (this.selectionList && this.selectionList.selected)
+      this.selectionList.selected.selected = false;
+    this._doc = newDoc;
+    this.requestUpdate();
+  }
+  get doc() {
+    return this._doc;
+  }
   selectSMVControl(evt) {
     const id = evt.target.selected.value;
     const smvControl = this.doc.querySelector(selector("SampledValueControl", id));
+    if (!smvControl)
+      return;
+    this.selectedSampledValueControl = smvControl;
     if (smvControl) {
-      this.selectedSampledValueControl = smvControl.parentElement?.querySelector(`DataSet[name="${smvControl.getAttribute("datSet")}"]`);
+      this.selectedDataSet = smvControl.parentElement?.querySelector(`DataSet[name="${smvControl.getAttribute("datSet")}"]`) ?? null;
       evt.target.classList.add("hidden");
       this.selectSampledValueControlButton.classList.remove("hidden");
     }
@@ -40,8 +57,12 @@ export let SampledValueControlEditor = class extends LitElement {
     if (this.selectedSampledValueControl !== void 0)
       return html`<div class="elementeditorcontainer">
         <data-set-element-editor
-          .element=${this.selectedSampledValueControl}
+          .element=${this.selectedDataSet}
         ></data-set-element-editor>
+        <sampled-value-control-element-editor
+          .doc=${this.doc}
+          .element=${this.selectedSampledValueControl}
+        ></sampled-value-control-element-editor>
       </div>`;
     return html``;
   }
@@ -96,16 +117,40 @@ export let SampledValueControlEditor = class extends LitElement {
 SampledValueControlEditor.styles = css`
     ${styles}
 
+    .elementeditorcontainer {
+      flex: 65%;
+      margin: 4px 8px 4px 4px;
+      background-color: var(--mdc-theme-surface);
+      overflow-y: scroll;
+      display: grid;
+      grid-gap: 12px;
+      padding: 8px 12px 16px;
+      grid-template-columns: repeat(3, 1fr);
+    }
+
     data-set-element-editor {
-      flex: auto;
+      grid-column: 1 / 2;
+    }
+
+    sampled-value-control-element-editor {
+      grid-column: 2 / 4;
+    }
+
+    @media (max-width: 950px) {
+      .elementeditorcontainer {
+        display: block;
+      }
     }
   `;
 __decorate([
   property({attribute: false})
-], SampledValueControlEditor.prototype, "doc", 2);
+], SampledValueControlEditor.prototype, "doc", 1);
 __decorate([
   state()
 ], SampledValueControlEditor.prototype, "selectedSampledValueControl", 2);
+__decorate([
+  state()
+], SampledValueControlEditor.prototype, "selectedDataSet", 2);
 __decorate([
   query(".selectionlist")
 ], SampledValueControlEditor.prototype, "selectionList", 2);

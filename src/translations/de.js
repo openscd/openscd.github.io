@@ -715,7 +715,12 @@ export const de = {
   },
   publisher: {
     selectbutton: "{{type}} auswählen",
-    nodataset: "Kein verbundener Datensatz"
+    nodataset: "Kein verbundener Datensatz",
+    smv: {
+      commsetting: "Kommunikationsparameter (SMV)",
+      noconnectedap: "Fehlende Verbindung zu einem Netzwerk",
+      smvopts: "Optionale Felder"
+    }
   },
   add: "Hinzufügen",
   new: "Neu",

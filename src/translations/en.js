@@ -711,7 +711,12 @@ export const en = {
   },
   publisher: {
     selectbutton: "Select other {{type}}",
-    nodataset: "No DataSet referenced"
+    nodataset: "No DataSet referenced",
+    smv: {
+      commsetting: "Communication Settings (SMV)",
+      noconnectedap: "No connection to SubNetwork",
+      smvopts: "Optional Fields"
+    }
   },
   add: "Add",
   new: "New",
