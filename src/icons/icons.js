@@ -46,8 +46,7 @@ export const iconColors = {
   info: "--cyan",
   warning: "--yellow",
   error: "--red",
-  action: "--blue",
-  sclhistory: "--cyan"
+  action: "--blue"
 };
 export function getFilterIcon(type, state) {
   if (type === "reset")

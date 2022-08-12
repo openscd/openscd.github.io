@@ -139,6 +139,10 @@ export const en = {
       placeholder: "No errors"
     }
   },
+  history: {
+    name: "SCL History",
+    noEntries: "No SCL history entries"
+  },
   diag: {
     name: "Diagnostics",
     zeroissues: "No errors found in the project",
