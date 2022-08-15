@@ -11,14 +11,15 @@ var __decorate = (decorators, target, key, kind) => {
 };
 import {css, html, LitElement, property} from "../../_snowpack/pkg/lit-element.js";
 import "./subscription/smv-laterbinding/svc-laterbinding-list.js";
+import "./subscription/smv-laterbinding/ext-ref-laterbinding-list.js";
 export default class SMVSubscribeLaterBindingPlugin extends LitElement {
   render() {
     return html`<div>
       <div class="container">
-        <svc-later-binding-list
-          class="column"
-          .doc=${this.doc}
-        ></svc-later-binding-list>
+        <svc-later-binding-list class="column" .doc=${this.doc}>
+        </svc-later-binding-list>
+        <extref-later-binding-list class="column" .doc=${this.doc}>
+        </extref-later-binding-list>
       </div>
     </div>`;
   }
@@ -29,7 +30,9 @@ SMVSubscribeLaterBindingPlugin.styles = css`
     }
 
     .container {
+      display: flex;
       padding: 8px 6px 16px;
+      height: calc(100vh - 136px);
     }
 
     .column {
@@ -37,7 +40,7 @@ SMVSubscribeLaterBindingPlugin.styles = css`
       margin: 0px 6px 0px;
       min-width: 300px;
       height: 100%;
-      overflow-y: scroll;
+      overflow-y: auto;
     }
   `;
 __decorate([
