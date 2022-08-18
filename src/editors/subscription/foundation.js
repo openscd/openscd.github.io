@@ -10,7 +10,12 @@ var __decorate = (decorators, target, key, kind) => {
   return result;
 };
 import {css, LitElement, query} from "../../../_snowpack/pkg/lit-element.js";
-import {compareNames, createElement} from "../../foundation.js";
+import {
+  cloneElement,
+  compareNames,
+  createElement,
+  getSclSchemaVersion
+} from "../../foundation.js";
 import {getFcdaReferences} from "../../foundation/ied.js";
 export var View;
 (function(View2) {
@@ -70,8 +75,8 @@ const serviceTypes = {
   GSEControl: "GOOSE",
   SampledValueControl: "SMV"
 };
-export function createExtRefElement(controlBlock, fCDA) {
-  const iedName = fCDA.closest("IED")?.getAttribute("name") ?? null;
+export function createExtRefElement(controlElement, fcdaElement) {
+  const iedName = fcdaElement.closest("IED")?.getAttribute("name") ?? null;
   const [ldInst, prefix, lnClass, lnInst, doName, daName] = [
     "ldInst",
     "prefix",
@@ -79,9 +84,9 @@ export function createExtRefElement(controlBlock, fCDA) {
     "lnInst",
     "doName",
     "daName"
-  ].map((attr) => fCDA.getAttribute(attr));
-  if (fCDA.ownerDocument.documentElement.getAttribute("version") !== "2007")
-    return createElement(fCDA.ownerDocument, "ExtRef", {
+  ].map((attr) => fcdaElement.getAttribute(attr));
+  if (getSclSchemaVersion(fcdaElement.ownerDocument) === "2003") {
+    return createElement(fcdaElement.ownerDocument, "ExtRef", {
       iedName,
       ldInst,
       lnClass,
@@ -90,8 +95,9 @@ export function createExtRefElement(controlBlock, fCDA) {
       doName,
       daName
     });
-  if (!controlBlock || !serviceTypes[controlBlock.tagName])
-    return createElement(fCDA.ownerDocument, "ExtRef", {
+  }
+  if (!controlElement || !serviceTypes[controlElement.tagName]) {
+    return createElement(fcdaElement.ownerDocument, "ExtRef", {
       iedName,
       serviceType: "Poll",
       ldInst,
@@ -101,14 +107,15 @@ export function createExtRefElement(controlBlock, fCDA) {
       doName,
       daName
     });
-  const srcLDInst = controlBlock.closest("LDevice")?.getAttribute("inst") ?? "";
-  const srcPrefix = controlBlock.closest("LN0,LN")?.getAttribute("prefix") ?? "";
-  const srcLNClass = controlBlock.closest("LN0,LN")?.getAttribute("lnClass") ?? "";
-  const srcLNInst = controlBlock.closest("LN0,LN")?.getAttribute("inst") ?? "";
-  const srcCBName = controlBlock.getAttribute("name") ?? "";
-  return createElement(fCDA.ownerDocument, "ExtRef", {
+  }
+  const srcLDInst = controlElement.closest("LDevice")?.getAttribute("inst") ?? "";
+  const srcPrefix = controlElement.closest("LN0,LN")?.getAttribute("prefix") ?? "";
+  const srcLNClass = controlElement.closest("LN0,LN")?.getAttribute("lnClass") ?? "";
+  const srcLNInst = controlElement.closest("LN0,LN")?.getAttribute("inst");
+  const srcCBName = controlElement.getAttribute("name") ?? "";
+  return createElement(fcdaElement.ownerDocument, "ExtRef", {
     iedName,
-    serviceType: serviceTypes[controlBlock.tagName],
+    serviceType: serviceTypes[controlElement.tagName],
     ldInst,
     lnClass,
     lnInst,
@@ -118,7 +125,72 @@ export function createExtRefElement(controlBlock, fCDA) {
     srcLDInst,
     srcPrefix,
     srcLNClass,
-    srcLNInst,
+    srcLNInst: srcLNInst ? srcLNInst : null,
+    srcCBName
+  });
+}
+export function updateExtRefElement(extRefElement, controlElement, fcdaElement) {
+  const iedName = fcdaElement.closest("IED")?.getAttribute("name") ?? null;
+  const [ldInst, prefix, lnClass, lnInst, doName, daName] = [
+    "ldInst",
+    "prefix",
+    "lnClass",
+    "lnInst",
+    "doName",
+    "daName"
+  ].map((attr) => fcdaElement.getAttribute(attr));
+  if (getSclSchemaVersion(fcdaElement.ownerDocument) === "2003") {
+    return cloneElement(extRefElement, {
+      iedName,
+      serviceType: null,
+      ldInst,
+      lnClass,
+      lnInst,
+      prefix,
+      doName,
+      daName,
+      srcLDInst: null,
+      srcPrefix: null,
+      srcLNClass: null,
+      srcLNInst: null,
+      srcCBName: null
+    });
+  }
+  if (!controlElement || !serviceTypes[controlElement.tagName]) {
+    return cloneElement(extRefElement, {
+      iedName,
+      serviceType: "Poll",
+      ldInst,
+      lnClass,
+      lnInst,
+      prefix,
+      doName,
+      daName,
+      srcLDInst: null,
+      srcPrefix: null,
+      srcLNClass: null,
+      srcLNInst: null,
+      srcCBName: null
+    });
+  }
+  const srcLDInst = controlElement.closest("LDevice")?.getAttribute("inst") ?? "";
+  const srcPrefix = controlElement.closest("LN0,LN")?.getAttribute("prefix") ?? "";
+  const srcLNClass = controlElement.closest("LN0,LN")?.getAttribute("lnClass") ?? "";
+  const srcLNInst = controlElement.closest("LN0,LN")?.getAttribute("inst");
+  const srcCBName = controlElement.getAttribute("name") ?? "";
+  return cloneElement(extRefElement, {
+    iedName,
+    serviceType: serviceTypes[controlElement.tagName],
+    ldInst,
+    lnClass,
+    lnInst,
+    prefix,
+    doName,
+    daName,
+    srcLDInst,
+    srcPrefix,
+    srcLNClass,
+    srcLNInst: srcLNInst ? srcLNInst : null,
     srcCBName
   });
 }

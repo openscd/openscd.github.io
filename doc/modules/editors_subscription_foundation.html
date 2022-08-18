@@ -112,6 +112,7 @@
 								<li class="tsd-kind-function tsd-parent-kind-module"><a href="editors_subscription_foundation.html#getOrderedIeds" class="tsd-kind-icon">get<wbr>Ordered<wbr>Ieds</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-module"><a href="editors_subscription_foundation.html#newIEDSelectEvent" class="tsd-kind-icon">newIEDSelect<wbr>Event</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-module"><a href="editors_subscription_foundation.html#newViewEvent" class="tsd-kind-icon">new<wbr>View<wbr>Event</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module"><a href="editors_subscription_foundation.html#updateExtRefElement" class="tsd-kind-icon">update<wbr>Ext<wbr>Ref<wbr>Element</a></li>
 							</ul>
 						</section>
 					</div>
@@ -125,7 +126,7 @@
 					<div class="tsd-signature tsd-kind-icon">IEDSelect<wbr>Event<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">CustomEvent</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/editors_subscription_foundation.IEDSelectDetail.html" class="tsd-signature-type" data-tsd-kind="Interface">IEDSelectDetail</a><span class="tsd-signature-symbol">&gt;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/d06d0b4/src/editors/subscription/foundation.ts#L38">src/editors/subscription/foundation.ts:38</a></li>
+							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/b25f9a6/src/editors/subscription/foundation.ts#L43">src/editors/subscription/foundation.ts:43</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -135,7 +136,7 @@
 					<div class="tsd-signature tsd-kind-icon">View<wbr>Event<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">CustomEvent</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/editors_subscription_foundation.ViewDetail.html" class="tsd-signature-type" data-tsd-kind="Interface">ViewDetail</a><span class="tsd-signature-symbol">&gt;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/d06d0b4/src/editors/subscription/foundation.ts#L22">src/editors/subscription/foundation.ts:22</a></li>
+							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/b25f9a6/src/editors/subscription/foundation.ts#L27">src/editors/subscription/foundation.ts:27</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -148,7 +149,7 @@
 					<div class="tsd-signature tsd-kind-icon">styles<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">CSSResult</span><span class="tsd-signature-symbol"> = ...</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/d06d0b4/src/editors/subscription/foundation.ts#L213">src/editors/subscription/foundation.ts:213</a></li>
+							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/b25f9a6/src/editors/subscription/foundation.ts#L313">src/editors/subscription/foundation.ts:313</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -170,7 +171,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/d06d0b4/src/editors/subscription/foundation.ts#L60">src/editors/subscription/foundation.ts:60</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/b25f9a6/src/editors/subscription/foundation.ts#L65">src/editors/subscription/foundation.ts:65</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -190,32 +191,38 @@
 					<a name="createExtRefElement" class="tsd-anchor"></a>
 					<h3>create<wbr>Ext<wbr>Ref<wbr>Element</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
-						<li class="tsd-signature tsd-kind-icon">create<wbr>Ext<wbr>Ref<wbr>Element<span class="tsd-signature-symbol">(</span>controlBlock<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Element</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span>, fCDA<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Element</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Element</span></li>
+						<li class="tsd-signature tsd-kind-icon">create<wbr>Ext<wbr>Ref<wbr>Element<span class="tsd-signature-symbol">(</span>controlElement<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Element</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span>, fcdaElement<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Element</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Element</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/d06d0b4/src/editors/subscription/foundation.ts#L103">src/editors/subscription/foundation.ts:103</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/b25f9a6/src/editors/subscription/foundation.ts#L111">src/editors/subscription/foundation.ts:111</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Create a new ExtRef Element depending on the SCL Edition copy attributes from the Control Element,
+									FCDA Element and related Elements.</p>
+								</div>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>controlBlock: <span class="tsd-signature-type">Element</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span></h5>
+									<h5>controlElement: <span class="tsd-signature-type">Element</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span></h5>
 									<div class="tsd-comment tsd-typography">
-										<p><code>ReportControl</code>, <code>GSEControl</code> or <code>SamepldValueControl</code> source element</p>
+										<p><code>ReportControl</code>, <code>GSEControl</code> or <code>SampledValueControl</code> source element</p>
 									</div>
 								</li>
 								<li>
-									<h5>fCDA: <span class="tsd-signature-type">Element</span></h5>
+									<h5>fcdaElement: <span class="tsd-signature-type">Element</span></h5>
 									<div class="tsd-comment tsd-typography">
-										<p>the source data. can be data attribute or data obejct (missing daName)</p>
+										<p>The source data attribute element.</p>
 									</div>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Element</span></h4>
-							<p>ExtRef element</p>
+							<p>The new created ExtRef element, which can be added to the document.</p>
 						</li>
 					</ul>
 				</section>
@@ -229,7 +236,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/d06d0b4/src/editors/subscription/foundation.ts#L51">src/editors/subscription/foundation.ts:51</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/b25f9a6/src/editors/subscription/foundation.ts#L56">src/editors/subscription/foundation.ts:56</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -255,7 +262,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/d06d0b4/src/editors/subscription/foundation.ts#L167">src/editors/subscription/foundation.ts:167</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/b25f9a6/src/editors/subscription/foundation.ts#L267">src/editors/subscription/foundation.ts:267</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -278,7 +285,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/d06d0b4/src/editors/subscription/foundation.ts#L39">src/editors/subscription/foundation.ts:39</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/b25f9a6/src/editors/subscription/foundation.ts#L44">src/editors/subscription/foundation.ts:44</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -304,7 +311,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/d06d0b4/src/editors/subscription/foundation.ts#L23">src/editors/subscription/foundation.ts:23</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/b25f9a6/src/editors/subscription/foundation.ts#L28">src/editors/subscription/foundation.ts:28</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -317,6 +324,51 @@
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <a href="editors_subscription_foundation.html#ViewEvent" class="tsd-signature-type" data-tsd-kind="Type alias">ViewEvent</a></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
+					<a name="updateExtRefElement" class="tsd-anchor"></a>
+					<h3>update<wbr>Ext<wbr>Ref<wbr>Element</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
+						<li class="tsd-signature tsd-kind-icon">update<wbr>Ext<wbr>Ref<wbr>Element<span class="tsd-signature-symbol">(</span>extRefElement<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Element</span>, controlElement<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Element</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span>, fcdaElement<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Element</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Element</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/b25f9a6/src/editors/subscription/foundation.ts#L188">src/editors/subscription/foundation.ts:188</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Create a clone of the passed ExtRefElement and updated or set the required attributes on the cloned element
+									depending on the Edition and type of Control Element.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>extRefElement: <span class="tsd-signature-type">Element</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The ExtRef Element to clone and update.</p>
+									</div>
+								</li>
+								<li>
+									<h5>controlElement: <span class="tsd-signature-type">Element</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p><code>ReportControl</code>, <code>GSEControl</code> or <code>SampledValueControl</code> source element</p>
+									</div>
+								</li>
+								<li>
+									<h5>fcdaElement: <span class="tsd-signature-type">Element</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The source data attribute element.</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Element</span></h4>
+							<p>A cloned ExtRef Element with updated information to be used for example in a Replace Action.</p>
 						</li>
 					</ul>
 				</section>
@@ -379,6 +431,9 @@
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-module">
 						<a href="editors_subscription_foundation.html#newViewEvent" class="tsd-kind-icon">new<wbr>View<wbr>Event</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-module">
+						<a href="editors_subscription_foundation.html#updateExtRefElement" class="tsd-kind-icon">update<wbr>Ext<wbr>Ref<wbr>Element</a>
 					</li>
 				</ul>
 			</nav>

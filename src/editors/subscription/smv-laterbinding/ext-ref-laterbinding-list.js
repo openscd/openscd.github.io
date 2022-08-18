@@ -20,12 +20,14 @@ import {
 import {nothing} from "../../../../_snowpack/pkg/lit-html.js";
 import {translate} from "../../../../_snowpack/pkg/lit-translate.js";
 import {
+  cloneElement,
   compareNames,
   getDescriptionAttribute,
   getNameAttribute,
-  identity
+  identity,
+  newActionEvent
 } from "../../../foundation.js";
-import {styles} from "../foundation.js";
+import {styles, updateExtRefElement} from "../foundation.js";
 import {getFcdaTitleValue} from "./foundation.js";
 export let ExtRefLaterBindingList = class extends LitElement {
   constructor() {
@@ -65,6 +67,38 @@ export let ExtRefLaterBindingList = class extends LitElement {
   unsupportedExtRefElement(extRefElement) {
     return extRefElement.hasAttribute("pLN") || extRefElement.hasAttribute("pDO") || extRefElement.hasAttribute("pDA") || extRefElement.hasAttribute("pServT");
   }
+  unsubscribe(extRefElement) {
+    const clonedExtRefElement = cloneElement(extRefElement, {
+      iedName: null,
+      ldInst: null,
+      prefix: null,
+      lnClass: null,
+      lnInst: null,
+      doName: null,
+      daName: null,
+      serviceType: null,
+      srcLDInst: null,
+      srcPrefix: null,
+      srcLNClass: null,
+      srcLNInst: null,
+      srcCBName: null
+    });
+    return {
+      old: {element: extRefElement},
+      new: {element: clonedExtRefElement}
+    };
+  }
+  subscribe(extRefElement) {
+    if (!this.currentIedElement || !this.currentSelectedFcdaElement || !this.currentSelectedSvcElement) {
+      return null;
+    }
+    return {
+      old: {element: extRefElement},
+      new: {
+        element: updateExtRefElement(extRefElement, this.currentSelectedSvcElement, this.currentSelectedFcdaElement)
+      }
+    };
+  }
   renderTitle() {
     const svcName = this.currentSelectedSvcElement ? getNameAttribute(this.currentSelectedSvcElement) : void 0;
     const fcdaName = this.currentSelectedFcdaElement ? getFcdaTitleValue(this.currentSelectedFcdaElement) : void 0;
@@ -88,6 +122,9 @@ export let ExtRefLaterBindingList = class extends LitElement {
       ${subscribedExtRefs.length > 0 ? html`${subscribedExtRefs.map((extRefElement) => html` <mwc-list-item
               graphic="large"
               twoline
+              @click=${() => {
+      this.dispatchEvent(newActionEvent(this.unsubscribe(extRefElement)));
+    }}
               value="${identity(extRefElement)}"
             >
               <span>
@@ -117,6 +154,12 @@ export let ExtRefLaterBindingList = class extends LitElement {
               graphic="large"
               ?disabled=${this.unsupportedExtRefElement(extRefElement)}
               twoline
+              @click=${() => {
+      const replaceAction = this.subscribe(extRefElement);
+      if (replaceAction) {
+        this.dispatchEvent(newActionEvent(replaceAction));
+      }
+    }}
               value="${identity(extRefElement)}"
             >
               <span>

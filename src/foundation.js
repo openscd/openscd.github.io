@@ -171,6 +171,11 @@ export function referencePath(element) {
   }
   return path;
 }
+export function getSclSchemaVersion(doc) {
+  const scl = doc.documentElement;
+  const edition = (scl.getAttribute("version") ?? "2003") + (scl.getAttribute("revision") ?? "") + (scl.getAttribute("release") ?? "");
+  return edition;
+}
 export function getNameAttribute(element) {
   const name2 = element.getAttribute("name");
   return name2 ? name2 : void 0;
