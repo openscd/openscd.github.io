@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">98.86% </span>
+                <span class="strong">98.89% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>174/176</span>
+                <span class='fraction'>179/181</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">94.11% </span>
+                <span class="strong">92.3% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>16/17</span>
+                <span class='fraction'>12/13</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>7/7</span>
+                <span class='fraction'>6/6</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">98.86% </span>
+                <span class="strong">98.89% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>174/176</span>
+                <span class='fraction'>179/181</span>
             </div>
         
             
@@ -239,7 +239,23 @@
 <a name='L174'></a><a href='#L174'>174</a>
 <a name='L175'></a><a href='#L175'>175</a>
 <a name='L176'></a><a href='#L176'>176</a>
-<a name='L177'></a><a href='#L177'>177</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">2x</span>
+<a name='L177'></a><a href='#L177'>177</a>
+<a name='L178'></a><a href='#L178'>178</a>
+<a name='L179'></a><a href='#L179'>179</a>
+<a name='L180'></a><a href='#L180'>180</a>
+<a name='L181'></a><a href='#L181'>181</a>
+<a name='L182'></a><a href='#L182'>182</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
@@ -275,20 +291,14 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
@@ -439,28 +449,13 @@ import { FilteredList } from '../../filtered-list.js';
 &nbsp;
 import { gooseIcon } from '../../icons/icons.js';
 import { compareNames, identity, selector } from '../../foundation.js';
-import { styles } from './foundation.js';
+import { styles, updateElementReference } from './foundation.js';
 &nbsp;
 @customElement('gse-control-editor')
 export class GseControlEditor extends LitElement {
   /** The document being edited as provided to plugins by [[`OpenSCD`]]. */
   @property({ attribute: false })
-  set doc(newDoc: XMLDocument) {
-    if (this._doc === newDoc) return;
-&nbsp;
-    this.selectedDataSet = undefined;
-    this.selectedGseControl = undefined;
-    if (this.selectionList &amp;&amp; this.selectionList.selected)
-      (this.selectionList.selected as ListItem).selected = false;
-&nbsp;
-    this._doc = newDoc;
-&nbsp;
-    this.requestUpdate();
-  }
-  get doc(): XMLDocument {
-    return this._doc;
-  }
-  private _doc!: XMLDocument;
+  doc!: XMLDocument;
 &nbsp;
   @state()
   selectedGseControl?: Element;
@@ -469,6 +464,26 @@ export class GseControlEditor extends LitElement {
 &nbsp;
   @query('.selectionlist') selectionList!: FilteredList;
   @query('mwc-button') selectGSEControlButton!: Button;
+&nbsp;
+  /** Resets selected GOOSE and its DataSet, if not existing in new doc */
+  update(props: Map&lt;string | number | symbol, unknown&gt;): void {
+    if (props.has('doc') &amp;&amp; this.selectedGseControl) {
+      const newGseControl = updateElementReference(
+        this.doc,
+        this.selectedGseControl
+      );
+&nbsp;
+      this.selectedGseControl = newGseControl ?? undefined;
+      this.selectedDataSet = this.selectedGseControl
+        ? updateElementReference(this.doc, this.selectedDataSet!)
+        : undefined;
+&nbsp;
+      if (!newGseControl &amp;&amp; this.selectionList &amp;&amp; this.selectionList.selected)
+        (this.selectionList.selected as ListItem).selected = false;
+    }
+&nbsp;
+    super.update(props);
+  }
 &nbsp;
   private selectGSEControl(evt: Event): void {
     const id = ((evt.target as FilteredList).selected as ListItem).value;
@@ -598,7 +613,7 @@ export class GseControlEditor extends LitElement {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener">istanbul</a>
-                at Thu Aug 18 2022 10:55:31 GMT+0000 (Coordinated Universal Time)
+                at Sat Aug 20 2022 13:23:01 GMT+0000 (Coordinated Universal Time)
             </div>
         </div>
         <script src="../../../prettify.js"></script>

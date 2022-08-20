@@ -26,20 +26,17 @@ import "../../filtered-list.js";
 import "./sampled-value-control-element-editor.js";
 import {compareNames, identity, selector} from "../../foundation.js";
 import {smvIcon} from "../../icons/icons.js";
-import {styles} from "./foundation.js";
+import {styles, updateElementReference} from "./foundation.js";
 export let SampledValueControlEditor = class extends LitElement {
-  set doc(newDoc) {
-    if (this._doc === newDoc)
-      return;
-    this.selectedDataSet = void 0;
-    this.selectedSampledValueControl = void 0;
-    if (this.selectionList && this.selectionList.selected)
-      this.selectionList.selected.selected = false;
-    this._doc = newDoc;
-    this.requestUpdate();
-  }
-  get doc() {
-    return this._doc;
+  update(props) {
+    if (props.has("doc") && this.selectedSampledValueControl) {
+      const newSampledValueControl = updateElementReference(this.doc, this.selectedSampledValueControl);
+      this.selectedSampledValueControl = newSampledValueControl ?? void 0;
+      this.selectedDataSet = this.selectedSampledValueControl ? updateElementReference(this.doc, this.selectedDataSet) : void 0;
+      if (!newSampledValueControl && this.selectionList && this.selectionList.selected)
+        this.selectionList.selected.selected = false;
+    }
+    super.update(props);
   }
   selectSMVControl(evt) {
     const id = evt.target.selected.value;
@@ -144,7 +141,7 @@ SampledValueControlEditor.styles = css`
   `;
 __decorate([
   property({attribute: false})
-], SampledValueControlEditor.prototype, "doc", 1);
+], SampledValueControlEditor.prototype, "doc", 2);
 __decorate([
   state()
 ], SampledValueControlEditor.prototype, "selectedSampledValueControl", 2);

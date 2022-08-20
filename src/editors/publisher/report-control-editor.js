@@ -26,20 +26,17 @@ import "./report-control-element-editor.js";
 import "../../filtered-list.js";
 import {compareNames, identity, selector} from "../../foundation.js";
 import {reportIcon} from "../../icons/icons.js";
-import {styles} from "./foundation.js";
+import {styles, updateElementReference} from "./foundation.js";
 export let ReportControlEditor = class extends LitElement {
-  set doc(newDoc) {
-    if (this._doc === newDoc)
-      return;
-    this.selectedDataSet = void 0;
-    this.selectedReportControl = void 0;
-    if (this.selectionList && this.selectionList.selected)
-      this.selectionList.selected.selected = false;
-    this._doc = newDoc;
-    this.requestUpdate();
-  }
-  get doc() {
-    return this._doc;
+  update(props) {
+    if (props.has("doc") && this.selectedReportControl) {
+      const newReportControl = updateElementReference(this.doc, this.selectedReportControl);
+      this.selectedReportControl = newReportControl ?? void 0;
+      this.selectedDataSet = this.selectedReportControl ? updateElementReference(this.doc, this.selectedDataSet) : void 0;
+      if (!newReportControl && this.selectionList && this.selectionList.selected)
+        this.selectionList.selected.selected = false;
+    }
+    super.update(props);
   }
   selectReportControl(evt) {
     const id = evt.target.selected.value;
@@ -145,7 +142,7 @@ ReportControlEditor.styles = css`
   `;
 __decorate([
   property({attribute: false})
-], ReportControlEditor.prototype, "doc", 1);
+], ReportControlEditor.prototype, "doc", 2);
 __decorate([
   state()
 ], ReportControlEditor.prototype, "selectedReportControl", 2);

@@ -24,19 +24,16 @@ import "../../../_snowpack/pkg/@material/mwc-list/mwc-list-item.js";
 import "./data-set-element-editor.js";
 import "../../filtered-list.js";
 import {compareNames, identity, selector} from "../../foundation.js";
-import {styles} from "./foundation.js";
+import {styles, updateElementReference} from "./foundation.js";
 export let DataSetEditor = class extends LitElement {
-  set doc(newDoc) {
-    if (this._doc === newDoc)
-      return;
-    this.selectedDataSet = void 0;
-    if (this.selectionList && this.selectionList.selected)
-      this.selectionList.selected.selected = false;
-    this._doc = newDoc;
-    this.requestUpdate();
-  }
-  get doc() {
-    return this._doc;
+  update(props) {
+    if (props.has("doc") && this.selectedDataSet) {
+      const newDataSet = updateElementReference(this.doc, this.selectedDataSet);
+      this.selectedDataSet = newDataSet ?? void 0;
+      if (!newDataSet && this.selectionList && this.selectionList.selected)
+        this.selectionList.selected.selected = false;
+    }
+    super.update(props);
   }
   selectDataSet(evt) {
     const id = evt.target.selected.value;
@@ -109,7 +106,7 @@ DataSetEditor.styles = css`
   `;
 __decorate([
   property({attribute: false})
-], DataSetEditor.prototype, "doc", 1);
+], DataSetEditor.prototype, "doc", 2);
 __decorate([
   state()
 ], DataSetEditor.prototype, "selectedDataSet", 2);

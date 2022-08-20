@@ -26,20 +26,17 @@ import "./gse-control-element-editor.js";
 import "../../filtered-list.js";
 import {gooseIcon} from "../../icons/icons.js";
 import {compareNames, identity, selector} from "../../foundation.js";
-import {styles} from "./foundation.js";
+import {styles, updateElementReference} from "./foundation.js";
 export let GseControlEditor = class extends LitElement {
-  set doc(newDoc) {
-    if (this._doc === newDoc)
-      return;
-    this.selectedDataSet = void 0;
-    this.selectedGseControl = void 0;
-    if (this.selectionList && this.selectionList.selected)
-      this.selectionList.selected.selected = false;
-    this._doc = newDoc;
-    this.requestUpdate();
-  }
-  get doc() {
-    return this._doc;
+  update(props) {
+    if (props.has("doc") && this.selectedGseControl) {
+      const newGseControl = updateElementReference(this.doc, this.selectedGseControl);
+      this.selectedGseControl = newGseControl ?? void 0;
+      this.selectedDataSet = this.selectedGseControl ? updateElementReference(this.doc, this.selectedDataSet) : void 0;
+      if (!newGseControl && this.selectionList && this.selectionList.selected)
+        this.selectionList.selected.selected = false;
+    }
+    super.update(props);
   }
   selectGSEControl(evt) {
     const id = evt.target.selected.value;
@@ -144,7 +141,7 @@ GseControlEditor.styles = css`
   `;
 __decorate([
   property({attribute: false})
-], GseControlEditor.prototype, "doc", 1);
+], GseControlEditor.prototype, "doc", 2);
 __decorate([
   state()
 ], GseControlEditor.prototype, "selectedGseControl", 2);
