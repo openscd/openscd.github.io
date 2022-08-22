@@ -70,6 +70,12 @@
 				<section class="tsd-panel tsd-index-panel">
 					<div class="tsd-index-content">
 						<section class="tsd-index-section ">
+							<h3>Interfaces</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-interface tsd-parent-kind-module tsd-has-type-parameter"><a href="../interfaces/foundation_compare.DiffFilter.html" class="tsd-kind-icon">Diff<wbr>Filter</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section ">
 							<h3>Type aliases</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter"><a href="foundation_compare.html#Diff" class="tsd-kind-icon">Diff</a></li>
@@ -96,7 +102,7 @@
 					<div class="tsd-signature tsd-kind-icon">Diff&lt;T&gt;<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{ </span>newValue<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol">; </span>oldValue<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">{ </span>newValue<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">; </span>oldValue<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">{ </span>newValue<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">; </span>oldValue<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol"> }</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/011eec8/src/foundation/compare.ts#L12">src/foundation/compare.ts:12</a></li>
+							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/65a41af/src/foundation/compare.ts#L12">src/foundation/compare.ts:12</a></li>
 						</ul>
 					</aside>
 					<h4 class="tsd-type-parameters-title">Type parameters</h4>
@@ -113,13 +119,13 @@
 					<a name="diffSclAttributes" class="tsd-anchor"></a>
 					<h3>diff<wbr>Scl<wbr>Attributes</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
-						<li class="tsd-signature tsd-kind-icon">diff<wbr>Scl<wbr>Attributes<span class="tsd-signature-symbol">(</span>elementToBeCompared<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Element</span>, elementToCompareAgainst<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Element</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">[</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><a href="foundation_compare.html#Diff" class="tsd-signature-type" data-tsd-kind="Type alias">Diff</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">]</span><span class="tsd-signature-symbol">[]</span></li>
+						<li class="tsd-signature tsd-kind-icon">diff<wbr>Scl<wbr>Attributes<span class="tsd-signature-symbol">(</span>elementToBeCompared<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Element</span>, elementToCompareAgainst<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Element</span>, filterToIgnore<span class="tsd-signature-symbol">: </span><a href="../interfaces/foundation_compare.DiffFilter.html" class="tsd-signature-type" data-tsd-kind="Interface">DiffFilter</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Element</span><span class="tsd-signature-symbol">&gt;</span>, searchElementToBeCompared<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Element</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">[</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><a href="foundation_compare.html#Diff" class="tsd-signature-type" data-tsd-kind="Type alias">Diff</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">]</span><span class="tsd-signature-symbol">[]</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/011eec8/src/foundation/compare.ts#L33">src/foundation/compare.ts:33</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/65a41af/src/foundation/compare.ts#L96">src/foundation/compare.ts:96</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -141,6 +147,12 @@
 										<p>The element used to check against.</p>
 									</div>
 								</li>
+								<li>
+									<h5>filterToIgnore: <a href="../interfaces/foundation_compare.DiffFilter.html" class="tsd-signature-type" data-tsd-kind="Interface">DiffFilter</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Element</span><span class="tsd-signature-symbol">&gt;</span></h5>
+								</li>
+								<li>
+									<h5>searchElementToBeCompared: <span class="tsd-signature-type">Element</span></h5>
+								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-symbol">[</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><a href="foundation_compare.html#Diff" class="tsd-signature-type" data-tsd-kind="Type alias">Diff</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">]</span><span class="tsd-signature-symbol">[]</span></h4>
 						</li>
@@ -150,13 +162,13 @@
 					<a name="diffSclChilds" class="tsd-anchor"></a>
 					<h3>diff<wbr>Scl<wbr>Childs</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
-						<li class="tsd-signature tsd-kind-icon">diff<wbr>Scl<wbr>Childs<span class="tsd-signature-symbol">(</span>elementToBeCompared<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Element</span>, elementToCompareAgainst<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Element</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="foundation_compare.html#Diff" class="tsd-signature-type" data-tsd-kind="Type alias">Diff</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Element</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">[]</span></li>
+						<li class="tsd-signature tsd-kind-icon">diff<wbr>Scl<wbr>Childs<span class="tsd-signature-symbol">(</span>elementToBeCompared<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Element</span>, elementToCompareAgainst<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Element</span>, filterToIgnore<span class="tsd-signature-symbol">: </span><a href="../interfaces/foundation_compare.DiffFilter.html" class="tsd-signature-type" data-tsd-kind="Interface">DiffFilter</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Element</span><span class="tsd-signature-symbol">&gt;</span>, searchElementToBeCompared<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Element</span>, searchElementToCompareAgainst<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Element</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="foundation_compare.html#Diff" class="tsd-signature-type" data-tsd-kind="Type alias">Diff</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Element</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">[]</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/011eec8/src/foundation/compare.ts#L112">src/foundation/compare.ts:112</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/65a41af/src/foundation/compare.ts#L199">src/foundation/compare.ts:199</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -181,6 +193,15 @@
 										<p>The element used to check against.</p>
 									</div>
 								</li>
+								<li>
+									<h5>filterToIgnore: <a href="../interfaces/foundation_compare.DiffFilter.html" class="tsd-signature-type" data-tsd-kind="Interface">DiffFilter</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Element</span><span class="tsd-signature-symbol">&gt;</span></h5>
+								</li>
+								<li>
+									<h5>searchElementToBeCompared: <span class="tsd-signature-type">Element</span></h5>
+								</li>
+								<li>
+									<h5>searchElementToCompareAgainst: <span class="tsd-signature-type">Element</span></h5>
+								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <a href="foundation_compare.html#Diff" class="tsd-signature-type" data-tsd-kind="Type alias">Diff</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Element</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">[]</span></h4>
 						</li>
@@ -196,7 +217,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/011eec8/src/foundation/compare.ts#L79">src/foundation/compare.ts:79</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/65a41af/src/foundation/compare.ts#L166">src/foundation/compare.ts:166</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -228,7 +249,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/011eec8/src/foundation/compare.ts#L96">src/foundation/compare.ts:96</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/65a41af/src/foundation/compare.ts#L183">src/foundation/compare.ts:183</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -261,13 +282,13 @@
 					<a name="renderDiff" class="tsd-anchor"></a>
 					<h3>render<wbr>Diff</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
-						<li class="tsd-signature tsd-kind-icon">render<wbr>Diff<span class="tsd-signature-symbol">(</span>elementToBeCompared<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Element</span>, elementToCompareAgainst<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Element</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">TemplateResult</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span></li>
+						<li class="tsd-signature tsd-kind-icon">render<wbr>Diff<span class="tsd-signature-symbol">(</span>elementToBeCompared<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Element</span>, elementToCompareAgainst<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Element</span>, filterToIgnore<span class="tsd-signature-symbol">?: </span><a href="../interfaces/foundation_compare.DiffFilter.html" class="tsd-signature-type" data-tsd-kind="Interface">DiffFilter</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Element</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">TemplateResult</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/011eec8/src/foundation/compare.ts#L150">src/foundation/compare.ts:150</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/65a41af/src/foundation/compare.ts#L261">src/foundation/compare.ts:261</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -290,6 +311,9 @@
 										<p>The element used to check against.</p>
 									</div>
 								</li>
+								<li>
+									<h5>filterToIgnore: <a href="../interfaces/foundation_compare.DiffFilter.html" class="tsd-signature-type" data-tsd-kind="Interface">DiffFilter</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Element</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = {}</span></h5>
+								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">TemplateResult</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span></h4>
 						</li>
@@ -310,6 +334,9 @@
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
+					<li class=" tsd-kind-interface tsd-parent-kind-module tsd-has-type-parameter">
+						<a href="../interfaces/foundation_compare.DiffFilter.html" class="tsd-kind-icon">Diff<wbr>Filter</a>
+					</li>
 					<li class=" tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter">
 						<a href="foundation_compare.html#Diff" class="tsd-kind-icon">Diff</a>
 					</li>

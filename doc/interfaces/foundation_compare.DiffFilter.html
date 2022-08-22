@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>CreateOptions | open-scd</title>
+	<title>DiffFilter | open-scd</title>
 	<meta name="description" content="Documentation for open-scd">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -55,52 +55,46 @@
 					<a href="../modules.html">open-scd</a>
 				</li>
 				<li>
-					<a href="../modules/editors_templates_foundation.html">editors/templates/foundation</a>
+					<a href="../modules/foundation_compare.html">foundation/compare</a>
 				</li>
 				<li>
-					<a href="editors_templates_foundation.CreateOptions.html">CreateOptions</a>
+					<a href="foundation_compare.DiffFilter.html">DiffFilter</a>
 				</li>
 			</ul>
-			<h1>Interface CreateOptions</h1>
+			<h1>Interface DiffFilter&lt;T&gt;</h1>
 		</div>
 	</div>
 </header>
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-comment">
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Type to filter out a difference based on <code>tagName</code>.<code>attributeName</code></p>
+					</div>
+					<p>The matcher can be a boolean or a <code>consumer</code> that returns a boolean</p>
+				</div>
+			</section>
+			<section class="tsd-panel tsd-type-parameters">
+				<h3>Type parameters</h3>
+				<ul class="tsd-type-parameters">
+					<li>
+						<h4>T</h4>
+					</li>
+				</ul>
+			</section>
 			<section class="tsd-panel tsd-hierarchy">
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">CreateOptions</span>
+						<span class="target">DiffFilter</span>
 					</li>
 				</ul>
 			</section>
-			<section class="tsd-panel-group tsd-index-group">
-				<h2>Index</h2>
-				<section class="tsd-panel tsd-index-panel">
-					<div class="tsd-index-content">
-						<section class="tsd-index-section ">
-							<h3>Properties</h3>
-							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="editors_templates_foundation.CreateOptions.html#parent" class="tsd-kind-icon">parent</a></li>
-							</ul>
-						</section>
-					</div>
-				</section>
-			</section>
-			<section class="tsd-panel-group tsd-member-group ">
-				<h2>Properties</h2>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="parent" class="tsd-anchor"></a>
-					<h3>parent</h3>
-					<div class="tsd-signature tsd-kind-icon">parent<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Element</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/65a41af/src/editors/templates/foundation.ts#L12">src/editors/templates/foundation.ts:12</a></li>
-						</ul>
-					</aside>
-				</section>
+			<section class="tsd-panel tsd-kind-interface tsd-parent-kind-module tsd-has-type-parameter">
+				<h3 class="tsd-before-signature">Indexable</h3>
+				<div class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">[</span>selector: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">]: </span><span class="tsd-signature-type">DiffFilterSelector</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></div>
 			</section>
 		</div>
 		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
@@ -110,7 +104,7 @@
 						<a href="../modules.html">Modules</a>
 					</li>
 					<li class="current tsd-kind-module">
-						<a href="../modules/editors_templates_foundation.html">editors/templates/foundation</a>
+						<a href="../modules/foundation_compare.html">foundation/compare</a>
 					</li>
 				</ul>
 			</nav>
@@ -118,36 +112,28 @@
 				<ul class="before-current">
 				</ul>
 				<ul class="current">
-					<li class="current tsd-kind-interface tsd-parent-kind-module">
-						<a href="editors_templates_foundation.CreateOptions.html" class="tsd-kind-icon">Create<wbr>Options</a>
-						<ul>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="editors_templates_foundation.CreateOptions.html#parent" class="tsd-kind-icon">parent</a>
-							</li>
-						</ul>
+					<li class="current tsd-kind-interface tsd-parent-kind-module tsd-has-type-parameter">
+						<a href="foundation_compare.DiffFilter.html" class="tsd-kind-icon">Diff<wbr>Filter</a>
 					</li>
 				</ul>
 				<ul class="after-current">
-					<li class=" tsd-kind-interface tsd-parent-kind-module">
-						<a href="editors_templates_foundation.UpdateOptions.html" class="tsd-kind-icon">Update<wbr>Options</a>
-					</li>
-					<li class=" tsd-kind-type-alias tsd-parent-kind-module">
-						<a href="../modules/editors_templates_foundation.html#WizardOptions" class="tsd-kind-icon">Wizard<wbr>Options</a>
-					</li>
-					<li class=" tsd-kind-variable tsd-parent-kind-module">
-						<a href="../modules/editors_templates_foundation.html#allDataTypeSelector" class="tsd-kind-icon">all<wbr>Data<wbr>Type<wbr>Selector</a>
-					</li>
-					<li class=" tsd-kind-variable tsd-parent-kind-module">
-						<a href="../modules/editors_templates_foundation.html#styles" class="tsd-kind-icon">styles</a>
+					<li class=" tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter">
+						<a href="../modules/foundation_compare.html#Diff" class="tsd-kind-icon">Diff</a>
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-module">
-						<a href="../modules/editors_templates_foundation.html#addReferencedDataTypes" class="tsd-kind-icon">add<wbr>Referenced<wbr>Data<wbr>Types</a>
+						<a href="../modules/foundation_compare.html#diffSclAttributes" class="tsd-kind-icon">diff<wbr>Scl<wbr>Attributes</a>
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-module">
-						<a href="../modules/editors_templates_foundation.html#isCreateOptions" class="tsd-kind-icon">is<wbr>Create<wbr>Options</a>
+						<a href="../modules/foundation_compare.html#diffSclChilds" class="tsd-kind-icon">diff<wbr>Scl<wbr>Childs</a>
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-module">
-						<a href="../modules/editors_templates_foundation.html#unifyCreateActionArray" class="tsd-kind-icon">unify<wbr>Create<wbr>Action<wbr>Array</a>
+						<a href="../modules/foundation_compare.html#identityForCompare" class="tsd-kind-icon">identity<wbr>For<wbr>Compare</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-module">
+						<a href="../modules/foundation_compare.html#isSame" class="tsd-kind-icon">is<wbr>Same</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-module">
+						<a href="../modules/foundation_compare.html#renderDiff" class="tsd-kind-icon">render<wbr>Diff</a>
 					</li>
 				</ul>
 			</nav>
@@ -168,7 +154,6 @@
 			<ul class="tsd-legend">
 				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
 				<li class="tsd-kind-interface tsd-has-type-parameter"><span class="tsd-kind-icon">Interface with type parameter</span></li>
-				<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
 			</ul>
 			<ul class="tsd-legend">
 				<li class="tsd-kind-enum"><span class="tsd-kind-icon">Enumeration</span></li>

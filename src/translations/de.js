@@ -145,7 +145,8 @@ export const de = {
   compare: {
     compareButton: "Starte Vergleich",
     attributes: "Attribute von {{ elementName }}",
-    children: "Kindelemente von {{ elementName }}"
+    children: "Kindelemente von {{ elementName }}",
+    filterMutables: "Projektspzifische Unterschiede ausblenden"
   },
   log: {
     name: "Protokoll",

@@ -14,12 +14,15 @@ import {
   html,
   LitElement,
   property,
-  query
+  query,
+  state
 } from "../../_snowpack/pkg/lit-element.js";
 import {get, translate} from "../../_snowpack/pkg/lit-translate.js";
 import "../../_snowpack/pkg/@material/mwc-dialog.js";
 import "../../_snowpack/pkg/@material/mwc-list.js";
 import "../../_snowpack/pkg/@material/mwc-list/mwc-list-item.js";
+import "../../_snowpack/pkg/@material/mwc-formfield.js";
+import "../../_snowpack/pkg/@material/mwc-checkbox.js";
 import {
   compareNames,
   getNameAttribute,
@@ -28,7 +31,46 @@ import {
   selector
 } from "../foundation.js";
 import {renderDiff} from "../foundation/compare.js";
+const tctrClass = `LN[lnClass='TCTR']`;
+const tvtrClass = `LN[lnClass='TVTR']`;
+const setMag = `SDI[name='setMag'] Val`;
+const setVal = `DAI[name='setVal'] Val`;
+const filterToIgnore = {
+  ":scope": {
+    attributes: {
+      name: true
+    }
+  },
+  P: {
+    full: true
+  }
+};
+filterToIgnore[`${tctrClass} DOI[name='Rat'] ${setMag}`] = {
+  full: true
+};
+filterToIgnore[`${tctrClass} DOI[name='ARtg'] ${setMag}`] = {
+  full: true
+};
+filterToIgnore[`${tctrClass} DOI[name='ARtgNom'] ${setMag}`] = {
+  full: true
+};
+filterToIgnore[`${tctrClass} DOI[name='ARtgSec'] ${setVal}`] = {
+  full: true
+};
+filterToIgnore[`${tvtrClass} DOI[name='VRtg'] ${setMag}`] = {
+  full: true
+};
+filterToIgnore[`${tvtrClass} DOI[name='Rat'] ${setMag}`] = {
+  full: true
+};
+filterToIgnore[`${tvtrClass} DOI[name='VRtgSec'] ${setVal}`] = {
+  full: true
+};
 export default class CompareIEDPlugin extends LitElement {
+  constructor() {
+    super(...arguments);
+    this.filterMutables = true;
+  }
   get ieds() {
     if (this.doc) {
       return Array.from(this.doc.querySelectorAll(`IED`)).sort(compareNames);
@@ -97,8 +139,21 @@ export default class CompareIEDPlugin extends LitElement {
       style="--mdc-theme-primary: var(--mdc-theme-error)"
     ></mwc-button>`;
   }
+  renderFilterCheckbox() {
+    return html`<mwc-formfield
+      label="${translate("compare.filterMutables")}">
+        <mwc-checkbox
+          ?checked=${this.filterMutables}
+          @change=${() => this.filterMutables = !this.filterMutables}>
+        </mwc-checkbox>
+      </mwc-formfield>
+      `;
+  }
   renderCompare() {
-    return html`${renderDiff(this.selectedProjectIed, this.selectedTemplateIed) ?? html`${translate("compare-ied.noDiff", {
+    const filter = this.filterMutables ? filterToIgnore : {};
+    return html`
+      ${this.renderFilterCheckbox()}
+      ${renderDiff(this.selectedProjectIed, this.selectedTemplateIed, filter) ?? html`${translate("compare-ied.noDiff", {
       projectIedName: identity(this.selectedProjectIed),
       templateIedName: identity(this.selectedTemplateIed)
     })}`}
@@ -204,6 +259,9 @@ __decorate([
 __decorate([
   property({attribute: false})
 ], CompareIEDPlugin.prototype, "selectedTemplateIed", 2);
+__decorate([
+  state()
+], CompareIEDPlugin.prototype, "filterMutables", 2);
 __decorate([
   query("mwc-dialog")
 ], CompareIEDPlugin.prototype, "dialog", 2);

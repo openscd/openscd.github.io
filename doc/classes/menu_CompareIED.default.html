@@ -135,6 +135,7 @@
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="menu_CompareIED.default.html#doc" class="tsd-kind-icon">doc</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-external"><a href="menu_CompareIED.default.html#draggable" class="tsd-kind-icon">draggable</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-external"><a href="menu_CompareIED.default.html#enterKeyHint" class="tsd-kind-icon">enter<wbr>Key<wbr>Hint</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="menu_CompareIED.default.html#filterMutables" class="tsd-kind-icon">filter<wbr>Mutables</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-external"><a href="menu_CompareIED.default.html#firstChild" class="tsd-kind-icon">first<wbr>Child</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-external"><a href="menu_CompareIED.default.html#firstElementChild" class="tsd-kind-icon">first<wbr>Element<wbr>Child</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-external"><a href="menu_CompareIED.default.html#floatingLabelFoundation" class="tsd-kind-icon">floating<wbr>Label<wbr>Foundation</a></li>
@@ -371,6 +372,7 @@
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-protected"><a href="menu_CompareIED.default.html#renderCompare" class="tsd-kind-icon">render<wbr>Compare</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="menu_CompareIED.default.html#renderCompareButton" class="tsd-kind-icon">render<wbr>Compare<wbr>Button</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="menu_CompareIED.default.html#renderDialog" class="tsd-kind-icon">render<wbr>Dialog</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-protected"><a href="menu_CompareIED.default.html#renderFilterCheckbox" class="tsd-kind-icon">render<wbr>Filter<wbr>Checkbox</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="menu_CompareIED.default.html#renderIEDList" class="tsd-kind-icon">renderIEDList</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-protected"><a href="menu_CompareIED.default.html#renderIEDLists" class="tsd-kind-icon">renderIEDLists</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="menu_CompareIED.default.html#renderSelectIedButton" class="tsd-kind-icon">render<wbr>Select<wbr>Ied<wbr>Button</a></li>
@@ -921,7 +923,7 @@
 					<div class="tsd-signature tsd-kind-icon">dialog<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Dialog</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/011eec8/src/menu/CompareIED.ts#L42">src/menu/CompareIED.ts:42</a></li>
+							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/65a41af/src/menu/CompareIED.ts#L91">src/menu/CompareIED.ts:91</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -942,7 +944,7 @@
 					<div class="tsd-signature tsd-kind-icon">doc<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">XMLDocument</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/011eec8/src/menu/CompareIED.ts#L30">src/menu/CompareIED.ts:30</a></li>
+							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/65a41af/src/menu/CompareIED.ts#L76">src/menu/CompareIED.ts:76</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -965,6 +967,16 @@
 						<p>Inherited from LitElement.enterKeyHint</p>
 						<ul>
 							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5260</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="filterMutables" class="tsd-anchor"></a>
+					<h3>filter<wbr>Mutables</h3>
+					<div class="tsd-signature tsd-kind-icon">filter<wbr>Mutables<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = true</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/65a41af/src/menu/CompareIED.ts#L88">src/menu/CompareIED.ts:88</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -2934,7 +2946,7 @@
 					<div class="tsd-signature tsd-kind-icon">selected<wbr>Project<wbr>Ied<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Element</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/011eec8/src/menu/CompareIED.ts#L36">src/menu/CompareIED.ts:36</a></li>
+							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/65a41af/src/menu/CompareIED.ts#L82">src/menu/CompareIED.ts:82</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -2944,7 +2956,7 @@
 					<div class="tsd-signature tsd-kind-icon">selected<wbr>Template<wbr>Ied<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Element</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/011eec8/src/menu/CompareIED.ts#L39">src/menu/CompareIED.ts:39</a></li>
+							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/65a41af/src/menu/CompareIED.ts#L85">src/menu/CompareIED.ts:85</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -3035,7 +3047,7 @@
 					<div class="tsd-signature tsd-kind-icon">template<wbr>Doc<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">XMLDocument</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/011eec8/src/menu/CompareIED.ts#L33">src/menu/CompareIED.ts:33</a></li>
+							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/65a41af/src/menu/CompareIED.ts#L79">src/menu/CompareIED.ts:79</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -3045,7 +3057,7 @@
 					<div class="tsd-signature tsd-kind-icon">template<wbr>FileUI<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">HTMLInputElement</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/011eec8/src/menu/CompareIED.ts#L45">src/menu/CompareIED.ts:45</a></li>
+							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/65a41af/src/menu/CompareIED.ts#L94">src/menu/CompareIED.ts:94</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -3216,7 +3228,7 @@
 					<aside class="tsd-sources">
 						<p>Overrides LitElement.styles</p>
 						<ul>
-							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/011eec8/src/menu/CompareIED.ts#L237">src/menu/CompareIED.ts:237</a></li>
+							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/65a41af/src/menu/CompareIED.ts#L301">src/menu/CompareIED.ts:301</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -3267,7 +3279,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/011eec8/src/menu/CompareIED.ts#L47">src/menu/CompareIED.ts:47</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/65a41af/src/menu/CompareIED.ts#L96">src/menu/CompareIED.ts:96</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Element</span><span class="tsd-signature-symbol">[]</span></h4>
@@ -3284,7 +3296,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/011eec8/src/menu/CompareIED.ts#L54">src/menu/CompareIED.ts:54</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/65a41af/src/menu/CompareIED.ts#L103">src/menu/CompareIED.ts:103</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Element</span><span class="tsd-signature-symbol">[]</span></h4>
@@ -4476,7 +4488,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/011eec8/src/menu/CompareIED.ts#L73">src/menu/CompareIED.ts:73</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/65a41af/src/menu/CompareIED.ts#L122">src/menu/CompareIED.ts:122</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -4502,7 +4514,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/011eec8/src/menu/CompareIED.ts#L88">src/menu/CompareIED.ts:88</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/65a41af/src/menu/CompareIED.ts#L137">src/menu/CompareIED.ts:137</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -5024,7 +5036,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/011eec8/src/menu/CompareIED.ts#L67">src/menu/CompareIED.ts:67</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/65a41af/src/menu/CompareIED.ts#L116">src/menu/CompareIED.ts:116</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -5500,7 +5512,7 @@
 							<aside class="tsd-sources">
 								<p>Overrides LitElement.render</p>
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/011eec8/src/menu/CompareIED.ts#L216">src/menu/CompareIED.ts:216</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/65a41af/src/menu/CompareIED.ts#L280">src/menu/CompareIED.ts:280</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">TemplateResult</span></h4>
@@ -5517,7 +5529,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/011eec8/src/menu/CompareIED.ts#L132">src/menu/CompareIED.ts:132</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/65a41af/src/menu/CompareIED.ts#L181">src/menu/CompareIED.ts:181</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">TemplateResult</span></h4>
@@ -5534,7 +5546,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/011eec8/src/menu/CompareIED.ts#L141">src/menu/CompareIED.ts:141</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/65a41af/src/menu/CompareIED.ts#L200">src/menu/CompareIED.ts:200</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">TemplateResult</span></h4>
@@ -5551,7 +5563,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/011eec8/src/menu/CompareIED.ts#L113">src/menu/CompareIED.ts:113</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/65a41af/src/menu/CompareIED.ts#L162">src/menu/CompareIED.ts:162</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">TemplateResult</span></h4>
@@ -5568,7 +5580,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/011eec8/src/menu/CompareIED.ts#L207">src/menu/CompareIED.ts:207</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/65a41af/src/menu/CompareIED.ts#L271">src/menu/CompareIED.ts:271</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -5584,6 +5596,23 @@
 						</li>
 					</ul>
 				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-protected">
+					<a name="renderFilterCheckbox" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagProtected">Protected</span> render<wbr>Filter<wbr>Checkbox</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-protected">
+						<li class="tsd-signature tsd-kind-icon">render<wbr>Filter<wbr>Checkbox<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">TemplateResult</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/65a41af/src/menu/CompareIED.ts#L190">src/menu/CompareIED.ts:190</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">TemplateResult</span></h4>
+						</li>
+					</ul>
+				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private">
 					<a name="renderIEDList" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagPrivate">Private</span> renderIEDList</h3>
@@ -5594,7 +5623,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/011eec8/src/menu/CompareIED.ts#L153">src/menu/CompareIED.ts:153</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/65a41af/src/menu/CompareIED.ts#L217">src/menu/CompareIED.ts:217</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -5620,7 +5649,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/011eec8/src/menu/CompareIED.ts#L164">src/menu/CompareIED.ts:164</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/65a41af/src/menu/CompareIED.ts#L228">src/menu/CompareIED.ts:228</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">TemplateResult</span></h4>
@@ -5637,7 +5666,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/011eec8/src/menu/CompareIED.ts#L100">src/menu/CompareIED.ts:100</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/65a41af/src/menu/CompareIED.ts#L149">src/menu/CompareIED.ts:149</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">TemplateResult</span></h4>
@@ -5654,7 +5683,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/011eec8/src/menu/CompareIED.ts#L182">src/menu/CompareIED.ts:182</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/65a41af/src/menu/CompareIED.ts#L246">src/menu/CompareIED.ts:246</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">TemplateResult</span></h4>
@@ -5864,7 +5893,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/011eec8/src/menu/CompareIED.ts#L63">src/menu/CompareIED.ts:63</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/65a41af/src/menu/CompareIED.ts#L112">src/menu/CompareIED.ts:112</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
@@ -6716,6 +6745,9 @@
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-external">
 								<a href="menu_CompareIED.default.html#enterKeyHint" class="tsd-kind-icon">enter<wbr>Key<wbr>Hint</a>
 							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="menu_CompareIED.default.html#filterMutables" class="tsd-kind-icon">filter<wbr>Mutables</a>
+							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-external">
 								<a href="menu_CompareIED.default.html#firstChild" class="tsd-kind-icon">first<wbr>Child</a>
 							</li>
@@ -7393,6 +7425,9 @@
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private">
 								<a href="menu_CompareIED.default.html#renderDialog" class="tsd-kind-icon">render<wbr>Dialog</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-protected">
+								<a href="menu_CompareIED.default.html#renderFilterCheckbox" class="tsd-kind-icon">render<wbr>Filter<wbr>Checkbox</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private">
 								<a href="menu_CompareIED.default.html#renderIEDList" class="tsd-kind-icon">renderIEDList</a>

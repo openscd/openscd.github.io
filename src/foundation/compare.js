@@ -6,20 +6,43 @@ import "../../_snowpack/pkg/@material/mwc-list/mwc-list-item.js";
 import "../../_snowpack/pkg/@material/mwc-icon.js";
 import {identity} from "../foundation.js";
 import {nothing} from "../../_snowpack/pkg/lit-html.js";
+;
+function getDiffFilterSelector(elementToBeCompared, rootElementToBeCompared, filters) {
+  const querySelector = rootElementToBeCompared === elementToBeCompared ? ":scope" : Object.keys(filters).find((selector) => Array.from(rootElementToBeCompared.querySelectorAll(selector)).includes(elementToBeCompared));
+  return querySelector ? filters[querySelector] : void 0;
+}
+function shouldFilterElement(element, filter) {
+  if (!filter || !filter.full) {
+    return false;
+  }
+  const consumer = filter.full;
+  return typeof consumer === "boolean" ? consumer : consumer(element);
+}
+function shouldFilterAttribute(element, attribute, filter) {
+  if (!filter || !filter.attributes || !filter.attributes[attribute]) {
+    return false;
+  }
+  const consumer = filter.attributes[attribute];
+  return typeof consumer === "boolean" ? consumer : consumer(element);
+}
 function describe(element) {
   const id = identity(element);
   return typeof id === "string" ? id : get("unidentifiable");
 }
-export function diffSclAttributes(elementToBeCompared, elementToCompareAgainst) {
+export function diffSclAttributes(elementToBeCompared, elementToCompareAgainst, filterToIgnore, searchElementToBeCompared) {
   const attrDiffs = [];
   const newText = elementToBeCompared.textContent?.trim() ?? "";
   const oldText = elementToCompareAgainst.textContent?.trim() ?? "";
   if (elementToBeCompared.childElementCount === 0 && elementToCompareAgainst.childElementCount === 0 && newText !== oldText) {
-    attrDiffs.push(["value", {newValue: newText, oldValue: oldText}]);
+    const shouldFilter = shouldFilterElement(elementToBeCompared, getDiffFilterSelector(elementToBeCompared, searchElementToBeCompared, filterToIgnore));
+    if (!shouldFilter) {
+      attrDiffs.push(["value", {newValue: newText, oldValue: oldText}]);
+    }
   }
   const attributeNames = new Set(elementToCompareAgainst.getAttributeNames().concat(elementToBeCompared.getAttributeNames()));
   for (const name of attributeNames) {
-    if (elementToCompareAgainst.getAttribute(name) !== elementToBeCompared.getAttribute(name)) {
+    const shouldFilter = shouldFilterAttribute(elementToBeCompared, name, getDiffFilterSelector(elementToBeCompared, searchElementToBeCompared, filterToIgnore));
+    if (!shouldFilter && elementToCompareAgainst.getAttribute(name) !== elementToBeCompared.getAttribute(name)) {
       attrDiffs.push([
         name,
         {
@@ -41,36 +64,47 @@ export function identityForCompare(element) {
 export function isSame(newValue, oldValue) {
   return newValue.tagName === oldValue.tagName && identityForCompare(newValue) === identityForCompare(oldValue);
 }
-export function diffSclChilds(elementToBeCompared, elementToCompareAgainst) {
+export function diffSclChilds(elementToBeCompared, elementToCompareAgainst, filterToIgnore, searchElementToBeCompared, searchElementToCompareAgainst) {
   const childDiffs = [];
   const childrenToBeCompared = Array.from(elementToBeCompared.children);
   const childrenToCompareTo = Array.from(elementToCompareAgainst.children);
   childrenToBeCompared.forEach((newElement) => {
     if (!newElement.closest("Private")) {
-      const twinIndex = childrenToCompareTo.findIndex((ourChild) => isSame(newElement, ourChild));
-      const oldElement = twinIndex > -1 ? childrenToCompareTo[twinIndex] : null;
-      if (oldElement) {
-        childrenToCompareTo.splice(twinIndex, 1);
-        childDiffs.push({newValue: newElement, oldValue: oldElement});
-      } else {
-        childDiffs.push({newValue: newElement, oldValue: null});
+      const shouldFilter = shouldFilterElement(newElement, getDiffFilterSelector(newElement, searchElementToBeCompared, filterToIgnore));
+      if (!shouldFilter) {
+        const twinIndex = childrenToCompareTo.findIndex((ourChild) => isSame(newElement, ourChild));
+        const oldElement = twinIndex > -1 ? childrenToCompareTo[twinIndex] : null;
+        if (oldElement) {
+          childrenToCompareTo.splice(twinIndex, 1);
+          childDiffs.push({newValue: newElement, oldValue: oldElement});
+        } else {
+          childDiffs.push({newValue: newElement, oldValue: null});
+        }
       }
     }
   });
   childrenToCompareTo.forEach((oldElement) => {
     if (!oldElement.closest("Private")) {
-      childDiffs.push({newValue: null, oldValue: oldElement});
+      const shouldFilter = shouldFilterElement(oldElement, getDiffFilterSelector(oldElement, searchElementToCompareAgainst, filterToIgnore));
+      if (!shouldFilter) {
+        childDiffs.push({newValue: null, oldValue: oldElement});
+      }
     }
   });
   return childDiffs;
 }
-export function renderDiff(elementToBeCompared, elementToCompareAgainst) {
+export function renderDiff(elementToBeCompared, elementToCompareAgainst, filterToIgnore = {}) {
+  return renderDiffInternal(elementToBeCompared, elementToCompareAgainst, filterToIgnore, elementToBeCompared, elementToCompareAgainst);
+}
+function renderDiffInternal(elementToBeCompared, elementToCompareAgainst, filterToIgnore = {}, searchElementToBeCompared, searchElementToCompareAgainst) {
   let idTitle = identity(elementToBeCompared).toString();
   if (idTitle === "NaN") {
     idTitle = void 0;
   }
-  const attrDiffs = diffSclAttributes(elementToBeCompared, elementToCompareAgainst);
-  const childDiffs = diffSclChilds(elementToBeCompared, elementToCompareAgainst);
+  searchElementToBeCompared = searchElementToBeCompared || elementToBeCompared;
+  searchElementToCompareAgainst = searchElementToCompareAgainst || elementToCompareAgainst;
+  const attrDiffs = diffSclAttributes(elementToBeCompared, elementToCompareAgainst, filterToIgnore, searchElementToBeCompared);
+  const childDiffs = diffSclChilds(elementToBeCompared, elementToCompareAgainst, filterToIgnore, searchElementToBeCompared, searchElementToCompareAgainst);
   const childAddedOrDeleted = [];
   const childToCompare = [];
   childDiffs.forEach((diff) => {
@@ -80,7 +114,7 @@ export function renderDiff(elementToBeCompared, elementToCompareAgainst) {
       childToCompare.push(diff);
     }
   });
-  const childToCompareTemplates = childToCompare.map((diff) => renderDiff(diff.newValue, diff.oldValue)).filter((result) => result !== null);
+  const childToCompareTemplates = childToCompare.map((diff) => renderDiffInternal(diff.newValue, diff.oldValue, filterToIgnore, searchElementToBeCompared, searchElementToCompareAgainst)).filter((result) => result !== null);
   if (childToCompareTemplates.length > 0 || attrDiffs.length > 0 || childAddedOrDeleted.length > 0) {
     return html` ${attrDiffs.length > 0 || childAddedOrDeleted.length > 0 ? html` <mwc-list multi>
           ${attrDiffs.length > 0 ? html` <mwc-list-item noninteractive ?twoline=${!!idTitle}>
