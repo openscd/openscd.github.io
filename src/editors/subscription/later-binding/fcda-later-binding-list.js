@@ -32,53 +32,56 @@ import {
 import {smvIcon} from "../../../icons/icons.js";
 import {wizards} from "../../../wizards/wizard-library.js";
 import {styles} from "../foundation.js";
-import {getFcdaTitleValue, newFcdaSelectEvent} from "./foundation.js";
-export let SVCLaterBindingList = class extends LitElement {
+import {
+  getFcdaTitleValue,
+  newFcdaSelectEvent
+} from "../smv-laterbinding/foundation.js";
+export let FCDALaterBindingList = class extends LitElement {
   constructor() {
     super();
     this.resetSelection = this.resetSelection.bind(this);
     parent.addEventListener("open-doc", this.resetSelection);
   }
-  getSvcElements() {
+  getControlElements() {
     if (this.doc) {
-      return Array.from(this.doc.querySelectorAll("LN0 > SampledValueControl")).sort((a, b) => compareNames(`${identity(a)}`, `${identity(b)}`));
+      return Array.from(this.doc.querySelectorAll(`LN0 > ${this.controlTag}`)).sort((a, b) => compareNames(`${identity(a)}`, `${identity(b)}`));
     }
     return [];
   }
-  getFcdaElements(svcElement) {
-    const lnElement = svcElement.parentElement;
+  getFcdaElements(controlElement) {
+    const lnElement = controlElement.parentElement;
     if (lnElement) {
-      return Array.from(lnElement.querySelectorAll(`:scope > DataSet[name=${svcElement.getAttribute("datSet")}] > FCDA`)).sort((a, b) => compareNames(`${identity(a)}`, `${identity(b)}`));
+      return Array.from(lnElement.querySelectorAll(`:scope > DataSet[name=${controlElement.getAttribute("datSet")}] > FCDA`)).sort((a, b) => compareNames(`${identity(a)}`, `${identity(b)}`));
     }
     return [];
   }
-  openEditWizard(svcElement) {
-    const wizard = wizards["SampledValueControl"].edit(svcElement);
+  openEditWizard(controlElement) {
+    const wizard = wizards[this.controlTag].edit(controlElement);
     if (wizard)
       this.dispatchEvent(newWizardEvent(wizard));
   }
   resetSelection() {
-    this.selectedSvcElement = void 0;
+    this.selectedControlElement = void 0;
     this.selectedFcdaElement = void 0;
   }
-  onFcdaSelect(svcElement, fcdaElement) {
+  onFcdaSelect(controlElement, fcdaElement) {
     this.resetSelection();
-    this.selectedSvcElement = svcElement;
+    this.selectedControlElement = controlElement;
     this.selectedFcdaElement = fcdaElement;
   }
   updated(_changedProperties) {
     super.updated(_changedProperties);
-    if (_changedProperties.has("doc") || _changedProperties.has("selectedSvcElement") || _changedProperties.has("selectedFcdaElement")) {
-      this.dispatchEvent(newFcdaSelectEvent(this.selectedSvcElement, this.selectedFcdaElement));
+    if (_changedProperties.has("doc") || _changedProperties.has("selectedControlElement") || _changedProperties.has("selectedFcdaElement")) {
+      this.dispatchEvent(newFcdaSelectEvent(this.selectedControlElement, this.selectedFcdaElement));
     }
   }
-  renderFCDA(svcElement, fcdaElement) {
+  renderFCDA(controlElement, fcdaElement) {
     return html`<mwc-list-item
       graphic="large"
       twoline
       class="subitem"
-      @click=${() => this.onFcdaSelect(svcElement, fcdaElement)}
-      value="${identity(svcElement)} ${identity(fcdaElement)}"
+      @click=${() => this.onFcdaSelect(controlElement, fcdaElement)}
+      value="${identity(controlElement)} ${identity(fcdaElement)}"
     >
       <span>${getFcdaTitleValue(fcdaElement)}</span>
       <span slot="secondary">
@@ -90,46 +93,46 @@ export let SVCLaterBindingList = class extends LitElement {
     </mwc-list-item>`;
   }
   render() {
-    const svcElements = this.getSvcElements();
+    const controlElements = this.getControlElements();
     return html` <section tabindex="0">
-      ${svcElements.length > 0 ? html`<h1>
-              ${translate("subscription.smvLaterBinding.svcList.title")}
+      ${controlElements.length > 0 ? html`<h1>
+              ${translate(`subscription.laterBinding.${this.controlTag}.controlBlockList.title`)}
             </h1>
             <filtered-list>
-              ${svcElements.map((svcElement) => {
-      const fcdaElements = this.getFcdaElements(svcElement);
+              ${controlElements.map((controlElement) => {
+      const fcdaElements = this.getFcdaElements(controlElement);
       return html`
                   <mwc-list-item
                     noninteractive
                     graphic="icon"
                     twoline
                     hasMeta
-                    value="${identity(svcElement)} ${fcdaElements.map((fcdaElement) => identity(fcdaElement)).join(" ")}"
+                    value="${identity(controlElement)} ${fcdaElements.map((fcdaElement) => identity(fcdaElement)).join(" ")}"
                   >
                     <mwc-icon-button
                       slot="meta"
                       icon="edit"
                       class="interactive"
-                      @click=${() => this.openEditWizard(svcElement)}
+                      @click=${() => this.openEditWizard(controlElement)}
                     ></mwc-icon-button>
                     <span
-                      >${getNameAttribute(svcElement)}
-                      ${getDescriptionAttribute(svcElement) ? html`${getDescriptionAttribute(svcElement)}` : nothing}</span
+                      >${getNameAttribute(controlElement)}
+                      ${getDescriptionAttribute(controlElement) ? html`${getDescriptionAttribute(controlElement)}` : nothing}</span
                     >
-                    <span slot="secondary">${identity(svcElement)}</span>
+                    <span slot="secondary">${identity(controlElement)}</span>
                     <mwc-icon slot="graphic">${smvIcon}</mwc-icon>
                   </mwc-list-item>
                   <li divider role="separator"></li>
-                  ${fcdaElements.map((fcdaElement) => this.renderFCDA(svcElement, fcdaElement))}
+                  ${fcdaElements.map((fcdaElement) => this.renderFCDA(controlElement, fcdaElement))}
                 `;
     })}
             </filtered-list>` : html`<h1>
-            ${translate("subscription.smvLaterBinding.svcList.noSvcFound")}
+            ${translate(`subscription.laterBinding.${this.controlTag}.controlBlockList.noControlBlockFound`)}
           </h1>`}
     </section>`;
   }
 };
-SVCLaterBindingList.styles = css`
+FCDALaterBindingList.styles = css`
     ${styles}
 
     mwc-list-item.hidden[noninteractive] + li[divider] {
@@ -150,13 +153,16 @@ SVCLaterBindingList.styles = css`
   `;
 __decorate([
   property({attribute: false})
-], SVCLaterBindingList.prototype, "doc", 2);
+], FCDALaterBindingList.prototype, "doc", 2);
+__decorate([
+  property()
+], FCDALaterBindingList.prototype, "controlTag", 2);
 __decorate([
   state()
-], SVCLaterBindingList.prototype, "selectedSvcElement", 2);
+], FCDALaterBindingList.prototype, "selectedControlElement", 2);
 __decorate([
   state()
-], SVCLaterBindingList.prototype, "selectedFcdaElement", 2);
-SVCLaterBindingList = __decorate([
-  customElement("svc-later-binding-list")
-], SVCLaterBindingList);
+], FCDALaterBindingList.prototype, "selectedFcdaElement", 2);
+FCDALaterBindingList = __decorate([
+  customElement("fcda-later-binding-list")
+], FCDALaterBindingList);

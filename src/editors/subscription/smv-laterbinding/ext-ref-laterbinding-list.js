@@ -103,7 +103,7 @@ export let ExtRefLaterBindingList = class extends LitElement {
     const svcName = this.currentSelectedSvcElement ? getNameAttribute(this.currentSelectedSvcElement) : void 0;
     const fcdaName = this.currentSelectedFcdaElement ? getFcdaTitleValue(this.currentSelectedFcdaElement) : void 0;
     return html`<h1>
-      ${translate("subscription.smvLaterBinding.extRefList.title", {
+      ${translate("subscription.laterBinding.extRefList.SampledValueControl.title", {
       svcName: svcName ?? "-",
       fcdaName: fcdaName ?? "-"
     })}
@@ -134,7 +134,7 @@ export let ExtRefLaterBindingList = class extends LitElement {
               <span slot="secondary">${identity(extRefElement)}</span>
               <mwc-icon slot="graphic">swap_horiz</mwc-icon>
             </mwc-list-item>`)}` : html`<mwc-list-item graphic="large" noninteractive>
-            ${translate("subscription.smvLaterBinding.extRefList.noSubscribedExtRefs")}
+            ${translate("subscription.laterBinding.extRefList.noSubscribedExtRefs")}
           </mwc-list-item>`}
     `;
   }
@@ -169,7 +169,7 @@ export let ExtRefLaterBindingList = class extends LitElement {
               <span slot="secondary">${identity(extRefElement)}</span>
               <mwc-icon slot="graphic">arrow_back</mwc-icon>
             </mwc-list-item>`)}` : html`<mwc-list-item graphic="large" noninteractive>
-            ${translate("subscription.smvLaterBinding.extRefList.noAvailableExtRefs")}
+            ${translate("subscription.laterBinding.extRefList.noAvailableExtRefs")}
           </mwc-list-item>`}
     `;
   }
@@ -182,7 +182,7 @@ export let ExtRefLaterBindingList = class extends LitElement {
             </filtered-list>
           ` : html`
             <h1>
-              ${translate("subscription.smvLaterBinding.extRefList.noSelection")}
+              ${translate("subscription.laterBinding.extRefList.noSelection")}
             </h1>
           `}
     </section>`;
