@@ -22,7 +22,9 @@ import "../../../_snowpack/pkg/@material/mwc-icon-button-toggle.js";
 import "../../action-pane.js";
 import {getNameAttribute, newWizardEvent} from "../../foundation.js";
 import {wizards} from "../../wizards/wizard-library.js";
-import {getCustomField} from "./foundation/foundation.js";
+import {
+  getCustomField
+} from "../../wizards/foundation/dai-field-type.js";
 import {createDaInfoWizard} from "./da-wizard.js";
 import {
   Container,
@@ -145,7 +147,7 @@ DAContainer.styles = css`
       font-weight: 300;
       margin: 0px;
       padding-left: 0.3em;
-      word-break: break-word; 
+      word-break: break-word;
       white-space: pre-wrap;
     }
 
