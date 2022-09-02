@@ -15,6 +15,9 @@ export function cleanSCLItems(cleanItems) {
   }
   return actions;
 }
+export function countBy(arr) {
+  return arr.reduce((acc, e) => acc.set(e, (acc.get(e) || 0) + 1), new Map());
+}
 export function identitySort(elements) {
   return elements.sort((a, b) => {
     const aId = identity(a);
@@ -27,4 +30,7 @@ export function identitySort(elements) {
     }
     return 0;
   });
+}
+export function uniq(arr) {
+  return Array.from(new Set(arr));
 }

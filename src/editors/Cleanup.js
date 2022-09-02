@@ -14,12 +14,14 @@ import {css, html, LitElement, property} from "../../_snowpack/pkg/lit-element.j
 import {styles} from "./templates/foundation.js";
 import "./cleanup/datasets-container.js";
 import "./cleanup/control-blocks-container.js";
+import "./cleanup/datatypes-container.js";
 export default class Cleanup extends LitElement {
   render() {
     return html`
       <div class="cleanup">
         <cleanup-datasets .doc=${this.doc}></cleanup-datasets>
         <cleanup-control-blocks .doc=${this.doc}></cleanup-control-blocks>
+        <cleanup-data-types .doc=${this.doc}></cleanup-data-types>
       </div>
     `;
   }
@@ -31,7 +33,7 @@ Cleanup.styles = css`
       width: 100vw;
     }
 
-    @media (max-width: 800px) {
+    @media (max-width: 799px) {
       .cleanup {
         flex-direction: column;
       }
@@ -43,14 +45,11 @@ Cleanup.styles = css`
       }
     }
 
-    cleanup-datasets, cleanup-control-blocks {
+    cleanup-datasets, cleanup-control-blocks, cleanup-data-types {
       display: flex;
       flex: 1;
       flex-direction: column;
       justify-content: space-between;
-      /* any more than 700px and distance between check box and item is too great */
-      max-width: 700px;
-
     }
 
     .cleanup {

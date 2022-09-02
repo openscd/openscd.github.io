@@ -73,7 +73,9 @@
 							<h3>Functions</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-function tsd-parent-kind-module"><a href="editors_cleanup_foundation.html#cleanSCLItems" class="tsd-kind-icon">cleanSCLItems</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module"><a href="editors_cleanup_foundation.html#countBy" class="tsd-kind-icon">count<wbr>By</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-module"><a href="editors_cleanup_foundation.html#identitySort" class="tsd-kind-icon">identity<wbr>Sort</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module"><a href="editors_cleanup_foundation.html#uniq" class="tsd-kind-icon">uniq</a></li>
 							</ul>
 						</section>
 					</div>
@@ -91,7 +93,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/4d52a9a/src/editors/cleanup/foundation.ts#L9">src/editors/cleanup/foundation.ts:9</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/1db5169/src/editors/cleanup/foundation.ts#L10">src/editors/cleanup/foundation.ts:10</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -103,10 +105,45 @@
 							<ul class="tsd-parameters">
 								<li>
 									<h5>cleanItems: <span class="tsd-signature-type">Element</span><span class="tsd-signature-symbol">[]</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>SCL elements to be removed from the SCL file</p>
+									</div>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <a href="../interfaces/foundation.Delete.html" class="tsd-signature-type" data-tsd-kind="Interface">Delete</a><span class="tsd-signature-symbol">[]</span></h4>
 							<p>an actions array to support undo/redo</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
+					<a name="countBy" class="tsd-anchor"></a>
+					<h3>count<wbr>By</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
+						<li class="tsd-signature tsd-kind-icon">count<wbr>By<span class="tsd-signature-symbol">(</span>arr<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Map</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/1db5169/src/editors/cleanup/foundation.ts#L31">src/editors/cleanup/foundation.ts:31</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Provide frequency count of elements.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>arr: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>An array of elements</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Map</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<p>a Map of element strings and frequencies</p>
 						</li>
 					</ul>
 				</section>
@@ -120,7 +157,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/4d52a9a/src/editors/cleanup/foundation.ts#L30">src/editors/cleanup/foundation.ts:30</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/1db5169/src/editors/cleanup/foundation.ts#L40">src/editors/cleanup/foundation.ts:40</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -139,6 +176,38 @@
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Element</span><span class="tsd-signature-symbol">[]</span></h4>
 							<p>a sorted list of elements.</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
+					<a name="uniq" class="tsd-anchor"></a>
+					<h3>uniq</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
+						<li class="tsd-signature tsd-kind-icon">uniq<span class="tsd-signature-symbol">(</span>arr<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">[]</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/1db5169/src/editors/cleanup/foundation.ts#L61">src/editors/cleanup/foundation.ts:61</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Return a de-duplicate set of array elements.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>arr: <span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">[]</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>an array of items with duplicates.</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">[]</span></h4>
+							<p>an array of items without duplicates.</p>
 						</li>
 					</ul>
 				</section>
@@ -161,7 +230,13 @@
 						<a href="editors_cleanup_foundation.html#cleanSCLItems" class="tsd-kind-icon">cleanSCLItems</a>
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-module">
+						<a href="editors_cleanup_foundation.html#countBy" class="tsd-kind-icon">count<wbr>By</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-module">
 						<a href="editors_cleanup_foundation.html#identitySort" class="tsd-kind-icon">identity<wbr>Sort</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-module">
+						<a href="editors_cleanup_foundation.html#uniq" class="tsd-kind-icon">uniq</a>
 					</li>
 				</ul>
 			</nav>

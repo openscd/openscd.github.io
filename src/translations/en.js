@@ -713,6 +713,12 @@ export const en = {
       tooltip: "Control Blocks without a reference to an existing DataSet. Note that this is normal in an ICD file or for an MMS ReportControl with a dynamically allocated DataSet",
       addressDefinitionTooltip: "An address definition exists for this control block in the Communication section",
       alsoRemoveFromCommunication: "Also remove SMV/GSE Address"
+    },
+    unreferencedDataTypes: {
+      title: "Unreferenced Data Types",
+      deleteButton: "Remove Selected Data Types",
+      tooltip: "Data Types which are not referenced in a Logical Node or other used Data Type",
+      alsoRemoveSubTypes: "Also remove subtypes"
     }
   },
   controlblock: {
