@@ -25,9 +25,10 @@ import {
   getDescriptionAttribute,
   getNameAttribute,
   identity,
-  newActionEvent
+  newActionEvent,
+  getSclSchemaVersion
 } from "../../../foundation.js";
-import {styles, updateExtRefElement} from "../foundation.js";
+import {styles, updateExtRefElement, serviceTypes} from "../foundation.js";
 import {getFcdaTitleValue} from "./foundation.js";
 export let ExtRefLaterBindingList = class extends LitElement {
   constructor() {
@@ -51,15 +52,20 @@ export let ExtRefLaterBindingList = class extends LitElement {
     return this.getExtRefElements().filter((element) => !this.isSubscribed(element));
   }
   async onFcdaSelectEvent(event) {
-    this.currentSelectedSvcElement = event.detail.svc;
+    this.currentSelectedControlElement = event.detail.controlElement;
     this.currentSelectedFcdaElement = event.detail.fcda;
     this.currentIedElement = this.currentSelectedFcdaElement ? this.currentSelectedFcdaElement.closest("IED") ?? void 0 : void 0;
   }
   sameAttributeValue(extRefElement, attributeName) {
     return extRefElement.getAttribute(attributeName) === this.currentSelectedFcdaElement?.getAttribute(attributeName);
   }
+  checkEditionSpecificRequirements(extRefElement) {
+    if (getSclSchemaVersion(extRefElement.ownerDocument) === "2003")
+      return true;
+    return extRefElement.getAttribute("serviceType") === serviceTypes[this.controlTag] && extRefElement.getAttribute("srcLDInst") === this.currentSelectedControlElement?.closest("LDevice")?.getAttribute("inst") && (extRefElement.getAttribute("scrPrefix") || "") === (this.currentSelectedControlElement?.closest("LN0")?.getAttribute("prefix") || "") && extRefElement.getAttribute("srcLNClass") === this.currentSelectedControlElement?.closest("LN0")?.getAttribute("lnClass") && (extRefElement.getAttribute("srcLNInst") || "") === this.currentSelectedControlElement?.closest("LN0")?.getAttribute("inst") && extRefElement.getAttribute("srcCBName") === this.currentSelectedControlElement?.getAttribute("name");
+  }
   isSubscribedTo(extRefElement) {
-    return extRefElement.getAttribute("iedName") === this.currentIedElement?.getAttribute("name") && this.sameAttributeValue(extRefElement, "ldInst") && this.sameAttributeValue(extRefElement, "prefix") && this.sameAttributeValue(extRefElement, "lnClass") && this.sameAttributeValue(extRefElement, "lnInst") && this.sameAttributeValue(extRefElement, "doName") && this.sameAttributeValue(extRefElement, "daName");
+    return extRefElement.getAttribute("iedName") === this.currentIedElement?.getAttribute("name") && this.sameAttributeValue(extRefElement, "ldInst") && this.sameAttributeValue(extRefElement, "prefix") && this.sameAttributeValue(extRefElement, "lnClass") && this.sameAttributeValue(extRefElement, "lnInst") && this.sameAttributeValue(extRefElement, "doName") && this.sameAttributeValue(extRefElement, "daName") && this.checkEditionSpecificRequirements(extRefElement);
   }
   isSubscribed(extRefElement) {
     return extRefElement.hasAttribute("iedName") && extRefElement.hasAttribute("ldInst") && extRefElement.hasAttribute("prefix") && extRefElement.hasAttribute("lnClass") && extRefElement.hasAttribute("lnInst") && extRefElement.hasAttribute("doName") && extRefElement.hasAttribute("daName");
@@ -89,22 +95,23 @@ export let ExtRefLaterBindingList = class extends LitElement {
     };
   }
   subscribe(extRefElement) {
-    if (!this.currentIedElement || !this.currentSelectedFcdaElement || !this.currentSelectedSvcElement) {
+    if (!this.currentIedElement || !this.currentSelectedFcdaElement || !this.currentSelectedControlElement) {
       return null;
     }
     return {
       old: {element: extRefElement},
       new: {
-        element: updateExtRefElement(extRefElement, this.currentSelectedSvcElement, this.currentSelectedFcdaElement)
+        element: updateExtRefElement(extRefElement, this.currentSelectedControlElement, this.currentSelectedFcdaElement)
       }
     };
   }
   renderTitle() {
-    const svcName = this.currentSelectedSvcElement ? getNameAttribute(this.currentSelectedSvcElement) : void 0;
+    const controlElementName = this.currentSelectedControlElement ? getNameAttribute(this.currentSelectedControlElement) : void 0;
     const fcdaName = this.currentSelectedFcdaElement ? getFcdaTitleValue(this.currentSelectedFcdaElement) : void 0;
     return html`<h1>
       ${translate("subscription.laterBinding.extRefList.SampledValueControl.title", {
-      svcName: svcName ?? "-",
+      controlTag: this.controlTag,
+      controlElementName: controlElementName ?? "-",
       fcdaName: fcdaName ?? "-"
     })}
     </h1>`;
@@ -175,7 +182,7 @@ export let ExtRefLaterBindingList = class extends LitElement {
   }
   render() {
     return html` <section tabindex="0">
-      ${this.currentSelectedSvcElement && this.currentSelectedFcdaElement ? html`
+      ${this.currentSelectedControlElement && this.currentSelectedFcdaElement ? html`
             ${this.renderTitle()}
             <filtered-list>
               ${this.renderSubscribedExtRefs()} ${this.renderAvailableExtRefs()}
@@ -199,8 +206,11 @@ __decorate([
   property({attribute: false})
 ], ExtRefLaterBindingList.prototype, "doc", 2);
 __decorate([
+  property()
+], ExtRefLaterBindingList.prototype, "controlTag", 2);
+__decorate([
   state()
-], ExtRefLaterBindingList.prototype, "currentSelectedSvcElement", 2);
+], ExtRefLaterBindingList.prototype, "currentSelectedControlElement", 2);
 __decorate([
   state()
 ], ExtRefLaterBindingList.prototype, "currentSelectedFcdaElement", 2);

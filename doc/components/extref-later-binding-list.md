@@ -5,10 +5,11 @@ The List reacts on a custom event to know which FCDA Element was selected and up
 
 ## Properties
 
-| Property                     | Type                   |
-|------------------------------|------------------------|
-| `currentIedElement`          | `Element \| undefined` |
-| `currentSelectedFcdaElement` | `Element \| undefined` |
-| `currentSelectedSvcElement`  | `Element \| undefined` |
-| `doc`                        | `XMLDocument`          |
-| `onFcdaSelectEvent`          |                        |
+| Property                        | Attribute    | Type                                    |
+|---------------------------------|--------------|-----------------------------------------|
+| `controlTag`                    | `controlTag` | `"SampledValueControl" \| "GSEControl"` |
+| `currentIedElement`             |              | `Element \| undefined`                  |
+| `currentSelectedControlElement` |              | `Element \| undefined`                  |
+| `currentSelectedFcdaElement`    |              | `Element \| undefined`                  |
+| `doc`                           |              | `XMLDocument`                           |
+| `onFcdaSelectEvent`             |              |                                         |

@@ -70,7 +70,7 @@ export function canCreateValidExtRef(fcda, controlBlock) {
     return false;
   return true;
 }
-const serviceTypes = {
+export const serviceTypes = {
   ReportControl: "Report",
   GSEControl: "GOOSE",
   SampledValueControl: "SMV"

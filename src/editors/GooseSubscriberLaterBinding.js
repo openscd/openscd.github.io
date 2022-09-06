@@ -11,12 +11,23 @@ var __decorate = (decorators, target, key, kind) => {
 };
 import {LitElement, property, html, css} from "../../_snowpack/pkg/lit-element.js";
 import "./subscription/later-binding/fcda-later-binding-list.js";
+import "./subscription/later-binding/ext-ref-laterbinding-list.js";
 export default class GooseSubscribeLaterBindingPlugin extends LitElement {
   render() {
     return html`<div>
       <div class="container">
-        <fcda-later-binding-list .doc=${this.doc} controlTag="GSEControl">
+        <fcda-later-binding-list
+          class="column"
+          .doc=${this.doc}
+          controlTag="GSEControl"
+        >
         </fcda-later-binding-list>
+        <extref-later-binding-list
+          class="column"
+          controlTag="GSEControl"
+          .doc=${this.doc}
+        >
+        </extref-later-binding-list>
       </div>
     </div>`;
   }
@@ -27,7 +38,17 @@ GooseSubscribeLaterBindingPlugin.styles = css`
     }
 
     .container {
+      display: flex;
       padding: 8px 6px 16px;
+      height: calc(100vh - 136px);
+    }
+
+    .column {
+      flex: 50%;
+      margin: 0px 6px 0px;
+      min-width: 300px;
+      height: 100%;
+      overflow-y: auto;
     }
   `;
 __decorate([

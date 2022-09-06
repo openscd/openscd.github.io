@@ -32,10 +32,7 @@ import {
 import {smvIcon} from "../../../icons/icons.js";
 import {wizards} from "../../../wizards/wizard-library.js";
 import {styles} from "../foundation.js";
-import {
-  getFcdaTitleValue,
-  newFcdaSelectEvent
-} from "../smv-laterbinding/foundation.js";
+import {getFcdaTitleValue, newFcdaSelectEvent} from "./foundation.js";
 export let FCDALaterBindingList = class extends LitElement {
   constructor() {
     super();

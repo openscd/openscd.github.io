@@ -373,9 +373,7 @@ export const de = {
         }
       },
       extRefList: {
-        SampledValueControl: {
-          title: 'Ausgewählter Sampled Value Datenpunkt "{{ svcName }}" / "{{ fcdaName }}"'
-        },
+        title: 'Ausgewählter {{ controlTag }} Datenpunkt "{{ svcName }}" / "{{ fcdaName }}"',
         noSelection: "Kein Daten-Attribut ausgewählt",
         noSubscribedExtRefs: "Keine verknüpften externen Referenzen",
         noAvailableExtRefs: 'Keine externen externen Referenzen vom Type "Later Binding"'
