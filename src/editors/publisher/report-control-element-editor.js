@@ -57,6 +57,7 @@ export let ReportControlElementEditor = class extends LitElement {
             .maybeValue=${value}
             nullable
             helper="${translate(`scl.${key}`)}"
+            disabled
           ></wizard-checkbox>`)}`;
   }
   renderTrgOpsContent() {
@@ -73,6 +74,7 @@ export let ReportControlElementEditor = class extends LitElement {
             .maybeValue=${value}
             nullable
             helper="${translate(`scl.${key}`)}"
+            disabled
           ></wizard-checkbox>`)}`;
   }
   renderChildElements() {
@@ -101,17 +103,20 @@ export let ReportControlElementEditor = class extends LitElement {
         pattern="${patterns.asciName}"
         maxLength="${maxLength.cbName}"
         dialogInitialFocus
+        disabled
       ></wizard-textfield
       ><wizard-textfield
         label="desc"
         .maybeValue=${desc}
         nullable
         helper="${translate("scl.desc")}"
+        disabled
       ></wizard-textfield
       ><wizard-checkbox
         label="buffered"
         .maybeValue=${buffered}
         helper="${translate("scl.buffered")}"
+        disabled
       ></wizard-checkbox
       ><wizard-textfield
         label="rptID"
@@ -119,12 +124,14 @@ export let ReportControlElementEditor = class extends LitElement {
         nullable
         required
         helper="${translate("report.rptID")}"
+        disabled
       ></wizard-textfield
       ><wizard-checkbox
         label="indexed"
         .maybeValue=${indexed}
         nullable
         helper="${translate("scl.indexed")}"
+        disabled
       ></wizard-checkbox
       ><wizard-textfield
         label="max Clients"
@@ -133,6 +140,7 @@ export let ReportControlElementEditor = class extends LitElement {
         nullable
         type="number"
         suffix="#"
+        disabled
       ></wizard-textfield
       ><wizard-textfield
         label="bufTime"
@@ -143,6 +151,7 @@ export let ReportControlElementEditor = class extends LitElement {
         type="number"
         min="0"
         suffix="ms"
+        disabled
       ></wizard-textfield
       ><wizard-textfield
         label="intgPd"
@@ -153,6 +162,7 @@ export let ReportControlElementEditor = class extends LitElement {
         type="number"
         min="0"
         suffix="ms"
+        disabled
       ></wizard-textfield>
     </div>`;
   }

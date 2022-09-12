@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">99.55% </span>
+                <span class="strong">99.57% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>223/224</span>
+                <span class='fraction'>233/234</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">99.55% </span>
+                <span class="strong">99.57% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>223/224</span>
+                <span class='fraction'>233/234</span>
             </div>
         
             
@@ -287,7 +287,17 @@
 <a name='L222'></a><a href='#L222'>222</a>
 <a name='L223'></a><a href='#L223'>223</a>
 <a name='L224'></a><a href='#L224'>224</a>
-<a name='L225'></a><a href='#L225'>225</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">3x</span>
+<a name='L225'></a><a href='#L225'>225</a>
+<a name='L226'></a><a href='#L226'>226</a>
+<a name='L227'></a><a href='#L227'>227</a>
+<a name='L228'></a><a href='#L228'>228</a>
+<a name='L229'></a><a href='#L229'>229</a>
+<a name='L230'></a><a href='#L230'>230</a>
+<a name='L231'></a><a href='#L231'>231</a>
+<a name='L232'></a><a href='#L232'>232</a>
+<a name='L233'></a><a href='#L233'>233</a>
+<a name='L234'></a><a href='#L234'>234</a>
+<a name='L235'></a><a href='#L235'>235</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
@@ -384,6 +394,9 @@
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
@@ -392,6 +405,13 @@
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
@@ -588,6 +608,7 @@ export class GseControlElementEditor extends LitElement {
         &gt;&lt;mwc-checkbox
           id="instType"
           ?checked="${hasInstType}"
+          disabled
         &gt;&lt;/mwc-checkbox&gt;&lt;/mwc-formfield
       &gt;${Object.entries(attributes).map(
         ([key, value]) =&gt;
@@ -597,6 +618,7 @@ export class GseControlElementEditor extends LitElement {
             .maybeValue=${value}
             pattern="${ifDefined(typePattern[key])}"
             required
+            disabled
           &gt;&lt;/wizard-textfield&gt;`
       )}&lt;wizard-textfield
         label="MinTime"
@@ -604,6 +626,7 @@ export class GseControlElementEditor extends LitElement {
         nullable
         suffix="ms"
         type="number"
+        disabled
       &gt;&lt;/wizard-textfield
       &gt;&lt;wizard-textfield
         label="MaxTime"
@@ -611,6 +634,7 @@ export class GseControlElementEditor extends LitElement {
         nullable
         suffix="ms"
         type="number"
+        disabled
       &gt;&lt;/wizard-textfield&gt;
     &lt;/div&gt;`;
   }
@@ -635,12 +659,14 @@ export class GseControlElementEditor extends LitElement {
         pattern="${patterns.asciName}"
         maxLength="${maxLength.cbName}"
         dialogInitialFocus
+        disabled
       &gt;&lt;/wizard-textfield&gt;
       &lt;wizard-textfield
         label="desc"
         .maybeValue=${desc}
         nullable
         helper="${translate('scl.desc')}"
+        disabled
       &gt;&lt;/wizard-textfield&gt;
       &lt;wizard-select
         label="type"
@@ -648,6 +674,7 @@ export class GseControlElementEditor extends LitElement {
         helper="${translate('scl.type')}"
         nullable
         required
+        disabled
         &gt;${['GOOSE', 'GSSE'].map(
           type =&gt; html`&lt;mwc-list-item value="${type}"&gt;${type}&lt;/mwc-list-item&gt;`
         )}&lt;/wizard-select
@@ -658,12 +685,14 @@ export class GseControlElementEditor extends LitElement {
         helper="${translate('scl.id')}"
         required
         validationMessage="${translate('textfield.nonempty')}"
+        disabled
       &gt;&lt;/wizard-textfield&gt;
       &lt;wizard-checkbox
         label="fixedOffs"
         .maybeValue=${fixedOffs}
         nullable
         helper="${translate('scl.fixedOffs')}"
+        disabled
       &gt;&lt;/wizard-checkbox&gt;
       &lt;wizard-select
         label="securityEnabled"
@@ -671,6 +700,7 @@ export class GseControlElementEditor extends LitElement {
         nullable
         required
         helper="${translate('scl.securityEnable')}"
+        disabled
         &gt;${['None', 'Signature', 'SignatureAndEncryption'].map(
           type =&gt; html`&lt;mwc-list-item value="${type}"&gt;${type}&lt;/mwc-list-item&gt;`
         )}&lt;/wizard-select
@@ -742,7 +772,7 @@ export class GseControlElementEditor extends LitElement {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener">istanbul</a>
-                at Wed Sep 07 2022 19:45:09 GMT+0000 (Coordinated Universal Time)
+                at Mon Sep 12 2022 08:02:00 GMT+0000 (Coordinated Universal Time)
             </div>
         </div>
         <script src="../../../prettify.js"></script>

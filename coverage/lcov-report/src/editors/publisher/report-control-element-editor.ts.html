@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">98.33% </span>
+                <span class="strong">98.4% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>236/240</span>
+                <span class='fraction'>246/250</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">98.33% </span>
+                <span class="strong">98.4% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>236/240</span>
+                <span class='fraction'>246/250</span>
             </div>
         
             
@@ -303,7 +303,17 @@
 <a name='L238'></a><a href='#L238'>238</a>
 <a name='L239'></a><a href='#L239'>239</a>
 <a name='L240'></a><a href='#L240'>240</a>
-<a name='L241'></a><a href='#L241'>241</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">3x</span>
+<a name='L241'></a><a href='#L241'>241</a>
+<a name='L242'></a><a href='#L242'>242</a>
+<a name='L243'></a><a href='#L243'>243</a>
+<a name='L244'></a><a href='#L244'>244</a>
+<a name='L245'></a><a href='#L245'>245</a>
+<a name='L246'></a><a href='#L246'>246</a>
+<a name='L247'></a><a href='#L247'>247</a>
+<a name='L248'></a><a href='#L248'>248</a>
+<a name='L249'></a><a href='#L249'>249</a>
+<a name='L250'></a><a href='#L250'>250</a>
+<a name='L251'></a><a href='#L251'>251</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
@@ -374,6 +384,7 @@
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
@@ -397,6 +408,7 @@
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">3x</span>
@@ -472,6 +484,14 @@
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
@@ -609,6 +629,7 @@ export class ReportControlElementEditor extends LitElement {
             .maybeValue=${value}
             nullable
             helper="${translate(`scl.${key}`)}"
+            disabled
           &gt;&lt;/wizard-checkbox&gt;`
       )}`;
   }
@@ -632,6 +653,7 @@ export class ReportControlElementEditor extends LitElement {
             .maybeValue=${value}
             nullable
             helper="${translate(`scl.${key}`)}"
+            disabled
           &gt;&lt;/wizard-checkbox&gt;`
       )}`;
   }
@@ -665,17 +687,20 @@ export class ReportControlElementEditor extends LitElement {
         pattern="${patterns.asciName}"
         maxLength="${maxLength.cbName}"
         dialogInitialFocus
+        disabled
       &gt;&lt;/wizard-textfield
       &gt;&lt;wizard-textfield
         label="desc"
         .maybeValue=${desc}
         nullable
         helper="${translate('scl.desc')}"
+        disabled
       &gt;&lt;/wizard-textfield
       &gt;&lt;wizard-checkbox
         label="buffered"
         .maybeValue=${buffered}
         helper="${translate('scl.buffered')}"
+        disabled
       &gt;&lt;/wizard-checkbox
       &gt;&lt;wizard-textfield
         label="rptID"
@@ -683,12 +708,14 @@ export class ReportControlElementEditor extends LitElement {
         nullable
         required
         helper="${translate('report.rptID')}"
+        disabled
       &gt;&lt;/wizard-textfield
       &gt;&lt;wizard-checkbox
         label="indexed"
         .maybeValue=${indexed}
         nullable
         helper="${translate('scl.indexed')}"
+        disabled
       &gt;&lt;/wizard-checkbox
       &gt;&lt;wizard-textfield
         label="max Clients"
@@ -697,6 +724,7 @@ export class ReportControlElementEditor extends LitElement {
         nullable
         type="number"
         suffix="#"
+        disabled
       &gt;&lt;/wizard-textfield
       &gt;&lt;wizard-textfield
         label="bufTime"
@@ -707,6 +735,7 @@ export class ReportControlElementEditor extends LitElement {
         type="number"
         min="0"
         suffix="ms"
+        disabled
       &gt;&lt;/wizard-textfield
       &gt;&lt;wizard-textfield
         label="intgPd"
@@ -717,6 +746,7 @@ export class ReportControlElementEditor extends LitElement {
         type="number"
         min="0"
         suffix="ms"
+        disabled
       &gt;&lt;/wizard-textfield&gt;
     &lt;/div&gt;`;
   }
@@ -790,7 +820,7 @@ export class ReportControlElementEditor extends LitElement {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener">istanbul</a>
-                at Wed Sep 07 2022 19:45:09 GMT+0000 (Coordinated Universal Time)
+                at Mon Sep 12 2022 08:02:00 GMT+0000 (Coordinated Universal Time)
             </div>
         </div>
         <script src="../../../prettify.js"></script>

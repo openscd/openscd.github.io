@@ -58,6 +58,7 @@ export let GseControlElementEditor = class extends LitElement {
         ><mwc-checkbox
           id="instType"
           ?checked="${hasInstType}"
+          disabled
         ></mwc-checkbox></mwc-formfield
       >${Object.entries(attributes).map(([key, value]) => html`<wizard-textfield
             label="${key}"
@@ -65,12 +66,14 @@ export let GseControlElementEditor = class extends LitElement {
             .maybeValue=${value}
             pattern="${ifDefined(typePattern[key])}"
             required
+            disabled
           ></wizard-textfield>`)}<wizard-textfield
         label="MinTime"
         .maybeValue=${minTime}
         nullable
         suffix="ms"
         type="number"
+        disabled
       ></wizard-textfield
       ><wizard-textfield
         label="MaxTime"
@@ -78,6 +81,7 @@ export let GseControlElementEditor = class extends LitElement {
         nullable
         suffix="ms"
         type="number"
+        disabled
       ></wizard-textfield>
     </div>`;
   }
@@ -100,12 +104,14 @@ export let GseControlElementEditor = class extends LitElement {
         pattern="${patterns.asciName}"
         maxLength="${maxLength.cbName}"
         dialogInitialFocus
+        disabled
       ></wizard-textfield>
       <wizard-textfield
         label="desc"
         .maybeValue=${desc}
         nullable
         helper="${translate("scl.desc")}"
+        disabled
       ></wizard-textfield>
       <wizard-select
         label="type"
@@ -113,6 +119,7 @@ export let GseControlElementEditor = class extends LitElement {
         helper="${translate("scl.type")}"
         nullable
         required
+        disabled
         >${["GOOSE", "GSSE"].map((type2) => html`<mwc-list-item value="${type2}">${type2}</mwc-list-item>`)}</wizard-select
       >
       <wizard-textfield
@@ -121,12 +128,14 @@ export let GseControlElementEditor = class extends LitElement {
         helper="${translate("scl.id")}"
         required
         validationMessage="${translate("textfield.nonempty")}"
+        disabled
       ></wizard-textfield>
       <wizard-checkbox
         label="fixedOffs"
         .maybeValue=${fixedOffs}
         nullable
         helper="${translate("scl.fixedOffs")}"
+        disabled
       ></wizard-checkbox>
       <wizard-select
         label="securityEnabled"
@@ -134,6 +143,7 @@ export let GseControlElementEditor = class extends LitElement {
         nullable
         required
         helper="${translate("scl.securityEnable")}"
+        disabled
         >${["None", "Signature", "SignatureAndEncryption"].map((type2) => html`<mwc-list-item value="${type2}">${type2}</mwc-list-item>`)}</wizard-select
       >
     </div>`;

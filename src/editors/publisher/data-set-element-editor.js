@@ -35,6 +35,7 @@ export let DataSetElementEditor = class extends LitElement {
         .maybeValue=${this.name}
         helper="${translate("scl.name")}"
         required
+        disabled
       >
       </wizard-textfield>
       <wizard-textfield
@@ -42,6 +43,7 @@ export let DataSetElementEditor = class extends LitElement {
         .maybeValue=${this.desc}
         helper="${translate("scl.desc")}"
         nullable
+        disabled
       >
       </wizard-textfield>
       <filtered-list
