@@ -9,7 +9,12 @@ var __decorate = (decorators, target, key, kind) => {
     __defProp(target, key, result);
   return result;
 };
-import {css, customElement, html} from "../../../_snowpack/pkg/lit-element.js";
+import {
+  css,
+  customElement,
+  html,
+  property
+} from "../../../_snowpack/pkg/lit-element.js";
 import {nothing} from "../../../_snowpack/pkg/lit-html.js";
 import {translate} from "../../../_snowpack/pkg/lit-translate.js";
 import "../../action-pane.js";
@@ -24,6 +29,10 @@ import {
 } from "../../foundation.js";
 import {removeIEDWizard} from "../../wizards/ied.js";
 export let IedContainer = class extends Container {
+  constructor() {
+    super(...arguments);
+    this.selectedLNClasses = [];
+  }
   openEditWizard() {
     const wizard = wizards["IED"].edit(this.element);
     if (wizard)
@@ -63,6 +72,7 @@ export let IedContainer = class extends Container {
           .doc=${this.doc}
           .element=${ap}
           .nsdoc=${this.nsdoc}
+          .selectedLNClasses=${this.selectedLNClasses}
           .ancestors=${[this.element]}
         ></access-point-container>`)}
     </action-pane>`;
@@ -74,6 +84,9 @@ IedContainer.styles = css`
       border-bottom: none;
     }
   `;
+__decorate([
+  property()
+], IedContainer.prototype, "selectedLNClasses", 2);
 IedContainer = __decorate([
   customElement("ied-container")
 ], IedContainer);

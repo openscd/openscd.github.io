@@ -13,9 +13,9 @@ import {
   css,
   customElement,
   html,
-  state,
   property,
   query,
+  state,
   unsafeCSS
 } from "../_snowpack/pkg/lit-element.js";
 import {translate} from "../_snowpack/pkg/lit-translate.js";

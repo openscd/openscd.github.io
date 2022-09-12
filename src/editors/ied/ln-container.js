@@ -9,7 +9,7 @@ var __decorate = (decorators, target, key, kind) => {
     __defProp(target, key, result);
   return result;
 };
-import {css, customElement, html, query} from "../../../_snowpack/pkg/lit-element.js";
+import {customElement, html, query} from "../../../_snowpack/pkg/lit-element.js";
 import {nothing} from "../../../_snowpack/pkg/lit-html.js";
 import {until} from "../../../_snowpack/pkg/lit-html/directives/until.js";
 import {translate} from "../../../_snowpack/pkg/lit-translate.js";
@@ -61,7 +61,6 @@ export let LNContainer = class extends Container {
     </action-pane>`;
   }
 };
-LNContainer.styles = css``;
 __decorate([
   query("#toggleButton")
 ], LNContainer.prototype, "toggleButton", 2);

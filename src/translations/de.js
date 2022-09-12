@@ -202,8 +202,8 @@ export const de = {
     }
   },
   iededitor: {
-    searchHelper: "IED auswählen",
-    searchHelperDesc: "({{description}})",
+    iedSelector: "IED auswählen",
+    lnFilter: "???",
     missing: "Kein IED vorhanden",
     toggleChildElements: "Kindelemente umschalten",
     wizard: {
@@ -766,6 +766,7 @@ export const de = {
   cancel: "Abbrechen",
   close: "Schließen",
   filter: "Filter",
+  filters: "Filters",
   undo: "Rückgängig",
   redo: "Wiederholen",
   duplicate: "Klonen",
