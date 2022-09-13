@@ -11,7 +11,7 @@ var __decorate = (decorators, target, key, kind) => {
 };
 import {LitElement, property, html, css} from "../../_snowpack/pkg/lit-element.js";
 import "./subscription/later-binding/fcda-later-binding-list.js";
-import "./subscription/later-binding/ext-ref-laterbinding-list.js";
+import "./subscription/later-binding/ext-ref-later-binding-list.js";
 export default class GooseSubscribeLaterBindingPlugin extends LitElement {
   render() {
     return html`<div>
