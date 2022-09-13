@@ -1,12 +1,15 @@
 import {html} from "../../_snowpack/pkg/lit-element.js";
 import {repeat} from "../../_snowpack/pkg/lit-html/directives/repeat.js";
-import {get, translate} from "../../_snowpack/pkg/lit-translate.js";
+import {get} from "../../_snowpack/pkg/lit-translate.js";
 import "../../_snowpack/pkg/@material/mwc-list.js";
 import "../../_snowpack/pkg/@material/mwc-list/mwc-list-item.js";
 import "../../_snowpack/pkg/@material/mwc-icon.js";
 import {identity} from "../foundation.js";
-import {nothing} from "../../_snowpack/pkg/lit-html.js";
-;
+import {attributeIcon, contentIcon, elementIcon} from "../icons/compare.js";
+const diffTypeToIcon = new Map();
+diffTypeToIcon.set("Attribute", attributeIcon);
+diffTypeToIcon.set("Content", contentIcon);
+diffTypeToIcon.set("Element", elementIcon);
 function getDiffFilterSelector(elementToBeCompared, rootElementToBeCompared, filters) {
   const querySelector = rootElementToBeCompared === elementToBeCompared ? ":scope" : Object.keys(filters).find((selector) => Array.from(rootElementToBeCompared.querySelectorAll(selector)).includes(elementToBeCompared));
   return querySelector ? filters[querySelector] : void 0;
@@ -36,7 +39,10 @@ export function diffSclAttributes(elementToBeCompared, elementToCompareAgainst, 
   if (elementToBeCompared.childElementCount === 0 && elementToCompareAgainst.childElementCount === 0 && newText !== oldText) {
     const shouldFilter = shouldFilterElement(elementToBeCompared, getDiffFilterSelector(elementToBeCompared, searchElementToBeCompared, filterToIgnore));
     if (!shouldFilter) {
-      attrDiffs.push(["value", {newValue: newText, oldValue: oldText}]);
+      attrDiffs.push([
+        "value",
+        {type: "Content", newValue: newText, oldValue: oldText}
+      ]);
     }
   }
   const attributeNames = new Set(elementToCompareAgainst.getAttributeNames().concat(elementToBeCompared.getAttributeNames()));
@@ -46,6 +52,7 @@ export function diffSclAttributes(elementToBeCompared, elementToCompareAgainst, 
       attrDiffs.push([
         name,
         {
+          type: "Attribute",
           newValue: elementToBeCompared.getAttribute(name),
           oldValue: elementToCompareAgainst.getAttribute(name)
         }
@@ -76,9 +83,17 @@ export function diffSclChilds(elementToBeCompared, elementToCompareAgainst, filt
         const oldElement = twinIndex > -1 ? childrenToCompareTo[twinIndex] : null;
         if (oldElement) {
           childrenToCompareTo.splice(twinIndex, 1);
-          childDiffs.push({newValue: newElement, oldValue: oldElement});
+          childDiffs.push({
+            type: "Element",
+            newValue: newElement,
+            oldValue: oldElement
+          });
         } else {
-          childDiffs.push({newValue: newElement, oldValue: null});
+          childDiffs.push({
+            type: "Element",
+            newValue: newElement,
+            oldValue: null
+          });
         }
       }
     }
@@ -87,7 +102,11 @@ export function diffSclChilds(elementToBeCompared, elementToCompareAgainst, filt
     if (!oldElement.closest("Private")) {
       const shouldFilter = shouldFilterElement(oldElement, getDiffFilterSelector(oldElement, searchElementToCompareAgainst, filterToIgnore));
       if (!shouldFilter) {
-        childDiffs.push({newValue: null, oldValue: oldElement});
+        childDiffs.push({
+          type: "Element",
+          newValue: null,
+          oldValue: oldElement
+        });
       }
     }
   });
@@ -114,48 +133,64 @@ function renderDiffInternal(elementToBeCompared, elementToCompareAgainst, filter
       childToCompare.push(diff);
     }
   });
-  const childToCompareTemplates = childToCompare.map((diff) => renderDiffInternal(diff.newValue, diff.oldValue, filterToIgnore, searchElementToBeCompared, searchElementToCompareAgainst)).filter((result) => result !== null);
+  const childToCompareTemplates = childToCompare.map((diff) => renderDiff(diff.newValue, diff.oldValue, filterToIgnore)).filter((result) => result !== null);
   if (childToCompareTemplates.length > 0 || attrDiffs.length > 0 || childAddedOrDeleted.length > 0) {
-    return html` ${attrDiffs.length > 0 || childAddedOrDeleted.length > 0 ? html` <mwc-list multi>
-          ${attrDiffs.length > 0 ? html` <mwc-list-item noninteractive ?twoline=${!!idTitle}>
-                  <span class="resultTitle">
-                    ${translate("compare.attributes", {
-      elementName: elementToBeCompared.tagName
-    })}
-                  </span>
-                  ${idTitle ? html`<span slot="secondary">${idTitle}</span>` : nothing}
-                </mwc-list-item>
-                <li padded divider role="separator"></li>` : ""}
-          ${repeat(attrDiffs, (e) => e, ([name, diff]) => html` <mwc-list-item twoline left hasMeta>
-                <span>${name}</span>
-                <span slot="secondary">
-                  ${diff.oldValue ?? ""}
-                  ${diff.oldValue && diff.newValue ? html`&curarr;` : " "}
-                  ${diff.newValue ?? ""}
-                </span>
-                <mwc-icon slot="meta">
-                  ${diff.oldValue ? diff.newValue ? "edit" : "delete" : "add"}
-                </mwc-icon>
-              </mwc-list-item>`)}
-          ${childAddedOrDeleted.length > 0 ? html` <mwc-list-item noninteractive ?twoline=${!!idTitle}>
-                  <span class="resultTitle">
-                    ${translate("compare.children", {
-      elementName: elementToBeCompared.tagName
-    })}
-                  </span>
-                  ${idTitle ? html`<span slot="secondary">${idTitle}</span>` : nothing}
-                </mwc-list-item>
-                <li padded divider role="separator"></li>` : ""}
-          ${repeat(childAddedOrDeleted, (e) => e, (diff) => html` <mwc-list-item twoline left hasMeta>
-                <span>${diff.oldValue?.tagName ?? diff.newValue?.tagName}</span>
-                <span slot="secondary">
-                  ${diff.oldValue ? describe(diff.oldValue) : describe(diff.newValue)}
-                </span>
-                <mwc-icon slot="meta">
-                  ${diff.oldValue ? "delete" : "add"}
-                </mwc-icon>
-              </mwc-list-item>`)}
-        </mwc-list>` : ""}
+    return html` ${attrDiffs.length > 0 || childAddedOrDeleted.length > 0 ? html`<div class="container container--alt">
+          <div class="list__container list__container--left">
+            <mwc-list multi right nonInteractive>
+              ${repeat(attrDiffs, (e) => e, ([name, diff]) => html`<mwc-list-item right twoLine graphic="icon">
+                    ${diff.oldValue !== null ? html`
+                          <span>
+                            ${name}:
+                            ${diff.oldValue === "" ? '""' : diff.oldValue}
+                          </span>
+                          <span slot="secondary">${idTitle}</span>
+                          <mwc-icon slot="graphic">
+                            ${diffTypeToIcon.get(diff.type)}
+                          </mwc-icon>
+                        ` : ""}
+                  </mwc-list-item>`)}
+              ${repeat(childAddedOrDeleted, (e) => e, (diff) => html` <mwc-list-item right twoLine graphic="icon">
+                    ${diff.oldValue ? html`
+                          <span>${diff.oldValue.tagName}</span>
+                          <span slot="secondary">
+                            ${describe(diff.oldValue)}
+                          </span>
+                          <mwc-icon slot="graphic">
+                            ${diffTypeToIcon.get(diff.type)}
+                          </mwc-icon>
+                        ` : ""}
+                  </mwc-list-item>`)}
+            </mwc-list>
+          </div>
+          <div class="list__container">
+            <mwc-list multi left nonInteractive>
+              ${repeat(attrDiffs, (e) => e, ([name, diff]) => html` <mwc-list-item left twoLine graphic="icon">
+                    ${diff.newValue !== null ? html`
+                          <span>
+                            ${name}:
+                            ${diff.newValue === "" ? '""' : diff.newValue}
+                          </span>
+                          <span slot="secondary">${idTitle}</span>
+                          <mwc-icon slot="graphic">
+                            ${diffTypeToIcon.get(diff.type)}
+                          </mwc-icon>
+                        ` : ""}
+                  </mwc-list-item>`)}
+              ${repeat(childAddedOrDeleted, (e) => e, (diff) => html` <mwc-list-item left twoLine graphic="icon">
+                    ${diff.newValue ? html`
+                          <span>${diff.newValue.tagName}</span>
+                          <span slot="secondary">
+                            ${describe(diff.newValue)}
+                          </span>
+                          <mwc-icon slot="graphic">
+                            ${diffTypeToIcon.get(diff.type)}
+                          </mwc-icon>
+                        ` : ""}
+                  </mwc-list-item>`)}
+            </mwc-list>
+          </div>
+        </div>` : ""}
     ${childToCompareTemplates}`;
   }
   return null;

@@ -14,8 +14,7 @@ import {
   html,
   LitElement,
   property,
-  query,
-  state
+  query
 } from "../../_snowpack/pkg/lit-element.js";
 import {get, translate} from "../../_snowpack/pkg/lit-translate.js";
 import "../../_snowpack/pkg/@material/mwc-dialog.js";
@@ -23,14 +22,15 @@ import "../../_snowpack/pkg/@material/mwc-list.js";
 import "../../_snowpack/pkg/@material/mwc-list/mwc-list-item.js";
 import "../../_snowpack/pkg/@material/mwc-formfield.js";
 import "../../_snowpack/pkg/@material/mwc-checkbox.js";
+import "../plain-compare-list.js";
 import {
   compareNames,
   getNameAttribute,
   identity,
+  isPublic,
   newPendingStateEvent,
   selector
 } from "../foundation.js";
-import {renderDiff} from "../foundation/compare.js";
 const tctrClass = `LN[lnClass='TCTR']`;
 const tvtrClass = `LN[lnClass='TVTR']`;
 const setMag = `SDI[name='setMag'] Val`;
@@ -69,17 +69,17 @@ filterToIgnore[`${tvtrClass} DOI[name='VRtgSec'] ${setVal}`] = {
 export default class CompareIEDPlugin extends LitElement {
   constructor() {
     super(...arguments);
-    this.filterMutables = true;
+    this.templateDocName = "";
   }
   get ieds() {
     if (this.doc) {
-      return Array.from(this.doc.querySelectorAll(`IED`)).sort(compareNames);
+      return Array.from(this.doc.querySelectorAll(`IED`)).filter(isPublic).sort(compareNames);
     }
     return [];
   }
   get templateIeds() {
     if (this.templateDoc) {
-      return Array.from(this.templateDoc.querySelectorAll(`IED`)).sort(compareNames);
+      return Array.from(this.templateDoc.querySelectorAll(`IED`)).filter(isPublic).sort(compareNames);
     }
     return [];
   }
@@ -103,6 +103,7 @@ export default class CompareIEDPlugin extends LitElement {
     const file = evt.target?.files?.item(0) ?? false;
     if (!file)
       return;
+    this.templateDocName = file.name;
     const templateText = await file.text();
     this.templateDoc = new DOMParser().parseFromString(templateText, "application/xml");
     this.templateFileUI.onchange = null;
@@ -139,25 +140,19 @@ export default class CompareIEDPlugin extends LitElement {
       style="--mdc-theme-primary: var(--mdc-theme-error)"
     ></mwc-button>`;
   }
-  renderFilterCheckbox() {
-    return html`<mwc-formfield
-      label="${translate("compare.filterMutables")}">
-        <mwc-checkbox
-          ?checked=${this.filterMutables}
-          @change=${() => this.filterMutables = !this.filterMutables}>
-        </mwc-checkbox>
-      </mwc-formfield>
-      `;
-  }
   renderCompare() {
-    const filter = this.filterMutables ? filterToIgnore : {};
-    return html`
-      ${this.renderFilterCheckbox()}
-      ${renderDiff(this.selectedProjectIed, this.selectedTemplateIed, filter) ?? html`${translate("compare-ied.noDiff", {
-      projectIedName: identity(this.selectedProjectIed),
-      templateIedName: identity(this.selectedTemplateIed)
-    })}`}
-    ${this.renderSelectIedButton()} ${this.renderCloseButton()}`;
+    const leftHandTitle = identity(this.selectedProjectIed);
+    const rightHandTitle = identity(this.selectedTemplateIed);
+    return html`<plain-compare-list
+        .leftHandObject=${this.selectedProjectIed}
+        .rightHandObject=${this.selectedTemplateIed}
+        .leftHandTitle=${typeof leftHandTitle === "number" ? "" : leftHandTitle}
+        .rightHandTitle=${typeof rightHandTitle === "number" ? "" : rightHandTitle}
+        .leftHandSubtitle=${this.docName}
+        .rightHandSubtitle=${this.templateDocName}
+        .filterToIgnore=${filterToIgnore}
+      ></plain-compare-list>
+      ${this.renderSelectIedButton()} ${this.renderCloseButton()}`;
   }
   renderIEDList(ieds, id) {
     return html`<mwc-list id="${id}" activatable>
@@ -226,7 +221,7 @@ export default class CompareIEDPlugin extends LitElement {
 }
 CompareIEDPlugin.styles = css`
     mwc-dialog {
-      --mdc-dialog-max-width: 92vw;
+      --mdc-dialog-min-width: 64vw;
     }
 
     .splitContainer {
@@ -260,11 +255,11 @@ __decorate([
   property({attribute: false})
 ], CompareIEDPlugin.prototype, "selectedTemplateIed", 2);
 __decorate([
-  state()
-], CompareIEDPlugin.prototype, "filterMutables", 2);
-__decorate([
   query("mwc-dialog")
 ], CompareIEDPlugin.prototype, "dialog", 2);
 __decorate([
   query("#template-file")
 ], CompareIEDPlugin.prototype, "templateFileUI", 2);
+__decorate([
+  property({attribute: false})
+], CompareIEDPlugin.prototype, "docName", 2);
