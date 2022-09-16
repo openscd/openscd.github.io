@@ -109,7 +109,7 @@ export let ExtRefLaterBindingList = class extends LitElement {
     const controlElementName = this.currentSelectedControlElement ? getNameAttribute(this.currentSelectedControlElement) : void 0;
     const fcdaName = this.currentSelectedFcdaElement ? getFcdaTitleValue(this.currentSelectedFcdaElement) : void 0;
     return html`<h1>
-      ${translate("subscription.laterBinding.extRefList.SampledValueControl.title", {
+      ${translate("subscription.laterBinding.extRefList.title", {
       controlTag: this.controlTag,
       controlElementName: controlElementName ?? "-",
       fcdaName: fcdaName ?? "-"
