@@ -6,7 +6,7 @@ An sub element for subscribing and unsubscribing IEDs to GOOSE messages.
 
 | Property                    | Type                           | Default | Description                                      |
 |-----------------------------|--------------------------------|---------|--------------------------------------------------|
-| `availableElements`         | `ListElement[]`                | []      | List holding all current avaialble Elements which are not subscribed. |
+| `availableElements`         | `ListElement[]`                | []      | List holding all current available Elements which are not subscribed. |
 | `currentGooseIedName`       | `string \| null \| undefined`  |         | The name of the IED belonging to the current selected GOOSE |
 | `currentSelectedGseControl` | `Element \| undefined`         |         | Current selected GOOSE message (when in GOOSE Publisher view) |
 | `currentSelectedIed`        | `Element \| undefined`         |         | Current selected IED (when in Subscriber view)   |

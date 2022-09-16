@@ -75,10 +75,14 @@ export let GooseList = class extends LitElement {
   updated() {
     this.dispatchEvent(newGOOSESelectEvent(selectedGseControl, selectedDataSet ?? void 0));
   }
+  firstUpdated() {
+    selectedGseControl = void 0;
+    selectedDataSet = void 0;
+  }
   render() {
     return html` <section tabindex="0">
-      <h1>${translate("subscription.goose.publisherGoose.title")}</h1>
-      <filtered-list>
+      <h1>${translate("subscription.goose.publisher.title")}</h1>
+      <filtered-list activatable>
         ${getOrderedIeds(this.doc).map((ied) => html`
               <mwc-list-item
                 noninteractive

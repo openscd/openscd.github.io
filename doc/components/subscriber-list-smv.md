@@ -6,7 +6,7 @@ An sub element for subscribing and unsubscribing IEDs to Sampled Values messages
 
 | Property                    | Type                           | Default | Description                                      |
 |-----------------------------|--------------------------------|---------|--------------------------------------------------|
-| `availableElements`         | `ListElement[]`                | []      | List holding all current avaialble Elements which are not subscribed. |
+| `availableElements`         | `ListElement[]`                | []      | List holding all current available Elements which are not subscribed. |
 | `currentSelectedIed`        | `Element \| undefined`         |         | Current selected IED (when in Subscriber view)   |
 | `currentSelectedSmvControl` | `Element \| undefined`         |         | Current selected Sampled Values element (when in GOOSE Publisher view) |
 | `currentSmvIedName`         | `string \| null \| undefined`  |         | The name of the IED belonging to the current selected Sampled Values |

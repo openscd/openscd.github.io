@@ -35,10 +35,13 @@ export let IedList = class extends LitElement {
   updated() {
     this.dispatchEvent(newIEDSelectEvent(selectedIed));
   }
+  firstUpdated() {
+    selectedIed = void 0;
+  }
   render() {
     return html` <section tabindex="0">
-      <h1>${translate("subscription.iedList.title")}</h1>
-      <filtered-list>
+      <h1>${translate(`subscription.${this.serviceType}.subscriber.iedListTitle`)}</h1>
+      <filtered-list activatable>
         ${getOrderedIeds(this.doc).map((ied) => html`
               <mwc-list-item
                 @click=${() => this.onIedSelect(ied)}
@@ -58,6 +61,9 @@ IedList.styles = css`
 __decorate([
   property()
 ], IedList.prototype, "doc", 2);
+__decorate([
+  property({type: String})
+], IedList.prototype, "serviceType", 2);
 IedList = __decorate([
   customElement("ied-list")
 ], IedList);

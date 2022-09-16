@@ -265,14 +265,17 @@ export let SubscriberList = class extends SubscriberListContainer {
   renderTitle() {
     const gseControlName = this.currentSelectedGseControl?.getAttribute("name") ?? void 0;
     return view == View.PUBLISHER ? html`<h1>
-          ${translate("subscription.goose.publisherGoose.subscriberTitle", {
+          ${translate("subscription.goose.publisher.subscriberTitle", {
       selected: gseControlName ? this.currentGooseIedName + " > " + gseControlName : "GOOSE"
     })}
         </h1>` : html`<h1>
-          ${translate("subscription.goose.subscriberGoose.publisherTitle", {
+          ${translate("subscription.goose.subscriber.publisherTitle", {
       selected: this.currentSelectedIed ? this.currentSelectedIed.getAttribute("name") : "IED"
     })}
         </h1>`;
+  }
+  firstUpdated() {
+    this.currentSelectedIed = void 0;
   }
   render() {
     return html`

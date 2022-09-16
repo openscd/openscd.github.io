@@ -54,6 +54,10 @@ export let SmvPublisherList = class extends LitElement {
   updated() {
     this.dispatchEvent(newSmvSelectEvent(selectedSmvMsg, selectedDataSet ?? void 0));
   }
+  firstUpdated() {
+    selectedSmvMsg = void 0;
+    selectedDataSet = void 0;
+  }
   renderSmv(smvControl) {
     return html`<mwc-list-item
       @click=${() => this.onSelect(smvControl)}
@@ -75,8 +79,8 @@ export let SmvPublisherList = class extends LitElement {
   }
   render() {
     return html` <section tabindex="0">
-      <h1>${translate("subscription.smv.publisherSmv.title")}</h1>
-      <filtered-list>
+      <h1>${translate("subscription.smv.publisher.title")}</h1>
+      <filtered-list activatable>
         ${getOrderedIeds(this.doc).map((ied) => html`
               <mwc-list-item
                 noninteractive

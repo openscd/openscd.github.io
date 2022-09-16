@@ -2,6 +2,7 @@
 
 ## Properties
 
-| Property | Attribute | Type          |
-|----------|-----------|---------------|
-| `doc`    | `doc`     | `XMLDocument` |
+| Property      | Attribute     | Type                            |
+|---------------|---------------|---------------------------------|
+| `doc`         | `doc`         | `XMLDocument`                   |
+| `serviceType` | `serviceType` | `"goose" \| "smv" \| undefined` |

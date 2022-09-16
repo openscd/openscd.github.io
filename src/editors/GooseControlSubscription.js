@@ -58,7 +58,7 @@ export default class GooseControlSubscriptionPlugin extends LitElement {
         ></mwc-radio>
       </mwc-formfield>
       <div class="container">
-        ${view == View.PUBLISHER ? html`<goose-list class="row" .doc=${this.doc}></goose-list>` : html`<ied-list class="row" .doc=${this.doc}></ied-list>`}
+        ${view == View.PUBLISHER ? html`<goose-list class="row" .doc=${this.doc}></goose-list>` : html`<ied-list class="row" .doc=${this.doc} serviceType="goose"></ied-list>`}
         <subscriber-list-goose
           class="row"
           .doc=${this.doc}

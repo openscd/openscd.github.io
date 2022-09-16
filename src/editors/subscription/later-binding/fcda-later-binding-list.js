@@ -95,7 +95,7 @@ export let FCDALaterBindingList = class extends LitElement {
       ${controlElements.length > 0 ? html`<h1>
               ${translate(`subscription.laterBinding.${this.controlTag}.controlBlockList.title`)}
             </h1>
-            <filtered-list>
+            <filtered-list activatable>
               ${controlElements.map((controlElement) => {
       const fcdaElements = this.getFcdaElements(controlElement);
       return html`

@@ -266,14 +266,17 @@ export let SubscriberList = class extends SubscriberListContainer {
   renderTitle() {
     const gseControlName = this.currentSelectedSmvControl?.getAttribute("name") ?? void 0;
     return view == View.PUBLISHER ? html`<h1>
-          ${translate("subscription.smv.publisherSmv.subscriberTitle", {
+          ${translate("subscription.smv.publisher.subscriberTitle", {
       selected: gseControlName ? this.currentSmvIedName + " > " + gseControlName : "Sampled Value"
     })}
         </h1>` : html`<h1>
-          ${translate("subscription.smv.subscriberSmv.publisherTitle", {
+          ${translate("subscription.smv.subscriber.publisherTitle", {
       selected: this.currentSelectedIed ? this.currentSelectedIed.getAttribute("name") : "IED"
     })}
         </h1>`;
+  }
+  firstUpdated() {
+    this.currentSelectedIed = void 0;
   }
   render() {
     return html`
