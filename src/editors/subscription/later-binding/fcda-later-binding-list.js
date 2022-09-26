@@ -29,13 +29,17 @@ import {
   identity,
   newWizardEvent
 } from "../../../foundation.js";
-import {smvIcon} from "../../../icons/icons.js";
+import {gooseIcon, smvIcon} from "../../../icons/icons.js";
 import {wizards} from "../../../wizards/wizard-library.js";
 import {styles} from "../foundation.js";
 import {getFcdaTitleValue, newFcdaSelectEvent} from "./foundation.js";
 export let FCDALaterBindingList = class extends LitElement {
   constructor() {
     super();
+    this.iconControlLookup = {
+      SampledValueControl: smvIcon,
+      GSEControl: gooseIcon
+    };
     this.resetSelection = this.resetSelection.bind(this);
     parent.addEventListener("open-doc", this.resetSelection);
   }
@@ -117,7 +121,9 @@ export let FCDALaterBindingList = class extends LitElement {
                       ${getDescriptionAttribute(controlElement) ? html`${getDescriptionAttribute(controlElement)}` : nothing}</span
                     >
                     <span slot="secondary">${identity(controlElement)}</span>
-                    <mwc-icon slot="graphic">${smvIcon}</mwc-icon>
+                    <mwc-icon slot="graphic"
+                      >${this.iconControlLookup[this.controlTag]}</mwc-icon
+                    >
                   </mwc-list-item>
                   <li divider role="separator"></li>
                   ${fcdaElements.map((fcdaElement) => this.renderFCDA(controlElement, fcdaElement))}
@@ -160,6 +166,9 @@ __decorate([
 __decorate([
   state()
 ], FCDALaterBindingList.prototype, "selectedFcdaElement", 2);
+__decorate([
+  property({attribute: false})
+], FCDALaterBindingList.prototype, "iconControlLookup", 2);
 FCDALaterBindingList = __decorate([
   customElement("fcda-later-binding-list")
 ], FCDALaterBindingList);

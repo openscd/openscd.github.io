@@ -6,13 +6,14 @@ And when selecting a FCDA Element a custom event is fired, so other list can be 
 
 ## Properties
 
-| Property                 | Attribute    | Type                                    |
-|--------------------------|--------------|-----------------------------------------|
-| `controlTag`             | `controlTag` | `"SampledValueControl" \| "GSEControl"` |
-| `doc`                    |              | `XMLDocument`                           |
-| `resetSelection`         |              |                                         |
-| `selectedControlElement` |              | `Element \| undefined`                  |
-| `selectedFcdaElement`    |              | `Element \| undefined`                  |
+| Property                 | Attribute    | Type                                             | Default                                          |
+|--------------------------|--------------|--------------------------------------------------|--------------------------------------------------|
+| `controlTag`             | `controlTag` | `"SampledValueControl" \| "GSEControl"`          |                                                  |
+| `doc`                    |              | `XMLDocument`                                    |                                                  |
+| `iconControlLookup`      |              | `Record<"SampledValueControl" \| "GSEControl", SVGTemplateResult>` | {"SampledValueControl":"smvIcon","GSEControl":"gooseIcon"} |
+| `resetSelection`         |              |                                                  |                                                  |
+| `selectedControlElement` |              | `Element \| undefined`                           |                                                  |
+| `selectedFcdaElement`    |              | `Element \| undefined`                           |                                                  |
 
 ## Methods
 

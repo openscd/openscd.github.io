@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">98.55% </span>
+                <span class="strong">98.64% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>205/208</span>
+                <span class='fraction'>218/221</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">98.55% </span>
+                <span class="strong">98.64% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>205/208</span>
+                <span class='fraction'>218/221</span>
             </div>
         
             
@@ -271,7 +271,31 @@
 <a name='L206'></a><a href='#L206'>206</a>
 <a name='L207'></a><a href='#L207'>207</a>
 <a name='L208'></a><a href='#L208'>208</a>
-<a name='L209'></a><a href='#L209'>209</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">5x</span>
+<a name='L209'></a><a href='#L209'>209</a>
+<a name='L210'></a><a href='#L210'>210</a>
+<a name='L211'></a><a href='#L211'>211</a>
+<a name='L212'></a><a href='#L212'>212</a>
+<a name='L213'></a><a href='#L213'>213</a>
+<a name='L214'></a><a href='#L214'>214</a>
+<a name='L215'></a><a href='#L215'>215</a>
+<a name='L216'></a><a href='#L216'>216</a>
+<a name='L217'></a><a href='#L217'>217</a>
+<a name='L218'></a><a href='#L218'>218</a>
+<a name='L219'></a><a href='#L219'>219</a>
+<a name='L220'></a><a href='#L220'>220</a>
+<a name='L221'></a><a href='#L221'>221</a>
+<a name='L222'></a><a href='#L222'>222</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-yes">5x</span>
@@ -439,6 +463,8 @@
 <span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-yes">5x</span>
@@ -489,7 +515,7 @@
   state,
   TemplateResult,
 } from 'lit-element';
-import { nothing } from 'lit-html';
+import { nothing, SVGTemplateResult } from 'lit-html';
 import { translate } from 'lit-translate';
 &nbsp;
 import '@material/mwc-icon';
@@ -503,12 +529,16 @@ import {
   identity,
   newWizardEvent,
 } from '../../../foundation.js';
-import { smvIcon } from '../../../icons/icons.js';
+import { gooseIcon, smvIcon } from '../../../icons/icons.js';
 import { wizards } from '../../../wizards/wizard-library.js';
 &nbsp;
 import { styles } from '../foundation.js';
 &nbsp;
 import { getFcdaTitleValue, newFcdaSelectEvent } from './foundation.js';
+&nbsp;
+type controlTag = 'SampledValueControl' | 'GSEControl';
+&nbsp;
+type iconLookup = Record&lt;controlTag, SVGTemplateResult&gt;;
 &nbsp;
 /**
  * A sub element for showing all Goose/Sampled Value Controls.
@@ -520,7 +550,7 @@ export class FCDALaterBindingList extends LitElement {
   @property({ attribute: false })
   doc!: XMLDocument;
   @property()
-  controlTag!: 'SampledValueControl' | 'GSEControl';
+  controlTag!: controlTag;
 &nbsp;
   // The selected Elements when a FCDA Line is clicked.
   @state()
@@ -528,9 +558,16 @@ export class FCDALaterBindingList extends LitElement {
   @state()
   selectedFcdaElement: Element | undefined;
 &nbsp;
+  @property({ attribute: false })
+  iconControlLookup: iconLookup;
+&nbsp;
   constructor() {
     super();
 &nbsp;
+    this.iconControlLookup = {
+      SampledValueControl: smvIcon,
+      GSEControl: gooseIcon,
+    };
     this.resetSelection = this.resetSelection.bind(this);
     parent.addEventListener('open-doc', this.resetSelection);
   }
@@ -650,7 +687,9 @@ export class FCDALaterBindingList extends LitElement {
                         : nothing}&lt;/span
                     &gt;
                     &lt;span slot="secondary"&gt;${identity(controlElement)}&lt;/span&gt;
-                    &lt;mwc-icon slot="graphic"&gt;${smvIcon}&lt;/mwc-icon&gt;
+                    &lt;mwc-icon slot="graphic"
+                      &gt;${this.iconControlLookup[this.controlTag]}&lt;/mwc-icon
+                    &gt;
                   &lt;/mwc-list-item&gt;
                   &lt;li divider role="separator"&gt;&lt;/li&gt;
                   ${fcdaElements.map(fcdaElement =&gt;
@@ -694,7 +733,7 @@ export class FCDALaterBindingList extends LitElement {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener">istanbul</a>
-                at Mon Sep 26 2022 17:05:49 GMT+0000 (Coordinated Universal Time)
+                at Mon Sep 26 2022 19:03:12 GMT+0000 (Coordinated Universal Time)
             </div>
         </div>
         <script src="../../../../prettify.js"></script>
