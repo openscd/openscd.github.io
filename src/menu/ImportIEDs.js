@@ -106,8 +106,8 @@ function hasConnectionToIed(type, ied) {
     return Array.from(data.querySelectorAll(`LNodeType > DO[type="${id}"], DOType > SDO[type="${id}"]`)).some((typeChild) => hasConnectionToIed(typeChild.parentElement, ied));
   return Array.from(ied.getElementsByTagName("LN0")).concat(Array.from(ied.getElementsByTagName("LN"))).some((anyln) => anyln.getAttribute("lnType") === id);
 }
-function addEnumType(ied, enumType, doc) {
-  const existEnumType = doc.querySelector(`:root > DataTypeTemplates > EnumType[id="${enumType.getAttribute("id")}"]`);
+function addEnumType(ied, enumType, parent) {
+  const existEnumType = parent.querySelector(`EnumType[id="${enumType.getAttribute("id")}"]`);
   if (existEnumType && enumType.isEqualNode(existEnumType))
     return;
   if (!hasConnectionToIed(enumType, ied))
@@ -121,13 +121,13 @@ function addEnumType(ied, enumType, doc) {
   }
   return {
     new: {
-      parent: doc.querySelector(":root > DataTypeTemplates"),
+      parent,
       element: enumType
     }
   };
 }
-function addDAType(ied, daType, doc) {
-  const existDAType = doc.querySelector(`:root > DataTypeTemplates > DAType[id="${daType.getAttribute("id")}"]`);
+function addDAType(ied, daType, parent) {
+  const existDAType = parent.querySelector(`DAType[id="${daType.getAttribute("id")}"]`);
   if (existDAType && daType.isEqualNode(existDAType))
     return;
   if (!hasConnectionToIed(daType, ied))
@@ -141,13 +141,13 @@ function addDAType(ied, daType, doc) {
   }
   return {
     new: {
-      parent: doc.querySelector(":root > DataTypeTemplates"),
+      parent,
       element: daType
     }
   };
 }
-function addDOType(ied, doType, doc) {
-  const existDOType = doc.querySelector(`:root > DataTypeTemplates > DOType[id="${doType.getAttribute("id")}"]`);
+function addDOType(ied, doType, parent) {
+  const existDOType = parent.querySelector(`DOType[id="${doType.getAttribute("id")}"]`);
   if (existDOType && doType.isEqualNode(existDOType))
     return;
   if (!hasConnectionToIed(doType, ied))
@@ -161,13 +161,13 @@ function addDOType(ied, doType, doc) {
   }
   return {
     new: {
-      parent: doc.querySelector(":root > DataTypeTemplates"),
+      parent,
       element: doType
     }
   };
 }
-function addLNodeType(ied, lNodeType, doc) {
-  const existLNodeType = doc.querySelector(`:root > DataTypeTemplates > LNodeType[id="${lNodeType.getAttribute("id")}"]`);
+function addLNodeType(ied, lNodeType, parent) {
+  const existLNodeType = parent.querySelector(`LNodeType[id="${lNodeType.getAttribute("id")}"]`);
   if (existLNodeType && lNodeType.isEqualNode(existLNodeType))
     return;
   if (!hasConnectionToIed(lNodeType, ied))
@@ -180,17 +180,26 @@ function addLNodeType(ied, lNodeType, doc) {
   }
   return {
     new: {
-      parent: doc.querySelector(":root > DataTypeTemplates"),
+      parent,
       element: lNodeType
     }
   };
 }
 function addDataTypeTemplates(ied, doc) {
   const actions = [];
-  ied.ownerDocument.querySelectorAll(":root > DataTypeTemplates > LNodeType").forEach((lNodeType) => actions.push(addLNodeType(ied, lNodeType, doc)));
-  ied.ownerDocument.querySelectorAll(":root > DataTypeTemplates > DOType").forEach((doType) => actions.push(addDOType(ied, doType, doc)));
-  ied.ownerDocument.querySelectorAll(":root > DataTypeTemplates > DAType").forEach((daType) => actions.push(addDAType(ied, daType, doc)));
-  ied.ownerDocument.querySelectorAll(":root > DataTypeTemplates > EnumType").forEach((enumType) => actions.push(addEnumType(ied, enumType, doc)));
+  const dataTypeTemplates = doc.querySelector(":root > DataTypeTemplates") ? doc.querySelector(":root > DataTypeTemplates") : createElement(doc, "DataTypeTemplates", {});
+  if (!dataTypeTemplates.parentElement) {
+    actions.push({
+      new: {
+        parent: doc.querySelector("SCL"),
+        element: dataTypeTemplates
+      }
+    });
+  }
+  ied.ownerDocument.querySelectorAll(":root > DataTypeTemplates > LNodeType").forEach((lNodeType) => actions.push(addLNodeType(ied, lNodeType, dataTypeTemplates)));
+  ied.ownerDocument.querySelectorAll(":root > DataTypeTemplates > DOType").forEach((doType) => actions.push(addDOType(ied, doType, dataTypeTemplates)));
+  ied.ownerDocument.querySelectorAll(":root > DataTypeTemplates > DAType").forEach((daType) => actions.push(addDAType(ied, daType, dataTypeTemplates)));
+  ied.ownerDocument.querySelectorAll(":root > DataTypeTemplates > EnumType").forEach((enumType) => actions.push(addEnumType(ied, enumType, dataTypeTemplates)));
   return actions.filter((item) => item !== void 0);
 }
 function isIedNameUnique(ied, doc) {
@@ -257,15 +266,6 @@ export default class ImportingIedPlugin extends LitElement {
         title: get("import.log.missingied")
       }));
       return;
-    }
-    if (!doc.querySelector(":root > DataTypeTemplates")) {
-      const element = createElement(doc, "DataTypeTemplates", {});
-      this.parent.dispatchEvent(newActionEvent({
-        new: {
-          parent: doc.documentElement,
-          element
-        }
-      }));
     }
     if (ieds.length === 1) {
       importIED(ieds[0], doc, this.parent);
