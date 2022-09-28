@@ -23,6 +23,10 @@ import "../_snowpack/pkg/@material/mwc-dialog.js";
 import "./filtered-list.js";
 import {FilteredList} from "./filtered-list.js";
 export let FilterButton = class extends FilteredList {
+  constructor() {
+    super(...arguments);
+    this.disabled = false;
+  }
   toggleList() {
     this.filterDialog.show();
   }
@@ -39,7 +43,11 @@ export let FilterButton = class extends FilteredList {
   }
   render() {
     return html`
-      <mwc-icon-button icon="${this.icon}" @click=${this.toggleList}>
+      <mwc-icon-button
+        icon="${this.icon}"
+        @click="${this.toggleList}"
+        ?disabled="${this.disabled}"
+      >
         <slot name="icon"></slot>
       </mwc-icon-button>
       <mwc-dialog
@@ -73,6 +81,9 @@ __decorate([
 __decorate([
   property()
 ], FilterButton.prototype, "icon", 2);
+__decorate([
+  property({type: Boolean})
+], FilterButton.prototype, "disabled", 2);
 __decorate([
   query("#filterDialog")
 ], FilterButton.prototype, "filterDialog", 2);

@@ -9,6 +9,7 @@ A mwc-list with mwc-textfield that filters the list items for given or separated
 | `activatable`      |                    |           | `boolean`                                        |         |                                                  |
 | `debouncedLayout`  |                    |           | `(updateItems?: boolean \| undefined) => void \| undefined` |         |                                                  |
 | `disableCheckAll`  | `disableCheckAll`  |           | `boolean`                                        | false   | Whether the check all option (checkbox next to search text field) is activated |
+| `disabled`         | `disabled`         |           | `boolean`                                        | false   |                                                  |
 | `emptyMessage`     |                    |           | `string \| undefined`                            |         |                                                  |
 | `header`           | `header`           |           | `string \| TemplateResult`                       |         |                                                  |
 | `icon`             | `icon`             |           | `string`                                         |         |                                                  |
