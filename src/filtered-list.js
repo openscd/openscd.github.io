@@ -37,8 +37,11 @@ function hideFiltered(item, searchText) {
   const childInnerText = Array.from(item.children).map((child) => child.innerText).join("\n");
   const value = item.value;
   const filterTarget = (itemInnerText + childInnerText + value).toUpperCase();
-  const terms = searchText.toUpperCase().split(" ");
-  terms.some((term) => !filterTarget.includes(term)) ? slotItem(item).classList.add("hidden") : slotItem(item).classList.remove("hidden");
+  const terms = searchText.toUpperCase().replace(/[.+^${}()|[\]\\]/g, "\\$&").trim().split(/\s+/g);
+  terms.length === 1 && terms[0] === "" || terms.every((term) => {
+    const reTerm = new RegExp(`*${term}*`.replace(/\*/g, ".*").replace(/\?/g, ".{1}"), "i");
+    return reTerm.test(filterTarget);
+  }) ? slotItem(item).classList.remove("hidden") : slotItem(item).classList.add("hidden");
 }
 export let FilteredList = class extends ListBase {
   constructor() {
