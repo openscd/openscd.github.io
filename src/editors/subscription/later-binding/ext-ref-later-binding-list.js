@@ -55,7 +55,7 @@ export let ExtRefLaterBindingList = class extends LitElement {
     this.currentIedElement = this.currentSelectedFcdaElement ? this.currentSelectedFcdaElement.closest("IED") ?? void 0 : void 0;
   }
   sameAttributeValue(extRefElement, attributeName) {
-    return extRefElement.getAttribute(attributeName) === this.currentSelectedFcdaElement?.getAttribute(attributeName);
+    return (extRefElement.getAttribute(attributeName) ?? "") === (this.currentSelectedFcdaElement?.getAttribute(attributeName) ?? "");
   }
   checkEditionSpecificRequirements(extRefElement) {
     if (getSclSchemaVersion(extRefElement.ownerDocument) === "2003")
