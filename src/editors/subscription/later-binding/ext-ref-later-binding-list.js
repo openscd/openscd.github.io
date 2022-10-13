@@ -21,17 +21,20 @@ import {nothing} from "../../../../_snowpack/pkg/lit-html.js";
 import {translate} from "../../../../_snowpack/pkg/lit-translate.js";
 import {
   cloneElement,
-  compareNames,
   getDescriptionAttribute,
   identity,
   newActionEvent
 } from "../../../foundation.js";
 import {
-  serviceTypes,
+  newSubscriptionChangedEvent,
   styles,
   updateExtRefElement
 } from "../foundation.js";
-import {isSubscribedTo} from "./foundation.js";
+import {
+  getExtRefElements,
+  getSubscribedExtRefElements,
+  isSubscribed
+} from "./foundation.js";
 export let ExtRefLaterBindingList = class extends LitElement {
   constructor() {
     super();
@@ -41,25 +44,10 @@ export let ExtRefLaterBindingList = class extends LitElement {
       parentDiv.addEventListener("fcda-select", this.onFcdaSelectEvent);
     }
   }
-  getExtRefElements() {
-    if (this.doc) {
-      return Array.from(this.doc.querySelectorAll("ExtRef")).filter((element) => element.hasAttribute("intAddr")).filter((element) => element.closest("IED") !== this.currentIedElement).sort((a, b) => compareNames(`${a.getAttribute("intAddr")}`, `${b.getAttribute("intAddr")}`));
-    }
-    return [];
-  }
-  getSubscribedExtRefElements() {
-    return this.getExtRefElements().filter((extRefElement) => isSubscribedTo(serviceTypes[this.controlTag], this.currentIedElement, this.currentSelectedControlElement, this.currentSelectedFcdaElement, extRefElement));
-  }
-  getAvailableExtRefElements() {
-    return this.getExtRefElements().filter((element) => !this.isSubscribed(element));
-  }
   async onFcdaSelectEvent(event) {
-    this.currentSelectedControlElement = event.detail.controlElement;
+    this.currentSelectedControlElement = event.detail.control;
     this.currentSelectedFcdaElement = event.detail.fcda;
     this.currentIedElement = this.currentSelectedFcdaElement ? this.currentSelectedFcdaElement.closest("IED") ?? void 0 : void 0;
-  }
-  isSubscribed(extRefElement) {
-    return extRefElement.hasAttribute("iedName") && extRefElement.hasAttribute("ldInst") && extRefElement.hasAttribute("prefix") && extRefElement.hasAttribute("lnClass") && extRefElement.hasAttribute("lnInst") && extRefElement.hasAttribute("doName") && extRefElement.hasAttribute("daName");
   }
   unsupportedExtRefElement(extRefElement) {
     return extRefElement.hasAttribute("pLN") || extRefElement.hasAttribute("pDO") || extRefElement.hasAttribute("pDA") || extRefElement.hasAttribute("pServT");
@@ -99,6 +87,12 @@ export let ExtRefLaterBindingList = class extends LitElement {
       }
     };
   }
+  getSubscribedExtRefElements() {
+    return getSubscribedExtRefElements(this.doc.getRootNode(), this.controlTag, this.currentSelectedFcdaElement, this.currentSelectedControlElement, true);
+  }
+  getAvailableExtRefElements() {
+    return getExtRefElements(this.doc.getRootNode(), this.currentSelectedFcdaElement, true).filter((extRefElement) => !isSubscribed(extRefElement));
+  }
   renderTitle() {
     return html`<h1>
       ${translate(`subscription.laterBinding.extRefList.title`)}
@@ -121,6 +115,7 @@ export let ExtRefLaterBindingList = class extends LitElement {
       const replaceAction = this.unsubscribe(extRefElement);
       if (replaceAction) {
         this.dispatchEvent(newActionEvent(replaceAction));
+        this.dispatchEvent(newSubscriptionChangedEvent(this.currentSelectedControlElement, this.currentSelectedFcdaElement));
       }
     }}
               value="${identity(extRefElement)}"
@@ -156,6 +151,7 @@ export let ExtRefLaterBindingList = class extends LitElement {
       const replaceAction = this.subscribe(extRefElement);
       if (replaceAction) {
         this.dispatchEvent(newActionEvent(replaceAction));
+        this.dispatchEvent(newSubscriptionChangedEvent(this.currentSelectedControlElement, this.currentSelectedFcdaElement));
       }
     }}
               value="${identity(extRefElement)}"

@@ -44,12 +44,20 @@ export function newIEDSelectEvent(ied, eventInitDict) {
     detail: {ied, ...eventInitDict?.detail}
   });
 }
-export function newFcdaSelectEvent(controlElement, fcda, eventInitDict) {
+export function newFcdaSelectEvent(control, fcda, eventInitDict) {
   return new CustomEvent("fcda-select", {
     bubbles: true,
     composed: true,
     ...eventInitDict,
-    detail: {controlElement, fcda, ...eventInitDict?.detail}
+    detail: {control, fcda, ...eventInitDict?.detail}
+  });
+}
+export function newSubscriptionChangedEvent(control, fcda, eventInitDict) {
+  return new CustomEvent("subscription-changed", {
+    bubbles: true,
+    composed: true,
+    ...eventInitDict,
+    detail: {control, fcda, ...eventInitDict?.detail}
   });
 }
 export function getFcdaTitleValue(fcdaElement) {

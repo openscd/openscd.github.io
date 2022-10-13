@@ -23,16 +23,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">96.33% </span>
+                <span class="strong">96.91% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>315/327</span>
+                <span class='fraction'>314/324</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">86.11% </span>
+                <span class="strong">84.37% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>31/36</span>
+                <span class='fraction'>27/32</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">96.33% </span>
+                <span class="strong">96.91% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>315/327</span>
+                <span class='fraction'>314/324</span>
             </div>
         
             
@@ -387,10 +387,7 @@
 <a name='L322'></a><a href='#L322'>322</a>
 <a name='L323'></a><a href='#L323'>323</a>
 <a name='L324'></a><a href='#L324'>324</a>
-<a name='L325'></a><a href='#L325'>325</a>
-<a name='L326'></a><a href='#L326'>326</a>
-<a name='L327'></a><a href='#L327'>327</a>
-<a name='L328'></a><a href='#L328'>328</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">5x</span>
+<a name='L325'></a><a href='#L325'>325</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-yes">5x</span>
@@ -460,16 +457,6 @@
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-yes">5x</span>
@@ -484,13 +471,10 @@
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
@@ -500,8 +484,6 @@
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-yes">5x</span>
@@ -632,6 +614,12 @@
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
@@ -678,6 +666,12 @@
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
@@ -743,10 +737,10 @@ import {
   createExtRefElement,
   existExtRef,
   FcdaSelectEvent,
-  serviceTypes,
+  newSubscriptionChangedEvent,
   styles,
 } from '../foundation.js';
-import { isSubscribedTo } from './foundation.js';
+import { getSubscribedExtRefElements } from './foundation.js';
 import {
   emptyInputsDeleteActions,
   getFcdaReferences,
@@ -786,54 +780,39 @@ export class ExtRefLnBindingList extends LitElement {
     if (this.doc) {
       return Array.from(
         this.doc.querySelectorAll('LDevice &gt; LN0, LDevice &gt; LN')
-      )
-        .filter(element =&gt; element.closest('IED') !== this.currentIedElement)
-        .sort((a, b) =&gt;
-          (
-            identity(a.closest('LDevice')) +
-            ' ' +
-            this.buildLNTitle(a)
-          ).localeCompare(
-            identity(b.closest('LDevice')) + ' ' + this.buildLNTitle(<span class="branch-0 cbranch-no" title="branch not covered" >b)</span>
-<span class="cstat-no" title="statement not covered" >          )</span>
-<span class="cstat-no" title="statement not covered" >        );</span>
+      ).filter(element =&gt; element.closest('IED') !== this.<span class="branch-0 cbranch-no" title="branch not covered" >currentIedElement);</span>
 <span class="cstat-no" title="statement not covered" >    }</span>
 <span class="cstat-no" title="statement not covered" >    return [];</span>
   }
 &nbsp;
   private getSubscribedLNElements(): Element[] {
-    return this.getLNElements().filter(element =&gt;
-      Array.from(element.querySelectorAll('ExtRef'))
-        .filter(extRefElement =&gt; extRefElement.getAttribute('intAddr') === null)
-        .some(extRefElement =&gt;
-          isSubscribedTo(
-            serviceTypes[this.controlTag],
-            this.currentIedElement,
-            this.currentSelectedControlElement,
-            this.currentSelectedFcdaElement,
-            extRefElement
-          )
-        )
+    return this.getLNElements().filter(
+      element =&gt;
+        getSubscribedExtRefElements(
+          element,
+          this.controlTag,
+          this.currentSelectedFcdaElement,
+          this.currentSelectedControlElement,
+          false
+        ).length &gt; 0
     );
   }
 &nbsp;
   private getAvailableLNElements(): Element[] {
     return this.getLNElements().filter(
       element =&gt;
-        !Array.from(element.querySelectorAll('ExtRef')).some(extRefElement =&gt;
-          isSubscribedTo(
-            serviceTypes[this.controlTag],
-            this.currentIedElement,
-            this.currentSelectedControlElement,
-            this.currentSelectedFcdaElement,
-            extRefElement
-          )
-        )
+        getSubscribedExtRefElements(
+          element,
+          this.controlTag,
+          this.currentSelectedFcdaElement,
+          this.currentSelectedControlElement,
+          false
+        ).length == 0
     );
   }
 &nbsp;
   private async onFcdaSelectEvent(event: FcdaSelectEvent) {
-    this.currentSelectedControlElement = event.detail.controlElement;
+    this.currentSelectedControlElement = event.detail.control;
     this.currentSelectedFcdaElement = event.detail.fcda;
 &nbsp;
     // Retrieve the IED Element to which the FCDA belongs.
@@ -959,6 +938,12 @@ export class ExtRefLnBindingList extends LitElement {
                 const replaceAction = this.unsubscribe(lnElement);
                 if (replaceAction) {
                   this.dispatchEvent(newActionEvent(replaceAction));
+                  this.dispatchEvent(
+                    newSubscriptionChangedEvent(
+                      this.currentSelectedControlElement,
+                      this.currentSelectedFcdaElement
+                    )
+                  );
                 }
               }}
             &gt;
@@ -1005,6 +990,12 @@ export class ExtRefLnBindingList extends LitElement {
                 const replaceAction = this.subscribe(lnElement);
                 if (replaceAction) {
                   this.dispatchEvent(newActionEvent(replaceAction));
+                  this.dispatchEvent(
+                    newSubscriptionChangedEvent(
+                      this.currentSelectedControlElement,
+                      this.currentSelectedFcdaElement
+                    )
+                  );
                 }
               }}
             &gt;
@@ -1051,7 +1042,7 @@ export class ExtRefLnBindingList extends LitElement {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener">istanbul</a>
-                at Thu Oct 13 2022 14:41:28 GMT+0000 (Coordinated Universal Time)
+                at Thu Oct 13 2022 15:43:53 GMT+0000 (Coordinated Universal Time)
             </div>
         </div>
         <script src="../../../../prettify.js"></script>

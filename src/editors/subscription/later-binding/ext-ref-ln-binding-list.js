@@ -27,10 +27,10 @@ import {
   canCreateValidExtRef,
   createExtRefElement,
   existExtRef,
-  serviceTypes,
+  newSubscriptionChangedEvent,
   styles
 } from "../foundation.js";
-import {isSubscribedTo} from "./foundation.js";
+import {getSubscribedExtRefElements} from "./foundation.js";
 import {
   emptyInputsDeleteActions,
   getFcdaReferences
@@ -46,18 +46,18 @@ export let ExtRefLnBindingList = class extends LitElement {
   }
   getLNElements() {
     if (this.doc) {
-      return Array.from(this.doc.querySelectorAll("LDevice > LN0, LDevice > LN")).filter((element) => element.closest("IED") !== this.currentIedElement).sort((a, b) => (identity(a.closest("LDevice")) + " " + this.buildLNTitle(a)).localeCompare(identity(b.closest("LDevice")) + " " + this.buildLNTitle(b)));
+      return Array.from(this.doc.querySelectorAll("LDevice > LN0, LDevice > LN")).filter((element) => element.closest("IED") !== this.currentIedElement);
     }
     return [];
   }
   getSubscribedLNElements() {
-    return this.getLNElements().filter((element) => Array.from(element.querySelectorAll("ExtRef")).filter((extRefElement) => extRefElement.getAttribute("intAddr") === null).some((extRefElement) => isSubscribedTo(serviceTypes[this.controlTag], this.currentIedElement, this.currentSelectedControlElement, this.currentSelectedFcdaElement, extRefElement)));
+    return this.getLNElements().filter((element) => getSubscribedExtRefElements(element, this.controlTag, this.currentSelectedFcdaElement, this.currentSelectedControlElement, false).length > 0);
   }
   getAvailableLNElements() {
-    return this.getLNElements().filter((element) => !Array.from(element.querySelectorAll("ExtRef")).some((extRefElement) => isSubscribedTo(serviceTypes[this.controlTag], this.currentIedElement, this.currentSelectedControlElement, this.currentSelectedFcdaElement, extRefElement)));
+    return this.getLNElements().filter((element) => getSubscribedExtRefElements(element, this.controlTag, this.currentSelectedFcdaElement, this.currentSelectedControlElement, false).length == 0);
   }
   async onFcdaSelectEvent(event) {
-    this.currentSelectedControlElement = event.detail.controlElement;
+    this.currentSelectedControlElement = event.detail.control;
     this.currentSelectedFcdaElement = event.detail.fcda;
     this.currentIedElement = this.currentSelectedFcdaElement ? this.currentSelectedFcdaElement.closest("IED") ?? void 0 : void 0;
   }
@@ -126,6 +126,7 @@ export let ExtRefLnBindingList = class extends LitElement {
       const replaceAction = this.unsubscribe(lnElement);
       if (replaceAction) {
         this.dispatchEvent(newActionEvent(replaceAction));
+        this.dispatchEvent(newSubscriptionChangedEvent(this.currentSelectedControlElement, this.currentSelectedFcdaElement));
       }
     }}
             >
@@ -160,6 +161,7 @@ export let ExtRefLnBindingList = class extends LitElement {
       const replaceAction = this.subscribe(lnElement);
       if (replaceAction) {
         this.dispatchEvent(newActionEvent(replaceAction));
+        this.dispatchEvent(newSubscriptionChangedEvent(this.currentSelectedControlElement, this.currentSelectedFcdaElement));
       }
     }}
             >
