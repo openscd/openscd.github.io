@@ -17,10 +17,24 @@ import {
   property,
   state
 } from "../../../../_snowpack/pkg/lit-element.js";
-import {translate} from "../../../../_snowpack/pkg/lit-translate.js";
-import {identity} from "../../../foundation.js";
-import {serviceTypes, styles} from "../foundation.js";
+import {get, translate} from "../../../../_snowpack/pkg/lit-translate.js";
+import {
+  createElement,
+  identity,
+  newActionEvent
+} from "../../../foundation.js";
+import {
+  canCreateValidExtRef,
+  createExtRefElement,
+  existExtRef,
+  serviceTypes,
+  styles
+} from "../foundation.js";
 import {isSubscribedTo} from "./foundation.js";
+import {
+  emptyInputsDeleteActions,
+  getFcdaReferences
+} from "../../../foundation/ied.js";
 export let ExtRefLnBindingList = class extends LitElement {
   constructor() {
     super();
@@ -46,6 +60,39 @@ export let ExtRefLnBindingList = class extends LitElement {
     this.currentSelectedControlElement = event.detail.controlElement;
     this.currentSelectedFcdaElement = event.detail.fcda;
     this.currentIedElement = this.currentSelectedFcdaElement ? this.currentSelectedFcdaElement.closest("IED") ?? void 0 : void 0;
+  }
+  subscribe(lnElement) {
+    if (!this.currentIedElement || !this.currentSelectedFcdaElement || !this.currentSelectedControlElement) {
+      return null;
+    }
+    const actions = [];
+    let inputsElement = lnElement.querySelector(":scope > Inputs");
+    if (!inputsElement) {
+      inputsElement = createElement(lnElement.ownerDocument, "Inputs", {});
+      actions.push({new: {parent: lnElement, element: inputsElement}});
+    }
+    if (!existExtRef(inputsElement, this.currentSelectedFcdaElement) && canCreateValidExtRef(this.currentSelectedFcdaElement, this.currentSelectedControlElement)) {
+      const extRef = createExtRefElement(this.currentSelectedControlElement, this.currentSelectedFcdaElement);
+      actions.push({new: {parent: inputsElement, element: extRef}});
+    }
+    const title = get("subscription.connect");
+    return {title, actions};
+  }
+  unsubscribe(lnElement) {
+    if (!this.currentIedElement || !this.currentSelectedFcdaElement || !this.currentSelectedControlElement) {
+      return null;
+    }
+    const actions = [];
+    const inputElement = lnElement.querySelector(":scope > Inputs");
+    const extRefElement = inputElement.querySelector(`ExtRef[iedName=${this.currentIedElement.getAttribute("name")}]${getFcdaReferences(this.currentSelectedFcdaElement)}`);
+    if (extRefElement) {
+      actions.push({old: {parent: inputElement, element: extRefElement}});
+    }
+    actions.push(...emptyInputsDeleteActions(actions));
+    return {
+      title: get("subscription.disconnect"),
+      actions
+    };
   }
   bindingNotSupported(lnElement) {
     const iedElement = lnElement.closest("IED");
@@ -75,6 +122,12 @@ export let ExtRefLnBindingList = class extends LitElement {
               ?disabled=${this.bindingNotSupported(lnElement)}
               twoline
               value="${identity(lnElement)}"
+              @click=${() => {
+      const replaceAction = this.unsubscribe(lnElement);
+      if (replaceAction) {
+        this.dispatchEvent(newActionEvent(replaceAction));
+      }
+    }}
             >
               <span>${this.buildLNTitle(lnElement)}</span>
               <span slot="secondary">
@@ -103,6 +156,12 @@ export let ExtRefLnBindingList = class extends LitElement {
               ?disabled=${this.bindingNotSupported(lnElement)}
               twoline
               value="${identity(lnElement)}"
+              @click=${() => {
+      const replaceAction = this.subscribe(lnElement);
+      if (replaceAction) {
+        this.dispatchEvent(newActionEvent(replaceAction));
+      }
+    }}
             >
               <span>${this.buildLNTitle(lnElement)}</span>
               <span slot="secondary">

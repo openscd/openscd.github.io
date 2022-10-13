@@ -326,6 +326,8 @@ export const en = {
   },
   subscription: {
     none: "None",
+    connect: "Connect data attribute",
+    disconnect: "Disconnect data attribute",
     subscriber: {
       subscribed: "Subscribed",
       availableToSubscribe: "Available to subscribe",

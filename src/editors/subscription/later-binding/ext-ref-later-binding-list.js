@@ -65,6 +65,9 @@ export let ExtRefLaterBindingList = class extends LitElement {
     return extRefElement.hasAttribute("pLN") || extRefElement.hasAttribute("pDO") || extRefElement.hasAttribute("pDA") || extRefElement.hasAttribute("pServT");
   }
   unsubscribe(extRefElement) {
+    if (!this.currentIedElement || !this.currentSelectedFcdaElement || !this.currentSelectedControlElement) {
+      return null;
+    }
     const clonedExtRefElement = cloneElement(extRefElement, {
       iedName: null,
       ldInst: null,
@@ -115,7 +118,10 @@ export let ExtRefLaterBindingList = class extends LitElement {
               graphic="large"
               twoline
               @click=${() => {
-      this.dispatchEvent(newActionEvent(this.unsubscribe(extRefElement)));
+      const replaceAction = this.unsubscribe(extRefElement);
+      if (replaceAction) {
+        this.dispatchEvent(newActionEvent(replaceAction));
+      }
     }}
               value="${identity(extRefElement)}"
             >

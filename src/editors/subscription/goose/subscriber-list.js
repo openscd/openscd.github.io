@@ -15,7 +15,7 @@ import {
   html,
   property
 } from "../../../../_snowpack/pkg/lit-element.js";
-import {translate} from "../../../../_snowpack/pkg/lit-translate.js";
+import {get, translate} from "../../../../_snowpack/pkg/lit-translate.js";
 import "../../../../_snowpack/pkg/@material/mwc-icon.js";
 import "../../../../_snowpack/pkg/@material/mwc-list.js";
 import "../../../../_snowpack/pkg/@material/mwc-list/mwc-list-item.js";
@@ -174,7 +174,7 @@ export let SubscriberList = class extends SubscriberListContainer {
           inputsElement?.appendChild(extRef);
       }
     });
-    const title = "Connect";
+    const title = get("subscription.connect");
     if (inputsElement.parentElement) {
       this.dispatchEvent(newActionEvent({title, actions}));
     } else {
@@ -195,7 +195,7 @@ export let SubscriberList = class extends SubscriberListContainer {
     });
     actions.push(...emptyInputsDeleteActions(actions));
     this.dispatchEvent(newActionEvent({
-      title: "Disconnect",
+      title: get("subscription.disconnect"),
       actions
     }));
   }
