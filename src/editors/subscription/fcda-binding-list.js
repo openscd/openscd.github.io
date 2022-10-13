@@ -16,24 +16,23 @@ import {
   LitElement,
   property,
   state
-} from "../../../../_snowpack/pkg/lit-element.js";
-import {nothing} from "../../../../_snowpack/pkg/lit-html.js";
-import {translate} from "../../../../_snowpack/pkg/lit-translate.js";
-import "../../../../_snowpack/pkg/@material/mwc-icon.js";
-import "../../../../_snowpack/pkg/@material/mwc-list.js";
-import "../../../../_snowpack/pkg/@material/mwc-list/mwc-list-item.js";
+} from "../../../_snowpack/pkg/lit-element.js";
+import {nothing} from "../../../_snowpack/pkg/lit-html.js";
+import {translate} from "../../../_snowpack/pkg/lit-translate.js";
+import "../../../_snowpack/pkg/@material/mwc-icon.js";
+import "../../../_snowpack/pkg/@material/mwc-list.js";
+import "../../../_snowpack/pkg/@material/mwc-list/mwc-list-item.js";
 import {
   compareNames,
   getDescriptionAttribute,
   getNameAttribute,
   identity,
   newWizardEvent
-} from "../../../foundation.js";
-import {gooseIcon, smvIcon} from "../../../icons/icons.js";
-import {wizards} from "../../../wizards/wizard-library.js";
-import {styles} from "../foundation.js";
-import {getFcdaTitleValue, newFcdaSelectEvent} from "./foundation.js";
-export let FCDALaterBindingList = class extends LitElement {
+} from "../../foundation.js";
+import {gooseIcon, smvIcon} from "../../icons/icons.js";
+import {wizards} from "../../wizards/wizard-library.js";
+import {getFcdaTitleValue, newFcdaSelectEvent, styles} from "./foundation.js";
+export let FcdaBindingList = class extends LitElement {
   constructor() {
     super();
     this.iconControlLookup = {
@@ -97,7 +96,7 @@ export let FCDALaterBindingList = class extends LitElement {
     const controlElements = this.getControlElements();
     return html` <section tabindex="0">
       ${controlElements.length > 0 ? html`<h1>
-              ${translate(`subscription.laterBinding.${this.controlTag}.controlBlockList.title`)}
+              ${translate(`subscription.${this.controlTag}.controlBlockList.title`)}
             </h1>
             <filtered-list activatable>
               ${controlElements.map((controlElement) => {
@@ -130,12 +129,12 @@ export let FCDALaterBindingList = class extends LitElement {
                 `;
     })}
             </filtered-list>` : html`<h1>
-            ${translate(`subscription.laterBinding.${this.controlTag}.controlBlockList.noControlBlockFound`)}
+            ${translate(`subscription.${this.controlTag}.controlBlockList.noControlBlockFound`)}
           </h1>`}
     </section>`;
   }
 };
-FCDALaterBindingList.styles = css`
+FcdaBindingList.styles = css`
     ${styles}
 
     mwc-list-item.hidden[noninteractive] + li[divider] {
@@ -156,19 +155,16 @@ FCDALaterBindingList.styles = css`
   `;
 __decorate([
   property({attribute: false})
-], FCDALaterBindingList.prototype, "doc", 2);
+], FcdaBindingList.prototype, "doc", 2);
 __decorate([
   property()
-], FCDALaterBindingList.prototype, "controlTag", 2);
+], FcdaBindingList.prototype, "controlTag", 2);
 __decorate([
   state()
-], FCDALaterBindingList.prototype, "selectedControlElement", 2);
+], FcdaBindingList.prototype, "selectedControlElement", 2);
 __decorate([
   state()
-], FCDALaterBindingList.prototype, "selectedFcdaElement", 2);
-__decorate([
-  property({attribute: false})
-], FCDALaterBindingList.prototype, "iconControlLookup", 2);
-FCDALaterBindingList = __decorate([
-  customElement("fcda-later-binding-list")
-], FCDALaterBindingList);
+], FcdaBindingList.prototype, "selectedFcdaElement", 2);
+FcdaBindingList = __decorate([
+  customElement("fcda-binding-list")
+], FcdaBindingList);

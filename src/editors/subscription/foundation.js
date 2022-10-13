@@ -44,6 +44,17 @@ export function newIEDSelectEvent(ied, eventInitDict) {
     detail: {ied, ...eventInitDict?.detail}
   });
 }
+export function newFcdaSelectEvent(controlElement, fcda, eventInitDict) {
+  return new CustomEvent("fcda-select", {
+    bubbles: true,
+    composed: true,
+    ...eventInitDict,
+    detail: {controlElement, fcda, ...eventInitDict?.detail}
+  });
+}
+export function getFcdaTitleValue(fcdaElement) {
+  return `${fcdaElement.getAttribute("doName")}${fcdaElement.hasAttribute("doName") && fcdaElement.hasAttribute("daName") ? `.` : ``}${fcdaElement.getAttribute("daName")}`;
+}
 export function existExtRef(parentInputs, fcda) {
   const iedName = fcda.closest("IED")?.getAttribute("name");
   if (!iedName)

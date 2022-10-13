@@ -10,18 +10,18 @@ var __decorate = (decorators, target, key, kind) => {
   return result;
 };
 import {css, html, LitElement, property} from "../../_snowpack/pkg/lit-element.js";
-import "./subscription/later-binding/fcda-later-binding-list.js";
+import "./subscription/fcda-binding-list.js";
 import "./subscription/later-binding/ext-ref-later-binding-list.js";
 export default class SMVSubscribeLaterBindingPlugin extends LitElement {
   render() {
     return html`<div>
       <div class="container">
-        <fcda-later-binding-list
+        <fcda-binding-list
           class="column"
           .doc=${this.doc}
           controlTag="SampledValueControl"
         >
-        </fcda-later-binding-list>
+        </fcda-binding-list>
         <extref-later-binding-list
           class="column"
           .doc=${this.doc}

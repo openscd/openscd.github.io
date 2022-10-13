@@ -11,6 +11,7 @@ export default {
     "**/.eslintrc.cjs",
     "**/.git/**/*",
     "**/.gitignore",
+    "**/.idea/**/*",
     "**/.travis.yml",
     "**/package*",
     "**/tsconfig.json",

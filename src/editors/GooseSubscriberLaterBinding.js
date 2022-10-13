@@ -9,19 +9,19 @@ var __decorate = (decorators, target, key, kind) => {
     __defProp(target, key, result);
   return result;
 };
-import {LitElement, property, html, css} from "../../_snowpack/pkg/lit-element.js";
-import "./subscription/later-binding/fcda-later-binding-list.js";
+import {css, html, LitElement, property} from "../../_snowpack/pkg/lit-element.js";
+import "./subscription/fcda-binding-list.js";
 import "./subscription/later-binding/ext-ref-later-binding-list.js";
 export default class GooseSubscribeLaterBindingPlugin extends LitElement {
   render() {
     return html`<div>
       <div class="container">
-        <fcda-later-binding-list
+        <fcda-binding-list
           class="column"
           .doc=${this.doc}
           controlTag="GSEControl"
         >
-        </fcda-later-binding-list>
+        </fcda-binding-list>
         <extref-later-binding-list
           class="column"
           controlTag="GSEControl"

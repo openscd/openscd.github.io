@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for src/editors/GooseControlSubscription.ts</title>
+    <title>Code coverage report for src/editors/SMVSubscriberMessageBinding.ts</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../../prettify.css" />
     <link rel="stylesheet" href="../../base.css" />
@@ -19,13 +19,13 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../../index.html">All files</a> / <a href="index.html">src/editors</a> GooseControlSubscription.ts</h1>
+        <h1><a href="../../index.html">All files</a> / <a href="index.html">src/editors</a> SMVSubscriberMessageBinding.ts</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">99.06% </span>
+                <span class="strong">99.05% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>106/107</span>
+                <span class='fraction'>105/106</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">99.06% </span>
+                <span class="strong">99.05% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>106/107</span>
+                <span class='fraction'>105/106</span>
             </div>
         
             
@@ -169,10 +169,7 @@
 <a name='L104'></a><a href='#L104'>104</a>
 <a name='L105'></a><a href='#L105'>105</a>
 <a name='L106'></a><a href='#L106'>106</a>
-<a name='L107'></a><a href='#L107'>107</a>
-<a name='L108'></a><a href='#L108'>108</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<a name='L107'></a><a href='#L107'>107</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -277,39 +274,38 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import {
-  LitElement,
-  html,
-  TemplateResult,
-  property,
   css,
+  html,
+  LitElement,
+  property,
   query,
+  TemplateResult,
 } from 'lit-element';
 import { translate } from 'lit-translate';
 &nbsp;
-import '@material/mwc-radio';
-import '@material/mwc-formfield';
-import { RadioListItem } from '@material/mwc-list/mwc-radio-list-item';
+import { RadioListItem } from '@material/mwc-list/mwc-radio-list-item.js';
 &nbsp;
-import './subscription/goose/subscriber-list.js';
-import './subscription/goose/goose-list.js';
+import './subscription/sampledvalues/subscriber-list.js';
+import './subscription/sampledvalues/smv-list.js';
 import './subscription/ied-list.js';
 import { newViewEvent, View, ViewEvent } from './subscription/foundation.js';
 &nbsp;
 /** Defining view outside the class, which makes it persistent. */
 let view: View = View.PUBLISHER;
 &nbsp;
-/** An editor [[`plugin`]] for subscribing IEDs to GOOSE messages. */
-export default class GooseControlSubscriptionPlugin extends LitElement {
+/** An editor [[`plugin`]] for subscribing IEDs to Sampled Values. */
+export default class SMVSubscriberMessageBindingPlugin extends LitElement {
   /** The document being edited as provided to plugins by [[`OpenSCD`]]. */
   @property()
   doc!: XMLDocument;
 &nbsp;
-  @query('#goosePublisherView')
-  goosePublisherView!: RadioListItem;
+  @query('#smvPublisherView')
+  smvPublisherView!: RadioListItem;
 &nbsp;
-  @query('#gooseSubscriberView')
-  gooseSubscriberView!: RadioListItem;
+  @query('#smvSubscriberView')
+  smvSubscriberView!: RadioListItem;
 &nbsp;
   @query('div[class="container"]')
   listDiv!: Element;
@@ -324,28 +320,28 @@ export default class GooseControlSubscriptionPlugin extends LitElement {
 &nbsp;
   firstUpdated(): void {
     view == View.PUBLISHER
-      ? this.goosePublisherView.setAttribute('checked', '')
-      : this.gooseSubscriberView.setAttribute('checked', '');
+      ? this.smvPublisherView.setAttribute('checked', '')
+      : this.smvSubscriberView.setAttribute('checked', '');
   }
 &nbsp;
   render(): TemplateResult {
     return html`&lt;div&gt;
       &lt;mwc-formfield
-        label="${translate('subscription.goose.view.publisherView')}"
+        label="${translate('subscription.smv.view.publisherView')}"
       &gt;
         &lt;mwc-radio
-          id="goosePublisherView"
+          id="smvPublisherView"
           name="view"
-          value="goose"
+          value="smv"
           @click=${() =&gt;
 <span class="cstat-no" title="statement not covered" >            this.listDiv.dispatchEvent(newViewEvent(View.PUBLISHER))}</span>
         &gt;&lt;/mwc-radio&gt;
       &lt;/mwc-formfield&gt;
       &lt;mwc-formfield
-        label="${translate('subscription.goose.view.subscriberView')}"
+        label="${translate('subscription.smv.view.subscriberView')}"
       &gt;
         &lt;mwc-radio
-          id="gooseSubscriberView"
+          id="smvSubscriberView"
           name="view"
           value="ied"
           @click=${() =&gt;
@@ -354,12 +350,13 @@ export default class GooseControlSubscriptionPlugin extends LitElement {
       &lt;/mwc-formfield&gt;
       &lt;div class="container"&gt;
         ${view == View.PUBLISHER
-          ? html`&lt;goose-list class="row" .doc=${this.doc}&gt;&lt;/goose-list&gt;`
-          : html`&lt;ied-list class="row" .doc=${this.doc} serviceType="goose"&gt;&lt;/ied-list&gt;`}
-        &lt;subscriber-list-goose
-          class="row"
-          .doc=${this.doc}
-        &gt;&lt;/subscriber-list-goose&gt;
+          ? html`&lt;smv-list class="row" .doc=${this.doc}&gt;&lt;/smv-list&gt;`
+          : html`&lt;ied-list
+              class="row"
+              .doc=${this.doc}
+              serviceType="smv"
+            &gt;&lt;/ied-list&gt;`}
+        &lt;subscriber-list-smv class="row" .doc=${this.doc}&gt;&lt;/subscriber-list-smv&gt;
       &lt;/div&gt;
     &lt;/div&gt;`;
   }
@@ -391,7 +388,7 @@ export default class GooseControlSubscriptionPlugin extends LitElement {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener">istanbul</a>
-                at Wed Oct 05 2022 12:52:26 GMT+0000 (Coordinated Universal Time)
+                at Thu Oct 13 2022 09:29:57 GMT+0000 (Coordinated Universal Time)
             </div>
         </div>
         <script src="../../prettify.js"></script>

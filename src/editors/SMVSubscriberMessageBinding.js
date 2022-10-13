@@ -10,10 +10,10 @@ var __decorate = (decorators, target, key, kind) => {
   return result;
 };
 import {
-  LitElement,
-  html,
-  property,
   css,
+  html,
+  LitElement,
+  property,
   query
 } from "../../_snowpack/pkg/lit-element.js";
 import {translate} from "../../_snowpack/pkg/lit-translate.js";
@@ -22,7 +22,7 @@ import "./subscription/sampledvalues/smv-list.js";
 import "./subscription/ied-list.js";
 import {newViewEvent, View} from "./subscription/foundation.js";
 let view = View.PUBLISHER;
-export default class SampledValuesSubscriberPlugin extends LitElement {
+export default class SMVSubscriberMessageBindingPlugin extends LitElement {
   constructor() {
     super();
     this.addEventListener("view", (evt) => {
@@ -56,13 +56,17 @@ export default class SampledValuesSubscriberPlugin extends LitElement {
         ></mwc-radio>
       </mwc-formfield>
       <div class="container">
-        ${view == View.PUBLISHER ? html`<smv-list class="row" .doc=${this.doc}></smv-list>` : html`<ied-list class="row" .doc=${this.doc} serviceType="smv"></ied-list>`}
+        ${view == View.PUBLISHER ? html`<smv-list class="row" .doc=${this.doc}></smv-list>` : html`<ied-list
+              class="row"
+              .doc=${this.doc}
+              serviceType="smv"
+            ></ied-list>`}
         <subscriber-list-smv class="row" .doc=${this.doc}></subscriber-list-smv>
       </div>
     </div>`;
   }
 }
-SampledValuesSubscriberPlugin.styles = css`
+SMVSubscriberMessageBindingPlugin.styles = css`
     :host {
       width: 100vw;
     }
@@ -83,13 +87,13 @@ SampledValuesSubscriberPlugin.styles = css`
   `;
 __decorate([
   property()
-], SampledValuesSubscriberPlugin.prototype, "doc", 2);
+], SMVSubscriberMessageBindingPlugin.prototype, "doc", 2);
 __decorate([
   query("#smvPublisherView")
-], SampledValuesSubscriberPlugin.prototype, "smvPublisherView", 2);
+], SMVSubscriberMessageBindingPlugin.prototype, "smvPublisherView", 2);
 __decorate([
   query("#smvSubscriberView")
-], SampledValuesSubscriberPlugin.prototype, "smvSubscriberView", 2);
+], SMVSubscriberMessageBindingPlugin.prototype, "smvSubscriberView", 2);
 __decorate([
   query('div[class="container"]')
-], SampledValuesSubscriberPlugin.prototype, "listDiv", 2);
+], SMVSubscriberMessageBindingPlugin.prototype, "listDiv", 2);

@@ -10,10 +10,10 @@ var __decorate = (decorators, target, key, kind) => {
   return result;
 };
 import {
-  LitElement,
-  html,
-  property,
   css,
+  html,
+  LitElement,
+  property,
   query
 } from "../../_snowpack/pkg/lit-element.js";
 import {translate} from "../../_snowpack/pkg/lit-translate.js";
@@ -24,7 +24,7 @@ import "./subscription/goose/goose-list.js";
 import "./subscription/ied-list.js";
 import {newViewEvent, View} from "./subscription/foundation.js";
 let view = View.PUBLISHER;
-export default class GooseControlSubscriptionPlugin extends LitElement {
+export default class GooseSubscriberMessageBindingPlugin extends LitElement {
   constructor() {
     super();
     this.addEventListener("view", (evt) => {
@@ -58,7 +58,11 @@ export default class GooseControlSubscriptionPlugin extends LitElement {
         ></mwc-radio>
       </mwc-formfield>
       <div class="container">
-        ${view == View.PUBLISHER ? html`<goose-list class="row" .doc=${this.doc}></goose-list>` : html`<ied-list class="row" .doc=${this.doc} serviceType="goose"></ied-list>`}
+        ${view == View.PUBLISHER ? html`<goose-list class="row" .doc=${this.doc}></goose-list>` : html`<ied-list
+              class="row"
+              .doc=${this.doc}
+              serviceType="goose"
+            ></ied-list>`}
         <subscriber-list-goose
           class="row"
           .doc=${this.doc}
@@ -67,7 +71,7 @@ export default class GooseControlSubscriptionPlugin extends LitElement {
     </div>`;
   }
 }
-GooseControlSubscriptionPlugin.styles = css`
+GooseSubscriberMessageBindingPlugin.styles = css`
     :host {
       width: 100vw;
     }
@@ -88,13 +92,13 @@ GooseControlSubscriptionPlugin.styles = css`
   `;
 __decorate([
   property()
-], GooseControlSubscriptionPlugin.prototype, "doc", 2);
+], GooseSubscriberMessageBindingPlugin.prototype, "doc", 2);
 __decorate([
   query("#goosePublisherView")
-], GooseControlSubscriptionPlugin.prototype, "goosePublisherView", 2);
+], GooseSubscriberMessageBindingPlugin.prototype, "goosePublisherView", 2);
 __decorate([
   query("#gooseSubscriberView")
-], GooseControlSubscriptionPlugin.prototype, "gooseSubscriberView", 2);
+], GooseSubscriberMessageBindingPlugin.prototype, "gooseSubscriberView", 2);
 __decorate([
   query('div[class="container"]')
-], GooseControlSubscriptionPlugin.prototype, "listDiv", 2);
+], GooseSubscriberMessageBindingPlugin.prototype, "listDiv", 2);
