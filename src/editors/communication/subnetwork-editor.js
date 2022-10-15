@@ -19,6 +19,8 @@ import {
 import {translate} from "../../../_snowpack/pkg/lit-translate.js";
 import "../../../_snowpack/pkg/@material/mwc-icon-button.js";
 import "./connectedap-editor.js";
+import "./gse-editor.js";
+import "./smv-editor.js";
 import {
   newWizardEvent,
   newActionEvent,
@@ -63,12 +65,29 @@ export let SubNetworkEditor = class extends LitElement {
         }
       }));
   }
+  renderSmvEditors(iedName) {
+    return Array.from(this.element.closest("Communication")?.querySelectorAll(`ConnectedAP[iedName="${iedName}"] > SMV`) ?? []).map((smv) => html`<smv-editor
+        class="${smv.closest("SubNetwork") !== this.element ? "disabled" : ""}"
+        .doc=${this.doc}
+        .element=${smv}
+      ></smv-editor>`);
+  }
+  renderGseEditors(iedName) {
+    return Array.from(this.element.closest("Communication")?.querySelectorAll(`ConnectedAP[iedName="${iedName}"] > GSE`) ?? []).map((gse) => html`<gse-editor
+        class="${gse.closest("SubNetwork") !== this.element ? "disabled" : ""}"
+        .doc=${this.doc}
+        .element=${gse}
+      ></gse-editor>`);
+  }
+  renderConnectedApEditors(iedName) {
+    return Array.from(this.element.parentElement?.querySelectorAll(`:scope > SubNetwork > ConnectedAP[iedName="${iedName}"]`) ?? []).map((connectedAP) => html`<connectedap-editor
+          class="${connectedAP.parentElement !== this.element ? "disabled" : ""}"
+          .element=${connectedAP}
+        ></connectedap-editor>`);
+  }
   renderIEDs() {
     return Array.from(this.element.querySelectorAll(":scope > ConnectedAP")).map((connAP) => connAP.getAttribute("iedName")).filter((v, i, a) => a.indexOf(v) === i).sort(compareNames).map((iedName) => html` <action-pane id="iedSection" label="${iedName}">
-          ${Array.from(this.element.parentElement?.querySelectorAll(`:scope > SubNetwork > ConnectedAP[iedName="${iedName}"]`) ?? []).map((connectedAP) => html`<connectedap-editor
-                class="${connectedAP.parentElement !== this.element ? "disabled" : ""}"
-                .element=${connectedAP}
-              ></connectedap-editor>`)}
+          ${this.renderConnectedApEditors(iedName)}${this.renderGseEditors(iedName)}${this.renderSmvEditors(iedName)}
         </action-pane>`);
   }
   subNetworkSpecs() {
@@ -114,6 +133,14 @@ SubNetworkEditor.styles = css`
     }
 
     #iedSection:not(:focus):not(:focus-within) .disabled {
+      display: none;
+    }
+
+    #iedSection:not(:focus):not(:focus-within) gse-editor {
+      display: none;
+    }
+
+    #iedSection:not(:focus):not(:focus-within) smv-editor {
       display: none;
     }
 
