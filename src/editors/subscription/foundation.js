@@ -63,11 +63,29 @@ export function newSubscriptionChangedEvent(control, fcda, eventInitDict) {
 export function getFcdaTitleValue(fcdaElement) {
   return `${fcdaElement.getAttribute("doName")}${fcdaElement.hasAttribute("doName") && fcdaElement.hasAttribute("daName") ? `.` : ``}${fcdaElement.getAttribute("daName")}`;
 }
-export function existExtRef(parentInputs, fcda) {
+export function existExtRef(parentInputs, fcda, control) {
+  return !!getExtRef(parentInputs, fcda, control);
+}
+export function getExtRef(parentInputs, fcda, control) {
+  function createCriteria(attributeName, value) {
+    if (value) {
+      return `[${attributeName}="${value}"]`;
+    }
+    return "";
+  }
   const iedName = fcda.closest("IED")?.getAttribute("name");
-  if (!iedName)
-    return false;
-  return !!parentInputs.querySelector(`ExtRef[iedName=${iedName}]${getFcdaReferences(fcda)}`);
+  if (!iedName) {
+    return void 0;
+  }
+  let controlCriteria = "";
+  if (control && getSclSchemaVersion(fcda.ownerDocument) !== "2003") {
+    controlCriteria = `[serviceType="${serviceTypes[control.tagName]}"]`;
+    controlCriteria += createCriteria("srcLDInst", control.closest("LDevice")?.getAttribute("inst") ?? null);
+    controlCriteria += createCriteria("srcLNClass", control.closest("LN0,LN")?.getAttribute("lnClass") ?? null);
+    controlCriteria += createCriteria("srcLNInst", control.closest("LN0,LN")?.getAttribute("inst") ?? null);
+    controlCriteria += createCriteria("srcCBName", control.getAttribute("name") ?? null);
+  }
+  return Array.from(parentInputs.querySelectorAll(`ExtRef[iedName="${iedName}"]${getFcdaReferences(fcda)}${controlCriteria}`)).find((extRefElement) => !extRefElement.hasAttribute("intAddr"));
 }
 export function canCreateValidExtRef(fcda, controlBlock) {
   const iedName = fcda.closest("IED")?.getAttribute("name");
@@ -77,17 +95,17 @@ export function canCreateValidExtRef(fcda, controlBlock) {
     "lnInst",
     "doName"
   ].map((attr) => fcda.getAttribute(attr));
-  if (!iedName || !ldInst || !lnClass || !lnInst || !doName)
+  if (!iedName || !ldInst || !lnClass || !lnInst || !doName) {
     return false;
-  if (controlBlock === void 0)
+  }
+  if (getSclSchemaVersion(fcda.ownerDocument) === "2003" || controlBlock === void 0) {
     return true;
+  }
   const srcLDInst = controlBlock.closest("LDevice")?.getAttribute("inst");
   const srcLNClass = controlBlock.closest("LN0,LN")?.getAttribute("lnClass");
   const srcLNInst = controlBlock.closest("LN0,LN")?.getAttribute("inst");
   const srcCBName = controlBlock.getAttribute("name");
-  if (!srcLDInst || !srcLNClass || !srcCBName || typeof srcLNInst !== "string")
-    return false;
-  return true;
+  return !(!srcLDInst || !srcLNClass || !srcCBName || typeof srcLNInst !== "string");
 }
 export const serviceTypes = {
   ReportControl: "Report",

@@ -1,7 +1,4 @@
-import {
-  identity,
-  selector
-} from "../foundation.js";
+import {identity, selector} from "../foundation.js";
 const fcdaReferences = [
   "ldInst",
   "lnClass",
@@ -12,6 +9,10 @@ const fcdaReferences = [
 ];
 export function getFcdaReferences(elementContainingFcdaReferences) {
   return fcdaReferences.map((fcdaRef) => elementContainingFcdaReferences.getAttribute(fcdaRef) ? `[${fcdaRef}="${elementContainingFcdaReferences.getAttribute(fcdaRef)}"]` : "").join("");
+}
+const controlReferences = ["srcLDInst", "srcLNClass", "srcLNInst", "srcCBName"];
+export function getControlReferences(extRef) {
+  return controlReferences.map((controlRef) => extRef.getAttribute(controlRef) ? `[${controlRef}="${extRef.getAttribute(controlRef)}"]` : "").join("");
 }
 export function emptyInputsDeleteActions(extRefDeleteActions) {
   if (!extRefDeleteActions.length)
@@ -24,7 +25,7 @@ export function emptyInputsDeleteActions(extRefDeleteActions) {
     const id = identity(inputsElement);
     if (!inputsMap[id])
       inputsMap[id] = inputsElement.cloneNode(true);
-    const linkedExtRef = inputsMap[id].querySelector(`ExtRef[iedName=${extRef.getAttribute("iedName")}]${getFcdaReferences(extRef)}`);
+    const linkedExtRef = inputsMap[id].querySelector(`ExtRef${extRef.getAttribute("iedName") ? `[iedName="${extRef.getAttribute("iedName")}"]` : ""}${getFcdaReferences(extRef)}${extRef.getAttribute("serviceType") ? `[serviceType="${extRef.getAttribute("serviceType")}"]` : ""}${getControlReferences(extRef)}`);
     if (linkedExtRef)
       inputsMap[id].removeChild(linkedExtRef);
   }

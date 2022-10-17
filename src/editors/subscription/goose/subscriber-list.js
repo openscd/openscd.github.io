@@ -28,14 +28,12 @@ import {
 import {
   newGooseSubscriptionEvent
 } from "./foundation.js";
-import {
-  emptyInputsDeleteActions,
-  getFcdaReferences
-} from "../../../foundation/ied.js";
+import {emptyInputsDeleteActions} from "../../../foundation/ied.js";
 import {
   canCreateValidExtRef,
   createExtRefElement,
   existExtRef,
+  getExtRef,
   styles,
   SubscriberListContainer,
   SubscribeStatus,
@@ -77,7 +75,7 @@ export let SubscriberList = class extends SubscriberListContainer {
         return;
       dataSet.querySelectorAll("FCDA").forEach((fcda) => {
         subscribedInputs.forEach((inputs) => {
-          if (inputs.querySelector(`ExtRef[iedName=${ied.getAttribute("name")}]${getFcdaReferences(fcda)}`)) {
+          if (getExtRef(inputs, fcda, this.currentSelectedGseControl)) {
             numberOfLinkedExtRefs++;
           }
         });
@@ -110,7 +108,7 @@ export let SubscriberList = class extends SubscriberListContainer {
       }
       this.currentUsedDataset.querySelectorAll("FCDA").forEach((fcda) => {
         inputElements.forEach((inputs) => {
-          if (inputs.querySelector(`ExtRef[iedName=${this.currentGooseIedName}]${getFcdaReferences(fcda)}`)) {
+          if (getExtRef(inputs, fcda, this.currentSelectedGseControl)) {
             numberOfLinkedExtRefs++;
           }
         });
@@ -166,7 +164,7 @@ export let SubscriberList = class extends SubscriberListContainer {
       inputsElement = createElement(ied.ownerDocument, "Inputs", {});
     const actions = [];
     this.currentUsedDataset.querySelectorAll("FCDA").forEach((fcda) => {
-      if (!existExtRef(inputsElement, fcda) && canCreateValidExtRef(fcda, this.currentSelectedGseControl)) {
+      if (!existExtRef(inputsElement, fcda, this.currentSelectedGseControl) && canCreateValidExtRef(fcda, this.currentSelectedGseControl)) {
         const extRef = createExtRefElement(this.currentSelectedGseControl, fcda);
         if (inputsElement?.parentElement)
           actions.push({new: {parent: inputsElement, element: extRef}});
@@ -188,7 +186,7 @@ export let SubscriberList = class extends SubscriberListContainer {
     const actions = [];
     ied.querySelectorAll("LN0 > Inputs, LN > Inputs").forEach((inputs) => {
       this.currentUsedDataset.querySelectorAll("FCDA").forEach((fcda) => {
-        const extRef = inputs.querySelector(`ExtRef[iedName=${this.currentGooseIedName}]${getFcdaReferences(fcda)}`);
+        const extRef = getExtRef(inputs, fcda, this.currentSelectedGseControl);
         if (extRef)
           actions.push({old: {parent: inputs, element: extRef}});
       });

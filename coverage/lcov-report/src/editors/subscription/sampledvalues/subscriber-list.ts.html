@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">97.83% </span>
+                <span class="strong">97.75% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>452/462</span>
+                <span class='fraction'>436/446</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">97.83% </span>
+                <span class="strong">97.75% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>452/462</span>
+                <span class='fraction'>436/446</span>
             </div>
         
             
@@ -509,25 +509,7 @@
 <a name='L444'></a><a href='#L444'>444</a>
 <a name='L445'></a><a href='#L445'>445</a>
 <a name='L446'></a><a href='#L446'>446</a>
-<a name='L447'></a><a href='#L447'>447</a>
-<a name='L448'></a><a href='#L448'>448</a>
-<a name='L449'></a><a href='#L449'>449</a>
-<a name='L450'></a><a href='#L450'>450</a>
-<a name='L451'></a><a href='#L451'>451</a>
-<a name='L452'></a><a href='#L452'>452</a>
-<a name='L453'></a><a href='#L453'>453</a>
-<a name='L454'></a><a href='#L454'>454</a>
-<a name='L455'></a><a href='#L455'>455</a>
-<a name='L456'></a><a href='#L456'>456</a>
-<a name='L457'></a><a href='#L457'>457</a>
-<a name='L458'></a><a href='#L458'>458</a>
-<a name='L459'></a><a href='#L459'>459</a>
-<a name='L460'></a><a href='#L460'>460</a>
-<a name='L461'></a><a href='#L461'>461</a>
-<a name='L462'></a><a href='#L462'>462</a>
-<a name='L463'></a><a href='#L463'>463</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
+<a name='L447'></a><a href='#L447'>447</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
@@ -681,18 +663,8 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -803,10 +775,6 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -1013,14 +981,12 @@ import {
   SmvSelectEvent,
   SmvSubscriptionEvent,
 } from './foundation.js';
-import {
-  emptyInputsDeleteActions,
-  getFcdaReferences,
-} from '../../../foundation/ied.js';
+import { emptyInputsDeleteActions } from '../../../foundation/ied.js';
 import {
   canCreateValidExtRef,
   createExtRefElement,
   existExtRef,
+  getExtRef,
   IEDSelectEvent,
   ListElement,
   styles,
@@ -1098,12 +1064,7 @@ export class SubscriberList extends SubscriberListContainer {
 &nbsp;
       dataSet!.querySelectorAll('FCDA').forEach(fcda =&gt; {
         subscribedInputs.forEach(inputs =&gt; {
-          if (
-            inputs.querySelector(
-              `ExtRef[iedName=${ied.getAttribute('name')}]` +
-                `${getFcdaReferences(fcda)}`
-            )
-          ) {
+          if (getExtRef(inputs, fcda, this.currentSelectedSmvControl)) {
             numberOfLinkedExtRefs++;
           }
         });
@@ -1157,12 +1118,7 @@ export class SubscriberList extends SubscriberListContainer {
          */
         this.currentUsedDataset!.querySelectorAll('FCDA').forEach(fcda =&gt; {
           inputElements.forEach(inputs =&gt; {
-            if (
-              inputs.querySelector(
-                `ExtRef[iedName=${this.currentSmvIedName}]` +
-                  `${getFcdaReferences(fcda)}`
-              )
-            ) {
+            if (getExtRef(inputs, fcda, this.currentSelectedSmvControl)) {
               numberOfLinkedExtRefs++;
             }
           });
@@ -1242,7 +1198,7 @@ export class SubscriberList extends SubscriberListContainer {
     const actions: Create[] = [];
     this.currentUsedDataset!.querySelectorAll('FCDA').forEach(fcda =&gt; {
       if (
-        !existExtRef(inputsElement!, fcda) &amp;&amp;
+        !existExtRef(inputsElement!, fcda, this.currentSelectedSmvControl) &amp;&amp;
         canCreateValidExtRef(fcda, this.currentSelectedSmvControl)
       ) {
         const extRef = createExtRefElement(
@@ -1272,11 +1228,7 @@ export class SubscriberList extends SubscriberListContainer {
     const actions: Delete[] = [];
     ied.querySelectorAll('LN0 &gt; Inputs, LN &gt; Inputs').forEach(inputs =&gt; {
       this.currentUsedDataset!.querySelectorAll('FCDA').forEach(fcda =&gt; {
-        const extRef = inputs.querySelector(
-          `ExtRef[iedName=${this.currentSmvIedName}]` +
-            `${getFcdaReferences(fcda)}`
-        );
-&nbsp;
+        const extRef = getExtRef(inputs, fcda, this.currentSelectedSmvControl);
         if (extRef) actions.push({ old: { parent: inputs, element: extRef } });
       });
     });
@@ -1456,7 +1408,7 @@ export class SubscriberList extends SubscriberListContainer {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener">istanbul</a>
-                at Sat Oct 15 2022 20:36:39 GMT+0000 (Coordinated Universal Time)
+                at Mon Oct 17 2022 14:30:55 GMT+0000 (Coordinated Universal Time)
             </div>
         </div>
         <script src="../../../../prettify.js"></script>

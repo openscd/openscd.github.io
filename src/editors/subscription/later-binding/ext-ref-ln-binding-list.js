@@ -27,14 +27,12 @@ import {
   canCreateValidExtRef,
   createExtRefElement,
   existExtRef,
+  getExtRef,
   newSubscriptionChangedEvent,
   styles
 } from "../foundation.js";
 import {getSubscribedExtRefElements} from "./foundation.js";
-import {
-  emptyInputsDeleteActions,
-  getFcdaReferences
-} from "../../../foundation/ied.js";
+import {emptyInputsDeleteActions} from "../../../foundation/ied.js";
 export let ExtRefLnBindingList = class extends LitElement {
   constructor() {
     super();
@@ -71,7 +69,7 @@ export let ExtRefLnBindingList = class extends LitElement {
       inputsElement = createElement(lnElement.ownerDocument, "Inputs", {});
       actions.push({new: {parent: lnElement, element: inputsElement}});
     }
-    if (!existExtRef(inputsElement, this.currentSelectedFcdaElement) && canCreateValidExtRef(this.currentSelectedFcdaElement, this.currentSelectedControlElement)) {
+    if (!existExtRef(inputsElement, this.currentSelectedFcdaElement, this.currentSelectedControlElement) && canCreateValidExtRef(this.currentSelectedFcdaElement, this.currentSelectedControlElement)) {
       const extRef = createExtRefElement(this.currentSelectedControlElement, this.currentSelectedFcdaElement);
       actions.push({new: {parent: inputsElement, element: extRef}});
     }
@@ -84,7 +82,7 @@ export let ExtRefLnBindingList = class extends LitElement {
     }
     const actions = [];
     const inputElement = lnElement.querySelector(":scope > Inputs");
-    const extRefElement = inputElement.querySelector(`ExtRef[iedName=${this.currentIedElement.getAttribute("name")}]${getFcdaReferences(this.currentSelectedFcdaElement)}`);
+    const extRefElement = getExtRef(inputElement, this.currentSelectedFcdaElement, this.currentSelectedControlElement);
     if (extRefElement) {
       actions.push({old: {parent: inputElement, element: extRefElement}});
     }
