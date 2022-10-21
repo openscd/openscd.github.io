@@ -36,6 +36,7 @@ import {startMove, styles} from "./foundation.js";
 import {SubstationEditor} from "./substation-editor.js";
 import {BayEditor} from "./bay-editor.js";
 import {VoltageLevelEditor} from "./voltage-level-editor.js";
+import "./sub-equipment-editor.js";
 function childTags(element) {
   if (!element)
     return [];
@@ -162,6 +163,17 @@ export let PowerTransformerEditor = class extends LitElement {
         >
       </abbr>`;
   }
+  renderSubEquipments() {
+    if (!this.showfunctions)
+      return html``;
+    const subEquipments = getChildElementsByTagName(this.element, "SubEquipment");
+    return subEquipments.length ? html`<div class="container subequipment">
+          ${subEquipments.map((subEquipment) => html`<sub-equipment-editor
+                .doc=${this.doc}
+                .element=${subEquipment}
+              ></sub-equipment-editor>`)}
+        </div>` : html``;
+  }
   renderContentIcon() {
     return html`<mwc-icon slot="icon"
         >${powerTransformerTwoWindingIcon}</mwc-icon
@@ -201,7 +213,7 @@ export let PowerTransformerEditor = class extends LitElement {
   render() {
     if (this.showfunctions)
       return html`<action-pane label="${this.name}"
-        >${this.renderContentPane()}${this.renderLNodes()}${this.renderEqFunctions()}</action-pane
+        >${this.renderContentPane()}${this.renderLNodes()}${this.renderEqFunctions()}${this.renderSubEquipments()}</action-pane
       > `;
     return html`<action-icon label="${this.name}"
       >${this.renderContentIcon()}</action-icon

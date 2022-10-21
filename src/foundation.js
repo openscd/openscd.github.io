@@ -971,7 +971,11 @@ export const tags = {
     identity: namingIdentity,
     selector: namingSelector,
     parents: ["Process", "Line", "SubFunction", "Function", "Bay"],
-    children: [...tAbstractConductingEquipmentSequence, "EqFunction"]
+    children: [
+      ...tAbstractConductingEquipmentSequence,
+      "EqFunction",
+      "SubEquipment"
+    ]
   },
   ConfDataSet: {
     identity: singletonIdentity,
@@ -1398,7 +1402,8 @@ export const tags = {
       ...tEquipmentSequence,
       "TransformerWinding",
       "SubEquipment",
-      "EqFunction"
+      "EqFunction",
+      "SubEquipment"
     ]
   },
   Private: {
@@ -1629,6 +1634,8 @@ export const tags = {
     parents: [
       "TapChanger",
       "PowerTransformer",
+      "ConductingEquipment",
+      "TransformerWinding",
       ...tAbstractConductingEquipment
     ],
     children: [...tPowerSystemResourceSequence, "EqFunction"]
@@ -1706,7 +1713,8 @@ export const tags = {
       ...tAbstractConductingEquipmentSequence,
       "TapChanger",
       "NeutralPoint",
-      "EqFunction"
+      "EqFunction",
+      "SubEquipment"
     ]
   },
   TrgOps: {

@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">99.59% </span>
+                <span class="strong">99.62% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>244/245</span>
+                <span class='fraction'>268/269</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">93.93% </span>
+                <span class="strong">91.89% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>31/33</span>
+                <span class='fraction'>34/37</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>14/14</span>
+                <span class='fraction'>15/15</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">99.59% </span>
+                <span class="strong">99.62% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>244/245</span>
+                <span class='fraction'>268/269</span>
             </div>
         
             
@@ -308,7 +308,33 @@
 <a name='L243'></a><a href='#L243'>243</a>
 <a name='L244'></a><a href='#L244'>244</a>
 <a name='L245'></a><a href='#L245'>245</a>
-<a name='L246'></a><a href='#L246'>246</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">22x</span>
+<a name='L246'></a><a href='#L246'>246</a>
+<a name='L247'></a><a href='#L247'>247</a>
+<a name='L248'></a><a href='#L248'>248</a>
+<a name='L249'></a><a href='#L249'>249</a>
+<a name='L250'></a><a href='#L250'>250</a>
+<a name='L251'></a><a href='#L251'>251</a>
+<a name='L252'></a><a href='#L252'>252</a>
+<a name='L253'></a><a href='#L253'>253</a>
+<a name='L254'></a><a href='#L254'>254</a>
+<a name='L255'></a><a href='#L255'>255</a>
+<a name='L256'></a><a href='#L256'>256</a>
+<a name='L257'></a><a href='#L257'>257</a>
+<a name='L258'></a><a href='#L258'>258</a>
+<a name='L259'></a><a href='#L259'>259</a>
+<a name='L260'></a><a href='#L260'>260</a>
+<a name='L261'></a><a href='#L261'>261</a>
+<a name='L262'></a><a href='#L262'>262</a>
+<a name='L263'></a><a href='#L263'>263</a>
+<a name='L264'></a><a href='#L264'>264</a>
+<a name='L265'></a><a href='#L265'>265</a>
+<a name='L266'></a><a href='#L266'>266</a>
+<a name='L267'></a><a href='#L267'>267</a>
+<a name='L268'></a><a href='#L268'>268</a>
+<a name='L269'></a><a href='#L269'>269</a>
+<a name='L270'></a><a href='#L270'>270</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">22x</span>
+<span class="cline-any cline-yes">22x</span>
+<span class="cline-any cline-yes">22x</span>
 <span class="cline-any cline-yes">22x</span>
 <span class="cline-any cline-yes">22x</span>
 <span class="cline-any cline-yes">22x</span>
@@ -530,9 +556,31 @@
 <span class="cline-any cline-yes">22x</span>
 <span class="cline-any cline-yes">22x</span>
 <span class="cline-any cline-yes">22x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">22x</span>
+<span class="cline-any cline-yes">22x</span>
+<span class="cline-any cline-yes">22x</span>
 <span class="cline-any cline-yes">19x</span>
 <span class="cline-any cline-yes">19x</span>
 <span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">19x</span>
 <span class="cline-any cline-yes">19x</span>
 <span class="cline-any cline-yes">19x</span>
 <span class="cline-any cline-yes">19x</span>
@@ -587,6 +635,8 @@ import {
 import { BayEditor } from './bay-editor.js';
 import { emptyWizard, wizards } from '../../wizards/wizard-library.js';
 &nbsp;
+import './sub-equipment-editor.js';
+&nbsp;
 function childTags(element: Element | null | undefined): SCLTag[] {
   if (!element) <span class="branch-0 cbranch-no" title="branch not covered" >return [];</span>
 &nbsp;
@@ -609,7 +659,7 @@ export class ConductingEquipmentEditor extends LitElement {
   get name(): string {
     return this.element.getAttribute('name') ?? '';
   }
-  /** Whether `EqFunction` and `SubEqFunction` are rendered */
+  /** Whether `EqFunction`, `SubEqFunction` and `SubEquipment` are rendered */
   @property({ type: Boolean })
   showfunctions = false;
 &nbsp;
@@ -774,10 +824,32 @@ export class ConductingEquipmentEditor extends LitElement {
       &gt;&lt;/mwc-fab&gt;`;
   }
 &nbsp;
+  private renderSubEquipments(): TemplateResult {
+    if (!this.showfunctions) <span class="branch-0 cbranch-no" title="branch not covered" >return html``;</span>
+&nbsp;
+    const subEquipments = getChildElementsByTagName(
+      this.element,
+      'SubEquipment'
+    );
+&nbsp;
+    return subEquipments.length
+      ? html`&lt;div class="container subequipment"&gt;
+          ${subEquipments.map(
+            subEquipment =&gt;
+              html`&lt;sub-equipment-editor
+                .doc=${this.doc}
+                .element=${subEquipment}
+              &gt;&lt;/sub-equipment-editor&gt;`
+          )}
+        &lt;/div&gt;`
+      : html``;
+  }
+&nbsp;
   render(): TemplateResult {
     if (this.showfunctions)
       return html`&lt;action-pane label="${this.name}"
-        &gt;${this.renderContentPane()}${this.renderLNodes()}${this.renderEqFunctions()}&lt;/action-pane
+        &gt;${this.renderContentPane()}${this.renderLNodes()}${this.renderEqFunctions()}${this.renderSubEquipments()}&lt;/action-pane
+        &gt;&lt;/action-pane
       &gt;`;
 &nbsp;
     return html`&lt;action-icon label="${this.name}"
@@ -805,7 +877,7 @@ export class ConductingEquipmentEditor extends LitElement {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener">istanbul</a>
-                at Tue Oct 18 2022 07:23:08 GMT+0000 (Coordinated Universal Time)
+                at Fri Oct 21 2022 08:08:04 GMT+0000 (Coordinated Universal Time)
             </div>
         </div>
         <script src="../../../prettify.js"></script>

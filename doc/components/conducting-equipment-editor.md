@@ -11,7 +11,7 @@
 | `doc`           |                 |           | `XMLDocument` |         | The document being edited as provided to editor by [[`Zeroline`]]. |
 | `element`       |                 |           | `Element`     |         | SCL element ConductingEquipment                  |
 | `name`          | `name`          | readonly  | `string`      |         | ConductingEquipment name attribute               |
-| `showfunctions` | `showfunctions` |           | `boolean`     | false   | Whether `EqFunction` and `SubEqFunction` are rendered |
+| `showfunctions` | `showfunctions` |           | `boolean`     | false   | Whether `EqFunction`, `SubEqFunction` and `SubEquipment` are rendered |
 
 ## Methods
 
