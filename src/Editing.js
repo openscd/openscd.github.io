@@ -228,7 +228,7 @@ export function Editing(Base) {
         return false;
       Array.from(action.element.attributes).forEach((attr) => action.element.removeAttributeNode(attr));
       Object.entries(action.newAttributes).forEach(([key, value]) => {
-        if (value)
+        if (value !== null && value !== void 0)
           action.element.setAttribute(key, value);
       });
       return true;
