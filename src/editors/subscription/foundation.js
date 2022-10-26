@@ -63,6 +63,9 @@ export function newSubscriptionChangedEvent(control, fcda, eventInitDict) {
 export function getFcdaTitleValue(fcdaElement) {
   return `${fcdaElement.getAttribute("doName")}${fcdaElement.hasAttribute("doName") && fcdaElement.hasAttribute("daName") ? `.` : ``}${fcdaElement.getAttribute("daName")}`;
 }
+export function getFcdaSubtitleValue(fcdaElement) {
+  return `${fcdaElement.getAttribute("ldInst")} ${fcdaElement.hasAttribute("ldInst") && fcdaElement.hasAttribute("prefix") ? `/` : ""} ${fcdaElement.getAttribute("prefix")} ${fcdaElement.getAttribute("lnClass")} ${fcdaElement.getAttribute("lnInst")}`;
+}
 export function existExtRef(parentInputs, fcda, control) {
   return !!getExtRef(parentInputs, fcda, control);
 }
