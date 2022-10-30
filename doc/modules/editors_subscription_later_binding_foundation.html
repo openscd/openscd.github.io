@@ -72,8 +72,10 @@
 						<section class="tsd-index-section ">
 							<h3>Functions</h3>
 							<ul class="tsd-index-list">
+								<li class="tsd-kind-function tsd-parent-kind-module"><a href="editors_subscription_later_binding_foundation.html#fcdaSpecification" class="tsd-kind-icon">fcda<wbr>Specification</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-module"><a href="editors_subscription_later_binding_foundation.html#getExtRefElements" class="tsd-kind-icon">get<wbr>Ext<wbr>Ref<wbr>Elements</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-module"><a href="editors_subscription_later_binding_foundation.html#getSubscribedExtRefElements" class="tsd-kind-icon">get<wbr>Subscribed<wbr>Ext<wbr>Ref<wbr>Elements</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module"><a href="editors_subscription_later_binding_foundation.html#inputRestriction" class="tsd-kind-icon">input<wbr>Restriction</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-module"><a href="editors_subscription_later_binding_foundation.html#isSubscribed" class="tsd-kind-icon">is<wbr>Subscribed</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-module"><a href="editors_subscription_later_binding_foundation.html#isSubscribedTo" class="tsd-kind-icon">is<wbr>Subscribed<wbr>To</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-module"><a href="editors_subscription_later_binding_foundation.html#sameAttributeValue" class="tsd-kind-icon">same<wbr>Attribute<wbr>Value</a></li>
@@ -86,6 +88,41 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Functions</h2>
 				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
+					<a name="fcdaSpecification" class="tsd-anchor"></a>
+					<h3>fcda<wbr>Specification</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
+						<li class="tsd-signature tsd-kind-icon">fcda<wbr>Specification<span class="tsd-signature-symbol">(</span>fcda<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Element</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">{ </span>bType<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol">; </span>cdc<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> }</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/26f7fe5/src/editors/subscription/later-binding/foundation.ts#L47">src/editors/subscription/later-binding/foundation.ts:47</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>fcda: <span class="tsd-signature-type">Element</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Data attribute reference in a data set</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-symbol">{ </span>bType<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol">; </span>cdc<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> }</span></h4>
+							<p>Data objects <code>CDC</code> and data attributes <code>bType</code></p>
+							<ul class="tsd-parameters">
+								<li class="tsd-parameter">
+									<h5>b<wbr>Type<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span></h5>
+								</li>
+								<li class="tsd-parameter">
+									<h5>cdc<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span></h5>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
 					<a name="getExtRefElements" class="tsd-anchor"></a>
 					<h3>get<wbr>Ext<wbr>Ref<wbr>Elements</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
@@ -95,7 +132,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/d5f8bb7/src/editors/subscription/later-binding/foundation.ts#L141">src/editors/subscription/later-binding/foundation.ts:141</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/26f7fe5/src/editors/subscription/later-binding/foundation.ts#L244">src/editors/subscription/later-binding/foundation.ts:244</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -124,7 +161,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/d5f8bb7/src/editors/subscription/later-binding/foundation.ts#L155">src/editors/subscription/later-binding/foundation.ts:155</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/26f7fe5/src/editors/subscription/later-binding/foundation.ts#L258">src/editors/subscription/later-binding/foundation.ts:258</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -150,6 +187,48 @@
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
+					<a name="inputRestriction" class="tsd-anchor"></a>
+					<h3>input<wbr>Restriction</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
+						<li class="tsd-signature tsd-kind-icon">input<wbr>Restriction<span class="tsd-signature-symbol">(</span>extRef<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Element</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">{ </span>bType<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol">; </span>cdc<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> }</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/26f7fe5/src/editors/subscription/later-binding/foundation.ts#L85">src/editors/subscription/later-binding/foundation.ts:85</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Edition 2 and later SCL files allow to restrict subscription on
+										later binding type inputs (<code>ExtRef</code> elements) based on a <code>CDC</code> and
+									basic type <code>bType</code>.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>extRef: <span class="tsd-signature-type">Element</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>A later binding type input in the sink IED</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-symbol">{ </span>bType<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol">; </span>cdc<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> }</span></h4>
+							<p>data objects <code>CDC</code> and data attribute basic type <code>bType</code> or <code>null</code></p>
+							<ul class="tsd-parameters">
+								<li class="tsd-parameter">
+									<h5>b<wbr>Type<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span></h5>
+								</li>
+								<li class="tsd-parameter">
+									<h5>cdc<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span></h5>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
 					<a name="isSubscribed" class="tsd-anchor"></a>
 					<h3>is<wbr>Subscribed</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
@@ -159,7 +238,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/d5f8bb7/src/editors/subscription/later-binding/foundation.ts#L129">src/editors/subscription/later-binding/foundation.ts:129</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/26f7fe5/src/editors/subscription/later-binding/foundation.ts#L232">src/editors/subscription/later-binding/foundation.ts:232</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -190,7 +269,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/d5f8bb7/src/editors/subscription/later-binding/foundation.ts#L105">src/editors/subscription/later-binding/foundation.ts:105</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/26f7fe5/src/editors/subscription/later-binding/foundation.ts#L208">src/editors/subscription/later-binding/foundation.ts:208</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -241,7 +320,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/d5f8bb7/src/editors/subscription/later-binding/foundation.ts#L12">src/editors/subscription/later-binding/foundation.ts:12</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/26f7fe5/src/editors/subscription/later-binding/foundation.ts#L115">src/editors/subscription/later-binding/foundation.ts:115</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -284,7 +363,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/d5f8bb7/src/editors/subscription/later-binding/foundation.ts#L31">src/editors/subscription/later-binding/foundation.ts:31</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/26f7fe5/src/editors/subscription/later-binding/foundation.ts#L134">src/editors/subscription/later-binding/foundation.ts:134</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -339,10 +418,16 @@
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
 					<li class=" tsd-kind-function tsd-parent-kind-module">
+						<a href="editors_subscription_later_binding_foundation.html#fcdaSpecification" class="tsd-kind-icon">fcda<wbr>Specification</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-module">
 						<a href="editors_subscription_later_binding_foundation.html#getExtRefElements" class="tsd-kind-icon">get<wbr>Ext<wbr>Ref<wbr>Elements</a>
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-module">
 						<a href="editors_subscription_later_binding_foundation.html#getSubscribedExtRefElements" class="tsd-kind-icon">get<wbr>Subscribed<wbr>Ext<wbr>Ref<wbr>Elements</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-module">
+						<a href="editors_subscription_later_binding_foundation.html#inputRestriction" class="tsd-kind-icon">input<wbr>Restriction</a>
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-module">
 						<a href="editors_subscription_later_binding_foundation.html#isSubscribed" class="tsd-kind-icon">is<wbr>Subscribed</a>

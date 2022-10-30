@@ -28,11 +28,14 @@ import {
 import {
   newSubscriptionChangedEvent,
   styles,
-  updateExtRefElement
+  updateExtRefElement,
+  serviceTypes
 } from "../foundation.js";
 import {
   getExtRefElements,
   getSubscribedExtRefElements,
+  fcdaSpecification,
+  inputRestriction,
   isSubscribed
 } from "./foundation.js";
 export let ExtRefLaterBindingList = class extends LitElement {
@@ -49,8 +52,20 @@ export let ExtRefLaterBindingList = class extends LitElement {
     this.currentSelectedFcdaElement = event.detail.fcda;
     this.currentIedElement = this.currentSelectedFcdaElement ? this.currentSelectedFcdaElement.closest("IED") ?? void 0 : void 0;
   }
-  unsupportedExtRefElement(extRefElement) {
-    return extRefElement.hasAttribute("pLN") || extRefElement.hasAttribute("pDO") || extRefElement.hasAttribute("pDA") || extRefElement.hasAttribute("pServT");
+  unsupportedExtRefElement(extRef) {
+    if (!extRef.hasAttribute("pLN") || !extRef.hasAttribute("pDO") || !extRef.hasAttribute("pDA") || !extRef.hasAttribute("pServT"))
+      return false;
+    if (!this.currentSelectedFcdaElement)
+      return true;
+    const fcda = fcdaSpecification(this.currentSelectedFcdaElement);
+    const input = inputRestriction(extRef);
+    if (fcda.cdc === null && input.cdc === null)
+      return true;
+    if (fcda.bType === null && input.bType === null)
+      return true;
+    if (serviceTypes[this.currentSelectedControlElement?.tagName ?? ""] !== extRef.getAttribute("pServT"))
+      return true;
+    return fcda.cdc !== input.cdc || fcda.bType !== input.bType;
   }
   unsubscribe(extRefElement) {
     if (!this.currentIedElement || !this.currentSelectedFcdaElement || !this.currentSelectedControlElement) {
