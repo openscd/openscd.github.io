@@ -167,6 +167,9 @@ export let CleanupControlBlocks = class extends LitElement {
       }
       const gseSmvLogReportDeleteActions = cleanSCLItems(cleanItems).concat(gseSmvAddressItems);
       gseSmvLogReportDeleteActions.forEach((deleteAction) => e.target?.dispatchEvent(newActionEvent(deleteAction)));
+      this.cleanupListItems.forEach((item) => {
+        item.selected = false;
+      });
     }}
     ></mwc-button>`;
   }

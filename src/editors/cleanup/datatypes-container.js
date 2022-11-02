@@ -20,7 +20,7 @@ import {
   queryAll
 } from "../../../_snowpack/pkg/lit-element.js";
 import {classMap} from "../../../_snowpack/pkg/lit-html/directives/class-map.js";
-import {translate} from "../../../_snowpack/pkg/lit-translate.js";
+import {get, translate} from "../../../_snowpack/pkg/lit-translate.js";
 import "../../../_snowpack/pkg/@material/mwc-button.js";
 import "../../../_snowpack/pkg/@material/mwc-icon.js";
 import "../../../_snowpack/pkg/@material/mwc-icon-button-toggle.js";
@@ -30,6 +30,7 @@ import "../../filtered-list.js";
 import {
   identity,
   isPublic,
+  newLogEvent,
   newSubWizardEvent,
   newActionEvent
 } from "../../foundation.js";
@@ -139,19 +140,15 @@ export let CleanupDataTypes = class extends LitElement {
       >
     </mwc-check-list-item>`;
   }
-  indexDataTypeTemplates() {
-    const dataTypeTemplates = this.doc.querySelector(":root > DataTypeTemplates");
-    const allUsages = this.fetchTree(dataTypeTemplates);
+  indexDataTypeTemplates(dttStart) {
     const dataTypeFrequencyUsage = new Map();
+    const allUsages = this.fetchTree(dttStart);
     allUsages.forEach((item) => {
-      const itemType = item.getAttribute("id");
-      if (itemType !== null) {
-        dataTypeFrequencyUsage.set(itemType, (dataTypeFrequencyUsage.get(itemType) || 0) + 1);
-      }
+      dataTypeFrequencyUsage.set(item, (dataTypeFrequencyUsage.get(item) || 0) + 1);
     });
     return dataTypeFrequencyUsage;
   }
-  getSubTypes(element) {
+  getSubType(element) {
     const dataTypeTemplates = this.doc.querySelector(":root > DataTypeTemplates");
     const type = element.getAttribute("type");
     if (element.tagName === "DO" || element.tagName === "SDO") {
@@ -163,39 +160,57 @@ export let CleanupDataTypes = class extends LitElement {
     }
     return null;
   }
-  fetchTree(rootElement) {
-    const elementStack = [rootElement];
+  fetchTree(rootElements) {
+    const elementStack = [...rootElements];
     const traversedElements = [];
-    const MAX_STACK_DEPTH = 1e4;
-    while (elementStack.length > 0 && elementStack.length < MAX_STACK_DEPTH) {
+    const MAX_STACK_DEPTH = 3e5;
+    while (elementStack.length > 0 && elementStack.length <= MAX_STACK_DEPTH) {
       const currentElement = elementStack.pop();
-      traversedElements.push(currentElement);
-      Array.from(currentElement.querySelectorAll("DO, SDO, DA, BDA")).filter(isPublic).forEach((element) => {
-        const newElements = this.getSubTypes(element);
-        if (newElements !== null) {
-          elementStack.unshift(newElements);
+      traversedElements.push(currentElement.getAttribute("id"));
+      const selector = "DO, SDO, DA, BDA";
+      Array.from(currentElement.querySelectorAll(selector)).filter(isPublic).forEach((element) => {
+        const newElement = this.getSubType(element);
+        if (newElement !== null) {
+          elementStack.unshift(newElement);
         }
       });
+      if (elementStack.length >= MAX_STACK_DEPTH) {
+        this.dispatchEvent(newLogEvent({
+          kind: "error",
+          title: get("cleanup.unreferencedDataTypes.title"),
+          message: get("cleanup.unreferencedDataTypes.stackExceeded", {
+            maxStackDepth: MAX_STACK_DEPTH.toString()
+          })
+        }));
+      }
     }
-    traversedElements.shift();
     return traversedElements;
   }
   getCleanItems() {
     const cleanItems = Array.from(this.selectedDataTypeItems.values()).map((index) => this.unreferencedDataTypes[index]);
     if (this.cleanSubTypesCheckbox.checked === true) {
       const dataTypeTemplates = this.doc.querySelector(":root > DataTypeTemplates");
-      const dataTypeUsageCounter = this.indexDataTypeTemplates();
+      const startingLNodeTypes = Array.from(dataTypeTemplates.querySelectorAll("LNodeType"));
+      const dataTypeUsageCounter = this.indexDataTypeTemplates(startingLNodeTypes);
       cleanItems.forEach((item) => {
-        const childDataTypeTemplates = this.fetchTree(item);
-        childDataTypeTemplates.forEach((element) => {
-          const type = element.getAttribute("id");
-          if (dataTypeUsageCounter.has(type)) {
-            dataTypeUsageCounter?.set(type, dataTypeUsageCounter.get(type) - 1);
-          }
-        });
+        if (item.tagName === "LNodeType") {
+          const childDataTypeTemplateIds = this.fetchTree([item]);
+          childDataTypeTemplateIds.forEach((id) => {
+            dataTypeUsageCounter?.set(id, dataTypeUsageCounter.get(id) - 1);
+          });
+        }
+      });
+      cleanItems.forEach((item) => {
+        if (["DOType", "DAType"].includes(item.tagName)) {
+          const unusedDataTypeTemplateChildrenIds = uniq(this.fetchTree([item]));
+          unusedDataTypeTemplateChildrenIds.forEach((id) => {
+            if (dataTypeUsageCounter.get(id) === void 0)
+              cleanItems.push(dataTypeTemplates.querySelector(`[id="${id}"]`));
+          });
+        }
       });
       dataTypeUsageCounter?.forEach((count, dataTypeId) => {
-        if (count === 0) {
+        if (count <= 0) {
           cleanItems.push(dataTypeTemplates.querySelector(`[id="${dataTypeId}"]`));
         }
       });
@@ -212,6 +227,9 @@ export let CleanupDataTypes = class extends LitElement {
       @click=${() => {
       const dataTypeItemsDeleteActions = cleanSCLItems(this.getCleanItems());
       dataTypeItemsDeleteActions.forEach((deleteAction) => this.dispatchEvent(newActionEvent(deleteAction)));
+      this.cleanupListItems.forEach((item) => {
+        item.selected = false;
+      });
     }}
     ></mwc-button>`;
   }
@@ -336,18 +354,18 @@ CleanupDataTypes.styles = css`
       opacity: 1;
     }
 
+    /* Make sure to type filter here
+    .hidden is set on string filter in filtered-list and must always filter*/
+    .cleanup-list-item.hiddenontypefilter:not(.hidden) {
+      display: none;
+    }
+
     /* filter disabled, Material Design guidelines for opacity */
     .t-da-type-filter,
     .t-enum-type-filter,
     .t-lnode-type-filter,
     .t-do-type-filter {
       opacity: 0.38;
-    }
-
-    /* Make sure to type filter here
-    .hidden is set on string filter in filtered-list and must always filter*/
-    .cleanupListItem.hiddenontypefilter:not(.hidden) {
-      display: none;
     }
   `;
 __decorate([

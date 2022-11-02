@@ -86,6 +86,9 @@ export let CleanupDatasets = class extends LitElement {
       const cleanItems = Array.from(this.selectedDatasetItems.values()).map((index) => this.unreferencedDataSets[index]);
       const deleteActions = cleanSCLItems(cleanItems);
       deleteActions.forEach((deleteAction) => e.target?.dispatchEvent(newActionEvent(deleteAction)));
+      this.dataSetItems.forEach((item) => {
+        item.selected = false;
+      });
     }}
     ></mwc-button>`;
   }

@@ -10,7 +10,7 @@ An editor component for cleaning SCL Control Blocks.
 | `cleanupAddressCheckbox`           |                        | `Checkbox \| undefined`       |         |                                                  |
 | `cleanupGSEControlFilter`          |                        | `Button`                      |         |                                                  |
 | `cleanupList`                      |                        | `List \| undefined`           |         |                                                  |
-| `cleanupListItems`                 |                        | `NodeList \| undefined`       |         |                                                  |
+| `cleanupListItems`                 |                        | `ListItem[] \| undefined`     |         |                                                  |
 | `cleanupLogControlFilter`          |                        | `Button`                      |         |                                                  |
 | `cleanupReportControlFilter`       |                        | `Button`                      |         |                                                  |
 | `cleanupSampledValueControlFilter` |                        | `Button`                      |         |                                                  |

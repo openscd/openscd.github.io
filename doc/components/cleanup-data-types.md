@@ -13,7 +13,7 @@ An editor component for cleaning SCL DataType templates.
 | `cleanupEnumTypeFilter`  |                         | `Button`                      |         |                                                  |
 | `cleanupLNodeTypeFilter` |                         | `Button`                      |         |                                                  |
 | `cleanupList`            |                         | `List \| undefined`           |         |                                                  |
-| `cleanupListItems`       |                         | `NodeList \| undefined`       |         |                                                  |
+| `cleanupListItems`       |                         | `ListItem[] \| undefined`     |         |                                                  |
 | `disableControlClean`    | `disableControlClean`   | `boolean`                     | false   |                                                  |
 | `doc`                    |                         | `XMLDocument`                 |         | The document being edited as provided to plugins by [[`OpenSCD`]]. |
 | `selectedDataTypeItems`  |                         | `number \| Set<number> \| []` | []      |                                                  |
