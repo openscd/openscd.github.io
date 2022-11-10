@@ -95,6 +95,7 @@ export let PowerTransformerEditor = class extends LitElement {
     return html` ${eqFunctions.map((eqFunction) => html`<eq-function-editor
           .doc=${this.doc}
           .element=${eqFunction}
+          ?showfunctions=${this.showfunctions}
         ></eq-function-editor>`)}`;
   }
   renderAddButtons() {

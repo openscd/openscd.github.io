@@ -20,6 +20,7 @@ import {
 } from "../../../_snowpack/pkg/lit-element.js";
 import "../../action-pane.js";
 import "./sub-function-editor.js";
+import "./general-equipment-editor.js";
 import {
   getChildElementsByTagName,
   newActionEvent,
@@ -28,12 +29,17 @@ import {
 } from "../../foundation.js";
 import {translate} from "../../../_snowpack/pkg/lit-translate.js";
 import {emptyWizard, wizards} from "../../wizards/wizard-library.js";
+import {renderGeneralEquipment} from "./foundation.js";
 function childTags(element) {
   if (!element)
     return [];
   return tags[element.tagName].children.filter((child) => wizards[child].create !== emptyWizard);
 }
 export let FunctionEditor = class extends LitElement {
+  constructor() {
+    super(...arguments);
+    this.showfunctions = false;
+  }
   get header() {
     const name = this.element.getAttribute("name");
     const desc = this.element.getAttribute("desc");
@@ -76,6 +82,7 @@ export let FunctionEditor = class extends LitElement {
     return html` ${subfunctions.map((subFunction) => html`<sub-function-editor
           .doc=${this.doc}
           .element=${subFunction}
+          ?showfunctions=${this.showfunctions}
         ></sub-function-editor>`)}`;
   }
   renderAddButtons() {
@@ -116,8 +123,10 @@ export let FunctionEditor = class extends LitElement {
       this.openCreateWizard(tagName);
     }}
           >${this.renderAddButtons()}</mwc-menu
-        > </abbr
-      >${this.renderLNodes()}${this.renderSubFunctions()}</action-pane
+        >
+      </abbr>
+      ${renderGeneralEquipment(this.doc, this.element, this.showfunctions)}
+      ${this.renderLNodes()}${this.renderSubFunctions()}</action-pane
     >`;
   }
 };
@@ -141,6 +150,9 @@ __decorate([
 __decorate([
   property({attribute: false})
 ], FunctionEditor.prototype, "element", 2);
+__decorate([
+  property({type: Boolean})
+], FunctionEditor.prototype, "showfunctions", 2);
 __decorate([
   state()
 ], FunctionEditor.prototype, "header", 1);

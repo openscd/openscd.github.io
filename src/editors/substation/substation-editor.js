@@ -23,6 +23,7 @@ import "../../action-pane.js";
 import "./ied-editor.js";
 import "./powertransformer-editor.js";
 import "./voltage-level-editor.js";
+import "./general-equipment-editor.js";
 import {
   getChildElementsByTagName,
   newActionEvent,
@@ -32,6 +33,7 @@ import {
 import {emptyWizard, wizards} from "../../wizards/wizard-library.js";
 import {
   cloneSubstationElement,
+  renderGeneralEquipment,
   selectors,
   startMove,
   styles
@@ -101,6 +103,7 @@ export let SubstationEditor = class extends LitElement {
     return html` ${functions.map((fUnction) => html`<function-editor
           .doc=${this.doc}
           .element=${fUnction}
+          ?showfunctions=${this.showfunctions}
         ></function-editor>`)}`;
   }
   renderIedContainer() {
@@ -180,6 +183,7 @@ export let SubstationEditor = class extends LitElement {
           >${this.renderAddButtons()}</mwc-menu
         >
       </abbr>
+      ${renderGeneralEquipment(this.doc, this.element, this.showfunctions)}
       ${this.renderIedContainer()}${this.renderLNodes()}${this.renderFunctions()}
       ${this.renderPowerTransformerContainer()}
       ${Array.from(this.element.querySelectorAll(selectors.VoltageLevel)).map((voltageLevel) => html`<voltage-level-editor

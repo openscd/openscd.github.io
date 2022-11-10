@@ -1,6 +1,11 @@
-import {css} from "../../../_snowpack/pkg/lit-element.js";
+import {css, html} from "../../../_snowpack/pkg/lit-element.js";
+import {classMap} from "../../../_snowpack/pkg/lit-html/directives/class-map.js";
 import "./function-editor.js";
-import {newActionEvent, isPublic} from "../../foundation.js";
+import {
+  newActionEvent,
+  isPublic,
+  getChildElementsByTagName
+} from "../../foundation.js";
 import {
   circuitBreakerIcon,
   disconnectorIcon,
@@ -116,6 +121,21 @@ function checkInstanceOfParentClass(et, classes) {
 export function getIcon(condEq) {
   return typeIcons[typeStr(condEq)] ?? generalConductingEquipmentIcon;
 }
+export function renderGeneralEquipment(doc, element, showfunctions) {
+  const generalEquipment = getChildElementsByTagName(element, "GeneralEquipment");
+  return generalEquipment.length ? html` <div
+        class="${classMap({
+    content: true,
+    actionicon: !showfunctions
+  })}"
+      >
+        ${generalEquipment.map((gEquipment) => html`<general-equipment-editor
+              .doc=${doc}
+              .element=${gEquipment}
+              ?showfunctions=${showfunctions}
+            ></general-equipment-editor>`)}
+      </div>` : html``;
+}
 const typeIcons = {
   CBR: circuitBreakerIcon,
   DIS: disconnectorIcon,
@@ -138,6 +158,14 @@ export const styles = css`
   }
 
   .ptrContent.actionicon {
+    display: grid;
+    grid-gap: 12px;
+    padding: 8px 12px 16px;
+    box-sizing: border-box;
+    grid-template-columns: repeat(auto-fit, minmax(64px, auto));
+  }
+
+  .content.actionicon {
     display: grid;
     grid-gap: 12px;
     padding: 8px 12px 16px;
@@ -170,6 +198,10 @@ export const styles = css`
   }
 
   powertransformer-editor[showfunctions] {
+    margin: 4px 8px 16px;
+  }
+
+  general-equipment-editor[showfunctions] {
     margin: 4px 8px 16px;
   }
 `;

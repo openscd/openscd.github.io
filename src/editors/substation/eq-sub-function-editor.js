@@ -23,6 +23,7 @@ import "../../../_snowpack/pkg/@material/mwc-icon-button.js";
 import "../../../_snowpack/pkg/@material/mwc-list/mwc-list-item.js";
 import "../../../_snowpack/pkg/@material/mwc-menu.js";
 import "../../action-pane.js";
+import "./general-equipment-editor.js";
 import {
   getChildElementsByTagName,
   newActionEvent,
@@ -30,12 +31,17 @@ import {
   tags
 } from "../../foundation.js";
 import {emptyWizard, wizards} from "../../wizards/wizard-library.js";
+import {renderGeneralEquipment} from "./foundation.js";
 function childTags(element) {
   if (!element)
     return [];
   return tags[element.tagName].children.filter((child) => wizards[child].create !== emptyWizard);
 }
 export let EqSubFunctionEditor = class extends LitElement {
+  constructor() {
+    super(...arguments);
+    this.showfunctions = false;
+  }
   get header() {
     const name = this.element.getAttribute("name");
     const desc = this.element.getAttribute("desc");
@@ -115,7 +121,9 @@ export let EqSubFunctionEditor = class extends LitElement {
     }}
           >${this.renderAddButtons()}</mwc-menu
         ></abbr
-      >${this.renderLNodes()}${this.renderEqSubFunctions()}</action-pane
+      >
+      ${renderGeneralEquipment(this.doc, this.element, this.showfunctions)}
+      ${this.renderLNodes()}${this.renderEqSubFunctions()}</action-pane
     >`;
   }
 };
@@ -139,6 +147,9 @@ __decorate([
 __decorate([
   property({attribute: false})
 ], EqSubFunctionEditor.prototype, "element", 2);
+__decorate([
+  property({type: Boolean})
+], EqSubFunctionEditor.prototype, "showfunctions", 2);
 __decorate([
   state()
 ], EqSubFunctionEditor.prototype, "header", 1);

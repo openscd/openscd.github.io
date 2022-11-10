@@ -22,13 +22,15 @@ import {translate} from "../../../_snowpack/pkg/lit-translate.js";
 import "../../../_snowpack/pkg/@material/mwc-icon-button.js";
 import "../../action-pane.js";
 import "./bay-editor.js";
+import "./general-equipment-editor.js";
 import "./ied-editor.js";
 import "./powertransformer-editor.js";
 import {
   selectors,
   startMove,
   cloneSubstationElement,
-  styles
+  styles,
+  renderGeneralEquipment
 } from "./foundation.js";
 import {
   getChildElementsByTagName,
@@ -113,6 +115,7 @@ export let VoltageLevelEditor = class extends LitElement {
     return html` ${functions.map((fUnction) => html`<function-editor
           .doc=${this.doc}
           .element=${fUnction}
+          ?showfunctions=${this.showfunctions}
         ></function-editor>`)}`;
   }
   renderIedContainer() {
@@ -192,6 +195,7 @@ export let VoltageLevelEditor = class extends LitElement {
           >${this.renderAddButtons()}</mwc-menu
         >
       </abbr>
+      ${renderGeneralEquipment(this.doc, this.element, this.showfunctions)}
       ${this.renderIedContainer()}${this.renderLNodes()}${this.renderFunctions()}
       ${this.renderPowerTransformerContainer()}
       <div id="bayContainer">

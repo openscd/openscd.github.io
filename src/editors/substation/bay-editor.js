@@ -23,6 +23,7 @@ import "../../../_snowpack/pkg/@material/mwc-icon-button.js";
 import "../../action-pane.js";
 import "./ied-editor.js";
 import "./conducting-equipment-editor.js";
+import "./general-equipment-editor.js";
 import "./powertransformer-editor.js";
 import {VoltageLevelEditor} from "./voltage-level-editor.js";
 import {
@@ -32,7 +33,12 @@ import {
   tags
 } from "../../foundation.js";
 import {emptyWizard, wizards} from "../../wizards/wizard-library.js";
-import {cloneSubstationElement, startMove, styles} from "./foundation.js";
+import {
+  cloneSubstationElement,
+  renderGeneralEquipment,
+  startMove,
+  styles
+} from "./foundation.js";
 function childTags(element) {
   if (!element)
     return [];
@@ -98,6 +104,7 @@ export let BayEditor = class extends LitElement {
     return html` ${functions.map((fUnction) => html`<function-editor
           .doc=${this.doc}
           .element=${fUnction}
+          ?showfunctions=${this.showfunctions}
         ></function-editor>`)}`;
   }
   renderIedContainer() {
@@ -162,6 +169,7 @@ export let BayEditor = class extends LitElement {
           >${this.renderAddButtons()}</mwc-menu
         >
       </abbr>
+      ${renderGeneralEquipment(this.doc, this.element, this.showfunctions)}
       ${this.renderIedContainer()}${this.renderLNodes()}${this.renderFunctions()}
       <div
         class="${classMap({
