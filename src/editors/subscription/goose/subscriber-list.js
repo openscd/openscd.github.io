@@ -34,6 +34,8 @@ import {
   createExtRefElement,
   existExtRef,
   getExtRef,
+  instantiateSubscriptionSupervision,
+  removeSubscriptionSupervision,
   styles,
   SubscriberListContainer,
   SubscribeStatus,
@@ -172,14 +174,21 @@ export let SubscriberList = class extends SubscriberListContainer {
           inputsElement?.appendChild(extRef);
       }
     });
+    const supervisionActions = instantiateSubscriptionSupervision(this.currentSelectedGseControl, ied);
     const title = get("subscription.connect");
     if (inputsElement.parentElement) {
-      this.dispatchEvent(newActionEvent({title, actions}));
+      this.dispatchEvent(newActionEvent({
+        title,
+        actions: actions.concat(supervisionActions)
+      }));
     } else {
       const inputAction = {
         new: {parent: ied.querySelector("LN0"), element: inputsElement}
       };
-      this.dispatchEvent(newActionEvent({title, actions: [inputAction]}));
+      this.dispatchEvent(newActionEvent({
+        title,
+        actions: [inputAction].concat(supervisionActions)
+      }));
     }
   }
   async unsubscribe(ied) {
@@ -192,6 +201,7 @@ export let SubscriberList = class extends SubscriberListContainer {
       });
     });
     actions.push(...emptyInputsDeleteActions(actions));
+    actions.push(...removeSubscriptionSupervision(this.currentSelectedGseControl, ied));
     this.dispatchEvent(newActionEvent({
       title: get("subscription.disconnect"),
       actions

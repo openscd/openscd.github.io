@@ -72,6 +72,7 @@
 						<section class="tsd-index-section ">
 							<h3>Functions</h3>
 							<ul class="tsd-index-list">
+								<li class="tsd-kind-function tsd-parent-kind-module"><a href="foundation_dai.html#createTemplateStructure" class="tsd-kind-icon">create<wbr>Template<wbr>Structure</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-module"><a href="foundation_dai.html#determineUninitializedStructure" class="tsd-kind-icon">determine<wbr>Uninitialized<wbr>Structure</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-module"><a href="foundation_dai.html#initializeElements" class="tsd-kind-icon">initialize<wbr>Elements</a></li>
 							</ul>
@@ -82,6 +83,46 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Functions</h2>
 				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
+					<a name="createTemplateStructure" class="tsd-anchor"></a>
+					<h3>create<wbr>Template<wbr>Structure</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
+						<li class="tsd-signature tsd-kind-icon">create<wbr>Template<wbr>Structure<span class="tsd-signature-symbol">(</span>lnElement<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Element</span>, path<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Element</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/3f6b659/src/foundation/dai.ts#L112">src/foundation/dai.ts:112</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Use the path configuration of a Common Data Class to search for all DO/SDO/DA/BDA Elements to create
+										a structure for which DOI/SDI/DAI Elements should be created later. Null will be returned when an invalid
+									Template Structure is described by the path.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>lnElement: <span class="tsd-signature-type">Element</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The LN Element to use for searching the starting DO Element.</p>
+									</div>
+								</li>
+								<li>
+									<h5>path: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The (S)DO/(B)DA Elements to find in the template structure.</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Element</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span></h4>
+							<p>List of Elements starting with the DO Element followed by one or more SDO or (B)DA Elements describing the structure.</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
 					<a name="determineUninitializedStructure" class="tsd-anchor"></a>
 					<h3>determine<wbr>Uninitialized<wbr>Structure</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
@@ -91,7 +132,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/d3baa74/src/foundation/dai.ts#L14">src/foundation/dai.ts:14</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/3f6b659/src/foundation/dai.ts#L14">src/foundation/dai.ts:14</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -133,7 +174,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/d3baa74/src/foundation/dai.ts#L61">src/foundation/dai.ts:61</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/3f6b659/src/foundation/dai.ts#L61">src/foundation/dai.ts:61</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -171,6 +212,9 @@
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
+					<li class=" tsd-kind-function tsd-parent-kind-module">
+						<a href="foundation_dai.html#createTemplateStructure" class="tsd-kind-icon">create<wbr>Template<wbr>Structure</a>
+					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-module">
 						<a href="foundation_dai.html#determineUninitializedStructure" class="tsd-kind-icon">determine<wbr>Uninitialized<wbr>Structure</a>
 					</li>

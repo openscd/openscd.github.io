@@ -43,3 +43,34 @@ export function initializeElements(uninitializedTemplateStructure) {
     return daiElement;
   }
 }
+export function createTemplateStructure(lnElement, path) {
+  let templateStructure = [];
+  const doc = lnElement.ownerDocument;
+  const lnType = lnElement.getAttribute("lnType") ?? "";
+  let typeElement = doc.querySelector(`LNodeType[id="${lnType}"]`);
+  path.forEach((name) => {
+    if (!typeElement) {
+      templateStructure = null;
+      return;
+    }
+    const dataElement = typeElement.querySelector(`:scope > DO[name="${name}"], :scope > SDO[name="${name}"], :scope > DA[name="${name}"], :scope > BDA[name="${name}"]`);
+    if (dataElement === null) {
+      templateStructure = null;
+      return;
+    }
+    templateStructure.push(dataElement);
+    if (dataElement.tagName === "DO" || dataElement.tagName === "SDO") {
+      const type = dataElement.getAttribute("type") ?? "";
+      typeElement = doc.querySelector(`DataTypeTemplates > DOType[id="${type}"]`);
+    } else {
+      const bType = dataElement.getAttribute("bType") ?? "";
+      if (bType === "Struct") {
+        const type = dataElement.getAttribute("type") ?? "";
+        typeElement = doc.querySelector(`DataTypeTemplates > DAType[id="${type}"]`);
+      } else {
+        typeElement = null;
+      }
+    }
+  });
+  return templateStructure;
+}

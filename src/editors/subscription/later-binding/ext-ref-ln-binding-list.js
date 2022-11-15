@@ -29,7 +29,10 @@ import {
   existExtRef,
   getExtRef,
   newSubscriptionChangedEvent,
-  styles
+  removeSubscriptionSupervision,
+  instantiateSubscriptionSupervision,
+  styles,
+  canRemoveSubscriptionSupervision
 } from "../foundation.js";
 import {getSubscribedExtRefElements} from "./foundation.js";
 import {emptyInputsDeleteActions} from "../../../foundation/ied.js";
@@ -73,6 +76,8 @@ export let ExtRefLnBindingList = class extends LitElement {
       const extRef = createExtRefElement(this.currentSelectedControlElement, this.currentSelectedFcdaElement);
       actions.push({new: {parent: inputsElement, element: extRef}});
     }
+    const subscriberIed = lnElement.closest("IED") || void 0;
+    actions.push(...instantiateSubscriptionSupervision(this.currentSelectedControlElement, subscriberIed));
     const title = get("subscription.connect");
     return {title, actions};
   }
@@ -87,6 +92,9 @@ export let ExtRefLnBindingList = class extends LitElement {
       actions.push({old: {parent: inputElement, element: extRefElement}});
     }
     actions.push(...emptyInputsDeleteActions(actions));
+    const subscriberIed = lnElement.closest("IED") || void 0;
+    if (extRefElement && canRemoveSubscriptionSupervision(extRefElement))
+      actions.push(...removeSubscriptionSupervision(this.currentSelectedControlElement, subscriberIed));
     return {
       title: get("subscription.disconnect"),
       actions

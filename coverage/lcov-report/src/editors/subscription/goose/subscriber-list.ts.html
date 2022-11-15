@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">97.74% </span>
+                <span class="strong">97.22% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>434/444</span>
+                <span class='fraction'>455/468</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">97.74% </span>
+                <span class="strong">97.22% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>434/444</span>
+                <span class='fraction'>455/468</span>
             </div>
         
             
@@ -507,7 +507,33 @@
 <a name='L442'></a><a href='#L442'>442</a>
 <a name='L443'></a><a href='#L443'>443</a>
 <a name='L444'></a><a href='#L444'>444</a>
-<a name='L445'></a><a href='#L445'>445</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">2x</span>
+<a name='L445'></a><a href='#L445'>445</a>
+<a name='L446'></a><a href='#L446'>446</a>
+<a name='L447'></a><a href='#L447'>447</a>
+<a name='L448'></a><a href='#L448'>448</a>
+<a name='L449'></a><a href='#L449'>449</a>
+<a name='L450'></a><a href='#L450'>450</a>
+<a name='L451'></a><a href='#L451'>451</a>
+<a name='L452'></a><a href='#L452'>452</a>
+<a name='L453'></a><a href='#L453'>453</a>
+<a name='L454'></a><a href='#L454'>454</a>
+<a name='L455'></a><a href='#L455'>455</a>
+<a name='L456'></a><a href='#L456'>456</a>
+<a name='L457'></a><a href='#L457'>457</a>
+<a name='L458'></a><a href='#L458'>458</a>
+<a name='L459'></a><a href='#L459'>459</a>
+<a name='L460'></a><a href='#L460'>460</a>
+<a name='L461'></a><a href='#L461'>461</a>
+<a name='L462'></a><a href='#L462'>462</a>
+<a name='L463'></a><a href='#L463'>463</a>
+<a name='L464'></a><a href='#L464'>464</a>
+<a name='L465'></a><a href='#L465'>465</a>
+<a name='L466'></a><a href='#L466'>466</a>
+<a name='L467'></a><a href='#L467'>467</a>
+<a name='L468'></a><a href='#L468'>468</a>
+<a name='L469'></a><a href='#L469'>469</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
@@ -765,7 +791,29 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -984,7 +1032,9 @@ import {
   existExtRef,
   getExtRef,
   IEDSelectEvent,
+  instantiateSubscriptionSupervision,
   ListElement,
+  removeSubscriptionSupervision,
   styles,
   SubscriberListContainer,
   SubscribeStatus,
@@ -1190,6 +1240,7 @@ export class SubscriberList extends SubscriberListContainer {
       inputsElement = createElement(ied.ownerDocument, 'Inputs', {});
 &nbsp;
     const actions: Create[] = [];
+&nbsp;
     this.currentUsedDataset!.querySelectorAll('FCDA').forEach(fcda =&gt; {
       if (
         !existExtRef(inputsElement!, fcda, this.currentSelectedGseControl) &amp;&amp;
@@ -1206,15 +1257,31 @@ export class SubscriberList extends SubscriberListContainer {
       }
     });
 &nbsp;
+    // we need to extend the actions array with the actions for the instation of the LGOS
+    const supervisionActions: Create[] = instantiateSubscriptionSupervision(
+      this.currentSelectedGseControl,
+      ied
+    );
+&nbsp;
     /** If the IED doesn't have a Inputs element, just append it to the first LN0 element. */
     const title = get('subscription.connect');
     if (inputsElement.parentElement) <span class="branch-0 cbranch-no" title="branch not covered" >{</span>
-<span class="cstat-no" title="statement not covered" >      this.dispatchEvent(newActionEvent({ title, actions }));</span>
+<span class="cstat-no" title="statement not covered" >      this.dispatchEvent(</span>
+<span class="cstat-no" title="statement not covered" >        newActionEvent({</span>
+<span class="cstat-no" title="statement not covered" >          title,</span>
+<span class="cstat-no" title="statement not covered" >          actions: actions.concat(supervisionActions),</span>
+        })
+      );
     } else {
       const inputAction: Create = {
         new: { parent: ied.querySelector('LN0')!, element: inputsElement },
       };
-      this.dispatchEvent(newActionEvent({ title, actions: [inputAction] }));
+      this.dispatchEvent(
+        newActionEvent({
+          title,
+          actions: [inputAction].concat(supervisionActions),
+        })
+      );
     }
   }
 &nbsp;
@@ -1229,6 +1296,11 @@ export class SubscriberList extends SubscriberListContainer {
 &nbsp;
     // Check if empty Input Element should also be removed.
     actions.push(...emptyInputsDeleteActions(actions));
+&nbsp;
+    // we need to extend the actions array with the actions for removing the supervision
+    actions.push(
+      ...removeSubscriptionSupervision(this.currentSelectedGseControl, ied)
+    );
 &nbsp;
     this.dispatchEvent(
       newActionEvent({
@@ -1402,7 +1474,7 @@ export class SubscriberList extends SubscriberListContainer {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener">istanbul</a>
-                at Thu Nov 10 2022 14:26:04 GMT+0000 (Coordinated Universal Time)
+                at Tue Nov 15 2022 10:15:57 GMT+0000 (Coordinated Universal Time)
             </div>
         </div>
         <script src="../../../../prettify.js"></script>

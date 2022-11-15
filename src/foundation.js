@@ -1948,3 +1948,7 @@ export function newLnInstGenerator(parent) {
     return generators.get(lnClass)();
   };
 }
+export function minAvailableLogicalNodeInstance(lnElements) {
+  const lnInsts = new Set(lnElements.map((ln) => ln.getAttribute("inst") || ""));
+  return lnInstRange.find((lnInst) => !lnInsts.has(lnInst));
+}
