@@ -62,7 +62,8 @@ export const de = {
     iedName: "Referenziertes IED",
     ldInst: "Referenziertes logisches Gerät",
     prefix: "Präfix des logischen Knotens",
-    lnInst: "Instanz des logischen Knotens"
+    lnInst: "Instanz des logischen Knotens",
+    virtual: "Virtuell"
   },
   settings: {
     title: "Einstellungen",

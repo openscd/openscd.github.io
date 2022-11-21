@@ -62,7 +62,8 @@ export const en = {
     iedName: "Referenced IED",
     ldInst: "Referenced Logical Device",
     prefix: "Prefix of the Logical Node",
-    lnInst: "Instance of the Logical Node"
+    lnInst: "Instance of the Logical Node",
+    virtual: "Virtual"
   },
   settings: {
     title: "Settings",
