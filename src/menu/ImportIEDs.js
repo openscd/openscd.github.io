@@ -210,8 +210,11 @@ function isIedNameUnique(ied, doc) {
   return true;
 }
 export async function importIED(ied, doc, dispatchObject) {
-  if (ied.getAttribute("name") === "TEMPLATE")
-    ied.setAttribute("name", "TEMPLATE_IED" + (Array.from(doc.querySelectorAll("IED")).filter((ied2) => ied2.getAttribute("name")?.includes("TEMPLATE")).length + 1));
+  if (ied.getAttribute("name") === "TEMPLATE") {
+    const newIedName = "TEMPLATE_IED" + (Array.from(doc.querySelectorAll("IED")).filter((ied2) => ied2.getAttribute("name")?.includes("TEMPLATE")).length + 1);
+    ied.setAttribute("name", newIedName);
+    Array.from(ied.ownerDocument.querySelectorAll(':root > Communication > SubNetwork > ConnectedAP[iedName="TEMPLATE"]')).forEach((connectedAp) => connectedAp.setAttribute("iedName", newIedName));
+  }
   if (!isIedNameUnique(ied, doc)) {
     dispatchObject.dispatchEvent(newLogEvent({
       kind: "error",
