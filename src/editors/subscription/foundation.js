@@ -219,6 +219,37 @@ export function findOrCreateAvailableLNInst(controlBlock, subscriberIED, supervi
   }
   return availableLN;
 }
+export function getFirstSubscribedExtRef(publishedControlBlock, subscribingIed) {
+  const publishingIed = publishedControlBlock.closest("LN,LN0");
+  const dataSet = publishingIed.querySelector(`DataSet[name="${publishedControlBlock.getAttribute("datSet")}"]`);
+  let extRef = void 0;
+  Array.from(subscribingIed?.querySelectorAll("LN0 > Inputs, LN > Inputs")).some((inputs) => {
+    Array.from(dataSet.querySelectorAll("FCDA")).some((fcda) => {
+      const anExtRef = getExtRef(inputs, fcda, publishedControlBlock);
+      if (anExtRef) {
+        extRef = anExtRef;
+        return true;
+      }
+      return false;
+    });
+    return extRef !== void 0;
+  });
+  return extRef !== void 0 ? extRef : null;
+}
+export function getExistingSupervision(extRef) {
+  if (extRef === null)
+    return null;
+  const extRefValues = ["iedName", "serviceType", "srcPrefix", "srcCBName"];
+  const [srcIedName, serviceType, srcPrefix, srcCBName] = extRefValues.map((attr) => extRef.getAttribute(attr) ?? "");
+  const supervisionType = serviceType === "GOOSE" ? "LGOS" : "LSVS";
+  const refSelector = supervisionType === "LGOS" ? 'DOI[name="GoCBRef"]' : 'DOI[name="SvCBRef"]';
+  const srcLDInst = extRef.getAttribute("srcLDInst") ?? extRef.getAttribute("ldInst");
+  const srcLNClass = extRef.getAttribute("srcLNClass") ?? "LLN0";
+  const cbReference = `${srcIedName}${srcPrefix}${srcLDInst}/${srcLNClass}.${srcCBName}`;
+  const iedName = extRef.closest("IED")?.getAttribute("name");
+  const candidates = Array.from(extRef.ownerDocument.querySelector(`IED[name="${iedName}"]`).querySelectorAll(`LN[lnClass="${supervisionType}"]>${refSelector}>DAI[name="setSrcRef"]>Val`)).find((val) => val.textContent === cbReference);
+  return candidates !== void 0 ? candidates.closest("LN") : null;
+}
 export function instantiatedSupervisionsCount(subscriberIED, controlBlock, supervisionType) {
   const instantiatedValues = Array.from(subscriberIED.querySelectorAll(`LN[lnClass="${supervisionType}"]>DOI>DAI>Val`)).filter((val) => val.textContent !== "");
   return instantiatedValues.length;

@@ -17,6 +17,7 @@ import {
   property,
   state
 } from "../../../../_snowpack/pkg/lit-element.js";
+import {nothing} from "../../../../_snowpack/pkg/lit-html.js";
 import {get, translate} from "../../../../_snowpack/pkg/lit-translate.js";
 import {
   createElement,
@@ -28,6 +29,7 @@ import {
   createExtRefElement,
   existExtRef,
   getExtRef,
+  getExistingSupervision,
   newSubscriptionChangedEvent,
   removeSubscriptionSupervision,
   instantiateSubscriptionSupervision,
@@ -113,6 +115,31 @@ export let ExtRefLnBindingList = class extends LitElement {
   renderTitle() {
     return html`<h1>${translate(`subscription.binding.extRefList.title`)}</h1>`;
   }
+  renderSubscribedLN(lnElement) {
+    const extRefs = getSubscribedExtRefElements(lnElement, this.controlTag, this.currentSelectedFcdaElement, this.currentSelectedControlElement, false);
+    const supervisionNode = getExistingSupervision(extRefs[0]);
+    return html`<mwc-list-item
+      graphic="large"
+      ?hasMeta=${supervisionNode !== null}
+      ?disabled=${this.bindingNotSupported(lnElement)}
+      twoline
+      value="${identity(lnElement)}"
+      @click=${() => {
+      const replaceAction = this.unsubscribe(lnElement);
+      if (replaceAction) {
+        this.dispatchEvent(newActionEvent(replaceAction));
+        this.dispatchEvent(newSubscriptionChangedEvent(this.currentSelectedControlElement, this.currentSelectedFcdaElement));
+      }
+    }}
+    >
+      <span>${this.buildLNTitle(lnElement)}</span>
+      <span slot="secondary"> ${identity(lnElement.closest("LDevice"))} </span>
+      <mwc-icon slot="graphic">close</mwc-icon>
+      ${supervisionNode !== null ? html`<mwc-icon title="${identity(supervisionNode)}" slot="meta"
+            >monitor_heart</mwc-icon
+          >` : nothing}</mwc-list-item
+    >`;
+  }
   renderSubscribedLNs() {
     const subscribedLNs = this.getSubscribedLNElements();
     return html`
@@ -123,25 +150,7 @@ export let ExtRefLnBindingList = class extends LitElement {
         <span>${translate("subscription.subscriber.subscribed")}</span>
       </mwc-list-item>
       <li divider role="separator"></li>
-      ${subscribedLNs.length > 0 ? html`${subscribedLNs.map((lnElement) => html` <mwc-list-item
-              graphic="large"
-              ?disabled=${this.bindingNotSupported(lnElement)}
-              twoline
-              value="${identity(lnElement)}"
-              @click=${() => {
-      const replaceAction = this.unsubscribe(lnElement);
-      if (replaceAction) {
-        this.dispatchEvent(newActionEvent(replaceAction));
-        this.dispatchEvent(newSubscriptionChangedEvent(this.currentSelectedControlElement, this.currentSelectedFcdaElement));
-      }
-    }}
-            >
-              <span>${this.buildLNTitle(lnElement)}</span>
-              <span slot="secondary">
-                ${identity(lnElement.closest("LDevice"))}
-              </span>
-              <mwc-icon slot="graphic">close</mwc-icon>
-            </mwc-list-item>`)}` : html`<mwc-list-item graphic="large" noninteractive>
+      ${subscribedLNs.length > 0 ? html`${subscribedLNs.map((lN) => this.renderSubscribedLN(lN))}` : html`<mwc-list-item graphic="large" noninteractive>
             ${translate("subscription.binding.extRefList.noSubscribedLNs")}
           </mwc-list-item>`}
     `;

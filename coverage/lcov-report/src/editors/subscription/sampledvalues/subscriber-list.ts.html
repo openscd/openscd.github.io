@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">96.8% </span>
+                <span class="strong">96.96% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>455/470</span>
+                <span class='fraction'>480/495</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">96.8% </span>
+                <span class="strong">96.96% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>455/470</span>
+                <span class='fraction'>480/495</span>
             </div>
         
             
@@ -533,7 +533,35 @@
 <a name='L468'></a><a href='#L468'>468</a>
 <a name='L469'></a><a href='#L469'>469</a>
 <a name='L470'></a><a href='#L470'>470</a>
-<a name='L471'></a><a href='#L471'>471</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">2x</span>
+<a name='L471'></a><a href='#L471'>471</a>
+<a name='L472'></a><a href='#L472'>472</a>
+<a name='L473'></a><a href='#L473'>473</a>
+<a name='L474'></a><a href='#L474'>474</a>
+<a name='L475'></a><a href='#L475'>475</a>
+<a name='L476'></a><a href='#L476'>476</a>
+<a name='L477'></a><a href='#L477'>477</a>
+<a name='L478'></a><a href='#L478'>478</a>
+<a name='L479'></a><a href='#L479'>479</a>
+<a name='L480'></a><a href='#L480'>480</a>
+<a name='L481'></a><a href='#L481'>481</a>
+<a name='L482'></a><a href='#L482'>482</a>
+<a name='L483'></a><a href='#L483'>483</a>
+<a name='L484'></a><a href='#L484'>484</a>
+<a name='L485'></a><a href='#L485'>485</a>
+<a name='L486'></a><a href='#L486'>486</a>
+<a name='L487'></a><a href='#L487'>487</a>
+<a name='L488'></a><a href='#L488'>488</a>
+<a name='L489'></a><a href='#L489'>489</a>
+<a name='L490'></a><a href='#L490'>490</a>
+<a name='L491'></a><a href='#L491'>491</a>
+<a name='L492'></a><a href='#L492'>492</a>
+<a name='L493'></a><a href='#L493'>493</a>
+<a name='L494'></a><a href='#L494'>494</a>
+<a name='L495'></a><a href='#L495'>495</a>
+<a name='L496'></a><a href='#L496'>496</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
@@ -864,7 +892,29 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
@@ -1010,6 +1060,7 @@
   property,
   TemplateResult,
 } from 'lit-element';
+import { nothing } from 'lit-html';
 import { get, translate } from 'lit-translate';
 &nbsp;
 import '@material/mwc-icon';
@@ -1034,7 +1085,9 @@ import {
   canCreateValidExtRef,
   createExtRefElement,
   existExtRef,
+  getExistingSupervision,
   getExtRef,
+  getFirstSubscribedExtRef,
   IEDSelectEvent,
   instantiateSubscriptionSupervision,
   ListElement,
@@ -1263,7 +1316,7 @@ export class SubscriberList extends SubscriberListContainer {
       }
     });
 &nbsp;
-    // we need to extend the actions array with the actions for the instation of the LSVS
+    // we need to extend the actions array with the actions for the instantiation of the LSVS
     const supervisionActions: Create[] = instantiateSubscriptionSupervision(
       this.currentSelectedSmvControl,
       ied
@@ -1317,6 +1370,23 @@ export class SubscriberList extends SubscriberListContainer {
   }
 &nbsp;
   renderSubscriber(status: SubscribeStatus, element: Element): TemplateResult {
+    let firstSubscribedExtRef: Element | null = null;
+    let supervisionNode: Element | null = null;
+    if (status !== SubscribeStatus.None) {
+      if (view === View.PUBLISHER) {
+        firstSubscribedExtRef = getFirstSubscribedExtRef(
+          this.currentSelectedSmvControl!,
+          element
+        );
+        supervisionNode = getExistingSupervision(firstSubscribedExtRef!);
+      } else {
+        firstSubscribedExtRef = getFirstSubscribedExtRef(
+          element,
+          this.currentSelectedIed!
+        );
+        supervisionNode = getExistingSupervision(firstSubscribedExtRef!);
+      }
+    }
     return html` &lt;mwc-list-item
       @click=${() =&gt; {
         this.dispatchEvent(
@@ -1324,7 +1394,7 @@ export class SubscriberList extends SubscriberListContainer {
         );
       }}
       graphic="avatar"
-      hasMeta
+      ?hasMeta=${supervisionNode !== null}
     &gt;
       &lt;span
         &gt;${view == View.PUBLISHER
@@ -1335,6 +1405,11 @@ export class SubscriberList extends SubscriberListContainer {
       &lt;mwc-icon slot="graphic"
         &gt;${status == SubscribeStatus.Full ? html`clear` : html`add`}&lt;/mwc-icon
       &gt;
+      ${supervisionNode !== null
+        ? html`&lt;mwc-icon title="${identity(supervisionNode)}" slot="meta"
+            &gt;monitor_heart&lt;/mwc-icon
+          &gt;`
+        : nothing}
     &lt;/mwc-list-item&gt;`;
   }
 &nbsp;
@@ -1480,7 +1555,7 @@ export class SubscriberList extends SubscriberListContainer {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener">istanbul</a>
-                at Wed Nov 23 2022 09:20:21 GMT+0000 (Coordinated Universal Time)
+                at Wed Nov 23 2022 21:22:41 GMT+0000 (Coordinated Universal Time)
             </div>
         </div>
         <script src="../../../../prettify.js"></script>

@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">96.34% </span>
+                <span class="strong">96.19% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>343/356</span>
+                <span class='fraction'>354/368</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">60.52% </span>
+                <span class="strong">60% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>23/38</span>
+                <span class='fraction'>24/40</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>11/11</span>
+                <span class='fraction'>12/12</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">96.34% </span>
+                <span class="strong">96.19% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>343/356</span>
+                <span class='fraction'>354/368</span>
             </div>
         
             
@@ -419,7 +419,20 @@
 <a name='L354'></a><a href='#L354'>354</a>
 <a name='L355'></a><a href='#L355'>355</a>
 <a name='L356'></a><a href='#L356'>356</a>
-<a name='L357'></a><a href='#L357'>357</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">5x</span>
+<a name='L357'></a><a href='#L357'>357</a>
+<a name='L358'></a><a href='#L358'>358</a>
+<a name='L359'></a><a href='#L359'>359</a>
+<a name='L360'></a><a href='#L360'>360</a>
+<a name='L361'></a><a href='#L361'>361</a>
+<a name='L362'></a><a href='#L362'>362</a>
+<a name='L363'></a><a href='#L363'>363</a>
+<a name='L364'></a><a href='#L364'>364</a>
+<a name='L365'></a><a href='#L365'>365</a>
+<a name='L366'></a><a href='#L366'>366</a>
+<a name='L367'></a><a href='#L367'>367</a>
+<a name='L368'></a><a href='#L368'>368</a>
+<a name='L369'></a><a href='#L369'>369</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-yes">5x</span>
@@ -674,23 +687,34 @@
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
@@ -796,6 +820,7 @@ import {
 } from '../../../foundation.js';
 &nbsp;
 import {
+  getExistingSupervision,
   styles,
   updateExtRefElement,
   serviceTypes,
@@ -1017,6 +1042,31 @@ export class ExtRefLaterBindingList extends LitElement {
     &lt;/h1&gt;`;
   }
 &nbsp;
+  private renderExtRefElement(extRefElement: Element): TemplateResult {
+    const supervisionNode = getExistingSupervision(extRefElement);
+    return html` &lt;mwc-list-item
+      graphic="large"
+      ?hasMeta=${supervisionNode !== null}
+      twoline
+      @click=${() =&gt; this.unsubscribe(extRefElement)}
+      value="${identity(extRefElement)}"
+    &gt;
+      &lt;span&gt;
+        ${extRefElement.getAttribute('intAddr')}
+        ${getDescriptionAttribute(extRefElement)
+          ? html` (${getDescriptionAttribute(<span class="branch-0 cbranch-no" title="branch not covered" >extRefElement)})`</span>
+<span class="cstat-no" title="statement not covered" >          : nothing}</span>
+      &lt;/span&gt;
+      &lt;span slot="secondary"&gt;${identity(extRefElement)}&lt;/span&gt;
+      &lt;mwc-icon slot="graphic"&gt;swap_horiz&lt;/mwc-icon&gt;
+      ${supervisionNode !== <span class="branch-0 cbranch-no" title="branch not covered" >null</span>
+<span class="cstat-no" title="statement not covered" >        ? html`&lt;mwc-icon title="${identity(supervisionNode)}" slot="meta"</span>
+            &gt;monitor_heart&lt;/mwc-icon
+          &gt;`
+        : nothing}
+    &lt;/mwc-list-item&gt;`;
+  }
+&nbsp;
   private renderSubscribedExtRefs(): TemplateResult {
     const subscribedExtRefs = this.getSubscribedExtRefElements();
     return html`
@@ -1035,22 +1085,8 @@ export class ExtRefLaterBindingList extends LitElement {
       &lt;/mwc-list-item&gt;
       &lt;li divider role="separator"&gt;&lt;/li&gt;
       ${subscribedExtRefs.length &gt; 0
-        ? html`${subscribedExtRefs.map(
-            extRefElement =&gt; html` &lt;mwc-list-item
-              graphic="large"
-              twoline
-              @click=${() =&gt; this.unsubscribe(extRefElement)}
-              value="${identity(extRefElement)}"
-            &gt;
-              &lt;span&gt;
-                ${extRefElement.getAttribute('intAddr')}
-                ${getDescriptionAttribute(extRefElement)
-                  ? html` (${getDescriptionAttribute(<span class="branch-0 cbranch-no" title="branch not covered" >extRefElement)})`</span>
-<span class="cstat-no" title="statement not covered" >                  : nothing}</span>
-              &lt;/span&gt;
-              &lt;span slot="secondary"&gt;${identity(extRefElement)}&lt;/span&gt;
-              &lt;mwc-icon slot="graphic"&gt;swap_horiz&lt;/mwc-icon&gt;
-            &lt;/mwc-list-item&gt;`
+        ? html`${subscribedExtRefs.map(extRefElement =&gt;
+            this.renderExtRefElement(extRefElement)
           )}`
         : html`&lt;mwc-list-item graphic="large" noninteractive&gt;
             ${translate(
@@ -1138,7 +1174,7 @@ export class ExtRefLaterBindingList extends LitElement {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener">istanbul</a>
-                at Wed Nov 23 2022 09:20:21 GMT+0000 (Coordinated Universal Time)
+                at Wed Nov 23 2022 21:22:41 GMT+0000 (Coordinated Universal Time)
             </div>
         </div>
         <script src="../../../../prettify.js"></script>

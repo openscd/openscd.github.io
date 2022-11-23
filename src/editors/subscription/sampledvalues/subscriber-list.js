@@ -15,6 +15,7 @@ import {
   html,
   property
 } from "../../../../_snowpack/pkg/lit-element.js";
+import {nothing} from "../../../../_snowpack/pkg/lit-html.js";
 import {get, translate} from "../../../../_snowpack/pkg/lit-translate.js";
 import "../../../../_snowpack/pkg/@material/mwc-icon.js";
 import "../../../../_snowpack/pkg/@material/mwc-list.js";
@@ -33,7 +34,9 @@ import {
   canCreateValidExtRef,
   createExtRefElement,
   existExtRef,
+  getExistingSupervision,
   getExtRef,
+  getFirstSubscribedExtRef,
   instantiateSubscriptionSupervision,
   removeSubscriptionSupervision,
   styles,
@@ -209,12 +212,23 @@ export let SubscriberList = class extends SubscriberListContainer {
     }));
   }
   renderSubscriber(status, element) {
+    let firstSubscribedExtRef = null;
+    let supervisionNode = null;
+    if (status !== SubscribeStatus.None) {
+      if (view === View.PUBLISHER) {
+        firstSubscribedExtRef = getFirstSubscribedExtRef(this.currentSelectedSmvControl, element);
+        supervisionNode = getExistingSupervision(firstSubscribedExtRef);
+      } else {
+        firstSubscribedExtRef = getFirstSubscribedExtRef(element, this.currentSelectedIed);
+        supervisionNode = getExistingSupervision(firstSubscribedExtRef);
+      }
+    }
     return html` <mwc-list-item
       @click=${() => {
       this.dispatchEvent(newSmvSubscriptionEvent(element, status ?? SubscribeStatus.None));
     }}
       graphic="avatar"
-      hasMeta
+      ?hasMeta=${supervisionNode !== null}
     >
       <span
         >${view == View.PUBLISHER ? element.getAttribute("name") : element.getAttribute("name") + ` (${element.closest("IED")?.getAttribute("name")})`}</span
@@ -222,6 +236,9 @@ export let SubscriberList = class extends SubscriberListContainer {
       <mwc-icon slot="graphic"
         >${status == SubscribeStatus.Full ? html`clear` : html`add`}</mwc-icon
       >
+      ${supervisionNode !== null ? html`<mwc-icon title="${identity(supervisionNode)}" slot="meta"
+            >monitor_heart</mwc-icon
+          >` : nothing}
     </mwc-list-item>`;
   }
   renderUnSubscribers(elements) {
