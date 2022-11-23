@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">85.13% </span>
+                <span class="strong">85.84% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>441/518</span>
+                <span class='fraction'>467/544</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">85.71% </span>
+                <span class="strong">86.95% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>36/42</span>
+                <span class='fraction'>40/46</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">88.23% </span>
+                <span class="strong">88.88% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>15/17</span>
+                <span class='fraction'>16/18</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">85.13% </span>
+                <span class="strong">85.84% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>441/518</span>
+                <span class='fraction'>467/544</span>
             </div>
         
             
@@ -581,7 +581,33 @@
 <a name='L516'></a><a href='#L516'>516</a>
 <a name='L517'></a><a href='#L517'>517</a>
 <a name='L518'></a><a href='#L518'>518</a>
-<a name='L519'></a><a href='#L519'>519</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L519'></a><a href='#L519'>519</a>
+<a name='L520'></a><a href='#L520'>520</a>
+<a name='L521'></a><a href='#L521'>521</a>
+<a name='L522'></a><a href='#L522'>522</a>
+<a name='L523'></a><a href='#L523'>523</a>
+<a name='L524'></a><a href='#L524'>524</a>
+<a name='L525'></a><a href='#L525'>525</a>
+<a name='L526'></a><a href='#L526'>526</a>
+<a name='L527'></a><a href='#L527'>527</a>
+<a name='L528'></a><a href='#L528'>528</a>
+<a name='L529'></a><a href='#L529'>529</a>
+<a name='L530'></a><a href='#L530'>530</a>
+<a name='L531'></a><a href='#L531'>531</a>
+<a name='L532'></a><a href='#L532'>532</a>
+<a name='L533'></a><a href='#L533'>533</a>
+<a name='L534'></a><a href='#L534'>534</a>
+<a name='L535'></a><a href='#L535'>535</a>
+<a name='L536'></a><a href='#L536'>536</a>
+<a name='L537'></a><a href='#L537'>537</a>
+<a name='L538'></a><a href='#L538'>538</a>
+<a name='L539'></a><a href='#L539'>539</a>
+<a name='L540'></a><a href='#L540'>540</a>
+<a name='L541'></a><a href='#L541'>541</a>
+<a name='L542'></a><a href='#L542'>542</a>
+<a name='L543'></a><a href='#L543'>543</a>
+<a name='L544'></a><a href='#L544'>544</a>
+<a name='L545'></a><a href='#L545'>545</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -853,6 +879,32 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -1162,11 +1214,11 @@ function importIedsWizard(importDoc: XMLDocument, doc: XMLDocument): Wizard {
       content: [
         html`&lt;filtered-list id="iedList" multi
           &gt;${Array.from(importDoc.querySelectorAll(':root &gt; IED')).map(
-            ied =&gt;
-              html`&lt;mwc-check-list-item value="${identity(ied)}"
+          ied =&gt;
+            html`&lt;mwc-check-list-item value="${identity(ied)}"
                 &gt;${ied.getAttribute('name')}&lt;/mwc-check-list-item
               &gt;`
-          )}&lt;/filtered-list
+        )}&lt;/filtered-list
         &gt;`,
       ],
     },
@@ -1469,6 +1521,26 @@ function isIedNameUnique(ied: Element, doc: Document): boolean {
   return true;
 }
 &nbsp;
+/**
+ * Transfer namespaces from one element to another
+ * @param destElement - Element to transfer namespaces to
+ * @param sourceElement  - Element to transfer namespaces from
+ */
+function updateNamespaces(destElement: Element, sourceElement: Element) {
+  Array.prototype.slice
+    .call(sourceElement.attributes)
+    .filter(attr =&gt; attr.name.startsWith('xmlns:'))
+    .filter(attr =&gt; !destElement.hasAttribute(attr.name))
+    .forEach((attr) =&gt; {
+      destElement.setAttributeNS(
+        'http://www.w3.org/2000/xmlns/',
+        attr.name,
+        attr.value
+      );
+    });
+&nbsp;
+}
+&nbsp;
 export async function importIED(
   ied: Element,
   doc: XMLDocument,
@@ -1501,6 +1573,12 @@ export async function importIED(
       })
     );
   }
+&nbsp;
+  // This doesn't provide redo/undo capability as it is not using the Editing
+  // action API. To use it would require us to cache the full SCL file in
+  // OpenSCD as it is now which could use significant memory.
+  // TODO: In open-scd core update this to allow including in undo/redo.
+  updateNamespaces(doc.documentElement, ied.ownerDocument.documentElement);
 &nbsp;
   const dataTypeTemplateActions = addDataTypeTemplates(ied, doc);
   const communicationActions = addCommunicationElements(ied, doc);
@@ -1624,7 +1702,7 @@ export default class ImportingIedPlugin extends LitElement <span class="fstat-no
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener">istanbul</a>
-                at Tue Nov 22 2022 08:27:25 GMT+0000 (Coordinated Universal Time)
+                at Wed Nov 23 2022 03:37:35 GMT+0000 (Coordinated Universal Time)
             </div>
         </div>
         <script src="../../prettify.js"></script>

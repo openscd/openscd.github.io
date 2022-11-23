@@ -209,6 +209,11 @@ function isIedNameUnique(ied, doc) {
     return false;
   return true;
 }
+function updateNamespaces(destElement, sourceElement) {
+  Array.prototype.slice.call(sourceElement.attributes).filter((attr) => attr.name.startsWith("xmlns:")).filter((attr) => !destElement.hasAttribute(attr.name)).forEach((attr) => {
+    destElement.setAttributeNS("http://www.w3.org/2000/xmlns/", attr.name, attr.value);
+  });
+}
 export async function importIED(ied, doc, dispatchObject) {
   if (ied.getAttribute("name") === "TEMPLATE") {
     const newIedName = "TEMPLATE_IED" + (Array.from(doc.querySelectorAll("IED")).filter((ied2) => ied2.getAttribute("name")?.includes("TEMPLATE")).length + 1);
@@ -223,6 +228,7 @@ export async function importIED(ied, doc, dispatchObject) {
       })
     }));
   }
+  updateNamespaces(doc.documentElement, ied.ownerDocument.documentElement);
   const dataTypeTemplateActions = addDataTypeTemplates(ied, doc);
   const communicationActions = addCommunicationElements(ied, doc);
   const actions = communicationActions.concat(dataTypeTemplateActions);
