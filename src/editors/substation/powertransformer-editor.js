@@ -37,6 +37,7 @@ import {SubstationEditor} from "./substation-editor.js";
 import {BayEditor} from "./bay-editor.js";
 import {VoltageLevelEditor} from "./voltage-level-editor.js";
 import "./sub-equipment-editor.js";
+import "./transformer-winding-editor.js";
 function childTags(element) {
   if (!element)
     return [];
@@ -175,6 +176,18 @@ export let PowerTransformerEditor = class extends LitElement {
               ></sub-equipment-editor>`)}
         </div>` : html``;
   }
+  renderTransformerWinding() {
+    if (!this.showfunctions)
+      return html``;
+    const transformerWindings = getChildElementsByTagName(this.element, "TransformerWinding");
+    return transformerWindings.length ? html`<div class="container">
+          ${transformerWindings.map((transformerWindings2) => html`<transformer-winding-editor
+                .doc=${this.doc}
+                .element=${transformerWindings2}
+                ?showfunctions=${this.showfunctions}
+              ></transformer-winding-editor>`)}
+        </div>` : html``;
+  }
   renderContentIcon() {
     return html`<mwc-icon slot="icon"
         >${powerTransformerTwoWindingIcon}</mwc-icon
@@ -213,9 +226,11 @@ export let PowerTransformerEditor = class extends LitElement {
   }
   render() {
     if (this.showfunctions)
-      return html`<action-pane label="${this.name}"
-        >${this.renderContentPane()}${this.renderLNodes()}${this.renderEqFunctions()}${this.renderSubEquipments()}</action-pane
-      > `;
+      return html`<action-pane label="${this.name}">
+        ${this.renderContentPane()} ${this.renderLNodes()}
+        ${this.renderEqFunctions()} ${this.renderSubEquipments()}
+        ${this.renderTransformerWinding()}
+      </action-pane> `;
     return html`<action-icon label="${this.name}"
       >${this.renderContentIcon()}</action-icon
     > `;
