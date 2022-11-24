@@ -764,6 +764,9 @@ export const de = {
       smvopts: "Optionale Felder"
     }
   },
+  exportCommunication: {
+    noCommunicationSection: "Die Communication-Sektion ist leer."
+  },
   add: "Hinzufügen",
   new: "Neu",
   remove: "Entfernen",

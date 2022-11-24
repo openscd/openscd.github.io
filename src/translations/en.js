@@ -760,6 +760,9 @@ export const en = {
       smvopts: "Optional Fields"
     }
   },
+  exportCommunication: {
+    noCommunicationSection: "No export as Communication section empty"
+  },
   add: "Add",
   new: "New",
   remove: "Remove",

@@ -1948,6 +1948,19 @@ export function newLnInstGenerator(parent) {
     return generators.get(lnClass)();
   };
 }
+export function formatXml(xml, tab) {
+  let formatted = "", indent = "";
+  if (!tab)
+    tab = "	";
+  xml.split(/>\s*</).forEach(function(node) {
+    if (node.match(/^\/\w/))
+      indent = indent.substring(tab.length);
+    formatted += indent + "<" + node + ">\r\n";
+    if (node.match(/^<?\w[^>]*[^/]$/))
+      indent += tab;
+  });
+  return formatted.substring(1, formatted.length - 3);
+}
 export function minAvailableLogicalNodeInstance(lnElements) {
   const lnInsts = new Set(lnElements.map((ln) => ln.getAttribute("inst") || ""));
   return lnInstRange.find((lnInst) => !lnInsts.has(lnInst));
