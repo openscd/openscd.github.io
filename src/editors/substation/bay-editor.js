@@ -15,11 +15,13 @@ import {
   html,
   LitElement,
   property,
-  query
+  query,
+  state
 } from "../../../_snowpack/pkg/lit-element.js";
 import {classMap} from "../../../_snowpack/pkg/lit-html/directives/class-map.js";
 import {translate} from "../../../_snowpack/pkg/lit-translate.js";
 import "../../../_snowpack/pkg/@material/mwc-icon-button.js";
+import "../../../_snowpack/pkg/@material/mwc-textfield.js";
 import "../../action-pane.js";
 import "./ied-editor.js";
 import "./conducting-equipment-editor.js";
@@ -36,6 +38,7 @@ import {emptyWizard, wizards} from "../../wizards/wizard-library.js";
 import {
   cloneSubstationElement,
   renderGeneralEquipment,
+  redirectDialog,
   startMove,
   styles
 } from "./foundation.js";
@@ -52,6 +55,7 @@ export let BayEditor = class extends LitElement {
     this.getAttachedIeds = () => {
       return [];
     };
+    this.cloneUI = false;
   }
   get header() {
     const name = this.element.getAttribute("name") ?? "";
@@ -86,6 +90,11 @@ export let BayEditor = class extends LitElement {
   firstUpdated() {
     this.addMenu.anchor = this.addButton;
   }
+  renderRedirectUI() {
+    if (!this.cloneUI)
+      return html``;
+    return redirectDialog(this.element);
+  }
   renderLNodes() {
     if (!this.showfunctions)
       return html``;
@@ -119,77 +128,77 @@ export let BayEditor = class extends LitElement {
         >`);
   }
   render() {
-    return html`<action-pane label="${this.header}">
-      <abbr slot="action" title="${translate("lnode.tooltip")}">
-        <mwc-icon-button
-          icon="account_tree"
-          @click="${() => this.openLNodeWizard()}"
-        ></mwc-icon-button>
-      </abbr>
-      <abbr slot="action" title="${translate("duplicate")}">
-        <mwc-icon-button
-          icon="content_copy"
-          @click=${() => cloneSubstationElement(this)}
-        ></mwc-icon-button>
-      </abbr>
-      <abbr slot="action" title="${translate("edit")}">
-        <mwc-icon-button
-          icon="edit"
-          @click=${() => this.openEditWizard()}
-        ></mwc-icon-button>
-      </abbr>
-      <abbr slot="action" title="${translate("move")}">
-        <mwc-icon-button
-          icon="forward"
-          @click=${() => startMove(this, BayEditor, [VoltageLevelEditor])}
-        ></mwc-icon-button>
-      </abbr>
-      <abbr slot="action" title="${translate("remove")}">
-        <mwc-icon-button
-          icon="delete"
-          @click=${() => this.remove()}
-        ></mwc-icon-button>
-      </abbr>
-      <abbr
-        slot="action"
-        style="position:relative;"
-        title="${translate("add")}"
-      >
-        <mwc-icon-button
-          icon="playlist_add"
-          @click=${() => this.addMenu.open = true}
-        ></mwc-icon-button
-        ><mwc-menu
-          corner="BOTTOM_RIGHT"
-          menuCorner="END"
-          @action=${(e) => {
+    return html`${this.renderRedirectUI()}<action-pane label="${this.header}">
+        <abbr slot="action" title="${translate("lnode.tooltip")}">
+          <mwc-icon-button
+            icon="account_tree"
+            @click="${() => this.openLNodeWizard()}"
+          ></mwc-icon-button>
+        </abbr>
+        <abbr slot="action" title="${translate("duplicate")}">
+          <mwc-icon-button
+            icon="content_copy"
+            @click=${() => cloneSubstationElement(this)}
+          ></mwc-icon-button>
+        </abbr>
+        <abbr slot="action" title="${translate("edit")}">
+          <mwc-icon-button
+            icon="edit"
+            @click=${() => this.openEditWizard()}
+          ></mwc-icon-button>
+        </abbr>
+        <abbr slot="action" title="${translate("move")}">
+          <mwc-icon-button
+            icon="forward"
+            @click=${() => startMove(this, BayEditor, [VoltageLevelEditor])}
+          ></mwc-icon-button>
+        </abbr>
+        <abbr slot="action" title="${translate("remove")}">
+          <mwc-icon-button
+            icon="delete"
+            @click=${() => this.remove()}
+          ></mwc-icon-button>
+        </abbr>
+        <abbr
+          slot="action"
+          style="position:relative;"
+          title="${translate("add")}"
+        >
+          <mwc-icon-button
+            icon="playlist_add"
+            @click=${() => this.addMenu.open = true}
+          ></mwc-icon-button
+          ><mwc-menu
+            corner="BOTTOM_RIGHT"
+            menuCorner="END"
+            @action=${(e) => {
       const tagName = e.target.selected.value;
       this.openCreateWizard(tagName);
     }}
-          >${this.renderAddButtons()}</mwc-menu
-        >
-      </abbr>
-      ${renderGeneralEquipment(this.doc, this.element, this.showfunctions)}
-      ${this.renderIedContainer()}${this.renderLNodes()}${this.renderFunctions()}
-      <div
-        class="${classMap({
+            >${this.renderAddButtons()}</mwc-menu
+          >
+        </abbr>
+        ${renderGeneralEquipment(this.doc, this.element, this.showfunctions)}
+        ${this.renderIedContainer()}${this.renderLNodes()}${this.renderFunctions()}
+        <div
+          class="${classMap({
       content: true,
       actionicon: !this.showfunctions
     })}"
-      >
-        ${Array.from(getChildElementsByTagName(this.element, "PowerTransformer")).map((pwt) => html`<powertransformer-editor
-              .doc=${this.doc}
-              .element=${pwt}
-              ?showfunctions=${this.showfunctions}
-            ></powertransformer-editor>`)}
-        ${Array.from(getChildElementsByTagName(this.element, "ConductingEquipment")).map((voltageLevel) => html`<conducting-equipment-editor
-              .doc=${this.doc}
-              .element=${voltageLevel}
-              ?readonly=${this.readonly}
-              ?showfunctions=${this.showfunctions}
-            ></conducting-equipment-editor>`)}
-      </div>
-    </action-pane> `;
+        >
+          ${Array.from(getChildElementsByTagName(this.element, "PowerTransformer")).map((pwt) => html`<powertransformer-editor
+                .doc=${this.doc}
+                .element=${pwt}
+                ?showfunctions=${this.showfunctions}
+              ></powertransformer-editor>`)}
+          ${Array.from(getChildElementsByTagName(this.element, "ConductingEquipment")).map((voltageLevel) => html`<conducting-equipment-editor
+                .doc=${this.doc}
+                .element=${voltageLevel}
+                ?readonly=${this.readonly}
+                ?showfunctions=${this.showfunctions}
+              ></conducting-equipment-editor>`)}
+        </div>
+      </action-pane> `;
   }
 };
 BayEditor.styles = css`
@@ -225,6 +234,12 @@ __decorate([
 __decorate([
   property({attribute: false})
 ], BayEditor.prototype, "getAttachedIeds", 2);
+__decorate([
+  state()
+], BayEditor.prototype, "cloneUI", 2);
+__decorate([
+  query("mwc-dialog")
+], BayEditor.prototype, "dialog", 2);
 __decorate([
   query("mwc-menu")
 ], BayEditor.prototype, "addMenu", 2);

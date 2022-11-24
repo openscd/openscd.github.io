@@ -8,6 +8,8 @@
 |-------------------|-----------------|-----------|--------------------------------------------------|--------------------------------|--------------------------------------------------|
 | `addButton`       |                 |           | `IconButton`                                     |                                |                                                  |
 | `addMenu`         |                 |           | `Menu`                                           |                                |                                                  |
+| `cloneUI`         |                 |           | `boolean`                                        | false                          |                                                  |
+| `dialog`          |                 |           | `Dialog`                                         |                                |                                                  |
 | `doc`             |                 |           | `XMLDocument`                                    |                                | The document being edited as provided to editor by [[`Zeroline`]]. |
 | `element`         |                 |           | `Element`                                        |                                |                                                  |
 | `getAttachedIeds` |                 |           | `((element: Element) => Element[]) \| undefined` | "() => {\n    return [];\n  }" |                                                  |

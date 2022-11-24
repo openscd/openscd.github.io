@@ -200,6 +200,12 @@ export const de = {
     action: {
       addvoltagelevel: "Spannungsebene hinzufügen",
       updatesubstation: 'Schaltanlage "{{name}}" bearbeitet'
+    },
+    clone: {
+      redirect: "LNode mitnehmen",
+      cloneclose: "Einmal klonen",
+      cloneproc: "Mehrfach klonen",
+      newname: "Klonname"
     }
   },
   iededitor: {

@@ -200,6 +200,12 @@ export const en = {
     action: {
       addvoltagelevel: "Add voltage level",
       updatesubstation: 'Edited substation "{{name}}"'
+    },
+    clone: {
+      redirect: "Redirect LNode's",
+      cloneclose: "Clone once",
+      cloneproc: "Clone multiple",
+      newname: "Clone Name"
     }
   },
   iededitor: {

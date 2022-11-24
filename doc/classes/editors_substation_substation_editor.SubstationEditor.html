@@ -137,8 +137,10 @@
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-external"><a href="editors_substation_substation_editor.SubstationEditor.html#clientLeft" class="tsd-kind-icon">client<wbr>Left</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-external"><a href="editors_substation_substation_editor.SubstationEditor.html#clientTop" class="tsd-kind-icon">client<wbr>Top</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-external"><a href="editors_substation_substation_editor.SubstationEditor.html#clientWidth" class="tsd-kind-icon">client<wbr>Width</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="editors_substation_substation_editor.SubstationEditor.html#cloneUI" class="tsd-kind-icon">cloneUI</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-external"><a href="editors_substation_substation_editor.SubstationEditor.html#contentEditable" class="tsd-kind-icon">content<wbr>Editable</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-external"><a href="editors_substation_substation_editor.SubstationEditor.html#dataset" class="tsd-kind-icon">dataset</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="editors_substation_substation_editor.SubstationEditor.html#dialog" class="tsd-kind-icon">dialog</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-external"><a href="editors_substation_substation_editor.SubstationEditor.html#dir" class="tsd-kind-icon">dir</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="editors_substation_substation_editor.SubstationEditor.html#doc" class="tsd-kind-icon">doc</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-external"><a href="editors_substation_substation_editor.SubstationEditor.html#draggable" class="tsd-kind-icon">draggable</a></li>
@@ -379,6 +381,7 @@
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="editors_substation_substation_editor.SubstationEditor.html#renderIedContainer" class="tsd-kind-icon">render<wbr>Ied<wbr>Container</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="editors_substation_substation_editor.SubstationEditor.html#renderLNodes" class="tsd-kind-icon">renderLNodes</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="editors_substation_substation_editor.SubstationEditor.html#renderPowerTransformerContainer" class="tsd-kind-icon">render<wbr>Power<wbr>Transformer<wbr>Container</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="editors_substation_substation_editor.SubstationEditor.html#renderRedirectUI" class="tsd-kind-icon">render<wbr>RedirectUI</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-inherited tsd-is-external"><a href="editors_substation_substation_editor.SubstationEditor.html#replaceChild" class="tsd-kind-icon">replace<wbr>Child</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external"><a href="editors_substation_substation_editor.SubstationEditor.html#replaceWith" class="tsd-kind-icon">replace<wbr>With</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external"><a href="editors_substation_substation_editor.SubstationEditor.html#requestFullscreen" class="tsd-kind-icon">request<wbr>Fullscreen</a></li>
@@ -723,7 +726,7 @@
 					<div class="tsd-signature tsd-kind-icon">add<wbr>Button<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">IconButton</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/a59967c/src/editors/substation/substation-editor.ts#L76">src/editors/substation/substation-editor.ts:76</a></li>
+							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/cfd16d6/src/editors/substation/substation-editor.ts#L83">src/editors/substation/substation-editor.ts:83</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -733,7 +736,7 @@
 					<div class="tsd-signature tsd-kind-icon">add<wbr>Menu<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Menu</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/a59967c/src/editors/substation/substation-editor.ts#L75">src/editors/substation/substation-editor.ts:75</a></li>
+							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/cfd16d6/src/editors/substation/substation-editor.ts#L82">src/editors/substation/substation-editor.ts:82</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -916,6 +919,16 @@
 						</ul>
 					</aside>
 				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="cloneUI" class="tsd-anchor"></a>
+					<h3>cloneUI</h3>
+					<div class="tsd-signature tsd-kind-icon">cloneUI<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = false</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/cfd16d6/src/editors/substation/substation-editor.ts#L79">src/editors/substation/substation-editor.ts:79</a></li>
+						</ul>
+					</aside>
+				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-external">
 					<a name="contentEditable" class="tsd-anchor"></a>
 					<h3>content<wbr>Editable</h3>
@@ -938,6 +951,16 @@
 						</ul>
 					</aside>
 				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="dialog" class="tsd-anchor"></a>
+					<h3>dialog</h3>
+					<div class="tsd-signature tsd-kind-icon">dialog<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Dialog</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/cfd16d6/src/editors/substation/substation-editor.ts#L81">src/editors/substation/substation-editor.ts:81</a></li>
+						</ul>
+					</aside>
+				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-external">
 					<a name="dir" class="tsd-anchor"></a>
 					<h3>dir</h3>
@@ -955,7 +978,7 @@
 					<div class="tsd-signature tsd-kind-icon">doc<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">XMLDocument</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/a59967c/src/editors/substation/substation-editor.ts#L52">src/editors/substation/substation-editor.ts:52</a></li>
+							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/cfd16d6/src/editors/substation/substation-editor.ts#L55">src/editors/substation/substation-editor.ts:55</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -981,7 +1004,7 @@
 					<div class="tsd-signature tsd-kind-icon">element<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Element</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/a59967c/src/editors/substation/substation-editor.ts#L55">src/editors/substation/substation-editor.ts:55</a></li>
+							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/cfd16d6/src/editors/substation/substation-editor.ts#L58">src/editors/substation/substation-editor.ts:58</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -1050,7 +1073,7 @@
 					<div class="tsd-signature tsd-kind-icon">get<wbr>Attached<wbr>Ieds<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span>element<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Element</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">Element</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> = ...</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/a59967c/src/editors/substation/substation-editor.ts#L71">src/editors/substation/substation-editor.ts:71</a></li>
+							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/cfd16d6/src/editors/substation/substation-editor.ts#L74">src/editors/substation/substation-editor.ts:74</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-type-declaration">
@@ -2937,7 +2960,7 @@
 					<div class="tsd-signature tsd-kind-icon">readonly<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = false</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/a59967c/src/editors/substation/substation-editor.ts#L57">src/editors/substation/substation-editor.ts:57</a></li>
+							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/cfd16d6/src/editors/substation/substation-editor.ts#L60">src/editors/substation/substation-editor.ts:60</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -3024,7 +3047,7 @@
 					<div class="tsd-signature tsd-kind-icon">showfunctions<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = false</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/a59967c/src/editors/substation/substation-editor.ts#L60">src/editors/substation/substation-editor.ts:60</a></li>
+							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/cfd16d6/src/editors/substation/substation-editor.ts#L63">src/editors/substation/substation-editor.ts:63</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -3265,7 +3288,7 @@
 					<aside class="tsd-sources">
 						<p>Overrides LitElement.styles</p>
 						<ul>
-							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/a59967c/src/editors/substation/substation-editor.ts#L258">src/editors/substation/substation-editor.ts:258</a></li>
+							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/cfd16d6/src/editors/substation/substation-editor.ts#L272">src/editors/substation/substation-editor.ts:272</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -3316,7 +3339,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/a59967c/src/editors/substation/substation-editor.ts#L63">src/editors/substation/substation-editor.ts:63</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/cfd16d6/src/editors/substation/substation-editor.ts#L66">src/editors/substation/substation-editor.ts:66</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
@@ -4070,7 +4093,7 @@
 							<aside class="tsd-sources">
 								<p>Overrides LitElement.firstUpdated</p>
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/a59967c/src/editors/substation/substation-editor.ts#L109">src/editors/substation/substation-editor.ts:109</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/cfd16d6/src/editors/substation/substation-editor.ts#L116">src/editors/substation/substation-editor.ts:116</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -4990,7 +5013,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/a59967c/src/editors/substation/substation-editor.ts#L103">src/editors/substation/substation-editor.ts:103</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/cfd16d6/src/editors/substation/substation-editor.ts#L110">src/editors/substation/substation-editor.ts:110</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -5013,7 +5036,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/a59967c/src/editors/substation/substation-editor.ts#L79">src/editors/substation/substation-editor.ts:79</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/cfd16d6/src/editors/substation/substation-editor.ts#L86">src/editors/substation/substation-editor.ts:86</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -5035,7 +5058,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/a59967c/src/editors/substation/substation-editor.ts#L85">src/editors/substation/substation-editor.ts:85</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/cfd16d6/src/editors/substation/substation-editor.ts#L92">src/editors/substation/substation-editor.ts:92</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -5302,7 +5325,7 @@
 							<aside class="tsd-sources">
 								<p>Overrides LitElement.remove</p>
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/a59967c/src/editors/substation/substation-editor.ts#L91">src/editors/substation/substation-editor.ts:91</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/cfd16d6/src/editors/substation/substation-editor.ts#L98">src/editors/substation/substation-editor.ts:98</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -5516,7 +5539,7 @@
 							<aside class="tsd-sources">
 								<p>Overrides LitElement.render</p>
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/a59967c/src/editors/substation/substation-editor.ts#L191">src/editors/substation/substation-editor.ts:191</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/cfd16d6/src/editors/substation/substation-editor.ts#L204">src/editors/substation/substation-editor.ts:204</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">TemplateResult</span></h4>
@@ -5533,7 +5556,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/a59967c/src/editors/substation/substation-editor.ts#L182">src/editors/substation/substation-editor.ts:182</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/cfd16d6/src/editors/substation/substation-editor.ts#L195">src/editors/substation/substation-editor.ts:195</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">TemplateResult</span><span class="tsd-signature-symbol">[]</span></h4>
@@ -5550,7 +5573,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/a59967c/src/editors/substation/substation-editor.ts#L131">src/editors/substation/substation-editor.ts:131</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/cfd16d6/src/editors/substation/substation-editor.ts#L144">src/editors/substation/substation-editor.ts:144</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">TemplateResult</span></h4>
@@ -5567,7 +5590,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/a59967c/src/editors/substation/substation-editor.ts#L145">src/editors/substation/substation-editor.ts:145</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/cfd16d6/src/editors/substation/substation-editor.ts#L158">src/editors/substation/substation-editor.ts:158</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">TemplateResult</span></h4>
@@ -5584,7 +5607,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/a59967c/src/editors/substation/substation-editor.ts#L113">src/editors/substation/substation-editor.ts:113</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/cfd16d6/src/editors/substation/substation-editor.ts#L126">src/editors/substation/substation-editor.ts:126</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">TemplateResult</span></h4>
@@ -5601,7 +5624,24 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/a59967c/src/editors/substation/substation-editor.ts#L157">src/editors/substation/substation-editor.ts:157</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/cfd16d6/src/editors/substation/substation-editor.ts#L170">src/editors/substation/substation-editor.ts:170</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">TemplateResult</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private">
+					<a name="renderRedirectUI" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> render<wbr>RedirectUI</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private">
+						<li class="tsd-signature tsd-kind-icon">render<wbr>RedirectUI<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">TemplateResult</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/cfd16d6/src/editors/substation/substation-editor.ts#L120">src/editors/substation/substation-editor.ts:120</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">TemplateResult</span></h4>
@@ -6631,11 +6671,17 @@
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-external">
 								<a href="editors_substation_substation_editor.SubstationEditor.html#clientWidth" class="tsd-kind-icon">client<wbr>Width</a>
 							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="editors_substation_substation_editor.SubstationEditor.html#cloneUI" class="tsd-kind-icon">cloneUI</a>
+							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-external">
 								<a href="editors_substation_substation_editor.SubstationEditor.html#contentEditable" class="tsd-kind-icon">content<wbr>Editable</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-external">
 								<a href="editors_substation_substation_editor.SubstationEditor.html#dataset" class="tsd-kind-icon">dataset</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="editors_substation_substation_editor.SubstationEditor.html#dialog" class="tsd-kind-icon">dialog</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-external">
 								<a href="editors_substation_substation_editor.SubstationEditor.html#dir" class="tsd-kind-icon">dir</a>
@@ -7326,6 +7372,9 @@
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="editors_substation_substation_editor.SubstationEditor.html#renderPowerTransformerContainer" class="tsd-kind-icon">render<wbr>Power<wbr>Transformer<wbr>Container</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private">
+								<a href="editors_substation_substation_editor.SubstationEditor.html#renderRedirectUI" class="tsd-kind-icon">render<wbr>RedirectUI</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-inherited tsd-is-external">
 								<a href="editors_substation_substation_editor.SubstationEditor.html#replaceChild" class="tsd-kind-icon">replace<wbr>Child</a>
