@@ -25,14 +25,14 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>139/139</span>
+                <span class='fraction'>144/144</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">88.88% </span>
+                <span class="strong">90.9% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>8/9</span>
+                <span class='fraction'>10/11</span>
             </div>
         
             
@@ -46,7 +46,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>139/139</span>
+                <span class='fraction'>144/144</span>
             </div>
         
             
@@ -202,10 +202,12 @@
 <a name='L137'></a><a href='#L137'>137</a>
 <a name='L138'></a><a href='#L138'>138</a>
 <a name='L139'></a><a href='#L139'>139</a>
-<a name='L140'></a><a href='#L140'>140</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
+<a name='L140'></a><a href='#L140'>140</a>
+<a name='L141'></a><a href='#L141'>141</a>
+<a name='L142'></a><a href='#L142'>142</a>
+<a name='L143'></a><a href='#L143'>143</a>
+<a name='L144'></a><a href='#L144'>144</a>
+<a name='L145'></a><a href='#L145'>145</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
@@ -298,12 +300,20 @@
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
@@ -403,10 +413,7 @@ export class PlainCompareList extends LitElement {
 &nbsp;
   render(): TemplateResult {
     return html`
-      &lt;div class="container"&gt;
-        &lt;div class="flex"&gt;&lt;/div&gt;
-        ${this.renderFilterCheckbox()}
-      &lt;/div&gt;
+      ${this.renderFilterCheckbox()}
       &lt;div class="container container--alt"&gt;
         &lt;div class="list__container list__container--left"&gt;
           &lt;h3 class="mdc-dialog__title"&gt;${this.leftHandTitle}&lt;/h3&gt;
@@ -426,8 +433,8 @@ export class PlainCompareList extends LitElement {
       ${this.leftHandObject &amp;&amp; this.rightHandObject
         ? html`
             ${renderDiff(
-              this.leftHandObject,
               this.rightHandObject,
+              this.leftHandObject,
               this.filterMutables ? this.<span class="branch-0 cbranch-no" title="branch not covered" >filterToIgnore : {}</span>
             )}
           `
@@ -436,13 +443,21 @@ export class PlainCompareList extends LitElement {
   }
 &nbsp;
   protected renderFilterCheckbox(): TemplateResult {
-    return html`&lt;mwc-formfield label="${translate('compare.filterMutables')}"&gt;
-      &lt;mwc-checkbox
-        ?checked=${this.filterMutables}
-        @change=${() =&gt; (this.filterMutables = !this.filterMutables)}
-      &gt;
-      &lt;/mwc-checkbox&gt;
-    &lt;/mwc-formfield&gt; `;
+    if (this.filterToIgnore) {
+      return html`
+        &lt;div class="container"&gt;
+          &lt;div class="flex"&gt;&lt;/div&gt;
+          &lt;mwc-formfield label="${translate('compare.filterMutables')}"&gt;
+            &lt;mwc-checkbox
+              ?checked=${this.filterMutables}
+              @change=${() =&gt; (this.filterMutables = !this.filterMutables)}
+            &gt;
+            &lt;/mwc-checkbox&gt;
+          &lt;/mwc-formfield&gt;
+        &lt;/div&gt;
+      `;
+    }
+    return html``;
   }
 &nbsp;
   static styles = css`
@@ -487,7 +502,7 @@ export class PlainCompareList extends LitElement {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener">istanbul</a>
-                at Mon Nov 28 2022 20:02:25 GMT+0000 (Coordinated Universal Time)
+                at Mon Nov 28 2022 20:22:11 GMT+0000 (Coordinated Universal Time)
             </div>
         </div>
         <script src="../prettify.js"></script>

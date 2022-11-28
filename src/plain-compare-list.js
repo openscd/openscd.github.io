@@ -30,10 +30,7 @@ export let PlainCompareList = class extends LitElement {
   }
   render() {
     return html`
-      <div class="container">
-        <div class="flex"></div>
-        ${this.renderFilterCheckbox()}
-      </div>
+      ${this.renderFilterCheckbox()}
       <div class="container container--alt">
         <div class="list__container list__container--left">
           <h3 class="mdc-dialog__title">${this.leftHandTitle}</h3>
@@ -47,18 +44,26 @@ export let PlainCompareList = class extends LitElement {
         </div>
       </div>
       ${this.leftHandObject && this.rightHandObject ? html`
-            ${renderDiff(this.leftHandObject, this.rightHandObject, this.filterMutables ? this.filterToIgnore : {})}
+            ${renderDiff(this.rightHandObject, this.leftHandObject, this.filterMutables ? this.filterToIgnore : {})}
           ` : ""}
     `;
   }
   renderFilterCheckbox() {
-    return html`<mwc-formfield label="${translate("compare.filterMutables")}">
-      <mwc-checkbox
-        ?checked=${this.filterMutables}
-        @change=${() => this.filterMutables = !this.filterMutables}
-      >
-      </mwc-checkbox>
-    </mwc-formfield> `;
+    if (this.filterToIgnore) {
+      return html`
+        <div class="container">
+          <div class="flex"></div>
+          <mwc-formfield label="${translate("compare.filterMutables")}">
+            <mwc-checkbox
+              ?checked=${this.filterMutables}
+              @change=${() => this.filterMutables = !this.filterMutables}
+            >
+            </mwc-checkbox>
+          </mwc-formfield>
+        </div>
+      `;
+    }
+    return html``;
   }
 };
 PlainCompareList.styles = css`
