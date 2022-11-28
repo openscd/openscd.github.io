@@ -23,11 +23,12 @@ import "../../action-pane.js";
 import "./eq-function-editor.js";
 import "./l-node-editor.js";
 import {generalConductingEquipmentIcon} from "../../icons/icons.js";
-import {getChildElementsByTagName} from "../../foundation.js";
+import {getChildElementsByTagName, newWizardEvent} from "../../foundation.js";
+import {translate} from "../../../_snowpack/pkg/lit-translate.js";
+import {wizards} from "../../wizards/wizard-library.js";
 export let GeneralEquipmentEditor = class extends LitElement {
   constructor() {
     super(...arguments);
-    this.readonly = false;
     this.showfunctions = false;
   }
   get header() {
@@ -37,9 +38,12 @@ export let GeneralEquipmentEditor = class extends LitElement {
       return `${name}`;
     return `${name} ${desc ? `—  ${desc}` : ""}`;
   }
+  openEditWizard() {
+    const wizard = wizards["GeneralEquipment"].edit(this.element);
+    if (wizard)
+      this.dispatchEvent(newWizardEvent(wizard));
+  }
   renderLNodes() {
-    if (!this.showfunctions)
-      return html``;
     const lNodes = getChildElementsByTagName(this.element, "LNode");
     return lNodes.length ? html`<div class="container lnode">
           ${lNodes.map((lNode) => html`<l-node-editor
@@ -49,8 +53,6 @@ export let GeneralEquipmentEditor = class extends LitElement {
         </div>` : html``;
   }
   renderEqFunctions() {
-    if (!this.showfunctions)
-      return html``;
     const eFunctions = getChildElementsByTagName(this.element, "EqFunction");
     return eFunctions.length ? html`${eFunctions.map((eFunction) => html` <eq-function-editor
               .doc=${this.doc}
@@ -60,9 +62,21 @@ export let GeneralEquipmentEditor = class extends LitElement {
   render() {
     if (this.showfunctions)
       return html`<action-pane label=${this.header}>
+        <abbr slot="action" title="${translate("edit")}">
+          <mwc-icon-button
+            icon="edit"
+            @click=${() => this.openEditWizard()}
+          ></mwc-icon-button>
+        </abbr>
         ${this.renderLNodes()} ${this.renderEqFunctions()}
       </action-pane>`;
     return html`<action-icon label=${this.header}>
+      <abbr slot="action" title="${translate("edit")}">
+        <mwc-icon-button
+          icon="edit"
+          @click=${() => this.openEditWizard()}
+        ></mwc-icon-button>
+      </abbr>
       <mwc-icon slot="icon">${generalConductingEquipmentIcon}</mwc-icon>
     </action-icon>`;
   }
@@ -82,9 +96,6 @@ __decorate([
 __decorate([
   property({attribute: false})
 ], GeneralEquipmentEditor.prototype, "element", 2);
-__decorate([
-  property({type: Boolean})
-], GeneralEquipmentEditor.prototype, "readonly", 2);
 __decorate([
   property({type: Boolean})
 ], GeneralEquipmentEditor.prototype, "showfunctions", 2);

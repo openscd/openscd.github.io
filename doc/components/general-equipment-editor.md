@@ -7,5 +7,10 @@
 | `doc`           |                 |           | `XMLDocument` |         |                                                  |
 | `element`       |                 |           | `Element`     |         |                                                  |
 | `header`        |                 | readonly  | `string`      |         |                                                  |
-| `readonly`      | `readonly`      |           | `boolean`     | false   |                                                  |
 | `showfunctions` | `showfunctions` |           | `boolean`     | false   | Whether `Function` and `SubFunction` are rendered |
+
+## Methods
+
+| Method           | Type       |
+|------------------|------------|
+| `openEditWizard` | `(): void` |
