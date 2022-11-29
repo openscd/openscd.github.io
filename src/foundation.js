@@ -1402,8 +1402,7 @@ export const tags = {
       ...tEquipmentSequence,
       "TransformerWinding",
       "SubEquipment",
-      "EqFunction",
-      "SubEquipment"
+      "EqFunction"
     ]
   },
   Private: {

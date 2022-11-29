@@ -34,7 +34,7 @@ import {
   editSubFunctionWizard
 } from "./subfunction.js";
 import {editSampledValueControlWizard} from "./sampledvaluecontrol.js";
-import {editSubEquipmentWizard} from "./subequipment.js";
+import {createSubEquipmentWizard, editSubEquipmentWizard} from "./subequipment.js";
 import {editGeneralEquipmentWizard} from "./generalEquipment.js";
 export function emptyWizard() {
   return;
@@ -470,7 +470,7 @@ export const wizards = {
   },
   SubEquipment: {
     edit: editSubEquipmentWizard,
-    create: emptyWizard
+    create: createSubEquipmentWizard
   },
   SubFunction: {
     edit: editSubFunctionWizard,

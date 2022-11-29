@@ -2,12 +2,13 @@ import {html} from "../../_snowpack/pkg/lit-html.js";
 import {get, translate} from "../../_snowpack/pkg/lit-translate.js";
 import {
   cloneElement,
+  createElement,
   getChildElementsByTagName,
   getValue
 } from "../foundation.js";
 import "../wizard-textfield.js";
 import "../wizard-select.js";
-export function contentFunctionWizard(content) {
+export function contentSubEquipmentWizard(content) {
   return [
     html`<wizard-textfield
       label="name"
@@ -77,7 +78,44 @@ export function editSubEquipmentWizard(element) {
         action: updateSubEquipmentAction(element)
       },
       content: [
-        ...contentFunctionWizard({
+        ...contentSubEquipmentWizard({
+          name,
+          desc,
+          phase,
+          virtual,
+          reservedNames
+        })
+      ]
+    }
+  ];
+}
+function createSubEquipmentAction(parent) {
+  return (inputs) => {
+    const subEquipmentAttrs = {};
+    const subEquipmentKeys = ["name", "desc", "phase", "virtual"];
+    subEquipmentKeys.forEach((key) => {
+      subEquipmentAttrs[key] = getValue(inputs.find((i) => i.label === key));
+    });
+    const subEquipment = createElement(parent.ownerDocument, "SubEquipment", subEquipmentAttrs);
+    return [{new: {parent, element: subEquipment}}];
+  };
+}
+export function createSubEquipmentWizard(parent) {
+  const name = "";
+  const desc = null;
+  const phase = null;
+  const virtual = null;
+  const reservedNames = Array.from(parent.querySelectorAll("SubEquipment")).map((subEquipment) => subEquipment.getAttribute("name"));
+  return [
+    {
+      title: get("wizard.title.add", {tagName: "SubEquipment"}),
+      primary: {
+        icon: "save",
+        label: get("save"),
+        action: createSubEquipmentAction(parent)
+      },
+      content: [
+        ...contentSubEquipmentWizard({
           name,
           desc,
           phase,
