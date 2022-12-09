@@ -1,4 +1,4 @@
-import { B as BaseElement } from './foundation-dcca5e00.js';
+import { B as BaseElement } from './base-element-bdd322ba.js';
 
 /**
  * @license

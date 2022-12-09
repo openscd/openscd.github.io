@@ -1,5 +1,6 @@
 {
   "imports": {
+    "@material/dialog": "./@material/dialog.js",
     "@material/mwc-button": "./@material/mwc-button.js",
     "@material/mwc-checkbox": "./@material/mwc-checkbox.js",
     "@material/mwc-circular-progress-four-color": "./@material/mwc-circular-progress-four-color.js",

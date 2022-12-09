@@ -1,9 +1,10 @@
-import { _ as __decorate } from './tslib.es6-ea9e4e3f.js';
+import { e as __decorate } from './tslib.es6-9ee6b4ed.js';
 import '../@material/mwc-list/mwc-list-item.js';
-import { M as MDCFoundation, B as BaseElement, i as isNodeElement, d as doesElementContainFocus, b as deepActiveElementPath } from './foundation-dcca5e00.js';
+import { B as BaseElement, i as isNodeElement, d as doesElementContainFocus, b as deepActiveElementPath } from './base-element-bdd322ba.js';
 import { o as observer } from './observer-2c150244.js';
 import { p as property, q as query, d as queryAssignedNodes } from './lit-element-d8235cfe.js';
 import { i as ifDefined } from './if-defined-d8369db9.js';
+import { M as MDCFoundation } from './foundation-8444ab9d.js';
 import { h as html } from './lit-html-fbfed138.js';
 
 /**

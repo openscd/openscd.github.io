@@ -76,4 +76,14 @@ function __read(o, n) {
     return ar;
 }
 
-export { __decorate as _, __extends as a, __values as b, __assign as c, __read as d };
+function __spreadArray(to, from, pack) {
+    if (pack || arguments.length === 2) for (var i = 0, l = from.length, ar; i < l; i++) {
+        if (ar || !(i in from)) {
+            if (!ar) ar = Array.prototype.slice.call(from, 0, i);
+            ar[i] = from[i];
+        }
+    }
+    return to.concat(ar || Array.prototype.slice.call(from));
+}
+
+export { __spreadArray as _, __read as a, __extends as b, __values as c, __assign as d, __decorate as e };

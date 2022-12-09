@@ -1,12 +1,14 @@
-import { a as __extends, c as __assign, _ as __decorate } from '../common/tslib.es6-ea9e4e3f.js';
+import { b as __extends, d as __assign, e as __decorate } from '../common/tslib.es6-9ee6b4ed.js';
 import { q as query, p as property, c as css, b as customElement, s as state, a as queryAsync, e as eventOptions } from '../common/lit-element-d8235cfe.js';
-import { M as MDCFoundation, B as BaseElement, a as addHasRemoveClass } from '../common/foundation-dcca5e00.js';
+import { B as BaseElement, a as addHasRemoveClass } from '../common/base-element-bdd322ba.js';
+import { M as MDCFoundation } from '../common/foundation-8444ab9d.js';
 import { c as classMap } from '../common/class-map-ad24d1e8.js';
 import { h as html } from '../common/lit-html-fbfed138.js';
-import { R as RippleHandlers } from '../common/ripple-handlers-959621dd.js';
+import { R as RippleHandlers } from '../common/ripple-handlers-90c858a8.js';
 import { o as observer } from '../common/observer-2c150244.js';
 import '../common/render-4b4a16b9.js';
 import '../common/ponyfill-4ccc5f83.js';
+import '../common/foundation-243ca3e3.js';
 import '../common/style-map-0182b6c2.js';
 
 /**
