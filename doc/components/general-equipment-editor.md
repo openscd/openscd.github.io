@@ -14,3 +14,4 @@
 | Method           | Type       |
 |------------------|------------|
 | `openEditWizard` | `(): void` |
+| `remove`         | `(): void` |

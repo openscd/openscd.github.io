@@ -23,7 +23,11 @@ import "../../action-pane.js";
 import "./eq-function-editor.js";
 import "./l-node-editor.js";
 import {generalConductingEquipmentIcon} from "../../icons/icons.js";
-import {getChildElementsByTagName, newWizardEvent} from "../../foundation.js";
+import {
+  getChildElementsByTagName,
+  newActionEvent,
+  newWizardEvent
+} from "../../foundation.js";
 import {translate} from "../../../_snowpack/pkg/lit-translate.js";
 import {wizards} from "../../wizards/wizard-library.js";
 export let GeneralEquipmentEditor = class extends LitElement {
@@ -42,6 +46,15 @@ export let GeneralEquipmentEditor = class extends LitElement {
     const wizard = wizards["GeneralEquipment"].edit(this.element);
     if (wizard)
       this.dispatchEvent(newWizardEvent(wizard));
+  }
+  remove() {
+    if (this.element.parentElement)
+      this.dispatchEvent(newActionEvent({
+        old: {
+          parent: this.element.parentElement,
+          element: this.element
+        }
+      }));
   }
   renderLNodes() {
     const lNodes = getChildElementsByTagName(this.element, "LNode");
@@ -68,20 +81,38 @@ export let GeneralEquipmentEditor = class extends LitElement {
             @click=${() => this.openEditWizard()}
           ></mwc-icon-button>
         </abbr>
+        <abbr slot="action" title="${translate("remove")}">
+          <mwc-icon-button
+            icon="delete"
+            @click=${() => this.remove()}
+          ></mwc-icon-button>
+        </abbr>
         ${this.renderLNodes()} ${this.renderEqFunctions()}
       </action-pane>`;
     return html`<action-icon label=${this.header}>
       <abbr slot="action" title="${translate("edit")}">
-        <mwc-icon-button
+        <mwc-fab
+        mini
           icon="edit"
           @click=${() => this.openEditWizard()}
-        ></mwc-icon-button>
+        ></mwc-fab
+      </abbr>
+      <abbr slot="action" title="${translate("remove")}">
+        <mwc-fab
+        mini
+          icon="delete"
+          @click=${() => this.remove()}
+        ></mwc-fab>
       </abbr>
       <mwc-icon slot="icon">${generalConductingEquipmentIcon}</mwc-icon>
     </action-icon>`;
   }
 };
 GeneralEquipmentEditor.styles = css`
+    abbr {
+      text-decoration: none;
+      border-bottom: none;
+    }
     .container.lnode {
       display: grid;
       grid-gap: 12px;
