@@ -4,6 +4,8 @@
 
 | Property        | Attribute       | Modifiers | Type          | Default | Description                                      |
 |-----------------|-----------------|-----------|---------------|---------|--------------------------------------------------|
+| `addButton`     |                 |           | `IconButton`  |         |                                                  |
+| `addMenu`       |                 |           | `Menu`        |         |                                                  |
 | `doc`           |                 |           | `XMLDocument` |         |                                                  |
 | `element`       |                 |           | `Element`     |         |                                                  |
 | `header`        |                 | readonly  | `string`      |         |                                                  |

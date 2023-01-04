@@ -15,9 +15,13 @@ import {
   LitElement,
   property,
   state,
-  css
+  css,
+  query
 } from "../../../_snowpack/pkg/lit-element.js";
+import {translate} from "../../../_snowpack/pkg/lit-translate.js";
 import "../../../_snowpack/pkg/@material/mwc-icon-button.js";
+import "../../../_snowpack/pkg/@material/mwc-list/mwc-list-item.js";
+import "../../../_snowpack/pkg/@material/mwc-menu.js";
 import "../../../_snowpack/pkg/@material/mwc-fab.js";
 import "../../action-pane.js";
 import "./eq-function-editor.js";
@@ -26,10 +30,15 @@ import {generalConductingEquipmentIcon} from "../../icons/icons.js";
 import {
   getChildElementsByTagName,
   newActionEvent,
-  newWizardEvent
+  newWizardEvent,
+  tags
 } from "../../foundation.js";
-import {translate} from "../../../_snowpack/pkg/lit-translate.js";
-import {wizards} from "../../wizards/wizard-library.js";
+import {emptyWizard, wizards} from "../../wizards/wizard-library.js";
+function childTags(element) {
+  if (!element)
+    return [];
+  return tags[element.tagName].children.filter((child) => wizards[child].create !== emptyWizard);
+}
 export let GeneralEquipmentEditor = class extends LitElement {
   constructor() {
     super(...arguments);
@@ -46,6 +55,15 @@ export let GeneralEquipmentEditor = class extends LitElement {
     const wizard = wizards["GeneralEquipment"].edit(this.element);
     if (wizard)
       this.dispatchEvent(newWizardEvent(wizard));
+  }
+  openCreateWizard(tagName) {
+    const wizard = wizards[tagName].create(this.element);
+    if (wizard)
+      this.dispatchEvent(newWizardEvent(wizard));
+  }
+  firstUpdated() {
+    if (this.addMenu && this.addButton)
+      this.addMenu.anchor = this.addButton;
   }
   remove() {
     if (this.element.parentElement)
@@ -72,6 +90,11 @@ export let GeneralEquipmentEditor = class extends LitElement {
               .element=${eFunction}
             ></eq-function-editor>`)}` : html``;
   }
+  renderAddButtons() {
+    return childTags(this.element).map((child) => html`<mwc-list-item value="${child}"
+          ><span>${child}</span></mwc-list-item
+        >`);
+  }
   render() {
     if (this.showfunctions)
       return html`<action-pane label=${this.header}>
@@ -87,6 +110,25 @@ export let GeneralEquipmentEditor = class extends LitElement {
             @click=${() => this.remove()}
           ></mwc-icon-button>
         </abbr>
+        <abbr
+          slot="action"
+          style="position:relative;"
+          title="${translate("add")}"
+        >
+          <mwc-icon-button
+            icon="playlist_add"
+            @click=${() => this.addMenu.open = true}
+          ></mwc-icon-button
+          ><mwc-menu
+            corner="BOTTOM_RIGHT"
+            menuCorner="END"
+            @action=${(e) => {
+        const tagName = e.target.selected.value;
+        this.openCreateWizard(tagName);
+      }}
+            >${this.renderAddButtons()}</mwc-menu
+          ></abbr
+        >
         ${this.renderLNodes()} ${this.renderEqFunctions()}
       </action-pane>`;
     return html`<action-icon label=${this.header}>
@@ -133,6 +175,12 @@ __decorate([
 __decorate([
   state()
 ], GeneralEquipmentEditor.prototype, "header", 1);
+__decorate([
+  query("mwc-menu")
+], GeneralEquipmentEditor.prototype, "addMenu", 2);
+__decorate([
+  query('mwc-icon-button[icon="playlist_add"]')
+], GeneralEquipmentEditor.prototype, "addButton", 2);
 GeneralEquipmentEditor = __decorate([
   customElement("general-equipment-editor")
 ], GeneralEquipmentEditor);
