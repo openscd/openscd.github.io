@@ -22,6 +22,13 @@ export default class OpenProjectPlugin extends LitElement {
     this.dispatchEvent(newLogEvent({kind: "reset"}));
     this.dispatchEvent(newOpenDocEvent(doc, docName));
     this.pluginFileUI.onchange = null;
+    this.closeMenu();
+  }
+  async closeMenu() {
+    this.dispatchEvent(new CustomEvent("close-drawer", {
+      bubbles: true,
+      composed: true
+    }));
   }
   async run() {
     this.pluginFileUI.click();

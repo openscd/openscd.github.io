@@ -40,6 +40,9 @@ export function Hosting(Base) {
         this.validated = Promise.allSettled(this.menuUI.querySelector("mwc-list").items.filter((item) => item.className === "validator").map((item) => item.nextElementSibling.validate())).then();
         this.dispatchEvent(newPendingStateEvent(this.validated));
       });
+      this.addEventListener("close-drawer", async () => {
+        this.menuUI.open = false;
+      });
     }
     get menu() {
       const topMenu = [];
