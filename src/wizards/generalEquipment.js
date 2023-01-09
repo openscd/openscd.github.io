@@ -2,6 +2,7 @@ import {html} from "../../_snowpack/pkg/lit-element.js";
 import {get, translate} from "../../_snowpack/pkg/lit-translate.js";
 import {
   cloneElement,
+  createElement,
   getChildElementsByTagName,
   getValue
 } from "../foundation.js";
@@ -82,4 +83,41 @@ export function contentGeneralEquipmentWizard(content) {
       nullable
     ></wizard-checkbox>`
   ];
+}
+export function createGeneralEquipmentWizard(parent) {
+  const name = "";
+  const desc = null;
+  const type = null;
+  const virtual = null;
+  const reservedNames = Array.from(parent.querySelectorAll("GeneralEquipment")).map((generalEquipment) => generalEquipment.getAttribute("name"));
+  return [
+    {
+      title: get("wizard.title.add", {tagName: "GeneralEquipment"}),
+      primary: {
+        icon: "save",
+        label: get("save"),
+        action: createGeneralEquipmentAction(parent)
+      },
+      content: [
+        ...contentGeneralEquipmentWizard({
+          name,
+          desc,
+          type,
+          virtual,
+          reservedNames
+        })
+      ]
+    }
+  ];
+}
+function createGeneralEquipmentAction(parent) {
+  return (inputs) => {
+    const generalEquipmentAttrs = {};
+    const generalEquipmentKeys = ["name", "desc", "type", "virtual"];
+    generalEquipmentKeys.forEach((key) => {
+      generalEquipmentAttrs[key] = getValue(inputs.find((i) => i.label === key));
+    });
+    const generalEquipment = createElement(parent.ownerDocument, "GeneralEquipment", generalEquipmentAttrs);
+    return [{new: {parent, element: generalEquipment}}];
+  };
 }
