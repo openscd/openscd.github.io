@@ -206,7 +206,7 @@ export function createPTextField(element, pType) {
     label="${pType}"
     pattern="${ifDefined(typePattern[pType])}"
     ?nullable=${typeNullable[pType]}
-    .maybeValue=${element.querySelector(`Address > P[type="${pType}"]`)?.innerHTML ?? null}
+    .maybeValue=${element.querySelector(`:scope > Address > P[type="${pType}"]`)?.innerHTML ?? null}
     maxLength="${ifDefined(typeMaxLength[pType])}"
   ></wizard-textfield>`;
 }
