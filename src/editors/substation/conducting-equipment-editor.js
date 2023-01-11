@@ -74,7 +74,7 @@ export let ConductingEquipmentEditor = class extends LitElement {
         }
       }));
   }
-  firstUpdated() {
+  updated() {
     if (this.addMenu && this.addButton)
       this.addMenu.anchor = this.addButton;
   }

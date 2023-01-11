@@ -61,7 +61,7 @@ export let GeneralEquipmentEditor = class extends LitElement {
     if (wizard)
       this.dispatchEvent(newWizardEvent(wizard));
   }
-  firstUpdated() {
+  updated() {
     if (this.addMenu && this.addButton)
       this.addMenu.anchor = this.addButton;
   }

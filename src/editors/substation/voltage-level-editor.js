@@ -97,7 +97,7 @@ export let VoltageLevelEditor = class extends LitElement {
     if (wizard)
       this.dispatchEvent(newWizardEvent(wizard));
   }
-  firstUpdated() {
+  updated() {
     this.addMenu.anchor = this.addButton;
   }
   renderRedirectUI() {

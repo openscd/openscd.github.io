@@ -65,7 +65,7 @@ export let FunctionEditor = class extends LitElement {
     if (wizard)
       this.dispatchEvent(newWizardEvent(wizard));
   }
-  firstUpdated() {
+  updated() {
     this.addMenu.anchor = this.addButton;
   }
   renderLNodes() {
