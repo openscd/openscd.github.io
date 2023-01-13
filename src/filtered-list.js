@@ -71,6 +71,10 @@ export let FilteredList = class extends ListBase {
     super.onListItemConnected(e);
     this.requestUpdate();
   }
+  update(changedProperties) {
+    super.update(changedProperties);
+    this.onFilterInput();
+  }
   renderCheckAll() {
     return this.existCheckListItem && !this.disableCheckAll ? html`<mwc-formfield class="checkall"
           ><mwc-checkbox
