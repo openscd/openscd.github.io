@@ -24,6 +24,9 @@ import "../../../_snowpack/pkg/@material/mwc-icon-button.js";
 import "../../../_snowpack/pkg/@material/mwc-menu.js";
 import "../../action-icon.js";
 import "../../action-pane.js";
+import "./sub-equipment-editor.js";
+import "./eq-function-editor.js";
+import "./transformer-winding-editor.js";
 import {powerTransformerTwoWindingIcon} from "../../icons/icons.js";
 import {emptyWizard, wizards} from "../../wizards/wizard-library.js";
 import {
@@ -36,8 +39,6 @@ import {startMove, styles} from "./foundation.js";
 import {SubstationEditor} from "./substation-editor.js";
 import {BayEditor} from "./bay-editor.js";
 import {VoltageLevelEditor} from "./voltage-level-editor.js";
-import "./sub-equipment-editor.js";
-import "./transformer-winding-editor.js";
 function childTags(element) {
   if (!element)
     return [];
@@ -98,6 +99,15 @@ export let PowerTransformerEditor = class extends LitElement {
           .element=${eqFunction}
           ?showfunctions=${this.showfunctions}
         ></eq-function-editor>`)}`;
+  }
+  renderSubEquipments() {
+    if (!this.showfunctions)
+      return html``;
+    const subEquipments = getChildElementsByTagName(this.element, "SubEquipment");
+    return html` ${subEquipments.map((subEquipment) => html`<sub-equipment-editor
+          .doc=${this.doc}
+          .element=${subEquipment}
+        ></sub-equipment-editor>`)}`;
   }
   renderAddButtons() {
     return childTags(this.element).map((child) => html`<mwc-list-item value="${child}"
@@ -164,17 +174,6 @@ export let PowerTransformerEditor = class extends LitElement {
           >${this.renderAddButtons()}</mwc-menu
         >
       </abbr>`;
-  }
-  renderSubEquipments() {
-    if (!this.showfunctions)
-      return html``;
-    const subEquipments = getChildElementsByTagName(this.element, "SubEquipment");
-    return subEquipments.length ? html`<div class="container subequipment">
-          ${subEquipments.map((subEquipment) => html`<sub-equipment-editor
-                .doc=${this.doc}
-                .element=${subEquipment}
-              ></sub-equipment-editor>`)}
-        </div>` : html``;
   }
   renderTransformerWinding() {
     if (!this.showfunctions)

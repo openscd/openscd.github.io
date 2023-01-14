@@ -23,16 +23,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">97.39% </span>
+                <span class="strong">97.35% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>299/307</span>
+                <span class='fraction'>295/303</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">87.8% </span>
+                <span class="strong">87.5% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>36/41</span>
+                <span class='fraction'>35/40</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">97.39% </span>
+                <span class="strong">97.35% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>299/307</span>
+                <span class='fraction'>295/303</span>
             </div>
         
             
@@ -366,11 +366,7 @@
 <a name='L301'></a><a href='#L301'>301</a>
 <a name='L302'></a><a href='#L302'>302</a>
 <a name='L303'></a><a href='#L303'>303</a>
-<a name='L304'></a><a href='#L304'>304</a>
-<a name='L305'></a><a href='#L305'>305</a>
-<a name='L306'></a><a href='#L306'>306</a>
-<a name='L307'></a><a href='#L307'>307</a>
-<a name='L308'></a><a href='#L308'>308</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">22x</span>
+<a name='L304'></a><a href='#L304'>304</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">22x</span>
 <span class="cline-any cline-yes">22x</span>
 <span class="cline-any cline-yes">22x</span>
 <span class="cline-any cline-yes">22x</span>
@@ -498,6 +494,22 @@
 <span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">22x</span>
+<span class="cline-any cline-yes">22x</span>
+<span class="cline-any cline-yes">22x</span>
+<span class="cline-any cline-yes">22x</span>
+<span class="cline-any cline-yes">22x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">22x</span>
 <span class="cline-any cline-yes">22x</span>
 <span class="cline-any cline-yes">22x</span>
@@ -571,26 +583,6 @@
 <span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-yes">22x</span>
 <span class="cline-any cline-yes">22x</span>
-<span class="cline-any cline-yes">22x</span>
-<span class="cline-any cline-yes">22x</span>
-<span class="cline-any cline-yes">22x</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-yes">22x</span>
 <span class="cline-any cline-yes">22x</span>
 <span class="cline-any cline-yes">22x</span>
@@ -698,6 +690,9 @@ import { Menu } from '@material/mwc-menu';
 &nbsp;
 import '../../action-icon.js';
 import '../../action-pane.js';
+import './sub-equipment-editor.js';
+import './eq-function-editor.js';
+import './transformer-winding-editor.js';
 import { powerTransformerTwoWindingIcon } from '../../icons/icons.js';
 import { emptyWizard, wizards } from '../../wizards/wizard-library.js';
 import {
@@ -711,9 +706,6 @@ import { startMove, styles } from './foundation.js';
 import { SubstationEditor } from './substation-editor.js';
 import { BayEditor } from './bay-editor.js';
 import { VoltageLevelEditor } from './voltage-level-editor.js';
-&nbsp;
-import './sub-equipment-editor.js';
-import './transformer-winding-editor.js';
 &nbsp;
 function childTags(element: Element | null | undefined): SCLTag[] {
   if (!element) <span class="branch-0 cbranch-no" title="branch not covered" >return [];</span>
@@ -809,6 +801,22 @@ export class PowerTransformerEditor extends LitElement {
     )}`;
   }
 &nbsp;
+  private renderSubEquipments(): TemplateResult {
+    if (!this.showfunctions) <span class="branch-0 cbranch-no" title="branch not covered" >return html``;</span>
+    const subEquipments = getChildElementsByTagName(
+      this.element,
+      'SubEquipment'
+    );
+&nbsp;
+    return html` ${subEquipments.map(
+      subEquipment =&gt;
+        html`&lt;sub-equipment-editor
+          .doc=${this.doc}
+          .element=${subEquipment}
+        &gt;&lt;/sub-equipment-editor&gt;`
+    )}`;
+  }
+&nbsp;
   private renderAddButtons(): TemplateResult[] {
     return childTags(this.element).map(
       child =&gt;
@@ -878,26 +886,6 @@ export class PowerTransformerEditor extends LitElement {
           &gt;${this.renderAddButtons()}&lt;/mwc-menu
         &gt;
       &lt;/abbr&gt;`;
-  }
-&nbsp;
-  private renderSubEquipments(): TemplateResult {
-    if (!this.showfunctions) <span class="branch-0 cbranch-no" title="branch not covered" >return html``;</span>
-    const subEquipments = getChildElementsByTagName(
-      this.element,
-      'SubEquipment'
-    );
-&nbsp;
-    return subEquipments.length
-      ? html`&lt;div class="container subequipment"&gt;
-          ${subEquipments.map(
-            subEquipment =&gt;
-              html`&lt;sub-equipment-editor
-                .doc=${this.doc}
-                .element=${subEquipment}
-              &gt;&lt;/sub-equipment-editor&gt;`
-          )}
-        &lt;/div&gt;`
-      : html``;
   }
 &nbsp;
   private renderTransformerWinding(): TemplateResult {
@@ -991,7 +979,7 @@ export class PowerTransformerEditor extends LitElement {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener">istanbul</a>
-                at Fri Jan 13 2023 18:32:28 GMT+0000 (Coordinated Universal Time)
+                at Sat Jan 14 2023 19:11:46 GMT+0000 (Coordinated Universal Time)
             </div>
         </div>
         <script src="../../../prettify.js"></script>

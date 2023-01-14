@@ -24,7 +24,8 @@ import "../../../_snowpack/pkg/@material/mwc-icon-button.js";
 import "../../../_snowpack/pkg/@material/mwc-menu.js";
 import "../../action-icon.js";
 import "../../action-pane.js";
-import {styles} from "./foundation.js";
+import "./l-node-editor.js";
+import "./eq-function-editor.js";
 import {
   getChildElementsByTagName,
   newWizardEvent,
@@ -125,15 +126,17 @@ export let SubEquipmentEditor = class extends LitElement {
   }
 };
 SubEquipmentEditor.styles = css`
-    ${styles}
-
-    :host(.moving) {
-      opacity: 0.3;
-    }
-
     abbr {
       text-decoration: none;
       border-bottom: none;
+    }
+
+    .container.lnode {
+      display: grid;
+      grid-gap: 12px;
+      padding: 8px 12px 16px;
+      box-sizing: border-box;
+      grid-template-columns: repeat(auto-fit, minmax(64px, auto));
     }
   `;
 __decorate([
