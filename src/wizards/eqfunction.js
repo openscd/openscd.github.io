@@ -33,6 +33,7 @@ export function editEqFunctionWizard(element) {
   return [
     {
       title: get("wizard.title.edit", {tagName: "EqFunction"}),
+      element,
       primary: {
         icon: "save",
         label: get("save"),
