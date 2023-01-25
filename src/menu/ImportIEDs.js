@@ -32,7 +32,7 @@ import {
   selector
 } from "../foundation.js";
 function uniqueTemplateIedName(doc, ied) {
-  const [manufacturer, type] = ["manufacturer", "type"].map((attr) => ied.getAttribute(attr));
+  const [manufacturer, type] = ["manufacturer", "type"].map((attr) => ied.getAttribute(attr)?.replace(/[^A-Za-z0-9_]/g, ""));
   const nameCore = manufacturer || type ? `${manufacturer ?? ""}${type ? "_" + type : ""}` : "TEMPLATE_IED";
   const siblingNames = Array.from(doc.querySelectorAll("IED")).filter(isPublic).map((child) => child.getAttribute("name") ?? child.tagName);
   if (!siblingNames.length)
