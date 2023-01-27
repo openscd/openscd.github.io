@@ -178,7 +178,7 @@ export let CleanupControlBlocks = class extends LitElement {
     Array.from(this.doc?.querySelectorAll("GSEControl, ReportControl, SampledValueControl, LogControl") ?? []).filter(isPublic).forEach((cb) => {
       const parent = cb.parentElement;
       const name = cb.getAttribute("datSet");
-      const isReferenced = parent?.querySelector(`DataSet[name=${name}]`);
+      const isReferenced = parent?.querySelector(`DataSet[name="${name}"]`);
       if (parent && (!name || !isReferenced))
         unreferencedCBs.push(cb);
     });
