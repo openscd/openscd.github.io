@@ -146,7 +146,9 @@ export let ExtRefLaterBindingList = class extends LitElement {
         ${extRefElement.getAttribute("intAddr")}
         ${getDescriptionAttribute(extRefElement) ? html` (${getDescriptionAttribute(extRefElement)})` : nothing}
       </span>
-      <span slot="secondary">${identity(extRefElement)}</span>
+      <span slot="secondary"
+        >${identity(extRefElement.parentElement)}${supervisionNode !== null ? ` (${identity(supervisionNode)})` : ""}</span
+      >
       <mwc-icon slot="graphic">swap_horiz</mwc-icon>
       ${supervisionNode !== null ? html`<mwc-icon title="${identity(supervisionNode)}" slot="meta"
             >monitor_heart</mwc-icon
@@ -191,7 +193,9 @@ export let ExtRefLaterBindingList = class extends LitElement {
                 ${extRefElement.getAttribute("intAddr")}
                 ${getDescriptionAttribute(extRefElement) ? html` (${getDescriptionAttribute(extRefElement)})` : nothing}
               </span>
-              <span slot="secondary">${identity(extRefElement)}</span>
+              <span slot="secondary"
+                >${identity(extRefElement.parentElement)}</span
+              >
               <mwc-icon slot="graphic">arrow_back</mwc-icon>
             </mwc-list-item>`)}` : html`<mwc-list-item graphic="large" noninteractive>
             ${translate("subscription.laterBinding.extRefList.noAvailableExtRefs")}
