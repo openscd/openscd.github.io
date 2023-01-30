@@ -5,10 +5,11 @@ The List reacts on a custom event to know which FCDA Element was selected and up
 
 ## Properties
 
-| Property                        | Attribute    | Type                   |
-|---------------------------------|--------------|------------------------|
-| `controlTag`                    | `controlTag` | `controlTag`           |
-| `currentIedElement`             |              | `Element \| undefined` |
-| `currentSelectedControlElement` |              | `Element \| undefined` |
-| `currentSelectedFcdaElement`    |              | `Element \| undefined` |
-| `doc`                           |              | `XMLDocument`          |
+| Property                        | Attribute    | Type                                             | Default                                          |
+|---------------------------------|--------------|--------------------------------------------------|--------------------------------------------------|
+| `controlTag`                    | `controlTag` | `controlTag`                                     |                                                  |
+| `currentIedElement`             |              | `Element \| undefined`                           |                                                  |
+| `currentSelectedControlElement` |              | `Element \| undefined`                           |                                                  |
+| `currentSelectedFcdaElement`    |              | `Element \| undefined`                           |                                                  |
+| `doc`                           |              | `XMLDocument`                                    |                                                  |
+| `serviceTypeLookup`             |              | `{ GSEControl: string; SampledValueControl: string; }` | {"GSEControl":"GOOSE","SampledValueControl":"SMV"} |

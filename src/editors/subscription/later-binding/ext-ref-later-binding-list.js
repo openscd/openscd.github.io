@@ -45,6 +45,10 @@ import {
 export let ExtRefLaterBindingList = class extends LitElement {
   constructor() {
     super();
+    this.serviceTypeLookup = {
+      GSEControl: "GOOSE",
+      SampledValueControl: "SMV"
+    };
     const parentDiv = this.closest(".container");
     if (parentDiv) {
       this.onFcdaSelectEvent = this.onFcdaSelectEvent.bind(this);
@@ -126,7 +130,7 @@ export let ExtRefLaterBindingList = class extends LitElement {
     return getSubscribedExtRefElements(this.doc.getRootNode(), this.controlTag, this.currentSelectedFcdaElement, this.currentSelectedControlElement, true);
   }
   getAvailableExtRefElements() {
-    return getExtRefElements(this.doc.getRootNode(), this.currentSelectedFcdaElement, true).filter((extRefElement) => !isSubscribed(extRefElement));
+    return getExtRefElements(this.doc.getRootNode(), this.currentSelectedFcdaElement, true).filter((extRefElement) => !isSubscribed(extRefElement) && (!extRefElement.hasAttribute("serviceType") || extRefElement.getAttribute("serviceType") === this.serviceTypeLookup[this.controlTag]));
   }
   renderTitle() {
     return html`<h1>
