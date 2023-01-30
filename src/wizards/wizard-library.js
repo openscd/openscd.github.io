@@ -42,6 +42,7 @@ import {
   createGeneralEquipmentWizard,
   editGeneralEquipmentWizard
 } from "./generalEquipment.js";
+import {editTransformerWindingWizard} from "./transformerWinding.js";
 export function emptyWizard() {
   return;
 }
@@ -519,7 +520,7 @@ export const wizards = {
     create: emptyWizard
   },
   TransformerWinding: {
-    edit: emptyWizard,
+    edit: editTransformerWindingWizard,
     create: emptyWizard
   },
   TrgOps: {

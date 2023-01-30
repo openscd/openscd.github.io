@@ -16,6 +16,7 @@ import {
   LitElement,
   property
 } from "../../../_snowpack/pkg/lit-element.js";
+import {translate} from "../../../_snowpack/pkg/lit-translate.js";
 import "../../../_snowpack/pkg/@material/mwc-fab.js";
 import "../../../_snowpack/pkg/@material/mwc-icon.js";
 import "../../../_snowpack/pkg/@material/mwc-icon-button.js";
@@ -23,7 +24,8 @@ import "../../../_snowpack/pkg/@material/mwc-menu.js";
 import "../../action-icon.js";
 import "../../action-pane.js";
 import {styles} from "./foundation.js";
-import {getChildElementsByTagName} from "../../foundation.js";
+import {getChildElementsByTagName, newWizardEvent} from "../../foundation.js";
+import {wizards} from "../../wizards/wizard-library.js";
 export let TransformerWindingEditor = class extends LitElement {
   constructor() {
     super(...arguments);
@@ -33,6 +35,11 @@ export let TransformerWindingEditor = class extends LitElement {
     const name = `${this.element.hasAttribute("name") ? `${this.element.getAttribute("name")}` : ""}`;
     const description = `${this.element.hasAttribute("desc") ? ` - ${this.element.getAttribute("desc")}` : ""}`;
     return `${name}${description}`;
+  }
+  openEditWizard() {
+    const wizard = wizards["TransformerWinding"].edit(this.element);
+    if (wizard)
+      this.dispatchEvent(newWizardEvent(wizard));
   }
   renderLNodes() {
     const lNodes = getChildElementsByTagName(this.element, "LNode");
@@ -55,6 +62,12 @@ export let TransformerWindingEditor = class extends LitElement {
   }
   render() {
     return html`<action-pane label="${this.label}">
+      <abbr slot="action" title="${translate("edit")}">
+        <mwc-icon-button
+          icon="edit"
+          @click=${() => this.openEditWizard()}
+        ></mwc-icon-button>
+      </abbr>
       ${this.renderLNodes()} ${this.renderEqFunctions()}
     </action-pane> `;
   }

@@ -8,3 +8,9 @@
 | `element`       |                 |           | `Element`     |         | SCL element TransformerWinding                   |
 | `label`         | `label`         | readonly  | `string`      |         | TransformerWinding name attribute                |
 | `showfunctions` | `showfunctions` |           | `boolean`     | false   | Whether `EqFunction` elements are rendered       |
+
+## Methods
+
+| Method           | Type       |
+|------------------|------------|
+| `openEditWizard` | `(): void` |
