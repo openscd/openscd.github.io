@@ -24,7 +24,11 @@ import "../../../_snowpack/pkg/@material/mwc-menu.js";
 import "../../action-icon.js";
 import "../../action-pane.js";
 import {styles} from "./foundation.js";
-import {getChildElementsByTagName, newWizardEvent} from "../../foundation.js";
+import {
+  getChildElementsByTagName,
+  newActionEvent,
+  newWizardEvent
+} from "../../foundation.js";
 import {wizards} from "../../wizards/wizard-library.js";
 export let TransformerWindingEditor = class extends LitElement {
   constructor() {
@@ -40,6 +44,15 @@ export let TransformerWindingEditor = class extends LitElement {
     const wizard = wizards["TransformerWinding"].edit(this.element);
     if (wizard)
       this.dispatchEvent(newWizardEvent(wizard));
+  }
+  remove() {
+    if (this.element.parentElement)
+      this.dispatchEvent(newActionEvent({
+        old: {
+          parent: this.element.parentElement,
+          element: this.element
+        }
+      }));
   }
   renderLNodes() {
     const lNodes = getChildElementsByTagName(this.element, "LNode");
@@ -66,6 +79,12 @@ export let TransformerWindingEditor = class extends LitElement {
         <mwc-icon-button
           icon="edit"
           @click=${() => this.openEditWizard()}
+        ></mwc-icon-button>
+      </abbr>
+      <abbr slot="action" title="${translate("remove")}">
+        <mwc-icon-button
+          icon="delete"
+          @click=${() => this.remove()}
         ></mwc-icon-button>
       </abbr>
       ${this.renderLNodes()} ${this.renderEqFunctions()}
