@@ -2,9 +2,47 @@ import {html} from "../../_snowpack/pkg/lit-element.js";
 import {get, translate} from "../../_snowpack/pkg/lit-translate.js";
 import {
   cloneElement,
+  createElement,
   getChildElementsByTagName,
   getValue
 } from "../foundation.js";
+function createTransformerWindingAction(parent) {
+  return (inputs) => {
+    const transformerWindingAttrs = {};
+    const transformerWindingKeys = ["name", "desc", "type", "virtual"];
+    transformerWindingKeys.forEach((key) => {
+      transformerWindingAttrs[key] = getValue(inputs.find((i) => i.label === key));
+    });
+    const transformerWinding = createElement(parent.ownerDocument, "TransformerWinding", transformerWindingAttrs);
+    return [{new: {parent, element: transformerWinding}}];
+  };
+}
+export function createTransformerWindingWizard(parent) {
+  const name = "";
+  const desc = null;
+  const type = null;
+  const virtual = null;
+  const reservedNames = Array.from(parent.querySelectorAll("TransformerWinding")).map((TransformerWinding) => TransformerWinding.getAttribute("name"));
+  return [
+    {
+      title: get("wizard.title.add", {tagName: "TransformerWinding"}),
+      primary: {
+        icon: "save",
+        label: get("save"),
+        action: createTransformerWindingAction(parent)
+      },
+      content: [
+        ...contentTransformerWindingWizard({
+          name,
+          desc,
+          type,
+          virtual,
+          reservedNames
+        })
+      ]
+    }
+  ];
+}
 function updateTransformerWindingAction(element) {
   return (inputs) => {
     const transformerWindingAttrs = {};
