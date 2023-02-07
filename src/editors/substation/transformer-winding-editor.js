@@ -14,7 +14,8 @@ import {
   customElement,
   html,
   LitElement,
-  property
+  property,
+  query
 } from "../../../_snowpack/pkg/lit-element.js";
 import {translate} from "../../../_snowpack/pkg/lit-translate.js";
 import "../../../_snowpack/pkg/@material/mwc-fab.js";
@@ -27,9 +28,15 @@ import {styles} from "./foundation.js";
 import {
   getChildElementsByTagName,
   newActionEvent,
-  newWizardEvent
+  newWizardEvent,
+  tags
 } from "../../foundation.js";
-import {wizards} from "../../wizards/wizard-library.js";
+import {emptyWizard, wizards} from "../../wizards/wizard-library.js";
+function childTags(element) {
+  if (!element)
+    return [];
+  return tags[element.tagName].children.filter((child) => wizards[child].create !== emptyWizard);
+}
 export let TransformerWindingEditor = class extends LitElement {
   constructor() {
     super(...arguments);
@@ -54,6 +61,15 @@ export let TransformerWindingEditor = class extends LitElement {
         }
       }));
   }
+  openCreateWizard(tagName) {
+    const wizard = wizards[tagName].create(this.element);
+    if (wizard)
+      this.dispatchEvent(newWizardEvent(wizard));
+  }
+  updated() {
+    if (this.addMenu && this.addButton)
+      this.addMenu.anchor = this.addButton;
+  }
   renderLNodes() {
     const lNodes = getChildElementsByTagName(this.element, "LNode");
     return lNodes.length ? html`<div class="container lnode">
@@ -73,6 +89,11 @@ export let TransformerWindingEditor = class extends LitElement {
               ?showfunctions=${this.showfunctions}
             ></eq-function-editor>`)}` : html``;
   }
+  renderAddButtons() {
+    return childTags(this.element).map((child) => html`<mwc-list-item value="${child}"
+          ><span>${child}</span></mwc-list-item
+        >`);
+  }
   render() {
     return html`<action-pane label="${this.label}">
       <abbr slot="action" title="${translate("edit")}">
@@ -87,6 +108,25 @@ export let TransformerWindingEditor = class extends LitElement {
           @click=${() => this.remove()}
         ></mwc-icon-button>
       </abbr>
+      <abbr
+        slot="action"
+        style="position:relative;"
+        title="${translate("add")}"
+      >
+        <mwc-icon-button
+          icon="playlist_add"
+          @click=${() => this.addMenu.open = true}
+        ></mwc-icon-button
+        ><mwc-menu
+          corner="BOTTOM_RIGHT"
+          menuCorner="END"
+          @action=${(e) => {
+      const tagName = e.target.selected.value;
+      this.openCreateWizard(tagName);
+    }}
+          >${this.renderAddButtons()}</mwc-menu
+        ></abbr
+      >
       ${this.renderLNodes()} ${this.renderEqFunctions()}
     </action-pane> `;
   }
@@ -115,6 +155,12 @@ __decorate([
 __decorate([
   property({type: String})
 ], TransformerWindingEditor.prototype, "label", 1);
+__decorate([
+  query("mwc-menu")
+], TransformerWindingEditor.prototype, "addMenu", 2);
+__decorate([
+  query('mwc-icon-button[icon="playlist_add"]')
+], TransformerWindingEditor.prototype, "addButton", 2);
 TransformerWindingEditor = __decorate([
   customElement("transformer-winding-editor")
 ], TransformerWindingEditor);
