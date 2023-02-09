@@ -24,6 +24,9 @@ import "../../../_snowpack/pkg/@material/mwc-icon-button.js";
 import "../../../_snowpack/pkg/@material/mwc-menu.js";
 import "../../action-icon.js";
 import "../../action-pane.js";
+import "./eq-function-editor.js";
+import "./l-node-editor.js";
+import "./tapchanger-editor.js";
 import {styles} from "./foundation.js";
 import {
   getChildElementsByTagName,
@@ -89,6 +92,16 @@ export let TransformerWindingEditor = class extends LitElement {
               ?showfunctions=${this.showfunctions}
             ></eq-function-editor>`)}` : html``;
   }
+  renderTapChanger() {
+    if (!this.showfunctions)
+      return html``;
+    const tapChangers = getChildElementsByTagName(this.element, "TapChanger");
+    return tapChangers.length ? html` ${tapChangers.map((tapChanger) => html`<tapchanger-editor
+              .doc=${this.doc}
+              .element=${tapChanger}
+              ?showfunctions=${this.showfunctions}
+            ></tapchanger-editor>`)}` : html``;
+  }
   renderAddButtons() {
     return childTags(this.element).map((child) => html`<mwc-list-item value="${child}"
           ><span>${child}</span></mwc-list-item
@@ -128,6 +141,7 @@ export let TransformerWindingEditor = class extends LitElement {
         ></abbr
       >
       ${this.renderLNodes()} ${this.renderEqFunctions()}
+      ${this.renderTapChanger()}
     </action-pane> `;
   }
 };
