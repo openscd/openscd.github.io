@@ -29,7 +29,7 @@ import {createDaInfoWizard} from "./da-wizard.js";
 import {
   Container,
   getInstanceDAElement,
-  getValueElement
+  getValueElements
 } from "./foundation.js";
 import {createDAIWizard} from "../../wizards/dai.js";
 import {
@@ -46,14 +46,6 @@ export let DAContainer = class extends Container {
     } else {
       return html`${name} &mdash; ${bType}${fc ? html` [${fc}]` : ``}`;
     }
-  }
-  getValue() {
-    if (this.instanceElement) {
-      return html`<b
-        >${getValueElement(this.instanceElement)?.textContent?.trim() ?? ""}</b
-      >`;
-    }
-    return html`${getValueElement(this.element)?.textContent?.trim() ?? ""}`;
   }
   getBDAElements() {
     const type = this.element.getAttribute("type") ?? void 0;
@@ -80,10 +72,48 @@ export let DAContainer = class extends Container {
         this.dispatchEvent(newWizardEvent(wizard));
     }
   }
-  openEditWizard() {
-    const wizard = wizards["DAI"].edit(this.element, this.instanceElement);
+  openEditWizard(val) {
+    const wizard = wizards["DAI"].edit(this.element, val);
     if (wizard)
       this.dispatchEvent(newWizardEvent(wizard));
+  }
+  getValueDisplayString(val) {
+    const sGroup = val.getAttribute("sGroup");
+    const prefix = sGroup ? `SG${sGroup}: ` : "";
+    const value = val.textContent?.trim();
+    return `${prefix}${value}`;
+  }
+  renderVal() {
+    const bType = this.element.getAttribute("bType");
+    const element = this.instanceElement ?? this.element;
+    const hasInstantiatedVal = !!this.instanceElement?.querySelector("Val");
+    return hasInstantiatedVal ? getValueElements(element).map((val) => html`<div style="display: flex; flex-direction: row;">
+            <div style="display: flex; align-items: center; flex: auto;">
+              <h4>${this.getValueDisplayString(val)}</h4>
+            </div>
+            <div style="display: flex; align-items: center;">
+              <mwc-icon-button
+                icon="edit"
+                .disabled="${!getCustomField()[bType]}"
+                @click=${() => this.openEditWizard(val)}
+              >
+              </mwc-icon-button>
+            </div>
+          </div>`) : [
+      html`<div style="display: flex; flex-direction: row;">
+            <div style="display: flex; align-items: center; flex: auto;">
+              <h4></h4>
+            </div>
+            <div style="display: flex; align-items: center;">
+              <mwc-icon-button
+                icon="add"
+                .disabled="${!getCustomField()[bType]}"
+                @click=${() => this.openCreateWizard()}
+              >
+              </mwc-icon-button>
+            </div>
+          </div>`
+    ];
   }
   render() {
     const bType = this.element.getAttribute("bType");
@@ -110,24 +140,7 @@ export let DAContainer = class extends Container {
                 @click=${() => this.requestUpdate()}
               >
               </mwc-icon-button-toggle>
-            </abbr>` : html` <div style="display: flex; flex-direction: row;">
-              <div style="display: flex; align-items: center; flex: auto;">
-                <h4>${this.getValue()}</h4>
-              </div>
-              <div style="display: flex; align-items: center;">
-                ${this.instanceElement ? html`<mwc-icon-button
-                      icon="edit"
-                      .disabled="${!getCustomField()[bType]}"
-                      @click=${() => this.openEditWizard()}
-                    >
-                    </mwc-icon-button>` : html`<mwc-icon-button
-                      icon="add"
-                      .disabled="${!getCustomField()[bType]}"
-                      @click=${() => this.openCreateWizard()}
-                    >
-                    </mwc-icon-button>`}
-              </div>
-            </div>`}
+            </abbr>` : html`${this.renderVal()}`}
         ${this.toggleButton?.on && bType === "Struct" ? this.getBDAElements().map((bdaElement) => html`<da-container
                   .doc=${this.doc}
                   .element=${bdaElement}

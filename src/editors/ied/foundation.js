@@ -83,8 +83,8 @@ export function getTitleForElementPath(element) {
     }
   }
 }
-export function getValueElement(element) {
-  return element.querySelector("Val");
+export function getValueElements(parent) {
+  return Array.from(parent.querySelectorAll("Val"));
 }
 export function newFullElementPathEvent(elementNames, eventInitDict) {
   return new CustomEvent("full-element-path", {

@@ -4,30 +4,21 @@ import {get} from "../../_snowpack/pkg/lit-translate.js";
 import {getCustomField} from "./foundation/dai-field-type.js";
 import "../wizard-textfield.js";
 import {SCL_NAMESPACE} from "../schemas.js";
-export function updateValue(element, instanceElement) {
+export function updateValue(element, val) {
   return (inputs) => {
     const bType = element.getAttribute("bType");
     const newValue = getCustomField()[bType].value(inputs);
-    const name = instanceElement.getAttribute("name");
+    const daiName = val.parentElement?.getAttribute("name") ?? "";
     const complexAction = {
       actions: [],
-      title: get("dai.action.updatedai", {daiName: name})
+      title: get("dai.action.updatedai", {daiName})
     };
-    const oldVal = instanceElement.querySelector("Val");
-    if (oldVal) {
-      const newVal = oldVal.cloneNode(false);
-      newVal.textContent = newValue;
-      complexAction.actions.push({
-        old: {element: oldVal},
-        new: {element: newVal}
-      });
-    } else {
-      const newVal = instanceElement.ownerDocument.createElementNS(SCL_NAMESPACE, "Val");
-      newVal.textContent = newValue;
-      complexAction.actions.push({
-        new: {parent: instanceElement, element: newVal}
-      });
-    }
+    const newVal = val.cloneNode(false);
+    newVal.textContent = newValue;
+    complexAction.actions.push({
+      old: {element: val},
+      new: {element: newVal}
+    });
     return [complexAction];
   };
 }
@@ -82,10 +73,11 @@ export function createDAIWizard(parent, newElement, element) {
   ];
 }
 export function editDAIWizard(element, instanceElement) {
+  const daiName = instanceElement?.tagName === "DAI" ? instanceElement?.getAttribute("name") ?? "" : instanceElement?.parentElement?.getAttribute("name") ?? "";
   return [
     {
       title: get("dai.wizard.title.edit", {
-        daiName: instanceElement?.getAttribute("name") ?? ""
+        daiName
       }),
       element: instanceElement,
       primary: {

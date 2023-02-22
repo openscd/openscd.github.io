@@ -185,8 +185,9 @@ export function getCustomField() {
       }
     };
   }
-  function getInstanceValue(instanceElement) {
-    return instanceElement.querySelector("Val")?.textContent?.trim() ?? "";
+  function getInstanceValue(daiOrVal) {
+    const val = daiOrVal?.querySelector("Val") ? daiOrVal?.querySelector("Val") : daiOrVal;
+    return val?.textContent?.trim() ?? "";
   }
   function getEnumValues(element) {
     const daType = element.getAttribute("type");

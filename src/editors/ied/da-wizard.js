@@ -11,8 +11,12 @@ import {
   findDOTypeElement,
   findElement,
   findLogicaNodeElement,
-  getValueElement
+  getValueElements
 } from "./foundation.js";
+function getValues(element) {
+  const hasValue = getValueElements(element).length !== 0;
+  return hasValue ? `${getValueElements(element).map((val) => val.textContent ?? "").join(", ")}` : "-";
+}
 function renderFields(element, instanceElement, ancestors, nsdoc) {
   const iedElement = findElement(ancestors, "IED");
   const accessPointElement = findElement(ancestors, "AccessPoint");
@@ -76,7 +80,7 @@ function renderFields(element, instanceElement, ancestors, nsdoc) {
     html`
       <mwc-textfield
         label="${translate("iededitor.wizard.daValue")}"
-        value="${instanceElement ? getValueElement(instanceElement)?.textContent ?? "-" : getValueElement(element)?.textContent ?? "-"}"
+        value="${instanceElement ? getValues(instanceElement) : getValues(element)}"
         id="daValue"
         readonly
         disabled
