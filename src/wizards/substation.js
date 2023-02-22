@@ -5,8 +5,7 @@ import "../../_snowpack/pkg/@material/mwc-formfield.js";
 import "../wizard-textfield.js";
 import {
   createElement,
-  getValue,
-  newWizardEvent
+  getValue
 } from "../foundation.js";
 import {guessVoltageLevel} from "../editors/substation/guess-wizard.js";
 import {updateNamingAttributeWithReferencesAction} from "./foundation/actions.js";
@@ -37,19 +36,13 @@ export function createAction(parent) {
     const desc = getValue(inputs.find((i) => i.label === "desc"));
     const guess = wizard.shadowRoot?.querySelector("mwc-checkbox")?.checked;
     parent.ownerDocument.createElement("Substation");
-    const element = createElement(parent.ownerDocument, "Substation", {
+    const substation = createElement(parent.ownerDocument, "Substation", {
       name,
       desc
     });
-    const action = {
-      new: {
-        parent,
-        element
-      }
-    };
     if (guess)
-      wizard.dispatchEvent(newWizardEvent(guessVoltageLevel(parent.ownerDocument)));
-    return [action];
+      return [() => guessVoltageLevel(parent.ownerDocument, substation)];
+    return [{new: {parent, element: substation}}];
   };
 }
 export function createSubstationWizard(parent) {

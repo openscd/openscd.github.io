@@ -65,12 +65,10 @@ function createBayElement(ied, ctlModelList) {
   }
   return null;
 }
-function guessBasedOnCSWI(doc) {
+function guessBasedOnCSWI(doc, substation) {
   return (inputs, wizard, list) => {
     const actions = [];
     const ctlModelList = list.selected.map((item) => item.value);
-    const root = doc.documentElement;
-    const substation = root.querySelector(":root > Substation");
     const voltageLevel = createElement(doc, "VoltageLevel", {
       name: "E1",
       desc: "guessed by OpenSCD",
@@ -83,9 +81,8 @@ function guessBasedOnCSWI(doc) {
     });
     voltage.textContent = "110.00";
     voltageLevel.appendChild(voltage);
-    Array.from(doc.querySelectorAll(":root > IED")).sort(compareNames).map((ied) => createBayElement(ied, ctlModelList)).forEach((bay) => {
-      if (bay)
-        voltageLevel.appendChild(bay);
+    actions.push({
+      new: {parent: doc.querySelector("SCL"), element: substation}
     });
     actions.push({
       new: {
@@ -93,17 +90,21 @@ function guessBasedOnCSWI(doc) {
         element: voltageLevel
       }
     });
+    Array.from(doc.querySelectorAll(":root > IED")).sort(compareNames).map((ied) => createBayElement(ied, ctlModelList)).forEach((bay) => {
+      if (bay)
+        actions.push({new: {parent: voltageLevel, element: bay}});
+    });
     return actions;
   };
 }
-export function guessVoltageLevel(doc) {
+export function guessVoltageLevel(doc, substation) {
   return [
     {
       title: get("guess.wizard.title"),
       primary: {
         icon: "play_arrow",
         label: get("guess.wizard.primary"),
-        action: guessBasedOnCSWI(doc)
+        action: guessBasedOnCSWI(doc, substation)
       },
       content: [
         html`<p>${translate("guess.wizard.description")}</p>`,
