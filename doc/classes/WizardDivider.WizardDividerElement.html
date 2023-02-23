@@ -136,6 +136,7 @@
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-external"><a href="WizardDivider.WizardDividerElement.html#firstChild" class="tsd-kind-icon">first<wbr>Child</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-external"><a href="WizardDivider.WizardDividerElement.html#firstElementChild" class="tsd-kind-icon">first<wbr>Element<wbr>Child</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-external"><a href="WizardDivider.WizardDividerElement.html#floatingLabelFoundation" class="tsd-kind-icon">floating<wbr>Label<wbr>Foundation</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="WizardDivider.WizardDividerElement.html#header" class="tsd-kind-icon">header</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-external"><a href="WizardDivider.WizardDividerElement.html#hidden" class="tsd-kind-icon">hidden</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-external"><a href="WizardDivider.WizardDividerElement.html#id" class="tsd-kind-icon">id</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-external"><a href="WizardDivider.WizardDividerElement.html#innerHTML" class="tsd-kind-icon">innerHTML</a></li>
@@ -356,6 +357,8 @@
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-inherited tsd-is-external"><a href="WizardDivider.WizardDividerElement.html#removeChild" class="tsd-kind-icon">remove<wbr>Child</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-inherited tsd-is-external"><a href="WizardDivider.WizardDividerElement.html#removeEventListener" class="tsd-kind-icon">remove<wbr>Event<wbr>Listener</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-overwrite"><a href="WizardDivider.WizardDividerElement.html#render-1" class="tsd-kind-icon">render</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="WizardDivider.WizardDividerElement.html#renderHeader" class="tsd-kind-icon">render<wbr>Header</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="WizardDivider.WizardDividerElement.html#renderSeparator" class="tsd-kind-icon">render<wbr>Separator</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-inherited tsd-is-external"><a href="WizardDivider.WizardDividerElement.html#replaceChild" class="tsd-kind-icon">replace<wbr>Child</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external"><a href="WizardDivider.WizardDividerElement.html#replaceWith" class="tsd-kind-icon">replace<wbr>With</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external"><a href="WizardDivider.WizardDividerElement.html#requestFullscreen" class="tsd-kind-icon">request<wbr>Fullscreen</a></li>
@@ -968,6 +971,16 @@
 						<p>Inherited from LitElement.floatingLabelFoundation</p>
 						<ul>
 							<li>Defined in node_modules/@material/mwc-textfield/mwc-textfield-base.d.ts:18</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="header" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> header</h3>
+					<div class="tsd-signature tsd-kind-icon">header<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/81088f0/src/WizardDivider.ts#L15">src/WizardDivider.ts:15</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -3136,7 +3149,7 @@
 					<aside class="tsd-sources">
 						<p>Overrides LitElement.styles</p>
 						<ul>
-							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/d9680fa/src/WizardDivider.ts#L11">src/WizardDivider.ts:11</a></li>
+							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/81088f0/src/WizardDivider.ts#L33">src/WizardDivider.ts:33</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -5320,7 +5333,41 @@
 							<aside class="tsd-sources">
 								<p>Overrides LitElement.render</p>
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/d9680fa/src/WizardDivider.ts#L5">src/WizardDivider.ts:5</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/81088f0/src/WizardDivider.ts#L17">src/WizardDivider.ts:17</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">TemplateResult</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private">
+					<a name="renderHeader" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> render<wbr>Header</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private">
+						<li class="tsd-signature tsd-kind-icon">render<wbr>Header<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">TemplateResult</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/81088f0/src/WizardDivider.ts#L21">src/WizardDivider.ts:21</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">TemplateResult</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private">
+					<a name="renderSeparator" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> render<wbr>Separator</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private">
+						<li class="tsd-signature tsd-kind-icon">render<wbr>Separator<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">TemplateResult</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/81088f0/src/WizardDivider.ts#L29">src/WizardDivider.ts:29</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">TemplateResult</span></h4>
@@ -6368,6 +6415,9 @@
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-external">
 								<a href="WizardDivider.WizardDividerElement.html#floatingLabelFoundation" class="tsd-kind-icon">floating<wbr>Label<wbr>Foundation</a>
 							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="WizardDivider.WizardDividerElement.html#header" class="tsd-kind-icon">header</a>
+							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-external">
 								<a href="WizardDivider.WizardDividerElement.html#hidden" class="tsd-kind-icon">hidden</a>
 							</li>
@@ -6998,6 +7048,12 @@
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
 								<a href="WizardDivider.WizardDividerElement.html#render-1" class="tsd-kind-icon">render</a>
 							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private">
+								<a href="WizardDivider.WizardDividerElement.html#renderHeader" class="tsd-kind-icon">render<wbr>Header</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private">
+								<a href="WizardDivider.WizardDividerElement.html#renderSeparator" class="tsd-kind-icon">render<wbr>Separator</a>
+							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-inherited tsd-is-external">
 								<a href="WizardDivider.WizardDividerElement.html#replaceChild" class="tsd-kind-icon">replace<wbr>Child</a>
 							</li>
@@ -7094,18 +7150,22 @@
 				<li class="tsd-kind-type-alias tsd-has-type-parameter"><span class="tsd-kind-icon">Type alias with type parameter</span></li>
 			</ul>
 			<ul class="tsd-legend">
-				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
-				<li class="tsd-kind-interface tsd-has-type-parameter"><span class="tsd-kind-icon">Interface with type parameter</span></li>
+				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
 			</ul>
 			<ul class="tsd-legend">
-				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
-				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
+				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
+				<li class="tsd-kind-interface tsd-has-type-parameter"><span class="tsd-kind-icon">Interface with type parameter</span></li>
 			</ul>
 			<ul class="tsd-legend">
 				<li class="tsd-kind-enum"><span class="tsd-kind-icon">Enumeration</span></li>
 			</ul>
 			<ul class="tsd-legend">
 				<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited constructor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private method</span></li>
 			</ul>
 			<ul class="tsd-legend">
 				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static property</span></li>

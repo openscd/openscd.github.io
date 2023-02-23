@@ -9,12 +9,25 @@ var __decorate = (decorators, target, key, kind) => {
     __defProp(target, key, result);
   return result;
 };
-import {css, customElement, html, LitElement} from "../_snowpack/pkg/lit-element.js";
+import {
+  css,
+  customElement,
+  html,
+  LitElement,
+  property
+} from "../_snowpack/pkg/lit-element.js";
 export let WizardDividerElement = class extends LitElement {
   render() {
-    return html`
-      <div role="separator"></div>
-    `;
+    return html` ${this.renderHeader()} ${this.renderSeparator()}`;
+  }
+  renderHeader() {
+    if (!this.header) {
+      return html``;
+    }
+    return html`<h4 class="header">${this.header}</h4>`;
+  }
+  renderSeparator() {
+    return html`<div role="separator"></div>`;
   }
 };
 WizardDividerElement.styles = css`
@@ -28,6 +41,11 @@ WizardDividerElement.styles = css`
       border-bottom: 1px solid rgba(0, 0, 0, 0.12);
     }
   `;
+__decorate([
+  property({
+    type: String
+  })
+], WizardDividerElement.prototype, "header", 2);
 WizardDividerElement = __decorate([
   customElement("wizard-divider")
 ], WizardDividerElement);

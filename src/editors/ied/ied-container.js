@@ -28,6 +28,7 @@ import {
   newWizardEvent
 } from "../../foundation.js";
 import {removeIEDWizard} from "../../wizards/ied.js";
+import {editServicesWizard} from "../../wizards/services.js";
 export let IedContainer = class extends Container {
   constructor() {
     super(...arguments);
@@ -35,6 +36,23 @@ export let IedContainer = class extends Container {
   }
   openEditWizard() {
     const wizard = wizards["IED"].edit(this.element);
+    if (wizard)
+      this.dispatchEvent(newWizardEvent(wizard));
+  }
+  renderServicesIcon() {
+    const services = this.element.querySelector("Services");
+    if (!services) {
+      return html``;
+    }
+    return html` <abbr slot="action" title="${translate("settings")}">
+      <mwc-icon-button
+        icon="settings"
+        @click=${() => this.openSettingsWizard(services)}
+      ></mwc-icon-button>
+    </abbr>`;
+  }
+  openSettingsWizard(services) {
+    const wizard = editServicesWizard(services);
     if (wizard)
       this.dispatchEvent(newWizardEvent(wizard));
   }
@@ -68,6 +86,7 @@ export let IedContainer = class extends Container {
           @click=${() => this.openEditWizard()}
         ></mwc-icon-button>
       </abbr>
+      ${this.renderServicesIcon()}
       ${Array.from(this.element.querySelectorAll(":scope > AccessPoint")).map((ap) => html`<access-point-container
           .doc=${this.doc}
           .element=${ap}
