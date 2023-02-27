@@ -26,7 +26,9 @@ function formatXml(xml, tab) {
 export default class SaveProjectPlugin extends LitElement {
   async run() {
     if (this.doc) {
-      const blob = new Blob([formatXml(new XMLSerializer().serializeToString(this.doc))], {
+      let documentAsString = formatXml(new XMLSerializer().serializeToString(this.doc));
+      documentAsString = documentAsString.startsWith("<?xml") ? documentAsString : '<?xml version="1.0" encoding="UTF-8"?>\n' + documentAsString;
+      const blob = new Blob([documentAsString], {
         type: "application/xml"
       });
       const a = document.createElement("a");
