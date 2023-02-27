@@ -368,7 +368,7 @@ function extRefIdentity(e) {
   const iedName = e.getAttribute("iedName");
   const intAddr = e.getAttribute("intAddr");
   const intAddrIndex = Array.from(e.parentElement.querySelectorAll(`ExtRef[intAddr="${intAddr}"]`)).indexOf(e);
-  if (!iedName)
+  if (intAddr)
     return `${parentIdentity}>${intAddr}[${intAddrIndex}]`;
   const [
     ldInst,
