@@ -63,7 +63,8 @@ export const en = {
     ldInst: "Referenced Logical Device",
     prefix: "Prefix of the Logical Node",
     lnInst: "Instance of the Logical Node",
-    virtual: "Virtual"
+    virtual: "Virtual",
+    phase: "Phase"
   },
   settings: {
     title: "Settings",

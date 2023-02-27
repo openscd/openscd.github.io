@@ -63,7 +63,8 @@ export const de = {
     ldInst: "Referenziertes logisches Gerät",
     prefix: "Präfix des logischen Knotens",
     lnInst: "Instanz des logischen Knotens",
-    virtual: "Virtuell"
+    virtual: "Virtuell",
+    phase: "Phase"
   },
   settings: {
     title: "Einstellungen",
