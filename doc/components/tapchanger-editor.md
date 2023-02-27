@@ -13,4 +13,5 @@
 
 | Method              | Type                 |
 |---------------------|----------------------|
+| `openEditWizard`    | `(): void`           |
 | `renderEqFunctions` | `(): TemplateResult` |

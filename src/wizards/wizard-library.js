@@ -46,6 +46,7 @@ import {
   createTransformerWindingWizard,
   editTransformerWindingWizard
 } from "./transformerWinding.js";
+import {editTapChangerWizard} from "./tapChanger.js";
 export function emptyWizard() {
   return;
 }
@@ -503,7 +504,7 @@ export const wizards = {
     create: emptyWizard
   },
   TapChanger: {
-    edit: emptyWizard,
+    edit: editTapChangerWizard,
     create: emptyWizard
   },
   Terminal: {

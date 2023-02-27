@@ -16,11 +16,15 @@ import {
   property,
   state
 } from "../../../_snowpack/pkg/lit-element.js";
+import {translate} from "../../../_snowpack/pkg/lit-translate.js";
+import "../../../_snowpack/pkg/@material/mwc-icon.js";
+import "../../../_snowpack/pkg/@material/mwc-icon-button.js";
 import "../../action-pane.js";
 import "./eq-function-editor.js";
 import "./l-node-editor.js";
 import "./sub-equipment-editor.js";
-import {getChildElementsByTagName} from "../../foundation.js";
+import {getChildElementsByTagName, newWizardEvent} from "../../foundation.js";
+import {wizards} from "../../wizards/wizard-library.js";
 export let TapChangerEditor = class extends LitElement {
   constructor() {
     super(...arguments);
@@ -39,6 +43,11 @@ export let TapChangerEditor = class extends LitElement {
                 .element=${lNode}
               ></l-node-editor>`)}
         </div>` : html``;
+  }
+  openEditWizard() {
+    const wizard = wizards["TapChanger"].edit(this.element);
+    if (wizard)
+      this.dispatchEvent(newWizardEvent(wizard));
   }
   renderEqFunctions() {
     if (!this.showfunctions)
@@ -60,7 +69,14 @@ export let TapChangerEditor = class extends LitElement {
         ></sub-equipment-editor>`)}`;
   }
   render() {
-    return html`<action-pane label=${this.header}> ${this.renderLNodes()}
+    return html`<action-pane label=${this.header}> 
+    <abbr slot="action" title="${translate("edit")}">
+    <mwc-icon-button
+      icon="edit"
+      @click=${() => this.openEditWizard()}
+    ></mwc-icon-button>
+  </abbr>
+    ${this.renderLNodes()}
     ${this.renderEqFunctions()} ${this.renderSubEquipments()}</action-icon>`;
   }
 };
