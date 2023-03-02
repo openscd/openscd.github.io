@@ -2,9 +2,21 @@ import {html} from "../../_snowpack/pkg/lit-element.js";
 import {get, translate} from "../../_snowpack/pkg/lit-translate.js";
 import {
   cloneElement,
+  createElement,
   getChildElementsByTagName,
   getValue
 } from "../foundation.js";
+function createTapChangerAction(parent) {
+  return (inputs) => {
+    const tapChangerAttrs = {};
+    const tapChangerKeys = ["name", "desc", "type", "virtual"];
+    tapChangerKeys.forEach((key) => {
+      tapChangerAttrs[key] = getValue(inputs.find((i) => i.label === key));
+    });
+    const tapChanger = createElement(parent.ownerDocument, "TapChanger", tapChangerAttrs);
+    return [{new: {parent, element: tapChanger}}];
+  };
+}
 function updateTapChangerAction(element) {
   return (inputs) => {
     const tapChangerAttrs = {};
@@ -53,6 +65,32 @@ export function contentTapChangerWizard(content) {
       helper="${translate("scl.virtual")}"
       nullable
     ></wizard-checkbox>`
+  ];
+}
+export function createTapChangerWizard(parent) {
+  const name = "";
+  const desc = null;
+  const type = "LTC";
+  const virtual = null;
+  const reservedNames = Array.from(parent.querySelectorAll("TapChanger")).map((TapChanger) => TapChanger.getAttribute("name"));
+  return [
+    {
+      title: get("wizard.title.add", {tagName: "TapChanger"}),
+      primary: {
+        icon: "save",
+        label: get("save"),
+        action: createTapChangerAction(parent)
+      },
+      content: [
+        ...contentTapChangerWizard({
+          name,
+          desc,
+          type,
+          virtual,
+          reservedNames
+        })
+      ]
+    }
   ];
 }
 export function editTapChangerWizard(element) {

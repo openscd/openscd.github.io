@@ -4,6 +4,8 @@
 
 | Property        | Attribute       | Modifiers | Type          | Default | Description                                      |
 |-----------------|-----------------|-----------|---------------|---------|--------------------------------------------------|
+| `addButton`     |                 |           | `IconButton`  |         |                                                  |
+| `addMenu`       |                 |           | `Menu`        |         |                                                  |
 | `doc`           |                 |           | `XMLDocument` |         | The document being edited as provided to editor by [[`Zeroline`]]. |
 | `element`       |                 |           | `Element`     |         | SCL element TransformerWinding                   |
 | `header`        |                 | readonly  | `string`      |         |                                                  |
@@ -11,7 +13,7 @@
 
 ## Methods
 
-| Method              | Type                 |
-|---------------------|----------------------|
-| `openEditWizard`    | `(): void`           |
-| `renderEqFunctions` | `(): TemplateResult` |
+| Method           | Type       |
+|------------------|------------|
+| `openEditWizard` | `(): void` |
+| `remove`         | `(): void` |
