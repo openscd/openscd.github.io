@@ -112,18 +112,20 @@ export let ExtRefLaterBindingList = class extends LitElement {
     if (!this.currentIedElement || !this.currentSelectedFcdaElement || !this.currentSelectedControlElement) {
       return;
     }
+    const complexAction = {
+      actions: [],
+      title: get(`subscription.connect`)
+    };
     const replaceAction = {
       old: {element: extRefElement},
       new: {
         element: updateExtRefElement(extRefElement, this.currentSelectedControlElement, this.currentSelectedFcdaElement)
       }
     };
+    complexAction.actions.push(replaceAction);
     const subscriberIed = extRefElement.closest("IED") || void 0;
-    const supervisionActions = instantiateSubscriptionSupervision(this.currentSelectedControlElement, subscriberIed);
-    this.dispatchEvent(newActionEvent({
-      title: get(`subscription.connect`),
-      actions: [replaceAction, ...supervisionActions]
-    }));
+    complexAction.actions.push(...instantiateSubscriptionSupervision(this.currentSelectedControlElement, subscriberIed));
+    this.dispatchEvent(newActionEvent(complexAction));
     this.dispatchEvent(newSubscriptionChangedEvent(this.currentSelectedControlElement, this.currentSelectedFcdaElement));
   }
   getSubscribedExtRefElements() {

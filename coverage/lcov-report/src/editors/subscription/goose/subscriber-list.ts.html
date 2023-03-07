@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">97.36% </span>
+                <span class="strong">97.75% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>480/493</span>
+                <span class='fraction'>480/491</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">97.36% </span>
+                <span class="strong">97.75% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>480/493</span>
+                <span class='fraction'>480/491</span>
             </div>
         
             
@@ -554,9 +554,9 @@
 <a name='L489'></a><a href='#L489'>489</a>
 <a name='L490'></a><a href='#L490'>490</a>
 <a name='L491'></a><a href='#L491'>491</a>
-<a name='L492'></a><a href='#L492'>492</a>
-<a name='L493'></a><a href='#L493'>493</a>
-<a name='L494'></a><a href='#L494'>494</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">2x</span>
+<a name='L492'></a><a href='#L492'>492</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
@@ -816,6 +816,8 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -827,12 +829,6 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -1065,10 +1061,12 @@ import '@material/mwc-list/mwc-list-item';
 &nbsp;
 import '../../../filtered-list.js';
 import {
+  ComplexAction,
   Create,
   createElement,
   Delete,
   identity,
+  Move,
   newActionEvent,
 } from '../../../foundation.js';
 import {
@@ -1292,7 +1290,10 @@ export class SubscriberList extends SubscriberListContainer {
     if (!inputsElement)
       inputsElement = createElement(ied.ownerDocument, 'Inputs', {});
 &nbsp;
-    const actions: Create[] = [];
+    const complexAction: ComplexAction = {
+      actions: [],
+      title: get(`subscription.connect`),
+    };
 &nbsp;
     this.currentUsedDataset!.querySelectorAll('FCDA').forEach(fcda =&gt; {
       if (
@@ -1305,37 +1306,30 @@ export class SubscriberList extends SubscriberListContainer {
         );
 &nbsp;
         if (inputsElement?.parentElement)
-<span class="branch-0 cbranch-no" title="branch not covered" >          actions.push({ new: { parent: inputsElement!, element: extRef } });</span>
+<span class="branch-0 cbranch-no" title="branch not covered" >          complexAction.actions.push({</span>
+<span class="cstat-no" title="statement not covered" >            new: { parent: inputsElement!, element: extRef },</span>
+          });
         else inputsElement?.appendChild(extRef);
       }
     });
 &nbsp;
-    // we need to extend the actions array with the actions for the instation of the LGOS
-    const supervisionActions: Create[] = instantiateSubscriptionSupervision(
+    // we need to extend the actions array with the actions for the instantiation of the LGOS
+    const supervisionActions = instantiateSubscriptionSupervision(
       this.currentSelectedGseControl,
       ied
     );
-&nbsp;
-    /** If the IED doesn't have a Inputs element, just append it to the first LN0 element. */
-    const title = get('subscription.connect');
     if (inputsElement.parentElement) <span class="branch-0 cbranch-no" title="branch not covered" >{</span>
-<span class="cstat-no" title="statement not covered" >      this.dispatchEvent(</span>
-<span class="cstat-no" title="statement not covered" >        newActionEvent({</span>
-<span class="cstat-no" title="statement not covered" >          title,</span>
-<span class="cstat-no" title="statement not covered" >          actions: actions.concat(supervisionActions),</span>
-        })
-      );
+<span class="cstat-no" title="statement not covered" >      complexAction.actions.concat(supervisionActions);</span>
     } else {
-      const inputAction: Create = {
-        new: { parent: ied.querySelector('LN0')!, element: inputsElement },
-      };
-      this.dispatchEvent(
-        newActionEvent({
-          title,
-          actions: [inputAction].concat(supervisionActions),
-        })
-      );
+      /** If the IED doesn't have a Inputs element, just append it to the first LN0 element. */
+      const inputAction: (Create | Move)[] = [
+        {
+          new: { parent: ied.querySelector('LN0')!, element: inputsElement },
+        },
+      ];
+      complexAction.actions = inputAction.concat(supervisionActions);
     }
+    this.dispatchEvent(newActionEvent(complexAction));
   }
 &nbsp;
   private async unsubscribe(ied: Element): Promise&lt;void&gt; {
@@ -1549,7 +1543,7 @@ export class SubscriberList extends SubscriberListContainer {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener">istanbul</a>
-                at Thu Mar 02 2023 13:41:25 GMT+0000 (Coordinated Universal Time)
+                at Tue Mar 07 2023 08:36:56 GMT+0000 (Coordinated Universal Time)
             </div>
         </div>
         <script src="../../../../prettify.js"></script>

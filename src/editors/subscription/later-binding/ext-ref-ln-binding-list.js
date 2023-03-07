@@ -68,20 +68,26 @@ export let ExtRefLnBindingList = class extends LitElement {
     if (!this.currentIedElement || !this.currentSelectedFcdaElement || !this.currentSelectedControlElement) {
       return null;
     }
-    const actions = [];
+    const complexAction = {
+      actions: [],
+      title: get(`subscription.connect`)
+    };
     let inputsElement = lnElement.querySelector(":scope > Inputs");
     if (!inputsElement) {
       inputsElement = createElement(lnElement.ownerDocument, "Inputs", {});
-      actions.push({new: {parent: lnElement, element: inputsElement}});
+      complexAction.actions.push({
+        new: {parent: lnElement, element: inputsElement}
+      });
     }
     if (!existExtRef(inputsElement, this.currentSelectedFcdaElement, this.currentSelectedControlElement) && canCreateValidExtRef(this.currentSelectedFcdaElement, this.currentSelectedControlElement)) {
       const extRef = createExtRefElement(this.currentSelectedControlElement, this.currentSelectedFcdaElement);
-      actions.push({new: {parent: inputsElement, element: extRef}});
+      complexAction.actions.push({
+        new: {parent: inputsElement, element: extRef}
+      });
     }
     const subscriberIed = lnElement.closest("IED") || void 0;
-    actions.push(...instantiateSubscriptionSupervision(this.currentSelectedControlElement, subscriberIed));
-    const title = get("subscription.connect");
-    return {title, actions};
+    complexAction.actions.push(...instantiateSubscriptionSupervision(this.currentSelectedControlElement, subscriberIed));
+    return complexAction;
   }
   unsubscribe(lnElement) {
     if (!this.currentIedElement || !this.currentSelectedFcdaElement || !this.currentSelectedControlElement) {

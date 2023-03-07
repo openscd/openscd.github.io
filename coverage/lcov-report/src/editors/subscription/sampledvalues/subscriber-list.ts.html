@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">96.96% </span>
+                <span class="strong">97.16% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>480/495</span>
+                <span class='fraction'>480/494</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">96.96% </span>
+                <span class="strong">97.16% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>480/495</span>
+                <span class='fraction'>480/494</span>
             </div>
         
             
@@ -557,8 +557,9 @@
 <a name='L492'></a><a href='#L492'>492</a>
 <a name='L493'></a><a href='#L493'>493</a>
 <a name='L494'></a><a href='#L494'>494</a>
-<a name='L495'></a><a href='#L495'>495</a>
-<a name='L496'></a><a href='#L496'>496</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">2x</span>
+<a name='L495'></a><a href='#L495'>495</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
@@ -817,25 +818,23 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -844,7 +843,6 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -1069,10 +1067,12 @@ import '@material/mwc-list/mwc-list-item';
 &nbsp;
 import '../../../filtered-list.js';
 import {
+  ComplexAction,
   Create,
   createElement,
   Delete,
   identity,
+  Move,
   newActionEvent,
 } from '../../../foundation.js';
 import {
@@ -1298,7 +1298,10 @@ export class SubscriberList extends SubscriberListContainer {
     if (!inputsElement)
 <span class="branch-0 cbranch-no" title="branch not covered" >      inputsElement = createElement(ied.ownerDocument, 'Inputs', {});</span>
 &nbsp;
-    const actions: Create[] = [];
+    const complexAction: ComplexAction = {
+      actions: [],
+      title: get(`subscription.connect`),
+    };
 &nbsp;
     this.currentUsedDataset!.querySelectorAll('FCDA').forEach(fcda =&gt; {
       if (
@@ -1311,37 +1314,31 @@ export class SubscriberList extends SubscriberListContainer {
         );
 &nbsp;
         if (inputsElement?.parentElement)
-          actions.push({ new: { parent: inputsElement!, element: <span class="branch-0 cbranch-no" title="branch not covered" >extRef } });</span>
+          complexAction.actions.push({
+            new: { parent: inputsElement!, element: <span class="branch-0 cbranch-no" title="branch not covered" >extRef },</span>
+<span class="cstat-no" title="statement not covered" >          });</span>
 <span class="cstat-no" title="statement not covered" >        else inputsElement?.appendChild(extRef);</span>
       }
     });
 &nbsp;
     // we need to extend the actions array with the actions for the instantiation of the LSVS
-    const supervisionActions: Create[] = instantiateSubscriptionSupervision(
+    const supervisionActions = instantiateSubscriptionSupervision(
       this.currentSelectedSmvControl,
       ied
     );
 &nbsp;
-    /** If the IED doesn't have a Inputs element, just append it to the first LN0 element. */
-    const title = get('subscription.connect');
-    if (inputsElement.parentElement)
-      this.dispatchEvent(
-        newActionEvent({
-          title,
-          actions: actions.concat(<span class="branch-0 cbranch-no" title="branch not covered" >supervisionActions),</span>
-<span class="cstat-no" title="statement not covered" >        })</span>
-<span class="cstat-no" title="statement not covered" >      );</span>
-<span class="cstat-no" title="statement not covered" >    else {</span>
-<span class="cstat-no" title="statement not covered" >      const inputAction: Create = {</span>
-<span class="cstat-no" title="statement not covered" >        new: { parent: ied.querySelector('LN0')!, element: inputsElement },</span>
-<span class="cstat-no" title="statement not covered" >      };</span>
-<span class="cstat-no" title="statement not covered" >      this.dispatchEvent(</span>
-<span class="cstat-no" title="statement not covered" >        newActionEvent({</span>
-<span class="cstat-no" title="statement not covered" >          title,</span>
-<span class="cstat-no" title="statement not covered" >          actions: [inputAction].concat(supervisionActions),</span>
-        })
-      );
+    if (inputsElement.parentElement) {
+      complexAction.actions.concat(<span class="branch-0 cbranch-no" title="branch not covered" >supervisionActions);</span>
+<span class="cstat-no" title="statement not covered" >    } else {</span>
+<span class="cstat-no" title="statement not covered" >      /** If the IED doesn't have a Inputs element, just append it to the first LN0 element. */</span>
+<span class="cstat-no" title="statement not covered" >      const inputAction: (Create | Move)[] = [</span>
+<span class="cstat-no" title="statement not covered" >        {</span>
+<span class="cstat-no" title="statement not covered" >          new: { parent: ied.querySelector('LN0')!, element: inputsElement },</span>
+<span class="cstat-no" title="statement not covered" >        },</span>
+<span class="cstat-no" title="statement not covered" >      ];</span>
+<span class="cstat-no" title="statement not covered" >      complexAction.actions = inputAction.concat(supervisionActions);</span>
     }
+    this.dispatchEvent(newActionEvent(complexAction));
   }
 &nbsp;
   private async unsubscribe(ied: Element): Promise&lt;void&gt; {
@@ -1555,7 +1552,7 @@ export class SubscriberList extends SubscriberListContainer {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener">istanbul</a>
-                at Thu Mar 02 2023 13:41:25 GMT+0000 (Coordinated Universal Time)
+                at Tue Mar 07 2023 08:36:56 GMT+0000 (Coordinated Universal Time)
             </div>
         </div>
         <script src="../../../../prettify.js"></script>

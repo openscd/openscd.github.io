@@ -167,32 +167,33 @@ export let SubscriberList = class extends SubscriberListContainer {
     let inputsElement = ied.querySelector("LN0 > Inputs");
     if (!inputsElement)
       inputsElement = createElement(ied.ownerDocument, "Inputs", {});
-    const actions = [];
+    const complexAction = {
+      actions: [],
+      title: get(`subscription.connect`)
+    };
     this.currentUsedDataset.querySelectorAll("FCDA").forEach((fcda) => {
       if (!existExtRef(inputsElement, fcda, this.currentSelectedGseControl) && canCreateValidExtRef(fcda, this.currentSelectedGseControl)) {
         const extRef = createExtRefElement(this.currentSelectedGseControl, fcda);
         if (inputsElement?.parentElement)
-          actions.push({new: {parent: inputsElement, element: extRef}});
+          complexAction.actions.push({
+            new: {parent: inputsElement, element: extRef}
+          });
         else
           inputsElement?.appendChild(extRef);
       }
     });
     const supervisionActions = instantiateSubscriptionSupervision(this.currentSelectedGseControl, ied);
-    const title = get("subscription.connect");
     if (inputsElement.parentElement) {
-      this.dispatchEvent(newActionEvent({
-        title,
-        actions: actions.concat(supervisionActions)
-      }));
+      complexAction.actions.concat(supervisionActions);
     } else {
-      const inputAction = {
-        new: {parent: ied.querySelector("LN0"), element: inputsElement}
-      };
-      this.dispatchEvent(newActionEvent({
-        title,
-        actions: [inputAction].concat(supervisionActions)
-      }));
+      const inputAction = [
+        {
+          new: {parent: ied.querySelector("LN0"), element: inputsElement}
+        }
+      ];
+      complexAction.actions = inputAction.concat(supervisionActions);
     }
+    this.dispatchEvent(newActionEvent(complexAction));
   }
   async unsubscribe(ied) {
     const actions = [];
