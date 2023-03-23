@@ -27,5 +27,6 @@
 | `openReportControlSelection`       | `(): void`           |                                                  |
 | `openSampledValueControlSelection` | `(): void`           |                                                  |
 | `renderIedContainer`               | `(): TemplateResult` |                                                  |
+| `renderLines`                      | `(): TemplateResult` |                                                  |
 | `toggleShowFunctions`              | `(): void`           |                                                  |
 | `toggleShowIEDs`                   | `(): void`           |                                                  |

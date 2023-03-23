@@ -20,6 +20,7 @@ import {
 import {translate} from "../../../_snowpack/pkg/lit-translate.js";
 import "../../../_snowpack/pkg/@material/mwc-icon-button.js";
 import "../../../_snowpack/pkg/@material/mwc-icon-button-toggle.js";
+import "./line-editor.js";
 import "./substation-editor.js";
 import "./ied-editor.js";
 import {communicationMappingWizard} from "../../wizards/commmap-wizards.js";
@@ -87,6 +88,15 @@ export let ZerolinePane = class extends LitElement {
     return ieds.length ? html`<div id="iedcontainer">
           ${ieds.map((ied) => html`<ied-editor .doc=${this.doc} .element=${ied}></ied-editor>`)}
         </div>` : html``;
+  }
+  renderLines() {
+    return this.doc?.querySelector(":root > Line") ? html`<section>
+          ${Array.from(this.doc.querySelectorAll("Line") ?? []).filter(isPublic).map((line) => html`<line-editor
+                  .doc=${this.doc}
+                  .element="${line}"
+                  ?showfunctions=${shouldShowFunctions()}
+                ></line-editor>`)}
+        </section>` : html``;
   }
   render() {
     return html` <h1>
@@ -161,7 +171,7 @@ export let ZerolinePane = class extends LitElement {
             <span style="color: var(--base1)"
               >${translate("substation.missing")}</span
             >
-          </h1>`}`;
+          </h1>`}${this.renderLines()}`;
   }
 };
 ZerolinePane.styles = css`
