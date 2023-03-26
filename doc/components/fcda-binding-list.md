@@ -8,13 +8,21 @@ And when selecting a FCDA Element a custom event is fired, so other list can be 
 
 | Property              | Attribute             | Type          |
 |-----------------------|-----------------------|---------------|
+| `actionsMenu`         |                       | `Menu`        |
+| `actionsMenuIcon`     |                       | `Icon`        |
+| `controlBlockList`    |                       | `List`        |
 | `controlTag`          | `controlTag`          | `controlTag`  |
 | `doc`                 |                       | `XMLDocument` |
+| `hideNotSubscribed`   | `hideNotSubscribed`   | `boolean`     |
+| `hideSubscribed`      | `hideSubscribed`      | `boolean`     |
 | `includeLaterBinding` | `includeLaterBinding` | `boolean`     |
 | `resetSelection`      |                       |               |
 
 ## Methods
 
-| Method       | Type                                             |
-|--------------|--------------------------------------------------|
-| `renderFCDA` | `(controlElement: Element, fcdaElement: Element): TemplateResult` |
+| Method                  | Type                                             |
+|-------------------------|--------------------------------------------------|
+| `renderControls`        | `(controlElements: Element[]): TemplateResult`   |
+| `renderFCDA`            | `(controlElement: Element, fcdaElement: Element): TemplateResult` |
+| `renderTitle`           | `(): TemplateResult`                             |
+| `updateBaseFilterState` | `(): void`                                       |
