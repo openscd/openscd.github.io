@@ -39,7 +39,8 @@ import {
   isWizardFactory,
   checkValidity,
   reportValidity,
-  identity
+  identity,
+  formatXml
 } from "./foundation.js";
 function renderWizardInput(input) {
   if (input instanceof TemplateResult)
@@ -257,7 +258,7 @@ export let WizardDialog = class extends LitElement {
               style="width: 80vw; height: calc(100vh - 240px);"
               theme="ace/theme/solarized_${localStorage.getItem("theme")}"
               mode="ace/mode/xml"
-              value="${new XMLSerializer().serializeToString(page.element)}"
+              value="${formatXml(new XMLSerializer().serializeToString(page.element))}"
             ></ace-editor>` : page.content?.map(renderWizardInput)}
       </div>
       ${index > 0 ? html`<mwc-button
