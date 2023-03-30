@@ -28,5 +28,6 @@
 | `openSampledValueControlSelection` | `(): void`           |                                                  |
 | `renderIedContainer`               | `(): TemplateResult` |                                                  |
 | `renderLines`                      | `(): TemplateResult` |                                                  |
+| `renderSubstation`                 | `(): TemplateResult` |                                                  |
 | `toggleShowFunctions`              | `(): void`           |                                                  |
 | `toggleShowIEDs`                   | `(): void`           |                                                  |

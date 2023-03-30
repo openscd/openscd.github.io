@@ -13,7 +13,6 @@
 
 ## Methods
 
-| Method           | Type       |
-|------------------|------------|
-| `openEditWizard` | `(): void` |
-| `remove`         | `(): void` |
+| Method   | Type       |
+|----------|------------|
+| `remove` | `(): void` |

@@ -89,12 +89,27 @@ export let ZerolinePane = class extends LitElement {
           ${ieds.map((ied) => html`<ied-editor .doc=${this.doc} .element=${ied}></ied-editor>`)}
         </div>` : html``;
   }
+  renderSubstation() {
+    return this.doc?.querySelector(":root > Substation") ? html`<section>
+          ${Array.from(this.doc.querySelectorAll("Substation") ?? []).filter(isPublic).map((substation) => html`<substation-editor
+                  .doc=${this.doc}
+                  .element=${substation}
+                  .getAttachedIeds=${this.getAttachedIeds}
+                  ?readonly=${this.readonly}
+                  ?showfunctions=${shouldShowFunctions()}
+                ></substation-editor>`)}
+        </section>` : html`<h1>
+          <span style="color: var(--base1)"
+            >${translate("substation.missing")}</span
+          >
+        </h1>`;
+  }
   renderLines() {
     return this.doc?.querySelector(":root > Line") ? html`<section>
           ${Array.from(this.doc.querySelectorAll("Line") ?? []).filter(isPublic).map((line) => html`<line-editor
                   .doc=${this.doc}
-                  .element="${line}"
-                  ?showfunctions=${shouldShowFunctions()}
+                  .element=${line}
+                 ?showfunctions=${shouldShowFunctions()}
                 ></line-editor>`)}
         </section>` : html``;
   }
@@ -159,19 +174,7 @@ export let ZerolinePane = class extends LitElement {
         </nav>
       </h1>
       ${this.renderIedContainer()}
-      ${this.doc?.querySelector(":root > Substation") ? html`<section>
-            ${Array.from(this.doc.querySelectorAll("Substation") ?? []).filter(isPublic).map((substation) => html`<substation-editor
-                    .doc=${this.doc}
-                    .element=${substation}
-                    .getAttachedIeds=${this.getAttachedIeds}
-                    ?readonly=${this.readonly}
-                    ?showfunctions=${shouldShowFunctions()}
-                  ></substation-editor>`)}
-          </section>` : html`<h1>
-            <span style="color: var(--base1)"
-              >${translate("substation.missing")}</span
-            >
-          </h1>`}${this.renderLines()}`;
+      ${this.renderSubstation()}${this.renderLines()}`;
   }
 };
 ZerolinePane.styles = css`

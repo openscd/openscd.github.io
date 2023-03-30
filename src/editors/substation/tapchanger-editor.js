@@ -106,8 +106,8 @@ export let TapChangerEditor = class extends LitElement {
         >`);
   }
   render() {
-    return html`<action-pane label=${this.header}> 
-    <abbr slot="action" title="${translate("edit")}">
+    return html`<action-pane label=${this.header}>
+      <abbr slot="action" title="${translate("edit")}">
         <mwc-icon-button
           icon="edit"
           @click=${() => this.openEditWizard()}
@@ -120,27 +120,27 @@ export let TapChangerEditor = class extends LitElement {
         ></mwc-icon-button>
       </abbr>
       <abbr
-      slot="action"
-      style="position:relative;"
-      title="${translate("add")}"
-    >
-      <mwc-icon-button
-        icon="playlist_add"
-        @click=${() => this.addMenu.open = true}
-      ></mwc-icon-button
-      ><mwc-menu
-        corner="BOTTOM_RIGHT"
-        menuCorner="END"
-        @action=${(e) => {
+        slot="action"
+        style="position:relative;"
+        title="${translate("add")}"
+      >
+        <mwc-icon-button
+          icon="playlist_add"
+          @click=${() => this.addMenu.open = true}
+        ></mwc-icon-button
+        ><mwc-menu
+          corner="BOTTOM_RIGHT"
+          menuCorner="END"
+          @action=${(e) => {
       const tagName = e.target.selected.value;
       this.openCreateWizard(tagName);
     }}
-        >${this.renderAddButtons()}</mwc-menu
-      ></abbr
-    >
-    ${this.renderLNodes()}
-    ${this.renderEqFunctions()} ${this.renderSubEquipments()}
-    </action-icon>`;
+          >${this.renderAddButtons()}</mwc-menu
+        ></abbr
+      >
+      ${this.renderLNodes()} ${this.renderEqFunctions()}
+      ${this.renderSubEquipments()}
+    </action-pane>`;
   }
 };
 TapChangerEditor.styles = css`

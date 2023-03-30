@@ -16,11 +16,15 @@ import {
   property,
   state
 } from "../../../_snowpack/pkg/lit-element.js";
+import {translate} from "../../../_snowpack/pkg/lit-translate.js";
+import "../../../_snowpack/pkg/@material/mwc-icon.js";
+import "../../../_snowpack/pkg/@material/mwc-icon-button.js";
 import "./conducting-equipment-editor.js";
 import "./function-editor.js";
 import "./general-equipment-editor.js";
 import "./l-node-editor.js";
-import {getChildElementsByTagName} from "../../foundation.js";
+import {getChildElementsByTagName, newWizardEvent} from "../../foundation.js";
+import {wizards} from "../../wizards/wizard-library.js";
 export let LineEditor = class extends LitElement {
   constructor() {
     super(...arguments);
@@ -30,6 +34,11 @@ export let LineEditor = class extends LitElement {
     const name = this.element.getAttribute("name") ?? "";
     const desc = this.element.getAttribute("desc");
     return `${name} ${desc ? `—${desc}` : ""}`;
+  }
+  openEditWizard() {
+    const wizard = wizards["Line"].edit(this.element);
+    if (wizard)
+      this.dispatchEvent(newWizardEvent(wizard));
   }
   renderConductingEquipments() {
     const ConductingEquipments = getChildElementsByTagName(this.element, "ConductingEquipment");
@@ -69,8 +78,14 @@ export let LineEditor = class extends LitElement {
         </div>` : html``;
   }
   render() {
-    return html`<action-pane label=${this.header}> ${this.renderConductingEquipments()}${this.renderGeneralEquipments()}${this.renderFunctions()}${this.renderLNodes()}
-      </action-icon>`;
+    return html`<action-pane label=${this.header}>
+      <abbr slot="action" title="${translate("edit")}">
+        <mwc-icon-button
+          icon="edit"
+          @click=${() => this.openEditWizard()}
+        ></mwc-icon-button> </abbr
+      >${this.renderConductingEquipments()}${this.renderGeneralEquipments()}${this.renderFunctions()}${this.renderLNodes()}
+    </action-pane>`;
   }
 };
 __decorate([
