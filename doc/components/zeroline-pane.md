@@ -6,6 +6,8 @@
 
 | Property           | Attribute  | Type                                             | Default    | Description                                      |
 |--------------------|------------|--------------------------------------------------|------------|--------------------------------------------------|
+| `addButton`        |            | `IconButton`                                     |            |                                                  |
+| `addMenu`          |            | `Menu`                                           |            |                                                  |
 | `commmap`          |            | `IconButton`                                     |            |                                                  |
 | `createsubstation` |            | `IconButton`                                     |            |                                                  |
 | `doc`              |            | `XMLDocument`                                    |            | The document being edited as provided to editor by [[`Zeroline`]]. |
@@ -19,15 +21,14 @@
 
 ## Methods
 
-| Method                             | Type                 | Description                                      |
-|------------------------------------|----------------------|--------------------------------------------------|
-| `openCommunicationMapping`         | `(): void`           |                                                  |
-| `openCreateSubstationWizard`       | `(): void`           | Opens a [[`WizardDialog`]] for creating a new `Substation` element. |
-| `openGseControlSelection`          | `(): void`           |                                                  |
-| `openReportControlSelection`       | `(): void`           |                                                  |
-| `openSampledValueControlSelection` | `(): void`           |                                                  |
-| `renderIedContainer`               | `(): TemplateResult` |                                                  |
-| `renderLines`                      | `(): TemplateResult` |                                                  |
-| `renderSubstation`                 | `(): TemplateResult` |                                                  |
-| `toggleShowFunctions`              | `(): void`           |                                                  |
-| `toggleShowIEDs`                   | `(): void`           |                                                  |
+| Method                             | Type                 |
+|------------------------------------|----------------------|
+| `openCommunicationMapping`         | `(): void`           |
+| `openGseControlSelection`          | `(): void`           |
+| `openReportControlSelection`       | `(): void`           |
+| `openSampledValueControlSelection` | `(): void`           |
+| `renderIedContainer`               | `(): TemplateResult` |
+| `renderLines`                      | `(): TemplateResult` |
+| `renderSubstation`                 | `(): TemplateResult` |
+| `toggleShowFunctions`              | `(): void`           |
+| `toggleShowIEDs`                   | `(): void`           |

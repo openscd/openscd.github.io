@@ -3,6 +3,7 @@ import {get, translate} from "../../_snowpack/pkg/lit-translate.js";
 import "../wizard-textfield.js";
 import {
   cloneElement,
+  createElement,
   getValue,
   patterns
 } from "../foundation.js";
@@ -54,6 +55,17 @@ function render(name, desc, type, nomFreq, numPhases) {
     ></wizard-textfield>`
   ];
 }
+function createLineAction(parent) {
+  return (inputs) => {
+    const lineAttrs = {};
+    const lineKeys = ["name", "desc", "type", "nomFreq", "numPhases"];
+    lineKeys.forEach((key) => {
+      lineAttrs[key] = getValue(inputs.find((i) => i.label === key));
+    });
+    const line = createElement(parent.ownerDocument, "Line", lineAttrs);
+    return [{new: {parent, element: line}}];
+  };
+}
 function updateAction(element) {
   return (inputs) => {
     const lineAttrs = {};
@@ -72,6 +84,24 @@ function updateAction(element) {
     }
     return [];
   };
+}
+export function createLineWizard(parent) {
+  const name = "";
+  const desc = "";
+  const type = "";
+  const nomFreq = "";
+  const numPhases = "";
+  return [
+    {
+      title: get("wizard.title.add", {tagName: "Line"}),
+      primary: {
+        icon: "save",
+        label: get("save"),
+        action: createLineAction(parent)
+      },
+      content: [...render(name, desc, type, nomFreq, numPhases)]
+    }
+  ];
 }
 export function editLineWizard(element) {
   return [

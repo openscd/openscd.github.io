@@ -27,10 +27,11 @@ import {communicationMappingWizard} from "../../wizards/commmap-wizards.js";
 import {gooseIcon, smvIcon, reportIcon} from "../../icons/icons.js";
 import {isPublic, newWizardEvent} from "../../foundation.js";
 import {selectGseControlWizard} from "../../wizards/gsecontrol.js";
-import {wizards} from "../../wizards/wizard-library.js";
+import {emptyWizard, wizards} from "../../wizards/wizard-library.js";
 import {getAttachedIeds} from "./foundation.js";
 import {selectSampledValueControlWizard} from "../../wizards/sampledvaluecontrol.js";
 import {selectReportControlWizard} from "../../wizards/reportcontrol.js";
+import {tags} from "../../foundation.js";
 function shouldShowIEDs() {
   return localStorage.getItem("showieds") === "on";
 }
@@ -43,6 +44,11 @@ function shouldShowFunctions() {
 function setShowFunctions(value) {
   localStorage.setItem("showfunctions", value);
 }
+function childTags(element) {
+  if (!element)
+    return [];
+  return tags[element.tagName].children.filter((child) => wizards[child].create !== emptyWizard);
+}
 export let ZerolinePane = class extends LitElement {
   constructor() {
     super(...arguments);
@@ -51,11 +57,6 @@ export let ZerolinePane = class extends LitElement {
   }
   openCommunicationMapping() {
     const wizard = communicationMappingWizard(this.doc);
-    if (wizard)
-      this.dispatchEvent(newWizardEvent(wizard));
-  }
-  openCreateSubstationWizard() {
-    const wizard = wizards["Substation"].create(this.doc.documentElement);
     if (wizard)
       this.dispatchEvent(newWizardEvent(wizard));
   }
@@ -91,7 +92,7 @@ export let ZerolinePane = class extends LitElement {
   }
   renderSubstation() {
     return this.doc?.querySelector(":root > Substation") ? html`<section>
-          ${Array.from(this.doc.querySelectorAll("Substation") ?? []).filter(isPublic).map((substation) => html`<substation-editor
+          ${Array.from(this.doc.querySelectorAll(":root >Substation") ?? []).filter(isPublic).map((substation) => html`<substation-editor
                   .doc=${this.doc}
                   .element=${substation}
                   .getAttachedIeds=${this.getAttachedIeds}
@@ -106,23 +107,44 @@ export let ZerolinePane = class extends LitElement {
   }
   renderLines() {
     return this.doc?.querySelector(":root > Line") ? html`<section>
-          ${Array.from(this.doc.querySelectorAll("Line") ?? []).filter(isPublic).map((line) => html`<line-editor
+          ${Array.from(this.doc.querySelectorAll(":root >Line") ?? []).filter(isPublic).map((line) => html`<line-editor
                   .doc=${this.doc}
                   .element=${line}
-                 ?showfunctions=${shouldShowFunctions()}
+                  ?showfunctions=${shouldShowFunctions()}
                 ></line-editor>`)}
         </section>` : html``;
+  }
+  openCreateWizard(tagName) {
+    const wizard = wizards[tagName].create(this.doc.documentElement);
+    if (wizard)
+      this.dispatchEvent(newWizardEvent(wizard));
+  }
+  renderAddButtons() {
+    return childTags(this.doc.documentElement).map((child) => html`<mwc-list-item value="${child}"
+          ><span>${child}</span></mwc-list-item
+        >`);
+  }
+  updated() {
+    if (this.addMenu && this.addButton)
+      this.addMenu.anchor = this.addButton;
   }
   render() {
     return html` <h1>
         <nav>
-          <abbr title="${translate("add")}">
+          <abbr slot="action" title="${translate("add")}">
             <mwc-icon-button
-              id="createsubstation"
               icon="playlist_add"
-              @click=${() => this.openCreateSubstationWizard()}
-            ></mwc-icon-button>
-          </abbr>
+              @click=${() => this.addMenu.open = true}
+            ></mwc-icon-button
+            ><mwc-menu
+              corner="BOTTOM_LEFT"
+              @action=${(e) => {
+      const tagName = e.target.selected.value;
+      this.openCreateWizard(tagName);
+    }}
+              >${this.renderAddButtons()}</mwc-menu
+            ></abbr
+          >
         </nav>
         <nav>
           <abbr title="${translate("zeroline.showieds")}">
@@ -212,6 +234,10 @@ ZerolinePane.styles = css`
       box-sizing: border-box;
       grid-template-columns: repeat(auto-fit, minmax(128px, auto));
     }
+    :host {
+      display: block;
+      position: relative;
+    }
   `;
 __decorate([
   property({attribute: false})
@@ -243,6 +269,12 @@ __decorate([
 __decorate([
   query("#createsubstation")
 ], ZerolinePane.prototype, "createsubstation", 2);
+__decorate([
+  query("mwc-menu")
+], ZerolinePane.prototype, "addMenu", 2);
+__decorate([
+  query('mwc-icon-button[icon="playlist_add"]')
+], ZerolinePane.prototype, "addButton", 2);
 ZerolinePane = __decorate([
   customElement("zeroline-pane")
 ], ZerolinePane);
