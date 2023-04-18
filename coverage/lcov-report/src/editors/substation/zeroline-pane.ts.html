@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">95.4% </span>
+                <span class="strong">94.71% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>291/305</span>
+                <span class='fraction'>287/303</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">95.4% </span>
+                <span class="strong">94.71% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>291/305</span>
+                <span class='fraction'>287/303</span>
             </div>
         
             
@@ -366,9 +366,7 @@
 <a name='L301'></a><a href='#L301'>301</a>
 <a name='L302'></a><a href='#L302'>302</a>
 <a name='L303'></a><a href='#L303'>303</a>
-<a name='L304'></a><a href='#L304'>304</a>
-<a name='L305'></a><a href='#L305'>305</a>
-<a name='L306'></a><a href='#L306'>306</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">6x</span>
+<a name='L304'></a><a href='#L304'>304</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-yes">6x</span>
@@ -535,6 +533,8 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-yes">6x</span>
@@ -574,10 +574,6 @@
 <span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">6x</span>
-<span class="cline-any cline-yes">6x</span>
-<span class="cline-any cline-yes">6x</span>
-<span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-yes">6x</span>
@@ -809,7 +805,7 @@ export class ZerolinePane extends LitElement {
   renderSubstation(): TemplateResult {
     return this.doc?.querySelector(':root &gt; Substation')
       ? html`&lt;section&gt;
-          ${Array.from(this.doc.querySelectorAll(<span class="branch-0 cbranch-no" title="branch not covered" >':root &gt;Substation') ?? [])</span>
+          ${Array.from(this.doc.querySelectorAll(<span class="branch-0 cbranch-no" title="branch not covered" >'Substation') ?? [])</span>
             .filter(isPublic)
             .map(
               substation =&gt;
@@ -832,13 +828,15 @@ export class ZerolinePane extends LitElement {
   renderLines(): TemplateResult {
     return this.doc?.querySelector(<span class="branch-0 cbranch-no" title="branch not covered" >':root &gt; Line')</span>
 <span class="cstat-no" title="statement not covered" >      ? html`&lt;section&gt;</span>
-<span class="cstat-no" title="statement not covered" >          ${Array.from(this.doc.querySelectorAll(':root &gt;Line') ?? [])</span>
+<span class="cstat-no" title="statement not covered" >          ${Array.from(this.doc.querySelectorAll('Line') ?? [])</span>
 <span class="cstat-no" title="statement not covered" >            .filter(isPublic)</span>
 <span class="cstat-no" title="statement not covered" >            .map(</span>
 <span class="cstat-no" title="statement not covered" >              line =&gt;</span>
 <span class="cstat-no" title="statement not covered" >                html`&lt;line-editor</span>
 <span class="cstat-no" title="statement not covered" >                  .doc=${this.doc}</span>
 <span class="cstat-no" title="statement not covered" >                  .element=${line}</span>
+<span class="cstat-no" title="statement not covered" >                  .getAttachedIeds=${this.getAttachedIeds}</span>
+<span class="cstat-no" title="statement not covered" >                  ?readonly=${this.readonly}</span>
 <span class="cstat-no" title="statement not covered" >                  ?showfunctions=${shouldShowFunctions()}</span>
                 &gt;&lt;/line-editor&gt;`
             )}
@@ -875,7 +873,7 @@ export class ZerolinePane extends LitElement {
               @click=${() =&gt; (this.addMenu.open = true)}
             &gt;&lt;/mwc-icon-button
             &gt;&lt;mwc-menu
-              corner="BOTTOM_LEFT"
+              corner="BOTTOM_RIGHT"
               @action=${(e: Event) =&gt; {
                 const tagName = (&lt;ListItem&gt;(&lt;Menu&gt;e.target).selected).value;
                 this.openCreateWizard(tagName);
@@ -972,10 +970,6 @@ export class ZerolinePane extends LitElement {
       box-sizing: border-box;
       grid-template-columns: repeat(auto-fit, minmax(128px, auto));
     }
-    :host {
-      display: block;
-      position: relative;
-    }
   `;
 }
 &nbsp;</pre></td></tr></table></pre>
@@ -985,7 +979,7 @@ export class ZerolinePane extends LitElement {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener">istanbul</a>
-                at Tue Apr 11 2023 12:38:44 GMT+0000 (Coordinated Universal Time)
+                at Tue Apr 18 2023 16:07:42 GMT+0000 (Coordinated Universal Time)
             </div>
         </div>
         <script src="../../../prettify.js"></script>

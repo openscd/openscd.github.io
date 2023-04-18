@@ -92,7 +92,7 @@ export let ZerolinePane = class extends LitElement {
   }
   renderSubstation() {
     return this.doc?.querySelector(":root > Substation") ? html`<section>
-          ${Array.from(this.doc.querySelectorAll(":root >Substation") ?? []).filter(isPublic).map((substation) => html`<substation-editor
+          ${Array.from(this.doc.querySelectorAll("Substation") ?? []).filter(isPublic).map((substation) => html`<substation-editor
                   .doc=${this.doc}
                   .element=${substation}
                   .getAttachedIeds=${this.getAttachedIeds}
@@ -107,9 +107,11 @@ export let ZerolinePane = class extends LitElement {
   }
   renderLines() {
     return this.doc?.querySelector(":root > Line") ? html`<section>
-          ${Array.from(this.doc.querySelectorAll(":root >Line") ?? []).filter(isPublic).map((line) => html`<line-editor
+          ${Array.from(this.doc.querySelectorAll("Line") ?? []).filter(isPublic).map((line) => html`<line-editor
                   .doc=${this.doc}
                   .element=${line}
+                  .getAttachedIeds=${this.getAttachedIeds}
+                  ?readonly=${this.readonly}
                   ?showfunctions=${shouldShowFunctions()}
                 ></line-editor>`)}
         </section>` : html``;
@@ -137,7 +139,7 @@ export let ZerolinePane = class extends LitElement {
               @click=${() => this.addMenu.open = true}
             ></mwc-icon-button
             ><mwc-menu
-              corner="BOTTOM_LEFT"
+              corner="BOTTOM_RIGHT"
               @action=${(e) => {
       const tagName = e.target.selected.value;
       this.openCreateWizard(tagName);
@@ -233,10 +235,6 @@ ZerolinePane.styles = css`
       padding: 8px 12px 16px;
       box-sizing: border-box;
       grid-template-columns: repeat(auto-fit, minmax(128px, auto));
-    }
-    :host {
-      display: block;
-      position: relative;
     }
   `;
 __decorate([

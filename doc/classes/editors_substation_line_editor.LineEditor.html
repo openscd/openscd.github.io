@@ -278,7 +278,7 @@
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-static tsd-is-external"><a href="editors_substation_line_editor.LineEditor.html#properties" class="tsd-kind-icon">properties</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-static tsd-is-external"><a href="editors_substation_line_editor.LineEditor.html#render" class="tsd-kind-icon">render</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-static tsd-is-external"><a href="editors_substation_line_editor.LineEditor.html#shadowRootOptions" class="tsd-kind-icon">shadow<wbr>Root<wbr>Options</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-static tsd-is-external"><a href="editors_substation_line_editor.LineEditor.html#styles" class="tsd-kind-icon">styles</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-overwrite tsd-is-static"><a href="editors_substation_line_editor.LineEditor.html#styles" class="tsd-kind-icon">styles</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
@@ -354,7 +354,7 @@
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-inherited tsd-is-external"><a href="editors_substation_line_editor.LineEditor.html#querySelector" class="tsd-kind-icon">query<wbr>Selector</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-inherited tsd-is-external"><a href="editors_substation_line_editor.LineEditor.html#querySelectorAll" class="tsd-kind-icon">query<wbr>Selector<wbr>All</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external"><a href="editors_substation_line_editor.LineEditor.html#releasePointerCapture" class="tsd-kind-icon">release<wbr>Pointer<wbr>Capture</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external"><a href="editors_substation_line_editor.LineEditor.html#remove" class="tsd-kind-icon">remove</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-overwrite"><a href="editors_substation_line_editor.LineEditor.html#remove" class="tsd-kind-icon">remove</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external"><a href="editors_substation_line_editor.LineEditor.html#removeAttribute" class="tsd-kind-icon">remove<wbr>Attribute</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external"><a href="editors_substation_line_editor.LineEditor.html#removeAttributeNS" class="tsd-kind-icon">remove<wbr>AttributeNS</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external"><a href="editors_substation_line_editor.LineEditor.html#removeAttributeNode" class="tsd-kind-icon">remove<wbr>Attribute<wbr>Node</a></li>
@@ -921,7 +921,7 @@
 					<div class="tsd-signature tsd-kind-icon">doc<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">XMLDocument</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/03632e2/src/editors/substation/line-editor.ts#L26">src/editors/substation/line-editor.ts:26</a></li>
+							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/33e9953/src/editors/substation/line-editor.ts#L33">src/editors/substation/line-editor.ts:33</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -947,7 +947,7 @@
 					<div class="tsd-signature tsd-kind-icon">element<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Element</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/03632e2/src/editors/substation/line-editor.ts#L29">src/editors/substation/line-editor.ts:29</a></li>
+							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/33e9953/src/editors/substation/line-editor.ts#L36">src/editors/substation/line-editor.ts:36</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -2949,7 +2949,7 @@
 					<div class="tsd-signature tsd-kind-icon">showfunctions<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = false</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/03632e2/src/editors/substation/line-editor.ts#L32">src/editors/substation/line-editor.ts:32</a></li>
+							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/33e9953/src/editors/substation/line-editor.ts#L39">src/editors/substation/line-editor.ts:39</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -3183,22 +3183,16 @@
 						</dl>
 					</div>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-static tsd-is-external">
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-overwrite tsd-is-static">
 					<a name="styles" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagStatic">Static</span> <span class="tsd-flag ts-flagOptional">Optional</span> styles</h3>
-					<div class="tsd-signature tsd-kind-icon">styles<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">CSSResultGroup</span></div>
+					<h3><span class="tsd-flag ts-flagStatic">Static</span> styles</h3>
+					<div class="tsd-signature tsd-kind-icon">styles<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">CSSResult</span><span class="tsd-signature-symbol"> = ...</span></div>
 					<aside class="tsd-sources">
-						<p>Inherited from LitElement.styles</p>
+						<p>Overrides LitElement.styles</p>
 						<ul>
-							<li>Defined in node_modules/lit-element/lit-element.d.ts:112</li>
+							<li>Defined in <a href="https://github.com/openscd/open-scd/blob/33e9953/src/editors/substation/line-editor.ts#L142">src/editors/substation/line-editor.ts:142</a></li>
 						</ul>
 					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>Array of styles to apply to the element. The styles should be defined
-							using the [[<code>css</code>]] tag function or via constructible stylesheets.</p>
-						</div>
-					</div>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
@@ -3247,7 +3241,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/03632e2/src/editors/substation/line-editor.ts#L35">src/editors/substation/line-editor.ts:35</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/33e9953/src/editors/substation/line-editor.ts#L42">src/editors/substation/line-editor.ts:42</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
@@ -4938,7 +4932,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/03632e2/src/editors/substation/line-editor.ts#L42">src/editors/substation/line-editor.ts:42</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/33e9953/src/editors/substation/line-editor.ts#L49">src/editors/substation/line-editor.ts:49</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -5189,25 +5183,20 @@
 						</li>
 					</ul>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
 					<a name="remove" class="tsd-anchor"></a>
 					<h3>remove</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
 						<li class="tsd-signature tsd-kind-icon">remove<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Inherited from LitElement.remove</p>
+								<p>Overrides LitElement.remove</p>
 								<ul>
-									<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:3547</li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/33e9953/src/editors/substation/line-editor.ts#L97">src/editors/substation/line-editor.ts:97</a></li>
 								</ul>
 							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Removes node.</p>
-								</div>
-							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
 						</li>
 					</ul>
@@ -5414,7 +5403,7 @@
 							<aside class="tsd-sources">
 								<p>Overrides LitElement.render</p>
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/03632e2/src/editors/substation/line-editor.ts#L108">src/editors/substation/line-editor.ts:108</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/33e9953/src/editors/substation/line-editor.ts#L126">src/editors/substation/line-editor.ts:126</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">TemplateResult</span></h4>
@@ -5431,7 +5420,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/03632e2/src/editors/substation/line-editor.ts#L47">src/editors/substation/line-editor.ts:47</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/33e9953/src/editors/substation/line-editor.ts#L54">src/editors/substation/line-editor.ts:54</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">TemplateResult</span></h4>
@@ -5448,7 +5437,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/03632e2/src/editors/substation/line-editor.ts#L77">src/editors/substation/line-editor.ts:77</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/33e9953/src/editors/substation/line-editor.ts#L84">src/editors/substation/line-editor.ts:84</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">TemplateResult</span></h4>
@@ -5465,7 +5454,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/03632e2/src/editors/substation/line-editor.ts#L62">src/editors/substation/line-editor.ts:62</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/33e9953/src/editors/substation/line-editor.ts#L69">src/editors/substation/line-editor.ts:69</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">TemplateResult</span></h4>
@@ -5482,7 +5471,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/03632e2/src/editors/substation/line-editor.ts#L91">src/editors/substation/line-editor.ts:91</a></li>
+									<li>Defined in <a href="https://github.com/openscd/open-scd/blob/33e9953/src/editors/substation/line-editor.ts#L109">src/editors/substation/line-editor.ts:109</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">TemplateResult</span></h4>
@@ -6956,7 +6945,7 @@
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-static tsd-is-external">
 								<a href="editors_substation_line_editor.LineEditor.html#shadowRootOptions" class="tsd-kind-icon">shadow<wbr>Root<wbr>Options</a>
 							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-static tsd-is-external">
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-overwrite tsd-is-static">
 								<a href="editors_substation_line_editor.LineEditor.html#styles" class="tsd-kind-icon">styles</a>
 							</li>
 							<li class=" tsd-kind-get-signature tsd-parent-kind-class tsd-is-private tsd-is-external">
@@ -7154,7 +7143,7 @@
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external">
 								<a href="editors_substation_line_editor.LineEditor.html#releasePointerCapture" class="tsd-kind-icon">release<wbr>Pointer<wbr>Capture</a>
 							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
 								<a href="editors_substation_line_editor.LineEditor.html#remove" class="tsd-kind-icon">remove</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external">
@@ -7299,6 +7288,9 @@
 			</ul>
 			<ul class="tsd-legend">
 				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private method</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static property</span></li>
 			</ul>
 		</div>
 	</div>

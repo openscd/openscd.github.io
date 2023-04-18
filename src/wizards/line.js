@@ -9,7 +9,9 @@ import {
 } from "../foundation.js";
 const initial = {
   nomFreq: "50",
-  numPhases: "3"
+  numPhases: "3",
+  Voltage: "110",
+  multiplier: "k"
 };
 function render(name, desc, type, nomFreq, numPhases) {
   return [
