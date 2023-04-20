@@ -21,6 +21,7 @@ import {translate} from "../../../_snowpack/pkg/lit-translate.js";
 import "../../../_snowpack/pkg/@material/mwc-icon-button.js";
 import "../../../_snowpack/pkg/@material/mwc-icon-button-toggle.js";
 import "./line-editor.js";
+import "./process-editor.js";
 import "./substation-editor.js";
 import "./ied-editor.js";
 import {communicationMappingWizard} from "../../wizards/commmap-wizards.js";
@@ -116,6 +117,17 @@ export let ZerolinePane = class extends LitElement {
                 ></line-editor>`)}
         </section>` : html``;
   }
+  renderProcesses() {
+    return this.doc?.querySelector(":root > Process") ? html`<section>
+          ${Array.from(this.doc.querySelectorAll(":root > Process") ?? []).filter(isPublic).map((process) => html`<process-editor
+                  .doc=${this.doc}
+                  .element=${process}
+                  .getAttachedIeds=${this.getAttachedIeds}
+                  ?readonly=${this.readonly}
+                  ?showfunctions=${shouldShowFunctions()}
+                ></process-editor>`)}
+        </section>` : html``;
+  }
   openCreateWizard(tagName) {
     const wizard = wizards[tagName].create(this.doc.documentElement);
     if (wizard)
@@ -198,7 +210,7 @@ export let ZerolinePane = class extends LitElement {
         </nav>
       </h1>
       ${this.renderIedContainer()}
-      ${this.renderSubstation()}${this.renderLines()}`;
+      ${this.renderSubstation()}${this.renderLines()}${this.renderProcesses()}`;
   }
 };
 ZerolinePane.styles = css`

@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">94.71% </span>
+                <span class="strong">91.64% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>287/303</span>
+                <span class='fraction'>296/323</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">90% </span>
+                <span class="strong">88.09% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>36/40</span>
+                <span class='fraction'>37/42</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">86.36% </span>
+                <span class="strong">86.95% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>19/22</span>
+                <span class='fraction'>20/23</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">94.71% </span>
+                <span class="strong">91.64% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>287/303</span>
+                <span class='fraction'>296/323</span>
             </div>
         
             
@@ -366,7 +366,28 @@
 <a name='L301'></a><a href='#L301'>301</a>
 <a name='L302'></a><a href='#L302'>302</a>
 <a name='L303'></a><a href='#L303'>303</a>
-<a name='L304'></a><a href='#L304'>304</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">6x</span>
+<a name='L304'></a><a href='#L304'>304</a>
+<a name='L305'></a><a href='#L305'>305</a>
+<a name='L306'></a><a href='#L306'>306</a>
+<a name='L307'></a><a href='#L307'>307</a>
+<a name='L308'></a><a href='#L308'>308</a>
+<a name='L309'></a><a href='#L309'>309</a>
+<a name='L310'></a><a href='#L310'>310</a>
+<a name='L311'></a><a href='#L311'>311</a>
+<a name='L312'></a><a href='#L312'>312</a>
+<a name='L313'></a><a href='#L313'>313</a>
+<a name='L314'></a><a href='#L314'>314</a>
+<a name='L315'></a><a href='#L315'>315</a>
+<a name='L316'></a><a href='#L316'>316</a>
+<a name='L317'></a><a href='#L317'>317</a>
+<a name='L318'></a><a href='#L318'>318</a>
+<a name='L319'></a><a href='#L319'>319</a>
+<a name='L320'></a><a href='#L320'>320</a>
+<a name='L321'></a><a href='#L321'>321</a>
+<a name='L322'></a><a href='#L322'>322</a>
+<a name='L323'></a><a href='#L323'>323</a>
+<a name='L324'></a><a href='#L324'>324</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-yes">6x</span>
@@ -518,6 +539,25 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-yes">6x</span>
@@ -688,6 +728,7 @@ import { IconButtonToggle } from '@material/mwc-icon-button-toggle';
 import { Menu } from '@material/mwc-menu';
 &nbsp;
 import './line-editor.js';
+import './process-editor.js';
 import './substation-editor.js';
 import './ied-editor.js';
 import { communicationMappingWizard } from '../../wizards/commmap-wizards.js';
@@ -844,6 +885,25 @@ export class ZerolinePane extends LitElement {
       : html``;
   }
 &nbsp;
+  renderProcesses(): TemplateResult {
+    return this.doc?.querySelector(<span class="branch-0 cbranch-no" title="branch not covered" >':root &gt; Process')</span>
+<span class="cstat-no" title="statement not covered" >      ? html`&lt;section&gt;</span>
+<span class="cstat-no" title="statement not covered" >          ${Array.from(this.doc.querySelectorAll(':root &gt; Process') ?? [])</span>
+<span class="cstat-no" title="statement not covered" >            .filter(isPublic)</span>
+<span class="cstat-no" title="statement not covered" >            .map(</span>
+<span class="cstat-no" title="statement not covered" >              process =&gt;</span>
+<span class="cstat-no" title="statement not covered" >                html`&lt;process-editor</span>
+<span class="cstat-no" title="statement not covered" >                  .doc=${this.doc}</span>
+<span class="cstat-no" title="statement not covered" >                  .element=${process}</span>
+<span class="cstat-no" title="statement not covered" >                  .getAttachedIeds=${this.getAttachedIeds}</span>
+<span class="cstat-no" title="statement not covered" >                  ?readonly=${this.readonly}</span>
+<span class="cstat-no" title="statement not covered" >                  ?showfunctions=${shouldShowFunctions()}</span>
+                &gt;&lt;/process-editor&gt;`
+            )}
+        &lt;/section&gt;`
+      : html``;
+  }
+&nbsp;
   private openCreateWizard(tagName: string): void {
     const wizard = wizards[&lt;SCLTag&gt;tagName].create(this.doc.documentElement);
 &nbsp;
@@ -932,7 +992,7 @@ export class ZerolinePane extends LitElement {
         &lt;/nav&gt;
       &lt;/h1&gt;
       ${this.renderIedContainer()}
-      ${this.renderSubstation()}${this.renderLines()}`;
+      ${this.renderSubstation()}${this.renderLines()}${this.renderProcesses()}`;
   }
 &nbsp;
   static styles = css`
@@ -979,7 +1039,7 @@ export class ZerolinePane extends LitElement {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener">istanbul</a>
-                at Wed Apr 19 2023 10:47:34 GMT+0000 (Coordinated Universal Time)
+                at Thu Apr 20 2023 14:37:53 GMT+0000 (Coordinated Universal Time)
             </div>
         </div>
         <script src="../../../prettify.js"></script>
