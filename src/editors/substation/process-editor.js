@@ -17,6 +17,7 @@ import {
   property,
   state
 } from "../../../_snowpack/pkg/lit-element.js";
+import {translate} from "../../../_snowpack/pkg/lit-translate.js";
 import "../../../_snowpack/pkg/@material/mwc-icon.js";
 import "../../../_snowpack/pkg/@material/mwc-icon-button.js";
 import "../../../_snowpack/pkg/@material/mwc-menu.js";
@@ -29,7 +30,8 @@ import "./process-editor.js";
 import "./substation-editor.js";
 import "./process-editor.js";
 import {styles} from "./foundation.js";
-import {getChildElementsByTagName} from "../../foundation.js";
+import {newWizardEvent, getChildElementsByTagName} from "../../foundation.js";
+import {wizards} from "../../wizards/wizard-library.js";
 export let ProcessEditor = class extends LitElement {
   constructor() {
     super(...arguments);
@@ -39,6 +41,11 @@ export let ProcessEditor = class extends LitElement {
     const name = this.element.getAttribute("name") ?? "";
     const desc = this.element.getAttribute("desc");
     return `${name} ${desc ? `—${desc}` : ""}`;
+  }
+  openEditWizard() {
+    const wizard = wizards["Process"].edit(this.element);
+    if (wizard)
+      this.dispatchEvent(newWizardEvent(wizard));
   }
   renderConductingEquipments() {
     const ConductingEquipments = getChildElementsByTagName(this.element, "ConductingEquipment");
@@ -103,6 +110,12 @@ export let ProcessEditor = class extends LitElement {
   }
   render() {
     return html`<action-pane label=${this.header}>
+      <abbr slot="action" title="${translate("edit")}">
+        <mwc-icon-button
+          icon="edit"
+          @click=${() => this.openEditWizard()}
+        ></mwc-icon-button>
+      </abbr>
       ${this.renderConductingEquipments()}${this.renderGeneralEquipments()}${this.renderFunctions()}${this.renderLNodes()}
       ${this.renderLines()} ${this.renderSubstations()}${this.renderProcesses()}
     </action-pane>`;

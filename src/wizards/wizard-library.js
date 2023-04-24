@@ -48,6 +48,7 @@ import {
 } from "./transformerWinding.js";
 import {createTapChangerWizard, editTapChangerWizard} from "./tapchanger.js";
 import {createLineWizard, editLineWizard} from "./line.js";
+import {editProcessWizard} from "./process.js";
 export function emptyWizard() {
   return;
 }
@@ -373,7 +374,7 @@ export const wizards = {
     create: emptyWizard
   },
   Process: {
-    edit: emptyWizard,
+    edit: editProcessWizard,
     create: emptyWizard
   },
   ProtNs: {
