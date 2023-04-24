@@ -2,9 +2,21 @@ import {html} from "../../_snowpack/pkg/lit-element.js";
 import {get, translate} from "../../_snowpack/pkg/lit-translate.js";
 import {
   cloneElement,
+  createElement,
   getChildElementsByTagName,
   getValue
 } from "../foundation.js";
+function createProcessAction(parent) {
+  return (inputs) => {
+    const processAttrs = {};
+    const processKeys = ["name", "desc", "type"];
+    processKeys.forEach((key) => {
+      processAttrs[key] = getValue(inputs.find((i) => i.label === key));
+    });
+    const line = createElement(parent.ownerDocument, "Process", processAttrs);
+    return [{new: {parent, element: line}}];
+  };
+}
 function updateProcessAction(element) {
   return (inputs) => {
     const tapProcessAttrs = {};
@@ -47,6 +59,30 @@ export function contentProcessWizard(content) {
       nullable
       helper="${translate("scl.type")}"
     ></wizard-textfield>`
+  ];
+}
+export function createProcessWizard(parent) {
+  const name = "";
+  const desc = "";
+  const type = "";
+  const reservedNames = getChildElementsByTagName(parent.parentElement, "Process").filter((sibling) => sibling !== parent).map((sibling) => sibling.getAttribute("name"));
+  return [
+    {
+      title: get("wizard.title.add", {tagName: "Process"}),
+      primary: {
+        icon: "save",
+        label: get("save"),
+        action: createProcessAction(parent)
+      },
+      content: [
+        ...contentProcessWizard({
+          name,
+          desc,
+          type,
+          reservedNames
+        })
+      ]
+    }
   ];
 }
 export function editProcessWizard(element) {
