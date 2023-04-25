@@ -46,7 +46,7 @@ export function createAction(parent) {
   };
 }
 export function createSubstationWizard(parent) {
-  const guessable = parent.querySelector("Substation") === null;
+  const guessable = parent.ownerDocument.querySelector("Substation") === null && parent.tagName === "SCL";
   return [
     {
       title: get("substation.wizard.title.add"),

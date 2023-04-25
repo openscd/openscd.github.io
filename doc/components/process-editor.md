@@ -4,6 +4,8 @@
 
 | Property        | Attribute       | Modifiers | Type          | Default | Description                                      |
 |-----------------|-----------------|-----------|---------------|---------|--------------------------------------------------|
+| `addButton`     |                 |           | `IconButton`  |         |                                                  |
+| `addMenu`       |                 |           | `Menu`        |         |                                                  |
 | `doc`           |                 |           | `XMLDocument` |         | The document being edited as provided to editor by [[`Zeroline`]]. |
 | `element`       |                 |           | `Element`     |         | SCL element Process                              |
 | `header`        |                 | readonly  | `string`      |         |                                                  |

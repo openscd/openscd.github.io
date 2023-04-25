@@ -100,11 +100,11 @@ export let ZerolinePane = class extends LitElement {
                   ?readonly=${this.readonly}
                   ?showfunctions=${shouldShowFunctions()}
                 ></substation-editor>`)}
-        </section>` : html`<h1>
+        </section>` : !this.doc?.querySelector(":root > Line, :root > Process") ? html`<h1>
           <span style="color: var(--base1)"
             >${translate("substation.missing")}</span
           >
-        </h1>`;
+        </h1>` : html``;
   }
   renderLines() {
     return this.doc?.querySelector(":root > Line") ? html`<section>
@@ -234,6 +234,8 @@ ZerolinePane.styles = css`
 
     section {
       padding: 8px 12px 16px;
+      display: grid;
+      gap: 12px;
     }
 
     abbr {

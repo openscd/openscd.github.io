@@ -15,7 +15,8 @@ import {
   html,
   LitElement,
   property,
-  state
+  state,
+  query
 } from "../../../_snowpack/pkg/lit-element.js";
 import {translate} from "../../../_snowpack/pkg/lit-translate.js";
 import "../../../_snowpack/pkg/@material/mwc-icon.js";
@@ -33,9 +34,15 @@ import {styles} from "./foundation.js";
 import {
   getChildElementsByTagName,
   newActionEvent,
-  newWizardEvent
+  newWizardEvent,
+  tags
 } from "../../foundation.js";
-import {wizards} from "../../wizards/wizard-library.js";
+import {emptyWizard, wizards} from "../../wizards/wizard-library.js";
+function childTags(element) {
+  if (!element)
+    return [];
+  return tags[element.tagName].children.filter((child) => wizards[child].create !== emptyWizard);
+}
 export let ProcessEditor = class extends LitElement {
   constructor() {
     super(...arguments);
@@ -48,6 +55,11 @@ export let ProcessEditor = class extends LitElement {
   }
   openEditWizard() {
     const wizard = wizards["Process"].edit(this.element);
+    if (wizard)
+      this.dispatchEvent(newWizardEvent(wizard));
+  }
+  openCreateWizard(tagName) {
+    const wizard = wizards[tagName].create(this.element);
     if (wizard)
       this.dispatchEvent(newWizardEvent(wizard));
   }
@@ -112,6 +124,15 @@ export let ProcessEditor = class extends LitElement {
               ></l-node-editor>`)}
         </div>` : html``;
   }
+  renderAddButtons() {
+    return childTags(this.element).map((child) => html`<mwc-list-item value="${child}"
+          ><span>${child}</span></mwc-list-item
+        >`);
+  }
+  updated() {
+    if (this.addMenu && this.addButton)
+      this.addMenu.anchor = this.addButton;
+  }
   remove() {
     if (this.element.parentElement)
       this.dispatchEvent(newActionEvent({
@@ -135,6 +156,25 @@ export let ProcessEditor = class extends LitElement {
           @click=${() => this.remove()}
         ></mwc-icon-button>
       </abbr>
+      <abbr
+        slot="action"
+        style="position:relative;"
+        title="${translate("add")}"
+      >
+        <mwc-icon-button
+          icon="playlist_add"
+          @click=${() => this.addMenu.open = true}
+        ></mwc-icon-button
+        ><mwc-menu
+          corner="BOTTOM_RIGHT"
+          menuCorner="END"
+          @action=${(e) => {
+      const tagName = e.target.selected.value;
+      this.openCreateWizard(tagName);
+    }}
+          >${this.renderAddButtons()}</mwc-menu
+        ></abbr
+      >
       ${this.renderConductingEquipments()}${this.renderGeneralEquipments()}${this.renderFunctions()}${this.renderLNodes()}
       ${this.renderLines()} ${this.renderSubstations()}${this.renderProcesses()}
     </action-pane>`;
@@ -164,6 +204,12 @@ __decorate([
 __decorate([
   state()
 ], ProcessEditor.prototype, "header", 1);
+__decorate([
+  query("mwc-menu")
+], ProcessEditor.prototype, "addMenu", 2);
+__decorate([
+  query('mwc-icon-button[icon="playlist_add"]')
+], ProcessEditor.prototype, "addButton", 2);
 ProcessEditor = __decorate([
   customElement("process-editor")
 ], ProcessEditor);
