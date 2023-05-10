@@ -150,6 +150,8 @@ export function Hosting(Base) {
     renderMenuItem(me) {
       if (me === "divider")
         return html`<li divider padded role="separator"></li>`;
+      if (me.actionItem)
+        return html``;
       return html`
         <mwc-list-item
           class="${me.kind}"
@@ -192,7 +194,7 @@ export function Hosting(Base) {
             wrapFocus
             @action=${(ae) => {
         if (ae.target instanceof List)
-          this.menu.filter((item) => item !== "divider")[ae.detail.index]?.action?.(ae);
+          this.menu.filter((item) => item !== "divider" && !item.actionItem)[ae.detail.index]?.action?.(ae);
       }}
           >
             ${this.menu.map(this.renderMenuItem)}
