@@ -44,7 +44,7 @@ export let IedContainer = class extends Container {
     if (!services) {
       return html``;
     }
-    return html` <abbr slot="action" title="${translate("settings")}">
+    return html` <abbr slot="action" title="${translate("iededitor.settings")}">
       <mwc-icon-button
         icon="settings"
         @click=${() => this.openSettingsWizard(services)}

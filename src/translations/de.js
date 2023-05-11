@@ -211,9 +211,10 @@ export const de = {
   },
   iededitor: {
     iedSelector: "IED auswählen",
-    lnFilter: "???",
+    lnFilter: "Filter für logische Knoten",
     missing: "Kein IED vorhanden",
     toggleChildElements: "Kindelemente umschalten",
+    settings: "Services für IED or AccessPoint",
     wizard: {
       daTitle: "DA Informationen anzeigen",
       doTitle: "DO Informationen anzeigen",
