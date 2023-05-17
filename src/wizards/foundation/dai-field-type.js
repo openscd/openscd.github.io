@@ -26,6 +26,9 @@ const daiFieldTypes = [
   "VisString129",
   "VisString255"
 ];
+const emptyIfNull = (item, value) => {
+  return item === null ? "" : value;
+};
 export function getCustomField() {
   return {
     BOOLEAN: booleanField(),
@@ -51,31 +54,31 @@ export function getCustomField() {
   };
   function booleanField() {
     return {
-      render: (element, instanceElement) => {
-        return [
-          html`<wizard-select
-            id="Val"
-            label="Val"
+      render: (element, instanceElement, numOfSGs = null) => {
+        return (numOfSGs ? [...Array(numOfSGs)] : [numOfSGs]).map((item, i) => {
+          return html`<wizard-select
+            id="Val${emptyIfNull(item, `${i + 1}`)}"
+            label="Val${emptyIfNull(item, ` for sGroup ${i + 1}`)}"
             .maybeValue=${getInstanceValue(instanceElement)}
             fixedMenuPosition
           >
             <mwc-list-item value="true">true</mwc-list-item>
             <mwc-list-item value="false">false</mwc-list-item>
-          </wizard-select>`
-        ];
+          </wizard-select>`;
+        });
       },
-      value: (inputs) => {
-        return getValue(inputs.find((input) => input.id === "Val"));
+      value: (inputs, sGroup) => {
+        return getValue(inputs.find((input) => input.id === `Val${sGroup || ""}`));
       }
     };
   }
   function enumField() {
     return {
-      render: (element, instanceElement) => {
-        return [
-          html`<wizard-select
-            id="Val"
-            label="val"
+      render: (element, instanceElement, numOfSGs = null) => {
+        return (numOfSGs ? [...Array(numOfSGs)] : [numOfSGs]).map((item, i) => {
+          return html`<wizard-select
+            id="Val${emptyIfNull(item, `${i + 1}`)}"
+            label="Val${emptyIfNull(item, ` for sGroup ${i + 1}`)}"
             .maybeValue=${getInstanceValue(instanceElement)}
             fixedMenuPosition
           >
@@ -84,21 +87,21 @@ export function getCustomField() {
                 >${enumValue}</mwc-list-item
               >`;
           })}
-          </wizard-select>`
-        ];
+          </wizard-select>`;
+        });
       },
-      value: (inputs) => {
-        return getValue(inputs.find((input) => input.id === "Val"));
+      value: (inputs, sGroup) => {
+        return getValue(inputs.find((input) => input.id === `Val${sGroup || ""}`));
       }
     };
   }
   function floatField(type, min, max) {
     return {
-      render: (element, instanceElement) => {
-        return [
-          html`<wizard-textfield
-            id="Val"
-            label="Val"
+      render: (element, instanceElement, numOfSGs = null) => {
+        return (numOfSGs ? [...Array(numOfSGs)] : [numOfSGs]).map((item, i) => {
+          return html`<wizard-textfield
+            id="Val${emptyIfNull(item, `${i + 1}`)}"
+            label="Val${emptyIfNull(item, ` for sGroup ${i + 1}`)}"
             .maybeValue=${getInstanceValue(instanceElement)}
             helper="${translate("dai.wizard.valueHelper", {type})}"
             type="number"
@@ -106,59 +109,61 @@ export function getCustomField() {
             max=${max}
             step="0.1"
           >
-          </wizard-textfield>`
-        ];
+          </wizard-textfield>`;
+        });
       },
-      value: (inputs) => {
-        return getValue(inputs.find((input) => input.id === "Val"));
+      value: (inputs, sGroup) => {
+        return getValue(inputs.find((input) => input.id === `Val${sGroup || ""}`));
       }
     };
   }
   function integerField(type, min, max) {
     return {
-      render: (element, instanceElement) => {
-        return [
-          html`<wizard-textfield
-            id="Val"
-            label="Val"
+      render: (element, instanceElement, numOfSGs = null) => {
+        return (numOfSGs ? [...Array(numOfSGs)] : [numOfSGs]).map((item, i) => {
+          return html`<wizard-textfield
+            id="Val${emptyIfNull(item, `${i + 1}`)}"
+            label="Val${emptyIfNull(item, ` for sGroup ${i + 1}`)}"
             .maybeValue=${getInstanceValue(instanceElement)}
             helper="${translate("dai.wizard.valueHelper", {type})}"
             type="number"
             min=${min}
             max=${max}
           >
-          </wizard-textfield>`
-        ];
+          </wizard-textfield>`;
+        });
       },
-      value: (inputs) => {
-        return getValue(inputs.find((input) => input.id === "Val"));
+      value: (inputs, sGroup) => {
+        return getValue(inputs.find((input) => input.id === `Val${sGroup || ""}`));
       }
     };
   }
   function timestampField() {
     return {
-      render: (element, instanceElement) => {
+      render: (element, instanceElement, numOfSGs = null) => {
         const value = getInstanceValue(instanceElement);
-        return [
-          html`<wizard-textfield
-            id="ValDate"
-            label="Val (Date)"
-            .maybeValue=${getDateValueFromTimestamp(value)}
-            type="date"
-          >
-          </wizard-textfield>`,
-          html`<wizard-textfield
-            id="ValTime"
-            label="Val (Time)"
-            .maybeValue=${getTimeValueFromTimestamp(value)}
-            type="time"
-            step="1"
-          >
-          </wizard-textfield>`
-        ];
+        return (numOfSGs ? [...Array(numOfSGs)] : [numOfSGs]).reduce((acc, item, i) => {
+          return acc.concat([
+            html`<wizard-textfield
+                id="ValDate${emptyIfNull(item, `${i + 1}`)}"
+                label="Val (Date)${emptyIfNull(item, ` for sGroup ${i + 1}`)}"
+                .maybeValue=${getDateValueFromTimestamp(value)}
+                type="date"
+              >
+              </wizard-textfield>`,
+            html`<wizard-textfield
+                id="ValTime${emptyIfNull(item, `${i + 1}`)}"
+                label="Val (Time)${emptyIfNull(item, ` for sGroup ${i + 1}`)}"
+                .maybeValue=${getTimeValueFromTimestamp(value)}
+                type="time"
+                step="1"
+              >
+              </wizard-textfield>`
+          ]);
+        }, []);
       },
-      value: (inputs) => {
-        const values = ["ValDate", "ValTime"].map((id) => getValue(inputs.find((input) => input.id === id)));
+      value: (inputs, sGroup) => {
+        const values = [`ValDate${sGroup || ""}`, `ValTime${sGroup || ""}`].map((id) => getValue(inputs.find((input) => input.id === id)));
         const dateValue = values[0] ? values[0] : "0000-00-00";
         const timeValue = values[1] ? values[1] : "00:00:00";
         return dateValue + "T" + timeValue + ".000";
@@ -167,21 +172,21 @@ export function getCustomField() {
   }
   function stringField(type, maxNrOfCharacters) {
     return {
-      render: (element, instanceElement) => {
-        return [
-          html`<wizard-textfield
-            id="Val"
-            label="Val"
+      render: (element, instanceElement, numOfSGs = null) => {
+        return (numOfSGs ? [...Array(numOfSGs)] : [numOfSGs]).map((item, i) => {
+          return html`<wizard-textfield
+            id="Val${emptyIfNull(item, ` ${i + 1}`)}"
+            label="Val${emptyIfNull(item, ` for sGroup ${i + 1}`)}"
             .maybeValue=${getInstanceValue(instanceElement)}
             helper="${translate("dai.wizard.valueHelper", {type})}"
             maxLength=${maxNrOfCharacters}
             type="text"
           >
-          </wizard-textfield>`
-        ];
+          </wizard-textfield>`;
+        });
       },
-      value: (inputs) => {
-        return getValue(inputs.find((input) => input.id === "Val"));
+      value: (inputs, sGroup) => {
+        return getValue(inputs.find((input) => input.id === `Val${sGroup || ""}`));
       }
     };
   }
