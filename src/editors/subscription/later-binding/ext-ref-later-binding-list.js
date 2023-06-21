@@ -45,6 +45,7 @@ import {
 export let ExtRefLaterBindingList = class extends LitElement {
   constructor() {
     super();
+    this.editCount = -1;
     this.serviceTypeLookup = {
       GSEControl: "GOOSE",
       SampledValueControl: "SMV"
@@ -233,6 +234,9 @@ ExtRefLaterBindingList.styles = css`
 __decorate([
   property({attribute: false})
 ], ExtRefLaterBindingList.prototype, "doc", 2);
+__decorate([
+  property({type: Number})
+], ExtRefLaterBindingList.prototype, "editCount", 2);
 __decorate([
   property()
 ], ExtRefLaterBindingList.prototype, "controlTag", 2);

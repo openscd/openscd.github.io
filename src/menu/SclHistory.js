@@ -22,6 +22,10 @@ import "../../_snowpack/pkg/@material/mwc-dialog.js";
 import "../../_snowpack/pkg/@material/mwc-list.js";
 import "../../_snowpack/pkg/@material/mwc-list/mwc-list-item.js";
 export default class SclHistoryPlugin extends LitElement {
+  constructor() {
+    super(...arguments);
+    this.editCount = -1;
+  }
   createMessage(who, why) {
     let message = who;
     if (message !== null && why !== null) {
@@ -89,6 +93,9 @@ SclHistoryPlugin.styles = css`
 __decorate([
   property({attribute: false})
 ], SclHistoryPlugin.prototype, "doc", 2);
+__decorate([
+  property({type: Number})
+], SclHistoryPlugin.prototype, "editCount", 2);
 __decorate([
   query("#historyLog")
 ], SclHistoryPlugin.prototype, "historyLog", 2);

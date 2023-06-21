@@ -142,6 +142,7 @@ export let DAContainer = class extends Container {
               </mwc-icon-button-toggle>
             </abbr>` : html`${this.renderVal()}`}
         ${this.toggleButton?.on && bType === "Struct" ? this.getBDAElements().map((bdaElement) => html`<da-container
+                  .editCount=${this.editCount}
                   .doc=${this.doc}
                   .element=${bdaElement}
                   .instanceElement=${getInstanceDAElement(this.instanceElement, bdaElement)}

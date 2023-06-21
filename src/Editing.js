@@ -272,9 +272,6 @@ export function Editing(Base) {
         return;
       if (!this.doc)
         return;
-      const newDoc = document.implementation.createDocument(this.doc.lookupNamespaceURI(""), this.doc.documentElement.tagName, this.doc.doctype);
-      newDoc.documentElement.replaceWith(this.doc.documentElement);
-      this.doc = newDoc;
       await this.updateComplete;
       this.dispatchEvent(newValidateEvent());
     }

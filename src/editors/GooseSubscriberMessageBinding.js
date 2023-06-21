@@ -27,6 +27,7 @@ let view = View.PUBLISHER;
 export default class GooseSubscriberMessageBindingPlugin extends LitElement {
   constructor() {
     super();
+    this.editCount = -1;
     this.addEventListener("view", (evt) => {
       view = evt.detail.view;
       this.requestUpdate();
@@ -58,13 +59,19 @@ export default class GooseSubscriberMessageBindingPlugin extends LitElement {
         ></mwc-radio>
       </mwc-formfield>
       <div class="container">
-        ${view == View.PUBLISHER ? html`<goose-list class="row" .doc=${this.doc}></goose-list>` : html`<ied-list
+        ${view == View.PUBLISHER ? html`<goose-list
               class="row"
+              .editCount=${this.editCount}
+              .doc=${this.doc}
+            ></goose-list>` : html`<ied-list
+              class="row"
+              .editCount=${this.editCount}
               .doc=${this.doc}
               serviceType="goose"
             ></ied-list>`}
         <subscriber-list-goose
           class="row"
+          .editCount=${this.editCount}
           .doc=${this.doc}
         ></subscriber-list-goose>
       </div>
@@ -93,6 +100,9 @@ GooseSubscriberMessageBindingPlugin.styles = css`
 __decorate([
   property()
 ], GooseSubscriberMessageBindingPlugin.prototype, "doc", 2);
+__decorate([
+  property({type: Number})
+], GooseSubscriberMessageBindingPlugin.prototype, "editCount", 2);
 __decorate([
   query("#goosePublisherView")
 ], GooseSubscriberMessageBindingPlugin.prototype, "goosePublisherView", 2);

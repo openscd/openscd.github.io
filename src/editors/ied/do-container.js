@@ -89,6 +89,7 @@ export let DOContainer = class extends Container {
             ></mwc-icon-button-toggle>
           </abbr>` : nothing}
       ${this.toggleButton?.on ? daElements.map((daElement) => html`<da-container
+                .editCount=${this.editCount}
                 .doc=${this.doc}
                 .element=${daElement}
                 .instanceElement=${getInstanceDAElement(this.instanceElement, daElement)}
@@ -96,6 +97,7 @@ export let DOContainer = class extends Container {
                 .ancestors=${[...this.ancestors, this.element]}
               ></da-container>`) : nothing}
       ${this.toggleButton?.on ? doElements.map((doElement) => html`<do-container
+                .editCount=${this.editCount}
                 .doc=${this.doc}
                 .element=${doElement}
                 .instanceElement=${this.getInstanceDOElement(doElement)}

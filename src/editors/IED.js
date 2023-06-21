@@ -32,6 +32,7 @@ import {getIcon} from "../icons/icons.js";
 export default class IedPlugin extends LitElement {
   constructor() {
     super(...arguments);
+    this.editCount = -1;
     this.selectedIEDs = [];
     this.selectedLNClasses = [];
   }
@@ -144,6 +145,7 @@ export default class IedPlugin extends LitElement {
         </div>
 
         <ied-container
+          .editCount=${this.editCount}
           .doc=${this.doc}
           .element=${this.selectedIed}
           .selectedLNClasses=${this.selectedLNClasses}
@@ -189,6 +191,9 @@ IedPlugin.styles = css`
 __decorate([
   property()
 ], IedPlugin.prototype, "doc", 2);
+__decorate([
+  property({type: Number})
+], IedPlugin.prototype, "editCount", 2);
 __decorate([
   property()
 ], IedPlugin.prototype, "nsdoc", 2);

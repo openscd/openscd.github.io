@@ -28,6 +28,10 @@ function onOpenDocResetSelectedGooseMsg() {
 }
 addEventListener("open-doc", onOpenDocResetSelectedGooseMsg);
 export let IedList = class extends LitElement {
+  constructor() {
+    super(...arguments);
+    this.editCount = -1;
+  }
   onIedSelect(element) {
     selectedIed = element;
     this.dispatchEvent(newIEDSelectEvent(selectedIed));
@@ -40,7 +44,9 @@ export let IedList = class extends LitElement {
   }
   render() {
     return html` <section tabindex="0">
-      <h1>${translate(`subscription.${this.serviceType}.subscriber.iedListTitle`)}</h1>
+      <h1>
+        ${translate(`subscription.${this.serviceType}.subscriber.iedListTitle`)}
+      </h1>
       <filtered-list activatable>
         ${getOrderedIeds(this.doc).map((ied) => html`
               <mwc-list-item
@@ -61,6 +67,9 @@ IedList.styles = css`
 __decorate([
   property()
 ], IedList.prototype, "doc", 2);
+__decorate([
+  property({type: Number})
+], IedList.prototype, "editCount", 2);
 __decorate([
   property({type: String})
 ], IedList.prototype, "serviceType", 2);

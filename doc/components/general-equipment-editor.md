@@ -7,6 +7,7 @@
 | `addButton`     |                 |           | `IconButton`  |         |                                                  |
 | `addMenu`       |                 |           | `Menu`        |         |                                                  |
 | `doc`           |                 |           | `XMLDocument` |         |                                                  |
+| `editCount`     | `editCount`     |           | `number`      | -1      |                                                  |
 | `element`       |                 |           | `Element`     |         |                                                  |
 | `header`        |                 | readonly  | `string`      |         |                                                  |
 | `showfunctions` | `showfunctions` |           | `boolean`     | false   | Whether `Function` and `SubFunction` are rendered |

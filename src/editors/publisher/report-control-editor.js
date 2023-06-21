@@ -28,6 +28,10 @@ import {compareNames, identity, selector} from "../../foundation.js";
 import {reportIcon} from "../../icons/icons.js";
 import {styles, updateElementReference} from "./foundation.js";
 export let ReportControlEditor = class extends LitElement {
+  constructor() {
+    super(...arguments);
+    this.editCount = -1;
+  }
   update(props) {
     if (props.has("doc") && this.selectedReportControl) {
       const newReportControl = updateElementReference(this.doc, this.selectedReportControl);
@@ -54,10 +58,12 @@ export let ReportControlEditor = class extends LitElement {
     if (this.selectedReportControl !== void 0)
       return html`<div class="elementeditorcontainer">
         <data-set-element-editor
+          .editCount=${this.editCount}
           .doc=${this.doc}
           .element=${this.selectedDataSet}
         ></data-set-element-editor>
         <report-control-element-editor
+          .editCount=${this.editCount}
           .doc=${this.doc}
           .element=${this.selectedReportControl}
         ></report-control-element-editor>
@@ -143,6 +149,9 @@ ReportControlEditor.styles = css`
 __decorate([
   property({attribute: false})
 ], ReportControlEditor.prototype, "doc", 2);
+__decorate([
+  property({type: Number})
+], ReportControlEditor.prototype, "editCount", 2);
 __decorate([
   state()
 ], ReportControlEditor.prototype, "selectedReportControl", 2);

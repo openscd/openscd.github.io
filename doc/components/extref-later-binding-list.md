@@ -12,4 +12,5 @@ The List reacts on a custom event to know which FCDA Element was selected and up
 | `currentSelectedControlElement` |              | `Element \| undefined`                           |                                                  |
 | `currentSelectedFcdaElement`    |              | `Element \| undefined`                           |                                                  |
 | `doc`                           |              | `XMLDocument`                                    |                                                  |
+| `editCount`                     | `editCount`  | `number`                                         | -1                                               |
 | `serviceTypeLookup`             |              | `{ GSEControl: string; SampledValueControl: string; }` | {"GSEControl":"GOOSE","SampledValueControl":"SMV"} |

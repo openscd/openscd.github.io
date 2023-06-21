@@ -71,6 +71,7 @@ export let LDeviceContainer = class extends Container {
           </abbr>` : nothing}
       <div id="lnContainer">
         ${this.toggleButton?.on ? lnElements.map((ln) => html`<ln-container
+                .editCount=${this.editCount}
                 .doc=${this.doc}
                 .element=${ln}
                 .nsdoc=${this.nsdoc}

@@ -4,10 +4,11 @@ Container showing all the DOI Elements, related to the 104 Protocol, of the pass
 
 ## Properties
 
-| Property       | Attribute     | Modifiers | Type                            |
-|----------------|---------------|-----------|---------------------------------|
-| `doc`          | `doc`         |           | `XMLDocument`                   |
-| `doiElements`  | `doiElements` | readonly  | `Element[]`                     |
-| `element`      | `element`     |           | `Element`                       |
-| `header`       | `header`      | readonly  | `TemplateResult`                |
-| `toggleButton` |               |           | `IconButtonToggle \| undefined` |
+| Property       | Attribute     | Modifiers | Type                            | Default |
+|----------------|---------------|-----------|---------------------------------|---------|
+| `doc`          | `doc`         |           | `XMLDocument`                   |         |
+| `doiElements`  | `doiElements` | readonly  | `Element[]`                     |         |
+| `editCount`    | `editCount`   |           | `number`                        | -1      |
+| `element`      | `element`     |           | `Element`                       |         |
+| `header`       | `header`      | readonly  | `TemplateResult`                |         |
+| `toggleButton` |               |           | `IconButtonToggle \| undefined` |         |

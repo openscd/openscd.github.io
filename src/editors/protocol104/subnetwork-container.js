@@ -39,6 +39,7 @@ export let SubNetwork104Container = class extends Base104Container {
     return Array.from(this.element.querySelectorAll(":scope > ConnectedAP")).map((connAP) => connAP.getAttribute("iedName")).filter((v, i, a) => a.indexOf(v) === i).sort(compareNames).map((iedName) => html` <action-pane id="iedSection" label="${iedName}">
           ${Array.from(this.element.parentElement?.querySelectorAll(`:scope > SubNetwork > ConnectedAP[iedName="${iedName}"]`) ?? []).map((connectedAP) => html`<connectedap-104-editor
                 class="${connectedAP.parentElement !== this.element ? "disabled" : ""}"
+                .editCount=${this.editCount}
                 .doc="${this.doc}"
                 .element=${connectedAP}
               ></connectedap-104-editor>`)}

@@ -38,6 +38,10 @@ function onOpenDocResetSelectedSmvMsg() {
 }
 addEventListener("open-doc", onOpenDocResetSelectedSmvMsg);
 export let SmvPublisherList = class extends LitElement {
+  constructor() {
+    super(...arguments);
+    this.editCount = -1;
+  }
   onSelect(smvControl) {
     const ln = smvControl.parentElement;
     const dataset = ln?.querySelector(`DataSet[name=${smvControl.getAttribute("datSet")}]`);
@@ -118,6 +122,9 @@ SmvPublisherList.styles = css`
 __decorate([
   property({attribute: false})
 ], SmvPublisherList.prototype, "doc", 2);
+__decorate([
+  property({type: Number})
+], SmvPublisherList.prototype, "editCount", 2);
 SmvPublisherList = __decorate([
   customElement("smv-list")
 ], SmvPublisherList);

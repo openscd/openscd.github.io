@@ -43,6 +43,7 @@ function childTags(element) {
 export let TransformerWindingEditor = class extends LitElement {
   constructor() {
     super(...arguments);
+    this.editCount = -1;
     this.showfunctions = false;
   }
   get label() {
@@ -77,7 +78,7 @@ export let TransformerWindingEditor = class extends LitElement {
     const lNodes = getChildElementsByTagName(this.element, "LNode");
     return lNodes.length ? html`<div class="container lnode">
           ${lNodes.map((lNode) => html`<l-node-editor
-                .doc=${this.doc}
+                .editCount=${this.editCount} .doc=${this.doc}
                 .element=${lNode}
               ></l-node-editor>`)}
         </div>` : html``;
@@ -87,7 +88,7 @@ export let TransformerWindingEditor = class extends LitElement {
       return html``;
     const eqFunctions = getChildElementsByTagName(this.element, "EqFunction");
     return eqFunctions.length ? html` ${eqFunctions.map((eqFunction) => html`<eq-function-editor
-              .doc=${this.doc}
+              .editCount=${this.editCount} .doc=${this.doc}
               .element=${eqFunction}
               ?showfunctions=${this.showfunctions}
             ></eq-function-editor>`)}` : html``;
@@ -97,7 +98,7 @@ export let TransformerWindingEditor = class extends LitElement {
       return html``;
     const tapChangers = getChildElementsByTagName(this.element, "TapChanger");
     return tapChangers.length ? html` ${tapChangers.map((tapChanger) => html`<tapchanger-editor
-              .doc=${this.doc}
+              .editCount=${this.editCount} .doc=${this.doc}
               .element=${tapChanger}
               ?showfunctions=${this.showfunctions}
             ></tapchanger-editor>`)}` : html``;
@@ -160,6 +161,9 @@ TransformerWindingEditor.styles = css`
 __decorate([
   property({attribute: false})
 ], TransformerWindingEditor.prototype, "doc", 2);
+__decorate([
+  property({type: Number})
+], TransformerWindingEditor.prototype, "editCount", 2);
 __decorate([
   property({attribute: false})
 ], TransformerWindingEditor.prototype, "element", 2);

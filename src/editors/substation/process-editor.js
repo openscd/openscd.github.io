@@ -46,6 +46,7 @@ function childTags(element) {
 export let ProcessEditor = class extends LitElement {
   constructor() {
     super(...arguments);
+    this.editCount = -1;
     this.showfunctions = false;
   }
   get header() {
@@ -66,6 +67,7 @@ export let ProcessEditor = class extends LitElement {
   renderConductingEquipments() {
     const ConductingEquipments = getChildElementsByTagName(this.element, "ConductingEquipment");
     return html` ${ConductingEquipments.map((ConductingEquipment) => html`<conducting-equipment-editor
+          .editCount=${this.editCount}
           .doc=${this.doc}
           .element=${ConductingEquipment}
           ?showfunctions=${this.showfunctions}
@@ -74,6 +76,7 @@ export let ProcessEditor = class extends LitElement {
   renderGeneralEquipments() {
     const GeneralEquipments = getChildElementsByTagName(this.element, "GeneralEquipment");
     return html` ${GeneralEquipments.map((GeneralEquipment) => html`<general-equipment-editor
+          .editCount=${this.editCount}
           .doc=${this.doc}
           .element=${GeneralEquipment}
           ?showfunctions=${this.showfunctions}
@@ -82,6 +85,7 @@ export let ProcessEditor = class extends LitElement {
   renderLines() {
     const Lines = getChildElementsByTagName(this.element, "Line");
     return html` ${Lines.map((Line) => html`<line-editor
+          .editCount=${this.editCount}
           .doc=${this.doc}
           .element=${Line}
           ?showfunctions=${this.showfunctions}
@@ -90,6 +94,7 @@ export let ProcessEditor = class extends LitElement {
   renderSubstations() {
     const Substations = getChildElementsByTagName(this.element, "Substation");
     return html` ${Substations.map((Substation) => html`<substation-editor
+          .editCount=${this.editCount}
           .doc=${this.doc}
           .element=${Substation}
           ?showfunctions=${this.showfunctions}
@@ -98,6 +103,7 @@ export let ProcessEditor = class extends LitElement {
   renderProcesses() {
     const Processes = getChildElementsByTagName(this.element, "Process");
     return html` ${Processes.map((Process) => html`<process-editor
+          .editCount=${this.editCount}
           .doc=${this.doc}
           .element=${Process}
           ?showfunctions=${this.showfunctions}
@@ -108,6 +114,7 @@ export let ProcessEditor = class extends LitElement {
       return html``;
     const Functions = getChildElementsByTagName(this.element, "Function");
     return html` ${Functions.map((Function) => html`<function-editor
+          .editCount=${this.editCount}
           .doc=${this.doc}
           .element=${Function}
           ?showfunctions=${this.showfunctions}
@@ -119,6 +126,7 @@ export let ProcessEditor = class extends LitElement {
     const lNodes = getChildElementsByTagName(this.element, "LNode");
     return lNodes.length ? html`<div class="container lnode">
           ${lNodes.map((lNode) => html`<l-node-editor
+                .editCount=${this.editCount}
                 .doc=${this.doc}
                 .element=${lNode}
               ></l-node-editor>`)}
@@ -195,6 +203,9 @@ ProcessEditor.styles = css`
 __decorate([
   property({attribute: false})
 ], ProcessEditor.prototype, "doc", 2);
+__decorate([
+  property({type: Number})
+], ProcessEditor.prototype, "editCount", 2);
 __decorate([
   property({attribute: false})
 ], ProcessEditor.prototype, "element", 2);

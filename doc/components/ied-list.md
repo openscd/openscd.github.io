@@ -2,7 +2,8 @@
 
 ## Properties
 
-| Property      | Attribute     | Type                            |
-|---------------|---------------|---------------------------------|
-| `doc`         | `doc`         | `XMLDocument`                   |
-| `serviceType` | `serviceType` | `"goose" \| "smv" \| undefined` |
+| Property      | Attribute     | Type                            | Default |
+|---------------|---------------|---------------------------------|---------|
+| `doc`         | `doc`         | `XMLDocument`                   |         |
+| `editCount`   | `editCount`   | `number`                        | -1      |
+| `serviceType` | `serviceType` | `"goose" \| "smv" \| undefined` |         |

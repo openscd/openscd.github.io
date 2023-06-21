@@ -5,10 +5,11 @@ The DAI Element can be edited by pressing the Edit button at the end of the line
 
 ## Properties
 
-| Property       | Attribute     | Modifiers | Type                            |
-|----------------|---------------|-----------|---------------------------------|
-| `daiElements`  | `daiElements` | readonly  | `Element[]`                     |
-| `doc`          | `doc`         |           | `XMLDocument`                   |
-| `element`      | `element`     |           | `Element`                       |
-| `header`       | `header`      | readonly  | `TemplateResult`                |
-| `toggleButton` |               |           | `IconButtonToggle \| undefined` |
+| Property       | Attribute     | Modifiers | Type                            | Default |
+|----------------|---------------|-----------|---------------------------------|---------|
+| `daiElements`  | `daiElements` | readonly  | `Element[]`                     |         |
+| `doc`          | `doc`         |           | `XMLDocument`                   |         |
+| `editCount`    | `editCount`   |           | `number`                        | -1      |
+| `element`      | `element`     |           | `Element`                       |         |
+| `header`       | `header`      | readonly  | `TemplateResult`                |         |
+| `toggleButton` |               |           | `IconButtonToggle \| undefined` |         |

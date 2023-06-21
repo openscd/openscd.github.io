@@ -42,6 +42,7 @@ function childTags(element) {
 export let LineEditor = class extends LitElement {
   constructor() {
     super(...arguments);
+    this.editCount = -1;
     this.showfunctions = false;
   }
   get header() {
@@ -62,6 +63,7 @@ export let LineEditor = class extends LitElement {
   renderConductingEquipments() {
     const ConductingEquipments = getChildElementsByTagName(this.element, "ConductingEquipment");
     return html` ${ConductingEquipments.map((ConductingEquipment) => html`<conducting-equipment-editor
+          .editCount=${this.editCount}
           .doc=${this.doc}
           .element=${ConductingEquipment}
           ?showfunctions=${this.showfunctions}
@@ -70,6 +72,7 @@ export let LineEditor = class extends LitElement {
   renderGeneralEquipments() {
     const GeneralEquipments = getChildElementsByTagName(this.element, "GeneralEquipment");
     return html` ${GeneralEquipments.map((GeneralEquipment) => html`<general-equipment-editor
+          .editCount=${this.editCount}
           .doc=${this.doc}
           .element=${GeneralEquipment}
           ?showfunctions=${this.showfunctions}
@@ -80,6 +83,7 @@ export let LineEditor = class extends LitElement {
       return html``;
     const Functions = getChildElementsByTagName(this.element, "Function");
     return html` ${Functions.map((Function) => html`<function-editor
+          .editCount=${this.editCount}
           .doc=${this.doc}
           .element=${Function}
           ?showfunctions=${this.showfunctions}
@@ -104,6 +108,7 @@ export let LineEditor = class extends LitElement {
     const lNodes = getChildElementsByTagName(this.element, "LNode");
     return lNodes.length ? html`<div class="container lnode">
           ${lNodes.map((lNode) => html`<l-node-editor
+                .editCount=${this.editCount}
                 .doc=${this.doc}
                 .element=${lNode}
               ></l-node-editor>`)}
@@ -165,6 +170,9 @@ LineEditor.styles = css`
 __decorate([
   property({attribute: false})
 ], LineEditor.prototype, "doc", 2);
+__decorate([
+  property({type: Number})
+], LineEditor.prototype, "editCount", 2);
 __decorate([
   property({attribute: false})
 ], LineEditor.prototype, "element", 2);

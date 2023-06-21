@@ -44,6 +44,7 @@ function childTags(element) {
 export let ConductingEquipmentEditor = class extends LitElement {
   constructor() {
     super(...arguments);
+    this.editCount = -1;
     this.showfunctions = false;
   }
   get name() {
@@ -82,6 +83,7 @@ export let ConductingEquipmentEditor = class extends LitElement {
     const lNodes = getChildElementsByTagName(this.element, "LNode");
     return lNodes.length ? html`<div class="container lnode">
           ${lNodes.map((lNode) => html`<l-node-editor
+                .editCount=${this.editCount}
                 .doc=${this.doc}
                 .element=${lNode}
               ></l-node-editor>`)}
@@ -92,6 +94,7 @@ export let ConductingEquipmentEditor = class extends LitElement {
       return html``;
     const eqFunctions = getChildElementsByTagName(this.element, "EqFunction");
     return html` ${eqFunctions.map((eqFunction) => html`<eq-function-editor
+          .editCount=${this.editCount}
           .doc=${this.doc}
           .element=${eqFunction}
           ?showfunctions=${this.showfunctions}
@@ -102,6 +105,7 @@ export let ConductingEquipmentEditor = class extends LitElement {
       return html``;
     const subEquipments = getChildElementsByTagName(this.element, "SubEquipment");
     return html` ${subEquipments.map((subEquipment) => html`<sub-equipment-editor
+          .editCount=${this.editCount}
           .doc=${this.doc}
           .element=${subEquipment}
         ></sub-equipment-editor>`)}`;
@@ -219,6 +223,9 @@ ConductingEquipmentEditor.styles = css`
 __decorate([
   property({attribute: false})
 ], ConductingEquipmentEditor.prototype, "doc", 2);
+__decorate([
+  property({type: Number})
+], ConductingEquipmentEditor.prototype, "editCount", 2);
 __decorate([
   property({attribute: false})
 ], ConductingEquipmentEditor.prototype, "element", 2);

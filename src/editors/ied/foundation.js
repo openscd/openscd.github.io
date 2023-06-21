@@ -14,6 +14,7 @@ import {getInstanceAttribute, getNameAttribute} from "../../foundation.js";
 export class Container extends LitElement {
   constructor() {
     super();
+    this.editCount = -1;
     this.ancestors = [];
     this.addEventListener("focus", (event) => {
       event.stopPropagation();
@@ -29,6 +30,9 @@ export class Container extends LitElement {
 __decorate([
   property()
 ], Container.prototype, "doc", 2);
+__decorate([
+  property({type: Number})
+], Container.prototype, "editCount", 2);
 __decorate([
   property({attribute: false})
 ], Container.prototype, "element", 2);

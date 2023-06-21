@@ -48,6 +48,7 @@ let view = View.PUBLISHER;
 export let SubscriberList = class extends SubscriberListContainer {
   constructor() {
     super();
+    this.editCount = -1;
     this.onIEDSelectEvent = this.onIEDSelectEvent.bind(this);
     this.onGOOSESelectEvent = this.onGOOSESelectEvent.bind(this);
     this.onGooseSubscriptionEvent = this.onGooseSubscriptionEvent.bind(this);
@@ -334,6 +335,9 @@ SubscriberList.styles = css`
 __decorate([
   property({attribute: false})
 ], SubscriberList.prototype, "doc", 2);
+__decorate([
+  property({type: Number})
+], SubscriberList.prototype, "editCount", 2);
 SubscriberList = __decorate([
   customElement("subscriber-list-goose")
 ], SubscriberList);

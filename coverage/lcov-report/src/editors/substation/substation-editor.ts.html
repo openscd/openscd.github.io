@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">99.27% </span>
+                <span class="strong">99.29% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>273/275</span>
+                <span class='fraction'>283/285</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">99.27% </span>
+                <span class="strong">99.29% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>273/275</span>
+                <span class='fraction'>283/285</span>
             </div>
         
             
@@ -338,7 +338,17 @@
 <a name='L273'></a><a href='#L273'>273</a>
 <a name='L274'></a><a href='#L274'>274</a>
 <a name='L275'></a><a href='#L275'>275</a>
-<a name='L276'></a><a href='#L276'>276</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">26x</span>
+<a name='L276'></a><a href='#L276'>276</a>
+<a name='L277'></a><a href='#L277'>277</a>
+<a name='L278'></a><a href='#L278'>278</a>
+<a name='L279'></a><a href='#L279'>279</a>
+<a name='L280'></a><a href='#L280'>280</a>
+<a name='L281'></a><a href='#L281'>281</a>
+<a name='L282'></a><a href='#L282'>282</a>
+<a name='L283'></a><a href='#L283'>283</a>
+<a name='L284'></a><a href='#L284'>284</a>
+<a name='L285'></a><a href='#L285'>285</a>
+<a name='L286'></a><a href='#L286'>286</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">26x</span>
 <span class="cline-any cline-yes">26x</span>
 <span class="cline-any cline-yes">26x</span>
 <span class="cline-any cline-yes">26x</span>
@@ -390,6 +400,8 @@
 <span class="cline-any cline-yes">26x</span>
 <span class="cline-any cline-yes">26x</span>
 <span class="cline-any cline-yes">26x</span>
+<span class="cline-any cline-yes">11x</span>
+<span class="cline-any cline-yes">11x</span>
 <span class="cline-any cline-yes">11x</span>
 <span class="cline-any cline-yes">11x</span>
 <span class="cline-any cline-yes">11x</span>
@@ -475,6 +487,7 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
@@ -491,6 +504,7 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">26x</span>
 <span class="cline-any cline-yes">26x</span>
 <span class="cline-any cline-yes">26x</span>
@@ -502,6 +516,10 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">11x</span>
 <span class="cline-any cline-yes">11x</span>
 <span class="cline-any cline-yes">11x</span>
 <span class="cline-any cline-yes">11x</span>
@@ -526,6 +544,7 @@
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">11x</span>
 <span class="cline-any cline-yes">11x</span>
 <span class="cline-any cline-yes">11x</span>
@@ -598,6 +617,7 @@
 <span class="cline-any cline-yes">11x</span>
 <span class="cline-any cline-yes">11x</span>
 <span class="cline-any cline-yes">11x</span>
+<span class="cline-any cline-yes">10x</span>
 <span class="cline-any cline-yes">10x</span>
 <span class="cline-any cline-yes">10x</span>
 <span class="cline-any cline-yes">10x</span>
@@ -668,6 +688,8 @@ export class SubstationEditor extends LitElement {
   /** The document being edited as provided to editor by [[`Zeroline`]]. */
   @property({ attribute: false })
   doc!: XMLDocument;
+  @property({ type: Number })
+  editCount = -1;
   /** The edited `Element`, a common property of all Substation subeditors. */
   @property({ attribute: false })
   element!: Element;
@@ -748,6 +770,7 @@ export class SubstationEditor extends LitElement {
           ${lNodes.map(
             lNode =&gt;
               html`&lt;l-node-editor
+                .editCount=${this.editCount}
                 .doc=${this.doc}
                 .element=${lNode}
               &gt;&lt;/l-node-editor&gt;`
@@ -763,6 +786,7 @@ export class SubstationEditor extends LitElement {
     return html` ${functions.map(
       fUnction =&gt;
         html`&lt;function-editor
+          .editCount=${this.editCount}
           .doc=${this.doc}
           .element=${fUnction}
           ?showfunctions=${this.showfunctions}
@@ -776,7 +800,11 @@ export class SubstationEditor extends LitElement {
       ? html`&lt;div id="iedcontainer"&gt;
           ${ieds.map(
             ied =&gt;
-              html`&lt;ied-editor .doc=${this.doc} .element=${ied}&gt;&lt;/ied-editor&gt;`
+              html`&lt;ied-editor
+                .editCount=${this.editCount}
+                .doc=${this.doc}
+                .element=${ied}
+              &gt;&lt;/ied-editor&gt;`
           )}
         &lt;/div&gt;`
       : html``;
@@ -798,6 +826,7 @@ export class SubstationEditor extends LitElement {
           ${pwts.map(
             pwt =&gt;
               html`&lt;powertransformer-editor
+                .editCount=${this.editCount}
                 .doc=${this.doc}
                 .element=${pwt}
                 ?showfunctions=${this.showfunctions}
@@ -874,6 +903,7 @@ export class SubstationEditor extends LitElement {
         ${Array.from(this.element.querySelectorAll(selectors.VoltageLevel)).map(
           voltageLevel =&gt;
             html`&lt;voltage-level-editor
+              .editCount=${this.editCount}
               .doc=${this.doc}
               .element=${voltageLevel}
               .getAttachedIeds=${this.getAttachedIeds}
@@ -895,7 +925,7 @@ export class SubstationEditor extends LitElement {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener">istanbul</a>
-                at Wed Jun 21 2023 21:45:13 GMT+0000 (Coordinated Universal Time)
+                at Wed Jun 21 2023 22:32:38 GMT+0000 (Coordinated Universal Time)
             </div>
         </div>
         <script src="../../../prettify.js"></script>

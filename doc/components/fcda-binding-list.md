@@ -6,17 +6,18 @@ And when selecting a FCDA Element a custom event is fired, so other list can be 
 
 ## Properties
 
-| Property              | Attribute             | Type          |
-|-----------------------|-----------------------|---------------|
-| `actionsMenu`         |                       | `Menu`        |
-| `actionsMenuIcon`     |                       | `Icon`        |
-| `controlBlockList`    |                       | `List`        |
-| `controlTag`          | `controlTag`          | `controlTag`  |
-| `doc`                 |                       | `XMLDocument` |
-| `hideNotSubscribed`   | `hideNotSubscribed`   | `boolean`     |
-| `hideSubscribed`      | `hideSubscribed`      | `boolean`     |
-| `includeLaterBinding` | `includeLaterBinding` | `boolean`     |
-| `resetSelection`      |                       |               |
+| Property              | Attribute             | Type          | Default |
+|-----------------------|-----------------------|---------------|---------|
+| `actionsMenu`         |                       | `Menu`        |         |
+| `actionsMenuIcon`     |                       | `Icon`        |         |
+| `controlBlockList`    |                       | `List`        |         |
+| `controlTag`          | `controlTag`          | `controlTag`  |         |
+| `doc`                 |                       | `XMLDocument` |         |
+| `editCount`           | `editCount`           | `number`      | -1      |
+| `hideNotSubscribed`   | `hideNotSubscribed`   | `boolean`     |         |
+| `hideSubscribed`      | `hideSubscribed`      | `boolean`     |         |
+| `includeLaterBinding` | `includeLaterBinding` | `boolean`     |         |
+| `resetSelection`      |                       |               |         |
 
 ## Methods
 

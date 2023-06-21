@@ -36,6 +36,10 @@ export function saveXmlBlob(doc, document2, filename) {
   }, 5e3);
 }
 export default class ExportCommunication extends LitElement {
+  constructor() {
+    super(...arguments);
+    this.editCount = -1;
+  }
   async run() {
     const sclNamespace = "http://www.iec.ch/61850/2003/SCL";
     const sclDoc = document.implementation.createDocument(sclNamespace, "SCL", null);
@@ -66,6 +70,9 @@ export default class ExportCommunication extends LitElement {
 __decorate([
   property({attribute: false})
 ], ExportCommunication.prototype, "doc", 2);
+__decorate([
+  property({type: Number})
+], ExportCommunication.prototype, "editCount", 2);
 __decorate([
   property({attribute: false})
 ], ExportCommunication.prototype, "docName", 2);

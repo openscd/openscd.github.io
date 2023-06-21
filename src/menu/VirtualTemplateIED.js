@@ -81,6 +81,10 @@ function groupLNodesToFunctions(lNodes) {
   return functionElements;
 }
 export default class VirtualTemplateIED extends LitElement {
+  constructor() {
+    super(...arguments);
+    this.editCount = -1;
+  }
   get isValidManufacturer() {
     const manufacturer = this.dialog?.querySelector('wizard-textfield[label="manufacturer"]').value;
     return manufacturer && manufacturer !== "" || false;
@@ -250,6 +254,9 @@ VirtualTemplateIED.styles = css`
 __decorate([
   property({attribute: false})
 ], VirtualTemplateIED.prototype, "doc", 2);
+__decorate([
+  property({type: Number})
+], VirtualTemplateIED.prototype, "editCount", 2);
 __decorate([
   state()
 ], VirtualTemplateIED.prototype, "isValidManufacturer", 1);

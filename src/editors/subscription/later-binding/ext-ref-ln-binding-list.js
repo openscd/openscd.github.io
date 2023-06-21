@@ -41,6 +41,7 @@ import {emptyInputsDeleteActions} from "../../../foundation/ied.js";
 export let ExtRefLnBindingList = class extends LitElement {
   constructor() {
     super();
+    this.editCount = -1;
     const parentDiv = this.closest(".container");
     if (parentDiv) {
       this.onFcdaSelectEvent = this.onFcdaSelectEvent.bind(this);
@@ -219,6 +220,9 @@ ExtRefLnBindingList.styles = css`
 __decorate([
   property({attribute: false})
 ], ExtRefLnBindingList.prototype, "doc", 2);
+__decorate([
+  property({type: Number})
+], ExtRefLnBindingList.prototype, "editCount", 2);
 __decorate([
   property()
 ], ExtRefLnBindingList.prototype, "nsdoc", 2);

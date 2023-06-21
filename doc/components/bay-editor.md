@@ -11,6 +11,7 @@
 | `cloneUI`         |                 |           | `boolean`                                        | false                          |                                                  |
 | `dialog`          |                 |           | `Dialog`                                         |                                |                                                  |
 | `doc`             |                 |           | `XMLDocument`                                    |                                | The document being edited as provided to editor by [[`Zeroline`]]. |
+| `editCount`       | `editCount`     |           | `number`                                         | -1                             |                                                  |
 | `element`         |                 |           | `Element`                                        |                                |                                                  |
 | `getAttachedIeds` |                 |           | `((element: Element) => Element[]) \| undefined` | "() => {\n    return [];\n  }" |                                                  |
 | `header`          | `header`        | readonly  | `string`                                         |                                |                                                  |

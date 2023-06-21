@@ -50,6 +50,7 @@ function childTags(element) {
 export let BayEditor = class extends LitElement {
   constructor() {
     super(...arguments);
+    this.editCount = -1;
     this.readonly = false;
     this.showfunctions = false;
     this.getAttachedIeds = () => {
@@ -101,6 +102,7 @@ export let BayEditor = class extends LitElement {
     const lNodes = getChildElementsByTagName(this.element, "LNode");
     return lNodes.length ? html`<div class="container lnode">
           ${lNodes.map((lNode) => html`<l-node-editor
+                .editCount=${this.editCount}
                 .doc=${this.doc}
                 .element=${lNode}
               ></l-node-editor>`)}
@@ -111,6 +113,7 @@ export let BayEditor = class extends LitElement {
       return html``;
     const functions = getChildElementsByTagName(this.element, "Function");
     return html` ${functions.map((fUnction) => html`<function-editor
+          .editCount=${this.editCount}
           .doc=${this.doc}
           .element=${fUnction}
           ?showfunctions=${this.showfunctions}
@@ -119,7 +122,11 @@ export let BayEditor = class extends LitElement {
   renderIedContainer() {
     const ieds = this.getAttachedIeds?.(this.element) ?? [];
     return ieds?.length ? html`<div id="iedcontainer">
-          ${ieds.map((ied) => html`<ied-editor .doc=${this.doc} .element=${ied}></ied-editor>`)}
+          ${ieds.map((ied) => html`<ied-editor
+                .editCount=${this.editCount}
+                .doc=${this.doc}
+                .element=${ied}
+              ></ied-editor>`)}
         </div>` : html``;
   }
   renderAddButtons() {
@@ -187,11 +194,13 @@ export let BayEditor = class extends LitElement {
     })}"
         >
           ${Array.from(getChildElementsByTagName(this.element, "PowerTransformer")).map((pwt) => html`<powertransformer-editor
+                .editCount=${this.editCount}
                 .doc=${this.doc}
                 .element=${pwt}
                 ?showfunctions=${this.showfunctions}
               ></powertransformer-editor>`)}
           ${Array.from(getChildElementsByTagName(this.element, "ConductingEquipment")).map((voltageLevel) => html`<conducting-equipment-editor
+                .editCount=${this.editCount}
                 .doc=${this.doc}
                 .element=${voltageLevel}
                 ?readonly=${this.readonly}
@@ -219,6 +228,9 @@ BayEditor.styles = css`
 __decorate([
   property({attribute: false})
 ], BayEditor.prototype, "doc", 2);
+__decorate([
+  property({type: Number})
+], BayEditor.prototype, "editCount", 2);
 __decorate([
   property({attribute: false})
 ], BayEditor.prototype, "element", 2);

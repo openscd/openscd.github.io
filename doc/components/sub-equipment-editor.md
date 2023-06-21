@@ -4,13 +4,14 @@
 
 ## Properties
 
-| Property    | Attribute | Modifiers | Type          | Description                                      |
-|-------------|-----------|-----------|---------------|--------------------------------------------------|
-| `addButton` |           |           | `IconButton`  |                                                  |
-| `addMenu`   |           |           | `Menu`        |                                                  |
-| `doc`       |           |           | `XMLDocument` | The document being edited as provided to editor by [[`Zeroline`]]. |
-| `element`   |           |           | `Element`     | SCL element SubEquipment                         |
-| `label`     | `label`   | readonly  | `string`      | SubEquipment name attribute                      |
+| Property    | Attribute   | Modifiers | Type          | Default | Description                                      |
+|-------------|-------------|-----------|---------------|---------|--------------------------------------------------|
+| `addButton` |             |           | `IconButton`  |         |                                                  |
+| `addMenu`   |             |           | `Menu`        |         |                                                  |
+| `doc`       |             |           | `XMLDocument` |         | The document being edited as provided to editor by [[`Zeroline`]]. |
+| `editCount` | `editCount` |           | `number`      | -1      |                                                  |
+| `element`   |             |           | `Element`     |         | SCL element SubEquipment                         |
+| `label`     | `label`     | readonly  | `string`      |         | SubEquipment name attribute                      |
 
 ## Methods
 

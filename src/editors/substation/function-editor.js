@@ -38,6 +38,7 @@ function childTags(element) {
 export let FunctionEditor = class extends LitElement {
   constructor() {
     super(...arguments);
+    this.editCount = -1;
     this.showfunctions = false;
   }
   get header() {
@@ -72,7 +73,7 @@ export let FunctionEditor = class extends LitElement {
     const lNodes = getChildElementsByTagName(this.element, "LNode");
     return lNodes.length ? html`<div class="container lnode">
           ${lNodes.map((lNode) => html`<l-node-editor
-                .doc=${this.doc}
+                .editCount=${this.editCount} .doc=${this.doc}
                 .element=${lNode}
               ></l-node-editor>`)}
         </div>` : html``;
@@ -80,7 +81,7 @@ export let FunctionEditor = class extends LitElement {
   renderSubFunctions() {
     const subfunctions = getChildElementsByTagName(this.element, "SubFunction");
     return html` ${subfunctions.map((subFunction) => html`<sub-function-editor
-          .doc=${this.doc}
+          .editCount=${this.editCount} .doc=${this.doc}
           .element=${subFunction}
           ?showfunctions=${this.showfunctions}
         ></sub-function-editor>`)}`;
@@ -147,6 +148,9 @@ FunctionEditor.styles = css`
 __decorate([
   property({attribute: false})
 ], FunctionEditor.prototype, "doc", 2);
+__decorate([
+  property({type: Number})
+], FunctionEditor.prototype, "editCount", 2);
 __decorate([
   property({attribute: false})
 ], FunctionEditor.prototype, "element", 2);

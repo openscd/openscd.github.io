@@ -211,6 +211,10 @@ function resetSelection(dialog) {
   dialog.querySelector("filtered-list").selected.forEach((item) => item.selected = false);
 }
 export default class ImportingIedPlugin extends LitElement {
+  constructor() {
+    super(...arguments);
+    this.editCount = -1;
+  }
   async run() {
     this.pluginFileUI.click();
   }
@@ -339,6 +343,9 @@ ImportingIedPlugin.styles = css`
 __decorate([
   property({attribute: false})
 ], ImportingIedPlugin.prototype, "doc", 2);
+__decorate([
+  property({type: Number})
+], ImportingIedPlugin.prototype, "editCount", 2);
 __decorate([
   state()
 ], ImportingIedPlugin.prototype, "importDoc", 2);

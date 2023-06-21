@@ -26,6 +26,7 @@ import "./publisher/data-set-editor.js";
 export default class PublisherPlugin extends LitElement {
   constructor() {
     super(...arguments);
+    this.editCount = -1;
     this.publisherType = "GOOSE";
   }
   render() {
@@ -57,24 +58,28 @@ export default class PublisherPlugin extends LitElement {
         ></mwc-formfield>
       </div>
       <report-control-editor
+        .editCount=${this.editCount}
         .doc=${this.doc}
         class="${classMap({
       hidden: this.publisherType !== "Report"
     })}"
       ></report-control-editor
       ><gse-control-editor
+        .editCount=${this.editCount}
         .doc=${this.doc}
         class="${classMap({
       hidden: this.publisherType !== "GOOSE"
     })}"
       ></gse-control-editor
       ><sampled-value-control-editor
+        .editCount=${this.editCount}
         .doc=${this.doc}
         class="${classMap({
       hidden: this.publisherType !== "SampledValue"
     })}"
       ></sampled-value-control-editor
       ><data-set-editor
+        .editCount=${this.editCount}
         .doc=${this.doc}
         class="${classMap({
       hidden: this.publisherType !== "DataSet"
@@ -97,6 +102,9 @@ PublisherPlugin.styles = css`
 __decorate([
   property({attribute: false})
 ], PublisherPlugin.prototype, "doc", 2);
+__decorate([
+  property({type: Number})
+], PublisherPlugin.prototype, "editCount", 2);
 __decorate([
   state()
 ], PublisherPlugin.prototype, "publisherType", 2);

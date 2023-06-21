@@ -48,6 +48,7 @@ let view = View.PUBLISHER;
 export let SubscriberList = class extends SubscriberListContainer {
   constructor() {
     super();
+    this.editCount = -1;
     this.onIEDSelectEvent = this.onIEDSelectEvent.bind(this);
     this.onSmvSelectEvent = this.onSmvSelectEvent.bind(this);
     this.onIEDSubscriptionEvent = this.onIEDSubscriptionEvent.bind(this);
@@ -335,6 +336,9 @@ SubscriberList.styles = css`
 __decorate([
   property({attribute: false})
 ], SubscriberList.prototype, "doc", 2);
+__decorate([
+  property({type: Number})
+], SubscriberList.prototype, "editCount", 2);
 SubscriberList = __decorate([
   customElement("subscriber-list-smv")
 ], SubscriberList);

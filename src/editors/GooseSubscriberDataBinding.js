@@ -13,6 +13,10 @@ import {css, html, LitElement, property} from "../../_snowpack/pkg/lit-element.j
 import "./subscription/fcda-binding-list.js";
 import "./subscription/later-binding/ext-ref-ln-binding-list.js";
 export default class GooseSubscribeDataBindingPlugin extends LitElement {
+  constructor() {
+    super(...arguments);
+    this.editCount = -1;
+  }
   render() {
     return html`<div>
       <div class="container">
@@ -20,12 +24,14 @@ export default class GooseSubscribeDataBindingPlugin extends LitElement {
           class="column"
           controlTag="GSEControl"
           .includeLaterBinding="${false}"
+          .editCount=${this.editCount}
           .doc="${this.doc}"
         >
         </fcda-binding-list>
         <extref-ln-binding-list
           class="column"
           controlTag="GSEControl"
+          .editCount=${this.editCount}
           .doc="${this.doc}"
           .nsdoc="${this.nsdoc}"
         >
@@ -56,6 +62,9 @@ GooseSubscribeDataBindingPlugin.styles = css`
 __decorate([
   property({attribute: false})
 ], GooseSubscribeDataBindingPlugin.prototype, "doc", 2);
+__decorate([
+  property({type: Number})
+], GooseSubscribeDataBindingPlugin.prototype, "editCount", 2);
 __decorate([
   property()
 ], GooseSubscribeDataBindingPlugin.prototype, "nsdoc", 2);

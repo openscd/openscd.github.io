@@ -41,6 +41,7 @@ function childTags(element) {
 export let EqFunctionEditor = class extends LitElement {
   constructor() {
     super(...arguments);
+    this.editCount = -1;
     this.showfunctions = false;
   }
   get header() {
@@ -75,6 +76,7 @@ export let EqFunctionEditor = class extends LitElement {
     const lNodes = getChildElementsByTagName(this.element, "LNode");
     return lNodes.length ? html`<div class="container lnode">
           ${lNodes.map((lNode) => html`<l-node-editor
+                .editCount=${this.editCount}
                 .doc=${this.doc}
                 .element=${lNode}
               ></l-node-editor>`)}
@@ -83,6 +85,7 @@ export let EqFunctionEditor = class extends LitElement {
   renderEqSubFunctions() {
     const eqSubFunctions = getChildElementsByTagName(this.element, "EqSubFunction");
     return html` ${eqSubFunctions.map((eqSubFunction) => html`<eq-sub-function-editor
+          .editCount=${this.editCount}
           .doc=${this.doc}
           .element=${eqSubFunction}
           ?showfunctions=${this.showfunctions}
@@ -150,6 +153,9 @@ EqFunctionEditor.styles = css`
 __decorate([
   property({attribute: false})
 ], EqFunctionEditor.prototype, "doc", 2);
+__decorate([
+  property({type: Number})
+], EqFunctionEditor.prototype, "editCount", 2);
 __decorate([
   property({attribute: false})
 ], EqFunctionEditor.prototype, "element", 2);

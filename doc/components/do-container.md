@@ -8,6 +8,7 @@
 |-------------------|-------------|---------------------------------|---------|------------------------------|
 | `ancestors`       | `ancestors` | `Element[]`                     | []      |                              |
 | `doc`             | `doc`       | `XMLDocument`                   |         |                              |
+| `editCount`       | `editCount` | `number`                        | -1      |                              |
 | `element`         |             | `Element`                       |         |                              |
 | `instanceElement` |             | `Element`                       |         | The optional DOI of this DO. |
 | `nsdoc`           | `nsdoc`     | `Nsdoc`                         |         |                              |

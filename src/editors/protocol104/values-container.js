@@ -45,6 +45,7 @@ export let Values104Container = class extends Base104Container {
       return html`
         ${ieds.map((iedElement) => {
         return html`<ied-104-container
+            .editCount=${this.editCount}
             .doc="${this.doc}"
             .element="${iedElement}"
           ></ied-104-container>`;

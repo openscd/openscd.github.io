@@ -28,6 +28,10 @@ import {gooseIcon} from "../../icons/icons.js";
 import {compareNames, identity, selector} from "../../foundation.js";
 import {styles, updateElementReference} from "./foundation.js";
 export let GseControlEditor = class extends LitElement {
+  constructor() {
+    super(...arguments);
+    this.editCount = -1;
+  }
   update(props) {
     if (props.has("doc") && this.selectedGseControl) {
       const newGseControl = updateElementReference(this.doc, this.selectedGseControl);
@@ -57,6 +61,7 @@ export let GseControlEditor = class extends LitElement {
           .element=${this.selectedDataSet}
         ></data-set-element-editor>
         <gse-control-element-editor
+          .editCount=${this.editCount}
           .doc=${this.doc}
           .element=${this.selectedGseControl}
         ></gse-control-element-editor>
@@ -142,6 +147,9 @@ GseControlEditor.styles = css`
 __decorate([
   property({attribute: false})
 ], GseControlEditor.prototype, "doc", 2);
+__decorate([
+  property({type: Number})
+], GseControlEditor.prototype, "editCount", 2);
 __decorate([
   state()
 ], GseControlEditor.prototype, "selectedGseControl", 2);

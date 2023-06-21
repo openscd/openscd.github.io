@@ -172,6 +172,7 @@ export function Plugging(Base) {
         content: staticTagHtml`<${tag}
             .doc=${this.doc}
             .docName=${this.docName}
+            .editCount=${this.editCount}
             .docId=${this.docId}
             .pluginId=${plugin.src}
             .nsdoc=${this.nsdoc}

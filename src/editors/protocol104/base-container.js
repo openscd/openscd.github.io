@@ -11,7 +11,14 @@ var __decorate = (decorators, target, key, kind) => {
 };
 import {LitElement, property} from "../../../_snowpack/pkg/lit-element.js";
 export class Base104Container extends LitElement {
+  constructor() {
+    super(...arguments);
+    this.editCount = -1;
+  }
 }
 __decorate([
   property()
 ], Base104Container.prototype, "doc", 2);
+__decorate([
+  property({type: Number})
+], Base104Container.prototype, "editCount", 2);

@@ -4,20 +4,21 @@
 
 ## Properties
 
-| Property           | Attribute  | Type                                             | Default    | Description                                      |
-|--------------------|------------|--------------------------------------------------|------------|--------------------------------------------------|
-| `addButton`        |            | `IconButton`                                     |            |                                                  |
-| `addMenu`          |            | `Menu`                                           |            |                                                  |
-| `commmap`          |            | `IconButton`                                     |            |                                                  |
-| `createsubstation` |            | `IconButton`                                     |            |                                                  |
-| `doc`              |            | `XMLDocument`                                    |            | The document being edited as provided to editor by [[`Zeroline`]]. |
-| `getAttachedIeds`  |            | `((element: Element) => Element[]) \| undefined` | "() => []" |                                                  |
-| `gsecontrol`       |            | `IconButton`                                     |            |                                                  |
-| `readonly`         | `readonly` | `boolean`                                        | false      |                                                  |
-| `reportcontrol`    |            | `IconButton`                                     |            |                                                  |
-| `showfunctions`    |            | `IconButtonToggle`                               |            |                                                  |
-| `showieds`         |            | `IconButtonToggle`                               |            |                                                  |
-| `smvcontrol`       |            | `IconButton`                                     |            |                                                  |
+| Property           | Attribute   | Type                                             | Default    | Description                                      |
+|--------------------|-------------|--------------------------------------------------|------------|--------------------------------------------------|
+| `addButton`        |             | `IconButton`                                     |            |                                                  |
+| `addMenu`          |             | `Menu`                                           |            |                                                  |
+| `commmap`          |             | `IconButton`                                     |            |                                                  |
+| `createsubstation` |             | `IconButton`                                     |            |                                                  |
+| `doc`              |             | `XMLDocument`                                    |            | The document being edited as provided to editor by [[`Zeroline`]]. |
+| `editCount`        | `editCount` | `number`                                         | -1         |                                                  |
+| `getAttachedIeds`  |             | `((element: Element) => Element[]) \| undefined` | "() => []" |                                                  |
+| `gsecontrol`       |             | `IconButton`                                     |            |                                                  |
+| `readonly`         | `readonly`  | `boolean`                                        | false      |                                                  |
+| `reportcontrol`    |             | `IconButton`                                     |            |                                                  |
+| `showfunctions`    |             | `IconButtonToggle`                               |            |                                                  |
+| `showieds`         |             | `IconButtonToggle`                               |            |                                                  |
+| `smvcontrol`       |             | `IconButton`                                     |            |                                                  |
 
 ## Methods
 

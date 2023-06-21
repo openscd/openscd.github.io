@@ -50,6 +50,7 @@ function childTags(element) {
 export let VoltageLevelEditor = class extends LitElement {
   constructor() {
     super(...arguments);
+    this.editCount = -1;
     this.readonly = false;
     this.showfunctions = false;
     this.getAttachedIeds = () => {
@@ -111,6 +112,7 @@ export let VoltageLevelEditor = class extends LitElement {
     const lNodes = getChildElementsByTagName(this.element, "LNode");
     return lNodes.length ? html`<div class="container lnode">
           ${lNodes.map((lNode) => html`<l-node-editor
+                .editCount=${this.editCount}
                 .doc=${this.doc}
                 .element=${lNode}
               ></l-node-editor>`)}
@@ -121,6 +123,7 @@ export let VoltageLevelEditor = class extends LitElement {
       return html``;
     const functions = getChildElementsByTagName(this.element, "Function");
     return html` ${functions.map((fUnction) => html`<function-editor
+          .editCount=${this.editCount}
           .doc=${this.doc}
           .element=${fUnction}
           ?showfunctions=${this.showfunctions}
@@ -129,7 +132,11 @@ export let VoltageLevelEditor = class extends LitElement {
   renderIedContainer() {
     const ieds = this.getAttachedIeds?.(this.element) ?? [];
     return ieds?.length ? html`<div id="iedcontainer">
-          ${ieds.map((ied) => html`<ied-editor .doc=${this.doc} .element=${ied}></ied-editor>`)}
+          ${ieds.map((ied) => html`<ied-editor
+                .editCount=${this.editCount}
+                .doc=${this.doc}
+                .element=${ied}
+              ></ied-editor>`)}
         </div>` : html``;
   }
   renderPowerTransformerContainer() {
@@ -141,6 +148,7 @@ export let VoltageLevelEditor = class extends LitElement {
     })}"
         >
           ${pwts.map((pwt) => html`<powertransformer-editor
+                .editCount=${this.editCount}
                 .doc=${this.doc}
                 .element=${pwt}
                 ?showfunctions=${this.showfunctions}
@@ -208,6 +216,7 @@ export let VoltageLevelEditor = class extends LitElement {
         ${this.renderPowerTransformerContainer()}
         <div id="bayContainer">
           ${Array.from(this.element?.querySelectorAll(selectors.Bay) ?? []).map((bay) => html`<bay-editor
+              .editCount=${this.editCount}
               .doc=${this.doc}
               .element=${bay}
               .getAttachedIeds=${this.getAttachedIeds}
@@ -237,6 +246,9 @@ VoltageLevelEditor.styles = css`
 __decorate([
   property({attribute: false})
 ], VoltageLevelEditor.prototype, "doc", 2);
+__decorate([
+  property({type: Number})
+], VoltageLevelEditor.prototype, "editCount", 2);
 __decorate([
   property({attribute: false})
 ], VoltageLevelEditor.prototype, "element", 2);

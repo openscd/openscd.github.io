@@ -43,6 +43,10 @@ const templates = fetch("public/xml/templates.scd").then((response) => response.
 const nsd74 = fetch("public/xml/IEC_61850-7-4_2007B3.nsd").then((response) => response.text()).then((str) => new DOMParser().parseFromString(str, "application/xml"));
 const nsd7420 = fetch("public/xml/IEC_61850-7-420_2019A4.nsd").then((response) => response.text()).then((str) => new DOMParser().parseFromString(str, "application/xml"));
 export default class TemplatesPlugin extends LitElement {
+  constructor() {
+    super(...arguments);
+    this.editCount = -1;
+  }
   async openCreateLNodeTypeWizard() {
     this.createDataTypeTemplates();
     this.dispatchEvent(newWizardEvent(createLNodeTypeWizard(this.doc.querySelector(":root > DataTypeTemplates"), await templates, await nsd74, await nsd7420)));
@@ -247,3 +251,6 @@ TemplatesPlugin.styles = css`
 __decorate([
   property({attribute: false})
 ], TemplatesPlugin.prototype, "doc", 2);
+__decorate([
+  property({type: Number})
+], TemplatesPlugin.prototype, "editCount", 2);

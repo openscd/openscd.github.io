@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">98.11% </span>
+                <span class="strong">98.16% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>208/212</span>
+                <span class='fraction'>214/218</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">98.11% </span>
+                <span class="strong">98.16% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>208/212</span>
+                <span class='fraction'>214/218</span>
             </div>
         
             
@@ -275,7 +275,13 @@
 <a name='L210'></a><a href='#L210'>210</a>
 <a name='L211'></a><a href='#L211'>211</a>
 <a name='L212'></a><a href='#L212'>212</a>
-<a name='L213'></a><a href='#L213'>213</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">10x</span>
+<a name='L213'></a><a href='#L213'>213</a>
+<a name='L214'></a><a href='#L214'>214</a>
+<a name='L215'></a><a href='#L215'>215</a>
+<a name='L216'></a><a href='#L216'>216</a>
+<a name='L217'></a><a href='#L217'>217</a>
+<a name='L218'></a><a href='#L218'>218</a>
+<a name='L219'></a><a href='#L219'>219</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">10x</span>
 <span class="cline-any cline-yes">10x</span>
 <span class="cline-any cline-yes">10x</span>
 <span class="cline-any cline-yes">10x</span>
@@ -321,6 +327,8 @@
 <span class="cline-any cline-yes">10x</span>
 <span class="cline-any cline-yes">10x</span>
 <span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
@@ -364,6 +372,7 @@
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">10x</span>
 <span class="cline-any cline-yes">10x</span>
 <span class="cline-any cline-yes">10x</span>
@@ -379,12 +388,14 @@
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">10x</span>
 <span class="cline-any cline-yes">10x</span>
 <span class="cline-any cline-yes">10x</span>
 <span class="cline-any cline-yes">10x</span>
 <span class="cline-any cline-yes">10x</span>
 <span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
@@ -416,6 +427,7 @@
 <span class="cline-any cline-yes">10x</span>
 <span class="cline-any cline-yes">10x</span>
 <span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
@@ -536,6 +548,8 @@ export class LineEditor extends LitElement {
   /** The document being edited as provided to editor by [[`Zeroline`]]. */
   @property({ attribute: false })
   doc!: XMLDocument;
+  @property({ type: Number })
+  editCount = -1;
   /** SCL element Line */
   @property({ attribute: false })
   element!: Element;
@@ -573,6 +587,7 @@ export class LineEditor extends LitElement {
     return html` ${ConductingEquipments.map(
       ConductingEquipment =&gt;
         html`&lt;conducting-equipment-editor
+          .editCount=${this.editCount}
           .doc=${this.doc}
           .element=${ConductingEquipment}
           ?showfunctions=${this.showfunctions}
@@ -588,6 +603,7 @@ export class LineEditor extends LitElement {
     return html` ${GeneralEquipments.map(
       GeneralEquipment =&gt;
         html`&lt;general-equipment-editor
+          .editCount=${this.editCount}
           .doc=${this.doc}
           .element=${GeneralEquipment}
           ?showfunctions=${this.showfunctions}
@@ -602,6 +618,7 @@ export class LineEditor extends LitElement {
     return html` ${Functions.map(
       Function =&gt;
         html`&lt;function-editor
+          .editCount=${this.editCount}
           .doc=${this.doc}
           .element=${Function}
           ?showfunctions=${this.showfunctions}
@@ -635,6 +652,7 @@ export class LineEditor extends LitElement {
           ${lNodes.map(
             lNode =&gt;
               html`&lt;l-node-editor
+                .editCount=${this.editCount}
                 .doc=${this.doc}
                 .element=${<span class="branch-0 cbranch-no" title="branch not covered" >lNode}</span>
 <span class="cstat-no" title="statement not covered" >              &gt;&lt;/l-node-editor&gt;`</span>
@@ -706,7 +724,7 @@ export class LineEditor extends LitElement {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener">istanbul</a>
-                at Wed Jun 21 2023 21:45:13 GMT+0000 (Coordinated Universal Time)
+                at Wed Jun 21 2023 22:32:38 GMT+0000 (Coordinated Universal Time)
             </div>
         </div>
         <script src="../../../prettify.js"></script>

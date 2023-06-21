@@ -28,6 +28,10 @@ import {compareNames, identity, selector} from "../../foundation.js";
 import {smvIcon} from "../../icons/icons.js";
 import {styles, updateElementReference} from "./foundation.js";
 export let SampledValueControlEditor = class extends LitElement {
+  constructor() {
+    super(...arguments);
+    this.editCount = -1;
+  }
   update(props) {
     if (props.has("doc") && this.selectedSampledValueControl) {
       const newSampledValueControl = updateElementReference(this.doc, this.selectedSampledValueControl);
@@ -57,6 +61,7 @@ export let SampledValueControlEditor = class extends LitElement {
           .element=${this.selectedDataSet}
         ></data-set-element-editor>
         <sampled-value-control-element-editor
+          .editCount=${this.editCount}
           .doc=${this.doc}
           .element=${this.selectedSampledValueControl}
         ></sampled-value-control-element-editor>
@@ -142,6 +147,9 @@ SampledValueControlEditor.styles = css`
 __decorate([
   property({attribute: false})
 ], SampledValueControlEditor.prototype, "doc", 2);
+__decorate([
+  property({type: Number})
+], SampledValueControlEditor.prototype, "editCount", 2);
 __decorate([
   state()
 ], SampledValueControlEditor.prototype, "selectedSampledValueControl", 2);

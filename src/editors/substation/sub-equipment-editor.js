@@ -39,6 +39,10 @@ function childTags(element) {
   return tags[element.tagName].children.filter((child) => wizards[child].create !== emptyWizard);
 }
 export let SubEquipmentEditor = class extends LitElement {
+  constructor() {
+    super(...arguments);
+    this.editCount = -1;
+  }
   get label() {
     const name = `${this.element.hasAttribute("name") ? `${this.element.getAttribute("name")}` : ""}`;
     const description = `${this.element.hasAttribute("desc") ? ` - ${this.element.getAttribute("desc")}` : ""}`;
@@ -72,6 +76,7 @@ export let SubEquipmentEditor = class extends LitElement {
     const lNodes = getChildElementsByTagName(this.element, "LNode");
     return lNodes.length ? html`<div class="container lnode">
           ${lNodes.map((lNode) => html`<l-node-editor
+                .editCount=${this.editCount}
                 .doc=${this.doc}
                 .element=${lNode}
               ></l-node-editor>`)}
@@ -80,6 +85,7 @@ export let SubEquipmentEditor = class extends LitElement {
   renderEqFunctions() {
     const eqFunctions = getChildElementsByTagName(this.element, "EqFunction");
     return eqFunctions.length ? html` ${eqFunctions.map((eqFunction) => html`<eq-function-editor
+              .editCount=${this.editCount}
               .doc=${this.doc}
               .element=${eqFunction}
             ></eq-function-editor>`)}` : html``;
@@ -142,6 +148,9 @@ SubEquipmentEditor.styles = css`
 __decorate([
   property({attribute: false})
 ], SubEquipmentEditor.prototype, "doc", 2);
+__decorate([
+  property({type: Number})
+], SubEquipmentEditor.prototype, "editCount", 2);
 __decorate([
   property({attribute: false})
 ], SubEquipmentEditor.prototype, "element", 2);

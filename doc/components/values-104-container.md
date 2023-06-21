@@ -5,7 +5,8 @@ Container that will render an 'ied-104-container' for every IED which contains D
 
 ## Properties
 
-| Property      | Attribute     | Modifiers | Type          |
-|---------------|---------------|-----------|---------------|
-| `doc`         | `doc`         |           | `XMLDocument` |
-| `iedElements` | `iedElements` | readonly  | `Element[]`   |
+| Property      | Attribute     | Modifiers | Type          | Default |
+|---------------|---------------|-----------|---------------|---------|
+| `doc`         | `doc`         |           | `XMLDocument` |         |
+| `editCount`   | `editCount`   |           | `number`      | -1      |
+| `iedElements` | `iedElements` | readonly  | `Element[]`   |         |

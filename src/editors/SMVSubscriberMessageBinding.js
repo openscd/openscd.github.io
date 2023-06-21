@@ -25,6 +25,7 @@ let view = View.PUBLISHER;
 export default class SMVSubscriberMessageBindingPlugin extends LitElement {
   constructor() {
     super();
+    this.editCount = -1;
     this.addEventListener("view", (evt) => {
       view = evt.detail.view;
       this.requestUpdate();
@@ -56,12 +57,21 @@ export default class SMVSubscriberMessageBindingPlugin extends LitElement {
         ></mwc-radio>
       </mwc-formfield>
       <div class="container">
-        ${view == View.PUBLISHER ? html`<smv-list class="row" .doc=${this.doc}></smv-list>` : html`<ied-list
+        ${view == View.PUBLISHER ? html`<smv-list
               class="row"
+              .editCount=${this.editCount}
+              .doc=${this.doc}
+            ></smv-list>` : html`<ied-list
+              class="row"
+              .editCount=${this.editCount}
               .doc=${this.doc}
               serviceType="smv"
             ></ied-list>`}
-        <subscriber-list-smv class="row" .doc=${this.doc}></subscriber-list-smv>
+        <subscriber-list-smv
+          class="row"
+          .editCount=${this.editCount}
+          .doc=${this.doc}
+        ></subscriber-list-smv>
       </div>
     </div>`;
   }
@@ -88,6 +98,9 @@ SMVSubscriberMessageBindingPlugin.styles = css`
 __decorate([
   property()
 ], SMVSubscriberMessageBindingPlugin.prototype, "doc", 2);
+__decorate([
+  property({type: Number})
+], SMVSubscriberMessageBindingPlugin.prototype, "editCount", 2);
 __decorate([
   query("#smvPublisherView")
 ], SMVSubscriberMessageBindingPlugin.prototype, "smvPublisherView", 2);

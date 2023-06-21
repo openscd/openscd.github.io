@@ -4,8 +4,9 @@
 
 ## Properties
 
-| Property  | Attribute | Modifiers | Type             | Description            |
-|-----------|-----------|-----------|------------------|------------------------|
-| `bitrate` |           | readonly  | `string \| null` |                        |
-| `doc`     | `doc`     |           | `XMLDocument`    |                        |
-| `element` |           |           | `Element`        | SCL element SubNetwork |
+| Property    | Attribute   | Modifiers | Type             | Default | Description            |
+|-------------|-------------|-----------|------------------|---------|------------------------|
+| `bitrate`   |             | readonly  | `string \| null` |         |                        |
+| `doc`       | `doc`       |           | `XMLDocument`    |         |                        |
+| `editCount` | `editCount` |           | `number`         | -1      |                        |
+| `element`   |             |           | `Element`        |         | SCL element SubNetwork |

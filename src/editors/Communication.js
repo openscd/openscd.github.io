@@ -21,6 +21,10 @@ import {
 } from "../foundation.js";
 import {createSubNetworkWizard} from "../wizards/subnetwork.js";
 export default class CommunicationPlugin extends LitElement {
+  constructor() {
+    super(...arguments);
+    this.editCount = -1;
+  }
   createCommunication() {
     const element = createElement(this.doc, "Communication", {});
     this.dispatchEvent(newActionEvent({
@@ -55,6 +59,7 @@ export default class CommunicationPlugin extends LitElement {
       ></mwc-fab>
       <section>
         ${Array.from(this.doc.querySelectorAll("SubNetwork") ?? []).filter(isPublic).map((subnetwork) => html`<subnetwork-editor
+                .editCount=${this.editCount}
                 .doc=${this.doc}
                 .element=${subnetwork}
               ></subnetwork-editor>`)}
@@ -97,3 +102,6 @@ CommunicationPlugin.styles = css`
 __decorate([
   property()
 ], CommunicationPlugin.prototype, "doc", 2);
+__decorate([
+  property({type: Number})
+], CommunicationPlugin.prototype, "editCount", 2);

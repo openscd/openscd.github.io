@@ -38,6 +38,10 @@ function onOpenDocResetSelectedGooseMsg() {
 }
 addEventListener("open-doc", onOpenDocResetSelectedGooseMsg);
 export let GooseList = class extends LitElement {
+  constructor() {
+    super(...arguments);
+    this.editCount = -1;
+  }
   onSelect(gseControl) {
     if (gseControl == selectedGseControl)
       return;
@@ -120,6 +124,9 @@ GooseList.styles = css`
 __decorate([
   property({attribute: false})
 ], GooseList.prototype, "doc", 2);
+__decorate([
+  property({type: Number})
+], GooseList.prototype, "editCount", 2);
 GooseList = __decorate([
   customElement("goose-list")
 ], GooseList);

@@ -29,6 +29,10 @@ import {
 import {createConnectedApWizard} from "../../wizards/connectedap.js";
 import {wizards} from "../../wizards/wizard-library.js";
 export let SubNetworkEditor = class extends LitElement {
+  constructor() {
+    super(...arguments);
+    this.editCount = -1;
+  }
   get name() {
     return this.element.getAttribute("name") ?? "UNDEFINED";
   }
@@ -68,6 +72,7 @@ export let SubNetworkEditor = class extends LitElement {
   renderSmvEditors(iedName) {
     return Array.from(this.element.closest("Communication")?.querySelectorAll(`ConnectedAP[iedName="${iedName}"] > SMV`) ?? []).map((smv) => html`<smv-editor
         class="${smv.closest("SubNetwork") !== this.element ? "disabled" : ""}"
+        .editCount=${this.editCount}
         .doc=${this.doc}
         .element=${smv}
       ></smv-editor>`);
@@ -75,6 +80,7 @@ export let SubNetworkEditor = class extends LitElement {
   renderGseEditors(iedName) {
     return Array.from(this.element.closest("Communication")?.querySelectorAll(`ConnectedAP[iedName="${iedName}"] > GSE`) ?? []).map((gse) => html`<gse-editor
         class="${gse.closest("SubNetwork") !== this.element ? "disabled" : ""}"
+        .editCount=${this.editCount}
         .doc=${this.doc}
         .element=${gse}
       ></gse-editor>`);
@@ -157,6 +163,9 @@ SubNetworkEditor.styles = css`
 __decorate([
   property({attribute: false})
 ], SubNetworkEditor.prototype, "doc", 2);
+__decorate([
+  property({type: Number})
+], SubNetworkEditor.prototype, "editCount", 2);
 __decorate([
   property({attribute: false})
 ], SubNetworkEditor.prototype, "element", 2);

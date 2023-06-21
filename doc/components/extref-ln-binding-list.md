@@ -5,11 +5,12 @@ The List reacts on a custom event to know which FCDA Element was selected and up
 
 ## Properties
 
-| Property                        | Attribute    | Type                   |
-|---------------------------------|--------------|------------------------|
-| `controlTag`                    | `controlTag` | `controlTag`           |
-| `currentIedElement`             |              | `Element \| undefined` |
-| `currentSelectedControlElement` |              | `Element \| undefined` |
-| `currentSelectedFcdaElement`    |              | `Element \| undefined` |
-| `doc`                           |              | `XMLDocument`          |
-| `nsdoc`                         | `nsdoc`      | `Nsdoc`                |
+| Property                        | Attribute    | Type                   | Default |
+|---------------------------------|--------------|------------------------|---------|
+| `controlTag`                    | `controlTag` | `controlTag`           |         |
+| `currentIedElement`             |              | `Element \| undefined` |         |
+| `currentSelectedControlElement` |              | `Element \| undefined` |         |
+| `currentSelectedFcdaElement`    |              | `Element \| undefined` |         |
+| `doc`                           |              | `XMLDocument`          |         |
+| `editCount`                     | `editCount`  | `number`               | -1      |
+| `nsdoc`                         | `nsdoc`      | `Nsdoc`                |         |

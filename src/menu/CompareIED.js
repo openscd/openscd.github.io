@@ -69,6 +69,7 @@ filterToIgnore[`${tvtrClass} DOI[name='VRtgSec'] ${setVal}`] = {
 export default class CompareIEDPlugin extends LitElement {
   constructor() {
     super(...arguments);
+    this.editCount = -1;
     this.templateDocName = "";
   }
   get ieds() {
@@ -245,6 +246,9 @@ CompareIEDPlugin.styles = css`
 __decorate([
   property({attribute: false})
 ], CompareIEDPlugin.prototype, "doc", 2);
+__decorate([
+  property({type: Number})
+], CompareIEDPlugin.prototype, "editCount", 2);
 __decorate([
   property({attribute: false})
 ], CompareIEDPlugin.prototype, "templateDoc", 2);

@@ -50,7 +50,7 @@ export function Logging(Base) {
     constructor(...args) {
       super(...args);
       this.history = [];
-      this.currentAction = -1;
+      this.editCount = -1;
       this.diagnoses = new Map();
       this.undo = this.undo.bind(this);
       this.redo = this.redo.bind(this);
@@ -59,7 +59,7 @@ export function Logging(Base) {
       this.addEventListener("issue", this.onIssue);
     }
     get canUndo() {
-      return this.currentAction >= 0;
+      return this.editCount >= 0;
     }
     get canRedo() {
       return this.nextAction >= 0;
@@ -67,12 +67,12 @@ export function Logging(Base) {
     get previousAction() {
       if (!this.canUndo)
         return -1;
-      return this.history.slice(0, this.currentAction).map((entry) => entry.kind == "action" ? true : false).lastIndexOf(true);
+      return this.history.slice(0, this.editCount).map((entry) => entry.kind == "action" ? true : false).lastIndexOf(true);
     }
     get nextAction() {
-      let index = this.history.slice(this.currentAction + 1).findIndex((entry) => entry.kind == "action");
+      let index = this.history.slice(this.editCount + 1).findIndex((entry) => entry.kind == "action");
       if (index >= 0)
-        index += this.currentAction + 1;
+        index += this.editCount + 1;
       return index;
     }
     onIssue(de) {
@@ -88,21 +88,21 @@ export function Logging(Base) {
     undo() {
       if (!this.canUndo)
         return false;
-      this.dispatchEvent(newActionEvent(invert(this.history[this.currentAction].action)));
-      this.currentAction = this.previousAction;
+      this.dispatchEvent(newActionEvent(invert(this.history[this.editCount].action)));
+      this.editCount = this.previousAction;
       return true;
     }
     redo() {
       if (!this.canRedo)
         return false;
       this.dispatchEvent(newActionEvent(this.history[this.nextAction].action));
-      this.currentAction = this.nextAction;
+      this.editCount = this.nextAction;
       return true;
     }
     onLog(le) {
       if (le.detail.kind === "reset") {
         this.history = [];
-        this.currentAction = -1;
+        this.editCount = -1;
         return;
       }
       const entry = {
@@ -115,7 +115,7 @@ export function Logging(Base) {
         entry.action.derived = true;
         if (this.nextAction !== -1)
           this.history.splice(this.nextAction);
-        this.currentAction = this.history.length;
+        this.editCount = this.history.length;
       }
       this.history.push(entry);
       if (!this.logUI.open) {
@@ -144,7 +144,7 @@ export function Logging(Base) {
           class="${entry.kind}"
           graphic="icon"
           ?twoline=${!!entry.message}
-          ?activated=${this.currentAction == history.length - index - 1}
+          ?activated=${this.editCount == history.length - index - 1}
         >
           <span>
             <!-- FIXME: replace tt with mwc-chip asap -->
@@ -353,7 +353,7 @@ export function Logging(Base) {
   ], LoggingElement.prototype, "history", 2);
   __decorate([
     property({type: Number})
-  ], LoggingElement.prototype, "currentAction", 2);
+  ], LoggingElement.prototype, "editCount", 2);
   __decorate([
     property()
   ], LoggingElement.prototype, "diagnoses", 2);

@@ -31,6 +31,7 @@ let selectedViewProtocol104Plugin = View.VALUES;
 export default class Communication104Plugin extends LitElement {
   constructor() {
     super();
+    this.editCount = -1;
     this.addEventListener(VIEW_EVENT_NAME, (evt) => {
       selectedViewProtocol104Plugin = evt.detail.view;
       this.requestUpdate();
@@ -40,30 +41,35 @@ export default class Communication104Plugin extends LitElement {
     selectedViewProtocol104Plugin == View.VALUES ? this.byValuesRadio.setAttribute("checked", "") : this.byNetworkRadio.setAttribute("checked", "");
   }
   render() {
-    return html`
-      <section>
-        <div>
-          <mwc-formfield label="${translate("protocol104.view.valuesView")}">
-            <mwc-radio
-              id="byValuesRadio"
-              name="view"
-              value="values"
-              @checked=${() => this.listDiv.dispatchEvent(newViewEvent(View.VALUES))}
-            ></mwc-radio>
-          </mwc-formfield>
-          <mwc-formfield label="${translate("protocol104.view.networkView")}">
-            <mwc-radio
-              id="byNetworkRadio"
-              name="view"
-              value="network"
-              @checked=${() => this.listDiv.dispatchEvent(newViewEvent(View.NETWORK))}
-            ></mwc-radio>
-          </mwc-formfield>
-          <div id="containers">
-            ${selectedViewProtocol104Plugin == View.VALUES ? html`<values-104-container .doc=${this.doc}></values-104-container>` : html`<network-104-container .doc=${this.doc}></network-104-container>`}
-          </div>
+    return html` <section>
+      <div>
+        <mwc-formfield label="${translate("protocol104.view.valuesView")}">
+          <mwc-radio
+            id="byValuesRadio"
+            name="view"
+            value="values"
+            @checked=${() => this.listDiv.dispatchEvent(newViewEvent(View.VALUES))}
+          ></mwc-radio>
+        </mwc-formfield>
+        <mwc-formfield label="${translate("protocol104.view.networkView")}">
+          <mwc-radio
+            id="byNetworkRadio"
+            name="view"
+            value="network"
+            @checked=${() => this.listDiv.dispatchEvent(newViewEvent(View.NETWORK))}
+          ></mwc-radio>
+        </mwc-formfield>
+        <div id="containers">
+          ${selectedViewProtocol104Plugin == View.VALUES ? html`<values-104-container
+                .editCount=${this.editCount}
+                .doc=${this.doc}
+              ></values-104-container>` : html`<network-104-container
+                .editCount=${this.editCount}
+                .doc=${this.doc}
+              ></network-104-container>`}
         </div>
-      </section>`;
+      </div>
+    </section>`;
   }
 }
 Communication104Plugin.styles = css`
@@ -74,10 +80,13 @@ Communication104Plugin.styles = css`
     section {
       padding: 8px 12px 16px;
     }
- `;
+  `;
 __decorate([
   property()
 ], Communication104Plugin.prototype, "doc", 2);
+__decorate([
+  property({type: Number})
+], Communication104Plugin.prototype, "editCount", 2);
 __decorate([
   query("#byValuesRadio")
 ], Communication104Plugin.prototype, "byValuesRadio", 2);

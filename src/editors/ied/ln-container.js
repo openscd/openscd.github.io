@@ -52,6 +52,7 @@ export let LNContainer = class extends Container {
             ></mwc-icon-button-toggle>
           </abbr>` : nothing}
       ${this.toggleButton?.on ? doElements.map((dO) => html`<do-container
+              .editCount=${this.editCount}
               .doc=${this.doc}
               .element=${dO}
               .instanceElement=${this.getInstanceElement(dO)}

@@ -16,12 +16,16 @@ import "./cleanup/datasets-container.js";
 import "./cleanup/control-blocks-container.js";
 import "./cleanup/datatypes-container.js";
 export default class Cleanup extends LitElement {
+  constructor() {
+    super(...arguments);
+    this.editCount = -1;
+  }
   render() {
     return html`
       <div class="cleanup">
-        <cleanup-datasets .doc=${this.doc}></cleanup-datasets>
-        <cleanup-control-blocks .doc=${this.doc}></cleanup-control-blocks>
-        <cleanup-data-types .doc=${this.doc}></cleanup-data-types>
+        <cleanup-datasets .editCount=${this.editCount} .doc=${this.doc}></cleanup-datasets>
+        <cleanup-control-blocks .editCount=${this.editCount} .doc=${this.doc}></cleanup-control-blocks>
+        <cleanup-data-types .editCount=${this.editCount} .doc=${this.doc}></cleanup-data-types>
       </div>
     `;
   }
@@ -63,3 +67,6 @@ Cleanup.styles = css`
 __decorate([
   property()
 ], Cleanup.prototype, "doc", 2);
+__decorate([
+  property({type: Number})
+], Cleanup.prototype, "editCount", 2);

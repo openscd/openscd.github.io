@@ -13,6 +13,10 @@ import {css, html, LitElement, property} from "../../_snowpack/pkg/lit-element.j
 import "./subscription/fcda-binding-list.js";
 import "./subscription/later-binding/ext-ref-later-binding-list.js";
 export default class SMVSubscribeLaterBindingPlugin extends LitElement {
+  constructor() {
+    super(...arguments);
+    this.editCount = -1;
+  }
   render() {
     return html`<div>
       <div class="container">
@@ -20,13 +24,13 @@ export default class SMVSubscribeLaterBindingPlugin extends LitElement {
           class="column"
           controlTag="SampledValueControl"
           .includeLaterBinding="${true}"
-          .doc="${this.doc}"
+          .editCount=${this.editCount} .doc="${this.doc}"
         >
         </fcda-binding-list>
         <extref-later-binding-list
           class="column"
           controlTag="SampledValueControl"
-          .doc="${this.doc}"
+          .editCount=${this.editCount} .doc="${this.doc}"
         >
         </extref-later-binding-list>
       </div>
@@ -55,3 +59,6 @@ SMVSubscribeLaterBindingPlugin.styles = css`
 __decorate([
   property({attribute: false})
 ], SMVSubscribeLaterBindingPlugin.prototype, "doc", 2);
+__decorate([
+  property({type: Number})
+], SMVSubscribeLaterBindingPlugin.prototype, "editCount", 2);

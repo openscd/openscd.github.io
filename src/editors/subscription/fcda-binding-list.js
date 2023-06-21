@@ -44,6 +44,7 @@ import {getSubscribedExtRefElements} from "./later-binding/foundation.js";
 export let FcdaBindingList = class extends LitElement {
   constructor() {
     super();
+    this.editCount = -1;
     this.extRefCounters = new Map();
     this.iconControlLookup = {
       SampledValueControl: smvIcon,
@@ -317,6 +318,9 @@ FcdaBindingList.styles = css`
 __decorate([
   property({attribute: false})
 ], FcdaBindingList.prototype, "doc", 2);
+__decorate([
+  property({type: Number})
+], FcdaBindingList.prototype, "editCount", 2);
 __decorate([
   property()
 ], FcdaBindingList.prototype, "controlTag", 2);

@@ -42,6 +42,7 @@ function childTags(element) {
 export let GeneralEquipmentEditor = class extends LitElement {
   constructor() {
     super(...arguments);
+    this.editCount = -1;
     this.showfunctions = false;
   }
   get header() {
@@ -78,6 +79,7 @@ export let GeneralEquipmentEditor = class extends LitElement {
     const lNodes = getChildElementsByTagName(this.element, "LNode");
     return lNodes.length ? html`<div class="container lnode">
           ${lNodes.map((lNode) => html`<l-node-editor
+                .editCount=${this.editCount}
                 .doc=${this.doc}
                 .element=${lNode}
               ></l-node-editor>`)}
@@ -86,6 +88,7 @@ export let GeneralEquipmentEditor = class extends LitElement {
   renderEqFunctions() {
     const eFunctions = getChildElementsByTagName(this.element, "EqFunction");
     return eFunctions.length ? html`${eFunctions.map((eFunction) => html` <eq-function-editor
+              .editCount=${this.editCount}
               .doc=${this.doc}
               .element=${eFunction}
             ></eq-function-editor>`)}` : html``;
@@ -164,6 +167,9 @@ GeneralEquipmentEditor.styles = css`
 __decorate([
   property({attribute: false})
 ], GeneralEquipmentEditor.prototype, "doc", 2);
+__decorate([
+  property({type: Number})
+], GeneralEquipmentEditor.prototype, "editCount", 2);
 __decorate([
   property({attribute: false})
 ], GeneralEquipmentEditor.prototype, "element", 2);

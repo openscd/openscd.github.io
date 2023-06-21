@@ -16,13 +16,20 @@ import "./substation/zeroline-pane.js";
 import {newWizardEvent} from "../foundation.js";
 import {wizards} from "../wizards/wizard-library.js";
 export default class SubstationPlugin extends LitElement {
+  constructor() {
+    super(...arguments);
+    this.editCount = -1;
+  }
   openCreateSubstationWizard() {
     const wizard = wizards["Substation"].create(this.doc.documentElement);
     if (wizard)
       this.dispatchEvent(newWizardEvent(wizard));
   }
   render() {
-    return html` <zeroline-pane .doc=${this.doc}></zeroline-pane>
+    return html` <zeroline-pane
+        .editCount=${this.editCount}
+        .doc=${this.doc}
+      ></zeroline-pane>
       ${!this.doc?.querySelector(":root > Substation, :root > Line, :root > Process") ? html`<h1>
             <mwc-fab
               extended
@@ -47,3 +54,6 @@ SubstationPlugin.styles = css`
 __decorate([
   property()
 ], SubstationPlugin.prototype, "doc", 2);
+__decorate([
+  property({type: Number})
+], SubstationPlugin.prototype, "editCount", 2);

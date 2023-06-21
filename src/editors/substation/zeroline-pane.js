@@ -53,6 +53,7 @@ function childTags(element) {
 export let ZerolinePane = class extends LitElement {
   constructor() {
     super(...arguments);
+    this.editCount = -1;
     this.readonly = false;
     this.getAttachedIeds = () => [];
   }
@@ -88,12 +89,17 @@ export let ZerolinePane = class extends LitElement {
     this.getAttachedIeds = shouldShowIEDs() ? getAttachedIeds(this.doc) : () => [];
     const ieds = this.getAttachedIeds?.(this.doc.documentElement) ?? [];
     return ieds.length ? html`<div id="iedcontainer">
-          ${ieds.map((ied) => html`<ied-editor .doc=${this.doc} .element=${ied}></ied-editor>`)}
+          ${ieds.map((ied) => html`<ied-editor
+                .editCount=${this.editCount}
+                .doc=${this.doc}
+                .element=${ied}
+              ></ied-editor>`)}
         </div>` : html``;
   }
   renderSubstation() {
     return this.doc?.querySelector(":root > Substation") ? html`<section>
           ${Array.from(this.doc.querySelectorAll("Substation") ?? []).filter(isPublic).map((substation) => html`<substation-editor
+                  .editCount=${this.editCount}
                   .doc=${this.doc}
                   .element=${substation}
                   .getAttachedIeds=${this.getAttachedIeds}
@@ -109,6 +115,7 @@ export let ZerolinePane = class extends LitElement {
   renderLines() {
     return this.doc?.querySelector(":root > Line") ? html`<section>
           ${Array.from(this.doc.querySelectorAll("Line") ?? []).filter(isPublic).map((line) => html`<line-editor
+                  .editCount=${this.editCount}
                   .doc=${this.doc}
                   .element=${line}
                   .getAttachedIeds=${this.getAttachedIeds}
@@ -120,6 +127,7 @@ export let ZerolinePane = class extends LitElement {
   renderProcesses() {
     return this.doc?.querySelector(":root > Process") ? html`<section>
           ${Array.from(this.doc.querySelectorAll(":root > Process") ?? []).filter(isPublic).map((process) => html`<process-editor
+                  .editCount=${this.editCount}
                   .doc=${this.doc}
                   .element=${process}
                   .getAttachedIeds=${this.getAttachedIeds}
@@ -254,6 +262,9 @@ ZerolinePane.styles = css`
 __decorate([
   property({attribute: false})
 ], ZerolinePane.prototype, "doc", 2);
+__decorate([
+  property({type: Number})
+], ZerolinePane.prototype, "editCount", 2);
 __decorate([
   property({type: Boolean})
 ], ZerolinePane.prototype, "readonly", 2);

@@ -48,6 +48,7 @@ export let ServerContainer = class extends Container {
     return html`<action-pane .label="${this.header()}">
       <mwc-icon slot="icon">${serverIcon}</mwc-icon>
       ${this.lDeviceElements.map((server) => html`<ldevice-container
+            .editCount=${this.editCount}
             .doc=${this.doc}
             .element=${server}
             .nsdoc=${this.nsdoc}

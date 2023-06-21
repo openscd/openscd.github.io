@@ -2,6 +2,7 @@
 
 ## Properties
 
-| Property | Attribute | Type          |
-|----------|-----------|---------------|
-| `doc`    | `doc`     | `XMLDocument` |
+| Property    | Attribute   | Type          | Default |
+|-------------|-------------|---------------|---------|
+| `doc`       | `doc`       | `XMLDocument` |         |
+| `editCount` | `editCount` | `number`      | -1      |

@@ -4,10 +4,11 @@
 
 ## Properties
 
-| Property  | Attribute | Type          | Description             |
-|-----------|-----------|---------------|-------------------------|
-| `doc`     | `doc`     | `XMLDocument` |                         |
-| `element` |           | `Element`     | SCL element ConnectedAP |
+| Property    | Attribute   | Type          | Default | Description             |
+|-------------|-------------|---------------|---------|-------------------------|
+| `doc`       | `doc`       | `XMLDocument` |         |                         |
+| `editCount` | `editCount` | `number`      | -1      |                         |
+| `element`   |             | `Element`     |         | SCL element ConnectedAP |
 
 ## Methods
 

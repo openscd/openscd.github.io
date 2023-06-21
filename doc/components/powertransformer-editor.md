@@ -9,6 +9,7 @@
 | `addButton`     |                 |           | `IconButton`  |         |                                                  |
 | `addMenu`       |                 |           | `Menu`        |         |                                                  |
 | `doc`           |                 |           | `XMLDocument` |         | The document being edited as provided to editor by [[`Zeroline`]]. |
+| `editCount`     | `editCount`     |           | `number`      | -1      |                                                  |
 | `element`       |                 |           | `Element`     |         | SCL element PowerTransformer                     |
 | `name`          | `name`          | readonly  | `string`      |         | PowerTransformer name attribute                  |
 | `showfunctions` | `showfunctions` |           | `boolean`     | false   | Whether `EqFunction`, `SubEqFunction` and `SubEquipment` are rendered |

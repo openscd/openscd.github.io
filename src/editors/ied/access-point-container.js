@@ -73,6 +73,7 @@ export let AccessPointContainer = class extends Container {
       <mwc-icon slot="icon">${accessPointIcon}</mwc-icon>
       ${this.renderServicesIcon()}
       ${Array.from(this.element.querySelectorAll(":scope > Server")).map((server) => html`<server-container
+            .editCount=${this.editCount}
             .doc=${this.doc}
             .element=${server}
             .nsdoc=${this.nsdoc}
@@ -81,6 +82,7 @@ export let AccessPointContainer = class extends Container {
           ></server-container>`)}
       <div id="lnContainer">
         ${lnElements.map((ln) => html`<ln-container
+            .editCount=${this.editCount}
             .doc=${this.doc}
             .element=${ln}
             .nsdoc=${this.nsdoc}
