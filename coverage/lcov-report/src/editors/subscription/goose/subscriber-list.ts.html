@@ -23,16 +23,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">97.75% </span>
+                <span class="strong">95.72% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>480/491</span>
+                <span class='fraction'>470/491</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">78% </span>
+                <span class="strong">74% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>39/50</span>
+                <span class='fraction'>37/50</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">97.75% </span>
+                <span class="strong">95.72% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>480/491</span>
+                <span class='fraction'>470/491</span>
             </div>
         
             
@@ -683,8 +683,8 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -770,10 +770,10 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -939,6 +939,8 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -946,10 +948,8 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -1161,7 +1161,7 @@ export class SubscriberList extends SubscriberListContainer {
 &nbsp;
       dataSet!.querySelectorAll('FCDA').forEach(fcda =&gt; {
         subscribedInputs.forEach(inputs =&gt; {
-          if (getExtRef(inputs, fcda, this.currentSelectedGseControl)) {
+          if (getExtRef(inputs, fcda, control)) {
             numberOfLinkedExtRefs++;
           }
         });
@@ -1173,9 +1173,9 @@ export class SubscriberList extends SubscriberListContainer {
       }
 &nbsp;
       if (numberOfLinkedExtRefs &gt;= dataSet!.querySelectorAll('FCDA').length) {
-        this.subscribedElements.push({ element: control });
-      } else {
-        this.availableElements.push({ element: control, partial: true });
+        this.subscribedElements.push({ element: <span class="branch-0 cbranch-no" title="branch not covered" >control });</span>
+<span class="cstat-no" title="statement not covered" >      } else {</span>
+<span class="cstat-no" title="statement not covered" >        this.availableElements.push({ element: control, partial: true });</span>
       }
     });
 &nbsp;
@@ -1260,11 +1260,11 @@ export class SubscriberList extends SubscriberListContainer {
     switch (event.detail.subscribeStatus) {
       case SubscribeStatus.Full: {
         this.unsubscribe(iedToSubscribe);
-        break;
-      }
-      case SubscribeStatus.Partial: {
-        this.subscribe(iedToSubscribe);
-        break;
+<span class="branch-0 cbranch-no" title="branch not covered" >        break;</span>
+<span class="cstat-no" title="statement not covered" >      }</span>
+<span class="cstat-no" title="statement not covered" >      case SubscribeStatus.Partial: {</span>
+<span class="cstat-no" title="statement not covered" >        this.subscribe(iedToSubscribe);</span>
+<span class="cstat-no" title="statement not covered" >        break;</span>
       }
       case SubscribeStatus.None: {
         this.subscribe(iedToSubscribe);
@@ -1430,17 +1430,17 @@ export class SubscriberList extends SubscriberListContainer {
         noninteractive
         value="${elements
           .map(element =&gt; {
-            const id = identity(element.element) as string;
-            return typeof id === 'string' ? <span class="branch-0 cbranch-no" title="branch not covered" >id : '';</span>
+<span class="cstat-no" title="statement not covered" >            const id = identity(element.element) as string;</span>
+<span class="cstat-no" title="statement not covered" >            return typeof id === 'string' ? id : '';</span>
           })
           .join(' ')}"
       &gt;
         &lt;span&gt;${translate('subscription.subscriber.partiallySubscribed')}&lt;/span&gt;
       &lt;/mwc-list-item&gt;
       &lt;li divider role="separator"&gt;&lt;/li&gt;
-      ${elements.length &gt; 0
-        ? elements.map(element =&gt;
-            this.renderSubscriber(SubscribeStatus.Partial, element.element)
+      ${elements.length &gt; <span class="branch-0 cbranch-no" title="branch not covered" >0</span>
+<span class="cstat-no" title="statement not covered" >        ? elements.map(element =&gt;</span>
+<span class="cstat-no" title="statement not covered" >            this.renderSubscriber(SubscribeStatus.Partial, element.element)</span>
           )
         : html`&lt;mwc-list-item graphic="avatar" noninteractive&gt;
             &lt;span&gt;${translate('subscription.none')}&lt;/span&gt;
@@ -1543,7 +1543,7 @@ export class SubscriberList extends SubscriberListContainer {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener">istanbul</a>
-                at Wed Jun 21 2023 20:32:24 GMT+0000 (Coordinated Universal Time)
+                at Wed Jun 21 2023 21:45:13 GMT+0000 (Coordinated Universal Time)
             </div>
         </div>
         <script src="../../../../prettify.js"></script>

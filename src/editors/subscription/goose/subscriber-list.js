@@ -80,7 +80,7 @@ export let SubscriberList = class extends SubscriberListContainer {
         return;
       dataSet.querySelectorAll("FCDA").forEach((fcda) => {
         subscribedInputs.forEach((inputs) => {
-          if (getExtRef(inputs, fcda, this.currentSelectedGseControl)) {
+          if (getExtRef(inputs, fcda, control)) {
             numberOfLinkedExtRefs++;
           }
         });
