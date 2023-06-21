@@ -10,7 +10,7 @@ var __decorate = (decorators, target, key, kind) => {
   return result;
 };
 import {html, property} from "../_snowpack/pkg/lit-element.js";
-import "../_snowpack/pkg/@material/mwc-circular-progress-four-color.js";
+import "../_snowpack/pkg/@material/mwc-linear-progress.js";
 import {
   ifImplemented
 } from "./foundation.js";
@@ -34,10 +34,10 @@ export function Waiting(Base) {
     }
     render() {
       return html`${ifImplemented(super.render())}
-        <mwc-circular-progress-four-color
+        <mwc-linear-progress
           .closed=${!this.waiting}
           indeterminate
-        ></mwc-circular-progress-four-color>`;
+        ></mwc-linear-progress>`;
     }
   }
   __decorate([

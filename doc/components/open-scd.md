@@ -3,7 +3,7 @@
 The `<open-scd>` custom element is the main entry point of the
 Open Substation Configuration Designer.
 
-**Mixins:** Hosting, Setting, Wizarding, Waiting, Plugging, Editing, Logging
+**Mixins:** Waiting, Hosting, Setting, Wizarding, Plugging, Editing, Logging
 
 ## Properties
 

@@ -25,7 +25,7 @@ import {Plugging} from "./Plugging.js";
 import {Setting} from "./Setting.js";
 import {Waiting} from "./Waiting.js";
 import {Wizarding} from "./Wizarding.js";
-export let OpenSCD = class extends Hosting(Setting(Wizarding(Waiting(Plugging(Editing(Logging(LitElement))))))) {
+export let OpenSCD = class extends Waiting(Hosting(Setting(Wizarding(Plugging(Editing(Logging(LitElement))))))) {
   constructor() {
     super();
     this.currentSrc = "";
@@ -106,13 +106,19 @@ OpenSCD.styles = css`
       margin-top: 16px;
     }
 
-    mwc-circular-progress-four-color {
+    mwc-linear-progress {
       position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      z-index: 99;
+      --mdc-theme-primary: var(--mdc-theme-secondary);
+      left: 0px;
+      top: 112px;
+      width: 100%;
       pointer-events: none;
+    }
+
+    @media (max-width: 599px) {
+      mwc-linear-progress {
+        top: 104px;
+      }
     }
 
     tt {
