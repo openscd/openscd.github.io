@@ -91,7 +91,7 @@ export let GooseList = class extends LitElement {
               <mwc-list-item
                 noninteractive
                 graphic="icon"
-                value="${Array.from(ied.querySelectorAll("GSEControl")).map((element) => {
+                value="${Array.from(ied.querySelectorAll("GSEControl")).filter((cb) => cb.hasAttribute("datSet")).map((element) => {
       const id = identity(element);
       return typeof id === "string" ? id : "";
     }).join(" ")}"
@@ -100,7 +100,7 @@ export let GooseList = class extends LitElement {
                 <mwc-icon slot="graphic">developer_board</mwc-icon>
               </mwc-list-item>
               <li divider role="separator"></li>
-              ${Array.from(ied.querySelectorAll(":scope > AccessPoint > Server > LDevice > LN0 > GSEControl")).map((control) => this.renderGoose(control))}
+              ${Array.from(ied.querySelectorAll(":scope > AccessPoint > Server > LDevice > LN0 > GSEControl")).filter((cb) => cb.hasAttribute("datSet")).map((control) => this.renderGoose(control))}
             `)}
       </filtered-list>
     </section>`;

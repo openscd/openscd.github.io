@@ -23,16 +23,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">95.74% </span>
+                <span class="strong">95.75% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>472/493</span>
+                <span class='fraction'>474/495</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">74% </span>
+                <span class="strong">73.07% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>37/50</span>
+                <span class='fraction'>38/52</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">95.74% </span>
+                <span class="strong">95.75% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>472/493</span>
+                <span class='fraction'>474/495</span>
             </div>
         
             
@@ -556,7 +556,9 @@
 <a name='L491'></a><a href='#L491'>491</a>
 <a name='L492'></a><a href='#L492'>492</a>
 <a name='L493'></a><a href='#L493'>493</a>
-<a name='L494'></a><a href='#L494'>494</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">2x</span>
+<a name='L494'></a><a href='#L494'>494</a>
+<a name='L495'></a><a href='#L495'>495</a>
+<a name='L496'></a><a href='#L496'>496</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
@@ -630,6 +632,8 @@
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -1143,47 +1147,49 @@ export class SubscriberList extends SubscriberListContainer {
       `LN0 &gt; Inputs, LN &gt; Inputs`
     );
 &nbsp;
-    this.doc.querySelectorAll('GSEControl').forEach(control =&gt; {
-      const ied = control.closest('IED')!;
+    Array.from(this.doc.querySelectorAll('GSEControl'))
+      .filter(cb =&gt; cb.hasAttribute('datSet'))
+      .forEach(control =&gt; {
+        const ied = control.closest('IED')!;
 &nbsp;
-      if (
-        ied.getAttribute('name') ==
-        this.currentSelectedIed?.getAttribute('name')
-      )
-        return;
+        if (
+          ied.getAttribute('name') ==
+          this.currentSelectedIed?.getAttribute('name')
+        )
+          return;
 &nbsp;
-      /** If no Inputs is available, it's automatically available. */
-      if (subscribedInputs.length == 0) <span class="branch-0 cbranch-no" title="branch not covered" >{</span>
-<span class="cstat-no" title="statement not covered" >        this.availableElements.push({ element: control });</span>
-<span class="cstat-no" title="statement not covered" >        return;</span>
-      }
+        /** If no Inputs is available, it's automatically available. */
+        if (subscribedInputs.length == 0) <span class="branch-0 cbranch-no" title="branch not covered" >{</span>
+<span class="cstat-no" title="statement not covered" >          this.availableElements.push({ element: control });</span>
+<span class="cstat-no" title="statement not covered" >          return;</span>
+        }
 &nbsp;
-      let numberOfLinkedExtRefs = 0;
-      const dataSet = ied.querySelector(
-        `DataSet[name="${control.getAttribute('datSet')}"]`
-      );
+        let numberOfLinkedExtRefs = 0;
+        const dataSet = ied.querySelector(
+          `DataSet[name="${control.getAttribute('datSet')}"]`
+        );
 &nbsp;
-      if (!dataSet) return;
+        if (!dataSet) <span class="branch-0 cbranch-no" title="branch not covered" >return;</span>
 &nbsp;
-      dataSet!.querySelectorAll('FCDA').forEach(fcda =&gt; {
-        subscribedInputs.forEach(inputs =&gt; {
-          if (getExtRef(inputs, fcda, control)) {
-            numberOfLinkedExtRefs++;
-          }
+        dataSet!.querySelectorAll('FCDA').forEach(fcda =&gt; {
+          subscribedInputs.forEach(inputs =&gt; {
+            if (getExtRef(inputs, fcda, control)) {
+              numberOfLinkedExtRefs++;
+            }
+          });
         });
+&nbsp;
+        if (numberOfLinkedExtRefs == 0) {
+          this.availableElements.push({ element: control });
+          return;
+        }
+&nbsp;
+        if (numberOfLinkedExtRefs &gt;= dataSet!.querySelectorAll('FCDA').length) {
+          this.subscribedElements.push({ element: <span class="branch-0 cbranch-no" title="branch not covered" >control });</span>
+<span class="cstat-no" title="statement not covered" >        } else {</span>
+<span class="cstat-no" title="statement not covered" >          this.availableElements.push({ element: control, partial: true });</span>
+        }
       });
-&nbsp;
-      if (numberOfLinkedExtRefs == 0) {
-        this.availableElements.push({ element: control });
-        return;
-      }
-&nbsp;
-      if (numberOfLinkedExtRefs &gt;= dataSet!.querySelectorAll('FCDA').length) {
-        this.subscribedElements.push({ element: <span class="branch-0 cbranch-no" title="branch not covered" >control });</span>
-<span class="cstat-no" title="statement not covered" >      } else {</span>
-<span class="cstat-no" title="statement not covered" >        this.availableElements.push({ element: control, partial: true });</span>
-      }
-    });
 &nbsp;
     this.requestUpdate();
   }
@@ -1549,7 +1555,7 @@ export class SubscriberList extends SubscriberListContainer {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener">istanbul</a>
-                at Wed Jun 21 2023 22:32:38 GMT+0000 (Coordinated Universal Time)
+                at Thu Jun 22 2023 09:09:28 GMT+0000 (Coordinated Universal Time)
             </div>
         </div>
         <script src="../../../../prettify.js"></script>

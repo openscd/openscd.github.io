@@ -67,7 +67,7 @@ export let SubscriberList = class extends SubscriberListContainer {
     this.currentSelectedIed = event.detail.ied;
     this.resetElements();
     const subscribedInputs = this.currentSelectedIed.querySelectorAll(`LN0 > Inputs, LN > Inputs`);
-    this.doc.querySelectorAll("SampledValueControl").forEach((control) => {
+    Array.from(this.doc.querySelectorAll("SampledValueControl")).filter((cb) => cb.hasAttribute("datSet")).forEach((control) => {
       const ied = control.closest("IED");
       if (ied.getAttribute("name") == this.currentSelectedIed?.getAttribute("name"))
         return;

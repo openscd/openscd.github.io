@@ -89,7 +89,7 @@ export let SmvPublisherList = class extends LitElement {
               <mwc-list-item
                 noninteractive
                 graphic="icon"
-                value="${Array.from(ied.querySelectorAll("SampledValueControl")).map((element) => {
+                value="${Array.from(ied.querySelectorAll("SampledValueControl")).filter((cb) => cb.hasAttribute("datSet")).map((element) => {
       const id = identity(element);
       return typeof id === "string" ? id : "";
     }).join(" ")}"
@@ -98,7 +98,7 @@ export let SmvPublisherList = class extends LitElement {
                 <mwc-icon slot="graphic">developer_board</mwc-icon>
               </mwc-list-item>
               <li divider role="separator"></li>
-              ${Array.from(ied.querySelectorAll(":scope > AccessPoint > Server > LDevice > LN0 > SampledValueControl")).map((control) => this.renderSmv(control))}
+              ${Array.from(ied.querySelectorAll(":scope > AccessPoint > Server > LDevice > LN0 > SampledValueControl")).filter((cb) => cb.hasAttribute("datSet")).map((control) => this.renderSmv(control))}
             `)}
       </filtered-list>
     </section>`;
