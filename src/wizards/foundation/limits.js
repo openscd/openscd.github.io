@@ -1,5 +1,5 @@
 const nameStartChar = "[:_A-Za-z]|[À-Ö]|[Ø-ö]|[ø-˿]|[Ͱ-ͽ]|[Ϳ-῿]|[‌-‍]|[⁰-↏]|[Ⰰ-⿯]|[、-퟿]|[豈-﷏]|[ﷰ-�]";
-const nameChar = nameStartChar + "|[.0-9-]|·|[̀-ͯ]|[‿-⁀]";
+const nameChar = nameStartChar + "|[.0-9\\-]|·|[̀-ͯ]|[‿-⁀]";
 const name = nameStartChar + "(" + nameChar + ")*";
 const nmToken = "(" + nameChar + ")+";
 export const patterns = {
@@ -9,7 +9,7 @@ export const patterns = {
   nmToken,
   names: name + "( " + name + ")*",
   nmTokens: nmToken + "( " + nmToken + ")*",
-  decimal: "[+-]?[0-9]+(([.][0-9]*)?|([.][0-9]+))",
+  decimal: "[+\\-]?[0-9]+(([.][0-9]*)?|([.][0-9]+))",
   unsigned: "[+]?[0-9]+(([.][0-9]*)?|([.][0-9]+))",
   alphanumericFirstUpperCase: "[A-Z][0-9,A-Z,a-z]*",
   asciName: "[A-Za-z][0-9,A-Z,a-z_]*",
