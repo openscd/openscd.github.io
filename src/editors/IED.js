@@ -70,7 +70,7 @@ export default class IedPlugin extends LitElement {
   }
   updated(_changedProperties) {
     super.updated(_changedProperties);
-    if (_changedProperties.has("doc") || _changedProperties.has("nsdoc")) {
+    if (_changedProperties.has("doc") || _changedProperties.has("editCount") || _changedProperties.has("nsdoc")) {
       this.selectedIEDs = [];
       this.selectedLNClasses = [];
       const iedList = this.iedList;
