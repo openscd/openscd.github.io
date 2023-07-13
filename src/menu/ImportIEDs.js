@@ -28,7 +28,6 @@ import {
   isPublic,
   newActionEvent,
   newLogEvent,
-  newPendingStateEvent,
   selector
 } from "../foundation.js";
 function uniqueTemplateIedName(doc, ied) {
@@ -207,15 +206,14 @@ function isIedNameUnique(ied, doc) {
     return false;
   return true;
 }
-function resetSelection(dialog) {
-  dialog.querySelector("filtered-list").selected.forEach((item) => item.selected = false);
-}
 export default class ImportingIedPlugin extends LitElement {
   constructor() {
     super(...arguments);
     this.editCount = -1;
+    this.iedSelection = [];
   }
   async run() {
+    this.iedSelection = [];
     this.pluginFileUI.click();
   }
   async docUpdate() {
@@ -251,34 +249,34 @@ export default class ImportingIedPlugin extends LitElement {
       actions
     }));
   }
-  async importIEDs() {
-    const selectedItems = this.dialog.querySelector("filtered-list").selected;
+  async importIEDs(importDoc, fileName) {
+    const documentDialog = this.shadowRoot.querySelector(`mwc-dialog[data-file="${fileName}"]`);
+    const selectedItems = documentDialog.querySelector("filtered-list").selected;
     const ieds = selectedItems.map((item) => {
-      return this.importDoc.querySelector(selector("IED", item.value));
+      return importDoc.querySelector(selector("IED", item.value));
     }).filter((ied) => ied);
-    resetSelection(this.dialog);
-    this.dialog.close();
+    documentDialog.close();
     for (const ied of ieds) {
       this.importIED(ied);
       await this.docUpdate();
     }
   }
-  prepareImport() {
-    if (!this.importDoc) {
+  async prepareImport(importDoc, fileName) {
+    if (!importDoc) {
       this.dispatchEvent(newLogEvent({
         kind: "error",
         title: get("import.log.loaderror")
       }));
       return;
     }
-    if (this.importDoc.querySelector("parsererror")) {
+    if (importDoc.querySelector("parsererror")) {
       this.dispatchEvent(newLogEvent({
         kind: "error",
         title: get("import.log.parsererror")
       }));
       return;
     }
-    const ieds = Array.from(this.importDoc.querySelectorAll(":root > IED"));
+    const ieds = Array.from(importDoc.querySelectorAll(":root > IED"));
     if (ieds.length === 0) {
       this.dispatchEvent(newLogEvent({
         kind: "error",
@@ -288,18 +286,30 @@ export default class ImportingIedPlugin extends LitElement {
     }
     if (ieds.length === 1) {
       this.importIED(ieds[0]);
-      return;
+      return await this.docUpdate();
     }
-    this.dialog.show();
+    this.buildIedSelection(importDoc, fileName);
+    await this.requestUpdate();
+    const dialog = this.shadowRoot.querySelector(`mwc-dialog[data-file="${fileName}"]`);
+    dialog.show();
+    await new Promise((resolve) => {
+      dialog.addEventListener("closed", function onClosed(evt) {
+        evt.target?.removeEventListener("closed", onClosed);
+        resolve();
+      });
+    });
   }
   async onLoadFiles(event) {
     const files = Array.from(event.target?.files ?? []);
-    const promises = files.map(async (file) => {
-      this.importDoc = new DOMParser().parseFromString(await file.text(), "application/xml");
-      return this.prepareImport();
+    const promises = files.map((file) => {
+      return {
+        text: file.text().then((text) => new DOMParser().parseFromString(text, "application/xml")),
+        name: file.name
+      };
     });
-    const mergedPromise = new Promise((resolve, reject) => Promise.allSettled(promises).then(() => resolve(), () => reject()));
-    this.dispatchEvent(newPendingStateEvent(mergedPromise));
+    for await (const file of promises) {
+      await this.prepareImport(await file.text, file.name);
+    }
   }
   renderInput() {
     return html`<input multiple @change=${(event) => {
@@ -307,10 +317,10 @@ export default class ImportingIedPlugin extends LitElement {
       event.target.value = "";
     }} id="importied-plugin-input" accept=".sed,.scd,.ssd,.iid,.cid,.icd" type="file"></input>`;
   }
-  renderIedSelection() {
-    return html`<mwc-dialog>
+  buildIedSelection(importDoc, fileName) {
+    this.iedSelection.push(html`<mwc-dialog data-file="${fileName}">
       <filtered-list hasSlot multi>
-        ${Array.from(this.importDoc?.querySelectorAll(":root > IED") ?? []).map((ied) => html`<mwc-check-list-item value="${identity(ied)}"
+        ${Array.from(importDoc?.querySelectorAll(":root > IED") ?? []).map((ied) => html`<mwc-check-list-item value="${identity(ied)}"
               >${ied.getAttribute("name")}</mwc-check-list-item
             >`)}
         <mwc-icon-button slot="meta" icon="edit"></mwc-icon-button>
@@ -325,12 +335,12 @@ export default class ImportingIedPlugin extends LitElement {
         label="IEDs"
         slot="primaryAction"
         icon="add"
-        @click=${this.importIEDs}
+        @click=${() => this.importIEDs(importDoc, fileName)}
       ></mwc-button>
-    </mwc-dialog>`;
+    </mwc-dialog>`);
   }
   render() {
-    return html`${this.renderIedSelection()}${this.renderInput()}`;
+    return html`${this.iedSelection}${this.renderInput()}`;
   }
 }
 ImportingIedPlugin.styles = css`
@@ -348,7 +358,7 @@ __decorate([
 ], ImportingIedPlugin.prototype, "editCount", 2);
 __decorate([
   state()
-], ImportingIedPlugin.prototype, "importDoc", 2);
+], ImportingIedPlugin.prototype, "iedSelection", 2);
 __decorate([
   query("#importied-plugin-input")
 ], ImportingIedPlugin.prototype, "pluginFileUI", 2);
