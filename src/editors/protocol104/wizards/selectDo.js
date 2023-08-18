@@ -10,7 +10,7 @@ import {
   getNameAttribute,
   identity,
   newSubWizardEvent,
-  selector
+  find
 } from "../../../foundation.js";
 import {createAddressesWizard} from "./createAddresses.js";
 import {supportedCdcTypes} from "../foundation/cdc.js";
@@ -66,7 +66,7 @@ function checkAndGetLastElementFromPath(doc, path, expectedTag) {
   const [tagName, id] = path.pop().split(": ");
   if (!expectedTag.includes(tagName))
     return null;
-  return doc.querySelector(selector(tagName, id));
+  return find(doc, tagName, id);
 }
 export function selectDoWizard(doc) {
   function renderTemplate(doc2) {

@@ -8,13 +8,13 @@ import "../../wizard-textfield.js";
 import {
   cloneElement,
   createElement,
+  find,
   getValue,
   identity,
   newActionEvent,
   newSubWizardEvent,
   newWizardEvent,
-  patterns,
-  selector
+  patterns
 } from "../../foundation.js";
 import {createBDAWizard, editBDAWizard} from "../../wizards/bda.js";
 import {
@@ -54,7 +54,7 @@ function updateDATpyeAction(element) {
   };
 }
 export function editDaTypeWizard(dATypeIdentity, doc) {
-  const datype = doc.querySelector(selector("DAType", dATypeIdentity));
+  const datype = find(doc, "DAType", dATypeIdentity);
   if (!datype)
     return void 0;
   const id = datype.getAttribute("id");
@@ -102,7 +102,7 @@ export function editDaTypeWizard(dATypeIdentity, doc) {
           style="margin-top: 0px;"
           @selected=${(e) => {
           const bdaIdentity = e.target.selected.value;
-          const bda = doc.querySelector(selector("BDA", bdaIdentity));
+          const bda = find(doc, "BDA", bdaIdentity);
           if (bda)
             e.target.dispatchEvent(newSubWizardEvent(editBDAWizard(bda)));
         }}

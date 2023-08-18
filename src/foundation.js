@@ -1763,12 +1763,20 @@ export function getReference(parent, tag) {
   }
   return nextSibling ?? null;
 }
-export function selector(tagName, identity2) {
+function selector(tagName, identity2) {
   if (typeof identity2 !== "string")
     return voidSelector;
   if (isSCLTag(tagName))
     return tags[tagName].selector(tagName, identity2);
   return tagName;
+}
+export function find(root, tagName, identity2) {
+  if (typeof identity2 !== "string" || !isSCLTag(tagName))
+    return null;
+  const element = root.querySelector(tags[tagName].selector(tagName, identity2));
+  if (element === null || isPublic(element))
+    return element;
+  return Array.from(root.querySelectorAll(tags[tagName].selector(tagName, identity2))).find(isPublic) ?? null;
 }
 export function identity(e) {
   if (e === null)

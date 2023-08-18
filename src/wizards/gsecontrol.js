@@ -9,14 +9,14 @@ import "../wizard-textfield.js";
 import {
   cloneElement,
   createElement,
+  find,
   getUniqueElementName,
   getValue,
   identity,
   isPublic,
   newActionEvent,
   newSubWizardEvent,
-  newWizardEvent,
-  selector
+  newWizardEvent
 } from "../foundation.js";
 import {maxLength, patterns} from "./foundation/limits.js";
 import {editDataSetWizard} from "./dataset.js";
@@ -259,7 +259,7 @@ function openGseControlCreateWizard(doc) {
     const [tagName, id] = path.pop().split(": ");
     if (tagName !== "IED")
       return [];
-    const ied = doc.querySelector(selector(tagName, id));
+    const ied = find(doc, tagName, id);
     if (!ied)
       return [];
     const ln0 = ied.querySelector("LN0");
@@ -433,7 +433,7 @@ export function selectGseControlWizard(element) {
         html`<filtered-list
           @selected=${(e) => {
           const gseControlIndentity = e.target.selected.value;
-          const gseControl = element.querySelector(selector("GSEControl", gseControlIndentity));
+          const gseControl = find(element, "GSEControl", gseControlIndentity);
           if (gseControl) {
             e.target.dispatchEvent(newSubWizardEvent(() => editGseControlWizard(gseControl)));
           }

@@ -23,7 +23,7 @@ import "../../../_snowpack/pkg/@material/mwc-button.js";
 import "../../../_snowpack/pkg/@material/mwc-list/mwc-list-item.js";
 import "./data-set-element-editor.js";
 import "../../filtered-list.js";
-import {compareNames, identity, selector} from "../../foundation.js";
+import {compareNames, identity, find} from "../../foundation.js";
 import {styles, updateElementReference} from "./foundation.js";
 export let DataSetEditor = class extends LitElement {
   update(props) {
@@ -37,7 +37,7 @@ export let DataSetEditor = class extends LitElement {
   }
   selectDataSet(evt) {
     const id = evt.target.selected.value;
-    const dataSet = this.doc.querySelector(selector("DataSet", id));
+    const dataSet = find(this.doc, "DataSet", id);
     if (dataSet) {
       this.selectedDataSet = dataSet;
       evt.target.classList.add("hidden");

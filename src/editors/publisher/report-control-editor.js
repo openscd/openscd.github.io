@@ -24,7 +24,7 @@ import "../../../_snowpack/pkg/@material/mwc-list/mwc-list-item.js";
 import "./data-set-element-editor.js";
 import "./report-control-element-editor.js";
 import "../../filtered-list.js";
-import {compareNames, identity, selector} from "../../foundation.js";
+import {compareNames, identity, find} from "../../foundation.js";
 import {reportIcon} from "../../icons/icons.js";
 import {styles, updateElementReference} from "./foundation.js";
 export let ReportControlEditor = class extends LitElement {
@@ -44,7 +44,7 @@ export let ReportControlEditor = class extends LitElement {
   }
   selectReportControl(evt) {
     const id = evt.target.selected.value;
-    const reportControl = this.doc.querySelector(selector("ReportControl", id));
+    const reportControl = find(this.doc, "ReportControl", id);
     if (!reportControl)
       return;
     this.selectedReportControl = reportControl;

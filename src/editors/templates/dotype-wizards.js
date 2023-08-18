@@ -8,13 +8,13 @@ import "../../wizard-textfield.js";
 import {
   cloneElement,
   createElement,
+  find,
   getValue,
   identity,
   isPublic,
   newActionEvent,
   newSubWizardEvent,
-  newWizardEvent,
-  selector
+  newWizardEvent
 } from "../../foundation.js";
 import {createDaWizard, editDAWizard} from "../../wizards/da.js";
 import {patterns} from "../../wizards/foundation/limits.js";
@@ -65,7 +65,7 @@ function createSDoAction(parent) {
 }
 function sDOWizard(options) {
   const doc = options.doc ? options.doc : options.parent.ownerDocument;
-  const sdo = Array.from(doc.querySelectorAll(selector("SDO", options.identity ?? NaN))).find(isPublic) ?? null;
+  const sdo = find(doc, "SDO", options.identity ?? NaN);
   const [title, action, type, menuActions, name, desc] = sdo ? [
     get("sdo.wizard.title.edit"),
     updateSDoAction(sdo),
@@ -247,7 +247,7 @@ function updateDOTypeAction(element) {
   };
 }
 export function dOTypeWizard(dOTypeIdentity, doc) {
-  const dotype = doc.querySelector(selector("DOType", dOTypeIdentity));
+  const dotype = find(doc, "DOType", dOTypeIdentity);
   if (!dotype)
     return void 0;
   return [
@@ -306,7 +306,7 @@ export function dOTypeWizard(dOTypeIdentity, doc) {
             @selected=${(e) => {
           const item = e.target.selected;
           const daIdentity = e.target.selected.value;
-          const da = doc.querySelector(selector("DA", daIdentity));
+          const da = find(doc, "DA", daIdentity);
           const wizard = item.classList.contains("DA") ? da ? editDAWizard(da) : void 0 : sDOWizard({
             identity: item.value,
             doc

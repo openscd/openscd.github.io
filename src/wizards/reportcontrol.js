@@ -10,12 +10,12 @@ import "../filtered-list.js";
 import {
   cloneElement,
   createElement,
+  find,
   getReference,
   getValue,
   identity,
   isPublic,
   newSubWizardEvent,
-  selector,
   getUniqueElementName,
   newActionEvent,
   newWizardEvent
@@ -242,7 +242,7 @@ function openReportControlCreateWizard(doc) {
     const [tagName, id] = path.pop().split(": ");
     if (tagName !== "IED")
       return [];
-    const ied = doc.querySelector(selector(tagName, id));
+    const ied = find(doc, tagName, id);
     if (!ied)
       return [];
     const ln0 = ied.querySelector("LN0");
@@ -324,7 +324,7 @@ function copyReportControlActions(element) {
     const iedItems = wizard.shadowRoot?.querySelector("filtered-list")?.selected;
     const complexActions = [];
     iedItems.forEach((iedItem) => {
-      const ied = doc.querySelector(selector("IED", iedItem.value));
+      const ied = find(doc, "IED", iedItem.value);
       if (!ied)
         return;
       const sinkLn0 = ied.querySelector("LN0");
@@ -567,7 +567,7 @@ export function selectReportControlWizard(element) {
         html`<filtered-list
           @selected=${(e) => {
           const identity2 = e.target.selected.value;
-          const reportControl = element.querySelector(selector("ReportControl", identity2));
+          const reportControl = find(element, "ReportControl", identity2);
           if (!reportControl)
             return;
           e.target?.dispatchEvent(newSubWizardEvent(() => editReportControlWizard(reportControl)));

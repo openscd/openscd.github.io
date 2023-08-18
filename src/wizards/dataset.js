@@ -6,9 +6,9 @@ import "../wizard-textfield.js";
 import "../filtered-list.js";
 import {
   cloneElement,
+  find,
   getValue,
   identity,
-  selector,
   newSubWizardEvent
 } from "../foundation.js";
 import {createFCDAsWizard} from "./fcda.js";
@@ -34,7 +34,7 @@ function updateDataSetAction(element) {
       const newCb = cloneElement(cb, {datSet: name});
       return {old: {element: cb}, new: {element: newCb}};
     }) : [];
-    const fCDARemoveActions = Array.from(wizard.shadowRoot.querySelectorAll("filtered-list > mwc-check-list-item:not([selected])")).map((listItem) => element.querySelector(selector("FCDA", listItem.value))).filter((fcda) => fcda).map((fcda) => {
+    const fCDARemoveActions = Array.from(wizard.shadowRoot.querySelectorAll("filtered-list > mwc-check-list-item:not([selected])")).map((listItem) => find(element, "FCDA", listItem.value)).filter((fcda) => fcda).map((fcda) => {
       return {
         old: {
           parent: element,

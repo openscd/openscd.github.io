@@ -4,11 +4,11 @@ import "../../_snowpack/pkg/@material/mwc-icon.js";
 import "../../_snowpack/pkg/@material/mwc-list/mwc-list-item.js";
 import "../filtered-list.js";
 import {
+  find,
   findControlBlocks,
   identity,
   isPublic,
-  newWizardEvent,
-  selector
+  newWizardEvent
 } from "../foundation.js";
 import {selectClientLNsWizard} from "./clientln.js";
 import {selectExtRefsWizard} from "./controlwithiedname.js";
@@ -57,7 +57,7 @@ export function communicationMappingWizard(element) {
           >${Array.from(connections.keys()).map((key) => {
           const elements = connections.get(key);
           const [cbId, cbTag, sinkIED] = key.split(" | ");
-          const cbElement = ownerDocument.querySelector(selector(cbTag, cbId));
+          const cbElement = find(ownerDocument, cbTag, cbId);
           const [_, sourceIED, controlBlock] = cbId.match(/^(.+)>>(.*)$/);
           return html`<mwc-list-item
               twoline

@@ -8,14 +8,14 @@ import "../wizard-textfield.js";
 import {
   cloneElement,
   createElement,
+  find,
   getUniqueElementName,
   getValue,
   identity,
   isPublic,
   newActionEvent,
   newSubWizardEvent,
-  newWizardEvent,
-  selector
+  newWizardEvent
 } from "../foundation.js";
 import {securityEnabledEnum, smpModEnum} from "./foundation/enums.js";
 import {maxLength, patterns} from "./foundation/limits.js";
@@ -340,7 +340,7 @@ function openSampledValueControlCreateWizard(doc) {
     const [tagName, id] = path.pop().split(": ");
     if (tagName !== "IED")
       return [];
-    const ied = doc.querySelector(selector(tagName, id));
+    const ied = find(doc, tagName, id);
     if (!ied)
       return [];
     const ln0 = ied.querySelector("LN0");
@@ -505,7 +505,7 @@ export function selectSampledValueControlWizard(element) {
         html`<filtered-list
           @selected=${(e) => {
           const identity2 = e.target.selected.value;
-          const sampledValueControl = element.querySelector(selector("SampledValueControl", identity2));
+          const sampledValueControl = find(element, "SampledValueControl", identity2);
           if (!sampledValueControl)
             return;
           e.target?.dispatchEvent(newSubWizardEvent(() => editSampledValueControlWizard(sampledValueControl)));

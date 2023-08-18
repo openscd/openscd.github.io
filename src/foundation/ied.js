@@ -1,4 +1,4 @@
-import {identity, selector} from "../foundation.js";
+import {find, identity} from "../foundation.js";
 const fcdaReferences = [
   "ldInst",
   "lnClass",
@@ -32,7 +32,7 @@ export function emptyInputsDeleteActions(extRefDeleteActions) {
   Object.entries(inputsMap).forEach(([key, value]) => {
     if (value.children.length == 0) {
       const doc = extRefDeleteActions[0].old.parent.ownerDocument;
-      const inputs = doc.querySelector(selector("Inputs", key));
+      const inputs = find(doc, "Inputs", key);
       if (inputs && inputs.parentElement) {
         inputDeleteActions.push({
           old: {parent: inputs.parentElement, element: inputs}

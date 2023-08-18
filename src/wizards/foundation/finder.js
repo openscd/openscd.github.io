@@ -1,7 +1,7 @@
 import {html} from "../../../_snowpack/pkg/lit-element.js";
 import {translate} from "../../../_snowpack/pkg/lit-translate.js";
 import "../../finder-list.js";
-import {identity, isPublic, selector} from "../../foundation.js";
+import {find, identity, isPublic} from "../../foundation.js";
 export function getDisplayString(entry) {
   if (entry.startsWith("IED:"))
     return entry.replace(/^.*:/, "").trim();
@@ -12,7 +12,7 @@ export function getDisplayString(entry) {
 export function getReader(doc, getChildren) {
   return async (path) => {
     const [tagName, id] = path[path.length - 1]?.split(": ", 2);
-    const element = doc.querySelector(selector(tagName, id));
+    const element = find(doc, tagName, id);
     if (!element)
       return {path, header: html`<p>${translate("error")}</p>`, entries: []};
     return {

@@ -24,7 +24,7 @@ import "../../../_snowpack/pkg/@material/mwc-list/mwc-list-item.js";
 import "./data-set-element-editor.js";
 import "../../filtered-list.js";
 import "./sampled-value-control-element-editor.js";
-import {compareNames, identity, selector} from "../../foundation.js";
+import {compareNames, identity, find} from "../../foundation.js";
 import {smvIcon} from "../../icons/icons.js";
 import {styles, updateElementReference} from "./foundation.js";
 export let SampledValueControlEditor = class extends LitElement {
@@ -44,7 +44,7 @@ export let SampledValueControlEditor = class extends LitElement {
   }
   selectSMVControl(evt) {
     const id = evt.target.selected.value;
-    const smvControl = this.doc.querySelector(selector("SampledValueControl", id));
+    const smvControl = find(this.doc, "SampledValueControl", id);
     if (!smvControl)
       return;
     this.selectedSampledValueControl = smvControl;

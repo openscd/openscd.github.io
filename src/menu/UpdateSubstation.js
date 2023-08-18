@@ -13,9 +13,9 @@ import {css, html, LitElement, query} from "../../_snowpack/pkg/lit-element.js";
 import {get} from "../../_snowpack/pkg/lit-translate.js";
 import {
   crossProduct,
+  find,
   identity,
   newWizardEvent,
-  selector,
   tags
 } from "../foundation.js";
 import {mergeWizard} from "../wizards.js";
@@ -62,8 +62,8 @@ export default class UpdateSubstationPlugin extends LitElement {
         const doc = new DOMParser().parseFromString(text, "application/xml");
         this.dispatchEvent(newWizardEvent(mergeWizard(this.doc.documentElement, doc.documentElement, {
           title: get("updatesubstation.title"),
-          selected: (diff) => diff.theirs instanceof Element ? diff.theirs.tagName === "LNode" ? this.doc.querySelector(selector("LNode", identity(diff.theirs))) === null && isValidReference(doc, identity(diff.theirs)) : diff.theirs.tagName === "Substation" || !tags["SCL"].children.includes(diff.theirs.tagName) : diff.theirs !== null,
-          disabled: (diff) => diff.theirs instanceof Element && diff.theirs.tagName === "LNode" && (this.doc.querySelector(selector("LNode", identity(diff.theirs))) !== null || !isValidReference(doc, identity(diff.theirs))),
+          selected: (diff) => diff.theirs instanceof Element ? diff.theirs.tagName === "LNode" ? find(this.doc, "LNode", identity(diff.theirs)) === null && isValidReference(doc, identity(diff.theirs)) : diff.theirs.tagName === "Substation" || !tags["SCL"].children.includes(diff.theirs.tagName) : diff.theirs !== null,
+          disabled: (diff) => diff.theirs instanceof Element && diff.theirs.tagName === "LNode" && (find(this.doc, "LNode", identity(diff.theirs)) !== null || !isValidReference(doc, identity(diff.theirs))),
           auto: () => true
         })));
       });

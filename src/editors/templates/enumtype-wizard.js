@@ -8,14 +8,13 @@ import "../../wizard-textfield.js";
 import {
   cloneElement,
   createElement,
+  find,
   getValue,
   identity,
-  isPublic,
   newActionEvent,
   newSubWizardEvent,
   newWizardEvent,
-  patterns,
-  selector
+  patterns
 } from "../../foundation.js";
 function remove(element) {
   return (wizard) => {
@@ -60,7 +59,7 @@ function updateEnumValAction(element) {
 }
 function eNumValWizard(options) {
   const doc = options.doc ? options.doc : options.parent.ownerDocument;
-  const enumval = Array.from(doc.querySelectorAll(selector("EnumVal", options.identity ?? NaN))).find(isPublic) ?? null;
+  const enumval = find(doc, "EnumVal", options.identity ?? NaN);
   const [title, action, ord, desc, value, menuActions] = enumval ? [
     get("enum-val.wizard.title.edit"),
     updateEnumValAction(enumval),
@@ -209,7 +208,7 @@ function updateEnumTpyeAction(element) {
   };
 }
 export function eNumTypeEditWizard(eNumTypeIdentity, doc) {
-  const enumtype = doc.querySelector(selector("EnumType", eNumTypeIdentity));
+  const enumtype = find(doc, "EnumType", eNumTypeIdentity);
   if (!enumtype)
     return void 0;
   return [

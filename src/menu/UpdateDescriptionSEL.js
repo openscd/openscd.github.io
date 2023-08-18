@@ -15,10 +15,10 @@ import "../../_snowpack/pkg/@material/mwc-list/mwc-check-list-item.js";
 import "../filtered-list.js";
 import {
   cloneElement,
+  find,
   identity,
   isPublic,
-  newWizardEvent,
-  selector
+  newWizardEvent
 } from "../foundation.js";
 function addDescriptionToSEL(ied, signalList) {
   const iedName = ied.getAttribute("name");
@@ -41,7 +41,7 @@ function addDescriptionAction(doc) {
     const actions = selectedItems.map((item) => {
       const desc = item.querySelector("span").textContent;
       const [tag, identity2] = item.value.split(" | ");
-      const oldElement = doc.querySelector(selector(tag, identity2));
+      const oldElement = find(doc, tag, identity2);
       const newElement = cloneElement(oldElement, {desc});
       return {old: {element: oldElement}, new: {element: newElement}};
     });

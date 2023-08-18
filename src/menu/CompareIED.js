@@ -25,11 +25,11 @@ import "../../_snowpack/pkg/@material/mwc-checkbox.js";
 import "../plain-compare-list.js";
 import {
   compareNames,
+  find,
   getNameAttribute,
   identity,
   isPublic,
-  newPendingStateEvent,
-  selector
+  newPendingStateEvent
 } from "../foundation.js";
 const tctrClass = `LN[lnClass='TCTR']`;
 const tvtrClass = `LN[lnClass='TVTR']`;
@@ -96,7 +96,7 @@ export default class CompareIEDPlugin extends LitElement {
     const selectListItem = this.shadowRoot.querySelector(`mwc-list[id='${listId}']`).selected;
     const identity2 = selectListItem?.value;
     if (identity2) {
-      return doc.querySelector(selector("IED", identity2)) ?? void 0;
+      return find(doc, "IED", identity2) ?? void 0;
     }
     return void 0;
   }

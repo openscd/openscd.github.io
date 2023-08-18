@@ -10,6 +10,7 @@ import "../../wizard-select.js";
 import {
   cloneElement,
   createElement,
+  find,
   getChildElementsByTagName,
   getValue,
   identity,
@@ -17,8 +18,7 @@ import {
   newActionEvent,
   newSubWizardEvent,
   newWizardEvent,
-  patterns,
-  selector
+  patterns
 } from "../../foundation.js";
 import {
   addReferencedDataTypes,
@@ -82,7 +82,7 @@ function createDoAction(parent) {
 }
 function dOWizard(options) {
   const doc = options.doc ? options.doc : options.parent.ownerDocument;
-  const DO = Array.from(doc.querySelectorAll(selector("DO", options.identity ?? NaN))).find(isPublic) ?? null;
+  const DO = find(doc, "DO", options.identity ?? NaN);
   const [
     title,
     action,
@@ -270,7 +270,7 @@ function startLNodeTypeCreate(parent, templates, nsd74, nsd7420) {
       return [];
     const desc = getValue(inputs.find((i) => i.label === "desc"));
     const value = inputs.find((i) => i.label === "lnClass")?.selected?.value;
-    const templateLNodeType = value ? templates.querySelector(selector("LNodeType", value)) : null;
+    const templateLNodeType = value ? find(templates, "LNodeType", value) : null;
     const newLNodeType = templateLNodeType ? templateLNodeType.cloneNode(true) : createElement(parent.ownerDocument, "LNodeType", {
       lnClass: value ?? ""
     });
@@ -287,7 +287,7 @@ function startLNodeTypeCreate(parent, templates, nsd74, nsd7420) {
 }
 function onLnClassChange(e, templates) {
   const identity2 = e.target.selected?.value;
-  const lnodetype = identity2 ? templates.querySelector(selector("LNodeType", identity2)) : null;
+  const lnodetype = identity2 ? find(templates, "LNodeType", identity2) : null;
   const primaryAction = e.target?.closest("mwc-dialog")?.querySelector('mwc-button[slot="primaryAction"]') ?? null;
   if (lnodetype) {
     primaryAction?.setAttribute("label", get("save"));
@@ -415,7 +415,7 @@ function updateLNodeTypeAction(element) {
   };
 }
 export function lNodeTypeWizard(lNodeTypeIdentity, doc) {
-  const lnodetype = doc.querySelector(selector("LNodeType", lNodeTypeIdentity));
+  const lnodetype = find(doc, "LNodeType", lNodeTypeIdentity);
   if (!lnodetype)
     return void 0;
   return [

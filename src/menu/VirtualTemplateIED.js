@@ -27,10 +27,10 @@ import "../../_snowpack/pkg/@material/mwc-list/mwc-radio-list-item.js";
 import {Dialog} from "../../_snowpack/pkg/@material/mwc-dialog.js";
 import "../filtered-list.js";
 import {
+  find,
   getChildElementsByTagName,
   identity,
-  newActionEvent,
-  selector
+  newActionEvent
 } from "../foundation.js";
 import {
   getFunctionNamingPrefix,
@@ -111,7 +111,7 @@ export default class VirtualTemplateIED extends LitElement {
     this.dialog.open = true;
   }
   onPrimaryAction(functions) {
-    const selectedLNode = Array.from(this.dialog.querySelectorAll("mwc-check-list-item[selected]:not([disabled])") ?? []).map((selectedItem) => this.doc.querySelector(selector("LNode", selectedItem.value)));
+    const selectedLNode = Array.from(this.dialog.querySelectorAll("mwc-check-list-item[selected]:not([disabled])") ?? []).map((selectedItem) => find(this.doc, "LNode", selectedItem.value));
     if (!selectedLNode.length)
       return;
     const selectedLLN0s = Array.from(this.dialog.querySelectorAll("mwc-select") ?? []).map((selectedItem) => selectedItem.value);

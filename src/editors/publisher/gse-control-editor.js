@@ -25,7 +25,7 @@ import "./data-set-element-editor.js";
 import "./gse-control-element-editor.js";
 import "../../filtered-list.js";
 import {gooseIcon} from "../../icons/icons.js";
-import {compareNames, identity, selector} from "../../foundation.js";
+import {compareNames, identity, find} from "../../foundation.js";
 import {styles, updateElementReference} from "./foundation.js";
 export let GseControlEditor = class extends LitElement {
   constructor() {
@@ -44,7 +44,7 @@ export let GseControlEditor = class extends LitElement {
   }
   selectGSEControl(evt) {
     const id = evt.target.selected.value;
-    const gseControl = this.doc.querySelector(selector("GSEControl", id));
+    const gseControl = find(this.doc, "GSEControl", id);
     if (!gseControl)
       return;
     this.selectedGseControl = gseControl;

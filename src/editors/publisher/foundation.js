@@ -1,10 +1,10 @@
 import {css} from "../../../_snowpack/pkg/lit-element.js";
-import {identity, selector} from "../../foundation.js";
+import {identity, find} from "../../foundation.js";
 export function updateElementReference(newDoc, oldElement) {
   if (!oldElement || !oldElement.closest("SCL"))
     return null;
   const id = identity(oldElement);
-  const newElement = newDoc.querySelector(selector(oldElement.tagName, id));
+  const newElement = find(newDoc, oldElement.tagName, id);
   return newElement;
 }
 export const styles = css`

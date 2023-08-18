@@ -8,6 +8,7 @@ import "../filtered-list.js";
 import {
   cloneElement,
   createElement,
+  find,
   getChildElementsByTagName,
   getValue,
   identity,
@@ -15,15 +16,12 @@ import {
   newLogEvent,
   newWizardEvent,
   referencePath,
-  selector,
   newLnInstGenerator
 } from "../foundation.js";
 import {patterns} from "./foundation/limits.js";
 function createLNodeAction(parent) {
   return (inputs, wizard, list) => {
-    const selectedLNodeTypes = list.items.filter((item) => item.selected).map((item) => item.value).map((identity2) => {
-      return parent.ownerDocument.querySelector(selector("LNodeType", identity2));
-    }).filter((item) => item !== null);
+    const selectedLNodeTypes = list.items.filter((item) => item.selected).map((item) => item.value).map((identity2) => find(parent.ownerDocument, "LNodeType", identity2)).filter((item) => item !== null);
     const lnInstGenerator = newLnInstGenerator(parent);
     const createActions = selectedLNodeTypes.map((selectedLNodeType) => {
       const lnClass = selectedLNodeType.getAttribute("lnClass");
@@ -170,7 +168,10 @@ function includesLNode(anyln, lnodes) {
 export function lNodeWizardAction(parent) {
   return (inputs, wizard, list) => {
     const selectedAnyLn = list.items.filter((item) => item.selected).map((item) => item.value).map((identity2) => {
-      return parent.ownerDocument.querySelector(selector("LN0", identity2)) ? parent.ownerDocument.querySelector(selector("LN0", identity2)) : parent.ownerDocument.querySelector(selector("LN", identity2));
+      const ln0 = find(parent.ownerDocument, "LN0", identity2);
+      if (ln0)
+        return ln0;
+      return find(parent.ownerDocument, "LN", identity2);
     }).filter((item) => item !== null);
     const oldLNodes = getChildElementsByTagName(parent, "LNode").filter(isPublic);
     const deleteActions = oldLNodes.filter((lnode) => !includesAnyLN(selectedAnyLn, lnode)).map((lnode) => deleteAction(parent, lnode));
@@ -178,8 +179,8 @@ export function lNodeWizardAction(parent) {
     return deleteActions.concat(createActions);
   };
 }
-function getListContainer(target, selector2) {
-  return target.parentElement?.parentElement?.nextElementSibling?.querySelector(selector2) ?? null;
+function getListContainer(target, selector) {
+  return target.parentElement?.parentElement?.nextElementSibling?.querySelector(selector) ?? null;
 }
 function onIEDSelect(evt, parent) {
   if (!(evt.target instanceof ListBase))

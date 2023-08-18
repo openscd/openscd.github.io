@@ -24,11 +24,11 @@ import "../../_snowpack/pkg/@material/mwc-button.js";
 import "../filtered-list.js";
 import {
   createElement,
+  find,
   identity,
   isPublic,
   newActionEvent,
-  newLogEvent,
-  selector
+  newLogEvent
 } from "../foundation.js";
 function uniqueTemplateIedName(doc, ied) {
   const [manufacturer, type] = ["manufacturer", "type"].map((attr) => ied.getAttribute(attr)?.replace(/[^A-Za-z0-9_]/g, ""));
@@ -253,7 +253,7 @@ export default class ImportingIedPlugin extends LitElement {
     const documentDialog = this.shadowRoot.querySelector(`mwc-dialog[data-file="${fileName}"]`);
     const selectedItems = documentDialog.querySelector("filtered-list").selected;
     const ieds = selectedItems.map((item) => {
-      return importDoc.querySelector(selector("IED", item.value));
+      return find(importDoc, "IED", item.value);
     }).filter((ied) => ied);
     documentDialog.close();
     for (const ied of ieds) {

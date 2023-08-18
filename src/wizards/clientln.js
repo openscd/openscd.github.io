@@ -5,9 +5,9 @@ import "../../_snowpack/pkg/@material/mwc-icon.js";
 import "../filtered-list.js";
 import {
   createElement,
+  find,
   identity,
-  pathParts,
-  selector
+  pathParts
 } from "../foundation.js";
 import {clientIcon} from "../icons/icons.js";
 import {openCommunicationMappingWizard} from "./commmap-wizards.js";
@@ -23,14 +23,14 @@ function getElement(identity2) {
 }
 function getLogicalNode(doc, identity2) {
   if (identity2.split(">").length === 4) {
-    return doc.querySelector(selector("LN", identity2));
+    return find(doc, "LN", identity2);
   }
   if (identity2.split(">").length === 3) {
     if (getElement(identity2).split(" ").length > 1) {
-      return doc.querySelector(selector("LN", identity2));
+      return find(doc, "LN", identity2);
     }
     if (getElement(identity2).split(" ").length === 1) {
-      return doc.querySelector(selector("LN0", identity2));
+      return find(doc, "LN0", identity2);
     }
   }
   return null;
@@ -76,7 +76,7 @@ function addClientLnAction(doc) {
     const actions = [];
     selectedLNs.forEach((selectedLN) => {
       const lnIdentity = selectedLN.value;
-      const reportCbs = cbSelected.map((cb) => cb.value).map((cbValue) => doc.querySelector(selector("ReportControl", cbValue))).filter((cb) => cb !== null);
+      const reportCbs = cbSelected.map((cb) => cb.value).map((cbValue) => find(doc, "ReportControl", cbValue)).filter((cb) => cb !== null);
       reportCbs.forEach((cb) => {
         if (cb.querySelector("RptEnabled") === null) {
           const rptEnabled = createElement(doc, "RptEnabled", {

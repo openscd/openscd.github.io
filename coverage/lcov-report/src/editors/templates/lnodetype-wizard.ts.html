@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">99.27% </span>
+                <span class="strong">99.41% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>682/687</span>
+                <span class='fraction'>676/680</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">99.27% </span>
+                <span class="strong">99.41% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>682/687</span>
+                <span class='fraction'>676/680</span>
             </div>
         
             
@@ -743,14 +743,7 @@
 <a name='L678'></a><a href='#L678'>678</a>
 <a name='L679'></a><a href='#L679'>679</a>
 <a name='L680'></a><a href='#L680'>680</a>
-<a name='L681'></a><a href='#L681'>681</a>
-<a name='L682'></a><a href='#L682'>682</a>
-<a name='L683'></a><a href='#L683'>683</a>
-<a name='L684'></a><a href='#L684'>684</a>
-<a name='L685'></a><a href='#L685'>685</a>
-<a name='L686'></a><a href='#L686'>686</a>
-<a name='L687'></a><a href='#L687'>687</a>
-<a name='L688'></a><a href='#L688'>688</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">10x</span>
+<a name='L681'></a><a href='#L681'>681</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">10x</span>
 <span class="cline-any cline-yes">10x</span>
 <span class="cline-any cline-yes">10x</span>
 <span class="cline-any cline-yes">10x</span>
@@ -974,11 +967,6 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">10x</span>
 <span class="cline-any cline-yes">10x</span>
 <span class="cline-any cline-yes">10x</span>
@@ -1192,8 +1180,6 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -1457,6 +1443,7 @@ import {
   Create,
   createElement,
   EditorAction,
+  find,
   getChildElementsByTagName,
   getValue,
   identity,
@@ -1466,7 +1453,6 @@ import {
   newWizardEvent,
   patterns,
   Replace,
-  selector,
   Wizard,
   WizardActor,
   WizardInputElement,
@@ -1569,12 +1555,7 @@ function dOWizard(options: WizardOptions): Wizard | undefined {
   const doc = (&lt;UpdateOptions&gt;options).doc
     ? (&lt;UpdateOptions&gt;options).doc
     : (&lt;CreateOptions&gt;options).parent.ownerDocument;
-  const DO =
-    Array.from(
-      doc.querySelectorAll(
-        selector('DO', (&lt;UpdateOptions&gt;options).identity ?? NaN)
-      )
-    ).find(isPublic) ?? null;
+  const DO = find(doc, 'DO', (&lt;UpdateOptions&gt;options).identity ?? NaN);
 &nbsp;
   const [
     title,
@@ -1851,7 +1832,7 @@ function startLNodeTypeCreate(
     const value = (&lt;Select&gt;inputs.find(i =&gt; i.label === 'lnClass'))?.selected
       ?.value;
     const templateLNodeType = value
-      ? templates.querySelector(selector('LNodeType', <span class="branch-0 cbranch-no" title="branch not covered" >value))</span>
+      ? find(templates, 'LNodeType', <span class="branch-0 cbranch-no" title="branch not covered" >value)</span>
 <span class="cstat-no" title="statement not covered" >      : null;</span>
 &nbsp;
     const newLNodeType = templateLNodeType
@@ -1878,9 +1859,7 @@ function startLNodeTypeCreate(
 &nbsp;
 function onLnClassChange(e: Event, templates: XMLDocument): void {
   const identity = (&lt;Select&gt;e.target).selected?.value;
-  const lnodetype = identity
-    ? templates.querySelector(selector('LNodeType', <span class="branch-0 cbranch-no" title="branch not covered" >identity))</span>
-<span class="cstat-no" title="statement not covered" >    : null;</span>
+  const lnodetype = identity ? find(templates, 'LNodeType', <span class="branch-0 cbranch-no" title="branch not covered" >identity) : null;</span>
 &nbsp;
   const primaryAction =
     (&lt;Element&gt;e.target)
@@ -2045,7 +2024,7 @@ export function lNodeTypeWizard(
   lNodeTypeIdentity: string,
   doc: XMLDocument
 ): Wizard | undefined {
-  const lnodetype = doc.querySelector(selector('LNodeType', lNodeTypeIdentity));
+  const lnodetype = find(doc, 'LNodeType', lNodeTypeIdentity);
   if (!lnodetype) <span class="branch-0 cbranch-no" title="branch not covered" >return undefined;</span>
 &nbsp;
   return [
@@ -2131,7 +2110,7 @@ export function lNodeTypeWizard(
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener">istanbul</a>
-                at Mon Jul 24 2023 17:59:56 GMT+0000 (Coordinated Universal Time)
+                at Fri Aug 18 2023 14:14:22 GMT+0000 (Coordinated Universal Time)
             </div>
         </div>
         <script src="../../../prettify.js"></script>
