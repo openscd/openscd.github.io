@@ -48,7 +48,10 @@ export const predefinedBasicTypeEnum = [
   "TrgOps",
   "OptFlds",
   "SvOptFlds",
-  "EntryID"
+  "LogOptFlds",
+  "EntryID",
+  "Octet6",
+  "Octet16"
 ];
 export const valKindEnum = ["Spec", "Conf", "RO", "Set"];
 export const smpModEnum = ["SmpPerPeriod", "SmpPerSec", "SecPerSmp"];
