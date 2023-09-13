@@ -28,6 +28,10 @@ import {selectSampledValueControlWizard} from "../../wizards/sampledvaluecontrol
 import {selectReportControlWizard} from "../../wizards/reportcontrol.js";
 import {removeIEDWizard} from "../../wizards/ied.js";
 export let IedEditor = class extends LitElement {
+  constructor() {
+    super(...arguments);
+    this.editCount = -1;
+  }
   get name() {
     return this.element.getAttribute("name") ?? "UNDEFINED";
   }
@@ -109,6 +113,9 @@ export let IedEditor = class extends LitElement {
 __decorate([
   property({attribute: false})
 ], IedEditor.prototype, "doc", 2);
+__decorate([
+  property({type: Number})
+], IedEditor.prototype, "editCount", 2);
 __decorate([
   property({attribute: false})
 ], IedEditor.prototype, "element", 2);
