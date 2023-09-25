@@ -35,6 +35,7 @@ export default class IedPlugin extends LitElement {
     this.editCount = -1;
     this.selectedIEDs = [];
     this.selectedLNClasses = [];
+    this.lNClassListOpenedOnce = false;
   }
   get iedList() {
     return this.doc ? Array.from(this.doc.querySelectorAll(":root > IED")).sort((a, b) => compareNames(a, b)) : [];
@@ -50,6 +51,10 @@ export default class IedPlugin extends LitElement {
         }
         uniqueLNClassList.push(lnClass);
         return true;
+      }).sort((a, b) => {
+        const aLnClass = a.getAttribute("lnClass") ?? "";
+        const bLnClass = b.getAttribute("lnClass") ?? "";
+        return aLnClass.localeCompare(bLnClass);
       }).map((element) => {
         const lnClass = element.getAttribute("lnClass");
         const label = this.nsdoc.getDataDescription(element).label;
@@ -70,9 +75,14 @@ export default class IedPlugin extends LitElement {
   }
   updated(_changedProperties) {
     super.updated(_changedProperties);
-    if (_changedProperties.has("doc") || _changedProperties.has("editCount") || _changedProperties.has("nsdoc")) {
+    const isDocumentUpdated = _changedProperties.has("doc") || _changedProperties.has("editCount") || _changedProperties.has("nsdoc");
+    if (isDocumentUpdated) {
+      const iedExists = this.doc?.querySelector(`IED[name="${this.selectedIEDs[0]}"]`);
+      if (iedExists)
+        return;
       this.selectedIEDs = [];
       this.selectedLNClasses = [];
+      this.lNClassListOpenedOnce = false;
       const iedList = this.iedList;
       if (iedList.length > 0) {
         const iedName = getNameAttribute(iedList[0]);
@@ -80,8 +90,16 @@ export default class IedPlugin extends LitElement {
           this.selectedIEDs = [iedName];
         }
       }
-      this.selectedLNClasses = this.lnClassList.map((lnClassInfo) => lnClassInfo[0]);
     }
+  }
+  calcSelectedLNClasses() {
+    const somethingSelected = this.selectedLNClasses.length > 0;
+    const lnClasses = this.lnClassList.map((lnClassInfo) => lnClassInfo[0]);
+    let selectedLNClasses = lnClasses;
+    if (somethingSelected) {
+      selectedLNClasses = lnClasses.filter((lnClass) => this.selectedLNClasses.includes(lnClass));
+    }
+    return selectedLNClasses;
   }
   render() {
     const iedList = this.iedList;
@@ -95,8 +113,16 @@ export default class IedPlugin extends LitElement {
             icon="developer_board"
             .header=${translate("iededitor.iedSelector")}
             @selected-items-changed="${(e) => {
+        const equalArrays = (first, second) => {
+          return first.length === second.length && first.every((val, index) => val === second[index]);
+        };
+        const selectionChanged = !equalArrays(this.selectedIEDs, e.detail.selectedItems);
+        if (!selectionChanged) {
+          return;
+        }
+        this.lNClassListOpenedOnce = false;
         this.selectedIEDs = e.detail.selectedItems;
-        this.selectedLNClasses = this.lnClassList.map((lnClassInfo) => lnClassInfo[0]);
+        this.selectedLNClasses = [];
         this.requestUpdate("selectedIed");
       }}"
           >
@@ -148,7 +174,7 @@ export default class IedPlugin extends LitElement {
           .editCount=${this.editCount}
           .doc=${this.doc}
           .element=${this.selectedIed}
-          .selectedLNClasses=${this.selectedLNClasses}
+          .selectedLNClasses=${this.calcSelectedLNClasses()}
           .nsdoc=${this.nsdoc}
         ></ied-container>
       </section>`;
