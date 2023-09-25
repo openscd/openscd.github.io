@@ -19,11 +19,6 @@ In order to install your own instance of OpenSCD on your own webserver (e.g. on 
 
 If you don't have your own webserver but still want your own version of OpenSCD hosted locally (e.g. on a system without an internet connection), you can [use a browser plugin that acts as a local webserver](https://github.com/openscd/open-scd/wiki/Install-OpenSCD#offline) (only for you) instead.
 
-## Contributing
-
-The easiest way to get in touch is to join the `#open-scd` channel kindly hosted on [the LF Energy Slack server](https://lfenergy.slack.com/archives/C03LH7EUP34). 
-If you say "hi" there we will be more than happy to help you find your way around this project.
-
 ### Building
 
 If you want to build OpenSCD yourself in order to make some changes to your local installation or to contribute to the project, you may first want to install [Node.js](https://nodejs.org/) in order to be able to use our local development setup. It is recommended to use Node.js 18.x. it is is the version used to build and test on GitHub Actions.
