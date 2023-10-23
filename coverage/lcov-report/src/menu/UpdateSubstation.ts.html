@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">70.13% </span>
+                <span class="strong">67.76% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>101/144</span>
+                <span class='fraction'>103/152</span>
             </div>
         
             
@@ -37,16 +37,16 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">25% </span>
+                <span class="strong">20% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>1/4</span>
+                <span class='fraction'>1/5</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">70.13% </span>
+                <span class="strong">67.76% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>101/144</span>
+                <span class='fraction'>103/152</span>
             </div>
         
             
@@ -207,12 +207,15 @@
 <a name='L142'></a><a href='#L142'>142</a>
 <a name='L143'></a><a href='#L143'>143</a>
 <a name='L144'></a><a href='#L144'>144</a>
-<a name='L145'></a><a href='#L145'>145</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<a name='L145'></a><a href='#L145'>145</a>
+<a name='L146'></a><a href='#L146'>146</a>
+<a name='L147'></a><a href='#L147'>147</a>
+<a name='L148'></a><a href='#L148'>148</a>
+<a name='L149'></a><a href='#L149'>149</a>
+<a name='L150'></a><a href='#L150'>150</a>
+<a name='L151'></a><a href='#L151'>151</a>
+<a name='L152'></a><a href='#L152'>152</a>
+<a name='L153'></a><a href='#L153'>153</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -314,6 +317,19 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -432,46 +448,54 @@ export function isValidReference(
   );
 }
 &nbsp;
-export default class UpdateSubstationPlugin extends LitElement {
-  doc!: XMLDocument;
+export <span class="fstat-no" title="function not covered" >function mergeSubstation(</span>
+<span class="cstat-no" title="statement not covered" >  element: Element,</span>
+<span class="cstat-no" title="statement not covered" >  currentDoc: Document,</span>
+<span class="cstat-no" title="statement not covered" >  docWithSubstation: Document</span>
+<span class="cstat-no" title="statement not covered" >): void {</span>
+<span class="cstat-no" title="statement not covered" >  element.dispatchEvent(</span>
+<span class="cstat-no" title="statement not covered" >    newWizardEvent(</span>
+<span class="cstat-no" title="statement not covered" >      mergeWizard(</span>
+<span class="cstat-no" title="statement not covered" >        // FIXME: doesn't work with multiple Substations!</span>
+<span class="cstat-no" title="statement not covered" >        currentDoc.documentElement,</span>
+<span class="cstat-no" title="statement not covered" >        docWithSubstation.documentElement,</span>
+<span class="cstat-no" title="statement not covered" >        {</span>
+<span class="cstat-no" title="statement not covered" >          title: get('updatesubstation.title'),</span>
+<span class="cstat-no" title="statement not covered" >          selected: (diff: Diff&lt;Element | string&gt;): boolean =&gt;</span>
+<span class="cstat-no" title="statement not covered" >            diff.theirs instanceof Element</span>
+<span class="cstat-no" title="statement not covered" >              ? diff.theirs.tagName === 'LNode'</span>
+<span class="cstat-no" title="statement not covered" >                ? find(currentDoc, 'LNode', identity(diff.theirs)) === null &amp;&amp;</span>
+<span class="cstat-no" title="statement not covered" >                  isValidReference(docWithSubstation, identity(diff.theirs))</span>
+<span class="cstat-no" title="statement not covered" >                : diff.theirs.tagName === 'Substation' ||</span>
+<span class="cstat-no" title="statement not covered" >                  !tags['SCL'].children.includes(&lt;SCLTag&gt;diff.theirs.tagName)</span>
+<span class="cstat-no" title="statement not covered" >              : diff.theirs !== null,</span>
+<span class="cstat-no" title="statement not covered" >          disabled: (diff: Diff&lt;Element | string&gt;): boolean =&gt;</span>
+<span class="cstat-no" title="statement not covered" >            diff.theirs instanceof Element &amp;&amp;</span>
+<span class="cstat-no" title="statement not covered" >            diff.theirs.tagName === 'LNode' &amp;&amp;</span>
+<span class="cstat-no" title="statement not covered" >            (find(currentDoc, 'LNode', identity(diff.theirs)) !== null ||</span>
+<span class="cstat-no" title="statement not covered" >              !isValidReference(docWithSubstation, identity(diff.theirs))),</span>
+<span class="cstat-no" title="statement not covered" >          auto: (): boolean =&gt; true,</span>
+        }
+      )
+    )
+  );
+}
 &nbsp;
-  @query('#update-substation-plugin-input') pluginFileUI!: HTMLInputElement;
-&nbsp;
-<span class="fstat-no" title="function not covered" >  updateSubstation(event: Event): void {</span>
+export default class UpdateSubstationPlugin extends LitElement <span class="fstat-no" title="function not covered" >{</span>
+<span class="cstat-no" title="statement not covered" >  doc!: XMLDocument;</span>
+<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >  @query('#update-substation-plugin-input') pluginFileUI!: HTMLInputElement;</span>
+<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >  async updateSubstation(event: Event): Promise&lt;void&gt; {</span>
 <span class="cstat-no" title="statement not covered" >    const file =</span>
 <span class="cstat-no" title="statement not covered" >      (&lt;HTMLInputElement | null&gt;event.target)?.files?.item(0) ?? false;</span>
-<span class="cstat-no" title="statement not covered" >    if (file)</span>
-<span class="cstat-no" title="statement not covered" >      file.text().then(text =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >        const doc = new DOMParser().parseFromString(text, 'application/xml');</span>
-<span class="cstat-no" title="statement not covered" >        this.dispatchEvent(</span>
-<span class="cstat-no" title="statement not covered" >          newWizardEvent(</span>
-<span class="cstat-no" title="statement not covered" >            mergeWizard(</span>
-<span class="cstat-no" title="statement not covered" >              // FIXME: doesn't work with multiple Substations!</span>
-<span class="cstat-no" title="statement not covered" >              this.doc.documentElement,</span>
-<span class="cstat-no" title="statement not covered" >              doc.documentElement,</span>
-<span class="cstat-no" title="statement not covered" >              {</span>
-<span class="cstat-no" title="statement not covered" >                title: get('updatesubstation.title'),</span>
-<span class="cstat-no" title="statement not covered" >                selected: (diff: Diff&lt;Element | string&gt;): boolean =&gt;</span>
-<span class="cstat-no" title="statement not covered" >                  diff.theirs instanceof Element</span>
-<span class="cstat-no" title="statement not covered" >                    ? diff.theirs.tagName === 'LNode'</span>
-<span class="cstat-no" title="statement not covered" >                      ? find(this.doc, 'LNode', identity(diff.theirs)) ===</span>
-<span class="cstat-no" title="statement not covered" >                          null &amp;&amp; isValidReference(doc, identity(diff.theirs))</span>
-<span class="cstat-no" title="statement not covered" >                      : diff.theirs.tagName === 'Substation' ||</span>
-<span class="cstat-no" title="statement not covered" >                        !tags['SCL'].children.includes(</span>
-<span class="cstat-no" title="statement not covered" >                          &lt;SCLTag&gt;diff.theirs.tagName</span>
-<span class="cstat-no" title="statement not covered" >                        )</span>
-<span class="cstat-no" title="statement not covered" >                    : diff.theirs !== null,</span>
-<span class="cstat-no" title="statement not covered" >                disabled: (diff: Diff&lt;Element | string&gt;): boolean =&gt;</span>
-<span class="cstat-no" title="statement not covered" >                  diff.theirs instanceof Element &amp;&amp;</span>
-<span class="cstat-no" title="statement not covered" >                  diff.theirs.tagName === 'LNode' &amp;&amp;</span>
-<span class="cstat-no" title="statement not covered" >                  (find(this.doc, 'LNode', identity(diff.theirs)) !== null ||</span>
-<span class="cstat-no" title="statement not covered" >                    !isValidReference(doc, identity(diff.theirs))),</span>
-<span class="cstat-no" title="statement not covered" >                auto: (): boolean =&gt; true,</span>
-<span class="cstat-no" title="statement not covered" >              }</span>
-<span class="cstat-no" title="statement not covered" >            )</span>
-<span class="cstat-no" title="statement not covered" >          )</span>
-<span class="cstat-no" title="statement not covered" >        );</span>
-<span class="cstat-no" title="statement not covered" >      });</span>
+<span class="cstat-no" title="statement not covered" >    if (!file) {</span>
+<span class="cstat-no" title="statement not covered" >      return;</span>
+<span class="cstat-no" title="statement not covered" >    }</span>
+<span class="cstat-no" title="statement not covered" >    const text = await file.text();</span>
+<span class="cstat-no" title="statement not covered" >    const doc = new DOMParser().parseFromString(text, 'application/xml');</span>
+<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >    mergeSubstation(this, this.doc, doc);</span>
 <span class="cstat-no" title="statement not covered" >    this.pluginFileUI.onchange = <span class="fstat-no" title="function not covered" >null;</span></span>
 <span class="cstat-no" title="statement not covered" >  }</span>
 <span class="cstat-no" title="statement not covered" ></span>
@@ -502,7 +526,7 @@ export default class UpdateSubstationPlugin extends LitElement {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener">istanbul</a>
-                at Wed Sep 27 2023 08:19:46 GMT+0000 (Coordinated Universal Time)
+                at Mon Oct 23 2023 10:13:11 GMT+0000 (Coordinated Universal Time)
             </div>
         </div>
         <script src="../../prettify.js"></script>

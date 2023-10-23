@@ -54,19 +54,23 @@ export function isValidReference(doc, identity2) {
   ];
   return doc.querySelector(crossProduct(iedNameSelectors, [" "], ldInstSelectors, [">"], lnClassSelectors, prefixSelectors, lnInstSelectors).map((strings) => strings.join("")).join(",")) !== null;
 }
+export function mergeSubstation(element, currentDoc, docWithSubstation) {
+  element.dispatchEvent(newWizardEvent(mergeWizard(currentDoc.documentElement, docWithSubstation.documentElement, {
+    title: get("updatesubstation.title"),
+    selected: (diff) => diff.theirs instanceof Element ? diff.theirs.tagName === "LNode" ? find(currentDoc, "LNode", identity(diff.theirs)) === null && isValidReference(docWithSubstation, identity(diff.theirs)) : diff.theirs.tagName === "Substation" || !tags["SCL"].children.includes(diff.theirs.tagName) : diff.theirs !== null,
+    disabled: (diff) => diff.theirs instanceof Element && diff.theirs.tagName === "LNode" && (find(currentDoc, "LNode", identity(diff.theirs)) !== null || !isValidReference(docWithSubstation, identity(diff.theirs))),
+    auto: () => true
+  })));
+}
 export default class UpdateSubstationPlugin extends LitElement {
-  updateSubstation(event) {
+  async updateSubstation(event) {
     const file = event.target?.files?.item(0) ?? false;
-    if (file)
-      file.text().then((text) => {
-        const doc = new DOMParser().parseFromString(text, "application/xml");
-        this.dispatchEvent(newWizardEvent(mergeWizard(this.doc.documentElement, doc.documentElement, {
-          title: get("updatesubstation.title"),
-          selected: (diff) => diff.theirs instanceof Element ? diff.theirs.tagName === "LNode" ? find(this.doc, "LNode", identity(diff.theirs)) === null && isValidReference(doc, identity(diff.theirs)) : diff.theirs.tagName === "Substation" || !tags["SCL"].children.includes(diff.theirs.tagName) : diff.theirs !== null,
-          disabled: (diff) => diff.theirs instanceof Element && diff.theirs.tagName === "LNode" && (find(this.doc, "LNode", identity(diff.theirs)) !== null || !isValidReference(doc, identity(diff.theirs))),
-          auto: () => true
-        })));
-      });
+    if (!file) {
+      return;
+    }
+    const text = await file.text();
+    const doc = new DOMParser().parseFromString(text, "application/xml");
+    mergeSubstation(this, this.doc, doc);
     this.pluginFileUI.onchange = null;
   }
   async run() {
