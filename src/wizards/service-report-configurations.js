@@ -8,7 +8,8 @@ export function createReportConfigurationsWizardPage(services) {
   const content = createReportConfigurationsWizard(services);
   return content ? {
     title: get("wizard.title.edit", {tagName: "Report Settings"}),
-    content: [...content]
+    content: [...content],
+    element: services
   } : null;
 }
 function createReportConfigurationsWizard(parent) {

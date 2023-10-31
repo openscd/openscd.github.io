@@ -8,7 +8,8 @@ export function createClientServerConfigurationsWizardPage(services) {
   const content = createClientServerConfigurationsWizard(services);
   return content ? {
     title: get("wizard.title.edit", {tagName: "Client Server Services"}),
-    content: [...content]
+    content: [...content],
+    element: services
   } : null;
 }
 function createClientServerConfigurationsWizard(parent) {

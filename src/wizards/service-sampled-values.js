@@ -8,7 +8,8 @@ export function createSampledValuesWizardPage(services) {
   const content = createSampledValuesWizard(services);
   return content ? {
     title: get("wizard.title.edit", {tagName: "Sampled Values"}),
-    content: [...content]
+    content: [...content],
+    element: services
   } : null;
 }
 function createSampledValuesWizard(parent) {

@@ -8,7 +8,8 @@ export function createNetworkingWizardPage(services) {
   const content = createNetworkingWizard(services);
   return content ? {
     title: get("wizard.title.edit", {tagName: "Networking"}),
-    content: [...content]
+    content: [...content],
+    element: services
   } : null;
 }
 function createNetworkingWizard(parent) {

@@ -8,7 +8,8 @@ export function createGSEControlWizardPage(services) {
   const content = createGSEControlWizard(services);
   return content ? {
     title: get("wizard.title.edit", {tagName: "GSE Control"}),
-    content: [...content]
+    content: [...content],
+    element: services
   } : null;
 }
 function createGSEControlWizard(parent) {

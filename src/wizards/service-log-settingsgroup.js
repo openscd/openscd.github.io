@@ -8,7 +8,8 @@ export function createLogSettingsGroupServicesWizardPage(services) {
   const content = createLogSettingsGroupServicesWizard(services);
   return content ? {
     title: get("wizard.title.edit", {tagName: "Services"}),
-    content: [...content]
+    content: [...content],
+    element: services
   } : null;
 }
 function createLogSettingsGroupServicesWizard(parent) {
