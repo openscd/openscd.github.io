@@ -117,10 +117,17 @@ export function Hosting(Base) {
         },
         ...validators,
         {
-          icon: "history",
+          icon: "list",
           name: "menu.viewLog",
           actionItem: true,
           action: () => this.logUI.show(),
+          kind: "static"
+        },
+        {
+          icon: "history",
+          name: "menu.viewHistory",
+          actionItem: true,
+          action: () => this.historyUI.show(),
           kind: "static"
         },
         {

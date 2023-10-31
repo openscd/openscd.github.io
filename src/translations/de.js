@@ -160,6 +160,7 @@ export const de = {
   },
   history: {
     name: "SCL History",
+    placeholder: "Keine History",
     noEntries: "Keine Einträge in der SCL History"
   },
   diag: {

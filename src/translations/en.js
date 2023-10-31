@@ -136,7 +136,7 @@ export const en = {
   },
   log: {
     name: "Log",
-    placeholder: "Edits, errors, and other notifications will show up here.",
+    placeholder: "Errors, warnings and other notifications will show up here.",
     snackbar: {
       show: "Show",
       placeholder: "No errors"
@@ -144,6 +144,7 @@ export const en = {
   },
   history: {
     name: "SCL History",
+    placeholder: "Edits will show up here",
     noEntries: "No SCL history entries"
   },
   diag: {

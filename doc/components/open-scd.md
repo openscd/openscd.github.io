@@ -3,7 +3,7 @@
 The `<open-scd>` custom element is the main entry point of the
 Open Substation Configuration Designer.
 
-**Mixins:** Waiting, Hosting, Setting, Wizarding, Plugging, Editing, Logging
+**Mixins:** Waiting, Hosting, Setting, Wizarding, Plugging, Editing, Historing
 
 ## Properties
 
@@ -23,11 +23,13 @@ Open Substation Configuration Designer.
 | `editors`          |             | readonly  | `Plugin[]`                              |                                    |                                                  |
 | `errorUI`          |             |           | `Snackbar`                              |                                    |                                                  |
 | `handleKeyPress`   |             |           |                                         |                                    |                                                  |
-| `history`          | `history`   |           | `LogEntry[]`                            | []                                 | All [[`LogEntry`]]s received so far through [[`LogEvent`]]s. |
+| `history`          | `history`   |           | `CommitEntry[]`                         | []                                 | All [[`CommitEntry`]]s received so far through [[`LogEvent`]]s |
+| `historyUI`        |             |           | `Dialog`                                |                                    |                                                  |
 | `infoUI`           |             |           | `Snackbar`                              |                                    |                                                  |
 | `issueUI`          |             |           | `Snackbar`                              |                                    |                                                  |
 | `languageUI`       |             |           | `Select`                                |                                    |                                                  |
 | `latestIssue`      |             |           | `IssueDetail`                           |                                    |                                                  |
+| `log`              | `log`       |           | `InfoEntry[]`                           | []                                 | All [[`LogEntry`]]s received so far through [[`LogEvent`]]s. |
 | `logUI`            |             |           | `Dialog`                                |                                    |                                                  |
 | `menu`             |             | readonly  | `(MenuItem \| "divider")[]`             |                                    |                                                  |
 | `menuEntries`      |             | readonly  | `Plugin[]`                              |                                    |                                                  |
@@ -67,7 +69,8 @@ Open Substation Configuration Designer.
 | `renderActionItem`       | `(me: MenuItem \| "divider"): TemplateResult`    |                                                  |
 | `renderDownloadUI`       | `(): TemplateResult`                             |                                                  |
 | `renderEditorTab`        | `({ name, icon }: Plugin): TemplateResult`       |                                                  |
-| `renderLogEntry`         | `(entry: LogEntry, index: number, history: LogEntry[]): TemplateResult` |                                                  |
+| `renderHistoryEntry`     | `(entry: CommitEntry, index: number, history: LogEntry[]): TemplateResult` |                                                  |
+| `renderLogEntry`         | `(entry: InfoEntry, index: number, log: LogEntry[]): TemplateResult` |                                                  |
 | `renderMenuItem`         | `(me: MenuItem \| "divider"): TemplateResult`    |                                                  |
 | `renderPluginKind`       | `(type: "editor" \| "menu" \| "validator" \| "top" \| "middle" \| "bottom", plugins: Plugin[]): TemplateResult` |                                                  |
 | `renderPluginUI`         | `(): TemplateResult`                             |                                                  |

@@ -20,12 +20,12 @@ import {newOpenDocEvent, newPendingStateEvent} from "./foundation.js";
 import {getTheme} from "./themes.js";
 import {Editing} from "./Editing.js";
 import {Hosting} from "./Hosting.js";
-import {Logging} from "./Logging.js";
+import {Historing} from "./Historing.js";
 import {Plugging} from "./Plugging.js";
 import {Setting} from "./Setting.js";
 import {Waiting} from "./Waiting.js";
 import {Wizarding} from "./Wizarding.js";
-export let OpenSCD = class extends Waiting(Hosting(Setting(Wizarding(Plugging(Editing(Logging(LitElement))))))) {
+export let OpenSCD = class extends Waiting(Hosting(Setting(Wizarding(Plugging(Editing(Historing(LitElement))))))) {
   constructor() {
     super();
     this.currentSrc = "";

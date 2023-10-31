@@ -35,8 +35,7 @@ import {getFilterIcon, iconColors} from "./icons/icons.js";
 const icons = {
   info: "info",
   warning: "warning",
-  error: "report",
-  action: "history"
+  error: "report"
 };
 function getPluginName(src) {
   const plugin = JSON.parse(localStorage.getItem("plugins") ?? "[]").find((p) => p.src === src);
@@ -45,10 +44,11 @@ function getPluginName(src) {
   const name = plugin.name;
   return name || src;
 }
-export function Logging(Base) {
-  class LoggingElement extends Base {
+export function Historing(Base) {
+  class HistoringElement extends Base {
     constructor(...args) {
       super(...args);
+      this.log = [];
       this.history = [];
       this.editCount = -1;
       this.diagnoses = new Map();
@@ -99,15 +99,10 @@ export function Logging(Base) {
       this.editCount = this.nextAction;
       return true;
     }
-    onLog(le) {
-      if (le.detail.kind === "reset") {
-        this.history = [];
-        this.editCount = -1;
-        return;
-      }
+    onHistory(detail) {
       const entry = {
         time: new Date(),
-        ...le.detail
+        ...detail
       };
       if (entry.kind === "action") {
         if (entry.action.derived)
@@ -118,27 +113,74 @@ export function Logging(Base) {
         this.editCount = this.history.length;
       }
       this.history.push(entry);
+      this.requestUpdate("history", []);
+    }
+    onReset() {
+      this.log = [];
+      this.history = [];
+      this.editCount = -1;
+    }
+    onInfo(detail) {
+      const entry = {
+        time: new Date(),
+        ...detail
+      };
+      this.log.push(entry);
       if (!this.logUI.open) {
         const ui = {
           error: this.errorUI,
           warning: this.warningUI,
-          info: this.infoUI,
-          action: this.infoUI
-        }[le.detail.kind];
+          info: this.infoUI
+        }[detail.kind];
         ui.close();
         ui.show();
       }
-      if (le.detail.kind == "error") {
+      if (detail.kind == "error") {
         this.errorUI.close();
         this.errorUI.show();
       }
-      this.requestUpdate("history", []);
+      this.requestUpdate("log", []);
+    }
+    onLog(le) {
+      switch (le.detail.kind) {
+        case "reset":
+          this.onReset();
+          break;
+        case "action":
+          this.onHistory(le.detail);
+          break;
+        default:
+          this.onInfo(le.detail);
+          break;
+      }
     }
     async performUpdate() {
       await new Promise((resolve) => requestAnimationFrame(() => resolve()));
       super.performUpdate();
     }
-    renderLogEntry(entry, index, history) {
+    renderLogEntry(entry, index, log) {
+      return html` <abbr title="${entry.title}">
+        <mwc-list-item
+          class="${entry.kind}"
+          graphic="icon"
+          ?twoline=${!!entry.message}
+          ?activated=${this.editCount == log.length - index - 1}
+        >
+          <span>
+            <!-- FIXME: replace tt with mwc-chip asap -->
+            <tt>${entry.time?.toLocaleString()}</tt>
+            ${entry.title}</span
+          >
+          <span slot="secondary">${entry.message}</span>
+          <mwc-icon
+            slot="graphic"
+            style="--mdc-theme-text-icon-on-background:var(${ifDefined(iconColors[entry.kind])})"
+            >${icons[entry.kind]}</mwc-icon
+          >
+        </mwc-list-item></abbr
+      >`;
+    }
+    renderHistoryEntry(entry, index, history) {
       return html` <abbr title="${entry.title}">
         <mwc-list-item
           class="${entry.kind}"
@@ -155,17 +197,26 @@ export function Logging(Base) {
           <mwc-icon
             slot="graphic"
             style="--mdc-theme-text-icon-on-background:var(${ifDefined(iconColors[entry.kind])})"
-            >${icons[entry.kind]}</mwc-icon
+            >history</mwc-icon
           >
         </mwc-list-item></abbr
       >`;
     }
-    renderHistory() {
-      if (this.history.length > 0)
-        return this.history.slice().reverse().map(this.renderLogEntry, this);
+    renderLog() {
+      if (this.log.length > 0)
+        return this.log.slice().reverse().map(this.renderLogEntry, this);
       else
         return html`<mwc-list-item disabled graphic="icon">
           <span>${translate("log.placeholder")}</span>
+          <mwc-icon slot="graphic">info</mwc-icon>
+        </mwc-list-item>`;
+    }
+    renderHistory() {
+      if (this.history.length > 0)
+        return this.history.slice().reverse().map(this.renderHistoryEntry, this);
+      else
+        return html`<mwc-list-item disabled graphic="icon">
+          <span>${translate("history.placeholder")}</span>
           <mwc-icon slot="graphic">info</mwc-icon>
         </mwc-list-item>`;
     }
@@ -204,6 +255,40 @@ export function Logging(Base) {
           ${getFilterIcon(kind, true)}</mwc-icon-button-toggle
         >`);
     }
+    renderLogDialog() {
+      return html` <mwc-dialog id="log" heading="${translate("log.name")}">
+        ${this.renderFilterButtons()}
+        <mwc-list id="content" wrapFocus>${this.renderLog()}</mwc-list>
+        <mwc-button slot="primaryAction" dialogaction="close"
+          >${translate("close")}</mwc-button
+        >
+      </mwc-dialog>`;
+    }
+    renderHistoryDialog() {
+      return html` <mwc-dialog
+        id="history"
+        heading="${translate("history.name")}"
+      >
+        <mwc-list id="content" wrapFocus>${this.renderHistory()}</mwc-list>
+        <mwc-button
+          icon="undo"
+          label="${translate("undo")}"
+          ?disabled=${!this.canUndo}
+          @click=${this.undo}
+          slot="secondaryAction"
+        ></mwc-button>
+        <mwc-button
+          icon="redo"
+          label="${translate("redo")}"
+          ?disabled=${!this.canRedo}
+          @click=${this.redo}
+          slot="secondaryAction"
+        ></mwc-button>
+        <mwc-button slot="primaryAction" dialogaction="close"
+          >${translate("close")}</mwc-button
+        >
+      </mwc-dialog>`;
+    }
     render() {
       return html`${ifImplemented(super.render())}
         <style>
@@ -221,13 +306,9 @@ export function Logging(Base) {
           #log > mwc-icon-button-toggle:nth-child(4) {
             right: 158px;
           }
-          #log > mwc-icon-button-toggle:nth-child(5) {
-            right: 206px;
-          }
           #content mwc-list-item.info,
           #content mwc-list-item.warning,
-          #content mwc-list-item.error,
-          #content mwc-list-item.action {
+          #content mwc-list-item.error {
             display: none;
           }
           #infofilter[on] ~ #content mwc-list-item.info {
@@ -237,9 +318,6 @@ export function Logging(Base) {
             display: flex;
           }
           #errorfilter[on] ~ #content mwc-list-item.error {
-            display: flex;
-          }
-          #actionfilter[on] ~ #content mwc-list-item.action {
             display: flex;
           }
 
@@ -259,7 +337,8 @@ export function Logging(Base) {
             color: var(--blue);
           }
 
-          #log {
+          #log,
+          #history {
             --mdc-dialog-min-width: 92vw;
           }
 
@@ -269,28 +348,7 @@ export function Logging(Base) {
             right: 14px;
           }
         </style>
-        <mwc-dialog id="log" heading="${translate("log.name")}">
-          ${this.renderFilterButtons()}
-          <mwc-list id="content" wrapFocus>${this.renderHistory()}</mwc-list>
-          <mwc-button
-            icon="undo"
-            label="${translate("undo")}"
-            ?disabled=${!this.canUndo}
-            @click=${this.undo}
-            slot="secondaryAction"
-          ></mwc-button>
-          <mwc-button
-            icon="redo"
-            label="${translate("redo")}"
-            ?disabled=${!this.canRedo}
-            @click=${this.redo}
-            slot="secondaryAction"
-          ></mwc-button>
-          <mwc-button slot="primaryAction" dialogaction="close"
-            >${translate("close")}</mwc-button
-          >
-        </mwc-dialog>
-
+        ${this.renderLogDialog()} ${this.renderHistoryDialog()}
         <mwc-dialog id="diagnostic" heading="${translate("diag.name")}">
           <filtered-list id="content" wrapFocus
             >${this.renderIssues()}</filtered-list
@@ -303,14 +361,14 @@ export function Logging(Base) {
         <mwc-snackbar
           id="info"
           timeoutMs="4000"
-          labelText="${this.history.slice().reverse().find((le) => le.kind === "info" || le.kind === "action")?.title ?? get("log.snackbar.placeholder")}"
+          labelText="${this.log.slice().reverse().find((le) => le.kind === "info")?.title ?? get("log.snackbar.placeholder")}"
         >
           <mwc-icon-button icon="close" slot="dismiss"></mwc-icon-button>
         </mwc-snackbar>
         <mwc-snackbar
           id="warning"
           timeoutMs="6000"
-          labelText="${this.history.slice().reverse().find((le) => le.kind === "warning")?.title ?? get("log.snackbar.placeholder")}"
+          labelText="${this.log.slice().reverse().find((le) => le.kind === "warning")?.title ?? get("log.snackbar.placeholder")}"
         >
           <mwc-button
             slot="action"
@@ -323,7 +381,7 @@ export function Logging(Base) {
         <mwc-snackbar
           id="error"
           timeoutMs="10000"
-          labelText="${this.history.slice().reverse().find((le) => le.kind === "error")?.title ?? get("log.snackbar.placeholder")}"
+          labelText="${this.log.slice().reverse().find((le) => le.kind === "error")?.title ?? get("log.snackbar.placeholder")}"
         >
           <mwc-button
             slot="action"
@@ -350,33 +408,39 @@ export function Logging(Base) {
   }
   __decorate([
     property({type: Array})
-  ], LoggingElement.prototype, "history", 2);
+  ], HistoringElement.prototype, "log", 2);
+  __decorate([
+    property({type: Array})
+  ], HistoringElement.prototype, "history", 2);
   __decorate([
     property({type: Number})
-  ], LoggingElement.prototype, "editCount", 2);
+  ], HistoringElement.prototype, "editCount", 2);
   __decorate([
     property()
-  ], LoggingElement.prototype, "diagnoses", 2);
+  ], HistoringElement.prototype, "diagnoses", 2);
   __decorate([
     internalProperty()
-  ], LoggingElement.prototype, "latestIssue", 2);
+  ], HistoringElement.prototype, "latestIssue", 2);
   __decorate([
     query("#log")
-  ], LoggingElement.prototype, "logUI", 2);
+  ], HistoringElement.prototype, "logUI", 2);
+  __decorate([
+    query("#history")
+  ], HistoringElement.prototype, "historyUI", 2);
   __decorate([
     query("#diagnostic")
-  ], LoggingElement.prototype, "diagnosticUI", 2);
+  ], HistoringElement.prototype, "diagnosticUI", 2);
   __decorate([
     query("#error")
-  ], LoggingElement.prototype, "errorUI", 2);
+  ], HistoringElement.prototype, "errorUI", 2);
   __decorate([
     query("#warning")
-  ], LoggingElement.prototype, "warningUI", 2);
+  ], HistoringElement.prototype, "warningUI", 2);
   __decorate([
     query("#info")
-  ], LoggingElement.prototype, "infoUI", 2);
+  ], HistoringElement.prototype, "infoUI", 2);
   __decorate([
     query("#issue")
-  ], LoggingElement.prototype, "issueUI", 2);
-  return LoggingElement;
+  ], HistoringElement.prototype, "issueUI", 2);
+  return HistoringElement;
 }
