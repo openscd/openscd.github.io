@@ -315,7 +315,7 @@ export default class ImportingIedPlugin extends LitElement {
     return html`<input multiple @change=${(event) => {
       this.onLoadFiles(event);
       event.target.value = "";
-    }} id="importied-plugin-input" accept=".sed,.scd,.ssd,.iid,.cid,.icd" type="file"></input>`;
+    }} id="importied-plugin-input" accept=".sed,.scd,.ssd,.isd,.iid,.cid,.icd" type="file"></input>`;
   }
   buildIedSelection(importDoc, fileName) {
     this.iedSelection.push(html`<mwc-dialog data-file="${fileName}">

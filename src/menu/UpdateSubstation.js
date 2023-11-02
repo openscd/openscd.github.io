@@ -77,7 +77,9 @@ export default class UpdateSubstationPlugin extends LitElement {
     this.pluginFileUI.click();
   }
   render() {
-    return html`<input @click=${(event) => event.target.value = ""} @change=${(e) => this.updateSubstation(e)} id="update-substation-plugin-input" accept=".sed,.scd,.ssd,.iid,.cid" type="file"></input>`;
+    return html`<input @click=${(event) => event.target.value = ""}
+                       @change=${this.updateSubstation}
+                       id="update-substation-plugin-input" accept=".sed,.scd,.ssd,.iid,.cid" type="file"></input>`;
   }
 }
 UpdateSubstationPlugin.styles = css`

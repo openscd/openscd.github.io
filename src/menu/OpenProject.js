@@ -34,7 +34,7 @@ export default class OpenProjectPlugin extends LitElement {
     this.pluginFileUI.click();
   }
   render() {
-    return html`<input @click=${(event) => event.target.value = ""} @change=${this.openDoc} id="open-plugin-input" accept=".sed,.scd,.ssd,.iid,.cid,.icd" type="file"></input>`;
+    return html`<input @click=${(event) => event.target.value = ""} @change=${this.openDoc} id="open-plugin-input" accept=".sed,.scd,.ssd,.isd,.iid,.cid,.icd" type="file"></input>`;
   }
 }
 OpenProjectPlugin.styles = css`

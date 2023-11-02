@@ -26,7 +26,7 @@ export default class MergePlugin extends LitElement {
     this.pluginFileUI.click();
   }
   render() {
-    return html`<input @click=${(event) => event.target.value = ""} @change=${this.mergeDoc} id="merge-plugin-input" accept=".sed,.scd,.ssd,.iid,.cid,.icd" type="file"></input>`;
+    return html`<input @click=${(event) => event.target.value = ""} @change=${this.mergeDoc} id="merge-plugin-input" accept=".sed,.scd,.ssd,.isd,.iid,.cid,.icd" type="file"></input>`;
   }
 }
 MergePlugin.styles = css`
