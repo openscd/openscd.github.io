@@ -26,6 +26,8 @@ export function contentGseOrSmvWizard(content) {
   ];
 }
 function isEqualAddress(oldAddr, newAdddr) {
+  if (oldAddr.querySelectorAll("P").length !== newAdddr.querySelectorAll("P").length)
+    return false;
   return Array.from(oldAddr.querySelectorAll("P")).filter((pType) => !newAdddr.querySelector(`Address > P[type="${pType.getAttribute("type")}"]`)?.isEqualNode(pType)).length === 0;
 }
 export function createAddressElement(inputs, parent, instType) {
