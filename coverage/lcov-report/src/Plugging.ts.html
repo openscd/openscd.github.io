@@ -25,28 +25,28 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">99.82% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>568/569</span>
+                <span class='fraction'>584/585</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">96.92% </span>
+                <span class="strong">95.58% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>63/65</span>
+                <span class='fraction'>65/68</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>26/26</span>
+                <span class='fraction'>28/28</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">99.82% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>568/569</span>
+                <span class='fraction'>584/585</span>
             </div>
         
             
@@ -632,7 +632,23 @@
 <a name='L567'></a><a href='#L567'>567</a>
 <a name='L568'></a><a href='#L568'>568</a>
 <a name='L569'></a><a href='#L569'>569</a>
-<a name='L570'></a><a href='#L570'>570</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">3x</span>
+<a name='L570'></a><a href='#L570'>570</a>
+<a name='L571'></a><a href='#L571'>571</a>
+<a name='L572'></a><a href='#L572'>572</a>
+<a name='L573'></a><a href='#L573'>573</a>
+<a name='L574'></a><a href='#L574'>574</a>
+<a name='L575'></a><a href='#L575'>575</a>
+<a name='L576'></a><a href='#L576'>576</a>
+<a name='L577'></a><a href='#L577'>577</a>
+<a name='L578'></a><a href='#L578'>578</a>
+<a name='L579'></a><a href='#L579'>579</a>
+<a name='L580'></a><a href='#L580'>580</a>
+<a name='L581'></a><a href='#L581'>581</a>
+<a name='L582'></a><a href='#L582'>582</a>
+<a name='L583'></a><a href='#L583'>583</a>
+<a name='L584'></a><a href='#L584'>584</a>
+<a name='L585'></a><a href='#L585'>585</a>
+<a name='L586'></a><a href='#L586'>586</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
@@ -888,6 +904,20 @@
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
@@ -910,6 +940,8 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
@@ -1302,7 +1334,7 @@ function staticTagHtml(
 &nbsp;
 type PluginKind = 'editor' | 'menu' | 'validator';
 const menuPosition = ['top', 'middle', 'bottom'] as const;
-type MenuPosition = typeof menuPosition[number];
+type MenuPosition = (typeof menuPosition)[number];
 &nbsp;
 export type Plugin = {
   name: string;
@@ -1442,6 +1474,20 @@ export function Plugging&lt;
     @query('#pluginAdd')
     pluginDownloadUI!: Dialog;
 &nbsp;
+    protected get locale(): string {
+      return navigator.<span class="branch-0 cbranch-no" title="branch not covered" >language || 'en-US';</span>
+    }
+&nbsp;
+    get docs(): Record&lt;string, XMLDocument&gt; {
+      const docs: Record&lt;string, XMLDocument&gt; = {};
+&nbsp;
+      if (this.doc) {
+        docs[this.docName] = this.doc;
+      }
+&nbsp;
+      return docs;
+    }
+&nbsp;
     private setPlugins(indices: Set&lt;number&gt;) {
       const newPlugins = this.plugins.map((plugin, index) =&gt; {
         return { ...plugin, installed: indices.has(index) };
@@ -1496,6 +1542,8 @@ export function Plugging&lt;
             .docId=${this.docId}
             .pluginId=${plugin.src}
             .nsdoc=${this.nsdoc}
+            .docs=${this.docs}
+            .locale=${this.locale}
             class="${classMap({
               plugin: true,
               menu: plugin.kind === 'menu',
@@ -1777,7 +1825,7 @@ export function Plugging&lt;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-11-24T15:10:27.504Z
+                at 2023-11-27T11:23:48.864Z
             </div>
         <script src="../prettify.js"></script>
         <script>

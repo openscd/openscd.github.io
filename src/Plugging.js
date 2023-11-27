@@ -132,6 +132,16 @@ export function Plugging(Base) {
     get storedPlugins() {
       return JSON.parse(localStorage.getItem("plugins") ?? "[]", (key, value) => value.src && value.installed ? this.addContent(value) : value);
     }
+    get locale() {
+      return navigator.language || "en-US";
+    }
+    get docs() {
+      const docs = {};
+      if (this.doc) {
+        docs[this.docName] = this.doc;
+      }
+      return docs;
+    }
     setPlugins(indices) {
       const newPlugins = this.plugins.map((plugin, index) => {
         return {...plugin, installed: indices.has(index)};
@@ -176,6 +186,8 @@ export function Plugging(Base) {
             .docId=${this.docId}
             .pluginId=${plugin.src}
             .nsdoc=${this.nsdoc}
+            .docs=${this.docs}
+            .locale=${this.locale}
             class="${classMap({
           plugin: true,
           menu: plugin.kind === "menu",

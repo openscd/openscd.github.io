@@ -19,6 +19,7 @@ Open Substation Configuration Designer.
 | `doc`              |             |           | `XMLDocument \| null`                   | null                               | The `XMLDocument` to be edited                   |
 | `docId`            | `docId`     |           | `string`                                | ""                                 | The UUID of the current [[`doc`]]                |
 | `docName`          | `docName`   |           | `string`                                | ""                                 | The name of the current [[`doc`]]                |
+| `docs`             |             | readonly  | `Record<string, XMLDocument>`           |                                    |                                                  |
 | `editCount`        | `editCount` |           | `number`                                | -1                                 | Index of the last [[`EditorAction`]] applied.    |
 | `editors`          |             | readonly  | `Plugin[]`                              |                                    |                                                  |
 | `errorUI`          |             |           | `Snackbar`                              |                                    |                                                  |
