@@ -23,6 +23,7 @@ import {
 } from "../../../foundation/dai.js";
 import {get} from "../../../../_snowpack/pkg/lit-translate.js";
 export const supportedCdcTypes = [
+  "ACD",
   "ACT",
   "APC",
   "ASG",
@@ -44,6 +45,33 @@ export const supportedCdcTypes = [
   "SPS"
 ];
 export const cdcProcessings = {
+  ACD: {
+    monitor: {
+      "30": {
+        daPaths: [
+          {path: ["general"]},
+          {path: ["phsA"]},
+          {path: ["phsB"]},
+          {path: ["phsC"]},
+          {path: ["neut"]}
+        ],
+        create: createAddressAction,
+        inverted: true
+      },
+      "40": {
+        daPaths: [
+          {path: ["general"]},
+          {path: ["phsA"]},
+          {path: ["phsB"]},
+          {path: ["phsC"]},
+          {path: ["neut"]}
+        ],
+        create: createAddressAction,
+        inverted: false
+      }
+    },
+    control: {}
+  },
   ACT: {
     monitor: {
       "30": {
