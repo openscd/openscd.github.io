@@ -68,6 +68,18 @@ export function editAddressWizard(iedElement, doiElement, daiElement, addressEle
   function renderAddressWizard() {
     const cdc = getCdcValueFromDOIElement(doiElement) ?? "";
     const ti = addressElement.getAttribute("ti") ?? "";
+    let casdu = addressElement.getAttribute("casdu") ?? "";
+    function validateIOA(value) {
+      const existingAddress = iedElement.querySelector(`Address[casdu="${casdu}"][ioa="${value}"]`);
+      if (existingAddress) {
+        this.validationMessage = get("protocol104.wizard.error.ioaConflict");
+        return {
+          valid: false,
+          customError: true
+        };
+      }
+      return {};
+    }
     const fields = [
       html`<wizard-textfield
         label="IED"
@@ -98,12 +110,16 @@ export function editAddressWizard(iedElement, doiElement, daiElement, addressEle
       </mwc-textarea>`,
       html`<wizard-textfield
         label="casdu"
+        @change="${(evt) => {
+        casdu = evt.target.value ?? "";
+      }}}"
         .maybeValue="${live(addressElement.getAttribute("casdu") ?? "")}"
         helper="${translate("protocol104.wizard.casduHelper")}"
         required
       >
       </wizard-textfield>`,
       html`<wizard-textfield
+        .validityTransform="${validateIOA}"
         label="ioa"
         .maybeValue="${live(addressElement.getAttribute("ioa") ?? "")}"
         helper="${translate("protocol104.wizard.ioaHelper")}"
