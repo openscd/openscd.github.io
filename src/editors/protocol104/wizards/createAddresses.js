@@ -19,6 +19,7 @@ import {
   cdcProcessings
 } from "../foundation/cdc.js";
 import {createActions, createCheckActions} from "../foundation/actions.js";
+import {getSignalName} from "../foundation/signalNames.js";
 function getSwitchValue(wizard, name) {
   const switchElement = wizard.shadowRoot?.querySelector(`mwc-switch[id="${name}"`);
   return switchElement?.checked ?? false;
@@ -36,7 +37,7 @@ export function createAddressesAction(lnElement, doElement, hasControlTis) {
       })
     };
     const lnClonedElement = lnElement.cloneNode(true);
-    const selectedMonitorTi = getValue(inputs.find((i) => i.label === "monitorTi")) ?? "";
+    const selectedMonitorTi = getValue(inputs.find((i) => i.label === "monitorTi"))?.split(" (")[0] ?? "";
     const monitorInverted = getSwitchValue(wizard, "monitorInverted");
     const tiInformation = cdcProcessing.monitor[selectedMonitorTi];
     if (tiInformation) {
@@ -137,13 +138,15 @@ export function createAddressesWizard(lnElement, doElement) {
             required
           >
             ${monitorTis.map((monitorTi) => html` <mwc-list-item value="${monitorTi}">
-                  <span>${monitorTi}</span>
+                  <span
+                    >${monitorTi + " (" + getSignalName(monitorTi) + ")"}</span
+                  >
                 </mwc-list-item>`)}
           </wizard-select>`);
       } else {
         fields.push(html`<wizard-textfield
             label="monitorTi"
-            .maybeValue=${monitorTis[0] ? monitorTis[0] : ""}
+            .maybeValue=${monitorTis[0] ? monitorTis[0] + " (" + getSignalName(monitorTis[0]) + ")" : ""}
             disabled
           >
           </wizard-textfield>`);

@@ -18,6 +18,7 @@ import {
   getFullPath
 } from "../foundation/foundation.js";
 import {hasScaleFields, hasUnitMultiplierField} from "../foundation/cdc.js";
+import {getSignalName} from "../foundation/signalNames.js";
 const allowedMultipliers = [
   "m",
   "k",
@@ -126,7 +127,12 @@ export function editAddressWizard(iedElement, doiElement, daiElement, addressEle
         required
       >
       </wizard-textfield>`,
-      html`<wizard-textfield label="ti" .maybeValue=${ti} disabled readonly>
+      html`<wizard-textfield
+        label="ti"
+        .maybeValue=${ti + " (" + getSignalName(ti) + ")"}
+        disabled
+        readonly
+      >
       </wizard-textfield>`
     ];
     if (hasUnitMultiplierField(cdc, ti)) {
