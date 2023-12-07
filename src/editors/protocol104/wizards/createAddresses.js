@@ -87,6 +87,13 @@ export function disableInvertedSwitch(tiInfo) {
   });
   return disableSwitch;
 }
+export function disableMonitorInvertedSwitch(tiInfo, tiNumberInfo) {
+  let disableSwitch = true;
+  const tiNumber = tiNumberInfo.split(" (")[0];
+  if (!isNaN(+tiNumber))
+    disableSwitch = !tiInfo[tiNumber].inverted;
+  return disableSwitch;
+}
 export function createAddressesWizard(lnElement, doElement) {
   const cdc = getCdcValueFromDOElement(doElement) ?? "";
   const cdcProcessing = cdcProcessings[cdc];
@@ -96,6 +103,13 @@ export function createAddressesWizard(lnElement, doElement) {
     const doName = getNameAttribute(doElement) ?? "";
     const iedElement = lnElement.closest("IED");
     const fullPath = getFullPath(lnElement, "IED");
+    function setMonitorInvertedSwitch(e) {
+      const selectedTi = e.target.selected.value;
+      const selectElement = e.target.parentElement.querySelector('mwc-switch[id="monitorInverted"]');
+      if (!selectElement)
+        return;
+      selectElement.disabled = disableMonitorInvertedSwitch(cdcProcessing.monitor, selectedTi);
+    }
     const fields = [
       html`<wizard-textfield
         label="IED"
@@ -130,12 +144,16 @@ export function createAddressesWizard(lnElement, doElement) {
     ];
     if (monitorTis.length > 0) {
       fields.push(html`<wizard-divider></wizard-divider>`);
+      let disabledSwitchByDefault = true;
       if (monitorTis.length > 1) {
         fields.push(html`<wizard-select
             label="monitorTi"
             helper="${translate("protocol104.wizard.monitorTiHelper")}"
             fixedMenuPosition
             required
+            @selected=${(e) => {
+          setMonitorInvertedSwitch(e);
+        }}
           >
             ${monitorTis.map((monitorTi) => html` <mwc-list-item value="${monitorTi}">
                   <span
@@ -144,6 +162,7 @@ export function createAddressesWizard(lnElement, doElement) {
                 </mwc-list-item>`)}
           </wizard-select>`);
       } else {
+        disabledSwitchByDefault = disableMonitorInvertedSwitch(cdcProcessing.monitor, monitorTis[0]);
         fields.push(html`<wizard-textfield
             label="monitorTi"
             .maybeValue=${monitorTis[0] ? monitorTis[0] + " (" + getSignalName(monitorTis[0]) + ")" : ""}
@@ -156,7 +175,7 @@ export function createAddressesWizard(lnElement, doElement) {
         >
           <mwc-switch
             id="monitorInverted"
-            .disabled="${disableInvertedSwitch(cdcProcessing.monitor)}"
+            .disabled="${disabledSwitchByDefault}"
           >
           </mwc-switch>
         </mwc-formfield>`);

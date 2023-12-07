@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">97.76% </span>
+                <span class="strong">97.81% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>830/849</span>
+                <span class='fraction'>849/868</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">97.76% </span>
+                <span class="strong">97.81% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>830/849</span>
+                <span class='fraction'>849/868</span>
             </div>
         
             
@@ -912,7 +912,45 @@
 <a name='L847'></a><a href='#L847'>847</a>
 <a name='L848'></a><a href='#L848'>848</a>
 <a name='L849'></a><a href='#L849'>849</a>
-<a name='L850'></a><a href='#L850'>850</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">10x</span>
+<a name='L850'></a><a href='#L850'>850</a>
+<a name='L851'></a><a href='#L851'>851</a>
+<a name='L852'></a><a href='#L852'>852</a>
+<a name='L853'></a><a href='#L853'>853</a>
+<a name='L854'></a><a href='#L854'>854</a>
+<a name='L855'></a><a href='#L855'>855</a>
+<a name='L856'></a><a href='#L856'>856</a>
+<a name='L857'></a><a href='#L857'>857</a>
+<a name='L858'></a><a href='#L858'>858</a>
+<a name='L859'></a><a href='#L859'>859</a>
+<a name='L860'></a><a href='#L860'>860</a>
+<a name='L861'></a><a href='#L861'>861</a>
+<a name='L862'></a><a href='#L862'>862</a>
+<a name='L863'></a><a href='#L863'>863</a>
+<a name='L864'></a><a href='#L864'>864</a>
+<a name='L865'></a><a href='#L865'>865</a>
+<a name='L866'></a><a href='#L866'>866</a>
+<a name='L867'></a><a href='#L867'>867</a>
+<a name='L868'></a><a href='#L868'>868</a>
+<a name='L869'></a><a href='#L869'>869</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-yes">10x</span>
 <span class="cline-any cline-yes">10x</span>
 <span class="cline-any cline-yes">10x</span>
 <span class="cline-any cline-yes">10x</span>
@@ -1882,7 +1920,6 @@ export const cdcProcessings: Record&lt;
           { path: ['neut'] },
         ],
         create: createAddressAction,
-        inverted: false,
       },
     },
     control: {},
@@ -1912,6 +1949,7 @@ export const cdcProcessings: Record&lt;
       '36': {
         daPaths: [{ path: ['mxVal', 'f'] }],
         create: createAddressAction,
+        inverted: true,
       },
     },
     control: {
@@ -1928,6 +1966,7 @@ export const cdcProcessings: Record&lt;
       '63': {
         daPaths: [{ path: ['setMag', 'f'] }],
         create: createAddressAction,
+        inverted: true,
       },
     },
     control: {},
@@ -1937,6 +1976,7 @@ export const cdcProcessings: Record&lt;
       '36': {
         daPaths: [{ path: ['mxVal', 'f'] }],
         create: createAddressAction,
+        inverted: true,
       },
     },
     control: {
@@ -1953,6 +1993,7 @@ export const cdcProcessings: Record&lt;
       '37': {
         daPaths: [{ path: ['actVal'] }, { path: ['frVal'] }],
         create: createAddressAction,
+        inverted: true,
       },
     },
     control: {},
@@ -1962,6 +2003,7 @@ export const cdcProcessings: Record&lt;
       '32': {
         daPaths: [{ path: ['valWTr', 'posVal'] }],
         create: createAddressAction,
+        inverted: true,
       },
     },
     control: {
@@ -1978,10 +2020,12 @@ export const cdcProcessings: Record&lt;
       '35': {
         daPaths: [{ path: ['mag', 'i'] }, { path: ['ang', 'i'] }],
         create: createAddressAction,
+        inverted: true,
       },
       '36': {
         daPaths: [{ path: ['mag', 'f'] }, { path: ['ang', 'f'] }],
         create: createAddressAction,
+        inverted: true,
       },
     },
     control: {},
@@ -1991,6 +2035,7 @@ export const cdcProcessings: Record&lt;
       '31': {
         daPaths: [{ path: ['stVal'] }],
         create: createAddressAction,
+        inverted: true,
       },
     },
     control: {
@@ -2007,6 +2052,7 @@ export const cdcProcessings: Record&lt;
       '31': {
         daPaths: [{ path: ['stVal'] }],
         create: createAddressAction,
+        inverted: true,
       },
     },
     control: {},
@@ -2016,10 +2062,12 @@ export const cdcProcessings: Record&lt;
       '58': {
         daPaths: [{ path: ['setVal'] }],
         create: createAddressWithExpectValueAction,
+        inverted: true,
       },
       '62': {
         daPaths: [{ path: ['setVal'] }],
         create: createAddressAction,
+        inverted: true,
       },
     },
     control: {},
@@ -2029,6 +2077,7 @@ export const cdcProcessings: Record&lt;
       '35': {
         daPaths: [{ path: ['stVal'] }],
         create: createAddressAction,
+        inverted: true,
       },
     },
     control: {
@@ -2045,6 +2094,7 @@ export const cdcProcessings: Record&lt;
       '62': {
         daPaths: [{ path: ['setVal'] }],
         create: createAddressAction,
+        inverted: true,
       },
     },
     control: {},
@@ -2059,10 +2109,12 @@ export const cdcProcessings: Record&lt;
       '33': {
         daPaths: [{ path: ['stVal'] }],
         create: createAddressAction,
+        inverted: true,
       },
       '35': {
         daPaths: [{ path: ['stVal'] }],
         create: createAddressAction,
+        inverted: true,
       },
     },
     control: {},
@@ -2072,6 +2124,7 @@ export const cdcProcessings: Record&lt;
       '32': {
         daPaths: [{ path: ['valWTr', 'posVal'] }],
         create: createAddressAction,
+        inverted: true,
       },
     },
     control: {
@@ -2088,10 +2141,12 @@ export const cdcProcessings: Record&lt;
       '35': {
         daPaths: [{ path: ['mag', 'i'] }],
         create: createAddressAction,
+        inverted: true,
       },
       '36': {
         daPaths: [{ path: ['mag', 'f'] }],
         create: createAddressAction,
+        inverted: true,
       },
     },
     control: {},
@@ -2101,6 +2156,7 @@ export const cdcProcessings: Record&lt;
       '37': {
         daPaths: [{ path: ['cnt'] }],
         create: createAddressAction,
+        inverted: true,
       },
     },
     control: {},
@@ -2127,6 +2183,7 @@ export const cdcProcessings: Record&lt;
       '58': {
         daPaths: [{ path: ['setVal'] }],
         create: createAddressAction,
+        inverted: true,
       },
     },
     control: {},
@@ -2617,7 +2674,7 @@ export function hasScaleFields(cdc: string, ti: string): boolean {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-12-06T11:02:30.435Z
+                at 2023-12-07T09:10:57.046Z
             </div>
         <script src="../../../../prettify.js"></script>
         <script>

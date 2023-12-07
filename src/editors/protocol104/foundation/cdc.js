@@ -66,8 +66,7 @@ export const cdcProcessings = {
           {path: ["phsC"]},
           {path: ["neut"]}
         ],
-        create: createAddressAction,
-        inverted: false
+        create: createAddressAction
       }
     },
     control: {}
@@ -96,7 +95,8 @@ export const cdcProcessings = {
     monitor: {
       "36": {
         daPaths: [{path: ["mxVal", "f"]}],
-        create: createAddressAction
+        create: createAddressAction,
+        inverted: true
       }
     },
     control: {
@@ -112,7 +112,8 @@ export const cdcProcessings = {
     monitor: {
       "63": {
         daPaths: [{path: ["setMag", "f"]}],
-        create: createAddressAction
+        create: createAddressAction,
+        inverted: true
       }
     },
     control: {}
@@ -121,7 +122,8 @@ export const cdcProcessings = {
     monitor: {
       "36": {
         daPaths: [{path: ["mxVal", "f"]}],
-        create: createAddressAction
+        create: createAddressAction,
+        inverted: true
       }
     },
     control: {
@@ -137,7 +139,8 @@ export const cdcProcessings = {
     monitor: {
       "37": {
         daPaths: [{path: ["actVal"]}, {path: ["frVal"]}],
-        create: createAddressAction
+        create: createAddressAction,
+        inverted: true
       }
     },
     control: {}
@@ -146,7 +149,8 @@ export const cdcProcessings = {
     monitor: {
       "32": {
         daPaths: [{path: ["valWTr", "posVal"]}],
-        create: createAddressAction
+        create: createAddressAction,
+        inverted: true
       }
     },
     control: {
@@ -162,11 +166,13 @@ export const cdcProcessings = {
     monitor: {
       "35": {
         daPaths: [{path: ["mag", "i"]}, {path: ["ang", "i"]}],
-        create: createAddressAction
+        create: createAddressAction,
+        inverted: true
       },
       "36": {
         daPaths: [{path: ["mag", "f"]}, {path: ["ang", "f"]}],
-        create: createAddressAction
+        create: createAddressAction,
+        inverted: true
       }
     },
     control: {}
@@ -175,7 +181,8 @@ export const cdcProcessings = {
     monitor: {
       "31": {
         daPaths: [{path: ["stVal"]}],
-        create: createAddressAction
+        create: createAddressAction,
+        inverted: true
       }
     },
     control: {
@@ -191,7 +198,8 @@ export const cdcProcessings = {
     monitor: {
       "31": {
         daPaths: [{path: ["stVal"]}],
-        create: createAddressAction
+        create: createAddressAction,
+        inverted: true
       }
     },
     control: {}
@@ -200,11 +208,13 @@ export const cdcProcessings = {
     monitor: {
       "58": {
         daPaths: [{path: ["setVal"]}],
-        create: createAddressWithExpectValueAction
+        create: createAddressWithExpectValueAction,
+        inverted: true
       },
       "62": {
         daPaths: [{path: ["setVal"]}],
-        create: createAddressAction
+        create: createAddressAction,
+        inverted: true
       }
     },
     control: {}
@@ -213,7 +223,8 @@ export const cdcProcessings = {
     monitor: {
       "35": {
         daPaths: [{path: ["stVal"]}],
-        create: createAddressAction
+        create: createAddressAction,
+        inverted: true
       }
     },
     control: {
@@ -229,7 +240,8 @@ export const cdcProcessings = {
     monitor: {
       "62": {
         daPaths: [{path: ["setVal"]}],
-        create: createAddressAction
+        create: createAddressAction,
+        inverted: true
       }
     },
     control: {}
@@ -243,11 +255,13 @@ export const cdcProcessings = {
       },
       "33": {
         daPaths: [{path: ["stVal"]}],
-        create: createAddressAction
+        create: createAddressAction,
+        inverted: true
       },
       "35": {
         daPaths: [{path: ["stVal"]}],
-        create: createAddressAction
+        create: createAddressAction,
+        inverted: true
       }
     },
     control: {}
@@ -256,7 +270,8 @@ export const cdcProcessings = {
     monitor: {
       "32": {
         daPaths: [{path: ["valWTr", "posVal"]}],
-        create: createAddressAction
+        create: createAddressAction,
+        inverted: true
       }
     },
     control: {
@@ -272,11 +287,13 @@ export const cdcProcessings = {
     monitor: {
       "35": {
         daPaths: [{path: ["mag", "i"]}],
-        create: createAddressAction
+        create: createAddressAction,
+        inverted: true
       },
       "36": {
         daPaths: [{path: ["mag", "f"]}],
-        create: createAddressAction
+        create: createAddressAction,
+        inverted: true
       }
     },
     control: {}
@@ -285,7 +302,8 @@ export const cdcProcessings = {
     monitor: {
       "37": {
         daPaths: [{path: ["cnt"]}],
-        create: createAddressAction
+        create: createAddressAction,
+        inverted: true
       }
     },
     control: {}
@@ -311,7 +329,8 @@ export const cdcProcessings = {
     monitor: {
       "58": {
         daPaths: [{path: ["setVal"]}],
-        create: createAddressAction
+        create: createAddressAction,
+        inverted: true
       }
     },
     control: {}
