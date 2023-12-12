@@ -12,7 +12,7 @@ var __decorate = (decorators, target, key, kind) => {
 import {
   customElement,
   html,
-  internalProperty,
+  state,
   property,
   query
 } from "../_snowpack/pkg/lit-element.js";
@@ -164,7 +164,7 @@ __decorate([
   property({type: String})
 ], WizardTextField.prototype, "unit", 2);
 __decorate([
-  internalProperty()
+  state()
 ], WizardTextField.prototype, "null", 1);
 __decorate([
   property({type: String})

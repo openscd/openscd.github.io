@@ -9,12 +9,7 @@ var __decorate = (decorators, target, key, kind) => {
     __defProp(target, key, result);
   return result;
 };
-import {
-  html,
-  internalProperty,
-  property,
-  query
-} from "../_snowpack/pkg/lit-element.js";
+import {html, state, property, query} from "../_snowpack/pkg/lit-element.js";
 import {ifDefined} from "../_snowpack/pkg/lit-html/directives/if-defined.js";
 import {get, translate} from "../_snowpack/pkg/lit-translate.js";
 import "../_snowpack/pkg/@material/mwc-button.js";
@@ -419,7 +414,7 @@ export function Historing(Base) {
     property()
   ], HistoringElement.prototype, "diagnoses", 2);
   __decorate([
-    internalProperty()
+    state()
   ], HistoringElement.prototype, "latestIssue", 2);
   __decorate([
     query("#log")

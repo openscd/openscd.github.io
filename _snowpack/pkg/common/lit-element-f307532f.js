@@ -1804,4 +1804,4 @@ LitElement.render = render;
 /** @nocollapse */
 LitElement.shadowRootOptions = { mode: 'open' };
 
-export { LitElement as L, queryAsync as a, customElement as b, css as c, queryAssignedNodes as d, eventOptions as e, queryAll as f, internalProperty as i, property as p, query as q, state as s, unsafeCSS as u };
+export { LitElement as L, queryAsync as a, customElement as b, css as c, queryAssignedNodes as d, eventOptions as e, queryAll as f, property as p, query as q, state as s, unsafeCSS as u };

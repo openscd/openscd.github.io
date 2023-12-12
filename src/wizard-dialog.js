@@ -15,7 +15,7 @@ import {
   queryAll,
   LitElement,
   property,
-  internalProperty,
+  state,
   TemplateResult,
   html,
   query
@@ -337,7 +337,7 @@ __decorate([
   property({type: Array})
 ], WizardDialog.prototype, "wizard", 2);
 __decorate([
-  internalProperty()
+  state()
 ], WizardDialog.prototype, "pageIndex", 2);
 __decorate([
   queryAll("mwc-dialog")

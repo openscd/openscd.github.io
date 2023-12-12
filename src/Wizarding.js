@@ -9,7 +9,7 @@ var __decorate = (decorators, target, key, kind) => {
     __defProp(target, key, result);
   return result;
 };
-import {html, internalProperty, query} from "../_snowpack/pkg/lit-element.js";
+import {html, state, query} from "../_snowpack/pkg/lit-element.js";
 import {
   ifImplemented
 } from "./foundation.js";
@@ -39,7 +39,7 @@ export function Wizarding(Base) {
     }
   }
   __decorate([
-    internalProperty()
+    state()
   ], WizardingElement.prototype, "workflow", 2);
   __decorate([
     query("wizard-dialog")
