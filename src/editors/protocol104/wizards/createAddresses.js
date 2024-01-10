@@ -50,7 +50,7 @@ export function createAddressesAction(lnElement, doElement, hasControlTis) {
     if (hasControlTis) {
       const ctlModel = getCtlModel(lnElement, doElement);
       if (ctlModel !== null && ctlModel !== "status-only") {
-        const selectedControlTi = getValue(inputs.find((i) => i.label === "controlTi")) ?? "";
+        const selectedControlTi = getValue(inputs.find((i) => i.label === "controlTi"))?.split(" (")[0] ?? "";
         const controlInverted = getSwitchValue(wizard, "controlInverted");
         const tiInformation2 = cdcProcessing.control[selectedControlTi];
         if (tiInformation2) {
@@ -210,13 +210,15 @@ export function createAddressesWizard(lnElement, doElement) {
               required
             >
               ${controlTis.map((controlTi) => html` <mwc-list-item value="${controlTi}">
-                    <span>${controlTi}</span>
+                    <span
+                      >${controlTi + " (" + getSignalName(controlTi) + ")"}</span
+                    >
                   </mwc-list-item>`)}
             </wizard-select>`);
         } else {
           fields.push(html` <wizard-textfield
               label="controlTi"
-              .maybeValue=${controlTis[0] ? controlTis[0] : ""}
+              .maybeValue=${controlTis[0] ? controlTis[0] + " (" + getSignalName(controlTis[0]) + ")" : ""}
               disabled
             >
             </wizard-textfield>`);

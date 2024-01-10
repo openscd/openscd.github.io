@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">93.43% </span>
+                <span class="strong">92.34% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>370/396</span>
+                <span class='fraction'>374/405</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">93.43% </span>
+                <span class="strong">92.34% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>370/396</span>
+                <span class='fraction'>374/405</span>
             </div>
         
             
@@ -459,7 +459,16 @@
 <a name='L394'></a><a href='#L394'>394</a>
 <a name='L395'></a><a href='#L395'>395</a>
 <a name='L396'></a><a href='#L396'>396</a>
-<a name='L397'></a><a href='#L397'>397</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">4x</span>
+<a name='L397'></a><a href='#L397'>397</a>
+<a name='L398'></a><a href='#L398'>398</a>
+<a name='L399'></a><a href='#L399'>399</a>
+<a name='L400'></a><a href='#L400'>400</a>
+<a name='L401'></a><a href='#L401'>401</a>
+<a name='L402'></a><a href='#L402'>402</a>
+<a name='L403'></a><a href='#L403'>403</a>
+<a name='L404'></a><a href='#L404'>404</a>
+<a name='L405'></a><a href='#L405'>405</a>
+<a name='L406'></a><a href='#L406'>406</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-yes">4x</span>
@@ -601,6 +610,8 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -798,6 +809,10 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -807,6 +822,9 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -961,7 +979,9 @@ export function createAddressesAction(
       const ctlModel = getCtlModel(lnElement, doElement);
       if (ctlModel !== null &amp;&amp; ctlModel !== 'status-only') {
         const selectedControlTi =
-          getValue(inputs.find(i =&gt; i.label === <span class="branch-0 cbranch-no" title="branch not covered" >'controlTi')!) ?? '';</span>
+          getValue(inputs.find(i =&gt; i.label === 'controlTi')!)?.split(
+            ' ('
+          )[<span class="branch-0 cbranch-no" title="branch not covered" >0] ?? '';</span>
         const controlInverted = getSwitchValue(wizard, 'controlInverted');
 &nbsp;
         const tiInformation = cdcProcessing.control[selectedControlTi];
@@ -1193,7 +1213,12 @@ export function createAddressesWizard(
 <span class="cstat-no" title="statement not covered" >              ${controlTis.map(</span>
 <span class="cstat-no" title="statement not covered" >                controlTi =&gt;</span>
 <span class="cstat-no" title="statement not covered" >                  html` &lt;mwc-list-item value="${controlTi}"&gt;</span>
-<span class="cstat-no" title="statement not covered" >                    &lt;span&gt;${controlTi}&lt;/span&gt;</span>
+<span class="cstat-no" title="statement not covered" >                    &lt;span</span>
+<span class="cstat-no" title="statement not covered" >                      &gt;${controlTi +</span>
+<span class="cstat-no" title="statement not covered" >                      ' (' +</span>
+<span class="cstat-no" title="statement not covered" >                      getSignalName(controlTi) +</span>
+<span class="cstat-no" title="statement not covered" >                      ')'}&lt;/span</span>
+                    &gt;
                   &lt;/mwc-list-item&gt;`
               )}
             &lt;/wizard-select&gt;`
@@ -1202,7 +1227,9 @@ export function createAddressesWizard(
           fields.push(
             html` &lt;wizard-textfield
               label="controlTi"
-              .maybeValue=${controlTis[0] ? controlTis[<span class="branch-0 cbranch-no" title="branch not covered" >0] : ''}</span>
+              .maybeValue=${controlTis[0]
+                ? controlTis[0] + ' (' + getSignalName(controlTis[0]) + <span class="branch-0 cbranch-no" title="branch not covered" >')'</span>
+<span class="cstat-no" title="statement not covered" >                : ''}</span>
               disabled
             &gt;
             &lt;/wizard-textfield&gt;`
@@ -1258,7 +1285,7 @@ export function createAddressesWizard(
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-12-21T12:54:37.154Z
+                at 2024-01-10T07:26:58.082Z
             </div>
         <script src="../../../../prettify.js"></script>
         <script>
