@@ -23,16 +23,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">99.63% </span>
+                <span class="strong">99.65% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>273/274</span>
+                <span class='fraction'>285/286</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">91.66% </span>
+                <span class="strong">92.59% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>22/24</span>
+                <span class='fraction'>25/27</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">99.63% </span>
+                <span class="strong">99.65% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>273/274</span>
+                <span class='fraction'>285/286</span>
             </div>
         
             
@@ -337,7 +337,19 @@
 <a name='L272'></a><a href='#L272'>272</a>
 <a name='L273'></a><a href='#L273'>273</a>
 <a name='L274'></a><a href='#L274'>274</a>
-<a name='L275'></a><a href='#L275'>275</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">10x</span>
+<a name='L275'></a><a href='#L275'>275</a>
+<a name='L276'></a><a href='#L276'>276</a>
+<a name='L277'></a><a href='#L277'>277</a>
+<a name='L278'></a><a href='#L278'>278</a>
+<a name='L279'></a><a href='#L279'>279</a>
+<a name='L280'></a><a href='#L280'>280</a>
+<a name='L281'></a><a href='#L281'>281</a>
+<a name='L282'></a><a href='#L282'>282</a>
+<a name='L283'></a><a href='#L283'>283</a>
+<a name='L284'></a><a href='#L284'>284</a>
+<a name='L285'></a><a href='#L285'>285</a>
+<a name='L286'></a><a href='#L286'>286</a>
+<a name='L287'></a><a href='#L287'>287</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">10x</span>
 <span class="cline-any cline-yes">10x</span>
 <span class="cline-any cline-yes">10x</span>
 <span class="cline-any cline-yes">10x</span>
@@ -431,11 +443,14 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">10x</span>
 <span class="cline-any cline-yes">10x</span>
 <span class="cline-any cline-yes">10x</span>
 <span class="cline-any cline-yes">10x</span>
 <span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
@@ -478,6 +493,15 @@
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
@@ -670,7 +694,8 @@ export function updateAddressValue(
   addressElement: Element
 ): WizardActor {
   return (inputs: WizardInputElement[]): EditorAction[] =&gt; {
-    const cdc = getCdcValueFromDOIElement(doiElement) ?? '';
+    const foundCdc = getCdcValueFromDOIElement(doiElement) ?? '';
+    const cdc = foundCdc === 'WYE' || foundCdc === 'DEL' ? 'CMV' : foundCdc;
     const ti = addressElement.getAttribute('ti') ?? '';
 &nbsp;
     const casdu = getValue(inputs.find(i =&gt; i.label === 'casdu')!)!;
@@ -716,7 +741,9 @@ export function editAddressWizard(
   addressElement: Element
 ): Wizard {
   function renderAddressWizard(): TemplateResult[] {
-    const cdc = getCdcValueFromDOIElement(<span class="branch-0 cbranch-no" title="branch not covered" >doiElement) ?? '';</span>
+    const foundCdc = getCdcValueFromDOIElement(<span class="branch-0 cbranch-no" title="branch not covered" >doiElement) ?? '';</span>
+    const reqCmvMapping = foundCdc === 'WYE' || foundCdc === 'DEL';
+    const cdc = reqCmvMapping ? 'CMV' : foundCdc;
     const ti = addressElement.getAttribute(<span class="branch-0 cbranch-no" title="branch not covered" >'ti') ?? '';</span>
 &nbsp;
     let casdu = addressElement.getAttribute('casdu') ?? '';
@@ -756,7 +783,16 @@ export function editAddressWizard(
         disabled
       &gt;
       &lt;/mwc-textarea&gt;`,
-      html`&lt;wizard-textfield label="cdc" .maybeValue="${cdc}" disabled readonly&gt;
+      html`&lt;wizard-textfield
+        label="cdc"
+        .maybeValue="${cdc}"
+        .helper="${reqCmvMapping
+          ? translate('protocol104.mappedCmv', { cdc: foundCdc })
+          : ''}"
+        .helperPersistent="${reqCmvMapping}"
+        disabled
+        readonly
+      &gt;
       &lt;/wizard-textfield&gt;`,
       html`&lt;mwc-textarea
         label="DAI"
@@ -892,7 +928,7 @@ export function editAddressWizard(
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2024-01-10T07:26:58.082Z
+                at 2024-01-29T13:01:06.447Z
             </div>
         <script src="../../../../prettify.js"></script>
         <script>

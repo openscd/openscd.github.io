@@ -43,7 +43,8 @@ const allowedMultipliers = [
 ];
 export function updateAddressValue(doiElement, daiElement, addressElement) {
   return (inputs) => {
-    const cdc = getCdcValueFromDOIElement(doiElement) ?? "";
+    const foundCdc = getCdcValueFromDOIElement(doiElement) ?? "";
+    const cdc = foundCdc === "WYE" || foundCdc === "DEL" ? "CMV" : foundCdc;
     const ti = addressElement.getAttribute("ti") ?? "";
     const casdu = getValue(inputs.find((i) => i.label === "casdu"));
     const ioa = getValue(inputs.find((i) => i.label === "ioa"));
@@ -67,7 +68,9 @@ export function updateAddressValue(doiElement, daiElement, addressElement) {
 }
 export function editAddressWizard(iedElement, doiElement, daiElement, addressElement) {
   function renderAddressWizard() {
-    const cdc = getCdcValueFromDOIElement(doiElement) ?? "";
+    const foundCdc = getCdcValueFromDOIElement(doiElement) ?? "";
+    const reqCmvMapping = foundCdc === "WYE" || foundCdc === "DEL";
+    const cdc = reqCmvMapping ? "CMV" : foundCdc;
     const ti = addressElement.getAttribute("ti") ?? "";
     let casdu = addressElement.getAttribute("casdu") ?? "";
     function validateIOA(value) {
@@ -98,7 +101,14 @@ export function editAddressWizard(iedElement, doiElement, daiElement, addressEle
         disabled
       >
       </mwc-textarea>`,
-      html`<wizard-textfield label="cdc" .maybeValue="${cdc}" disabled readonly>
+      html`<wizard-textfield
+        label="cdc"
+        .maybeValue="${cdc}"
+        .helper="${reqCmvMapping ? translate("protocol104.mappedCmv", {cdc: foundCdc}) : ""}"
+        .helperPersistent="${reqCmvMapping}"
+        disabled
+        readonly
+      >
       </wizard-textfield>`,
       html`<mwc-textarea
         label="DAI"

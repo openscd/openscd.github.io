@@ -64,6 +64,7 @@ Open Substation Configuration Designer.
 
 | Method                   | Type                                             | Description                                      |
 |--------------------------|--------------------------------------------------|--------------------------------------------------|
+| `handleOpenDoc`          | `({ detail: { docName, doc } }: OpenEvent): void` |                                                  |
 | `performUpdate`          | `(): Promise<void>`                              |                                                  |
 | `redo`                   | `(): boolean`                                    |                                                  |
 | `removeSetting`          | `<T extends "language" \| "theme" \| "mode" \| "showieds" \| "IEC 61850-7-2" \| "IEC 61850-7-3" \| "IEC 61850-7-4" \| "IEC 61850-8-1">(setting: T): void` | Remove the `setting` in `localStorage`.          |

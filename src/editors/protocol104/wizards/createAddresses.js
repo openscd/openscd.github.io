@@ -95,8 +95,10 @@ export function disableMonitorInvertedSwitch(tiInfo, tiNumberInfo) {
   return disableSwitch;
 }
 export function createAddressesWizard(lnElement, doElement) {
-  const cdc = getCdcValueFromDOElement(doElement) ?? "";
-  const cdcProcessing = cdcProcessings[cdc];
+  const foundCdc = getCdcValueFromDOElement(doElement) ?? "";
+  const reqCmvMapping = foundCdc === "WYE" || foundCdc === "DEL";
+  const cdc = reqCmvMapping ? "CMV" : foundCdc;
+  const cdcProcessing = cdcProcessings[foundCdc];
   const monitorTis = Object.keys(cdcProcessing.monitor);
   const controlTis = Object.keys(cdcProcessing.control);
   function renderCreateAddressesWizard() {
@@ -109,6 +111,12 @@ export function createAddressesWizard(lnElement, doElement) {
       if (!selectElement)
         return;
       selectElement.disabled = disableMonitorInvertedSwitch(cdcProcessing.monitor, selectedTi);
+    }
+    function setMonitorControlValue(e, isMonitor) {
+      const selectedTi = e.target.selected.value;
+      const counterType = isMonitor ? "controlTi" : "monitorTi";
+      const availableTis = e.target.parentElement.querySelector(`wizard-select[label="${counterType}"]`);
+      availableTis.maybeValue = isMonitor ? selectedTi === "30" ? "58" : "62" : selectedTi === "58" ? "30" : "35";
     }
     const fields = [
       html`<wizard-textfield
@@ -136,7 +144,9 @@ export function createAddressesWizard(lnElement, doElement) {
       </wizard-textfield>`,
       html`<wizard-textfield
         label="Common Data Class"
-        .maybeValue=${cdc}
+        .maybeValue="${cdc}"
+        .helper="${reqCmvMapping ? translate("protocol104.mappedCmv", {cdc: foundCdc}) : ""}"
+        .helperPersistent="${reqCmvMapping}"
         disabled
         readonly
       >
@@ -153,6 +163,8 @@ export function createAddressesWizard(lnElement, doElement) {
             required
             @selected=${(e) => {
           setMonitorInvertedSwitch(e);
+          if (cdc === "ENC")
+            setMonitorControlValue(e, true);
         }}
           >
             ${monitorTis.map((monitorTi) => html` <mwc-list-item value="${monitorTi}">
@@ -208,6 +220,10 @@ export function createAddressesWizard(lnElement, doElement) {
               helper="${translate("protocol104.wizard.controlTiHelper")}"
               fixedMenuPosition
               required
+              @selected=${(e) => {
+            if (cdc === "ENC")
+              setMonitorControlValue(e, false);
+          }}
             >
               ${controlTis.map((controlTi) => html` <mwc-list-item value="${controlTi}">
                     <span

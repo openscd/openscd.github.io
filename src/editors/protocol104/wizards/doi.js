@@ -30,7 +30,8 @@ function renderTiOverview(foundTis, label) {
 export function renderDOIWizard(doiElement) {
   const iedElement = doiElement.closest("IED");
   const fullpath = getFullPath(doiElement, "IED");
-  const cdc = getCdcValueFromDOIElement(doiElement);
+  const foundCdc = getCdcValueFromDOIElement(doiElement);
+  const cdc = foundCdc === "WYE" || foundCdc === "DEL" ? "CMV" : foundCdc;
   const fields = [
     html`<wizard-textfield
       label="IED"

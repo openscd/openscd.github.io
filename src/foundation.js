@@ -180,6 +180,10 @@ export function getNameAttribute(element) {
   const name2 = element.getAttribute("name");
   return name2 ? name2 : void 0;
 }
+export function getLdNameAttribute(element) {
+  const name2 = element.getAttribute("ldName");
+  return name2 ? name2 : void 0;
+}
 export function getDescriptionAttribute(element) {
   const name2 = element.getAttribute("desc");
   return name2 ? name2 : void 0;

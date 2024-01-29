@@ -22,21 +22,30 @@ import {translate} from "../../../_snowpack/pkg/lit-translate.js";
 import {
   getDescriptionAttribute,
   getInstanceAttribute,
-  getNameAttribute
+  getNameAttribute,
+  getLdNameAttribute,
+  newWizardEvent
 } from "../../foundation.js";
 import {logicalDeviceIcon} from "../../icons/ied-icons.js";
 import "../../action-pane.js";
 import "./ln-container.js";
+import {wizards} from "../../wizards/wizard-library.js";
 import {Container} from "./foundation.js";
 export let LDeviceContainer = class extends Container {
   constructor() {
     super(...arguments);
     this.selectedLNClasses = [];
   }
+  openEditWizard() {
+    const wizard = wizards["LDevice"].edit(this.element);
+    if (wizard)
+      this.dispatchEvent(newWizardEvent(wizard));
+  }
   header() {
     const nameOrInst = getNameAttribute(this.element) ?? getInstanceAttribute(this.element);
     const desc = getDescriptionAttribute(this.element);
-    return html`${nameOrInst}${desc ? html` &mdash; ${desc}` : nothing}`;
+    const ldName = getLdNameAttribute(this.element);
+    return html`${nameOrInst}${desc ? html` &mdash; ${desc}` : nothing}${ldName ? html` &mdash; ${ldName}` : nothing}`;
   }
   firstUpdated() {
     this.requestUpdate();
@@ -57,6 +66,12 @@ export let LDeviceContainer = class extends Container {
     const lnElements = this.lnElements;
     return html`<action-pane .label="${this.header()}">
       <mwc-icon slot="icon">${logicalDeviceIcon}</mwc-icon>
+      <abbr slot="action" title="${translate("edit")}">
+        <mwc-icon-button
+          icon="edit"
+          @click=${() => this.openEditWizard()}
+        ></mwc-icon-button>
+      </abbr>
       ${lnElements.length > 0 ? html`<abbr
             slot="action"
             title="${translate("iededitor.toggleChildElements")}"
@@ -87,6 +102,10 @@ LDeviceContainer.styles = css`
       grid-gap: 12px;
       box-sizing: border-box;
       grid-template-columns: repeat(auto-fit, minmax(316px, auto));
+    }
+
+    abbr {
+      text-decoration: none;
     }
 
     @media (max-width: 387px) {

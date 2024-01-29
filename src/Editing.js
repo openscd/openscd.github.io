@@ -31,6 +31,7 @@ export function Editing(Base) {
       this.docId = "";
       this.addEventListener("editor-action", this.onAction);
       this.addEventListener("open-doc", this.onOpenDoc);
+      this.addEventListener("oscd-open", this.handleOpenDoc);
     }
     checkCreateValidity(create) {
       if (create.checkValidity !== void 0)
@@ -285,6 +286,10 @@ export function Editing(Base) {
         kind: "info",
         title: get("openSCD.loaded", {name: this.docName})
       }));
+    }
+    handleOpenDoc({detail: {docName, doc}}) {
+      this.doc = doc;
+      this.docName = docName;
     }
   }
   __decorate([
