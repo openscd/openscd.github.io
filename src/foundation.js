@@ -147,6 +147,17 @@ export function newPendingStateEvent(promise, eventInitDict) {
     detail: {promise, ...eventInitDict?.detail}
   });
 }
+export function newSettingsUIEvent(show, eventInitDict) {
+  return new CustomEvent("oscd-settings", {
+    bubbles: true,
+    composed: true,
+    ...eventInitDict,
+    detail: {
+      show,
+      ...eventInitDict?.detail
+    }
+  });
+}
 export function newValidateEvent(eventInitDict) {
   return new CustomEvent("validate", {
     bubbles: true,

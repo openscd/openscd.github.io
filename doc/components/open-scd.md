@@ -3,79 +3,68 @@
 The `<open-scd>` custom element is the main entry point of the
 Open Substation Configuration Designer.
 
-**Mixins:** Waiting, Hosting, Setting, Wizarding, Plugging, Editing, Historing
+**Mixins:** Hosting, Wizarding, Plugging, Editing, Historing
 
 ## Properties
 
-| Property           | Attribute   | Modifiers | Type                                    | Default                            | Description                                      |
-|--------------------|-------------|-----------|-----------------------------------------|------------------------------------|--------------------------------------------------|
-| `activeTab`        | `activeTab` |           | `number`                                | 0                                  | The currently active editor tab.                 |
-| `bottomMenu`       |             | readonly  | `Plugin[]`                              |                                    |                                                  |
-| `canRedo`          |             | readonly  | `boolean`                               |                                    |                                                  |
-| `canUndo`          |             | readonly  | `boolean`                               |                                    |                                                  |
-| `darkThemeUI`      |             |           | `Switch`                                |                                    |                                                  |
-| `diagnoses`        | `diagnoses` |           | `Map<string, IssueDetail[]>`            | "new Map<string, IssueDetail[]>()" |                                                  |
-| `diagnosticUI`     |             |           | `Dialog`                                |                                    |                                                  |
-| `doc`              |             |           | `XMLDocument \| null`                   | null                               | The `XMLDocument` to be edited                   |
-| `docId`            | `docId`     |           | `string`                                | ""                                 | The UUID of the current [[`doc`]]                |
-| `docName`          | `docName`   |           | `string`                                | ""                                 | The name of the current [[`doc`]]                |
-| `docs`             |             | readonly  | `Record<string, XMLDocument>`           |                                    |                                                  |
-| `editCount`        | `editCount` |           | `number`                                | -1                                 | Index of the last [[`EditorAction`]] applied.    |
-| `editors`          |             | readonly  | `Plugin[]`                              |                                    |                                                  |
-| `errorUI`          |             |           | `Snackbar`                              |                                    |                                                  |
-| `handleKeyPress`   |             |           |                                         |                                    |                                                  |
-| `history`          | `history`   |           | `CommitEntry[]`                         | []                                 | All [[`CommitEntry`]]s received so far through [[`LogEvent`]]s |
-| `historyUI`        |             |           | `Dialog`                                |                                    |                                                  |
-| `infoUI`           |             |           | `Snackbar`                              |                                    |                                                  |
-| `issueUI`          |             |           | `Snackbar`                              |                                    |                                                  |
-| `languageUI`       |             |           | `Select`                                |                                    |                                                  |
-| `latestIssue`      |             |           | `IssueDetail`                           |                                    |                                                  |
-| `log`              | `log`       |           | `InfoEntry[]`                           | []                                 | All [[`LogEntry`]]s received so far through [[`LogEvent`]]s. |
-| `logUI`            |             |           | `Dialog`                                |                                    |                                                  |
-| `menu`             |             | readonly  | `(MenuItem \| "divider")[]`             |                                    |                                                  |
-| `menuEntries`      |             | readonly  | `Plugin[]`                              |                                    |                                                  |
-| `menuUI`           |             |           | `Drawer`                                |                                    |                                                  |
-| `middleMenu`       |             | readonly  | `Plugin[]`                              |                                    |                                                  |
-| `modeUI`           |             |           | `Switch`                                |                                    |                                                  |
-| `nextAction`       |             | readonly  | `number`                                |                                    |                                                  |
-| `nsdoc`            |             |           | `Nsdoc`                                 | "initializeNsdoc()"                | Object containing all *.nsdoc files and a function extracting element's label form them |
-| `onLog`            |             |           |                                         |                                    |                                                  |
-| `onPendingState`   |             |           |                                         |                                    |                                                  |
-| `pluginDownloadUI` |             |           | `Dialog`                                |                                    |                                                  |
-| `pluginList`       |             |           | `List`                                  |                                    |                                                  |
-| `pluginUI`         |             |           | `Dialog`                                |                                    |                                                  |
-| `previousAction`   |             | readonly  | `number`                                |                                    |                                                  |
-| `redo`             |             |           |                                         |                                    |                                                  |
-| `settings`         | `settings`  | readonly  | `Settings`                              |                                    | Current [[`Settings`]] in `localStorage`, default to [[`defaults`]]. |
-| `settingsUI`       |             |           | `Dialog`                                |                                    |                                                  |
-| `showiedsUI`       |             |           | `Switch`                                |                                    |                                                  |
-| `src`              | `src`       |           | `string`                                |                                    | The current file's URL. `blob:` URLs are *revoked after parsing*! |
-| `topMenu`          |             | readonly  | `Plugin[]`                              |                                    |                                                  |
-| `undo`             |             |           |                                         |                                    |                                                  |
-| `validated`        |             |           | `Promise<void>`                         | "Promise.resolve()"                |                                                  |
-| `validators`       |             | readonly  | `Plugin[]`                              |                                    |                                                  |
-| `waiting`          | `waiting`   |           | `boolean`                               | false                              | Whether the element is currently waiting for some async work. |
-| `warningUI`        |             |           | `Snackbar`                              |                                    |                                                  |
-| `wizardUI`         |             |           | `WizardDialog`                          |                                    |                                                  |
-| `workDone`         |             |           | `Promise<PromiseSettledResult<void>[]>` | "Promise.allSettled(this.work)"    | A promise which resolves once all currently pending work is done. |
-| `workflow`         |             |           | `WizardFactory[]`                       | []                                 | FIFO queue of [[`Wizard`]]s to display.          |
+| Property           | Attribute   | Modifiers | Type                          | Default                            | Description                                      |
+|--------------------|-------------|-----------|-------------------------------|------------------------------------|--------------------------------------------------|
+| `activeTab`        | `activeTab` |           | `number`                      | 0                                  | The currently active editor tab.                 |
+| `bottomMenu`       |             | readonly  | `Plugin[]`                    |                                    |                                                  |
+| `canRedo`          |             | readonly  | `boolean`                     |                                    |                                                  |
+| `canUndo`          |             | readonly  | `boolean`                     |                                    |                                                  |
+| `diagnoses`        | `diagnoses` |           | `Map<string, IssueDetail[]>`  | "new Map<string, IssueDetail[]>()" |                                                  |
+| `diagnosticUI`     |             |           | `Dialog`                      |                                    |                                                  |
+| `doc`              |             |           | `XMLDocument \| null`         | null                               | The `XMLDocument` to be edited                   |
+| `docId`            | `docId`     |           | `string`                      | ""                                 | The UUID of the current [[`doc`]]                |
+| `docName`          | `docName`   |           | `string`                      | ""                                 | The name of the current [[`doc`]]                |
+| `docs`             |             | readonly  | `Record<string, XMLDocument>` |                                    |                                                  |
+| `editCount`        | `editCount` |           | `number`                      | -1                                 | Index of the last [[`EditorAction`]] applied.    |
+| `editors`          |             | readonly  | `Plugin[]`                    |                                    |                                                  |
+| `errorUI`          |             |           | `Snackbar`                    |                                    |                                                  |
+| `handleKeyPress`   |             |           |                               |                                    |                                                  |
+| `history`          | `history`   |           | `CommitEntry[]`               | []                                 | All [[`CommitEntry`]]s received so far through [[`LogEvent`]]s |
+| `historyUI`        |             |           | `Dialog`                      |                                    |                                                  |
+| `infoUI`           |             |           | `Snackbar`                    |                                    |                                                  |
+| `issueUI`          |             |           | `Snackbar`                    |                                    |                                                  |
+| `latestIssue`      |             |           | `IssueDetail`                 |                                    |                                                  |
+| `log`              | `log`       |           | `InfoEntry[]`                 | []                                 | All [[`LogEntry`]]s received so far through [[`LogEvent`]]s. |
+| `logUI`            |             |           | `Dialog`                      |                                    |                                                  |
+| `menu`             |             | readonly  | `(MenuItem \| "divider")[]`   |                                    |                                                  |
+| `menuEntries`      |             | readonly  | `Plugin[]`                    |                                    |                                                  |
+| `menuUI`           |             |           | `Drawer`                      |                                    |                                                  |
+| `middleMenu`       |             | readonly  | `Plugin[]`                    |                                    |                                                  |
+| `nextAction`       |             | readonly  | `number`                      |                                    |                                                  |
+| `nsdoc`            |             |           | `Nsdoc`                       |                                    |                                                  |
+| `onLog`            |             |           |                               |                                    |                                                  |
+| `pluginDownloadUI` |             |           | `Dialog`                      |                                    |                                                  |
+| `pluginList`       |             |           | `List`                        |                                    |                                                  |
+| `pluginUI`         |             |           | `Dialog`                      |                                    |                                                  |
+| `previousAction`   |             | readonly  | `number`                      |                                    |                                                  |
+| `redo`             |             |           |                               |                                    |                                                  |
+| `src`              | `src`       |           | `string`                      |                                    | The current file's URL. `blob:` URLs are *revoked after parsing*! |
+| `topMenu`          |             | readonly  | `Plugin[]`                    |                                    |                                                  |
+| `undo`             |             |           |                               |                                    |                                                  |
+| `validated`        |             |           | `Promise<void>`               | "Promise.resolve()"                |                                                  |
+| `validators`       |             | readonly  | `Plugin[]`                    |                                    |                                                  |
+| `warningUI`        |             |           | `Snackbar`                    |                                    |                                                  |
+| `wizardUI`         |             |           | `WizardDialog`                |                                    |                                                  |
+| `workflow`         |             |           | `WizardFactory[]`             | []                                 | FIFO queue of [[`Wizard`]]s to display.          |
 
 ## Methods
 
-| Method                   | Type                                             | Description                                      |
-|--------------------------|--------------------------------------------------|--------------------------------------------------|
-| `handleOpenDoc`          | `({ detail: { docName, doc } }: OpenEvent): void` |                                                  |
-| `performUpdate`          | `(): Promise<void>`                              |                                                  |
-| `redo`                   | `(): boolean`                                    |                                                  |
-| `removeSetting`          | `<T extends "language" \| "theme" \| "mode" \| "showieds" \| "IEC 61850-7-2" \| "IEC 61850-7-3" \| "IEC 61850-7-4" \| "IEC 61850-8-1">(setting: T): void` | Remove the `setting` in `localStorage`.          |
-| `renderActionItem`       | `(me: MenuItem \| "divider"): TemplateResult`    |                                                  |
-| `renderDownloadUI`       | `(): TemplateResult`                             |                                                  |
-| `renderEditorTab`        | `({ name, icon }: Plugin): TemplateResult`       |                                                  |
-| `renderHistoryEntry`     | `(entry: CommitEntry, index: number, history: LogEntry[]): TemplateResult` |                                                  |
-| `renderLogEntry`         | `(entry: InfoEntry, index: number, log: LogEntry[]): TemplateResult` |                                                  |
-| `renderMenuItem`         | `(me: MenuItem \| "divider"): TemplateResult`    |                                                  |
-| `renderPluginKind`       | `(type: "editor" \| "menu" \| "validator" \| "top" \| "middle" \| "bottom", plugins: Plugin[]): TemplateResult` |                                                  |
-| `renderPluginUI`         | `(): TemplateResult`                             |                                                  |
-| `renderValidatorsIssues` | `(issues: IssueDetail[]): TemplateResult[]`      |                                                  |
-| `setSetting`             | `<T extends "language" \| "theme" \| "mode" \| "showieds" \| "IEC 61850-7-2" \| "IEC 61850-7-3" \| "IEC 61850-7-4" \| "IEC 61850-8-1">(setting: T, value: Settings[T]): void` | Update the `value` of `setting`, storing to `localStorage`. |
-| `undo`                   | `(): boolean`                                    |                                                  |
+| Method                   | Type                                             |
+|--------------------------|--------------------------------------------------|
+| `handleOpenDoc`          | `({ detail: { docName, doc } }: OpenEvent): void` |
+| `performUpdate`          | `(): Promise<void>`                              |
+| `redo`                   | `(): boolean`                                    |
+| `renderActionItem`       | `(me: MenuItem \| "divider"): TemplateResult`    |
+| `renderDownloadUI`       | `(): TemplateResult`                             |
+| `renderEditorTab`        | `({ name, icon }: Plugin): TemplateResult`       |
+| `renderHistoryEntry`     | `(entry: CommitEntry, index: number, history: LogEntry[]): TemplateResult` |
+| `renderLogEntry`         | `(entry: InfoEntry, index: number, log: LogEntry[]): TemplateResult` |
+| `renderMenuItem`         | `(me: MenuItem \| "divider"): TemplateResult`    |
+| `renderPluginKind`       | `(type: "editor" \| "menu" \| "validator" \| "top" \| "middle" \| "bottom", plugins: Plugin[]): TemplateResult` |
+| `renderPluginUI`         | `(): TemplateResult`                             |
+| `renderValidatorsIssues` | `(issues: IssueDetail[]): TemplateResult[]`      |
+| `undo`                   | `(): boolean`                                    |

@@ -11,5 +11,5 @@ An editor component for cleaning SCL datasets.
 | `dataSetList`          |                        | `List \| undefined`           |         |                                                  |
 | `disableDataSetClean`  | `disableDataSetClean`  | `boolean`                     | false   |                                                  |
 | `doc`                  |                        | `XMLDocument`                 |         | The document being edited as provided to plugins by [[`OpenSCD`]]. |
-| `selectedDatasetItems` |                        | `number \| Set<number> \| []` | []      |                                                  |
+| `selectedDatasetItems` |                        | `number \| [] \| Set<number>` | []      |                                                  |
 | `unreferencedDataSets` | `unreferencedDataSets` | `Element[]`                   | []      |                                                  |

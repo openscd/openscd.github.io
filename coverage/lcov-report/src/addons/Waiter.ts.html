@@ -3,15 +3,15 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for src/Waiting.ts</title>
+    <title>Code coverage report for src/addons/Waiter.ts</title>
     <meta charset="utf-8" />
-    <link rel="stylesheet" href="../prettify.css" />
-    <link rel="stylesheet" href="../base.css" />
-    <link rel="shortcut icon" type="image/x-icon" href="../favicon.png" />
+    <link rel="stylesheet" href="../../prettify.css" />
+    <link rel="stylesheet" href="../../base.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="../../favicon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <style type='text/css'>
         .coverage-summary .sorter {
-            background-image: url(../sort-arrow-sprite.png);
+            background-image: url(../../sort-arrow-sprite.png);
         }
     </style>
 </head>
@@ -19,34 +19,34 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../index.html">All files</a> / <a href="index.html">src</a> Waiting.ts</h1>
+        <h1><a href="../../index.html">All files</a> / <a href="index.html">src/addons</a> Waiter.ts</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>52/52</span>
+                <span class='fraction'>56/56</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>4/4</span>
+                <span class='fraction'>5/5</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>3/3</span>
+                <span class='fraction'>4/4</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>52/52</span>
+                <span class='fraction'>56/56</span>
             </div>
         
             
@@ -115,7 +115,11 @@
 <a name='L50'></a><a href='#L50'>50</a>
 <a name='L51'></a><a href='#L51'>51</a>
 <a name='L52'></a><a href='#L52'>52</a>
-<a name='L53'></a><a href='#L53'>53</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">3x</span>
+<a name='L53'></a><a href='#L53'>53</a>
+<a name='L54'></a><a href='#L54'>54</a>
+<a name='L55'></a><a href='#L55'>55</a>
+<a name='L56'></a><a href='#L56'>56</a>
+<a name='L57'></a><a href='#L57'>57</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
@@ -167,57 +171,65 @@
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { html, property, TemplateResult } from 'lit-element';
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import {
+  customElement,
+  html,
+  LitElement,
+  property,
+  TemplateResult,
+} from 'lit-element';
 &nbsp;
 import '@material/mwc-linear-progress';
 &nbsp;
-import {
-  LitElementConstructor,
-  Mixin,
-  PendingStateDetail,
-  ifImplemented,
-} from './foundation.js';
+import { PendingStateDetail } from '../foundation.js';
 &nbsp;
-/** Mixin implementing
- * [Pending State](https://github.com/justinfagnani/pending-state-protocol) */
-export type WaitingElement = Mixin&lt;typeof Waiting&gt;;
+@customElement('oscd-waiter')
+export class OscdWaiter extends LitElement {
+  /** Whether the element is currently waiting for some async work. */
+  @property({ type: Boolean })
+  waiting = false;
 &nbsp;
-export function Waiting&lt;TBase extends LitElementConstructor&gt;(Base: TBase) {
-  class WaitingElement extends Base {
-    /** Whether the element is currently waiting for some async work. */
-    @property({ type: Boolean })
-    waiting = false;
+  private work: Set&lt;Promise&lt;void&gt;&gt; = new Set();
 &nbsp;
-    private work: Set&lt;Promise&lt;void&gt;&gt; = new Set();
-    /** A promise which resolves once all currently pending work is done. */
-    workDone = Promise.allSettled(this.work);
+  /** A promise which resolves once all currently pending work is done. */
+  workDone = Promise.allSettled(this.work);
 &nbsp;
-    private async onPendingState(e: CustomEvent&lt;PendingStateDetail&gt;) {
-      this.waiting = true;
-      this.work.add(e.detail.promise);
-      this.workDone = Promise.allSettled(this.work);
-      await e.detail.promise.catch(reason =&gt; console.warn(reason));
-      this.work.delete(e.detail.promise);
-      this.waiting = this.work.size &gt; 0;
-    }
-&nbsp;
-    constructor(...args: any[]) {
-      super(...args);
-&nbsp;
-      this.onPendingState = this.onPendingState.bind(this);
-      this.addEventListener('pending-state', this.onPendingState);
-    }
-&nbsp;
-    render(): TemplateResult {
-      return html`${ifImplemented(super.render())}
-        &lt;mwc-linear-progress
-          .closed=${!this.waiting}
-          indeterminate
-        &gt;&lt;/mwc-linear-progress&gt;`;
-    }
+  private async onPendingState(e: CustomEvent&lt;PendingStateDetail&gt;) {
+    this.waiting = true;
+    this.work.add(e.detail.promise);
+    this.workDone = Promise.allSettled(this.work);
+    await e.detail.promise.catch(reason =&gt; console.warn(reason));
+    this.work.delete(e.detail.promise);
+    this.waiting = this.work.size &gt; 0;
   }
 &nbsp;
-  return WaitingElement;
+  constructor() {
+    super();
+&nbsp;
+    this.onPendingState = this.onPendingState.bind(this);
+  }
+&nbsp;
+  connectedCallback(): void {
+    super.connectedCallback();
+    this.addEventListener('pending-state', this.onPendingState);
+  }
+&nbsp;
+  disconnectedCallback(): void {
+    super.disconnectedCallback();
+    this.removeEventListener('pending-state', this.onPendingState);
+  }
+&nbsp;
+  render(): TemplateResult {
+    return html`&lt;slot&gt;&lt;/slot&gt;
+      &lt;mwc-linear-progress
+        .closed=${!this.waiting}
+        indeterminate
+      &gt;&lt;/mwc-linear-progress&gt;`;
+  }
 }
 &nbsp;</pre></td></tr></table></pre>
 
@@ -226,16 +238,16 @@ export function Waiting&lt;TBase extends LitElementConstructor&gt;(Base: TBase) 
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2024-02-20T16:18:44.555Z
+                at 2024-02-23T14:44:05.007Z
             </div>
-        <script src="../prettify.js"></script>
+        <script src="../../prettify.js"></script>
         <script>
             window.onload = function () {
                 prettyPrint();
             };
         </script>
-        <script src="../sorter.js"></script>
-        <script src="../block-navigation.js"></script>
+        <script src="../../sorter.js"></script>
+        <script src="../../block-navigation.js"></script>
     </body>
 </html>
     

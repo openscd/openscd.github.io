@@ -21,7 +21,10 @@ import "../_snowpack/pkg/@material/mwc-tab.js";
 import "../_snowpack/pkg/@material/mwc-tab-bar.js";
 import "../_snowpack/pkg/@material/mwc-top-app-bar-fixed.js";
 import {List} from "../_snowpack/pkg/@material/mwc-list.js";
-import {newPendingStateEvent} from "./foundation.js";
+import {
+  newPendingStateEvent,
+  newSettingsUIEvent
+} from "./foundation.js";
 import {pluginIcons} from "./Plugging.js";
 export function Hosting(Base) {
   class HostingElement extends Base {
@@ -142,7 +145,9 @@ export function Hosting(Base) {
         {
           icon: "settings",
           name: "settings.title",
-          action: () => this.settingsUI.show(),
+          action: () => {
+            this.dispatchEvent(newSettingsUIEvent(true));
+          },
           kind: "static"
         },
         ...bottomMenu,

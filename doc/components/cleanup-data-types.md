@@ -16,7 +16,7 @@ An editor component for cleaning SCL DataType templates.
 | `cleanupListItems`       |                         | `ListItem[] \| undefined`     |         |                                                  |
 | `disableControlClean`    | `disableControlClean`   | `boolean`                     | false   |                                                  |
 | `doc`                    |                         | `XMLDocument`                 |         | The document being edited as provided to plugins by [[`OpenSCD`]]. |
-| `selectedDataTypeItems`  |                         | `number \| Set<number> \| []` | []      |                                                  |
+| `selectedDataTypeItems`  |                         | `number \| [] \| Set<number>` | []      |                                                  |
 | `unreferencedDataTypes`  | `unreferencedDataTypes` | `Element[]`                   | []      |                                                  |
 
 ## Methods

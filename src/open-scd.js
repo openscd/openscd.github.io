@@ -17,15 +17,14 @@ import {
   property
 } from "../_snowpack/pkg/lit-element.js";
 import {newOpenDocEvent, newPendingStateEvent} from "./foundation.js";
-import {getTheme} from "./themes.js";
 import {Editing} from "./Editing.js";
 import {Hosting} from "./Hosting.js";
 import {Historing} from "./Historing.js";
 import {Plugging} from "./Plugging.js";
-import {Setting} from "./Setting.js";
-import {Waiting} from "./Waiting.js";
 import {Wizarding} from "./Wizarding.js";
-export let OpenSCD = class extends Waiting(Hosting(Setting(Wizarding(Plugging(Editing(Historing(LitElement))))))) {
+import "./addons/Settings.js";
+import "./addons/Waiter.js";
+export let OpenSCD = class extends Hosting(Wizarding(Plugging(Editing(Historing(LitElement))))) {
   constructor() {
     super();
     this.currentSrc = "";
@@ -75,7 +74,9 @@ export let OpenSCD = class extends Waiting(Hosting(Setting(Wizarding(Plugging(Ed
       e.preventDefault();
   }
   render() {
-    return html` ${super.render()} ${getTheme(this.settings.theme)} `;
+    return html`<oscd-waiter>
+      <oscd-settings .host=${this}> ${super.render()} </oscd-settings>
+    </oscd-waiter>`;
   }
 };
 OpenSCD.styles = css`
