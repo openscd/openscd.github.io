@@ -24,9 +24,11 @@ import {Plugging} from "./Plugging.js";
 import {Wizarding} from "./Wizarding.js";
 import "./addons/Settings.js";
 import "./addons/Waiter.js";
+import {initializeNsdoc} from "./foundation/nsdoc.js";
 export let OpenSCD = class extends Hosting(Wizarding(Plugging(Editing(Historing(LitElement))))) {
   constructor() {
     super();
+    this.nsdoc = initializeNsdoc();
     this.currentSrc = "";
     this.handleKeyPress = this.handleKeyPress.bind(this);
     document.onkeydown = this.handleKeyPress;
@@ -75,7 +77,9 @@ export let OpenSCD = class extends Hosting(Wizarding(Plugging(Editing(Historing(
   }
   render() {
     return html`<oscd-waiter>
-      <oscd-settings .host=${this}> ${super.render()} </oscd-settings>
+      <oscd-settings .host=${this} .nsdoc=${this.nsdoc}>
+        ${super.render()}
+      </oscd-settings>
     </oscd-waiter>`;
   }
 };
@@ -169,6 +173,9 @@ OpenSCD.styles = css`
       display: flex;
     }
   `;
+__decorate([
+  property({attribute: false})
+], OpenSCD.prototype, "nsdoc", 2);
 __decorate([
   property({type: String})
 ], OpenSCD.prototype, "src", 1);

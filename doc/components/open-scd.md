@@ -35,7 +35,7 @@ Open Substation Configuration Designer.
 | `menuUI`           |             |           | `Drawer`                      |                                    |                                                  |
 | `middleMenu`       |             | readonly  | `Plugin[]`                    |                                    |                                                  |
 | `nextAction`       |             | readonly  | `number`                      |                                    |                                                  |
-| `nsdoc`            |             |           | `Nsdoc`                       |                                    |                                                  |
+| `nsdoc`            |             |           | `Nsdoc`                       | "initializeNsdoc()"                | Object containing all *.nsdoc files and a function extracting element's label form them |
 | `onLog`            |             |           |                               |                                    |                                                  |
 | `pluginDownloadUI` |             |           | `Dialog`                      |                                    |                                                  |
 | `pluginList`       |             |           | `List`                        |                                    |                                                  |

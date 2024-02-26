@@ -53,12 +53,6 @@ export function newLoadNsdocEvent(nsdoc, filename) {
   });
 }
 export let OscdSettings = class extends LitElement {
-  constructor() {
-    super();
-    this.nsdoc = initializeNsdoc();
-    registerTranslateConfig({loader, empty: (key) => key});
-    use(this.settings.language);
-  }
   get settings() {
     return {
       language: this.getSetting("language"),
@@ -244,6 +238,11 @@ export let OscdSettings = class extends LitElement {
   parseToXmlObject(text) {
     return new DOMParser().parseFromString(text, "application/xml");
   }
+  constructor() {
+    super();
+    registerTranslateConfig({loader, empty: (key) => key});
+    use(this.settings.language);
+  }
   connectedCallback() {
     super.connectedCallback();
     if (this.host) {
@@ -417,11 +416,13 @@ OscdSettings.styles = css`
     }
   `;
 __decorate([
+  property({
+    type: Object
+  })
+], OscdSettings.prototype, "nsdoc", 2);
+__decorate([
   property()
 ], OscdSettings.prototype, "settings", 1);
-__decorate([
-  property({attribute: false})
-], OscdSettings.prototype, "nsdoc", 2);
 __decorate([
   property({
     type: Object
