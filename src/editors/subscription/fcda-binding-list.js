@@ -26,6 +26,7 @@ import "../../../_snowpack/pkg/@material/mwc-list.js";
 import "../../../_snowpack/pkg/@material/mwc-list/mwc-list-item.js";
 import "../../../_snowpack/pkg/@material/mwc-list/mwc-check-list-item.js";
 import "../../../_snowpack/pkg/@material/mwc-menu.js";
+import "../../../_snowpack/pkg/@material/mwc-icon-button.js";
 import {
   getDescriptionAttribute,
   getNameAttribute,

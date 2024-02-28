@@ -217,7 +217,7 @@ export default class ImportingIedPlugin extends LitElement {
     this.pluginFileUI.click();
   }
   async docUpdate() {
-    await this.getRootNode().host.updateComplete;
+    await this.updateComplete;
   }
   importIED(ied) {
     if (ied.getAttribute("name") === "TEMPLATE") {

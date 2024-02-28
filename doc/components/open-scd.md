@@ -3,7 +3,7 @@
 The `<open-scd>` custom element is the main entry point of the
 Open Substation Configuration Designer.
 
-**Mixins:** Hosting, Wizarding, Plugging, Editing, Historing
+**Mixins:** Wizarding, Plugging, Editing, Historing
 
 ## Properties
 
@@ -62,9 +62,10 @@ Open Substation Configuration Designer.
 | `renderDownloadUI`       | `(): TemplateResult`                             |
 | `renderEditorTab`        | `({ name, icon }: Plugin): TemplateResult`       |
 | `renderHistoryEntry`     | `(entry: CommitEntry, index: number, history: LogEntry[]): TemplateResult` |
+| `renderHosting`          | `(): TemplateResult`                             |
 | `renderLogEntry`         | `(entry: InfoEntry, index: number, log: LogEntry[]): TemplateResult` |
 | `renderMenuItem`         | `(me: MenuItem \| "divider"): TemplateResult`    |
-| `renderPluginKind`       | `(type: "editor" \| "menu" \| "validator" \| "top" \| "middle" \| "bottom", plugins: Plugin[]): TemplateResult` |
+| `renderPluginKind`       | `(type: "menu" \| "editor" \| "validator" \| "top" \| "middle" \| "bottom", plugins: Plugin[]): TemplateResult` |
 | `renderPluginUI`         | `(): TemplateResult`                             |
 | `renderValidatorsIssues` | `(issues: IssueDetail[]): TemplateResult[]`      |
 | `undo`                   | `(): boolean`                                    |
