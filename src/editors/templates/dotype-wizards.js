@@ -207,7 +207,7 @@ export function createDOTypeWizard(parent, templates) {
         ></wizard-textfield>`,
         html`<wizard-textfield
           label="cdc"
-          helper="${translate("scl.cdc")}"
+          helper="${translate("scl.CDC")}"
           required
           pattern="${patterns.cdc}"
         ></wizard-textfield>`
