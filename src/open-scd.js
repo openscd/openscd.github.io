@@ -34,13 +34,13 @@ import {
 import {Editing} from "./Editing.js";
 import {Historing} from "./Historing.js";
 import {Plugging, pluginIcons} from "./Plugging.js";
-import {Wizarding} from "./Wizarding.js";
 import "./addons/Settings.js";
 import "./addons/Waiter.js";
-import {initializeNsdoc} from "./foundation/nsdoc.js";
+import "./addons/Wizards.js";
 import {List} from "../_snowpack/pkg/@material/mwc-list.js";
 import {translate} from "../_snowpack/pkg/lit-translate.js";
-export let OpenSCD = class extends Wizarding(Plugging(Editing(Historing(LitElement)))) {
+import {initializeNsdoc} from "./foundation/nsdoc.js";
+export let OpenSCD = class extends Plugging(Editing(Historing(LitElement))) {
   constructor() {
     super();
     this.nsdoc = initializeNsdoc();
@@ -115,7 +115,7 @@ export let OpenSCD = class extends Wizarding(Plugging(Editing(Historing(LitEleme
   render() {
     return html`<oscd-waiter>
       <oscd-settings .host=${this} .nsdoc=${this.nsdoc}>
-        ${this.renderMain()}
+        <oscd-wizards .host=${this}> ${this.renderMain()}</oscd-wizards>
       </oscd-settings>
     </oscd-waiter>`;
   }

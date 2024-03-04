@@ -3,7 +3,7 @@
 The `<open-scd>` custom element is the main entry point of the
 Open Substation Configuration Designer.
 
-**Mixins:** Wizarding, Plugging, Editing, Historing
+**Mixins:** Plugging, Editing, Historing
 
 ## Properties
 
@@ -48,8 +48,6 @@ Open Substation Configuration Designer.
 | `validated`        |             |           | `Promise<void>`               | "Promise.resolve()"                |                                                  |
 | `validators`       |             | readonly  | `Plugin[]`                    |                                    |                                                  |
 | `warningUI`        |             |           | `Snackbar`                    |                                    |                                                  |
-| `wizardUI`         |             |           | `WizardDialog`                |                                    |                                                  |
-| `workflow`         |             |           | `WizardFactory[]`             | []                                 | FIFO queue of [[`Wizard`]]s to display.          |
 
 ## Methods
 
