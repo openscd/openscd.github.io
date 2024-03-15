@@ -1,4 +1,4 @@
-import {iec6185072, iec6185073, iec6185074, iec6185081} from "../validators/templates/foundation.js";
+import {iec6185072, iec6185073, iec6185074, iec6185081} from "./nsd.js";
 const [nsd72, nsd73, nsd74, nsd81] = await Promise.all([iec6185072, iec6185073, iec6185074, iec6185081]);
 export function initializeNsdoc() {
   const [nsdoc72, nsdoc73, nsdoc74, nsdoc81] = [

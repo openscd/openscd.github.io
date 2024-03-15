@@ -17,7 +17,7 @@ import {
   css,
   state
 } from "../_snowpack/pkg/lit-element.js";
-import {translate} from "../_snowpack/pkg/lit-translate.js";
+import {get} from "../_snowpack/pkg/lit-translate.js";
 import {renderDiff} from "./foundation/compare.js";
 export let PlainCompareList = class extends LitElement {
   constructor() {
@@ -53,7 +53,7 @@ export let PlainCompareList = class extends LitElement {
       return html`
         <div class="container">
           <div class="flex"></div>
-          <mwc-formfield label="${translate("compare.filterMutables")}">
+          <mwc-formfield label="${get("compare.filterMutables")}">
             <mwc-checkbox
               ?checked=${this.filterMutables}
               @change=${() => this.filterMutables = !this.filterMutables}

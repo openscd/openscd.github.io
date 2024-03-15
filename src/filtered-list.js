@@ -18,7 +18,7 @@ import {
   state,
   unsafeCSS
 } from "../_snowpack/pkg/lit-element.js";
-import {translate} from "../_snowpack/pkg/lit-translate.js";
+import {get} from "../_snowpack/pkg/lit-translate.js";
 import "../_snowpack/pkg/@material/mwc-checkbox.js";
 import "../_snowpack/pkg/@material/mwc-formfield.js";
 import "../_snowpack/pkg/@material/mwc-textfield.js";
@@ -88,7 +88,7 @@ export let FilteredList = class extends ListBase {
   }
   render() {
     return html`<div id="tfcontainer">
-        <abbr title="${this.searchFieldLabel ?? translate("filter")}"
+        <abbr title="${this.searchFieldLabel ?? get("filter")}"
           ><mwc-textfield
             label="${this.searchFieldLabel ?? ""}"
             iconTrailing="search"

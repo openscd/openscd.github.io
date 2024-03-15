@@ -3,7 +3,7 @@
 The `<open-scd>` custom element is the main entry point of the
 Open Substation Configuration Designer.
 
-**Mixins:** Plugging, Editing, Historing
+**Mixins:** Historing
 
 ## Properties
 
@@ -15,7 +15,7 @@ Open Substation Configuration Designer.
 | `canUndo`          |             | readonly  | `boolean`                     |                                    |                                                  |
 | `diagnoses`        | `diagnoses` |           | `Map<string, IssueDetail[]>`  | "new Map<string, IssueDetail[]>()" |                                                  |
 | `diagnosticUI`     |             |           | `Dialog`                      |                                    |                                                  |
-| `doc`              |             |           | `XMLDocument \| null`         | null                               | The `XMLDocument` to be edited                   |
+| `doc`              |             |           | `XMLDocument \| null`         | null                               |                                                  |
 | `docId`            | `docId`     |           | `string`                      | ""                                 | The UUID of the current [[`doc`]]                |
 | `docName`          | `docName`   |           | `string`                      | ""                                 | The name of the current [[`doc`]]                |
 | `docs`             |             | readonly  | `Record<string, XMLDocument>` |                                    |                                                  |
@@ -53,7 +53,6 @@ Open Substation Configuration Designer.
 
 | Method                   | Type                                             |
 |--------------------------|--------------------------------------------------|
-| `handleOpenDoc`          | `({ detail: { docName, doc } }: OpenEvent): void` |
 | `performUpdate`          | `(): Promise<void>`                              |
 | `redo`                   | `(): boolean`                                    |
 | `renderActionItem`       | `(me: MenuItem \| "divider"): TemplateResult`    |
@@ -63,7 +62,8 @@ Open Substation Configuration Designer.
 | `renderHosting`          | `(): TemplateResult`                             |
 | `renderLogEntry`         | `(entry: InfoEntry, index: number, log: LogEntry[]): TemplateResult` |
 | `renderMenuItem`         | `(me: MenuItem \| "divider"): TemplateResult`    |
-| `renderPluginKind`       | `(type: "menu" \| "editor" \| "validator" \| "top" \| "middle" \| "bottom", plugins: Plugin[]): TemplateResult` |
+| `renderPlugging`         | `(): TemplateResult`                             |
+| `renderPluginKind`       | `(type: "editor" \| "menu" \| "validator" \| "top" \| "middle" \| "bottom", plugins: Plugin[]): TemplateResult` |
 | `renderPluginUI`         | `(): TemplateResult`                             |
 | `renderValidatorsIssues` | `(issues: IssueDetail[]): TemplateResult[]`      |
 | `undo`                   | `(): boolean`                                    |

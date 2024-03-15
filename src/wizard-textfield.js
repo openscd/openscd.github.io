@@ -16,7 +16,7 @@ import {
   property,
   query
 } from "../_snowpack/pkg/lit-element.js";
-import {translate, get} from "../_snowpack/pkg/lit-translate.js";
+import {get} from "../_snowpack/pkg/lit-translate.js";
 import "../_snowpack/pkg/@material/mwc-icon-button.js";
 import "../_snowpack/pkg/@material/mwc-list/mwc-list-item.js";
 import "../_snowpack/pkg/@material/mwc-menu.js";
@@ -123,7 +123,7 @@ export let WizardTextField = class extends TextField {
   }
   renderMulplierList() {
     return html`${this.multipliers.map((multiplier) => html`<mwc-list-item ?selected=${multiplier === this.multiplier}
-          >${multiplier === null ? translate("textfield.noMultiplier") : multiplier}</mwc-list-item
+          >${multiplier === null ? get("textfield.noMultiplier") : multiplier}</mwc-list-item
         >`)}`;
   }
   renderSwitch() {

@@ -17,7 +17,7 @@ import {
   query,
   unsafeCSS
 } from "../_snowpack/pkg/lit-element.js";
-import {get, translate} from "../_snowpack/pkg/lit-translate.js";
+import {get} from "../_snowpack/pkg/lit-translate.js";
 import "../_snowpack/pkg/@material/mwc-icon-button.js";
 import "../_snowpack/pkg/@material/mwc-dialog.js";
 import "./filtered-list.js";
@@ -58,7 +58,7 @@ export let FilterButton = class extends FilteredList {
       >
         ${super.render()}
         <mwc-button slot="primaryAction" dialogAction="close">
-          ${translate("close")}
+          ${get("close")}
         </mwc-button>
       </mwc-dialog>
     `;

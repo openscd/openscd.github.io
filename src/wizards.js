@@ -1,6 +1,6 @@
 import {html} from "../_snowpack/pkg/lit-element.js";
 import {repeat} from "../_snowpack/pkg/lit-html/directives/repeat.js";
-import {get, translate} from "../_snowpack/pkg/lit-translate.js";
+import {get} from "../_snowpack/pkg/lit-translate.js";
 import "../_snowpack/pkg/@material/mwc-icon.js";
 import "../_snowpack/pkg/@material/mwc-list.js";
 import "../_snowpack/pkg/@material/mwc-list/mwc-check-list-item.js";
@@ -139,7 +139,7 @@ export function mergeWizard(sink, source, options) {
                   >
                 </mwc-check-list-item>`)}
             ${childDiffs.length ? html`<mwc-list-item noninteractive
-                    >${translate("merge.children")}</mwc-list-item
+                    >${get("merge.children")}</mwc-list-item
                   >
                   <li padded divider role="separator"></li>` : ""}
             ${repeat(childDiffs, (e) => e, (diff, index) => html`<mwc-check-list-item

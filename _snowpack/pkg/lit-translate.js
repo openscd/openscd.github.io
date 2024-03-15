@@ -1,4 +1,4 @@
-import { N as NodePart, A as AttributePart, d as directive } from './common/lit-html-fbfed138.js';
+import { N as NodePart, A as AttributePart } from './common/lit-html-e07bf80b.js';
 
 const CLEANUP_PARTS_MS = 1000 * 60;
 const LANG_CHANGED_EVENT = "langChanged";
@@ -207,23 +207,5 @@ function updatePart(part, cb, e) {
     part.setValue(newValue);
     part.commit();
 }
-/**
- * A lit directive that invokes the callback when the language changes.
- * @param key
- * @param values
- * @param listen
- */
-const langChanged = directive((cb) => (part) => {
-    partCache.set(part, cb);
-    updatePart(part, cb);
-});
 
-/**
- * A lit directive that updates the translation when the language changes.
- * @param key
- * @param values
- * @param config
- */
-const translate = (key, values, config) => langChanged(() => get(key, values, config));
-
-export { get, registerTranslateConfig, translate, use };
+export { get, registerTranslateConfig, use };

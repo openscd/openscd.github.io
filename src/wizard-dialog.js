@@ -21,7 +21,7 @@ import {
   query
 } from "../_snowpack/pkg/lit-element.js";
 import {ifDefined} from "../_snowpack/pkg/lit-html/directives/if-defined.js";
-import {get, translate} from "../_snowpack/pkg/lit-translate.js";
+import {get} from "../_snowpack/pkg/lit-translate.js";
 import "../_snowpack/pkg/@material/mwc-button.js";
 import "../_snowpack/pkg/@material/mwc-dialog.js";
 import "../_snowpack/pkg/@material/mwc-icon-button.js";
@@ -275,14 +275,14 @@ export let WizardDialog = class extends LitElement {
           ></mwc-button>` : html`<mwc-button
             slot="secondaryAction"
             dialogAction="close"
-            label="${translate("close")}"
+            label="${get("close")}"
             style="--mdc-theme-primary: var(--mdc-theme-error)"
           ></mwc-button>`}
       ${this.code && page.element ? html`<mwc-button
             slot="primaryAction"
             @click=${() => this.act(codeAction(page.element))}
             icon="code"
-            label="${translate("save")}"
+            label="${get("save")}"
             trailingIcon
           ></mwc-button>` : page.primary ? html`<mwc-button
             slot="primaryAction"

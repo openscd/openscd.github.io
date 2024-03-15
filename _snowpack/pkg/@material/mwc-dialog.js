@@ -1,14 +1,14 @@
 import { e as __decorate } from '../common/tslib.es6-bdd0d59c.js';
-import { q as query, p as property, c as css, b as customElement } from '../common/lit-element-f307532f.js';
+import { q as query, p as property, c as css, b as customElement } from '../common/lit-element-05157a0d.js';
 import '../common/inert.esm-5c96ec71.js';
-import { M as MDCDialogFoundation, a as applyPassive, c as cssClasses } from '../common/foundation-f35dfe86.js';
-import { m as matches, c as closest } from '../common/ponyfill-4ccc5f83.js';
-import { B as BaseElement, a as addHasRemoveClass } from '../common/base-element-c0617817.js';
-import { o as observer } from '../common/observer-2c150244.js';
-import { c as classMap } from '../common/class-map-ad24d1e8.js';
-import { h as html } from '../common/lit-html-fbfed138.js';
-import '../common/render-4b4a16b9.js';
-import '../common/foundation-8444ab9d.js';
+import { M as MDCDialogFoundation, a as applyPassive, c as cssClasses } from '../common/foundation-cf56621a.js';
+import { m as matches, c as closest } from '../common/ponyfill-44e20603.js';
+import { B as BaseElement, a as addHasRemoveClass } from '../common/base-element-338757e6.js';
+import { o as observer } from '../common/observer-6d1a3681.js';
+import { c as classMap } from '../common/class-map-aad33d7c.js';
+import { h as html } from '../common/lit-html-e07bf80b.js';
+import '../common/render-ab1aa234.js';
+import '../common/foundation-7cea7f4a.js';
 
 const blockingElements = document.$blockingElements;
 class DialogBase extends BaseElement {
