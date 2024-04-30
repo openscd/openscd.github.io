@@ -2,9 +2,11 @@ import {LitElement} from "../../../_snowpack/pkg/lit-element.js";
 import {get} from "../../../_snowpack/pkg/lit-translate.js";
 import {
   createElement,
-  getVersion,
-  newActionEvent
+  getVersion
 } from "../../../src/foundation.js";
+import {
+  newActionEvent
+} from "../../../_snowpack/link/packages/core/dist/foundation/deprecated/editor.js";
 function getElementIndexOf(list, match) {
   for (let i = 0; list.length; i++)
     if (list[i]?.isEqualNode(match))
@@ -20,20 +22,20 @@ function addIEDName(extRef, gseControl) {
     "LN0"
   ].map((element) => extRef.closest(element));
   const anyln = ln ? ln : ln0;
-  if (getVersion(extRef) === "2007" && Array.from(gseControl.getElementsByTagName("IEDName")).filter((item) => !item.closest("Private")).filter((iedName) => iedName.innerHTML === ied.getAttribute("name") && (iedName.getAttribute("apRef") ?? "") === (accPoint.getAttribute("name") ?? "") && (iedName.getAttribute("ldInst") ?? "") === (lDevice.getAttribute("inst") ?? "") && (iedName.getAttribute("prefix") ?? "") === (anyln.getAttribute("prefix") ?? "") && (iedName.getAttribute("lnClass") ?? "") === (anyln.getAttribute("lnClass") ?? "") && (iedName.getAttribute("lnInst") ?? "") === (anyln.getAttribute("inst") ?? "")).length === 0) {
+  if (getVersion(extRef) === "2007" && Array.from(gseControl.getElementsByTagName("IEDName")).filter((item) => !item.closest("Private")).filter((iedName) => iedName.innerHTML === ied?.getAttribute("name") && (iedName.getAttribute("apRef") ?? "") === (accPoint?.getAttribute("name") ?? "") && (iedName.getAttribute("ldInst") ?? "") === (lDevice?.getAttribute("inst") ?? "") && (iedName.getAttribute("prefix") ?? "") === (anyln?.getAttribute("prefix") ?? "") && (iedName.getAttribute("lnClass") ?? "") === (anyln?.getAttribute("lnClass") ?? "") && (iedName.getAttribute("lnInst") ?? "") === (anyln?.getAttribute("inst") ?? "")).length === 0) {
     const iedName = createElement(gseControl.ownerDocument, "IEDName", {
-      apRef: accPoint.getAttribute("name") ?? "",
-      ldInst: lDevice.getAttribute("inst") ?? "",
-      prefix: anyln.getAttribute("prefix") ?? "",
-      lnClass: anyln.getAttribute("lnClass") ?? "",
-      lnInst: anyln.getAttribute("inst") || null
+      apRef: accPoint?.getAttribute("name") ?? "",
+      ldInst: lDevice?.getAttribute("inst") ?? "",
+      prefix: anyln?.getAttribute("prefix") ?? "",
+      lnClass: anyln?.getAttribute("lnClass") ?? "",
+      lnInst: anyln?.getAttribute("inst") || null
     });
-    iedName.innerHTML = ied.getAttribute("name");
+    iedName.innerHTML = ied?.getAttribute("name");
     return iedName;
   }
-  if (Array.from(gseControl.getElementsByTagName("IEDName")).filter((item) => !item.closest("Private")).filter((iedName) => iedName.innerHTML === ied.getAttribute("name")).length === 0) {
+  if (Array.from(gseControl.getElementsByTagName("IEDName")).filter((item) => !item.closest("Private")).filter((iedName) => iedName.innerHTML === ied?.getAttribute("name")).length === 0) {
     const iedName = createElement(gseControl.ownerDocument, "IEDName", {});
-    iedName.innerHTML = ied.getAttribute("name");
+    iedName.innerHTML = ied?.getAttribute("name");
     return iedName;
   }
   return null;

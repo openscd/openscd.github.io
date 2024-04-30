@@ -33,7 +33,9 @@ import "./wizard-checkbox.js";
 import "./wizard-textfield.js";
 import "./wizard-select.js";
 import {
-  newActionEvent,
+  newActionEvent
+} from "../_snowpack/link/packages/core/dist/foundation/deprecated/editor.js";
+import {
   newWizardEvent,
   wizardInputSelector,
   isWizardFactory,

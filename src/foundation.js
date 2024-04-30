@@ -3,79 +3,6 @@ import {Select} from "../_snowpack/pkg/@material/mwc-select.js";
 import {WizardTextField} from "./wizard-textfield.js";
 import {WizardSelect} from "./wizard-select.js";
 import {WizardCheckbox} from "./wizard-checkbox.js";
-export function isCreate(action) {
-  return action.old === void 0 && action.new?.parent !== void 0 && action.new?.element !== void 0;
-}
-export function isDelete(action) {
-  return action.old?.parent !== void 0 && action.old?.element !== void 0 && action.new === void 0;
-}
-export function isMove(action) {
-  return action.old?.parent !== void 0 && action.old?.element !== void 0 && action.new?.parent !== void 0 && action.new?.element == void 0;
-}
-export function isReplace(action) {
-  return action.old?.parent === void 0 && action.old?.element !== void 0 && action.new?.parent === void 0 && action.new?.element !== void 0;
-}
-export function isUpdate(action) {
-  return action.old === void 0 && action.new === void 0 && action.element !== void 0 && action.newAttributes !== void 0 && action.oldAttributes !== void 0;
-}
-export function isSimple(action) {
-  return !(action.actions instanceof Array);
-}
-export function invert(action) {
-  if (!isSimple(action)) {
-    const inverse = {
-      title: action.title,
-      derived: action.derived,
-      actions: []
-    };
-    action.actions.forEach((element) => inverse.actions.unshift(invert(element)));
-    return inverse;
-  }
-  const metaData = {
-    derived: action.derived,
-    checkValidity: action.checkValidity
-  };
-  if (isCreate(action))
-    return {old: action.new, ...metaData};
-  else if (isDelete(action))
-    return {new: action.old, ...metaData};
-  else if (isMove(action))
-    return {
-      old: {
-        parent: action.new.parent,
-        element: action.old.element,
-        reference: action.new.reference
-      },
-      new: {parent: action.old.parent, reference: action.old.reference},
-      ...metaData
-    };
-  else if (isReplace(action))
-    return {new: action.old, old: action.new, ...metaData};
-  else if (isUpdate(action))
-    return {
-      element: action.element,
-      oldAttributes: action.newAttributes,
-      newAttributes: action.oldAttributes,
-      ...metaData
-    };
-  else
-    return unreachable("Unknown EditorAction type in invert.");
-}
-export function createUpdateAction(element, newAttributes) {
-  const oldAttributes = {};
-  Array.from(element.attributes).forEach((attr) => {
-    oldAttributes[attr.name] = attr.value;
-  });
-  return {element, oldAttributes, newAttributes};
-}
-export function newActionEvent(action, eventInitDict) {
-  return new CustomEvent("editor-action", {
-    bubbles: true,
-    composed: true,
-    ...eventInitDict,
-    detail: {action, ...eventInitDict?.detail}
-  });
-}
 export const wizardInputSelector = "wizard-textfield, mwc-textfield, ace-editor, mwc-select, wizard-select, wizard-checkbox";
 export function isWizardFactory(maybeFactory) {
   return typeof maybeFactory === "function";
@@ -122,56 +49,6 @@ export function newWizardEvent(wizardOrFactory, eventInitDict) {
 }
 export function newSubWizardEvent(wizardOrFactory) {
   return newWizardEvent(wizardOrFactory, {detail: {subwizard: true}});
-}
-export function newLogEvent(detail, eventInitDict) {
-  return new CustomEvent("log", {
-    bubbles: true,
-    composed: true,
-    ...eventInitDict,
-    detail: {...detail, ...eventInitDict?.detail}
-  });
-}
-export function newIssueEvent(detail, eventInitDict) {
-  return new CustomEvent("issue", {
-    bubbles: true,
-    composed: true,
-    ...eventInitDict,
-    detail: {...detail, ...eventInitDict?.detail}
-  });
-}
-export function newPendingStateEvent(promise, eventInitDict) {
-  return new CustomEvent("pending-state", {
-    bubbles: true,
-    composed: true,
-    ...eventInitDict,
-    detail: {promise, ...eventInitDict?.detail}
-  });
-}
-export function newSettingsUIEvent(show, eventInitDict) {
-  return new CustomEvent("oscd-settings", {
-    bubbles: true,
-    composed: true,
-    ...eventInitDict,
-    detail: {
-      show,
-      ...eventInitDict?.detail
-    }
-  });
-}
-export function newValidateEvent(eventInitDict) {
-  return new CustomEvent("validate", {
-    bubbles: true,
-    composed: true,
-    ...eventInitDict
-  });
-}
-export function newOpenDocEvent(doc, docName, eventInitDict) {
-  return new CustomEvent("open-doc", {
-    bubbles: true,
-    composed: true,
-    ...eventInitDict,
-    detail: {doc, docName, ...eventInitDict?.detail}
-  });
 }
 export function referencePath(element) {
   let path = "";
@@ -1879,9 +1756,6 @@ export function compareNames(a, b) {
   if (typeof a === "object" && typeof b === "object")
     return (a.getAttribute("name") ?? "").localeCompare(b.getAttribute("name") ?? "");
   return 0;
-}
-export function unreachable(message) {
-  throw new Error(message);
 }
 export function crossProduct(...arrays) {
   return arrays.reduce((a, b) => a.flatMap((d) => b.map((e) => [d, e].flat())), [[]]);

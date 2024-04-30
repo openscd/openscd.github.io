@@ -11,7 +11,8 @@ var __decorate = (decorators, target, key, kind) => {
 };
 import {LitElement, property} from "../../../_snowpack/pkg/lit-element.js";
 import {get} from "../../../_snowpack/pkg/lit-translate.js";
-import {formatXml, newLogEvent} from "../../../src/foundation.js";
+import {formatXml} from "../../../src/foundation.js";
+import {newLogEvent} from "../../../_snowpack/link/packages/core/dist/foundation/deprecated/history.js";
 function cloneAttributes(destElement, sourceElement) {
   let attr;
   const attributes = Array.prototype.slice.call(sourceElement.attributes);

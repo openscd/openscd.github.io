@@ -23,9 +23,9 @@ import "./gse-editor.js";
 import "./smv-editor.js";
 import {
   newWizardEvent,
-  newActionEvent,
   compareNames
 } from "../../../../src/foundation.js";
+import {newActionEvent} from "../../../../_snowpack/link/packages/core/dist/foundation/deprecated/editor.js";
 import {createConnectedApWizard} from "../../wizards/connectedap.js";
 import {wizards} from "../../wizards/wizard-library.js";
 export let SubNetworkEditor = class extends LitElement {

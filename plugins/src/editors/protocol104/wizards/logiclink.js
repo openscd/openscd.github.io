@@ -6,9 +6,11 @@ import {
   cloneElement,
   createElement,
   getValue,
-  newActionEvent,
   newWizardEvent
 } from "../../../../../src/foundation.js";
+import {
+  newActionEvent
+} from "../../../../../_snowpack/link/packages/core/dist/foundation/deprecated/editor.js";
 import {createNetworkTextField} from "../foundation/foundation.js";
 export function editLogicLinkWizard(parent, rGNumber, lLNumber) {
   return [

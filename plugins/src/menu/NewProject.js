@@ -4,10 +4,10 @@ import "../../../_snowpack/pkg/@material/mwc-list.js";
 import "../../../_snowpack/pkg/@material/mwc-list/mwc-radio-list-item.js";
 import "../../../src/wizard-textfield.js";
 import {
-  newLogEvent,
-  newOpenDocEvent,
   newWizardEvent
 } from "../../../src/foundation.js";
+import {newOpenDocEvent} from "../../../_snowpack/link/packages/core/dist/foundation/deprecated/open-event.js";
+import {newLogEvent} from "../../../_snowpack/link/packages/core/dist/foundation/deprecated/history.js";
 import {
   newEmptySCD
 } from "../../../src/schemas.js";

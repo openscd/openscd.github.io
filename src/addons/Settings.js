@@ -25,7 +25,10 @@ import "../../_snowpack/pkg/@material/mwc-list/mwc-list-item.js";
 import "../../_snowpack/pkg/@material/mwc-select.js";
 import "../../_snowpack/pkg/@material/mwc-switch.js";
 import {getTheme} from "../themes.js";
-import {newLogEvent} from "../foundation.js";
+import {newLogEvent} from "../../_snowpack/link/packages/core/dist/foundation/deprecated/history.js";
+import {
+  newLoadNsdocEvent
+} from "../../_snowpack/link/packages/core/dist/foundation/deprecated/settings.js";
 import {languages, loader} from "../translations/loader.js";
 import "../WizardDivider.js";
 import {
@@ -45,17 +48,11 @@ export const defaults = {
   "IEC 61850-7-4": void 0,
   "IEC 61850-8-1": void 0
 };
-export function newLoadNsdocEvent(nsdoc, filename) {
-  return new CustomEvent("load-nsdoc", {
-    bubbles: true,
-    composed: true,
-    detail: {nsdoc, filename}
-  });
-}
 export let OscdSettings = class extends LitElement {
   constructor() {
     super();
     this.nsdoc = initializeNsdoc();
+    this.nsdUploadButton = true;
     registerTranslateConfig({loader, empty: (key) => key});
     use(this.settings.language);
   }
@@ -293,10 +290,10 @@ export let OscdSettings = class extends LitElement {
           </mwc-formfield>
         </form>
         <wizard-divider></wizard-divider>
-        <section>
-          <h3>${get("settings.loadNsdTranslations")}</h3>
-          ${this.renderFileSelect()}
-        </section>
+        ${this.nsdUploadButton ? html`<section id="shownsdbutton">
+              <h3>${get("settings.loadNsdTranslations")}</h3>
+              ${this.renderFileSelect()}
+            </section>` : html``}
         <mwc-list id="nsdocList">
           ${this.renderNsdocItem("IEC 61850-7-2")}
           ${this.renderNsdocItem("IEC 61850-7-3")}
@@ -427,6 +424,9 @@ __decorate([
     type: Object
   })
 ], OscdSettings.prototype, "host", 2);
+__decorate([
+  property({type: Boolean})
+], OscdSettings.prototype, "nsdUploadButton", 2);
 __decorate([
   query("#settings")
 ], OscdSettings.prototype, "settingsUI", 2);

@@ -26,10 +26,12 @@ import {
   createElement,
   find,
   identity,
-  isPublic,
-  newActionEvent,
-  newLogEvent
+  isPublic
 } from "../../../src/foundation.js";
+import {
+  newActionEvent
+} from "../../../_snowpack/link/packages/core/dist/foundation/deprecated/editor.js";
+import {newLogEvent} from "../../../_snowpack/link/packages/core/dist/foundation/deprecated/history.js";
 function uniqueTemplateIedName(doc, ied) {
   const [manufacturer, type] = ["manufacturer", "type"].map((attr) => ied.getAttribute(attr)?.replace(/[^A-Za-z0-9_]/g, ""));
   const nameCore = manufacturer || type ? `${manufacturer ?? ""}${type ? "_" + type : ""}` : "TEMPLATE_IED";

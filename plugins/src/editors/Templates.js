@@ -19,9 +19,9 @@ import "../../../src/filtered-list.js";
 import {
   createElement,
   identity,
-  newActionEvent,
   newWizardEvent
 } from "../../../src/foundation.js";
+import {newActionEvent} from "../../../_snowpack/link/packages/core/dist/foundation/deprecated/editor.js";
 import {styles} from "./templates/foundation.js";
 import {
   createEnumTypeWizard,

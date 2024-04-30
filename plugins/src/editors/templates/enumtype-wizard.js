@@ -11,11 +11,13 @@ import {
   find,
   getValue,
   identity,
-  newActionEvent,
   newSubWizardEvent,
   newWizardEvent,
   patterns
 } from "../../../../src/foundation.js";
+import {
+  newActionEvent
+} from "../../../../_snowpack/link/packages/core/dist/foundation/deprecated/editor.js";
 function remove(element) {
   return (wizard) => {
     wizard.dispatchEvent(newActionEvent({old: {parent: element.parentElement, element}}));

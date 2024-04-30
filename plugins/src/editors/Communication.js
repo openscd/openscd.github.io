@@ -15,10 +15,10 @@ import "../../../_snowpack/pkg/@material/mwc-fab.js";
 import "./communication/subnetwork-editor.js";
 import {
   newWizardEvent,
-  newActionEvent,
   createElement,
   isPublic
 } from "../../../src/foundation.js";
+import {newActionEvent} from "../../../_snowpack/link/packages/core/dist/foundation/deprecated/editor.js";
 import {createSubNetworkWizard} from "../wizards/subnetwork.js";
 export default class CommunicationPlugin extends LitElement {
   constructor() {

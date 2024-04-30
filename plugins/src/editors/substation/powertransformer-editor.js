@@ -31,10 +31,10 @@ import {powerTransformerTwoWindingIcon} from "../../../../src/icons/icons.js";
 import {emptyWizard, wizards} from "../../wizards/wizard-library.js";
 import {
   getChildElementsByTagName,
-  newActionEvent,
   newWizardEvent,
   tags
 } from "../../../../src/foundation.js";
+import {newActionEvent} from "../../../../_snowpack/link/packages/core/dist/foundation/deprecated/editor.js";
 import {startMove, styles} from "./foundation.js";
 import {SubstationEditor} from "./substation-editor.js";
 import {BayEditor} from "./bay-editor.js";
@@ -119,7 +119,7 @@ export let PowerTransformerEditor = class extends LitElement {
         >`);
   }
   renderContentPane() {
-    return html`<mwc-icon slot="icon" style="width:24px;height:24px"
+    return html`<mwc-icon class="substation-editor-icon" slot="icon"
         >${powerTransformerTwoWindingIcon}</mwc-icon
       >
       <abbr slot="action" title="${get("lnode.tooltip")}">

@@ -14,10 +14,12 @@ import {
   getValue,
   identity,
   isPublic,
-  newActionEvent,
   newSubWizardEvent,
   newWizardEvent
 } from "../../../src/foundation.js";
+import {
+  newActionEvent
+} from "../../../_snowpack/link/packages/core/dist/foundation/deprecated/editor.js";
 import {maxLength, patterns} from "./foundation/limits.js";
 import {editDataSetWizard} from "./dataset.js";
 import {editGseWizard} from "./gse.js";

@@ -28,9 +28,9 @@ import {
   find,
   getNameAttribute,
   identity,
-  isPublic,
-  newPendingStateEvent
+  isPublic
 } from "../../../src/foundation.js";
+import {newPendingStateEvent} from "../../../_snowpack/link/packages/core/dist/foundation/deprecated/waiter.js";
 const tctrClass = `LN[lnClass='TCTR']`;
 const tvtrClass = `LN[lnClass='TVTR']`;
 const setMag = `SDI[name='setMag'] Val`;

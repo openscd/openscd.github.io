@@ -17,10 +17,8 @@ import {
 } from "../../../../_snowpack/pkg/lit-element.js";
 import "../../../../_snowpack/pkg/@material/mwc-fab.js";
 import "../../../../src/action-icon.js";
-import {
-  newWizardEvent,
-  newActionEvent
-} from "../../../../src/foundation.js";
+import {newWizardEvent} from "../../../../src/foundation.js";
+import {newActionEvent} from "../../../../_snowpack/link/packages/core/dist/foundation/deprecated/editor.js";
 import {editConnectedApWizard} from "../../wizards/connectedap.js";
 export let ConnectedAPEditor = class extends LitElement {
   get apName() {

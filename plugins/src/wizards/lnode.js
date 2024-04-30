@@ -13,12 +13,12 @@ import {
   getValue,
   identity,
   isPublic,
-  newLogEvent,
   newWizardEvent,
   referencePath,
   newLnInstGenerator
 } from "../../../src/foundation.js";
 import {patterns} from "./foundation/limits.js";
+import {newLogEvent} from "../../../_snowpack/link/packages/core/dist/foundation/deprecated/history.js";
 function createLNodeAction(parent) {
   return (inputs, wizard, list) => {
     const selectedLNodeTypes = list.items.filter((item) => item.selected).map((item) => item.value).map((identity2) => find(parent.ownerDocument, "LNodeType", identity2)).filter((item) => item !== null);

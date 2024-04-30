@@ -1,8 +1,10 @@
 import {
   cloneElement,
-  createUpdateAction,
   getValue
 } from "../../../../src/foundation.js";
+import {
+  createUpdateAction
+} from "../../../../_snowpack/link/packages/core/dist/foundation/deprecated/editor.js";
 import {get} from "../../../../_snowpack/pkg/lit-translate.js";
 import {updateReferences} from "./references.js";
 export function replaceNamingAction(element) {

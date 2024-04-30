@@ -9,9 +9,9 @@ import {
   createElement,
   getValue,
   isPublic,
-  newActionEvent,
   newWizardEvent
 } from "../../../src/foundation.js";
+import {newActionEvent} from "../../../_snowpack/link/packages/core/dist/foundation/deprecated/editor.js";
 import {getValAction, wizardContent} from "./abstractda.js";
 import {functionalConstraintEnum} from "./foundation/enums.js";
 function remove(element) {

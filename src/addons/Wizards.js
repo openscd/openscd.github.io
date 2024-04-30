@@ -18,7 +18,7 @@ import {
   property
 } from "../../_snowpack/pkg/lit-element.js";
 import "../wizard-dialog.js";
-export let Wizards = class extends LitElement {
+export let OscdWizards = class extends LitElement {
   constructor() {
     super(...arguments);
     this.workflow = [];
@@ -48,13 +48,13 @@ __decorate([
   property({
     type: Object
   })
-], Wizards.prototype, "host", 2);
+], OscdWizards.prototype, "host", 2);
 __decorate([
   state()
-], Wizards.prototype, "workflow", 2);
+], OscdWizards.prototype, "workflow", 2);
 __decorate([
   query("wizard-dialog")
-], Wizards.prototype, "wizardUI", 2);
-Wizards = __decorate([
+], OscdWizards.prototype, "wizardUI", 2);
+OscdWizards = __decorate([
   customElement("oscd-wizards")
-], Wizards);
+], OscdWizards);

@@ -26,13 +26,14 @@ import "./conducting-equipment-editor.js";
 import "./function-editor.js";
 import "./general-equipment-editor.js";
 import "./l-node-editor.js";
+import {lineIcon} from "../../../../src/icons/icons.js";
 import {styles} from "./foundation.js";
 import {
   getChildElementsByTagName,
   newWizardEvent,
-  newActionEvent,
   tags
 } from "../../../../src/foundation.js";
+import {newActionEvent} from "../../../../_snowpack/link/packages/core/dist/foundation/deprecated/editor.js";
 import {emptyWizard, wizards} from "../../wizards/wizard-library.js";
 function childTags(element) {
   if (!element)
@@ -121,6 +122,9 @@ export let LineEditor = class extends LitElement {
   }
   render() {
     return html`<action-pane label=${this.header}>
+      <mwc-icon class="substation-editor-icon" slot="icon"
+        >${lineIcon}</mwc-icon
+      >
       <abbr slot="action" title="${get("edit")}">
         <mwc-icon-button
           icon="edit"

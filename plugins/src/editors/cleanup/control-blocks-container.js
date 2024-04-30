@@ -30,9 +30,9 @@ import "../../../../src/filtered-list.js";
 import {
   identity,
   isPublic,
-  newSubWizardEvent,
-  newActionEvent
+  newSubWizardEvent
 } from "../../../../src/foundation.js";
+import {newActionEvent} from "../../../../_snowpack/link/packages/core/dist/foundation/deprecated/editor.js";
 import {styles} from "../templates/foundation.js";
 import {
   controlBlockIcons,

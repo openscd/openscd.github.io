@@ -31,9 +31,9 @@ import {styles} from "../templates/foundation.js";
 import {
   identity,
   isPublic,
-  newSubWizardEvent,
-  newActionEvent
+  newSubWizardEvent
 } from "../../../../src/foundation.js";
+import {newActionEvent} from "../../../../_snowpack/link/packages/core/dist/foundation/deprecated/editor.js";
 import {cleanSCLItems, identitySort} from "./foundation.js";
 export let CleanupDatasets = class extends LitElement {
   constructor() {

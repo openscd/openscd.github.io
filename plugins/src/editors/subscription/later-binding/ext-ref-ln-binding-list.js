@@ -21,9 +21,11 @@ import {nothing} from "../../../../../_snowpack/pkg/lit-html.js";
 import {get} from "../../../../../_snowpack/pkg/lit-translate.js";
 import {
   createElement,
-  identity,
-  newActionEvent
+  identity
 } from "../../../../../src/foundation.js";
+import {
+  newActionEvent
+} from "../../../../../_snowpack/link/packages/core/dist/foundation/deprecated/editor.js";
 import {
   canCreateValidExtRef,
   createExtRefElement,

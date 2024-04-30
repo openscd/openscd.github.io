@@ -16,18 +16,20 @@ import {
   html
 } from "../../_snowpack/pkg/lit-element.js";
 import {get} from "../../_snowpack/pkg/lit-translate.js";
+import {newLogEvent} from "../../_snowpack/link/packages/core/dist/foundation/deprecated/history.js";
+import {newValidateEvent} from "../../_snowpack/link/packages/core/dist/foundation/deprecated/validation.js";
 import {
-  getReference,
+  getReference
+} from "../foundation.js";
+import {
   isCreate,
   isDelete,
   isMove,
   isSimple,
   isReplace,
-  newLogEvent,
-  newValidateEvent,
   isUpdate
-} from "../foundation.js";
-export let Editor = class extends LitElement {
+} from "../../_snowpack/link/packages/core/dist/foundation/deprecated/editor.js";
+export let OscdEditor = class extends LitElement {
   constructor() {
     super(...arguments);
     this.doc = null;
@@ -305,23 +307,23 @@ export let Editor = class extends LitElement {
 };
 __decorate([
   property({attribute: false})
-], Editor.prototype, "doc", 2);
+], OscdEditor.prototype, "doc", 2);
 __decorate([
   property({type: String})
-], Editor.prototype, "docName", 2);
+], OscdEditor.prototype, "docName", 2);
 __decorate([
   property({type: String})
-], Editor.prototype, "docId", 2);
+], OscdEditor.prototype, "docId", 2);
 __decorate([
   property({
     type: Object
   })
-], Editor.prototype, "host", 2);
+], OscdEditor.prototype, "host", 2);
 __decorate([
   property({
     type: Number
   })
-], Editor.prototype, "editCount", 2);
-Editor = __decorate([
+], OscdEditor.prototype, "editCount", 2);
+OscdEditor = __decorate([
   customElement("oscd-editor")
-], Editor);
+], OscdEditor);

@@ -2,16 +2,17 @@
 
 ## Properties
 
-| Property      | Attribute  | Modifiers | Type          | Default             | Description                                      |
-|---------------|------------|-----------|---------------|---------------------|--------------------------------------------------|
-| `darkThemeUI` |            |           | `Switch`      |                     |                                                  |
-| `host`        | `host`     |           | `HTMLElement` |                     |                                                  |
-| `languageUI`  |            |           | `Select`      |                     |                                                  |
-| `modeUI`      |            |           | `Switch`      |                     |                                                  |
-| `nsdoc`       |            |           | `Nsdoc`       | "initializeNsdoc()" | Object containing all *.nsdoc files and a function extracting element's label form them |
-| `settings`    | `settings` | readonly  | `Settings`    |                     | Current [[`Settings`]] in `localStorage`, default to [[`defaults`]]. |
-| `settingsUI`  |            |           | `Dialog`      |                     |                                                  |
-| `showiedsUI`  |            |           | `Switch`      |                     |                                                  |
+| Property          | Attribute         | Modifiers | Type          | Default             | Description                                      |
+|-------------------|-------------------|-----------|---------------|---------------------|--------------------------------------------------|
+| `darkThemeUI`     |                   |           | `Switch`      |                     |                                                  |
+| `host`            | `host`            |           | `HTMLElement` |                     |                                                  |
+| `languageUI`      |                   |           | `Select`      |                     |                                                  |
+| `modeUI`          |                   |           | `Switch`      |                     |                                                  |
+| `nsdUploadButton` | `nsdUploadButton` |           | `boolean`     | true                |                                                  |
+| `nsdoc`           |                   |           | `Nsdoc`       | "initializeNsdoc()" | Object containing all *.nsdoc files and a function extracting element's label form them |
+| `settings`        | `settings`        | readonly  | `Settings`    |                     | Current [[`Settings`]] in `localStorage`, default to [[`defaults`]]. |
+| `settingsUI`      |                   |           | `Dialog`      |                     |                                                  |
+| `showiedsUI`      |                   |           | `Switch`      |                     |                                                  |
 
 ## Methods
 

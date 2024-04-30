@@ -29,9 +29,9 @@ import "./eq-function-editor.js";
 import {
   getChildElementsByTagName,
   newWizardEvent,
-  newActionEvent,
   tags
 } from "../../../../src/foundation.js";
+import {newActionEvent} from "../../../../_snowpack/link/packages/core/dist/foundation/deprecated/editor.js";
 import {emptyWizard, wizards} from "../../wizards/wizard-library.js";
 function childTags(element) {
   if (!element)

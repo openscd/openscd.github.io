@@ -30,10 +30,10 @@ import "./sub-equipment-editor.js";
 import {startMove, getIcon, styles} from "./foundation.js";
 import {
   getChildElementsByTagName,
-  newActionEvent,
   newWizardEvent,
   tags
 } from "../../../../src/foundation.js";
+import {newActionEvent} from "../../../../_snowpack/link/packages/core/dist/foundation/deprecated/editor.js";
 import {BayEditor} from "./bay-editor.js";
 import {emptyWizard, wizards} from "../../wizards/wizard-library.js";
 function childTags(element) {
@@ -116,7 +116,7 @@ export let ConductingEquipmentEditor = class extends LitElement {
         >`);
   }
   renderContentPane() {
-    return html`<mwc-icon slot="icon" style="width:24px;height:24px"
+    return html`<mwc-icon class="substation-editor-icon" slot="icon"
         >${getIcon(this.element)}</mwc-icon
       >
       <abbr slot="action" title="${get("lnode.tooltip")}">

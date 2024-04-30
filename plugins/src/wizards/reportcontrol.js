@@ -17,9 +17,11 @@ import {
   isPublic,
   newSubWizardEvent,
   getUniqueElementName,
-  newActionEvent,
   newWizardEvent
 } from "../../../src/foundation.js";
+import {
+  newActionEvent
+} from "../../../_snowpack/link/packages/core/dist/foundation/deprecated/editor.js";
 import {dataAttributePicker, iEDPicker} from "./foundation/finder.js";
 import {maxLength, patterns} from "./foundation/limits.js";
 import {editDataSetWizard} from "./dataset.js";

@@ -6,10 +6,12 @@ import "../../../src/wizard-textfield.js";
 import {
   identity,
   isPublic,
-  newActionEvent,
   newSubWizardEvent,
   newWizardEvent
 } from "../../../src/foundation.js";
+import {
+  newActionEvent
+} from "../../../_snowpack/link/packages/core/dist/foundation/deprecated/editor.js";
 import {patterns} from "./foundation/limits.js";
 import {updateNamingAttributeWithReferencesAction} from "./foundation/actions.js";
 import {deleteReferences} from "./foundation/references.js";

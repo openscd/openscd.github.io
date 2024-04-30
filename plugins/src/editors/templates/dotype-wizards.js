@@ -12,10 +12,12 @@ import {
   getValue,
   identity,
   isPublic,
-  newActionEvent,
   newSubWizardEvent,
   newWizardEvent
 } from "../../../../src/foundation.js";
+import {
+  newActionEvent
+} from "../../../../_snowpack/link/packages/core/dist/foundation/deprecated/editor.js";
 import {createDaWizard, editDAWizard} from "../../wizards/da.js";
 import {patterns} from "../../wizards/foundation/limits.js";
 import {

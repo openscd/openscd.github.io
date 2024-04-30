@@ -1,273 +1,137 @@
-<!doctype html>
-<html class="default no-js">
-<head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>@openscd/open-scd</title>
-	<meta name="description" content="Documentation for @openscd/open-scd">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="assets/css/main.css">
-	<script async src="assets/js/search.js" id="search-script"></script>
-</head>
-<body>
-<header>
-	<div class="tsd-page-toolbar">
-		<div class="container">
-			<div class="table-wrap">
-				<div class="table-cell" id="tsd-search" data-index="assets/js/search.json" data-base=".">
-					<div class="field">
-						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
-						<input id="tsd-search-field" type="text" />
-					</div>
-					<ul class="results">
-						<li class="state loading">Preparing search index...</li>
-						<li class="state failure">The search index is not available</li>
-					</ul>
-					<a href="index.html" class="title">@openscd/open-scd</a>
-				</div>
-				<div class="table-cell" id="tsd-widgets">
-					<div id="tsd-filter">
-						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
-						<div class="tsd-filter-group">
-							<div class="tsd-select" id="tsd-filter-visibility">
-								<span class="tsd-select-label">All</span>
-								<ul class="tsd-select-list">
-									<li data-value="public">Public</li>
-									<li data-value="protected">Public/Protected</li>
-									<li data-value="private" class="selected">All</li>
-								</ul>
-							</div>
-							<input type="checkbox" id="tsd-filter-inherited" checked />
-							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
-							<input type="checkbox" id="tsd-filter-externals" checked />
-							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
-						</div>
-					</div>
-					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="tsd-page-title">
-		<div class="container">
-			<h1>@openscd/open-scd</h1>
-		</div>
-	</div>
-</header>
+<!DOCTYPE html><html class="default" lang="en"><head><meta charSet="utf-8"/><meta http-equiv="x-ua-compatible" content="IE=edge"/><title>@openscd/open-scd</title><meta name="description" content="Documentation for @openscd/open-scd"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="assets/style.css"/><link rel="stylesheet" href="assets/highlight.css"/><script async src="assets/search.js" id="search-script"></script></head><body><script>document.documentElement.dataset.theme = localStorage.getItem("tsd-theme") || "os"</script><header class="tsd-page-toolbar">
+<div class="tsd-toolbar-contents container">
+<div class="table-cell" id="tsd-search" data-base=".">
+<div class="field"><label for="tsd-search-field" class="tsd-widget tsd-toolbar-icon search no-caption"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M15.7824 13.833L12.6666 10.7177C12.5259 10.5771 12.3353 10.499 12.1353 10.499H11.6259C12.4884 9.39596 13.001 8.00859 13.001 6.49937C13.001 2.90909 10.0914 0 6.50048 0C2.90959 0 0 2.90909 0 6.49937C0 10.0896 2.90959 12.9987 6.50048 12.9987C8.00996 12.9987 9.39756 12.4863 10.5008 11.6239V12.1332C10.5008 12.3332 10.5789 12.5238 10.7195 12.6644L13.8354 15.7797C14.1292 16.0734 14.6042 16.0734 14.8948 15.7797L15.7793 14.8954C16.0731 14.6017 16.0731 14.1267 15.7824 13.833ZM6.50048 10.499C4.29094 10.499 2.50018 8.71165 2.50018 6.49937C2.50018 4.29021 4.28781 2.49976 6.50048 2.49976C8.71001 2.49976 10.5008 4.28708 10.5008 6.49937C10.5008 8.70852 8.71314 10.499 6.50048 10.499Z" fill="var(--color-text)"></path></svg></label><input type="text" id="tsd-search-field" aria-label="Search"/></div>
+<div class="field">
+<div id="tsd-toolbar-links"></div></div>
+<ul class="results">
+<li class="state loading">Preparing search index...</li>
+<li class="state failure">The search index is not available</li></ul><a href="index.html" class="title">@openscd/open-scd</a></div>
+<div class="table-cell" id="tsd-widgets"><a href="#" class="tsd-widget tsd-toolbar-icon menu no-caption" data-toggle="menu" aria-label="Menu"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="1" y="3" width="14" height="2" fill="var(--color-text)"></rect><rect x="1" y="7" width="14" height="2" fill="var(--color-text)"></rect><rect x="1" y="11" width="14" height="2" fill="var(--color-text)"></rect></svg></a></div></div></header>
 <div class="container container-main">
-	<div class="row">
-		<div class="col-8 col-content">
-			<div class="tsd-panel tsd-typography">
-				<a href="#openscd" id="openscd" style="color: inherit; text-decoration: none;">
-					<h1><code>OpenSCD</code></h1>
-				</a>
-				<p><a href="https://travis-ci.org/openscd/open-scd"><img src="https://travis-ci.org/openscd/open-scd.svg?branch=main" alt="Build Status"></a>
-					<a href="https://app.fossa.com/projects/git%2Bgithub.com%2Fopenscd%2Fopen-scd?ref=badge_shield"><img src="https://app.fossa.com/api/projects/git%2Bgithub.com%2Fopenscd%2Fopen-scd.svg?type=shield" alt="FOSSA Status"></a>
-					<a href="https://github.com/open-wc"><img src="https://img.shields.io/badge/built%20with-open--wc-blue.svg" alt="Built with open-wc recommendations"></a>
-				<a href="https://lfenergy.slack.com/archives/C03LH7EUP34"><img src="https://img.shields.io/badge/LF%20Energy%20Slack-%20%23OpenSCD%20chat-purple?logo=slack&color=2aa198&labelColor=6c71c4" alt="Slack LF Energy"></a></p>
-				<p>Open Substation Communication Designer is an editor for SCL files as described in <code>IEC 61850-6</code>.</p>
-				<blockquote>
-					<p>Try it out at <a href="https://openscd.github.io">openscd.github.io</a>!</p>
-				</blockquote>
-				<p>Make sure your web browser has enough free memory! If needed, disable plug-ins and close unused browser tabs.</p>
-				<a href="#installation" id="installation" style="color: inherit; text-decoration: none;">
-					<h2>Installation</h2>
-				</a>
-				<p>In order to install OpenSCD on your local device (only for you), simply visit <a href="https://openscd.github.io">openscd.github.io</a>, click the &quot;Install OpenSCD&quot; button in your address bar (Chrome or Edge on desktop) or click the &quot;Add OpenSCD to home screen&quot; notification in any mobile browser.</p>
-				<p>In order to install your own instance of OpenSCD on your own webserver (e.g. on your company intranet), simply download <a href="https://github.com/openscd/open-scd/releases/latest">our latest release</a> (<code>open-scd.zip</code> or <code>open-scd.tar.gz</code>) and extract the archive contents into the &quot;webroot&quot; directory of your web server.</p>
-				<p>If you don&#39;t have your own webserver but still want your own version of OpenSCD hosted locally (e.g. on a system without an internet connection), you can <a href="https://github.com/openscd/open-scd/wiki/Install-OpenSCD#offline">use a browser plugin that acts as a local webserver</a> (only for you) instead.</p>
-				<a href="#building" id="building" style="color: inherit; text-decoration: none;">
-					<h3>Building</h3>
-				</a>
-				<p>If you want to build OpenSCD yourself in order to make some changes to your local installation or to contribute to the project, you may first want to install <a href="https://nodejs.org/">Node.js</a> in order to be able to use our local development setup. It is recommended to use Node.js 18.x. it is is the version used to build and test on GitHub Actions.</p>
-				<p>Once Node.js is installed on your system, you may get started by entering the following lines in your command prompt:</p>
-				<pre><code><span style="color: #001080">git</span><span style="color: #000000"> </span><span style="color: #001080">clone</span><span style="color: #000000"> https:</span><span style="color: #008000">//github.com/openscd/open-scd.git</span>
-<span style="color: #001080">cd</span><span style="color: #000000"> </span><span style="color: #001080">open</span><span style="color: #000000">-</span><span style="color: #001080">scd</span>
-<span style="color: #001080">npm</span><span style="color: #000000"> </span><span style="color: #001080">install</span>
-<span style="color: #001080">npm</span><span style="color: #000000"> </span><span style="color: #001080">start</span>
+<div class="col-8 col-content">
+<div class="tsd-page-title">
+<h2>@openscd/open-scd</h2></div>
+<div class="tsd-panel tsd-typography">
+<a href="#openscd" id="openscd" style="color: inherit; text-decoration: none;">
+  <h1><code>OpenSCD</code></h1>
+</a>
+<p><a href="https://travis-ci.org/openscd/open-scd"><img src="https://travis-ci.org/openscd/open-scd.svg?branch=main" alt="Build Status"></a>
+<a href="https://app.fossa.com/projects/git%2Bgithub.com%2Fopenscd%2Fopen-scd?ref=badge_shield"><img src="https://app.fossa.com/api/projects/git%2Bgithub.com%2Fopenscd%2Fopen-scd.svg?type=shield" alt="FOSSA Status"></a>
+<a href="https://github.com/open-wc"><img src="https://img.shields.io/badge/built%20with-open--wc-blue.svg" alt="Built with open-wc recommendations"></a>
+<a href="https://lfenergy.slack.com/archives/C03LH7EUP34"><img src="https://img.shields.io/badge/LF%20Energy%20Slack-%20%23OpenSCD%20chat-purple?logo=slack&color=2aa198&labelColor=6c71c4" alt="Slack LF Energy"></a></p>
+<p>Open Substation Communication Designer is an editor for SCL files as described in <code>IEC 61850-6</code>.</p>
+<blockquote>
+<p>Try it out at <a href="https://openscd.github.io">openscd.github.io</a>!</p>
+</blockquote>
+<p>Make sure your web browser has enough free memory! If needed, disable plug-ins and close unused browser tabs.</p>
+
+<a href="#installation" id="installation" style="color: inherit; text-decoration: none;">
+  <h2>Installation</h2>
+</a>
+<p>In order to install OpenSCD on your local device (only for you), simply visit <a href="https://openscd.github.io">openscd.github.io</a>, click the &quot;Install OpenSCD&quot; button in your address bar (Chrome or Edge on desktop) or click the &quot;Add OpenSCD to home screen&quot; notification in any mobile browser.</p>
+<p>In order to install your own instance of OpenSCD on your own webserver (e.g. on your company intranet), simply download <a href="https://github.com/openscd/open-scd/releases/latest">our latest release</a> (<code>open-scd.zip</code> or <code>open-scd.tar.gz</code>) and extract the archive contents into the &quot;webroot&quot; directory of your web server.</p>
+<p>If you don&#39;t have your own webserver but still want your own version of OpenSCD hosted locally (e.g. on a system without an internet connection), you can <a href="https://github.com/openscd/open-scd/wiki/Install-OpenSCD#offline">use a browser plugin that acts as a local webserver</a> (only for you) instead.</p>
+
+<a href="#building" id="building" style="color: inherit; text-decoration: none;">
+  <h3>Building</h3>
+</a>
+<p>If you want to build OpenSCD yourself in order to make some changes to your local installation or to contribute to the project, you may first want to install <a href="https://nodejs.org/">Node.js</a> in order to be able to use our local development setup. It is recommended to use Node.js 18.x. it is is the version used to build and test on GitHub Actions.</p>
+<p>Once Node.js is installed on your system, you may get started by entering the following lines in your command prompt:</p>
+<pre><code><span class="hl-0">git</span><span class="hl-1"> </span><span class="hl-0">clone</span><span class="hl-1"> </span><span class="hl-2">https</span><span class="hl-1">:</span><span class="hl-3">//github.com/openscd/open-scd.git</span><br/><span class="hl-0">cd</span><span class="hl-1"> </span><span class="hl-0">open</span><span class="hl-1">-</span><span class="hl-0">scd</span><br/><span class="hl-0">npm</span><span class="hl-1"> </span><span class="hl-0">install</span><br/><span class="hl-0">npm</span><span class="hl-1"> </span><span class="hl-0">start</span>
 </code></pre>
-				<p>This will start a local development server and open a browser window which will automatically be reloaded as soon as you save any changes to your local source code files.</p>
-				<a href="#typedoc" id="typedoc" style="color: inherit; text-decoration: none;">
-					<h3>TypeDoc</h3>
-				</a>
-				<p>This project uses <a href="https://typedoc.org/">TypeDoc</a> to transform documentation comments in the source code into a rendered HTML document that can be queried and navigated through. If you want to consult the generated documentation for the TypeScript components, mixins, modules and other relevant artifacts of this project, you can <a href="https://openscd.github.io/doc/">do it here</a>. Documentation for OpenSCD Core <a href="https://openscd.github.io/core-doc">can be found here</a>.</p>
-				<a href="#linting-amp-formatting" id="linting-amp-formatting" style="color: inherit; text-decoration: none;">
-					<h3>Linting &amp; Formatting</h3>
-				</a>
-				<p>If you use VSCode to develop, we recommend you install and use the <a href="https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint">ESLint</a> and <a href="https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode">Prettier</a> extensions in order to automatically lint and format your code as you edit it. There are similar plugins available for using <a href="https://eslint.org/">ESLint</a> and <a href="https://prettier.io/">Prettier</a> from within other IDEs and text editors.</p>
-				<a href="#scripts" id="scripts" style="color: inherit; text-decoration: none;">
-					<h3>Scripts</h3>
-				</a>
-				<p>We provide the following <code>npm</code> scripts for your convenience:</p>
-				<ul>
-					<li><code>npm start</code> runs <code>OpenSCD</code> for development, reloading on file changes</li>
-					<li><code>npm test</code> runs the test suite with Karma</li>
-					<li><code>npm run lint</code> runs the linter (fixes problems in your code)</li>
-					<li><code>npm run format</code> runs the formatter (formats your code in a unified way)</li>
-					<li><code>npm run doc</code> builds HTML documentation into the <code>doc</code> directory</li>
-					<li><code>npm run build</code> builds a deployable version of the project into the <code>dist</code> directory</li>
-				</ul>
-				<a href="#license" id="license" style="color: inherit; text-decoration: none;">
-					<h2>License</h2>
-				</a>
-				<p>The <a href="https://webstore.iec.ch/publication/63319">IEC 61850</a> XSD and NSD code components used are
-				distributed under their <a href="CC-EULA.pdf">end user license agreement</a>.</p>
-				<p>This project is licensed under the <a href="LICENSE.md">Apache License 2.0</a>.</p>
-				<p>&copy; 2020-2022 OMICRON electronics GmbH, TransnetBW GmbH, Alliander N.V., and others</p>
-				<p><a href="https://app.fossa.com/projects/git%2Bgithub.com%2Fopenscd%2Fopen-scd?ref=badge_large"><img src="https://app.fossa.com/api/projects/git%2Bgithub.com%2Fopenscd%2Fopen-scd.svg?type=large" alt="FOSSA Status"></a></p>
-			</div>
-		</div>
-		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
-			<nav class="tsd-navigation primary">
-				<ul>
-					<li class=" ">
-						<a href="modules.html">Modules</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/Editing.html">Editing</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/Historing.html">Historing</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/WizardDivider.html">Wizard<wbr>Divider</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/Wizarding.html">Wizarding</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/action_icon.html">action-<wbr>icon</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/action_pane.html">action-<wbr>pane</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/addons_Editor.html">addons/<wbr>Editor</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/addons_Settings.html">addons/<wbr>Settings</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/addons_Waiter.html">addons/<wbr>Waiter</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/addons_Wizards.html">addons/<wbr>Wizards</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/filtered_list.html">filtered-<wbr>list</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/finder_list.html">finder-<wbr>list</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/foundation.html">foundation</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/foundation_compare.html">foundation/compare</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/foundation_dai.html">foundation/dai</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/foundation_generators.html">foundation/generators</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/foundation_ied.html">foundation/ied</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/foundation_nsd.html">foundation/nsd</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/foundation_nsdoc.html">foundation/nsdoc</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/foundation_scl.html">foundation/scl</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/icons_compare.html">icons/compare</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/icons_icons.html">icons/icons</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/icons_ied_icons.html">icons/ied-<wbr>icons</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/icons_lnode.html">icons/lnode</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/open_scd.html">open-<wbr>scd</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/oscd_filter_button.html">oscd-<wbr>filter-<wbr>button</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/plain_compare_list.html">plain-<wbr>compare-<wbr>list</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/schemas.html">schemas</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/themes.html">themes</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/translations_de.html">translations/de</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/translations_en.html">translations/en</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/translations_loader.html">translations/loader</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/wizard_checkbox.html">wizard-<wbr>checkbox</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/wizard_dialog.html">wizard-<wbr>dialog</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/wizard_select.html">wizard-<wbr>select</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/wizard_textfield.html">wizard-<wbr>textfield</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/wizards.html">wizards</a>
-					</li>
-				</ul>
-			</nav>
-			<nav class="tsd-navigation secondary menu-sticky">
-				<ul class="before-current">
-				</ul>
-			</nav>
-		</div>
-	</div>
-</div>
-<footer class="with-border-bottom">
-	<div class="container">
-		<h2>Legend</h2>
-		<div class="tsd-legend-group">
-			<ul class="tsd-legend">
-				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
-				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
-				<li class="tsd-kind-function tsd-has-type-parameter"><span class="tsd-kind-icon">Function with type parameter</span></li>
-				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
-				<li class="tsd-kind-type-alias tsd-has-type-parameter"><span class="tsd-kind-icon">Type alias with type parameter</span></li>
-			</ul>
-			<ul class="tsd-legend">
-				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
-				<li class="tsd-kind-interface tsd-has-type-parameter"><span class="tsd-kind-icon">Interface with type parameter</span></li>
-			</ul>
-			<ul class="tsd-legend">
-				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
-			</ul>
-		</div>
-	</div>
-</footer>
+<p>This will start a local development server and open a browser window which will automatically be reloaded as soon as you save any changes to your local source code files.</p>
+
+<a href="#typedoc" id="typedoc" style="color: inherit; text-decoration: none;">
+  <h3>TypeDoc</h3>
+</a>
+<p>This project uses <a href="https://typedoc.org/">TypeDoc</a> to transform documentation comments in the source code into a rendered HTML document that can be queried and navigated through. If you want to consult the generated documentation for the TypeScript components, mixins, modules and other relevant artifacts of this project, you can <a href="https://openscd.github.io/doc/">do it here</a>. Documentation for OpenSCD Core <a href="https://openscd.github.io/core-doc">can be found here</a>.</p>
+
+<a href="#linting-amp-formatting" id="linting-amp-formatting" style="color: inherit; text-decoration: none;">
+  <h3>Linting &amp; Formatting</h3>
+</a>
+<p>If you use VSCode to develop, we recommend you install and use the <a href="https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint">ESLint</a> and <a href="https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode">Prettier</a> extensions in order to automatically lint and format your code as you edit it. There are similar plugins available for using <a href="https://eslint.org/">ESLint</a> and <a href="https://prettier.io/">Prettier</a> from within other IDEs and text editors.</p>
+
+<a href="#scripts" id="scripts" style="color: inherit; text-decoration: none;">
+  <h3>Scripts</h3>
+</a>
+<p>We provide the following <code>npm</code> scripts for your convenience:</p>
+<ul>
+<li><code>npm start</code> runs <code>OpenSCD</code> for development, reloading on file changes</li>
+<li><code>npm test</code> runs the test suite with Karma</li>
+<li><code>npm run lint</code> runs the linter (fixes problems in your code)</li>
+<li><code>npm run format</code> runs the formatter (formats your code in a unified way)</li>
+<li><code>npm run doc</code> builds HTML documentation into the <code>doc</code> directory</li>
+<li><code>npm run build</code> builds a deployable version of the project into the <code>dist</code> directory</li>
+</ul>
+
+<a href="#license" id="license" style="color: inherit; text-decoration: none;">
+  <h2>License</h2>
+</a>
+<p>The <a href="https://webstore.iec.ch/publication/63319">IEC 61850</a> XSD and NSD code components used are
+distributed under their <a href="CC-EULA.pdf">end user license agreement</a>.</p>
+<p>This project is licensed under the <a href="LICENSE.md">Apache License 2.0</a>.</p>
+<p>&copy; 2020-2022 OMICRON electronics GmbH, TransnetBW GmbH, Alliander N.V., and others</p>
+<p><a href="https://app.fossa.com/projects/git%2Bgithub.com%2Fopenscd%2Fopen-scd?ref=badge_large"><img src="https://app.fossa.com/api/projects/git%2Bgithub.com%2Fopenscd%2Fopen-scd.svg?type=large" alt="FOSSA Status"></a></p>
+</div></div>
+<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+<div class="tsd-navigation settings">
+<details class="tsd-index-accordion"><summary class="tsd-accordion-summary">
+<h3><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M4.93896 8.531L12 15.591L19.061 8.531L16.939 6.409L12 11.349L7.06098 6.409L4.93896 8.531Z" fill="var(--color-text)"></path></svg> Settings</h3></summary>
+<div class="tsd-accordion-details">
+<div class="tsd-filter-visibility">
+<h4 class="uppercase">Member Visibility</h4><form>
+<ul id="tsd-filter-options">
+<li class="tsd-filter-item"><label class="tsd-filter-input"><input type="checkbox" id="tsd-filter-protected" name="protected"/><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect class="tsd-checkbox-background" width="30" height="30" x="1" y="1" rx="6" fill="none"></rect><path class="tsd-checkbox-checkmark" d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25" stroke="none" stroke-width="3.5" stroke-linejoin="round" fill="none"></path></svg><span>Protected</span></label></li>
+<li class="tsd-filter-item"><label class="tsd-filter-input"><input type="checkbox" id="tsd-filter-private" name="private"/><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect class="tsd-checkbox-background" width="30" height="30" x="1" y="1" rx="6" fill="none"></rect><path class="tsd-checkbox-checkmark" d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25" stroke="none" stroke-width="3.5" stroke-linejoin="round" fill="none"></path></svg><span>Private</span></label></li>
+<li class="tsd-filter-item"><label class="tsd-filter-input"><input type="checkbox" id="tsd-filter-inherited" name="inherited" checked/><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect class="tsd-checkbox-background" width="30" height="30" x="1" y="1" rx="6" fill="none"></rect><path class="tsd-checkbox-checkmark" d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25" stroke="none" stroke-width="3.5" stroke-linejoin="round" fill="none"></path></svg><span>Inherited</span></label></li>
+<li class="tsd-filter-item"><label class="tsd-filter-input"><input type="checkbox" id="tsd-filter-external" name="external"/><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect class="tsd-checkbox-background" width="30" height="30" x="1" y="1" rx="6" fill="none"></rect><path class="tsd-checkbox-checkmark" d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25" stroke="none" stroke-width="3.5" stroke-linejoin="round" fill="none"></path></svg><span>External</span></label></li></ul></form></div>
+<div class="tsd-theme-toggle">
+<h4 class="uppercase">Theme</h4><select id="theme"><option value="os">OS</option><option value="light">Light</option><option value="dark">Dark</option></select></div></div></details></div>
+<nav class="tsd-navigation primary">
+<details class="tsd-index-accordion" open><summary class="tsd-accordion-summary">
+<h3><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M4.93896 8.531L12 15.591L19.061 8.531L16.939 6.409L12 11.349L7.06098 6.409L4.93896 8.531Z" fill="var(--color-text)"></path></svg> Modules</h3></summary>
+<div class="tsd-accordion-details">
+<ul>
+<li class="current selected"><a href="modules.html">@openscd/open-<wbr/>scd</a>
+<ul>
+<li class="tsd-kind-module"><a href="modules/Editing.html">Editing</a></li>
+<li class="tsd-kind-module"><a href="modules/WizardDivider.html">Wizard<wbr/>Divider</a></li>
+<li class="tsd-kind-module"><a href="modules/Wizarding.html">Wizarding</a></li>
+<li class="tsd-kind-module"><a href="modules/action_icon.html">action-<wbr/>icon</a></li>
+<li class="tsd-kind-module"><a href="modules/action_pane.html">action-<wbr/>pane</a></li>
+<li class="tsd-kind-module"><a href="modules/addons_Editor.html">addons/<wbr/>Editor</a></li>
+<li class="tsd-kind-module"><a href="modules/addons_History.html">addons/<wbr/>History</a></li>
+<li class="tsd-kind-module"><a href="modules/addons_Settings.html">addons/<wbr/>Settings</a></li>
+<li class="tsd-kind-module"><a href="modules/addons_Waiter.html">addons/<wbr/>Waiter</a></li>
+<li class="tsd-kind-module"><a href="modules/addons_Wizards.html">addons/<wbr/>Wizards</a></li>
+<li class="tsd-kind-module"><a href="modules/filtered_list.html">filtered-<wbr/>list</a></li>
+<li class="tsd-kind-module"><a href="modules/finder_list.html">finder-<wbr/>list</a></li>
+<li class="tsd-kind-module"><a href="modules/foundation.html">foundation</a></li>
+<li class="tsd-kind-module"><a href="modules/foundation_compare.html">foundation/compare</a></li>
+<li class="tsd-kind-module"><a href="modules/foundation_dai.html">foundation/dai</a></li>
+<li class="tsd-kind-module"><a href="modules/foundation_generators.html">foundation/generators</a></li>
+<li class="tsd-kind-module"><a href="modules/foundation_ied.html">foundation/ied</a></li>
+<li class="tsd-kind-module"><a href="modules/foundation_nsd.html">foundation/nsd</a></li>
+<li class="tsd-kind-module"><a href="modules/foundation_nsdoc.html">foundation/nsdoc</a></li>
+<li class="tsd-kind-module"><a href="modules/foundation_scl.html">foundation/scl</a></li>
+<li class="tsd-kind-module"><a href="modules/icons_compare.html">icons/compare</a></li>
+<li class="tsd-kind-module"><a href="modules/icons_icons.html">icons/icons</a></li>
+<li class="tsd-kind-module"><a href="modules/icons_ied_icons.html">icons/ied-<wbr/>icons</a></li>
+<li class="tsd-kind-module"><a href="modules/icons_lnode.html">icons/lnode</a></li>
+<li class="tsd-kind-module"><a href="modules/open_scd.html">open-<wbr/>scd</a></li>
+<li class="tsd-kind-module"><a href="modules/oscd_filter_button.html">oscd-<wbr/>filter-<wbr/>button</a></li>
+<li class="tsd-kind-module"><a href="modules/plain_compare_list.html">plain-<wbr/>compare-<wbr/>list</a></li>
+<li class="tsd-kind-module"><a href="modules/schemas.html">schemas</a></li>
+<li class="tsd-kind-module"><a href="modules/themes.html">themes</a></li>
+<li class="tsd-kind-module"><a href="modules/translations_de.html">translations/de</a></li>
+<li class="tsd-kind-module"><a href="modules/translations_en.html">translations/en</a></li>
+<li class="tsd-kind-module"><a href="modules/translations_loader.html">translations/loader</a></li>
+<li class="tsd-kind-module"><a href="modules/wizard_checkbox.html">wizard-<wbr/>checkbox</a></li>
+<li class="tsd-kind-module"><a href="modules/wizard_dialog.html">wizard-<wbr/>dialog</a></li>
+<li class="tsd-kind-module"><a href="modules/wizard_select.html">wizard-<wbr/>select</a></li>
+<li class="tsd-kind-module"><a href="modules/wizard_textfield.html">wizard-<wbr/>textfield</a></li>
+<li class="tsd-kind-module"><a href="modules/wizards.html">wizards</a></li></ul></li></ul></div></details></nav></div></div>
 <div class="container tsd-generator">
-	<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p>
-</div>
-<div class="overlay"></div>
-<script src="assets/js/main.js"></script>
-</body>
-</html>
+<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p></div>
+<div class="overlay"></div><script src="assets/main.js"></script></body></html>

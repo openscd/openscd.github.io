@@ -11,16 +11,18 @@ var __decorate = (decorators, target, key, kind) => {
 };
 import {property} from "../_snowpack/pkg/lit-element.js";
 import {get} from "../_snowpack/pkg/lit-translate.js";
+import {newLogEvent} from "../_snowpack/link/packages/core/dist/foundation/deprecated/history.js";
+import {newValidateEvent} from "../_snowpack/link/packages/core/dist/foundation/deprecated/validation.js";
 import {
-  getReference,
   isCreate,
   isDelete,
   isMove,
   isSimple,
   isReplace,
-  newLogEvent,
-  newValidateEvent,
   isUpdate
+} from "../_snowpack/link/packages/core/dist/foundation/deprecated/editor.js";
+import {
+  getReference
 } from "./foundation.js";
 export function Editing(Base) {
   class EditingElement extends Base {

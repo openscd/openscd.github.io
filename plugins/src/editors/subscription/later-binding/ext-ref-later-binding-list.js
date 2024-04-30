@@ -22,9 +22,11 @@ import {get} from "../../../../../_snowpack/pkg/lit-translate.js";
 import {
   cloneElement,
   getDescriptionAttribute,
-  identity,
-  newActionEvent
+  identity
 } from "../../../../../src/foundation.js";
+import {
+  newActionEvent
+} from "../../../../../_snowpack/link/packages/core/dist/foundation/deprecated/editor.js";
 import {
   getExistingSupervision,
   styles,

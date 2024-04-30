@@ -24,9 +24,9 @@ import {Container} from "./foundation.js";
 import {
   getDescriptionAttribute,
   getNameAttribute,
-  newActionEvent,
   newWizardEvent
 } from "../../../../src/foundation.js";
+import {newActionEvent} from "../../../../_snowpack/link/packages/core/dist/foundation/deprecated/editor.js";
 import {removeIEDWizard} from "../../wizards/ied.js";
 import {editServicesWizard} from "../../wizards/services.js";
 export let IedContainer = class extends Container {

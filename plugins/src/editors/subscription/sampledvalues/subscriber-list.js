@@ -23,9 +23,11 @@ import "../../../../../_snowpack/pkg/@material/mwc-list/mwc-list-item.js";
 import "../../../../../src/filtered-list.js";
 import {
   createElement,
-  identity,
-  newActionEvent
+  identity
 } from "../../../../../src/foundation.js";
+import {
+  newActionEvent
+} from "../../../../../_snowpack/link/packages/core/dist/foundation/deprecated/editor.js";
 import {
   newSmvSubscriptionEvent
 } from "./foundation.js";

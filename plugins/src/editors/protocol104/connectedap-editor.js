@@ -12,10 +12,8 @@ var __decorate = (decorators, target, key, kind) => {
 import {customElement, html, property} from "../../../../_snowpack/pkg/lit-element.js";
 import "../../../../_snowpack/pkg/@material/mwc-fab.js";
 import "../../../../src/action-icon.js";
-import {
-  newActionEvent,
-  newWizardEvent
-} from "../../../../src/foundation.js";
+import {newWizardEvent} from "../../../../src/foundation.js";
+import {newActionEvent} from "../../../../_snowpack/link/packages/core/dist/foundation/deprecated/editor.js";
 import {editConnectedApWizard} from "./wizards/connectedap.js";
 import {Base104Container} from "./base-container.js";
 export let ConnectedAP104Editor = class extends Base104Container {

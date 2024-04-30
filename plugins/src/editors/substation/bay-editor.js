@@ -30,10 +30,13 @@ import "./powertransformer-editor.js";
 import {VoltageLevelEditor} from "./voltage-level-editor.js";
 import {
   getChildElementsByTagName,
-  newActionEvent,
   newWizardEvent,
   tags
 } from "../../../../src/foundation.js";
+import {newActionEvent} from "../../../../_snowpack/link/packages/core/dist/foundation/deprecated/editor.js";
+import {
+  bayIcon
+} from "../../../../src/icons/icons.js";
 import {emptyWizard, wizards} from "../../wizards/wizard-library.js";
 import {
   cloneSubstationElement,
@@ -136,6 +139,9 @@ export let BayEditor = class extends LitElement {
   }
   render() {
     return html`${this.renderRedirectUI()}<action-pane label="${this.header}">
+        <mwc-icon class="substation-editor-icon" slot="icon"
+          >${bayIcon}</mwc-icon
+        >
         <abbr slot="action" title="${get("lnode.tooltip")}">
           <mwc-icon-button
             icon="account_tree"

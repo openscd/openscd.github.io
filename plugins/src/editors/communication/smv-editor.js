@@ -19,10 +19,8 @@ import {
 import "../../../../_snowpack/pkg/@material/mwc-icon.js";
 import "../../../../src/action-icon.js";
 import {sizableSmvIcon} from "../../../../src/icons/icons.js";
-import {
-  newWizardEvent,
-  newActionEvent
-} from "../../../../src/foundation.js";
+import {newWizardEvent} from "../../../../src/foundation.js";
+import {newActionEvent} from "../../../../_snowpack/link/packages/core/dist/foundation/deprecated/editor.js";
 import {editSMvWizard} from "../../wizards/smv.js";
 export let SmvEditor = class extends LitElement {
   get label() {

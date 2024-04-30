@@ -11,11 +11,13 @@ import {
   find,
   getValue,
   identity,
-  newActionEvent,
   newSubWizardEvent,
   newWizardEvent,
   patterns
 } from "../../../../src/foundation.js";
+import {
+  newActionEvent
+} from "../../../../_snowpack/link/packages/core/dist/foundation/deprecated/editor.js";
 import {createBDAWizard, editBDAWizard} from "../../wizards/bda.js";
 import {
   addReferencedDataTypes,

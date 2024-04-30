@@ -10,10 +10,8 @@ var __decorate = (decorators, target, key, kind) => {
   return result;
 };
 import {css, html, LitElement, query} from "../../../_snowpack/pkg/lit-element.js";
-import {
-  newLogEvent,
-  newOpenDocEvent
-} from "../../../src/foundation.js";
+import {newOpenDocEvent} from "../../../_snowpack/link/packages/core/dist/foundation/deprecated/open-event.js";
+import {newLogEvent} from "../../../_snowpack/link/packages/core/dist/foundation/deprecated/history.js";
 export default class OpenProjectPlugin extends LitElement {
   async openDoc(event) {
     const file = event.target?.files?.item(0) ?? false;

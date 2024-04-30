@@ -29,10 +29,10 @@ import "./sub-equipment-editor.js";
 import {styles} from "./foundation.js";
 import {
   getChildElementsByTagName,
-  newActionEvent,
   newWizardEvent,
   tags
 } from "../../../../src/foundation.js";
+import {newActionEvent} from "../../../../_snowpack/link/packages/core/dist/foundation/deprecated/editor.js";
 import {emptyWizard, wizards} from "../../wizards/wizard-library.js";
 function childTags(element) {
   if (!element)

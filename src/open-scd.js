@@ -15,6 +15,7 @@ import {
   html,
   LitElement,
   property,
+  state,
   query
 } from "../_snowpack/pkg/lit-element.js";
 import {classMap} from "../_snowpack/pkg/lit-html/directives/class-map.js";
@@ -35,20 +36,19 @@ import "../_snowpack/pkg/@material/mwc-list/mwc-radio-list-item.js";
 import "../_snowpack/pkg/@material/mwc-select.js";
 import "../_snowpack/pkg/@material/mwc-switch.js";
 import "../_snowpack/pkg/@material/mwc-textfield.js";
-import {
-  newOpenDocEvent,
-  newPendingStateEvent,
-  newSettingsUIEvent
-} from "./foundation.js";
-import {Historing} from "./Historing.js";
+import {newOpenDocEvent} from "../_snowpack/link/packages/core/dist/foundation/deprecated/open-event.js";
+import {newPendingStateEvent} from "../_snowpack/link/packages/core/dist/foundation/deprecated/waiter.js";
+import {newSettingsUIEvent} from "../_snowpack/link/packages/core/dist/foundation/deprecated/settings.js";
 import "./addons/Settings.js";
 import "./addons/Waiter.js";
 import "./addons/Wizards.js";
 import "./addons/Editor.js";
+import "./addons/History.js";
 import {List} from "../_snowpack/pkg/@material/mwc-list.js";
 import {get} from "../_snowpack/pkg/lit-translate.js";
 import {officialPlugins} from "../public/js/plugins.js";
 import {initializeNsdoc} from "./foundation/nsdoc.js";
+import {HistoryUIKind, newEmptyIssuesEvent, newHistoryUIEvent, newRedoEvent, newUndoEvent} from "./addons/History.js";
 const pluginTags = new Map();
 function pluginTag(uri) {
   if (!pluginTags.has(uri)) {
@@ -122,12 +122,15 @@ function compareNeedsDoc(a, b) {
   return a.requireDoc ? 1 : -1;
 }
 const loadedPlugins = new Set();
-export let OpenSCD = class extends Historing(LitElement) {
+export let OpenSCD = class extends LitElement {
   constructor() {
     super();
     this.doc = null;
     this.docName = "";
     this.docId = "";
+    this.editCount = -1;
+    this.canRedo = false;
+    this.canUndo = false;
     this.nsdoc = initializeNsdoc();
     this.currentSrc = "";
     this.activeTab = 0;
@@ -159,14 +162,6 @@ export let OpenSCD = class extends Historing(LitElement) {
   handleKeyPress(e) {
     let handled = false;
     const ctrlAnd = (key) => e.key === key && e.ctrlKey && (handled = true);
-    if (ctrlAnd("y"))
-      this.redo();
-    if (ctrlAnd("z"))
-      this.undo();
-    if (ctrlAnd("l"))
-      this.logUI.open ? this.logUI.close() : this.logUI.show();
-    if (ctrlAnd("d"))
-      this.diagnosticUI.open ? this.diagnosticUI.close() : this.diagnosticUI.show();
     if (ctrlAnd("m"))
       this.menuUI.open = !this.menuUI.open;
     if (ctrlAnd("o"))
@@ -181,7 +176,7 @@ export let OpenSCD = class extends Historing(LitElement) {
       e.preventDefault();
   }
   renderMain() {
-    return html`${this.renderHosting()}${this.renderPlugging()}${super.render()}`;
+    return html`${this.renderHosting()}${this.renderPlugging()}`;
   }
   connectedCallback() {
     super.connectedCallback();
@@ -190,7 +185,6 @@ export let OpenSCD = class extends Historing(LitElement) {
       await this.validated;
       if (!this.shouldValidate)
         return;
-      this.diagnoses.clear();
       this.shouldValidate = false;
       this.validated = Promise.allSettled(this.menuUI.querySelector("mwc-list").items.filter((item) => item.className === "validator").map((item) => item.nextElementSibling.validate())).then();
       this.dispatchEvent(newPendingStateEvent(this.validated));
@@ -198,20 +192,33 @@ export let OpenSCD = class extends Historing(LitElement) {
     this.addEventListener("close-drawer", async () => {
       this.menuUI.open = false;
     });
+    this.addEventListener("undo-redo-changed", (e) => {
+      this.canRedo = e.detail.canRedo;
+      this.canUndo = e.detail.canUndo;
+    });
   }
   render() {
     return html`<oscd-waiter>
       <oscd-settings .host=${this}>
         <oscd-wizards .host=${this}>
-          <oscd-editor
-            .doc=${this.doc}
-            .docName=${this.docName}
-            .docId=${this.docId}
-            .host=${this}
-            .editCount=${this.editCount}
+          <oscd-history 
+            .host=${this} 
+            @undo-redo-changed="${(e) => {
+      this.editCount = e.detail.editCount;
+      this.canRedo = e.detail.canRedo;
+      this.canUndo = e.detail.canUndo;
+    }}"
           >
-            ${this.renderMain()}
-          </oscd-editor>
+            <oscd-editor
+              .doc=${this.doc}
+              .docName=${this.docName}
+              .docId=${this.docId}
+              .host=${this}
+              .editCount=${this.editCount}
+            >
+              ${this.renderMain()}
+            </oscd-editor>
+          </oscd-history>
         </oscd-wizards>
       </oscd-settings>
     </oscd-waiter>`;
@@ -255,8 +262,7 @@ export let OpenSCD = class extends Historing(LitElement) {
       icon: plugin.icon || pluginIcons["validator"],
       name: plugin.name,
       action: (ae) => {
-        if (this.diagnoses.get(plugin.src))
-          this.diagnoses.get(plugin.src).length = 0;
+        this.dispatchEvent(newEmptyIssuesEvent(plugin.src));
         this.dispatchEvent(newPendingStateEvent(ae.target.items[ae.detail.index].nextElementSibling.validate()));
       },
       disabled: () => this.doc === null,
@@ -275,7 +281,9 @@ export let OpenSCD = class extends Historing(LitElement) {
         icon: "undo",
         name: "undo",
         actionItem: true,
-        action: this.undo,
+        action: () => {
+          this.dispatchEvent(newUndoEvent());
+        },
         disabled: () => !this.canUndo,
         kind: "static"
       },
@@ -283,7 +291,9 @@ export let OpenSCD = class extends Historing(LitElement) {
         icon: "redo",
         name: "redo",
         actionItem: true,
-        action: this.redo,
+        action: () => {
+          this.dispatchEvent(newRedoEvent());
+        },
         disabled: () => !this.canRedo,
         kind: "static"
       },
@@ -292,21 +302,27 @@ export let OpenSCD = class extends Historing(LitElement) {
         icon: "list",
         name: "menu.viewLog",
         actionItem: true,
-        action: () => this.logUI.show(),
+        action: () => {
+          this.dispatchEvent(newHistoryUIEvent(true, HistoryUIKind.log));
+        },
         kind: "static"
       },
       {
         icon: "history",
         name: "menu.viewHistory",
         actionItem: true,
-        action: () => this.historyUI.show(),
+        action: () => {
+          this.dispatchEvent(newHistoryUIEvent(true, HistoryUIKind.history));
+        },
         kind: "static"
       },
       {
         icon: "rule",
         name: "menu.viewDiag",
         actionItem: true,
-        action: () => this.diagnosticUI.show(),
+        action: () => {
+          this.dispatchEvent(newHistoryUIEvent(true, HistoryUIKind.diagnostic));
+        },
         kind: "static"
       },
       "divider",
@@ -550,7 +566,7 @@ export let OpenSCD = class extends Historing(LitElement) {
                 >${pluginIcons["editor"]}</mwc-icon
               ></mwc-radio-list-item
             >
-            <mwc-radio-list-item id="menu" value="menu" hasMeta left
+            <mwc-radio-list-item value="menu" hasMeta left
               >${get("plugins.menu")}<mwc-icon slot="meta"
                 >${pluginIcons["menu"]}</mwc-icon
               ></mwc-radio-list-item
@@ -797,6 +813,15 @@ __decorate([
 __decorate([
   property({type: String})
 ], OpenSCD.prototype, "docId", 2);
+__decorate([
+  state()
+], OpenSCD.prototype, "editCount", 2);
+__decorate([
+  state()
+], OpenSCD.prototype, "canRedo", 2);
+__decorate([
+  state()
+], OpenSCD.prototype, "canUndo", 2);
 __decorate([
   property({attribute: false})
 ], OpenSCD.prototype, "nsdoc", 2);

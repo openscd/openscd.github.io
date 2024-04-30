@@ -20,10 +20,10 @@ import "../../../../src/action-icon.js";
 import {
   cloneElement,
   identity,
-  newActionEvent,
   newLnInstGenerator,
   newWizardEvent
 } from "../../../../src/foundation.js";
+import {newActionEvent} from "../../../../_snowpack/link/packages/core/dist/foundation/deprecated/editor.js";
 import {
   automationLogicalNode,
   controlLogicalNode,

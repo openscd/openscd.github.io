@@ -30,13 +30,14 @@ import "./line-editor.js";
 import "./process-editor.js";
 import "./substation-editor.js";
 import "./process-editor.js";
+import {processIcon} from "../../../../src/icons/icons.js";
 import {styles} from "./foundation.js";
 import {
   getChildElementsByTagName,
-  newActionEvent,
   newWizardEvent,
   tags
 } from "../../../../src/foundation.js";
+import {newActionEvent} from "../../../../_snowpack/link/packages/core/dist/foundation/deprecated/editor.js";
 import {emptyWizard, wizards} from "../../wizards/wizard-library.js";
 function childTags(element) {
   if (!element)
@@ -152,6 +153,9 @@ export let ProcessEditor = class extends LitElement {
   }
   render() {
     return html`<action-pane label=${this.header}>
+      <mwc-icon class="substation-editor-icon" slot="icon"
+        >${processIcon}</mwc-icon
+      >
       <abbr slot="action" title="${get("edit")}">
         <mwc-icon-button
           icon="edit"

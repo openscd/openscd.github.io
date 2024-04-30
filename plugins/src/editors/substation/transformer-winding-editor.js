@@ -27,13 +27,14 @@ import "../../../../src/action-pane.js";
 import "./eq-function-editor.js";
 import "./l-node-editor.js";
 import "./tapchanger-editor.js";
+import {transformerWindingIcon} from "../../../../src/icons/icons.js";
 import {styles} from "./foundation.js";
 import {
   getChildElementsByTagName,
-  newActionEvent,
   newWizardEvent,
   tags
 } from "../../../../src/foundation.js";
+import {newActionEvent} from "../../../../_snowpack/link/packages/core/dist/foundation/deprecated/editor.js";
 import {emptyWizard, wizards} from "../../wizards/wizard-library.js";
 function childTags(element) {
   if (!element)
@@ -113,6 +114,9 @@ export let TransformerWindingEditor = class extends LitElement {
   }
   render() {
     return html`<action-pane label="${this.label}">
+      <mwc-icon class="substation-editor-icon" slot="icon"
+        >${transformerWindingIcon}</mwc-icon
+      >
       <abbr slot="action" title="${get("edit")}">
         <mwc-icon-button
           icon="edit"

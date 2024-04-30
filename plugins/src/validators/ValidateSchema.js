@@ -14,7 +14,7 @@ import {get} from "../../../_snowpack/pkg/lit-translate.js";
 import {
   newIssueEvent,
   newLogEvent
-} from "../../../src/foundation.js";
+} from "../../../_snowpack/link/packages/core/dist/foundation/deprecated/history.js";
 import {
   getSchema,
   isLoadSchemaResult,

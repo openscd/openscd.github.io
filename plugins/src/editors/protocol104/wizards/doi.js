@@ -3,9 +3,11 @@ import {get} from "../../../../../_snowpack/pkg/lit-translate.js";
 import "../../../../../_snowpack/pkg/@material/mwc-textarea.js";
 import {
   getNameAttribute,
-  newActionEvent,
   newWizardEvent
 } from "../../../../../src/foundation.js";
+import {
+  newActionEvent
+} from "../../../../../_snowpack/link/packages/core/dist/foundation/deprecated/editor.js";
 import "../../../../../src/wizard-textfield.js";
 import {
   getCdcValueFromDOIElement,

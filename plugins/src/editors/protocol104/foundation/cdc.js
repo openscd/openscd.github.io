@@ -1,8 +1,8 @@
 import {
   getNameAttribute,
-  newLogEvent,
   newWizardEvent
 } from "../../../../../src/foundation.js";
+import {newLogEvent} from "../../../../../_snowpack/link/packages/core/dist/foundation/deprecated/history.js";
 import {
   addPrefixAndNamespaceToDocument,
   createPrivateAddress,

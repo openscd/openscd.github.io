@@ -36,10 +36,11 @@ import {
 } from "./foundation.js";
 import {
   getChildElementsByTagName,
-  newActionEvent,
   newWizardEvent,
   tags
 } from "../../../../src/foundation.js";
+import {newActionEvent} from "../../../../_snowpack/link/packages/core/dist/foundation/deprecated/editor.js";
+import {voltageLevelIcon} from "../../../../src/icons/icons.js";
 import {SubstationEditor} from "./substation-editor.js";
 import {emptyWizard, wizards} from "../../wizards/wizard-library.js";
 function childTags(element) {
@@ -162,6 +163,9 @@ export let VoltageLevelEditor = class extends LitElement {
   }
   render() {
     return html`${this.renderRedirectUI()}<action-pane label="${this.header}">
+        <mwc-icon class="substation-editor-icon" slot="icon"
+          >${voltageLevelIcon}</mwc-icon
+        >
         <abbr slot="action" title="${get("lnode.tooltip")}">
           <mwc-icon-button
             icon="account_tree"

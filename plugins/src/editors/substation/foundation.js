@@ -3,10 +3,10 @@ import {classMap} from "../../../../_snowpack/pkg/lit-html/directives/class-map.
 import "./function-editor.js";
 import {
   identity,
-  newActionEvent,
   isPublic,
   getChildElementsByTagName
 } from "../../../../src/foundation.js";
+import {newActionEvent} from "../../../../_snowpack/link/packages/core/dist/foundation/deprecated/editor.js";
 import {
   circuitBreakerIcon,
   disconnectorIcon,
@@ -378,5 +378,10 @@ export const styles = css`
 
   general-equipment-editor[showfunctions] {
     margin: 4px 8px 16px;
+  }
+
+  .substation-editor-icon {
+    width: 24px;
+    height: 24px;
   }
 `;

@@ -27,10 +27,10 @@ import "./sub-function-editor.js";
 import "./general-equipment-editor.js";
 import {
   getChildElementsByTagName,
-  newActionEvent,
   newWizardEvent,
   tags
 } from "../../../../src/foundation.js";
+import {newActionEvent} from "../../../../_snowpack/link/packages/core/dist/foundation/deprecated/editor.js";
 import {emptyWizard, wizards} from "../../wizards/wizard-library.js";
 import {renderGeneralEquipment} from "./foundation.js";
 function childTags(element) {
