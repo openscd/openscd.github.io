@@ -46,9 +46,15 @@ import "./addons/Editor.js";
 import "./addons/History.js";
 import {List} from "../_snowpack/pkg/@material/mwc-list.js";
 import {get} from "../_snowpack/pkg/lit-translate.js";
-import {officialPlugins} from "../public/js/plugins.js";
+import {officialPlugins} from "./plugins.js";
 import {initializeNsdoc} from "./foundation/nsdoc.js";
-import {HistoryUIKind, newEmptyIssuesEvent, newHistoryUIEvent, newRedoEvent, newUndoEvent} from "./addons/History.js";
+import {
+  HistoryUIKind,
+  newEmptyIssuesEvent,
+  newHistoryUIEvent,
+  newRedoEvent,
+  newUndoEvent
+} from "./addons/History.js";
 const pluginTags = new Map();
 function pluginTag(uri) {
   if (!pluginTags.has(uri)) {
@@ -201,8 +207,8 @@ export let OpenSCD = class extends LitElement {
     return html`<oscd-waiter>
       <oscd-settings .host=${this}>
         <oscd-wizards .host=${this}>
-          <oscd-history 
-            .host=${this} 
+          <oscd-history
+            .host=${this}
             @undo-redo-changed="${(e) => {
       this.editCount = e.detail.editCount;
       this.canRedo = e.detail.canRedo;
