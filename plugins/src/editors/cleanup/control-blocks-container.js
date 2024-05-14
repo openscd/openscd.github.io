@@ -26,18 +26,18 @@ import "../../../../_snowpack/pkg/@material/mwc-icon.js";
 import "../../../../_snowpack/pkg/@material/mwc-icon-button-toggle.js";
 import "../../../../_snowpack/pkg/@material/mwc-list/mwc-check-list-item.js";
 import "../../../../_snowpack/pkg/@material/mwc-checkbox.js";
-import "../../../../src/filtered-list.js";
+import "../../../../openscd/src/filtered-list.js";
 import {
   identity,
   isPublic,
   newSubWizardEvent
-} from "../../../../src/foundation.js";
+} from "../../../../openscd/src/foundation.js";
 import {newActionEvent} from "../../../../_snowpack/link/packages/core/dist/foundation/deprecated/editor.js";
 import {styles} from "../templates/foundation.js";
 import {
   controlBlockIcons,
   getFilterIcon
-} from "../../../../src/icons/icons.js";
+} from "../../../../openscd/src/icons/icons.js";
 import {editGseControlWizard, getGSE} from "../../wizards/gsecontrol.js";
 import {editReportControlWizard} from "../../wizards/reportcontrol.js";
 import {

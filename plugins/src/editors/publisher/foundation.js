@@ -1,5 +1,5 @@
 import {css} from "../../../../_snowpack/pkg/lit-element.js";
-import {identity, find} from "../../../../src/foundation.js";
+import {identity, find} from "../../../../openscd/src/foundation.js";
 export function updateElementReference(newDoc, oldElement) {
   if (!oldElement || !oldElement.closest("SCL"))
     return null;

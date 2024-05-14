@@ -2,8 +2,8 @@ import {html} from "../../../_snowpack/pkg/lit-element.js";
 import {nothing} from "../../../_snowpack/pkg/lit-html.js";
 import {get} from "../../../_snowpack/pkg/lit-translate.js";
 import {getCustomField} from "./foundation/dai-field-type.js";
-import "../../../src/wizard-textfield.js";
-import {SCL_NAMESPACE} from "../../../src/schemas.js";
+import "../../../openscd/src/wizard-textfield.js";
+import {SCL_NAMESPACE} from "../../../openscd/src/schemas.js";
 export function updateValue(element, val) {
   return (inputs) => {
     const bType = element.getAttribute("bType");

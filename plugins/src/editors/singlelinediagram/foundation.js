@@ -1,7 +1,7 @@
 import {
   getNameAttribute,
   getPathNameAttribute
-} from "../../../../src/foundation.js";
+} from "../../../../openscd/src/foundation.js";
 export const SCL_COORDINATES_NAMESPACE = "http://www.iec.ch/61850/2003/SCLcoordinates";
 const COORDINATES_SCALE_FACTOR = 2;
 export function getRelativeCoordinates(element) {

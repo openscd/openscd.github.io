@@ -2,7 +2,7 @@ import {get} from "../../../_snowpack/pkg/lit-translate.js";
 import {
   getValue,
   identity
-} from "../../../src/foundation.js";
+} from "../../../openscd/src/foundation.js";
 import {contentGseOrSmvWizard, updateAddress} from "./address.js";
 export function updateSmvAction(element) {
   return (inputs, wizard) => {

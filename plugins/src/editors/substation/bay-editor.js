@@ -22,7 +22,7 @@ import {classMap} from "../../../../_snowpack/pkg/lit-html/directives/class-map.
 import {get} from "../../../../_snowpack/pkg/lit-translate.js";
 import "../../../../_snowpack/pkg/@material/mwc-icon-button.js";
 import "../../../../_snowpack/pkg/@material/mwc-textfield.js";
-import "../../../../src/action-pane.js";
+import "../../../../openscd/src/action-pane.js";
 import "./ied-editor.js";
 import "./conducting-equipment-editor.js";
 import "./general-equipment-editor.js";
@@ -32,11 +32,11 @@ import {
   getChildElementsByTagName,
   newWizardEvent,
   tags
-} from "../../../../src/foundation.js";
+} from "../../../../openscd/src/foundation.js";
 import {newActionEvent} from "../../../../_snowpack/link/packages/core/dist/foundation/deprecated/editor.js";
 import {
   bayIcon
-} from "../../../../src/icons/icons.js";
+} from "../../../../openscd/src/icons/icons.js";
 import {emptyWizard, wizards} from "../../wizards/wizard-library.js";
 import {
   cloneSubstationElement,

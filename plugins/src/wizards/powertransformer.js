@@ -4,7 +4,7 @@ import {
   createElement,
   getValue,
   isPublic
-} from "../../../src/foundation.js";
+} from "../../../openscd/src/foundation.js";
 import {replaceNamingAction} from "./foundation/actions.js";
 const defaultPowerTransformerType = "PTR";
 export function createAction(parent) {

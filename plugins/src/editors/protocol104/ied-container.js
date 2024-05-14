@@ -23,8 +23,8 @@ import "../../../../_snowpack/pkg/@material/mwc-icon-button-toggle.js";
 import {
   getDescriptionAttribute,
   getNameAttribute
-} from "../../../../src/foundation.js";
-import "../../../../src/action-pane.js";
+} from "../../../../openscd/src/foundation.js";
+import "../../../../openscd/src/action-pane.js";
 import {getFullPath} from "./foundation/foundation.js";
 import "./doi-container.js";
 import {PROTOCOL_104_PRIVATE} from "./foundation/private.js";

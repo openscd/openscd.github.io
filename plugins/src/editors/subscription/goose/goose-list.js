@@ -20,14 +20,14 @@ import {get} from "../../../../../_snowpack/pkg/lit-translate.js";
 import {classMap} from "../../../../../_snowpack/pkg/lit-html/directives/class-map.js";
 import "../../../../../_snowpack/pkg/@material/mwc-icon.js";
 import "../../../../../_snowpack/pkg/@material/mwc-list/mwc-list-item.js";
-import "../../../../../src/filtered-list.js";
+import "../../../../../openscd/src/filtered-list.js";
 import {
   getNameAttribute,
   identity,
   newWizardEvent
-} from "../../../../../src/foundation.js";
+} from "../../../../../openscd/src/foundation.js";
 import {newGOOSESelectEvent} from "./foundation.js";
-import {gooseIcon} from "../../../../../src/icons/icons.js";
+import {gooseIcon} from "../../../../../openscd/src/icons/icons.js";
 import {wizards} from "../../../wizards/wizard-library.js";
 import {getOrderedIeds, styles} from "../foundation.js";
 let selectedGseControl;

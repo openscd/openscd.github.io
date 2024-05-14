@@ -4,7 +4,7 @@ import {get} from "../../../../../_snowpack/pkg/lit-translate.js";
 import {
   getInstanceAttribute,
   getNameAttribute
-} from "../../../../../src/foundation.js";
+} from "../../../../../openscd/src/foundation.js";
 import {typeMaxLength} from "../../../wizards/foundation/p-types.js";
 import {typeDescriptiveNameKeys, typePattern} from "./p-types.js";
 export function getFullPath(element, topLevelTagName) {

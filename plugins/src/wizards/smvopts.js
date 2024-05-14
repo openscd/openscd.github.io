@@ -3,7 +3,7 @@ import {get} from "../../../_snowpack/pkg/lit-translate.js";
 import {
   cloneElement,
   getValue
-} from "../../../src/foundation.js";
+} from "../../../openscd/src/foundation.js";
 export function contentSmvOptsWizard(option) {
   return Object.entries(option).map(([key, value]) => html`<wizard-checkbox
         label="${key}"

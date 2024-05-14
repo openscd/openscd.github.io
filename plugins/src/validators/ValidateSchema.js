@@ -20,7 +20,7 @@ import {
   isLoadSchemaResult,
   isValidationError,
   isValidationResult
-} from "../../../src/schemas.js";
+} from "../../../openscd/src/schemas.js";
 const validators = {};
 export default class ValidateSchema extends LitElement {
   async getValidator(xsd, xsdName) {

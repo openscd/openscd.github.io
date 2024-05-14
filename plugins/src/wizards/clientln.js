@@ -2,14 +2,14 @@ import {html} from "../../../_snowpack/pkg/lit-element.js";
 import {get} from "../../../_snowpack/pkg/lit-translate.js";
 import "../../../_snowpack/pkg/@material/mwc-list/mwc-check-list-item.js";
 import "../../../_snowpack/pkg/@material/mwc-icon.js";
-import "../../../src/filtered-list.js";
+import "../../../openscd/src/filtered-list.js";
 import {
   createElement,
   find,
   identity,
   pathParts
-} from "../../../src/foundation.js";
-import {clientIcon} from "../../../src/icons/icons.js";
+} from "../../../openscd/src/foundation.js";
+import {clientIcon} from "../../../openscd/src/icons/icons.js";
 import {openCommunicationMappingWizard} from "./commmap-wizards.js";
 function getPath(identity2) {
   if (typeof identity2 !== "string")

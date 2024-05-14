@@ -1,4 +1,4 @@
-import {SCL_NAMESPACE} from "../../../../../src/schemas.js";
+import {SCL_NAMESPACE} from "../../../../../openscd/src/schemas.js";
 export const PROTOCOL_104_PRIVATE = "IEC_60870_5_104";
 export const PROTOCOL_104_NS = "http://www.iec.ch/61850-80-1/2007/IEC_60870-5-104";
 export const PROTOCOL_104_PREFIX = "IEC_60870_5_104";

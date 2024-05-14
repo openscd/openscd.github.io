@@ -16,13 +16,13 @@ import {
   customElement,
   state
 } from "../../../../_snowpack/pkg/lit-element.js";
-import "../../../../src/action-icon.js";
+import "../../../../openscd/src/action-icon.js";
 import {
   cloneElement,
   identity,
   newLnInstGenerator,
   newWizardEvent
-} from "../../../../src/foundation.js";
+} from "../../../../openscd/src/foundation.js";
 import {newActionEvent} from "../../../../_snowpack/link/packages/core/dist/foundation/deprecated/editor.js";
 import {
   automationLogicalNode,
@@ -41,7 +41,7 @@ import {
   switchgearLogicalNode,
   systemLogicalNode,
   transformerLogicalNode
-} from "../../../../src/icons/lnode.js";
+} from "../../../../openscd/src/icons/lnode.js";
 import {wizards} from "../../wizards/wizard-library.js";
 export function getLNodeIcon(lNode) {
   const lnClassGroup = lNode.getAttribute("lnClass")?.charAt(0) ?? "";

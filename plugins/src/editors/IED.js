@@ -20,15 +20,15 @@ import {get} from "../../../_snowpack/pkg/lit-translate.js";
 import {nothing} from "../../../_snowpack/pkg/lit-html.js";
 import "../../../_snowpack/pkg/@material/mwc-list/mwc-check-list-item.js";
 import "../../../_snowpack/pkg/@material/mwc-list/mwc-radio-list-item.js";
-import "../../../src/oscd-filter-button.js";
+import "../../../openscd/src/oscd-filter-button.js";
 import "./ied/ied-container.js";
 import "./ied/element-path.js";
 import {
   compareNames,
   getDescriptionAttribute,
   getNameAttribute
-} from "../../../src/foundation.js";
-import {getIcon} from "../../../src/icons/icons.js";
+} from "../../../openscd/src/foundation.js";
+import {getIcon} from "../../../openscd/src/icons/icons.js";
 export default class IedPlugin extends LitElement {
   constructor() {
     super(...arguments);

@@ -22,8 +22,8 @@ import "../../../../_snowpack/pkg/@material/mwc-fab.js";
 import "../../../../_snowpack/pkg/@material/mwc-icon.js";
 import "../../../../_snowpack/pkg/@material/mwc-icon-button.js";
 import "../../../../_snowpack/pkg/@material/mwc-menu.js";
-import "../../../../src/action-icon.js";
-import "../../../../src/action-pane.js";
+import "../../../../openscd/src/action-icon.js";
+import "../../../../openscd/src/action-pane.js";
 import "./eq-function-editor.js";
 import "./l-node-editor.js";
 import "./sub-equipment-editor.js";
@@ -32,7 +32,7 @@ import {
   getChildElementsByTagName,
   newWizardEvent,
   tags
-} from "../../../../src/foundation.js";
+} from "../../../../openscd/src/foundation.js";
 import {newActionEvent} from "../../../../_snowpack/link/packages/core/dist/foundation/deprecated/editor.js";
 import {BayEditor} from "./bay-editor.js";
 import {emptyWizard, wizards} from "../../wizards/wizard-library.js";

@@ -1,7 +1,7 @@
 import {get} from "../../../../_snowpack/pkg/lit-translate.js";
-import {identity} from "../../../../src/foundation.js";
+import {identity} from "../../../../openscd/src/foundation.js";
 import {validateChildren} from "./foundation.js";
-import {iec6185073, iec6185081} from "../../../../src/foundation/nsd.js";
+import {iec6185073, iec6185081} from "../../../../openscd/src/foundation/nsd.js";
 async function getChildren(cdc, daName) {
   const nsd73 = await iec6185073;
   const dataAttribute = nsd73.querySelector(`CDC[name="${cdc}"] > DataAttribute[name="${daName}"]`)?.getAttribute("type");

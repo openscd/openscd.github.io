@@ -2,9 +2,9 @@ import {html, LitElement} from "../../../_snowpack/pkg/lit-element.js";
 import {unsafeHTML} from "../../../_snowpack/pkg/lit-html/directives/unsafe-html.js";
 import * as marked from "../../../_snowpack/pkg/marked.js";
 import "../../../_snowpack/pkg/@material/mwc-icon.js";
-import "../../../src/finder-list.js";
-import {newWizardEvent} from "../../../src/foundation.js";
-import {openSCDIcon} from "../../../src/icons/icons.js";
+import "../../../openscd/src/finder-list.js";
+import {newWizardEvent} from "../../../openscd/src/foundation.js";
+import {openSCDIcon} from "../../../openscd/src/icons/icons.js";
 function aboutBox(version) {
   return html`<div>
       <div style="display:flex">

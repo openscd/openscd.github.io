@@ -1,12 +1,12 @@
 import {html} from "../../../_snowpack/pkg/lit-element.js";
 import {get} from "../../../_snowpack/pkg/lit-translate.js";
 import "../../../_snowpack/pkg/@material/mwc-list/mwc-list-item.js";
-import "../../../src/wizard-checkbox.js";
-import "../../../src/wizard-select.js";
+import "../../../openscd/src/wizard-checkbox.js";
+import "../../../openscd/src/wizard-select.js";
 import {
   cloneElement,
   getValue
-} from "../../../src/foundation.js";
+} from "../../../openscd/src/foundation.js";
 export function contentTrgOpsWizard(option) {
   return Object.entries(option).map(([key, value]) => html`<wizard-checkbox
         label="${key}"

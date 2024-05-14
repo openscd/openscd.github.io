@@ -5,7 +5,7 @@ import {
   createElement,
   getChildElementsByTagName,
   getValue
-} from "../../../src/foundation.js";
+} from "../../../openscd/src/foundation.js";
 function createTapChangerAction(parent) {
   return (inputs) => {
     const tapChangerAttrs = {};

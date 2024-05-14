@@ -4,7 +4,7 @@ import {
   createElement,
   getChildElementsByTagName,
   getValue
-} from "../../../src/foundation.js";
+} from "../../../openscd/src/foundation.js";
 import {contentFunctionWizard} from "./function.js";
 function updateEqFunctionAction(element) {
   return (inputs) => {

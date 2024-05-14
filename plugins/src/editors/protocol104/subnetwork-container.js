@@ -20,7 +20,7 @@ import "./connectedap-editor.js";
 import {
   compareNames,
   newWizardEvent
-} from "../../../../src/foundation.js";
+} from "../../../../openscd/src/foundation.js";
 import {get} from "../../../../_snowpack/pkg/lit-translate.js";
 import {createConnectedApWizard} from "./wizards/connectedap.js";
 import {Base104Container} from "./base-container.js";

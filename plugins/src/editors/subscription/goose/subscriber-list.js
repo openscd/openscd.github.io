@@ -20,18 +20,18 @@ import {get} from "../../../../../_snowpack/pkg/lit-translate.js";
 import "../../../../../_snowpack/pkg/@material/mwc-icon.js";
 import "../../../../../_snowpack/pkg/@material/mwc-list.js";
 import "../../../../../_snowpack/pkg/@material/mwc-list/mwc-list-item.js";
-import "../../../../../src/filtered-list.js";
+import "../../../../../openscd/src/filtered-list.js";
 import {
   createElement,
   identity
-} from "../../../../../src/foundation.js";
+} from "../../../../../openscd/src/foundation.js";
 import {
   newActionEvent
 } from "../../../../../_snowpack/link/packages/core/dist/foundation/deprecated/editor.js";
 import {
   newGooseSubscriptionEvent
 } from "./foundation.js";
-import {emptyInputsDeleteActions} from "../../../../../src/foundation/ied.js";
+import {emptyInputsDeleteActions} from "../../../../../openscd/src/foundation/ied.js";
 import {
   canCreateValidExtRef,
   createExtRefElement,

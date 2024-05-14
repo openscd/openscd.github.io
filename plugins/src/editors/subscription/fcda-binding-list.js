@@ -32,8 +32,8 @@ import {
   getNameAttribute,
   identity,
   newWizardEvent
-} from "../../../../src/foundation.js";
-import {gooseIcon, smvIcon} from "../../../../src/icons/icons.js";
+} from "../../../../openscd/src/foundation.js";
+import {gooseIcon, smvIcon} from "../../../../openscd/src/icons/icons.js";
 import {wizards} from "../../wizards/wizard-library.js";
 import {
   getFcdaSubtitleValue,

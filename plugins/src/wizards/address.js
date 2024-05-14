@@ -3,10 +3,10 @@ import {ifDefined} from "../../../_snowpack/pkg/lit-html/directives/if-defined.j
 import {get} from "../../../_snowpack/pkg/lit-translate.js";
 import "../../../_snowpack/pkg/@material/mwc-checkbox.js";
 import "../../../_snowpack/pkg/@material/mwc-formfield.js";
-import "../../../src/wizard-textfield.js";
+import "../../../openscd/src/wizard-textfield.js";
 import {
   createElement
-} from "../../../src/foundation.js";
+} from "../../../openscd/src/foundation.js";
 import {typeNullable, typePattern} from "./foundation/p-types.js";
 export function contentGseOrSmvWizard(content) {
   return [

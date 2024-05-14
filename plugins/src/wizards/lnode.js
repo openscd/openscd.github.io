@@ -4,7 +4,7 @@ import "../../../_snowpack/pkg/@material/mwc-icon.js";
 import "../../../_snowpack/pkg/@material/mwc-list/mwc-check-list-item.js";
 import "../../../_snowpack/pkg/@material/mwc-list/mwc-list-item.js";
 import {ListBase} from "../../../_snowpack/pkg/@material/mwc-list/mwc-list-base.js";
-import "../../../src/filtered-list.js";
+import "../../../openscd/src/filtered-list.js";
 import {
   cloneElement,
   createElement,
@@ -16,7 +16,7 @@ import {
   newWizardEvent,
   referencePath,
   newLnInstGenerator
-} from "../../../src/foundation.js";
+} from "../../../openscd/src/foundation.js";
 import {patterns} from "./foundation/limits.js";
 import {newLogEvent} from "../../../_snowpack/link/packages/core/dist/foundation/deprecated/history.js";
 function createLNodeAction(parent) {

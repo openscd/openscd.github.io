@@ -23,13 +23,13 @@ import "../../../../_snowpack/pkg/@material/mwc-button.js";
 import "../../../../_snowpack/pkg/@material/mwc-list/mwc-list-item.js";
 import "./data-set-element-editor.js";
 import "./gse-control-element-editor.js";
-import "../../../../src/filtered-list.js";
-import {gooseIcon} from "../../../../src/icons/icons.js";
+import "../../../../openscd/src/filtered-list.js";
+import {gooseIcon} from "../../../../openscd/src/icons/icons.js";
 import {
   compareNames,
   identity,
   find
-} from "../../../../src/foundation.js";
+} from "../../../../openscd/src/foundation.js";
 import {styles, updateElementReference} from "./foundation.js";
 export let GseControlEditor = class extends LitElement {
   constructor() {

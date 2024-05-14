@@ -24,9 +24,9 @@ import {
   getNameAttribute,
   identity,
   newWizardEvent
-} from "../../../../../src/foundation.js";
+} from "../../../../../openscd/src/foundation.js";
 import {newSmvSelectEvent} from "./foundation.js";
-import {smvIcon} from "../../../../../src/icons/icons.js";
+import {smvIcon} from "../../../../../openscd/src/icons/icons.js";
 import {getOrderedIeds, styles} from "../foundation.js";
 import {classMap} from "../../../../../_snowpack/pkg/lit-html/directives/class-map.js";
 import {wizards} from "../../../wizards/wizard-library.js";

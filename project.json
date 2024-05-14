@@ -1,7 +1,7 @@
 {
-  "name": "@openscd/open-scd",
+  "name": "@openscd/distribution",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "projectType": "application",
-  "sourceRoot": "packages/open-scd/src",
+  "sourceRoot": "packages/distribution/src",
   "targets": {}
 }

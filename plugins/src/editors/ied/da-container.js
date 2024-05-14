@@ -19,11 +19,11 @@ import {
 import {nothing} from "../../../../_snowpack/pkg/lit-html.js";
 import {get} from "../../../../_snowpack/pkg/lit-translate.js";
 import "../../../../_snowpack/pkg/@material/mwc-icon-button-toggle.js";
-import "../../../../src/action-pane.js";
+import "../../../../openscd/src/action-pane.js";
 import {
   getNameAttribute,
   newWizardEvent
-} from "../../../../src/foundation.js";
+} from "../../../../openscd/src/foundation.js";
 import {wizards} from "../../wizards/wizard-library.js";
 import {
   getCustomField
@@ -38,7 +38,7 @@ import {createDAIWizard} from "../../wizards/dai.js";
 import {
   determineUninitializedStructure,
   initializeElements
-} from "../../../../src/foundation/dai.js";
+} from "../../../../openscd/src/foundation/dai.js";
 export let DAContainer = class extends Container {
   header() {
     const name = getNameAttribute(this.element);

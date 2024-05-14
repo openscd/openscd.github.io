@@ -1,5 +1,5 @@
 import {get} from "../../../../_snowpack/pkg/lit-translate.js";
-import {identity} from "../../../../src/foundation.js";
+import {identity} from "../../../../openscd/src/foundation.js";
 import {
   getAdjacentClass,
   validateChildren
@@ -8,7 +8,7 @@ import {
   iec6185073,
   iec6185074,
   iec6185081
-} from "../../../../src/foundation/nsd.js";
+} from "../../../../openscd/src/foundation/nsd.js";
 async function getSpecificDataObject(lnClass, doName) {
   if (!lnClass || !doName)
     return null;

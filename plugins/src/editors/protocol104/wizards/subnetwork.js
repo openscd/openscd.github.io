@@ -5,8 +5,8 @@ import {
   getMultiplier,
   getValue,
   patterns
-} from "../../../../../src/foundation.js";
-import "../../../../../src/wizard-textfield.js";
+} from "../../../../../openscd/src/foundation.js";
+import "../../../../../openscd/src/wizard-textfield.js";
 const initial = {
   type: "104",
   bitrate: "100",

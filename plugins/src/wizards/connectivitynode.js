@@ -1,6 +1,6 @@
 import {html} from "../../../_snowpack/pkg/lit-element.js";
 import {get} from "../../../_snowpack/pkg/lit-translate.js";
-import {isPublic} from "../../../src/foundation.js";
+import {isPublic} from "../../../openscd/src/foundation.js";
 function render(name, pathName, reservedNames) {
   return [
     html`<wizard-textfield

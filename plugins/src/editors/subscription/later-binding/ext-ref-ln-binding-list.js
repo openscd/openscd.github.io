@@ -22,7 +22,7 @@ import {get} from "../../../../../_snowpack/pkg/lit-translate.js";
 import {
   createElement,
   identity
-} from "../../../../../src/foundation.js";
+} from "../../../../../openscd/src/foundation.js";
 import {
   newActionEvent
 } from "../../../../../_snowpack/link/packages/core/dist/foundation/deprecated/editor.js";
@@ -39,7 +39,7 @@ import {
   canRemoveSubscriptionSupervision
 } from "../foundation.js";
 import {getSubscribedExtRefElements} from "./foundation.js";
-import {emptyInputsDeleteActions} from "../../../../../src/foundation/ied.js";
+import {emptyInputsDeleteActions} from "../../../../../openscd/src/foundation/ied.js";
 export let ExtRefLnBindingList = class extends LitElement {
   constructor() {
     super();

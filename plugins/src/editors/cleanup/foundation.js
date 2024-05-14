@@ -1,5 +1,5 @@
 "use strict";
-import {identity} from "../../../../src/foundation.js";
+import {identity} from "../../../../openscd/src/foundation.js";
 export function cleanSCLItems(cleanItems) {
   const actions = [];
   if (cleanItems) {

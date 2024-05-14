@@ -22,14 +22,14 @@ import "../../../_snowpack/pkg/@material/mwc-list.js";
 import "../../../_snowpack/pkg/@material/mwc-list/mwc-list-item.js";
 import "../../../_snowpack/pkg/@material/mwc-formfield.js";
 import "../../../_snowpack/pkg/@material/mwc-checkbox.js";
-import "../../../src/plain-compare-list.js";
+import "../../../openscd/src/plain-compare-list.js";
 import {
   compareNames,
   find,
   getNameAttribute,
   identity,
   isPublic
-} from "../../../src/foundation.js";
+} from "../../../openscd/src/foundation.js";
 import {newPendingStateEvent} from "../../../_snowpack/link/packages/core/dist/foundation/deprecated/waiter.js";
 const tctrClass = `LN[lnClass='TCTR']`;
 const tvtrClass = `LN[lnClass='TVTR']`;

@@ -5,7 +5,7 @@ import {
   createElement,
   getChildElementsByTagName,
   getValue
-} from "../../../src/foundation.js";
+} from "../../../openscd/src/foundation.js";
 export function editGeneralEquipmentWizard(element) {
   const name = element.getAttribute("name");
   const desc = element.getAttribute("desc");

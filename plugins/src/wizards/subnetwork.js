@@ -1,13 +1,13 @@
 import {html} from "../../../_snowpack/pkg/lit-element.js";
 import {get} from "../../../_snowpack/pkg/lit-translate.js";
-import "../../../src/wizard-textfield.js";
+import "../../../openscd/src/wizard-textfield.js";
 import {
   cloneElement,
   createElement,
   getMultiplier,
   getValue,
   patterns
-} from "../../../src/foundation.js";
+} from "../../../openscd/src/foundation.js";
 const initial = {
   type: "8-MMS",
   bitrate: "100",

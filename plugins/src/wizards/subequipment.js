@@ -5,9 +5,9 @@ import {
   createElement,
   getChildElementsByTagName,
   getValue
-} from "../../../src/foundation.js";
-import "../../../src/wizard-textfield.js";
-import "../../../src/wizard-select.js";
+} from "../../../openscd/src/foundation.js";
+import "../../../openscd/src/wizard-textfield.js";
+import "../../../openscd/src/wizard-select.js";
 export function contentSubEquipmentWizard(content) {
   return [
     html`<wizard-textfield

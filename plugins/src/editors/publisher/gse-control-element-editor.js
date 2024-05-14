@@ -19,10 +19,10 @@ import {
 import {get} from "../../../../_snowpack/pkg/lit-translate.js";
 import "../../../../_snowpack/pkg/@material/mwc-formfield.js";
 import "../../../../_snowpack/pkg/@material/mwc-checkbox.js";
-import "../../../../src/wizard-checkbox.js";
-import "../../../../src/wizard-select.js";
-import "../../../../src/wizard-textfield.js";
-import {identity} from "../../../../src/foundation.js";
+import "../../../../openscd/src/wizard-checkbox.js";
+import "../../../../openscd/src/wizard-select.js";
+import "../../../../openscd/src/wizard-textfield.js";
+import {identity} from "../../../../openscd/src/foundation.js";
 import {maxLength, patterns} from "../../wizards/foundation/limits.js";
 import {typeNullable, typePattern} from "../../wizards/foundation/p-types.js";
 import {ifDefined} from "../../../../_snowpack/pkg/lit-html/directives/if-defined.js";

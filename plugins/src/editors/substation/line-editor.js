@@ -26,13 +26,13 @@ import "./conducting-equipment-editor.js";
 import "./function-editor.js";
 import "./general-equipment-editor.js";
 import "./l-node-editor.js";
-import {lineIcon} from "../../../../src/icons/icons.js";
+import {lineIcon} from "../../../../openscd/src/icons/icons.js";
 import {styles} from "./foundation.js";
 import {
   getChildElementsByTagName,
   newWizardEvent,
   tags
-} from "../../../../src/foundation.js";
+} from "../../../../openscd/src/foundation.js";
 import {newActionEvent} from "../../../../_snowpack/link/packages/core/dist/foundation/deprecated/editor.js";
 import {emptyWizard, wizards} from "../../wizards/wizard-library.js";
 function childTags(element) {

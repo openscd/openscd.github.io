@@ -1,14 +1,14 @@
 import {html, LitElement} from "../../../_snowpack/pkg/lit-element.js";
 import {get} from "../../../_snowpack/pkg/lit-translate.js";
 import "../../../_snowpack/pkg/@material/mwc-list/mwc-check-list-item.js";
-import "../../../src/filtered-list.js";
+import "../../../openscd/src/filtered-list.js";
 import {
   cloneElement,
   find,
   identity,
   isPublic,
   newWizardEvent
-} from "../../../src/foundation.js";
+} from "../../../openscd/src/foundation.js";
 function addDescriptionAction(doc) {
   return (_, wizard, list) => {
     const selectedItems = list.selected;

@@ -25,7 +25,7 @@ import {
   getPathNameAttribute,
   identity,
   newWizardEvent
-} from "../../../src/foundation.js";
+} from "../../../openscd/src/foundation.js";
 import {
   addLabelToBay,
   addLabelToBusBar,
@@ -51,7 +51,7 @@ import {
   getConnectedTerminals,
   isBusBar
 } from "./singlelinediagram/foundation.js";
-import {isSCLNamespace} from "../../../src/schemas.js";
+import {isSCLNamespace} from "../../../openscd/src/schemas.js";
 import {wizards} from "./singlelinediagram/wizards/wizard-library.js";
 import {get} from "../../../_snowpack/pkg/lit-translate.js";
 import "../../../_snowpack/pkg/@material/mwc-list/mwc-list-item.js";

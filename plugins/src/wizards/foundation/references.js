@@ -1,7 +1,7 @@
 import {
   getNameAttribute,
   isPublic
-} from "../../../../src/foundation.js";
+} from "../../../../openscd/src/foundation.js";
 const referenceInfoTags = ["IED", "Substation", "VoltageLevel", "Bay"];
 const referenceInfos = {
   IED: [

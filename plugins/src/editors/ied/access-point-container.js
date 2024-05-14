@@ -22,10 +22,10 @@ import {
   getDescriptionAttribute,
   getNameAttribute,
   newWizardEvent
-} from "../../../../src/foundation.js";
-import {accessPointIcon} from "../../../../src/icons/ied-icons.js";
+} from "../../../../openscd/src/foundation.js";
+import {accessPointIcon} from "../../../../openscd/src/icons/ied-icons.js";
 import {editServicesWizard} from "../../wizards/services.js";
-import "../../../../src/action-pane.js";
+import "../../../../openscd/src/action-pane.js";
 import "./server-container.js";
 import {Container} from "./foundation.js";
 export let AccessPointContainer = class extends Container {

@@ -25,12 +25,12 @@ import "../../../_snowpack/pkg/@material/mwc-list/mwc-list-item.js";
 import "../../../_snowpack/pkg/@material/mwc-list/mwc-check-list-item.js";
 import "../../../_snowpack/pkg/@material/mwc-list/mwc-radio-list-item.js";
 import {Dialog} from "../../../_snowpack/pkg/@material/mwc-dialog.js";
-import "../../../src/filtered-list.js";
+import "../../../openscd/src/filtered-list.js";
 import {
   find,
   getChildElementsByTagName,
   identity
-} from "../../../src/foundation.js";
+} from "../../../openscd/src/foundation.js";
 import {newActionEvent} from "../../../_snowpack/link/packages/core/dist/foundation/deprecated/editor.js";
 import {
   getFunctionNamingPrefix,

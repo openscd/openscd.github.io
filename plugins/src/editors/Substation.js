@@ -13,7 +13,7 @@ import {LitElement, html, property, css} from "../../../_snowpack/pkg/lit-elemen
 import {get} from "../../../_snowpack/pkg/lit-translate.js";
 import "../../../_snowpack/pkg/@material/mwc-fab.js";
 import "./substation/zeroline-pane.js";
-import {newWizardEvent} from "../../../src/foundation.js";
+import {newWizardEvent} from "../../../openscd/src/foundation.js";
 import {wizards} from "../wizards/wizard-library.js";
 export default class SubstationPlugin extends LitElement {
   constructor() {

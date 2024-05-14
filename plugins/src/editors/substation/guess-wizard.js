@@ -5,7 +5,7 @@ import "../../../../_snowpack/pkg/@material/mwc-list/mwc-check-list-item.js";
 import {
   compareNames,
   createElement
-} from "../../../../src/foundation.js";
+} from "../../../../openscd/src/foundation.js";
 let bayNum = 1;
 let cbNum = 1;
 let dsNum = 1;

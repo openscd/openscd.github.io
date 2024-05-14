@@ -1,6 +1,6 @@
 import {html} from "../../../../../_snowpack/pkg/lit-element.js";
 import {get} from "../../../../../_snowpack/pkg/lit-translate.js";
-import "../../../../../src/finder-list.js";
+import "../../../../../openscd/src/finder-list.js";
 import {
   getDisplayString,
   getReader
@@ -11,7 +11,7 @@ import {
   identity,
   newSubWizardEvent,
   find
-} from "../../../../../src/foundation.js";
+} from "../../../../../openscd/src/foundation.js";
 import {createAddressesWizard} from "./createAddresses.js";
 import {supportedCdcTypes} from "../foundation/cdc.js";
 import {PROTOCOL_104_PRIVATE} from "../foundation/private.js";

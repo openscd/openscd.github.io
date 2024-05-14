@@ -26,19 +26,19 @@ import "../../../../_snowpack/pkg/@material/mwc-icon.js";
 import "../../../../_snowpack/pkg/@material/mwc-icon-button-toggle.js";
 import "../../../../_snowpack/pkg/@material/mwc-list/mwc-check-list-item.js";
 import "../../../../_snowpack/pkg/@material/mwc-checkbox.js";
-import "../../../../src/filtered-list.js";
+import "../../../../openscd/src/filtered-list.js";
 import {
   identity,
   isPublic,
   newSubWizardEvent
-} from "../../../../src/foundation.js";
+} from "../../../../openscd/src/foundation.js";
 import {newActionEvent} from "../../../../_snowpack/link/packages/core/dist/foundation/deprecated/editor.js";
 import {newLogEvent} from "../../../../_snowpack/link/packages/core/dist/foundation/deprecated/history.js";
 import {styles} from "../templates/foundation.js";
 import {
   dataTypeTemplateIcons,
   getFilterIcon
-} from "../../../../src/icons/icons.js";
+} from "../../../../openscd/src/icons/icons.js";
 import {lNodeTypeWizard} from "../templates/lnodetype-wizard.js";
 import {editDaTypeWizard} from "../templates/datype-wizards.js";
 import {dOTypeWizard} from "../templates/dotype-wizards.js";

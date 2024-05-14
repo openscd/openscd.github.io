@@ -25,14 +25,14 @@ import "../../../../_snowpack/pkg/@material/mwc-icon.js";
 import "../../../../_snowpack/pkg/@material/mwc-icon-button-toggle.js";
 import "../../../../_snowpack/pkg/@material/mwc-list/mwc-check-list-item.js";
 import "../../../../_snowpack/pkg/@material/mwc-checkbox.js";
-import "../../../../src/filtered-list.js";
+import "../../../../openscd/src/filtered-list.js";
 import {editDataSetWizard} from "../../wizards/dataset.js";
 import {styles} from "../templates/foundation.js";
 import {
   identity,
   isPublic,
   newSubWizardEvent
-} from "../../../../src/foundation.js";
+} from "../../../../openscd/src/foundation.js";
 import {newActionEvent} from "../../../../_snowpack/link/packages/core/dist/foundation/deprecated/editor.js";
 import {cleanSCLItems, identitySort} from "./foundation.js";
 export let CleanupDatasets = class extends LitElement {

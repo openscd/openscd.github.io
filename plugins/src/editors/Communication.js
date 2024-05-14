@@ -17,7 +17,7 @@ import {
   newWizardEvent,
   createElement,
   isPublic
-} from "../../../src/foundation.js";
+} from "../../../openscd/src/foundation.js";
 import {newActionEvent} from "../../../_snowpack/link/packages/core/dist/foundation/deprecated/editor.js";
 import {createSubNetworkWizard} from "../wizards/subnetwork.js";
 export default class CommunicationPlugin extends LitElement {

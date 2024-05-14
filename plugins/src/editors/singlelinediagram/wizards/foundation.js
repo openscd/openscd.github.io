@@ -3,7 +3,7 @@ import {get} from "../../../../../_snowpack/pkg/lit-translate.js";
 import {
   cloneElement,
   getValue
-} from "../../../../../src/foundation.js";
+} from "../../../../../openscd/src/foundation.js";
 import {SCL_COORDINATES_NAMESPACE} from "../foundation.js";
 export function getNameAttribute(element) {
   return element.getAttribute("name");

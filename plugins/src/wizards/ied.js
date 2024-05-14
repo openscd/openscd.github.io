@@ -2,20 +2,20 @@ import {html} from "../../../_snowpack/pkg/lit-element.js";
 import {get} from "../../../_snowpack/pkg/lit-translate.js";
 import "../../../_snowpack/pkg/@material/mwc-list.js";
 import "../../../_snowpack/pkg/@material/mwc-list/mwc-list-item.js";
-import "../../../src/wizard-textfield.js";
+import "../../../openscd/src/wizard-textfield.js";
 import {
   identity,
   isPublic,
   newSubWizardEvent,
   newWizardEvent
-} from "../../../src/foundation.js";
+} from "../../../openscd/src/foundation.js";
 import {
   newActionEvent
 } from "../../../_snowpack/link/packages/core/dist/foundation/deprecated/editor.js";
 import {patterns} from "./foundation/limits.js";
 import {updateNamingAttributeWithReferencesAction} from "./foundation/actions.js";
 import {deleteReferences} from "./foundation/references.js";
-import {emptyInputsDeleteActions} from "../../../src/foundation/ied.js";
+import {emptyInputsDeleteActions} from "../../../openscd/src/foundation/ied.js";
 const iedNamePattern = "[A-Za-z][0-9A-Za-z_]{0,2}|[A-Za-z][0-9A-Za-z_]{4,63}|[A-MO-Za-z][0-9A-Za-z_]{3}|N[0-9A-Za-np-z_][0-9A-Za-z_]{2}|No[0-9A-Za-mo-z_][0-9A-Za-z_]|Non[0-9A-Za-df-z_]";
 export function renderIEDWizard(name, desc, type, manufacturer, configVersion, originalSclVersion, engRight, owner, reservedNames) {
   return [

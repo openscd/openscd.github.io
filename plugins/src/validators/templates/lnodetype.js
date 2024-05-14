@@ -1,10 +1,10 @@
 import {get} from "../../../../_snowpack/pkg/lit-translate.js";
-import {identity} from "../../../../src/foundation.js";
+import {identity} from "../../../../openscd/src/foundation.js";
 import {
   getAdjacentClass,
   validateChildren
 } from "./foundation.js";
-import {iec6185074} from "../../../../src/foundation/nsd.js";
+import {iec6185074} from "../../../../openscd/src/foundation/nsd.js";
 async function getMandatoryDataObject(base) {
   const lnodeclasses = getAdjacentClass(await iec6185074, base);
   return lnodeclasses.flatMap((lnodeclass) => Array.from(lnodeclass.querySelectorAll('DataObject[presCond="M"]')));

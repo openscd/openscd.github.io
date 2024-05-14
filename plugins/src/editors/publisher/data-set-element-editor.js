@@ -19,9 +19,9 @@ import {
 } from "../../../../_snowpack/pkg/lit-element.js";
 import {get} from "../../../../_snowpack/pkg/lit-translate.js";
 import "../../../../_snowpack/pkg/@material/mwc-list/mwc-list-item.js";
-import "../../../../src/wizard-textfield.js";
-import "../../../../src/filtered-list.js";
-import {identity} from "../../../../src/foundation.js";
+import "../../../../openscd/src/wizard-textfield.js";
+import "../../../../openscd/src/filtered-list.js";
+import {identity} from "../../../../openscd/src/foundation.js";
 export let DataSetElementEditor = class extends LitElement {
   get name() {
     return this.element ? this.element.getAttribute("name") : "UNDEFINED";

@@ -5,7 +5,7 @@ import {
   createElement,
   getChildElementsByTagName,
   getValue
-} from "../../../src/foundation.js";
+} from "../../../openscd/src/foundation.js";
 export function contentFunctionWizard(content) {
   return [
     html`<wizard-textfield

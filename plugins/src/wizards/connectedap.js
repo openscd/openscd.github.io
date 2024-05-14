@@ -6,15 +6,15 @@ import "../../../_snowpack/pkg/@material/mwc-formfield.js";
 import "../../../_snowpack/pkg/@material/mwc-list/mwc-list-item.js";
 import "../../../_snowpack/pkg/@material/mwc-list/mwc-check-list-item.js";
 import "../../../_snowpack/pkg/@material/mwc-icon.js";
-import "../../../src/wizard-textfield.js";
-import "../../../src/filtered-list.js";
+import "../../../openscd/src/wizard-textfield.js";
+import "../../../openscd/src/filtered-list.js";
 import {
   compareNames,
   getValue,
   createElement,
   isPublic,
   identity
-} from "../../../src/foundation.js";
+} from "../../../openscd/src/foundation.js";
 import {
   getTypes,
   typeMaxLength,
@@ -24,7 +24,7 @@ import {
 import {
   mACAddressGenerator,
   appIdGenerator
-} from "../../../src/foundation/generators.js";
+} from "../../../openscd/src/foundation/generators.js";
 function compareAccessPointConnection(a, b) {
   if (a.connected !== b.connected)
     return b.connected ? -1 : 1;

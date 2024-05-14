@@ -3,13 +3,13 @@ import {html} from "../../../../../_snowpack/pkg/lit-element.js";
 import "../../../../../_snowpack/pkg/@material/mwc-formfield.js";
 import "../../../../../_snowpack/pkg/@material/mwc-list/mwc-list-item.js";
 import "../../../../../_snowpack/pkg/@material/mwc-switch.js";
-import "../../../../../src/wizard-textfield.js";
-import "../../../../../src/WizardDivider.js";
+import "../../../../../openscd/src/wizard-textfield.js";
+import "../../../../../openscd/src/WizardDivider.js";
 import {
   getNameAttribute,
   getValue,
   newWizardEvent
-} from "../../../../../src/foundation.js";
+} from "../../../../../openscd/src/foundation.js";
 import {
   getCdcValueFromDOElement,
   getCtlModel,

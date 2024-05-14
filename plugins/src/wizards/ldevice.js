@@ -2,11 +2,11 @@ import {html} from "../../../_snowpack/pkg/lit-element.js";
 import {get} from "../../../_snowpack/pkg/lit-translate.js";
 import "../../../_snowpack/pkg/@material/mwc-list.js";
 import "../../../_snowpack/pkg/@material/mwc-list/mwc-list-item.js";
-import "../../../src/wizard-textfield.js";
+import "../../../openscd/src/wizard-textfield.js";
 import {
   cloneElement,
   getValue
-} from "../../../src/foundation.js";
+} from "../../../openscd/src/foundation.js";
 import {patterns} from "./foundation/limits.js";
 const lDeviceNamePattern = "[A-Za-z][0-9A-Za-z_]{0,2}|[A-Za-z][0-9A-Za-z_]{4,63}|[A-MO-Za-z][0-9A-Za-z_]{3}|N[0-9A-Za-np-z_][0-9A-Za-z_]{2}|No[0-9A-Za-mo-z_][0-9A-Za-z_]|Non[0-9A-Za-df-z_]";
 export function renderLdeviceWizard(ldName, readOnly, desc, ldInst) {

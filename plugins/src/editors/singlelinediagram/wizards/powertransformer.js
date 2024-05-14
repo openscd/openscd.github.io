@@ -1,5 +1,5 @@
 import {get} from "../../../../../_snowpack/pkg/lit-translate.js";
-import "../../../../../src/wizard-textfield.js";
+import "../../../../../openscd/src/wizard-textfield.js";
 import {
   reservedNamesPowerTransformer,
   renderPowerTransformerWizard

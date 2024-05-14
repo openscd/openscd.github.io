@@ -16,7 +16,7 @@ import {
   compareNames,
   createElement,
   newWizardEvent
-} from "../../../../src/foundation.js";
+} from "../../../../openscd/src/foundation.js";
 import {newActionEvent} from "../../../../_snowpack/link/packages/core/dist/foundation/deprecated/editor.js";
 import {createSubNetworkWizard} from "./wizards/subnetwork.js";
 import {Base104Container} from "./base-container.js";

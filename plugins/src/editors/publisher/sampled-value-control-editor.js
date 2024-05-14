@@ -22,14 +22,14 @@ import {get} from "../../../../_snowpack/pkg/lit-translate.js";
 import "../../../../_snowpack/pkg/@material/mwc-button.js";
 import "../../../../_snowpack/pkg/@material/mwc-list/mwc-list-item.js";
 import "./data-set-element-editor.js";
-import "../../../../src/filtered-list.js";
+import "../../../../openscd/src/filtered-list.js";
 import "./sampled-value-control-element-editor.js";
 import {
   compareNames,
   identity,
   find
-} from "../../../../src/foundation.js";
-import {smvIcon} from "../../../../src/icons/icons.js";
+} from "../../../../openscd/src/foundation.js";
+import {smvIcon} from "../../../../openscd/src/icons/icons.js";
 import {styles, updateElementReference} from "./foundation.js";
 export let SampledValueControlEditor = class extends LitElement {
   constructor() {

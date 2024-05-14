@@ -1,11 +1,11 @@
 import {html} from "../../../../_snowpack/pkg/lit-html.js";
 import {get} from "../../../../_snowpack/pkg/lit-translate.js";
 import "../../../../_snowpack/pkg/@material/mwc-list/mwc-list-item.js";
-import "../../../../src/wizard-textfield.js";
-import "../../../../src/wizard-select.js";
+import "../../../../openscd/src/wizard-textfield.js";
+import "../../../../openscd/src/wizard-select.js";
 import {
   getValue
-} from "../../../../src/foundation.js";
+} from "../../../../openscd/src/foundation.js";
 const daiFieldTypes = [
   "BOOLEAN",
   "Enum",

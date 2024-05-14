@@ -18,14 +18,14 @@ import {
   css,
   query
 } from "../../../../_snowpack/pkg/lit-element.js";
-import "../../../../src/action-pane.js";
+import "../../../../openscd/src/action-pane.js";
 import "./sub-function-editor.js";
 import "./general-equipment-editor.js";
 import {
   getChildElementsByTagName,
   newWizardEvent,
   tags
-} from "../../../../src/foundation.js";
+} from "../../../../openscd/src/foundation.js";
 import {newActionEvent} from "../../../../_snowpack/link/packages/core/dist/foundation/deprecated/editor.js";
 import {get} from "../../../../_snowpack/pkg/lit-translate.js";
 import {emptyWizard, wizards} from "../../wizards/wizard-library.js";

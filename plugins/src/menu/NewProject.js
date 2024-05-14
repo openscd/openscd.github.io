@@ -2,15 +2,15 @@ import {html, LitElement} from "../../../_snowpack/pkg/lit-element.js";
 import {get} from "../../../_snowpack/pkg/lit-translate.js";
 import "../../../_snowpack/pkg/@material/mwc-list.js";
 import "../../../_snowpack/pkg/@material/mwc-list/mwc-radio-list-item.js";
-import "../../../src/wizard-textfield.js";
+import "../../../openscd/src/wizard-textfield.js";
 import {
   newWizardEvent
-} from "../../../src/foundation.js";
+} from "../../../openscd/src/foundation.js";
 import {newOpenDocEvent} from "../../../_snowpack/link/packages/core/dist/foundation/deprecated/open-event.js";
 import {newLogEvent} from "../../../_snowpack/link/packages/core/dist/foundation/deprecated/history.js";
 import {
   newEmptySCD
-} from "../../../src/schemas.js";
+} from "../../../openscd/src/schemas.js";
 export default class NewProjectPlugin extends LitElement {
   createNewProject(inputs, wizard) {
     const docName = inputs[0].value?.match(/\.s[sc]d$/i) ? inputs[0].value : inputs[0].value + ".scd";

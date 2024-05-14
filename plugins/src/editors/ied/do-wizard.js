@@ -6,7 +6,7 @@ import {
   getDescriptionAttribute,
   getInstanceAttribute,
   getNameAttribute
-} from "../../../../src/foundation.js";
+} from "../../../../openscd/src/foundation.js";
 import {
   findDOTypeElement,
   findElement,

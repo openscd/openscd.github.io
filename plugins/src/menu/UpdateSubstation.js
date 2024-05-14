@@ -17,8 +17,8 @@ import {
   identity,
   newWizardEvent,
   tags
-} from "../../../src/foundation.js";
-import {mergeWizard} from "../../../src/wizards.js";
+} from "../../../openscd/src/foundation.js";
+import {mergeWizard} from "../../../openscd/src/wizards.js";
 export function isValidReference(doc, identity2) {
   if (typeof identity2 !== "string")
     return false;

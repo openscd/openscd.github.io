@@ -1,6 +1,6 @@
 import {html} from "../../../_snowpack/pkg/lit-html.js";
-import "../../../src/wizard-textfield.js";
-import "../../../src/wizard-select.js";
+import "../../../openscd/src/wizard-textfield.js";
+import "../../../openscd/src/wizard-select.js";
 import {createLogSettingsGroupServicesWizardPage} from "./service-log-settingsgroup.js";
 import {createReportConfigurationsWizardPage} from "./service-report-configurations.js";
 import {createGSEControlWizardPage} from "./service-GSEControl.js";

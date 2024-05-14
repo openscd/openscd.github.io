@@ -13,7 +13,7 @@ import {LitElement, property} from "../../../../_snowpack/pkg/lit-element.js";
 import {
   getInstanceAttribute,
   getNameAttribute
-} from "../../../../src/foundation.js";
+} from "../../../../openscd/src/foundation.js";
 export class Container extends LitElement {
   constructor() {
     super();

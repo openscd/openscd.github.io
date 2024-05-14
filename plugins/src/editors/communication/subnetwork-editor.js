@@ -24,7 +24,7 @@ import "./smv-editor.js";
 import {
   newWizardEvent,
   compareNames
-} from "../../../../src/foundation.js";
+} from "../../../../openscd/src/foundation.js";
 import {newActionEvent} from "../../../../_snowpack/link/packages/core/dist/foundation/deprecated/editor.js";
 import {createConnectedApWizard} from "../../wizards/connectedap.js";
 import {wizards} from "../../wizards/wizard-library.js";

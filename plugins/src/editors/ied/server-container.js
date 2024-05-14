@@ -16,10 +16,10 @@ import {
   state
 } from "../../../../_snowpack/pkg/lit-element.js";
 import {nothing} from "../../../../_snowpack/pkg/lit-html.js";
-import "../../../../src/action-pane.js";
+import "../../../../openscd/src/action-pane.js";
 import "./ldevice-container.js";
-import {serverIcon} from "../../../../src/icons/ied-icons.js";
-import {getDescriptionAttribute} from "../../../../src/foundation.js";
+import {serverIcon} from "../../../../openscd/src/icons/ied-icons.js";
+import {getDescriptionAttribute} from "../../../../openscd/src/foundation.js";
 import {Container} from "./foundation.js";
 export let ServerContainer = class extends Container {
   constructor() {

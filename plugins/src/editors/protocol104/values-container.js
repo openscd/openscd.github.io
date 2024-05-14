@@ -19,7 +19,7 @@ import {get} from "../../../../_snowpack/pkg/lit-translate.js";
 import {
   compareNames,
   newWizardEvent
-} from "../../../../src/foundation.js";
+} from "../../../../openscd/src/foundation.js";
 import "./ied-container.js";
 import {selectDoWizard} from "./wizards/selectDo.js";
 import {PROTOCOL_104_PRIVATE} from "./foundation/private.js";

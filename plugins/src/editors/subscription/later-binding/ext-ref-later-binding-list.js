@@ -23,7 +23,7 @@ import {
   cloneElement,
   getDescriptionAttribute,
   identity
-} from "../../../../../src/foundation.js";
+} from "../../../../../openscd/src/foundation.js";
 import {
   newActionEvent
 } from "../../../../../_snowpack/link/packages/core/dist/foundation/deprecated/editor.js";

@@ -17,7 +17,7 @@ import {
 } from "../../../../_snowpack/pkg/lit-element.js";
 import {nothing} from "../../../../_snowpack/pkg/lit-html.js";
 import {get} from "../../../../_snowpack/pkg/lit-translate.js";
-import "../../../../src/action-pane.js";
+import "../../../../openscd/src/action-pane.js";
 import "./access-point-container.js";
 import {wizards} from "../../wizards/wizard-library.js";
 import {Container} from "./foundation.js";
@@ -25,7 +25,7 @@ import {
   getDescriptionAttribute,
   getNameAttribute,
   newWizardEvent
-} from "../../../../src/foundation.js";
+} from "../../../../openscd/src/foundation.js";
 import {newActionEvent} from "../../../../_snowpack/link/packages/core/dist/foundation/deprecated/editor.js";
 import {removeIEDWizard} from "../../wizards/ied.js";
 import {editServicesWizard} from "../../wizards/services.js";

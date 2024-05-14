@@ -17,9 +17,9 @@ import {
   property
 } from "../../../../_snowpack/pkg/lit-element.js";
 import {get} from "../../../../_snowpack/pkg/lit-translate.js";
-import "../../../../src/wizard-textfield.js";
-import "../../../../src/wizard-checkbox.js";
-import {identity} from "../../../../src/foundation.js";
+import "../../../../openscd/src/wizard-textfield.js";
+import "../../../../openscd/src/wizard-checkbox.js";
+import {identity} from "../../../../openscd/src/foundation.js";
 import {maxLength, patterns} from "../../wizards/foundation/limits.js";
 export let ReportControlElementEditor = class extends LitElement {
   renderOptFieldsContent() {

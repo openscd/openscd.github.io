@@ -1,4 +1,4 @@
-import {getSclSchemaVersion} from "../../../../../src/foundation.js";
+import {getSclSchemaVersion} from "../../../../../openscd/src/foundation.js";
 import {serviceTypes} from "../foundation.js";
 function dataAttributeSpecification(anyLn, doName, daName) {
   const doc = anyLn.ownerDocument;

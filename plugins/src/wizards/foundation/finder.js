@@ -1,7 +1,7 @@
 import {html} from "../../../../_snowpack/pkg/lit-element.js";
 import {get} from "../../../../_snowpack/pkg/lit-translate.js";
-import "../../../../src/finder-list.js";
-import {find, identity, isPublic} from "../../../../src/foundation.js";
+import "../../../../openscd/src/finder-list.js";
+import {find, identity, isPublic} from "../../../../openscd/src/foundation.js";
 export function getDisplayString(entry) {
   if (entry.startsWith("IED:"))
     return entry.replace(/^.*:/, "").trim();

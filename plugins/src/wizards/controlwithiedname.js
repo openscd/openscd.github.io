@@ -3,13 +3,13 @@ import {get} from "../../../_snowpack/pkg/lit-translate.js";
 import "../../../_snowpack/pkg/@material/mwc-icon.js";
 import "../../../_snowpack/pkg/@material/mwc-list.js";
 import "../../../_snowpack/pkg/@material/mwc-list/mwc-check-list-item.js";
-import "../../../src/filtered-list.js";
+import "../../../openscd/src/filtered-list.js";
 import {
   createElement,
   findControlBlocks,
   identity
-} from "../../../src/foundation.js";
-import {inputIcon} from "../../../src/icons/icons.js";
+} from "../../../openscd/src/foundation.js";
+import {inputIcon} from "../../../openscd/src/icons/icons.js";
 import {
   getSourceReferences,
   openCommunicationMappingWizard

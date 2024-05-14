@@ -2,15 +2,15 @@ import {html} from "../../../_snowpack/pkg/lit-html.js";
 import {get} from "../../../_snowpack/pkg/lit-translate.js";
 import "../../../_snowpack/pkg/@material/mwc-button.js";
 import "../../../_snowpack/pkg/@material/mwc-list/mwc-list-item.js";
-import "../../../src/wizard-checkbox.js";
-import "../../../src/wizard-select.js";
+import "../../../openscd/src/wizard-checkbox.js";
+import "../../../openscd/src/wizard-select.js";
 import {
   cloneElement,
   createElement,
   getValue,
   isPublic,
   newWizardEvent
-} from "../../../src/foundation.js";
+} from "../../../openscd/src/foundation.js";
 import {newActionEvent} from "../../../_snowpack/link/packages/core/dist/foundation/deprecated/editor.js";
 import {getValAction, wizardContent} from "./abstractda.js";
 import {functionalConstraintEnum} from "./foundation/enums.js";

@@ -1,13 +1,13 @@
 import {html} from "../../../../../_snowpack/pkg/lit-element.js";
 import {get} from "../../../../../_snowpack/pkg/lit-translate.js";
-import "../../../../../src/wizard-textfield.js";
+import "../../../../../openscd/src/wizard-textfield.js";
 import {pTypesLogicLink104} from "../foundation/p-types.js";
 import {
   cloneElement,
   createElement,
   getValue,
   newWizardEvent
-} from "../../../../../src/foundation.js";
+} from "../../../../../openscd/src/foundation.js";
 import {
   newActionEvent
 } from "../../../../../_snowpack/link/packages/core/dist/foundation/deprecated/editor.js";

@@ -30,13 +30,13 @@ import "./line-editor.js";
 import "./process-editor.js";
 import "./substation-editor.js";
 import "./process-editor.js";
-import {processIcon} from "../../../../src/icons/icons.js";
+import {processIcon} from "../../../../openscd/src/icons/icons.js";
 import {styles} from "./foundation.js";
 import {
   getChildElementsByTagName,
   newWizardEvent,
   tags
-} from "../../../../src/foundation.js";
+} from "../../../../openscd/src/foundation.js";
 import {newActionEvent} from "../../../../_snowpack/link/packages/core/dist/foundation/deprecated/editor.js";
 import {emptyWizard, wizards} from "../../wizards/wizard-library.js";
 function childTags(element) {

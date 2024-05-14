@@ -2,15 +2,15 @@ import {html} from "../../../_snowpack/pkg/lit-element.js";
 import {get} from "../../../_snowpack/pkg/lit-translate.js";
 import "../../../_snowpack/pkg/@material/mwc-button.js";
 import "../../../_snowpack/pkg/@material/mwc-list/mwc-check-list-item.js";
-import "../../../src/wizard-textfield.js";
-import "../../../src/filtered-list.js";
+import "../../../openscd/src/wizard-textfield.js";
+import "../../../openscd/src/filtered-list.js";
 import {
   cloneElement,
   find,
   getValue,
   identity,
   newSubWizardEvent
-} from "../../../src/foundation.js";
+} from "../../../openscd/src/foundation.js";
 import {createFCDAsWizard} from "./fcda.js";
 function openFcdaWizard(element) {
   return (wizard) => {

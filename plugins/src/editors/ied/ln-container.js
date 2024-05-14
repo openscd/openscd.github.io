@@ -16,8 +16,8 @@ import {get} from "../../../../_snowpack/pkg/lit-translate.js";
 import {
   getInstanceAttribute,
   getNameAttribute
-} from "../../../../src/foundation.js";
-import "../../../../src/action-pane.js";
+} from "../../../../openscd/src/foundation.js";
+import "../../../../openscd/src/action-pane.js";
 import "./do-container.js";
 import {Container} from "./foundation.js";
 export let LNContainer = class extends Container {

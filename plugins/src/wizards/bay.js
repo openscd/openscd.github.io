@@ -1,10 +1,10 @@
 import {html} from "../../../_snowpack/pkg/lit-html.js";
 import {get} from "../../../_snowpack/pkg/lit-translate.js";
-import "../../../src/wizard-textfield.js";
+import "../../../openscd/src/wizard-textfield.js";
 import {
   createElement,
   getValue
-} from "../../../src/foundation.js";
+} from "../../../openscd/src/foundation.js";
 import {replaceNamingAttributeWithReferencesAction} from "./foundation/actions.js";
 export function renderBayWizard(name, desc) {
   return [

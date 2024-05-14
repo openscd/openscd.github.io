@@ -1,13 +1,13 @@
 import {html} from "../../../_snowpack/pkg/lit-html.js";
 import {get} from "../../../_snowpack/pkg/lit-translate.js";
-import "../../../src/wizard-textfield.js";
+import "../../../openscd/src/wizard-textfield.js";
 import {
   cloneElement,
   createElement,
   getMultiplier,
   getValue,
   patterns
-} from "../../../src/foundation.js";
+} from "../../../openscd/src/foundation.js";
 import {updateReferences} from "./foundation/references.js";
 const initial = {
   nomFreq: "50",

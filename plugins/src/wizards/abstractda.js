@@ -1,12 +1,12 @@
 import {html, render} from "../../../_snowpack/pkg/lit-html.js";
 import {get} from "../../../_snowpack/pkg/lit-translate.js";
 import "../../../_snowpack/pkg/@material/mwc-list/mwc-list-item.js";
-import "../../../src/wizard-checkbox.js";
-import "../../../src/wizard-select.js";
-import "../../../src/wizard-textfield.js";
+import "../../../openscd/src/wizard-checkbox.js";
+import "../../../openscd/src/wizard-select.js";
+import "../../../openscd/src/wizard-textfield.js";
 import {
   createElement
-} from "../../../src/foundation.js";
+} from "../../../openscd/src/foundation.js";
 import {maxLength, patterns} from "./foundation/limits.js";
 import {predefinedBasicTypeEnum, valKindEnum} from "./foundation/enums.js";
 function selectType(e, data, Val) {

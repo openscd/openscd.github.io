@@ -25,9 +25,9 @@ import {
   getNameAttribute,
   getLdNameAttribute,
   newWizardEvent
-} from "../../../../src/foundation.js";
-import {logicalDeviceIcon} from "../../../../src/icons/ied-icons.js";
-import "../../../../src/action-pane.js";
+} from "../../../../openscd/src/foundation.js";
+import {logicalDeviceIcon} from "../../../../openscd/src/icons/ied-icons.js";
+import "../../../../openscd/src/action-pane.js";
 import "./ln-container.js";
 import {wizards} from "../../wizards/wizard-library.js";
 import {Container} from "./foundation.js";

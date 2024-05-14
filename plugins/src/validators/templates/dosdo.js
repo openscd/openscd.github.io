@@ -1,5 +1,5 @@
 import {get} from "../../../../_snowpack/pkg/lit-translate.js";
-import {identity} from "../../../../src/foundation.js";
+import {identity} from "../../../../openscd/src/foundation.js";
 import {getTypeChild, isTypeMissing} from "./foundation.js";
 export async function dOValidator(element) {
   if (isTypeMissing(element))

@@ -1,7 +1,7 @@
 import {
   getNameAttribute,
   newWizardEvent
-} from "../../../../../src/foundation.js";
+} from "../../../../../openscd/src/foundation.js";
 import {newLogEvent} from "../../../../../_snowpack/link/packages/core/dist/foundation/deprecated/history.js";
 import {
   addPrefixAndNamespaceToDocument,
@@ -20,7 +20,7 @@ import {editAddressWizard} from "../wizards/address.js";
 import {
   determineUninitializedStructure,
   initializeElements
-} from "../../../../../src/foundation/dai.js";
+} from "../../../../../openscd/src/foundation/dai.js";
 import {get} from "../../../../../_snowpack/pkg/lit-translate.js";
 export const supportedCdcTypes = [
   "ACD",

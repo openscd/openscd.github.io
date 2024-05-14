@@ -1,7 +1,7 @@
 import {get} from "../../../../../_snowpack/pkg/lit-translate.js";
 import "../../../../../_snowpack/pkg/@material/mwc-list/mwc-list-item.js";
 import "../../../../../_snowpack/pkg/@material/mwc-select.js";
-import "../../../../../src/wizard-textfield.js";
+import "../../../../../openscd/src/wizard-textfield.js";
 import {
   getDescAttribute,
   getNameAttribute,

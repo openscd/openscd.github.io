@@ -10,8 +10,8 @@ var __decorate = (decorators, target, key, kind) => {
   return result;
 };
 import {css, html, LitElement, query} from "../../../_snowpack/pkg/lit-element.js";
-import {newWizardEvent} from "../../../src/foundation.js";
-import {mergeWizard} from "../../../src/wizards.js";
+import {newWizardEvent} from "../../../openscd/src/foundation.js";
+import {mergeWizard} from "../../../openscd/src/wizards.js";
 export default class MergePlugin extends LitElement {
   mergeDoc(event) {
     const file = event.target?.files?.item(0) ?? false;

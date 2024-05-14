@@ -29,14 +29,14 @@ import {
   gooseIcon,
   smvIcon,
   reportIcon
-} from "../../../../src/icons/icons.js";
-import {isPublic, newWizardEvent} from "../../../../src/foundation.js";
+} from "../../../../openscd/src/icons/icons.js";
+import {isPublic, newWizardEvent} from "../../../../openscd/src/foundation.js";
 import {selectGseControlWizard} from "../../wizards/gsecontrol.js";
 import {emptyWizard, wizards} from "../../wizards/wizard-library.js";
 import {getAttachedIeds} from "./foundation.js";
 import {selectSampledValueControlWizard} from "../../wizards/sampledvaluecontrol.js";
 import {selectReportControlWizard} from "../../wizards/reportcontrol.js";
-import {tags} from "../../../../src/foundation.js";
+import {tags} from "../../../../openscd/src/foundation.js";
 function shouldShowIEDs() {
   return localStorage.getItem("showieds") === "on";
 }

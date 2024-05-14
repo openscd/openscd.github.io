@@ -7,8 +7,8 @@ import "../../../../../_snowpack/pkg/@material/mwc-formfield.js";
 import "../../../../../_snowpack/pkg/@material/mwc-list/mwc-list-item.js";
 import "../../../../../_snowpack/pkg/@material/mwc-list/mwc-check-list-item.js";
 import "../../../../../_snowpack/pkg/@material/mwc-icon.js";
-import "../../../../../src/wizard-textfield.js";
-import "../../../../../src/filtered-list.js";
+import "../../../../../openscd/src/wizard-textfield.js";
+import "../../../../../openscd/src/filtered-list.js";
 import {
   pTypes104,
   stationTypeOptions,
@@ -24,7 +24,7 @@ import {
   isPublic,
   newSubWizardEvent,
   newWizardEvent
-} from "../../../../../src/foundation.js";
+} from "../../../../../openscd/src/foundation.js";
 import {getTypeAttribute} from "../foundation/foundation.js";
 import {
   createRedundancyGroupWizard,

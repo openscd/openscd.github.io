@@ -23,8 +23,8 @@ import "../../../../_snowpack/pkg/@material/mwc-icon-button.js";
 import "../../../../_snowpack/pkg/@material/mwc-icon-button-toggle.js";
 import "../../../../_snowpack/pkg/@material/mwc-list.js";
 import "../../../../_snowpack/pkg/@material/mwc-list/mwc-list-item.js";
-import {newWizardEvent} from "../../../../src/foundation.js";
-import "../../../../src/action-pane.js";
+import {newWizardEvent} from "../../../../openscd/src/foundation.js";
+import "../../../../openscd/src/action-pane.js";
 import {
   get104DetailsLine,
   getCdcValueFromDOIElement,

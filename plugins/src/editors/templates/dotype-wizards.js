@@ -4,7 +4,7 @@ import "../../../../_snowpack/pkg/@material/mwc-button.js";
 import "../../../../_snowpack/pkg/@material/mwc-list.js";
 import "../../../../_snowpack/pkg/@material/mwc-list/mwc-list-item.js";
 import "../../../../_snowpack/pkg/@material/mwc-select.js";
-import "../../../../src/wizard-textfield.js";
+import "../../../../openscd/src/wizard-textfield.js";
 import {
   cloneElement,
   createElement,
@@ -14,7 +14,7 @@ import {
   isPublic,
   newSubWizardEvent,
   newWizardEvent
-} from "../../../../src/foundation.js";
+} from "../../../../openscd/src/foundation.js";
 import {
   newActionEvent
 } from "../../../../_snowpack/link/packages/core/dist/foundation/deprecated/editor.js";

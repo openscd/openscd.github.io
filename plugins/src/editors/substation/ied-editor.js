@@ -18,15 +18,15 @@ import {
 } from "../../../../_snowpack/pkg/lit-element.js";
 import "../../../../_snowpack/pkg/@material/mwc-fab.js";
 import "../../../../_snowpack/pkg/@material/mwc-icon.js";
-import "../../../../src/action-icon.js";
+import "../../../../openscd/src/action-icon.js";
 import {createClientLnWizard} from "../../wizards/clientln.js";
 import {
   gooseIcon,
   smvIcon,
   reportIcon
-} from "../../../../src/icons/icons.js";
+} from "../../../../openscd/src/icons/icons.js";
 import {wizards} from "../../wizards/wizard-library.js";
-import {newWizardEvent} from "../../../../src/foundation.js";
+import {newWizardEvent} from "../../../../openscd/src/foundation.js";
 import {newActionEvent} from "../../../../_snowpack/link/packages/core/dist/foundation/deprecated/editor.js";
 import {selectGseControlWizard} from "../../wizards/gsecontrol.js";
 import {selectSampledValueControlWizard} from "../../wizards/sampledvaluecontrol.js";

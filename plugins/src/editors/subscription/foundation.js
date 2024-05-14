@@ -17,9 +17,9 @@ import {
   getSclSchemaVersion,
   isPublic,
   minAvailableLogicalNodeInstance
-} from "../../../../src/foundation.js";
-import {getFcdaReferences} from "../../../../src/foundation/ied.js";
-import {SCL_NAMESPACE} from "../../../../src/schemas.js";
+} from "../../../../openscd/src/foundation.js";
+import {getFcdaReferences} from "../../../../openscd/src/foundation/ied.js";
+import {SCL_NAMESPACE} from "../../../../openscd/src/schemas.js";
 export var View;
 (function(View2) {
   View2[View2["PUBLISHER"] = 0] = "PUBLISHER";

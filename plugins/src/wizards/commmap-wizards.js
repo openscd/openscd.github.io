@@ -2,17 +2,17 @@ import {html} from "../../../_snowpack/pkg/lit-element.js";
 import {get} from "../../../_snowpack/pkg/lit-translate.js";
 import "../../../_snowpack/pkg/@material/mwc-icon.js";
 import "../../../_snowpack/pkg/@material/mwc-list/mwc-list-item.js";
-import "../../../src/filtered-list.js";
+import "../../../openscd/src/filtered-list.js";
 import {
   find,
   findControlBlocks,
   identity,
   isPublic,
   newWizardEvent
-} from "../../../src/foundation.js";
+} from "../../../openscd/src/foundation.js";
 import {selectClientLNsWizard} from "./clientln.js";
 import {selectExtRefsWizard} from "./controlwithiedname.js";
-import {controlBlockIcons} from "../../../src/icons/icons.js";
+import {controlBlockIcons} from "../../../openscd/src/icons/icons.js";
 export function openCommunicationMappingWizard(root) {
   return () => [() => communicationMappingWizard(root)];
 }

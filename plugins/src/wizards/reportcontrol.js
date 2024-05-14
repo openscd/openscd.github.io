@@ -3,10 +3,10 @@ import {get} from "../../../_snowpack/pkg/lit-translate.js";
 import "../../../_snowpack/pkg/@material/mwc-button.js";
 import "../../../_snowpack/pkg/@material/mwc-list/mwc-list-item.js";
 import "../../../_snowpack/pkg/@material/mwc-list/mwc-check-list-item.js";
-import "../../../src/wizard-checkbox.js";
-import "../../../src/wizard-textfield.js";
-import "../../../src/wizard-select.js";
-import "../../../src/filtered-list.js";
+import "../../../openscd/src/wizard-checkbox.js";
+import "../../../openscd/src/wizard-textfield.js";
+import "../../../openscd/src/wizard-select.js";
+import "../../../openscd/src/filtered-list.js";
 import {
   cloneElement,
   createElement,
@@ -18,7 +18,7 @@ import {
   newSubWizardEvent,
   getUniqueElementName,
   newWizardEvent
-} from "../../../src/foundation.js";
+} from "../../../openscd/src/foundation.js";
 import {
   newActionEvent
 } from "../../../_snowpack/link/packages/core/dist/foundation/deprecated/editor.js";
@@ -28,7 +28,7 @@ import {editDataSetWizard} from "./dataset.js";
 import {newFCDA} from "./fcda.js";
 import {contentOptFieldsWizard, editOptFieldsWizard} from "./optfields.js";
 import {contentTrgOpsWizard, editTrgOpsWizard} from "./trgops.js";
-import {existFcdaReference} from "../../../src/foundation/scl.js";
+import {existFcdaReference} from "../../../openscd/src/foundation/scl.js";
 function contentReportControlWizard(options) {
   return [
     html`<wizard-textfield

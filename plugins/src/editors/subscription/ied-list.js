@@ -19,8 +19,8 @@ import {
 import {get} from "../../../../_snowpack/pkg/lit-translate.js";
 import "../../../../_snowpack/pkg/@material/mwc-icon.js";
 import "../../../../_snowpack/pkg/@material/mwc-list/mwc-list-item.js";
-import "../../../../src/filtered-list.js";
-import {getNameAttribute} from "../../../../src/foundation.js";
+import "../../../../openscd/src/filtered-list.js";
+import {getNameAttribute} from "../../../../openscd/src/foundation.js";
 import {getOrderedIeds, newIEDSelectEvent, styles} from "./foundation.js";
 let selectedIed;
 function onOpenDocResetSelectedGooseMsg() {

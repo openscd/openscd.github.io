@@ -5,7 +5,7 @@ import {
   identity,
   isPublic,
   getChildElementsByTagName
-} from "../../../../src/foundation.js";
+} from "../../../../openscd/src/foundation.js";
 import {newActionEvent} from "../../../../_snowpack/link/packages/core/dist/foundation/deprecated/editor.js";
 import {
   circuitBreakerIcon,
@@ -14,7 +14,7 @@ import {
   voltageTransformerIcon,
   earthSwitchIcon,
   generalConductingEquipmentIcon
-} from "../../../../src/icons/icons.js";
+} from "../../../../openscd/src/icons/icons.js";
 import {typeStr} from "../../wizards/conductingequipment.js";
 import {get} from "../../../../_snowpack/pkg/lit-translate.js";
 function containsReference(element, iedName) {

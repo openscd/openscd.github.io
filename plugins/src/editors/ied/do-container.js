@@ -18,13 +18,13 @@ import {
 import {nothing} from "../../../../_snowpack/pkg/lit-html.js";
 import {get} from "../../../../_snowpack/pkg/lit-translate.js";
 import "../../../../_snowpack/pkg/@material/mwc-icon-button-toggle.js";
-import "../../../../src/action-pane.js";
+import "../../../../openscd/src/action-pane.js";
 import "./da-container.js";
 import {
   getDescriptionAttribute,
   getNameAttribute,
   newWizardEvent
-} from "../../../../src/foundation.js";
+} from "../../../../openscd/src/foundation.js";
 import {createDoInfoWizard} from "./do-wizard.js";
 import {
   Container,
