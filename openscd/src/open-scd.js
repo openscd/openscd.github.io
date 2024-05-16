@@ -132,7 +132,6 @@ export let OpenSCD = class extends LitElement {
     this.nsdoc = initializeNsdoc();
     this.currentSrc = "";
     this.plugins = {menu: [], editor: []};
-    this._sortedStoredPlugins = [];
   }
   get src() {
     return this.currentSrc;
@@ -172,6 +171,7 @@ export let OpenSCD = class extends LitElement {
             .host=${this} 
             @undo-redo-changed="${(e) => {
       this.editCount = e.detail.editCount;
+      this.requestUpdate();
     }}"
           >
             <oscd-editor
@@ -186,7 +186,7 @@ export let OpenSCD = class extends LitElement {
                 .doc=${this.doc}
                 .docName=${this.docName}
                 .editCount=${this.editCount}
-                .plugins=${this._sortedStoredPlugins}
+                .plugins=${this.sortedStoredPlugins}
               >
               </oscd-layout>
             </oscd-editor>
@@ -198,7 +198,6 @@ export let OpenSCD = class extends LitElement {
   storePlugins(plugins) {
     localStorage.setItem("plugins", JSON.stringify(plugins.map(withoutContent)));
     this.requestUpdate();
-    this._sortedStoredPlugins = this.sortedStoredPlugins;
   }
   resetPlugins() {
     this.storePlugins(officialPlugins.concat(this.parsedPlugins).map((plugin) => {
@@ -322,9 +321,6 @@ __decorate([
 __decorate([
   property({type: Object})
 ], OpenSCD.prototype, "plugins", 2);
-__decorate([
-  state()
-], OpenSCD.prototype, "_sortedStoredPlugins", 2);
 OpenSCD = __decorate([
   customElement("open-scd")
 ], OpenSCD);

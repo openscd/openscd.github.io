@@ -151,7 +151,6 @@ let OpenSCD = class OpenSCD extends LitElement {
          * @prop {PluginSet} plugins - Set of plugins that are used by OpenSCD
          */
         this.plugins = { menu: [], editor: [] };
-        this._sortedStoredPlugins = [];
     }
     /** The current file's URL. `blob:` URLs are *revoked after parsing*! */
     get src() {
@@ -193,6 +192,7 @@ let OpenSCD = class OpenSCD extends LitElement {
             .host=${this} 
             @undo-redo-changed="${(e) => {
             this.editCount = e.detail.editCount;
+            this.requestUpdate();
         }}"
           >
             <oscd-editor
@@ -207,7 +207,7 @@ let OpenSCD = class OpenSCD extends LitElement {
                 .doc=${this.doc}
                 .docName=${this.docName}
                 .editCount=${this.editCount}
-                .plugins=${this._sortedStoredPlugins}
+                .plugins=${this.sortedStoredPlugins}
               >
               </oscd-layout>
             </oscd-editor>
@@ -219,7 +219,6 @@ let OpenSCD = class OpenSCD extends LitElement {
     storePlugins(plugins) {
         localStorage.setItem('plugins', JSON.stringify(plugins.map(withoutContent)));
         this.requestUpdate();
-        this._sortedStoredPlugins = this.sortedStoredPlugins;
     }
     resetPlugins() {
         this.storePlugins(officialPlugins.concat(this.parsedPlugins).map(plugin => {
@@ -357,9 +356,6 @@ __decorate([
 __decorate([
     property({ type: Object })
 ], OpenSCD.prototype, "plugins", void 0);
-__decorate([
-    state()
-], OpenSCD.prototype, "_sortedStoredPlugins", void 0);
 OpenSCD = __decorate([
     customElement('open-scd')
 ], OpenSCD);
