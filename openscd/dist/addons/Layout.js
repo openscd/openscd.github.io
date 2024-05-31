@@ -396,7 +396,7 @@ let OscdLayout = class OscdLayout extends LitElement {
                 padding: 20px;
                 padding-left: 50px;
               }
-              #menu[selected] ~ #menudetails {
+              #pluginKindList [value="menu"][selected] ~ #menudetails {
                 display: grid;
               }
               #enabledefault {
