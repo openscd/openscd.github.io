@@ -1,5 +1,5 @@
 import { __decorate } from "../../../_snowpack/pkg/tslib.js";
-import { html, state, property, query, customElement, LitElement } from '../../../_snowpack/pkg/lit-element.js';
+import { html, state, property, query, customElement, LitElement, } from '../../../_snowpack/pkg/lit-element.js';
 import { get } from '../../../_snowpack/pkg/lit-translate.js';
 import '../../../_snowpack/pkg/@material/mwc-button.js';
 import '../../../_snowpack/pkg/@material/mwc-dialog.js';
@@ -10,7 +10,7 @@ import '../../../_snowpack/pkg/@material/mwc-list.js';
 import '../../../_snowpack/pkg/@material/mwc-list/mwc-list-item.js';
 import '../../../_snowpack/pkg/@material/mwc-snackbar.js';
 import '../filtered-list.js';
-import { newActionEvent, invert } from '../../../_snowpack/link/packages/core/dist/foundation/deprecated/editor.js';
+import { newActionEvent, invert, } from '../../../_snowpack/link/packages/core/dist/foundation/deprecated/editor.js';
 import { getFilterIcon, iconColors } from '../icons/icons.js';
 const icons = {
     info: 'info',
@@ -48,19 +48,6 @@ export function newEmptyIssuesEvent(pluginSrc, eventInitDict) {
         composed: true,
         ...eventInitDict,
         detail: { pluginSrc, ...eventInitDict?.detail },
-    });
-}
-export function newUndoRedoChangedEvent(canUndo, canRedo, editCount, eventInitDict) {
-    return new CustomEvent('undo-redo-changed', {
-        bubbles: true,
-        composed: true,
-        ...eventInitDict,
-        detail: {
-            canUndo,
-            canRedo,
-            editCount,
-            ...eventInitDict?.detail,
-        },
     });
 }
 export function newUndoEvent() {
@@ -105,17 +92,17 @@ let OscdHistory = class OscdHistory extends LitElement {
     undo() {
         if (!this.canUndo)
             return false;
-        this.dispatchEvent(newActionEvent(invert(this.history[this.editCount].action)));
+        const invertedAction = invert(this.history[this.editCount].action);
+        this.dispatchEvent(newActionEvent(invertedAction, 'undo'));
         this.editCount = this.previousAction;
-        this.dispatchEvent(newUndoRedoChangedEvent(this.canUndo, this.canRedo, this.editCount));
         return true;
     }
     redo() {
         if (!this.canRedo)
             return false;
-        this.dispatchEvent(newActionEvent(this.history[this.nextAction].action));
+        const nextAction = this.history[this.nextAction].action;
+        this.dispatchEvent(newActionEvent(nextAction, 'redo'));
         this.editCount = this.nextAction;
-        this.dispatchEvent(newUndoRedoChangedEvent(this.canUndo, this.canRedo, this.editCount));
         return true;
     }
     onHistory(detail) {
@@ -130,7 +117,6 @@ let OscdHistory = class OscdHistory extends LitElement {
             if (this.nextAction !== -1)
                 this.history.splice(this.nextAction);
             this.editCount = this.history.length;
-            this.dispatchEvent(newUndoRedoChangedEvent(this.canUndo, this.canRedo, this.editCount));
         }
         this.history.push(entry);
         this.requestUpdate('history', []);
@@ -139,7 +125,6 @@ let OscdHistory = class OscdHistory extends LitElement {
         this.log = [];
         this.history = [];
         this.editCount = -1;
-        this.dispatchEvent(newUndoRedoChangedEvent(this.canUndo, this.canRedo, this.editCount));
     }
     onInfo(detail) {
         const entry = {
@@ -187,13 +172,11 @@ let OscdHistory = class OscdHistory extends LitElement {
             ui.close();
     }
     emptyIssuesHandler(e) {
-        const issues = this.diagnoses.get(e.detail.pluginSrc);
         if (this.diagnoses.get(e.detail.pluginSrc))
             this.diagnoses.get(e.detail.pluginSrc).length = 0;
     }
     handleKeyPress(e) {
-        let handled = false;
-        const ctrlAnd = (key) => e.key === key && e.ctrlKey && (handled = true);
+        const ctrlAnd = (key) => e.key === key && e.ctrlKey;
         if (ctrlAnd('y'))
             this.redo();
         if (ctrlAnd('z'))
@@ -235,84 +218,81 @@ let OscdHistory = class OscdHistory extends LitElement {
     }
     renderLogEntry(entry, index, log) {
         return html ` <abbr title="${entry.title}">
-        <mwc-list-item
-          class="${entry.kind}"
-          graphic="icon"
-          ?twoline=${!!entry.message}
-          ?activated=${this.editCount == log.length - index - 1}
+      <mwc-list-item
+        class="${entry.kind}"
+        graphic="icon"
+        ?twoline=${!!entry.message}
+        ?activated=${this.editCount == log.length - index - 1}
+      >
+        <span>
+          <!-- FIXME: replace tt with mwc-chip asap -->
+          <tt>${entry.time?.toLocaleString()}</tt>
+          ${entry.title}</span
         >
-          <span>
-            <!-- FIXME: replace tt with mwc-chip asap -->
-            <tt>${entry.time?.toLocaleString()}</tt>
-            ${entry.title}</span
-          >
-          <span slot="secondary">${entry.message}</span>
-          <mwc-icon
-            slot="graphic"
-            style="--mdc-theme-text-icon-on-background:var(${iconColors[entry.kind]})"
-            >${icons[entry.kind]}</mwc-icon
-          >
-        </mwc-list-item></abbr
-      >`;
+        <span slot="secondary">${entry.message}</span>
+        <mwc-icon
+          slot="graphic"
+          style="--mdc-theme-text-icon-on-background:var(${iconColors[entry.kind]})"
+          >${icons[entry.kind]}</mwc-icon
+        >
+      </mwc-list-item></abbr
+    >`;
     }
     renderHistoryEntry(entry, index, history) {
         return html ` <abbr title="${entry.title}">
-        <mwc-list-item
-          class="${entry.kind}"
-          graphic="icon"
-          ?twoline=${!!entry.message}
-          ?activated=${this.editCount == history.length - index - 1}
+      <mwc-list-item
+        class="${entry.kind}"
+        graphic="icon"
+        ?twoline=${!!entry.message}
+        ?activated=${this.editCount == history.length - index - 1}
+      >
+        <span>
+          <!-- FIXME: replace tt with mwc-chip asap -->
+          <tt>${entry.time?.toLocaleString()}</tt>
+          ${entry.title}</span
         >
-          <span>
-            <!-- FIXME: replace tt with mwc-chip asap -->
-            <tt>${entry.time?.toLocaleString()}</tt>
-            ${entry.title}</span
-          >
-          <span slot="secondary">${entry.message}</span>
-          <mwc-icon
-            slot="graphic"
-            style="--mdc-theme-text-icon-on-background:var(${iconColors[entry.kind]})"
-            >history</mwc-icon
-          >
-        </mwc-list-item></abbr
-      >`;
+        <span slot="secondary">${entry.message}</span>
+        <mwc-icon
+          slot="graphic"
+          style="--mdc-theme-text-icon-on-background:var(${iconColors[entry.kind]})"
+          >history</mwc-icon
+        >
+      </mwc-list-item></abbr
+    >`;
     }
     renderLog() {
         if (this.log.length > 0)
             return this.log.slice().reverse().map(this.renderLogEntry, this);
         else
             return html `<mwc-list-item disabled graphic="icon">
-          <span>${get('log.placeholder')}</span>
-          <mwc-icon slot="graphic">info</mwc-icon>
-        </mwc-list-item>`;
+        <span>${get('log.placeholder')}</span>
+        <mwc-icon slot="graphic">info</mwc-icon>
+      </mwc-list-item>`;
     }
     renderHistory() {
         if (this.history.length > 0)
-            return this.history
-                .slice()
-                .reverse()
-                .map(this.renderHistoryEntry, this);
+            return this.history.slice().reverse().map(this.renderHistoryEntry, this);
         else
             return html `<mwc-list-item disabled graphic="icon">
-          <span>${get('history.placeholder')}</span>
-          <mwc-icon slot="graphic">info</mwc-icon>
-        </mwc-list-item>`;
+        <span>${get('history.placeholder')}</span>
+        <mwc-icon slot="graphic">info</mwc-icon>
+      </mwc-list-item>`;
     }
     renderIssueEntry(issue) {
         return html ` <abbr title="${issue.title + '\n' + issue.message}"
-        ><mwc-list-item ?twoline=${!!issue.message}>
-          <span> ${issue.title}</span>
-          <span slot="secondary">${issue.message}</span>
-        </mwc-list-item></abbr
-      >`;
+      ><mwc-list-item ?twoline=${!!issue.message}>
+        <span> ${issue.title}</span>
+        <span slot="secondary">${issue.message}</span>
+      </mwc-list-item></abbr
+    >`;
     }
     renderValidatorsIssues(issues) {
         if (issues.length === 0)
             return [html ``];
         return [
             html `<mwc-list-item noninteractive
-          >${getPluginName(issues[0].validatorId)}</mwc-list-item
-        >`,
+        >${getPluginName(issues[0].validatorId)}</mwc-list-item
+      >`,
             html `<li divider padded role="separator"></li>`,
             ...issues.map(issue => this.renderIssueEntry(issue)),
         ];
@@ -325,178 +305,175 @@ let OscdHistory = class OscdHistory extends LitElement {
         return issueItems.length
             ? issueItems
             : html `<mwc-list-item disabled graphic="icon">
-            <span>${get('diag.placeholder')}</span>
-            <mwc-icon slot="graphic">info</mwc-icon>
-          </mwc-list-item>`;
+          <span>${get('diag.placeholder')}</span>
+          <mwc-icon slot="graphic">info</mwc-icon>
+        </mwc-list-item>`;
     }
     renderFilterButtons() {
         return Object.keys(icons).map(kind => html `<mwc-icon-button-toggle id="${kind}filter" on
-          >${getFilterIcon(kind, false)}
-          ${getFilterIcon(kind, true)}</mwc-icon-button-toggle
-        >`);
+        >${getFilterIcon(kind, false)}
+        ${getFilterIcon(kind, true)}</mwc-icon-button-toggle
+      >`);
     }
     renderLogDialog() {
         return html ` <mwc-dialog id="log" heading="${get('log.name')}">
-        ${this.renderFilterButtons()}
-        <mwc-list id="content" wrapFocus>${this.renderLog()}</mwc-list>
-        <mwc-button slot="primaryAction" dialogaction="close"
-          >${get('close')}</mwc-button
-        >
-      </mwc-dialog>`;
+      ${this.renderFilterButtons()}
+      <mwc-list id="content" wrapFocus>${this.renderLog()}</mwc-list>
+      <mwc-button slot="primaryAction" dialogaction="close"
+        >${get('close')}</mwc-button
+      >
+    </mwc-dialog>`;
     }
     renderHistoryUI() {
-        return html ` <mwc-dialog
-        id="history"
-        heading="${get('history.name')}"
+        return html ` <mwc-dialog id="history" heading="${get('history.name')}">
+      <mwc-list id="content" wrapFocus>${this.renderHistory()}</mwc-list>
+      <mwc-button
+        icon="undo"
+        label="${get('undo')}"
+        ?disabled=${!this.canUndo}
+        @click=${this.undo}
+        slot="secondaryAction"
+      ></mwc-button>
+      <mwc-button
+        icon="redo"
+        label="${get('redo')}"
+        ?disabled=${!this.canRedo}
+        @click=${this.redo}
+        slot="secondaryAction"
+      ></mwc-button>
+      <mwc-button slot="primaryAction" dialogaction="close"
+        >${get('close')}</mwc-button
       >
-        <mwc-list id="content" wrapFocus>${this.renderHistory()}</mwc-list>
-        <mwc-button
-          icon="undo"
-          label="${get('undo')}"
-          ?disabled=${!this.canUndo}
-          @click=${this.undo}
-          slot="secondaryAction"
-        ></mwc-button>
-        <mwc-button
-          icon="redo"
-          label="${get('redo')}"
-          ?disabled=${!this.canRedo}
-          @click=${this.redo}
-          slot="secondaryAction"
-        ></mwc-button>
-        <mwc-button slot="primaryAction" dialogaction="close"
-          >${get('close')}</mwc-button
-        >
-      </mwc-dialog>`;
+    </mwc-dialog>`;
     }
     render() {
         return html `<slot></slot>
-        <style>
-          #log > mwc-icon-button-toggle {
-            position: absolute;
-            top: 8px;
-            right: 14px;
-          }
-          #log > mwc-icon-button-toggle:nth-child(2) {
-            right: 62px;
-          }
-          #log > mwc-icon-button-toggle:nth-child(3) {
-            right: 110px;
-          }
-          #log > mwc-icon-button-toggle:nth-child(4) {
-            right: 158px;
-          }
-          #content mwc-list-item.info,
-          #content mwc-list-item.warning,
-          #content mwc-list-item.error {
-            display: none;
-          }
-          #infofilter[on] ~ #content mwc-list-item.info {
-            display: flex;
-          }
-          #warningfilter[on] ~ #content mwc-list-item.warning {
-            display: flex;
-          }
-          #errorfilter[on] ~ #content mwc-list-item.error {
-            display: flex;
-          }
+      <style>
+        #log > mwc-icon-button-toggle {
+          position: absolute;
+          top: 8px;
+          right: 14px;
+        }
+        #log > mwc-icon-button-toggle:nth-child(2) {
+          right: 62px;
+        }
+        #log > mwc-icon-button-toggle:nth-child(3) {
+          right: 110px;
+        }
+        #log > mwc-icon-button-toggle:nth-child(4) {
+          right: 158px;
+        }
+        #content mwc-list-item.info,
+        #content mwc-list-item.warning,
+        #content mwc-list-item.error {
+          display: none;
+        }
+        #infofilter[on] ~ #content mwc-list-item.info {
+          display: flex;
+        }
+        #warningfilter[on] ~ #content mwc-list-item.warning {
+          display: flex;
+        }
+        #errorfilter[on] ~ #content mwc-list-item.error {
+          display: flex;
+        }
 
-          #infofilter[on] {
-            color: var(--cyan);
-          }
+        #infofilter[on] {
+          color: var(--cyan);
+        }
 
-          #warningfilter[on] {
-            color: var(--yellow);
-          }
+        #warningfilter[on] {
+          color: var(--yellow);
+        }
 
-          #errorfilter[on] {
-            color: var(--red);
-          }
+        #errorfilter[on] {
+          color: var(--red);
+        }
 
-          #actionfilter[on] {
-            color: var(--blue);
-          }
+        #actionfilter[on] {
+          color: var(--blue);
+        }
 
-          #log,
-          #history {
-            --mdc-dialog-min-width: 92vw;
-          }
+        #log,
+        #history {
+          --mdc-dialog-min-width: 92vw;
+        }
 
-          #log > #filterContainer {
-            position: absolute;
-            top: 14px;
-            right: 14px;
-          }
-        </style>
-        ${this.renderLogDialog()} ${this.renderHistoryUI()}
-        <mwc-dialog id="diagnostic" heading="${get('diag.name')}">
-          <filtered-list id="content" wrapFocus
-            >${this.renderIssues()}</filtered-list
-          >
-          <mwc-button slot="primaryAction" dialogaction="close"
-            >${get('close')}</mwc-button
-          >
-        </mwc-dialog>
+        #log > #filterContainer {
+          position: absolute;
+          top: 14px;
+          right: 14px;
+        }
+      </style>
+      ${this.renderLogDialog()} ${this.renderHistoryUI()}
+      <mwc-dialog id="diagnostic" heading="${get('diag.name')}">
+        <filtered-list id="content" wrapFocus
+          >${this.renderIssues()}</filtered-list
+        >
+        <mwc-button slot="primaryAction" dialogaction="close"
+          >${get('close')}</mwc-button
+        >
+      </mwc-dialog>
 
-        <mwc-snackbar
-          id="info"
-          timeoutMs="4000"
-          labelText="${this.log
+      <mwc-snackbar
+        id="info"
+        timeoutMs="4000"
+        labelText="${this.log
             .slice()
             .reverse()
             .find(le => le.kind === 'info')?.title ??
             get('log.snackbar.placeholder')}"
-        >
-          <mwc-icon-button icon="close" slot="dismiss"></mwc-icon-button>
-        </mwc-snackbar>
-        <mwc-snackbar
-          id="warning"
-          timeoutMs="6000"
-          labelText="${this.log
+      >
+        <mwc-icon-button icon="close" slot="dismiss"></mwc-icon-button>
+      </mwc-snackbar>
+      <mwc-snackbar
+        id="warning"
+        timeoutMs="6000"
+        labelText="${this.log
             .slice()
             .reverse()
             .find(le => le.kind === 'warning')?.title ??
             get('log.snackbar.placeholder')}"
+      >
+        <mwc-button
+          slot="action"
+          icon="history"
+          @click=${() => this.logUI.show()}
+          >${get('log.snackbar.show')}</mwc-button
         >
-          <mwc-button
-            slot="action"
-            icon="history"
-            @click=${() => this.logUI.show()}
-            >${get('log.snackbar.show')}</mwc-button
-          >
-          <mwc-icon-button icon="close" slot="dismiss"></mwc-icon-button>
-        </mwc-snackbar>
-        <mwc-snackbar
-          id="error"
-          timeoutMs="10000"
-          labelText="${this.log
+        <mwc-icon-button icon="close" slot="dismiss"></mwc-icon-button>
+      </mwc-snackbar>
+      <mwc-snackbar
+        id="error"
+        timeoutMs="10000"
+        labelText="${this.log
             .slice()
             .reverse()
             .find(le => le.kind === 'error')?.title ??
             get('log.snackbar.placeholder')}"
+      >
+        <mwc-button
+          slot="action"
+          icon="history"
+          @click=${() => this.logUI.show()}
+          >${get('log.snackbar.show')}</mwc-button
         >
-          <mwc-button
-            slot="action"
-            icon="history"
-            @click=${() => this.logUI.show()}
-            >${get('log.snackbar.show')}</mwc-button
-          >
-          <mwc-icon-button icon="close" slot="dismiss"></mwc-icon-button>
-        </mwc-snackbar>
-        <mwc-snackbar
-          id="issue"
-          timeoutMs="10000"
-          labelText="${this.latestIssue?.title ??
+        <mwc-icon-button icon="close" slot="dismiss"></mwc-icon-button>
+      </mwc-snackbar>
+      <mwc-snackbar
+        id="issue"
+        timeoutMs="10000"
+        labelText="${this.latestIssue?.title ??
             get('log.snackbar.placeholder')}"
+      >
+        <mwc-button
+          slot="action"
+          icon="rule"
+          @click=${() => this.diagnosticUI.show()}
+          >${get('log.snackbar.show')}</mwc-button
         >
-          <mwc-button
-            slot="action"
-            icon="rule"
-            @click=${() => this.diagnosticUI.show()}
-            >${get('log.snackbar.show')}</mwc-button
-          >
-          <mwc-icon-button icon="close" slot="dismiss"></mwc-icon-button>
-        </mwc-snackbar>`;
+        <mwc-icon-button icon="close" slot="dismiss"></mwc-icon-button>
+      </mwc-snackbar>`;
     }
 };
 __decorate([

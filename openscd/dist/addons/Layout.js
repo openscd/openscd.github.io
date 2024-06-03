@@ -1,10 +1,10 @@
 import { __decorate } from "../../../_snowpack/pkg/tslib.js";
-import { customElement, html, LitElement, property, state, query, css } from '../../../_snowpack/pkg/lit-element.js';
+import { customElement, html, LitElement, property, state, query, css, } from '../../../_snowpack/pkg/lit-element.js';
 import { get } from '../../../_snowpack/pkg/lit-translate.js';
 import { newPendingStateEvent } from '../../../_snowpack/link/packages/core/dist/foundation/deprecated/waiter.js';
 import { newSettingsUIEvent } from '../../../_snowpack/link/packages/core/dist/foundation/deprecated/settings.js';
-import { menuPosition, pluginIcons, newResetPluginsEvent, newAddExternalPluginEvent, newSetPluginsEvent } from '../open-scd.js';
-import { HistoryUIKind, newEmptyIssuesEvent, newHistoryUIEvent, newRedoEvent, newUndoEvent } from './History.js';
+import { menuPosition, pluginIcons, newResetPluginsEvent, newAddExternalPluginEvent, newSetPluginsEvent, } from '../open-scd.js';
+import { HistoryUIKind, newEmptyIssuesEvent, newHistoryUIEvent, newRedoEvent, newUndoEvent, } from './History.js';
 import { List } from '../../../_snowpack/pkg/@material/mwc-list.js';
 import '../../../_snowpack/pkg/@material/mwc-drawer.js';
 import '../../../_snowpack/pkg/@material/mwc-list.js';
@@ -27,8 +27,13 @@ let OscdLayout = class OscdLayout extends LitElement {
         this.plugins = [];
         this.validated = Promise.resolve();
         this.shouldValidate = false;
-        this.canRedo = false;
-        this.canUndo = false;
+        this.redoCount = 0;
+    }
+    get canUndo() {
+        return this.editCount >= 0;
+    }
+    get canRedo() {
+        return this.redoCount > 0;
     }
     // Computed properties
     get validators() {
@@ -236,9 +241,15 @@ let OscdLayout = class OscdLayout extends LitElement {
         });
         this.handleKeyPress = this.handleKeyPress.bind(this);
         document.onkeydown = this.handleKeyPress;
-        this.host.addEventListener('undo-redo-changed', (e) => {
-            this.canRedo = e.detail.canRedo;
-            this.canUndo = e.detail.canUndo;
+        this.host.addEventListener('oscd-edit-completed', (evt) => {
+            const initiator = evt.detail.initiator;
+            if (initiator === 'undo') {
+                this.redoCount += 1;
+            }
+            else if (initiator === 'redo') {
+                this.redoCount -= 1;
+            }
+            this.requestUpdate();
         });
     }
     renderMenuItem(me) {
@@ -279,25 +290,20 @@ let OscdLayout = class OscdLayout extends LitElement {
     /** Renders top bar which features icon buttons for undo, redo, log, scl history and diagnostics*/
     renderHeader() {
         return html `<mwc-top-app-bar-fixed>
-        <mwc-icon-button
-          icon="menu"
-          label="Menu"
-          slot="navigationIcon"
-          @click=${() => (this.menuUI.open = true)}
-        ></mwc-icon-button>
-        <div slot="title" id="title">${this.docName}</div>
-        ${this.menu.map(this.renderActionItem)}
-      </mwc-top-app-bar-fixed>`;
+      <mwc-icon-button
+        icon="menu"
+        label="Menu"
+        slot="navigationIcon"
+        @click=${() => (this.menuUI.open = true)}
+      ></mwc-icon-button>
+      <div slot="title" id="title">${this.docName}</div>
+      ${this.menu.map(this.renderActionItem)}
+    </mwc-top-app-bar-fixed>`;
     }
     /** Renders a drawer toolbar featuring the scl filename, enabled menu plugins, settings, help, scl history and plug-ins management */
     renderAside() {
         return html `
-      <mwc-drawer
-        class="mdc-theme--surface"
-        hasheader
-        type="modal"
-        id="menu"
-      >
+      <mwc-drawer class="mdc-theme--surface" hasheader type="modal" id="menu">
         <span slot="title">${get('menu.title')}</span>
         ${this.docName
             ? html `<span slot="subtitle">${this.docName}</span>`
@@ -321,19 +327,20 @@ let OscdLayout = class OscdLayout extends LitElement {
         return html `
       ${this.doc
             ? html `<mwc-tab-bar
-          @MDCTabBar:activated=${(e) => (this.activeTab = e.detail.index)}
-        >
-          ${this.editors.map(this.renderEditorTab)}
-        </mwc-tab-bar>
-        ${this.editors[this.activeTab]?.content ? this.editors[this.activeTab].content : ``}`
+              @MDCTabBar:activated=${(e) => (this.activeTab = e.detail.index)}
+            >
+              ${this.editors.map(this.renderEditorTab)}
+            </mwc-tab-bar>
+            ${this.editors[this.activeTab]?.content
+                ? this.editors[this.activeTab].content
+                : ``}`
             : ``}
     `;
     }
     /** Renders the landing buttons (open project and new project)*/
     renderLanding() {
-        return html ` 
-    ${!this.doc ?
-            html `<div class="landing">
+        return html ` ${!this.doc
+            ? html `<div class="landing">
           ${this.menu.filter(mi => mi !== 'divider').map((mi, index) => mi.kind === 'top' && !mi.disabled?.()
                 ? html `
                     <mwc-icon-button
@@ -345,7 +352,8 @@ let OscdLayout = class OscdLayout extends LitElement {
                     </mwc-icon-button>
                   `
                 : html ``)}
-        </div>` : ``}`;
+        </div>`
+            : ``}`;
     }
     /** Renders the "Add Custom Plug-in" UI*/
     renderDownloadUI() {
@@ -523,19 +531,16 @@ let OscdLayout = class OscdLayout extends LitElement {
     render() {
         return html `
       <slot></slot>
-			${this.renderHeader()}
-			${this.renderAside()}
-			${this.renderContent()}
-			${this.renderLanding()}
-			${this.renderPlugging()}
-		`;
+      ${this.renderHeader()} ${this.renderAside()} ${this.renderContent()}
+      ${this.renderLanding()} ${this.renderPlugging()}
+    `;
     }
 };
 OscdLayout.styles = css `
-		mwc-drawer {
-			position: absolute;
-			top: 0;
-		}
+    mwc-drawer {
+      position: absolute;
+      top: 0;
+    }
 
     mwc-top-app-bar-fixed {
       --mdc-theme-text-disabled-on-light: rgba(255, 255, 255, 0.38);
@@ -652,10 +657,7 @@ __decorate([
 ], OscdLayout.prototype, "shouldValidate", void 0);
 __decorate([
     state()
-], OscdLayout.prototype, "canRedo", void 0);
-__decorate([
-    state()
-], OscdLayout.prototype, "canUndo", void 0);
+], OscdLayout.prototype, "redoCount", void 0);
 __decorate([
     query('#menu')
 ], OscdLayout.prototype, "menuUI", void 0);

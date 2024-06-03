@@ -162,18 +162,21 @@ export let OpenSCD = class extends LitElement {
     });
     this.updatePlugins();
     this.requestUpdate();
+    this.addEventListener("oscd-edit-completed", (evt) => {
+      const initiator = evt.detail.initiator;
+      if (initiator === "undo") {
+        this.editCount -= 1;
+      } else {
+        this.editCount += 1;
+      }
+      this.requestUpdate();
+    });
   }
   render() {
     return html`<oscd-waiter>
       <oscd-settings .host=${this}>
         <oscd-wizards .host=${this}>
-          <oscd-history 
-            .host=${this} 
-            @undo-redo-changed="${(e) => {
-      this.editCount = e.detail.editCount;
-      this.requestUpdate();
-    }}"
-          >
+          <oscd-history .host=${this} .editCount=${this.editCount}>
             <oscd-editor
               .doc=${this.doc}
               .docName=${this.docName}

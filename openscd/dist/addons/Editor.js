@@ -1,9 +1,10 @@
 import { __decorate } from "../../../_snowpack/pkg/tslib.js";
+import { newEditCompletedEvent } from '../../../_snowpack/link/packages/core/dist/foundation.js';
 import { property, LitElement, customElement, html, } from '../../../_snowpack/pkg/lit-element.js';
 import { get } from '../../../_snowpack/pkg/lit-translate.js';
 import { newLogEvent } from '../../../_snowpack/link/packages/core/dist/foundation/deprecated/history.js';
 import { newValidateEvent } from '../../../_snowpack/link/packages/core/dist/foundation/deprecated/validation.js';
-import { getReference, } from '../foundation.js';
+import { getReference } from '../foundation.js';
 import { isCreate, isDelete, isMove, isSimple, isReplace, isUpdate, } from '../../../_snowpack/link/packages/core/dist/foundation/deprecated/editor.js';
 let OscdEditor = class OscdEditor extends LitElement {
     constructor() {
@@ -289,6 +290,7 @@ let OscdEditor = class OscdEditor extends LitElement {
             return;
         await this.updateComplete;
         this.dispatchEvent(newValidateEvent());
+        this.dispatchEvent(newEditCompletedEvent(event.detail.action, event.detail.initiator));
     }
     /**
      *

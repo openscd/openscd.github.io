@@ -9,6 +9,7 @@ var __decorate = (decorators, target, key, kind) => {
     __defProp(target, key, result);
   return result;
 };
+import {newEditCompletedEvent} from "../../../_snowpack/link/packages/core/dist/foundation.js";
 import {
   property,
   LitElement,
@@ -18,9 +19,7 @@ import {
 import {get} from "../../../_snowpack/pkg/lit-translate.js";
 import {newLogEvent} from "../../../_snowpack/link/packages/core/dist/foundation/deprecated/history.js";
 import {newValidateEvent} from "../../../_snowpack/link/packages/core/dist/foundation/deprecated/validation.js";
-import {
-  getReference
-} from "../foundation.js";
+import {getReference} from "../foundation.js";
 import {
   isCreate,
   isDelete,
@@ -279,6 +278,7 @@ export let OscdEditor = class extends LitElement {
       return;
     await this.updateComplete;
     this.dispatchEvent(newValidateEvent());
+    this.dispatchEvent(newEditCompletedEvent(event.detail.action, event.detail.initiator));
   }
   async onOpenDoc(event) {
     this.doc = event.detail.doc;

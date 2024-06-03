@@ -87,12 +87,12 @@ export function invert(action) {
     else
         return unreachable('Unknown EditorAction type in invert.');
 }
-export function newActionEvent(action, eventInitDict) {
+export function newActionEvent(action, initiator = 'user', eventInitDict) {
     return new CustomEvent('editor-action', {
         bubbles: true,
         composed: true,
         ...eventInitDict,
-        detail: { action, ...eventInitDict === null || eventInitDict === void 0 ? void 0 : eventInitDict.detail },
+        detail: { action, initiator, ...eventInitDict === null || eventInitDict === void 0 ? void 0 : eventInitDict.detail },
     });
 }
 //# sourceMappingURL=editor.js.map
