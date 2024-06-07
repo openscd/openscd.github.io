@@ -1,4 +1,5 @@
-import { cloneElement, getValue, } from '../../../../openscd/src/foundation.js';
+import { getValue, } from '../../../../openscd/src/foundation.js';
+import { cloneElement, } from '../../../../_snowpack/link/packages/xml/dist/index.js';
 import { createUpdateAction } from '../../../../_snowpack/link/packages/core/dist/foundation/deprecated/editor.js';
 import { get } from '../../../../_snowpack/pkg/lit-translate.js';
 import { updateReferences } from './references.js';

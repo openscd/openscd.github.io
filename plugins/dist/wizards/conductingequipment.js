@@ -3,7 +3,8 @@ import { get } from '../../../_snowpack/pkg/lit-translate.js';
 import '../../../_snowpack/pkg/@material/mwc-list/mwc-list-item.js';
 import '../../../_snowpack/pkg/@material/mwc-select.js';
 import '../../../openscd/src/wizard-textfield.js';
-import { createElement, crossProduct, getValue, isPublic, } from '../../../openscd/src/foundation.js';
+import { crossProduct, getValue, isPublic, } from '../../../openscd/src/foundation.js';
+import { createElement, } from '../../../_snowpack/link/packages/xml/dist/index.js';
 import { replaceNamingAction } from './foundation/actions.js';
 const types = {
     // standard

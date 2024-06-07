@@ -4,7 +4,7 @@ import { get } from '../../../_snowpack/pkg/lit-translate.js';
 import '../../../_snowpack/pkg/@material/mwc-checkbox.js';
 import '../../../_snowpack/pkg/@material/mwc-formfield.js';
 import '../../../openscd/src/wizard-textfield.js';
-import { createElement, } from '../../../openscd/src/foundation.js';
+import { createElement, } from '../../../_snowpack/link/packages/xml/dist/index.js';
 import { typeNullable, typePattern } from './foundation/p-types.js';
 export function contentGseOrSmvWizard(content) {
     return [

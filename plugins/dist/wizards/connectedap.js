@@ -8,7 +8,8 @@ import '../../../_snowpack/pkg/@material/mwc-list/mwc-check-list-item.js';
 import '../../../_snowpack/pkg/@material/mwc-icon.js';
 import '../../../openscd/src/wizard-textfield.js';
 import '../../../openscd/src/filtered-list.js';
-import { compareNames, getValue, createElement, isPublic, identity, } from '../../../openscd/src/foundation.js';
+import { compareNames, getValue, isPublic, identity, } from '../../../openscd/src/foundation.js';
+import { createElement, } from '../../../_snowpack/link/packages/xml/dist/index.js';
 import { getTypes, typeMaxLength, typeNullable, typePattern, } from './foundation/p-types.js';
 import { mACAddressGenerator, appIdGenerator, } from '../../../openscd/src/foundation/generators.js';
 /** Sorts connected `AccessPoint`s to the bottom. */

@@ -1,5 +1,6 @@
 import {directive} from "../../_snowpack/pkg/lit-html.js";
 import {Select} from "../../_snowpack/pkg/@material/mwc-select.js";
+import {getChildElementsByTagName} from "../../_snowpack/link/packages/xml/dist/index.js";
 import {WizardTextField} from "./wizard-textfield.js";
 import {WizardSelect} from "./wizard-select.js";
 import {WizardCheckbox} from "./wizard-checkbox.js";
@@ -1707,21 +1708,6 @@ export function isEqual(a, b) {
       return false;
   return true;
 }
-export function createElement(doc, tag, attrs) {
-  const element = doc.createElementNS(doc.documentElement.namespaceURI, tag);
-  Object.entries(attrs).filter(([_, value]) => value !== null).forEach(([name2, value]) => element.setAttribute(name2, value));
-  return element;
-}
-export function cloneElement(element, attrs) {
-  const newElement = element.cloneNode(false);
-  Object.entries(attrs).forEach(([name2, value]) => {
-    if (value === null)
-      newElement.removeAttribute(name2);
-    else
-      newElement.setAttribute(name2, value);
-  });
-  return newElement;
-}
 export const ifImplemented = directive((rendered) => (part) => {
   if (Object.keys(rendered).length)
     part.setValue(rendered);
@@ -1773,14 +1759,6 @@ export function depth(t, mem = new WeakSet()) {
         return 0;
     }
 }
-export function getUniqueElementName(parent, tagName, iteration = 1) {
-  const newName = "new" + tagName + iteration;
-  const child = parent.querySelector(`:scope > ${tagName}[name="${newName}"]`);
-  if (!child)
-    return newName;
-  else
-    return getUniqueElementName(parent, tagName, ++iteration);
-}
 export function findFCDAs(extRef) {
   if (extRef.tagName !== "ExtRef" || extRef.closest("Private"))
     return [];
@@ -1822,11 +1800,6 @@ export function getVersion(element) {
   const header = Array.from(element.ownerDocument.getElementsByTagName("Header")).filter((item) => !item.closest("Private"));
   return header[0].getAttribute("version") ?? "2003";
 }
-export function getChildElementsByTagName(element, tag) {
-  if (!element || !tag)
-    return [];
-  return Array.from(element.children).filter((element2) => element2.tagName === tag);
-}
 const maxLnInst = 99;
 const lnInstRange = Array(maxLnInst).fill(1).map((_, i) => `${i + 1}`);
 export function newLnInstGenerator(parent) {
@@ -1843,19 +1816,6 @@ export function newLnInstGenerator(parent) {
     }
     return generators.get(lnClass)();
   };
-}
-export function formatXml(xml, tab) {
-  let formatted = "", indent = "";
-  if (!tab)
-    tab = "	";
-  xml.split(/>\s*</).forEach(function(node) {
-    if (node.match(/^\/\w/))
-      indent = indent.substring(tab.length);
-    formatted += indent + "<" + node + ">\r\n";
-    if (node.match(/^<?\w[^>]*[^/]$/))
-      indent += tab;
-  });
-  return formatted.substring(1, formatted.length - 3);
 }
 export function minAvailableLogicalNodeInstance(lnElements) {
   const lnInsts = new Set(lnElements.map((ln) => ln.getAttribute("inst") || ""));

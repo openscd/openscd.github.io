@@ -1,5 +1,6 @@
 import { directive } from '../../_snowpack/pkg/lit-html.js';
 import { Select } from '../../_snowpack/pkg/@material/mwc-select.js';
+import { getChildElementsByTagName } from '../../_snowpack/link/packages/xml/dist/index.js';
 import { WizardTextField } from './wizard-textfield.js';
 import { WizardSelect } from './wizard-select.js';
 import { WizardCheckbox } from './wizard-checkbox.js';
@@ -1769,25 +1770,6 @@ export function isEqual(a, b) {
             return false;
     return true;
 }
-/** @returns a new [[`tag`]] element owned by [[`doc`]]. */
-export function createElement(doc, tag, attrs) {
-    const element = doc.createElementNS(doc.documentElement.namespaceURI, tag);
-    Object.entries(attrs)
-        .filter(([_, value]) => value !== null)
-        .forEach(([name, value]) => element.setAttribute(name, value));
-    return element;
-}
-/** @returns a clone of `element` with attributes set to values from `attrs`. */
-export function cloneElement(element, attrs) {
-    const newElement = element.cloneNode(false);
-    Object.entries(attrs).forEach(([name, value]) => {
-        if (value === null)
-            newElement.removeAttribute(name);
-        else
-            newElement.setAttribute(name, value);
-    });
-    return newElement;
-}
 /** A directive rendering its argument `rendered` only if `rendered !== {}`. */
 export const ifImplemented = directive(rendered => (part) => {
     if (Object.keys(rendered).length)
@@ -1847,14 +1829,6 @@ export function depth(t, mem = new WeakSet()) {
                 return 0;
         }
 }
-export function getUniqueElementName(parent, tagName, iteration = 1) {
-    const newName = 'new' + tagName + iteration;
-    const child = parent.querySelector(`:scope > ${tagName}[name="${newName}"]`);
-    if (!child)
-        return newName;
-    else
-        return getUniqueElementName(parent, tagName, ++iteration);
-}
 export function findFCDAs(extRef) {
     if (extRef.tagName !== 'ExtRef' || extRef.closest('Private'))
         return [];
@@ -1907,11 +1881,6 @@ export function getVersion(element) {
     const header = Array.from(element.ownerDocument.getElementsByTagName('Header')).filter(item => !item.closest('Private'));
     return header[0].getAttribute('version') ?? '2003';
 }
-export function getChildElementsByTagName(element, tag) {
-    if (!element || !tag)
-        return [];
-    return Array.from(element.children).filter(element => element.tagName === tag);
-}
 /** maximum value for `lnInst` attribute */
 const maxLnInst = 99;
 const lnInstRange = Array(maxLnInst)
@@ -1940,25 +1909,6 @@ export function newLnInstGenerator(parent) {
         }
         return generators.get(lnClass)();
     };
-}
-/**
- * Format xml string in "pretty print" style and return as a string
- * @param xml - xml document as a string
- * @param tab - character to use as a tab
- * @returns string with pretty print formatting
- */
-export function formatXml(xml, tab) {
-    let formatted = '', indent = '';
-    if (!tab)
-        tab = '\t';
-    xml.split(/>\s*</).forEach(function (node) {
-        if (node.match(/^\/\w/))
-            indent = indent.substring(tab.length);
-        formatted += indent + '<' + node + '>\r\n';
-        if (node.match(/^<?\w[^>]*[^/]$/))
-            indent += tab;
-    });
-    return formatted.substring(1, formatted.length - 3);
 }
 /**
  * @param lnElements - The LN elements to be scanned for `inst`

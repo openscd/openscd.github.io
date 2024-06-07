@@ -1,6 +1,7 @@
 import { html } from '../../../_snowpack/pkg/lit-element.js';
 import { get } from '../../../_snowpack/pkg/lit-translate.js';
-import { createElement, find, } from '../../../openscd/src/foundation.js';
+import { find, } from '../../../openscd/src/foundation.js';
+import { createElement, } from '../../../_snowpack/link/packages/xml/dist/index.js';
 import { dataAttributePicker, getDataModelChildren, } from './foundation/finder.js';
 export function newFCDA(parent, path) {
     const [leafTag, leafId] = path[path.length - 1].split(': ');

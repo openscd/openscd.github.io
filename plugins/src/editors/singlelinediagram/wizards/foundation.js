@@ -1,9 +1,11 @@
 import {html} from "../../../../../_snowpack/pkg/lit-element.js";
 import {get} from "../../../../../_snowpack/pkg/lit-translate.js";
 import {
-  cloneElement,
   getValue
 } from "../../../../../openscd/src/foundation.js";
+import {
+  cloneElement
+} from "../../../../../_snowpack/link/packages/xml/dist/index.js";
 import {SCL_COORDINATES_NAMESPACE} from "../foundation.js";
 export function getNameAttribute(element) {
   return element.getAttribute("name");

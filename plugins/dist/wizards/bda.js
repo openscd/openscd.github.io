@@ -1,6 +1,7 @@
 import { get } from '../../../_snowpack/pkg/lit-translate.js';
 import '../../../_snowpack/pkg/@material/mwc-button.js';
-import { cloneElement, createElement, getValue, isPublic, newWizardEvent, } from '../../../openscd/src/foundation.js';
+import { getValue, isPublic, newWizardEvent, } from '../../../openscd/src/foundation.js';
+import { cloneElement, createElement, } from '../../../_snowpack/link/packages/xml/dist/index.js';
 import { newActionEvent } from '../../../_snowpack/link/packages/core/dist/foundation/deprecated/editor.js';
 import { getValAction, wizardContent } from './abstractda.js';
 function remove(element) {

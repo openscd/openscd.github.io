@@ -35,10 +35,12 @@ import {
   redirectDialog
 } from "./foundation.js";
 import {
-  getChildElementsByTagName,
   newWizardEvent,
   tags
 } from "../../../../openscd/src/foundation.js";
+import {
+  getChildElementsByTagName
+} from "../../../../_snowpack/link/packages/xml/dist/index.js";
 import {newActionEvent} from "../../../../_snowpack/link/packages/core/dist/foundation/deprecated/editor.js";
 import {voltageLevelIcon} from "../../../../openscd/src/icons/icons.js";
 import {SubstationEditor} from "./substation-editor.js";

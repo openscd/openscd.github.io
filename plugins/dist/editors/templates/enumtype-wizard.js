@@ -5,8 +5,9 @@ import '../../../../_snowpack/pkg/@material/mwc-list.js';
 import '../../../../_snowpack/pkg/@material/mwc-list/mwc-list-item.js';
 import '../../../../_snowpack/pkg/@material/mwc-select.js';
 import '../../../../openscd/src/wizard-textfield.js';
-import { cloneElement, createElement, find, getValue, identity, newSubWizardEvent, newWizardEvent, patterns, } from '../../../../openscd/src/foundation.js';
-import { newActionEvent } from '../../../../_snowpack/link/packages/core/dist/foundation/deprecated/editor.js';
+import { find, getValue, identity, newSubWizardEvent, newWizardEvent, patterns, } from '../../../../openscd/src/foundation.js';
+import { cloneElement, createElement } from '../../../../_snowpack/link/packages/xml/dist/index.js';
+import { newActionEvent, } from '../../../../_snowpack/link/packages/core/dist/foundation/deprecated/editor.js';
 function remove(element) {
     return (wizard) => {
         wizard.dispatchEvent(newActionEvent({ old: { parent: element.parentElement, element } }));

@@ -5,12 +5,12 @@ import "../../../_snowpack/pkg/@material/mwc-list/mwc-check-list-item.js";
 import "../../../openscd/src/wizard-textfield.js";
 import "../../../openscd/src/filtered-list.js";
 import {
-  cloneElement,
   find,
   getValue,
   identity,
   newSubWizardEvent
 } from "../../../openscd/src/foundation.js";
+import {cloneElement} from "../../../_snowpack/link/packages/xml/dist/index.js";
 import {createFCDAsWizard} from "./fcda.js";
 function openFcdaWizard(element) {
   return (wizard) => {

@@ -5,7 +5,8 @@ import '../../../_snowpack/pkg/@material/mwc-list/mwc-check-list-item.js';
 import '../../../_snowpack/pkg/@material/dialog.js';
 import '../../../_snowpack/pkg/@material/mwc-button.js';
 import '../../../openscd/src/filtered-list.js';
-import { createElement, find, identity, isPublic, } from '../../../openscd/src/foundation.js';
+import { find, identity, isPublic } from '../../../openscd/src/foundation.js';
+import { createElement } from '../../../_snowpack/link/packages/xml/dist/index.js';
 import { newActionEvent, } from '../../../_snowpack/link/packages/core/dist/foundation/deprecated/editor.js';
 import { newLogEvent } from '../../../_snowpack/link/packages/core/dist/foundation/deprecated/history.js';
 function uniqueTemplateIedName(doc, ied) {

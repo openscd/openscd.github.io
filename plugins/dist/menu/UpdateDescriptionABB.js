@@ -2,7 +2,8 @@ import { html, LitElement } from '../../../_snowpack/pkg/lit-element.js';
 import { get } from '../../../_snowpack/pkg/lit-translate.js';
 import '../../../_snowpack/pkg/@material/mwc-list/mwc-check-list-item.js';
 import '../../../openscd/src/filtered-list.js';
-import { cloneElement, find, identity, isPublic, newWizardEvent, } from '../../../openscd/src/foundation.js';
+import { find, identity, isPublic, newWizardEvent, } from '../../../openscd/src/foundation.js';
+import { cloneElement } from '../../../_snowpack/link/packages/xml/dist/index.js';
 function addDescriptionAction(doc) {
     return (_, wizard, list) => {
         const selectedItems = list.selected;

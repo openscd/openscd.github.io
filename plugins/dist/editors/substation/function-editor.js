@@ -3,7 +3,8 @@ import { html, LitElement, property, customElement, state, css, query, } from '.
 import '../../../../openscd/src/action-pane.js';
 import './sub-function-editor.js';
 import './general-equipment-editor.js';
-import { getChildElementsByTagName, newWizardEvent, tags, } from '../../../../openscd/src/foundation.js';
+import { newWizardEvent, tags, } from '../../../../openscd/src/foundation.js';
+import { getChildElementsByTagName } from '../../../../_snowpack/link/packages/xml/dist/index.js';
 import { newActionEvent } from '../../../../_snowpack/link/packages/core/dist/foundation/deprecated/editor.js';
 import { get } from '../../../../_snowpack/pkg/lit-translate.js';
 import { emptyWizard, wizards } from '../../wizards/wizard-library.js';

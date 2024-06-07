@@ -4,11 +4,13 @@ import "../../../_snowpack/pkg/@material/mwc-list/mwc-check-list-item.js";
 import "../../../_snowpack/pkg/@material/mwc-icon.js";
 import "../../../openscd/src/filtered-list.js";
 import {
-  createElement,
   find,
   identity,
   pathParts
 } from "../../../openscd/src/foundation.js";
+import {
+  createElement
+} from "../../../_snowpack/link/packages/xml/dist/index.js";
 import {clientIcon} from "../../../openscd/src/icons/icons.js";
 import {openCommunicationMappingWizard} from "./commmap-wizards.js";
 function getPath(identity2) {

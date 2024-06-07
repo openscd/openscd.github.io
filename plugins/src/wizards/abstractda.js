@@ -6,7 +6,7 @@ import "../../../openscd/src/wizard-select.js";
 import "../../../openscd/src/wizard-textfield.js";
 import {
   createElement
-} from "../../../openscd/src/foundation.js";
+} from "../../../_snowpack/link/packages/xml/dist/index.js";
 import {maxLength, patterns} from "./foundation/limits.js";
 import {predefinedBasicTypeEnum, valKindEnum} from "./foundation/enums.js";
 function selectType(e, data, Val) {

@@ -28,6 +28,7 @@ import "../../_snowpack/pkg/@material/mwc-icon-button.js";
 import "../../_snowpack/pkg/@material/mwc-icon-button-toggle.js";
 import "../../_snowpack/pkg/@material/mwc-menu.js";
 import {Dialog} from "../../_snowpack/pkg/@material/mwc-dialog.js";
+import {formatXml} from "../../_snowpack/link/packages/xml/dist/index.js";
 import "../../_snowpack/pkg/ace-custom-element.js";
 import "./wizard-checkbox.js";
 import "./wizard-textfield.js";
@@ -41,8 +42,7 @@ import {
   isWizardFactory,
   checkValidity,
   reportValidity,
-  identity,
-  formatXml
+  identity
 } from "./foundation.js";
 function renderWizardInput(input) {
   if (input instanceof TemplateResult)

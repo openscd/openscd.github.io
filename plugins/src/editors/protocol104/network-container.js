@@ -14,9 +14,9 @@ import {css, customElement, html} from "../../../../_snowpack/pkg/lit-element.js
 import "./subnetwork-container.js";
 import {
   compareNames,
-  createElement,
   newWizardEvent
 } from "../../../../openscd/src/foundation.js";
+import {createElement} from "../../../../_snowpack/link/packages/xml/dist/index.js";
 import {newActionEvent} from "../../../../_snowpack/link/packages/core/dist/foundation/deprecated/editor.js";
 import {createSubNetworkWizard} from "./wizards/subnetwork.js";
 import {Base104Container} from "./base-container.js";

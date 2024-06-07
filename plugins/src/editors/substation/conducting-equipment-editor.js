@@ -29,10 +29,12 @@ import "./l-node-editor.js";
 import "./sub-equipment-editor.js";
 import {startMove, getIcon, styles} from "./foundation.js";
 import {
-  getChildElementsByTagName,
   newWizardEvent,
   tags
 } from "../../../../openscd/src/foundation.js";
+import {
+  getChildElementsByTagName
+} from "../../../../_snowpack/link/packages/xml/dist/index.js";
 import {newActionEvent} from "../../../../_snowpack/link/packages/core/dist/foundation/deprecated/editor.js";
 import {BayEditor} from "./bay-editor.js";
 import {emptyWizard, wizards} from "../../wizards/wizard-library.js";

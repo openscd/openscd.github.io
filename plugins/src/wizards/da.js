@@ -5,12 +5,14 @@ import "../../../_snowpack/pkg/@material/mwc-list/mwc-list-item.js";
 import "../../../openscd/src/wizard-checkbox.js";
 import "../../../openscd/src/wizard-select.js";
 import {
-  cloneElement,
-  createElement,
   getValue,
   isPublic,
   newWizardEvent
 } from "../../../openscd/src/foundation.js";
+import {
+  cloneElement,
+  createElement
+} from "../../../_snowpack/link/packages/xml/dist/index.js";
 import {newActionEvent} from "../../../_snowpack/link/packages/core/dist/foundation/deprecated/editor.js";
 import {getValAction, wizardContent} from "./abstractda.js";
 import {functionalConstraintEnum} from "./foundation/enums.js";

@@ -1,4 +1,5 @@
-import { createElement, getChildElementsByTagName, identity, } from '../../../../openscd/src/foundation.js';
+import { identity, } from '../../../../openscd/src/foundation.js';
+import { createElement, getChildElementsByTagName, } from '../../../../_snowpack/link/packages/xml/dist/index.js';
 const functionTypeElementTags = [
     'Function',
     'SubFunction',

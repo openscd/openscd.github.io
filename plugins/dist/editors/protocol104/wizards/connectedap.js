@@ -10,7 +10,8 @@ import '../../../../../_snowpack/pkg/@material/mwc-icon.js';
 import '../../../../../openscd/src/wizard-textfield.js';
 import '../../../../../openscd/src/filtered-list.js';
 import { pTypes104, stationTypeOptions, typeDescriptiveNameKeys, typePattern, } from '../foundation/p-types.js';
-import { cloneElement, compareNames, createElement, getValue, identity, isPublic, newSubWizardEvent, newWizardEvent, } from '../../../../../openscd/src/foundation.js';
+import { compareNames, getValue, identity, isPublic, newSubWizardEvent, newWizardEvent, } from '../../../../../openscd/src/foundation.js';
+import { cloneElement, createElement } from '../../../../../_snowpack/link/packages/xml/dist/index.js';
 import { getTypeAttribute } from '../foundation/foundation.js';
 import { createRedundancyGroupWizard, editRedundancyGroupWizard, } from './redundancygroup.js';
 /** Sorts connected `AccessPoint`s to the bottom. */

@@ -5,11 +5,11 @@ import "../../../../../_snowpack/pkg/@material/mwc-list/mwc-list-item.js";
 import "../../../../../_snowpack/pkg/@material/mwc-select.js";
 import "../../../../../_snowpack/pkg/@material/mwc-textarea.js";
 import {
-  cloneElement,
   getNameAttribute,
   getValue,
   patterns
 } from "../../../../../openscd/src/foundation.js";
+import {cloneElement} from "../../../../../_snowpack/link/packages/xml/dist/index.js";
 import "../../../../../openscd/src/wizard-textfield.js";
 import "../../../../../openscd/src/wizard-select.js";
 import {

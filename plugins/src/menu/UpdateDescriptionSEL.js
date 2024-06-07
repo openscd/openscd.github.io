@@ -14,12 +14,12 @@ import {get} from "../../../_snowpack/pkg/lit-translate.js";
 import "../../../_snowpack/pkg/@material/mwc-list/mwc-check-list-item.js";
 import "../../../openscd/src/filtered-list.js";
 import {
-  cloneElement,
   find,
   identity,
   isPublic,
   newWizardEvent
 } from "../../../openscd/src/foundation.js";
+import {cloneElement} from "../../../_snowpack/link/packages/xml/dist/index.js";
 function addDescriptionToSEL(ied, signalList) {
   const iedName = ied.getAttribute("name");
   const manufacturer = ied.getAttribute("manufacturer");

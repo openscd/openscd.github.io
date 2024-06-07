@@ -4,7 +4,8 @@ import '../../../_snowpack/pkg/@material/mwc-icon.js';
 import '../../../_snowpack/pkg/@material/mwc-list.js';
 import '../../../_snowpack/pkg/@material/mwc-list/mwc-check-list-item.js';
 import '../../../openscd/src/filtered-list.js';
-import { createElement, findControlBlocks, identity, } from '../../../openscd/src/foundation.js';
+import { findControlBlocks, identity, } from '../../../openscd/src/foundation.js';
+import { createElement } from '../../../_snowpack/link/packages/xml/dist/index.js';
 import { inputIcon } from '../../../openscd/src/icons/icons.js';
 import { getSourceReferences, openCommunicationMappingWizard, } from './commmap-wizards.js';
 function findIEDNameTarget(iedName) {

@@ -11,10 +11,12 @@ import "../../../openscd/src/filtered-list.js";
 import {
   compareNames,
   getValue,
-  createElement,
   isPublic,
   identity
 } from "../../../openscd/src/foundation.js";
+import {
+  createElement
+} from "../../../_snowpack/link/packages/xml/dist/index.js";
 import {
   getTypes,
   typeMaxLength,

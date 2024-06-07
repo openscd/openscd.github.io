@@ -17,10 +17,12 @@ import "../../../_snowpack/pkg/@material/mwc-list.js";
 import "../../../_snowpack/pkg/@material/mwc-list/mwc-list-item.js";
 import "../../../openscd/src/filtered-list.js";
 import {
-  createElement,
   identity,
   newWizardEvent
 } from "../../../openscd/src/foundation.js";
+import {
+  createElement
+} from "../../../_snowpack/link/packages/xml/dist/index.js";
 import {newActionEvent} from "../../../_snowpack/link/packages/core/dist/foundation/deprecated/editor.js";
 import {styles} from "./templates/foundation.js";
 import {

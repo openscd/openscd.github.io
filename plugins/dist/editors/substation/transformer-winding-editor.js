@@ -12,7 +12,8 @@ import './l-node-editor.js';
 import './tapchanger-editor.js';
 import { transformerWindingIcon } from '../../../../openscd/src/icons/icons.js';
 import { styles } from './foundation.js';
-import { getChildElementsByTagName, newWizardEvent, tags, } from '../../../../openscd/src/foundation.js';
+import { newWizardEvent, tags, } from '../../../../openscd/src/foundation.js';
+import { getChildElementsByTagName, } from '../../../../_snowpack/link/packages/xml/dist/index.js';
 import { newActionEvent } from '../../../../_snowpack/link/packages/core/dist/foundation/deprecated/editor.js';
 import { emptyWizard, wizards } from '../../wizards/wizard-library.js';
 function childTags(element) {

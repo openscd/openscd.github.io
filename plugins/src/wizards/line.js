@@ -2,11 +2,10 @@ import {html} from "../../../_snowpack/pkg/lit-html.js";
 import {get} from "../../../_snowpack/pkg/lit-translate.js";
 import "../../../openscd/src/wizard-textfield.js";
 import {
-  cloneElement,
-  createElement,
   getValue,
   patterns
 } from "../../../openscd/src/foundation.js";
+import {cloneElement, createElement} from "../../../_snowpack/link/packages/xml/dist/index.js";
 const initial = {
   nomFreq: "50",
   numPhases: "3",

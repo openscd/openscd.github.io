@@ -1,7 +1,8 @@
 import { __decorate } from "../../../../_snowpack/pkg/tslib.js";
 import { html, LitElement, property, customElement, state, } from '../../../../_snowpack/pkg/lit-element.js';
 import '../../../../openscd/src/action-icon.js';
-import { cloneElement, identity, newLnInstGenerator, newWizardEvent, } from '../../../../openscd/src/foundation.js';
+import { identity, newLnInstGenerator, newWizardEvent, } from '../../../../openscd/src/foundation.js';
+import { cloneElement, } from '../../../../_snowpack/link/packages/xml/dist/index.js';
 import { newActionEvent } from '../../../../_snowpack/link/packages/core/dist/foundation/deprecated/editor.js';
 import { automationLogicalNode, controlLogicalNode, functionalLogicalNode, furtherPowerSystemEquipmentLogicalNode, generalLogicalNode, interfacingLogicalNode, measurementLogicalNode, nonElectricalLogicalNode, powerTransformerLogicalNode, protectionLogicalNode, protectionRelatedLogicalNode, qualityLogicalNode, supervisionLogicalNode, switchgearLogicalNode, systemLogicalNode, transformerLogicalNode, } from '../../../../openscd/src/icons/lnode.js';
 import { wizards } from '../../wizards/wizard-library.js';

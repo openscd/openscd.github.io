@@ -2,7 +2,9 @@ import {get} from "../../../_snowpack/pkg/lit-translate.js";
 import {
   cloneElement,
   createElement,
-  getChildElementsByTagName,
+  getChildElementsByTagName
+} from "../../../_snowpack/link/packages/xml/dist/index.js";
+import {
   getValue
 } from "../../../openscd/src/foundation.js";
 import {contentFunctionWizard} from "./function.js";

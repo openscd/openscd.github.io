@@ -1,6 +1,7 @@
 import { html } from '../../../_snowpack/pkg/lit-element.js';
 import { get } from '../../../_snowpack/pkg/lit-translate.js';
-import { cloneElement, getValue, } from '../../../openscd/src/foundation.js';
+import { cloneElement } from '../../../_snowpack/link/packages/xml/dist/index.js';
+import { getValue, } from '../../../openscd/src/foundation.js';
 export function contentSmvOptsWizard(option) {
     return Object.entries(option).map(([key, value]) => html `<wizard-checkbox
         label="${key}"

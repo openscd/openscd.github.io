@@ -5,7 +5,8 @@ import '../../../_snowpack/pkg/@material/mwc-list/mwc-check-list-item.js';
 import '../../../_snowpack/pkg/@material/mwc-list/mwc-list-item.js';
 import { ListBase } from '../../../_snowpack/pkg/@material/mwc-list/mwc-list-base.js';
 import '../../../openscd/src/filtered-list.js';
-import { cloneElement, createElement, find, getChildElementsByTagName, getValue, identity, isPublic, newWizardEvent, referencePath, newLnInstGenerator, } from '../../../openscd/src/foundation.js';
+import { find, getValue, identity, isPublic, newWizardEvent, referencePath, newLnInstGenerator, } from '../../../openscd/src/foundation.js';
+import { cloneElement, createElement, getChildElementsByTagName, } from '../../../_snowpack/link/packages/xml/dist/index.js';
 import { patterns } from './foundation/limits.js';
 import { newLogEvent } from '../../../_snowpack/link/packages/core/dist/foundation/deprecated/history.js';
 function createLNodeAction(parent) {

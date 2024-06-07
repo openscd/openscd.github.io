@@ -1,7 +1,8 @@
 import { html } from '../../../_snowpack/pkg/lit-html.js';
 import { get } from '../../../_snowpack/pkg/lit-translate.js';
 import '../../../openscd/src/wizard-textfield.js';
-import { createElement, getValue, } from '../../../openscd/src/foundation.js';
+import { getValue, } from '../../../openscd/src/foundation.js';
+import { createElement, } from '../../../_snowpack/link/packages/xml/dist/index.js';
 import { replaceNamingAttributeWithReferencesAction } from './foundation/actions.js';
 export function renderBayWizard(name, desc) {
     return [

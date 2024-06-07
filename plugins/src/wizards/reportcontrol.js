@@ -8,17 +8,19 @@ import "../../../openscd/src/wizard-textfield.js";
 import "../../../openscd/src/wizard-select.js";
 import "../../../openscd/src/filtered-list.js";
 import {
-  cloneElement,
-  createElement,
   find,
   getReference,
   getValue,
   identity,
   isPublic,
   newSubWizardEvent,
-  getUniqueElementName,
   newWizardEvent
 } from "../../../openscd/src/foundation.js";
+import {
+  cloneElement,
+  createElement,
+  getUniqueElementName
+} from "../../../_snowpack/link/packages/xml/dist/index.js";
 import {
   newActionEvent
 } from "../../../_snowpack/link/packages/core/dist/foundation/deprecated/editor.js";

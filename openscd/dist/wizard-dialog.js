@@ -8,12 +8,13 @@ import '../../_snowpack/pkg/@material/mwc-icon-button.js';
 import '../../_snowpack/pkg/@material/mwc-icon-button-toggle.js';
 import '../../_snowpack/pkg/@material/mwc-menu.js';
 import { Dialog } from '../../_snowpack/pkg/@material/mwc-dialog.js';
+import { formatXml } from '../../_snowpack/link/packages/xml/dist/index.js';
 import '../../_snowpack/pkg/ace-custom-element.js';
 import './wizard-checkbox.js';
 import './wizard-textfield.js';
 import './wizard-select.js';
 import { newActionEvent, } from '../../_snowpack/link/packages/core/dist/foundation/deprecated/editor.js';
-import { newWizardEvent, wizardInputSelector, isWizardFactory, checkValidity, reportValidity, identity, formatXml, } from './foundation.js';
+import { newWizardEvent, wizardInputSelector, isWizardFactory, checkValidity, reportValidity, identity, } from './foundation.js';
 function renderWizardInput(input) {
     if (input instanceof TemplateResult)
         return input;

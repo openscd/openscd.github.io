@@ -2,8 +2,9 @@ import { html } from '../../../../../_snowpack/pkg/lit-element.js';
 import { get } from '../../../../../_snowpack/pkg/lit-translate.js';
 import '../../../../../openscd/src/wizard-textfield.js';
 import { pTypesLogicLink104 } from '../foundation/p-types.js';
-import { cloneElement, createElement, getValue, newWizardEvent, } from '../../../../../openscd/src/foundation.js';
-import { newActionEvent } from '../../../../../_snowpack/link/packages/core/dist/foundation/deprecated/editor.js';
+import { getValue, newWizardEvent, } from '../../../../../openscd/src/foundation.js';
+import { cloneElement, createElement } from '../../../../../_snowpack/link/packages/xml/dist/index.js';
+import { newActionEvent, } from '../../../../../_snowpack/link/packages/core/dist/foundation/deprecated/editor.js';
 import { createNetworkTextField } from '../foundation/foundation.js';
 export function editLogicLinkWizard(parent, rGNumber, lLNumber) {
     return [

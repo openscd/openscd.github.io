@@ -1,11 +1,8 @@
 import {css, html} from "../../../../_snowpack/pkg/lit-element.js";
 import {classMap} from "../../../../_snowpack/pkg/lit-html/directives/class-map.js";
 import "./function-editor.js";
-import {
-  identity,
-  isPublic,
-  getChildElementsByTagName
-} from "../../../../openscd/src/foundation.js";
+import {identity, isPublic} from "../../../../openscd/src/foundation.js";
+import {getChildElementsByTagName} from "../../../../_snowpack/link/packages/xml/dist/index.js";
 import {newActionEvent} from "../../../../_snowpack/link/packages/core/dist/foundation/deprecated/editor.js";
 import {
   circuitBreakerIcon,

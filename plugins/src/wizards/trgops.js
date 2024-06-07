@@ -3,8 +3,8 @@ import {get} from "../../../_snowpack/pkg/lit-translate.js";
 import "../../../_snowpack/pkg/@material/mwc-list/mwc-list-item.js";
 import "../../../openscd/src/wizard-checkbox.js";
 import "../../../openscd/src/wizard-select.js";
+import {cloneElement} from "../../../_snowpack/link/packages/xml/dist/index.js";
 import {
-  cloneElement,
   getValue
 } from "../../../openscd/src/foundation.js";
 export function contentTrgOpsWizard(option) {

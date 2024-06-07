@@ -3,7 +3,8 @@ import { get } from '../../../_snowpack/pkg/lit-translate.js';
 import '../../../_snowpack/pkg/@material/mwc-list.js';
 import '../../../_snowpack/pkg/@material/mwc-list/mwc-list-item.js';
 import '../../../openscd/src/wizard-textfield.js';
-import { cloneElement, getValue, } from '../../../openscd/src/foundation.js';
+import { getValue, } from '../../../openscd/src/foundation.js';
+import { cloneElement } from '../../../_snowpack/link/packages/xml/dist/index.js';
 import { patterns } from './foundation/limits.js';
 const lDeviceNamePattern = '[A-Za-z][0-9A-Za-z_]{0,2}|' +
     '[A-Za-z][0-9A-Za-z_]{4,63}|' +

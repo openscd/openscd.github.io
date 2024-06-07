@@ -8,7 +8,8 @@ import '../../../_snowpack/pkg/@material/mwc-list/mwc-check-list-item.js';
 import '../../../_snowpack/pkg/@material/mwc-list/mwc-radio-list-item.js';
 import { Dialog } from '../../../_snowpack/pkg/@material/mwc-dialog.js';
 import '../../../openscd/src/filtered-list.js';
-import { find, getChildElementsByTagName, identity, } from '../../../openscd/src/foundation.js';
+import { find, identity } from '../../../openscd/src/foundation.js';
+import { getChildElementsByTagName } from '../../../_snowpack/link/packages/xml/dist/index.js';
 import { newActionEvent } from '../../../_snowpack/link/packages/core/dist/foundation/deprecated/editor.js';
 import { getFunctionNamingPrefix, getNonLeafParent, getSpecificationIED, getUniqueFunctionName, } from './virtualtemplateied/foundation.js';
 /** converts FunctionElementDescription's to LDeviceDescription's */

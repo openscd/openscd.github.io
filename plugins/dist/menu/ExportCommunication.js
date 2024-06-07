@@ -1,7 +1,7 @@
 import { __decorate } from "../../../_snowpack/pkg/tslib.js";
 import { LitElement, property } from '../../../_snowpack/pkg/lit-element.js';
 import { get } from '../../../_snowpack/pkg/lit-translate.js';
-import { formatXml } from '../../../openscd/src/foundation.js';
+import { formatXml } from '../../../_snowpack/link/packages/xml/dist/index.js';
 import { newLogEvent } from '../../../_snowpack/link/packages/core/dist/foundation/deprecated/history.js';
 function cloneAttributes(destElement, sourceElement) {
     let attr;

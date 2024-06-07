@@ -7,8 +7,9 @@ import '../../../../_snowpack/pkg/@material/mwc-select.js';
 import '../../../../openscd/src/wizard-checkbox.js';
 import '../../../../openscd/src/wizard-textfield.js';
 import '../../../../openscd/src/wizard-select.js';
-import { cloneElement, createElement, find, getChildElementsByTagName, getValue, identity, isPublic, newSubWizardEvent, newWizardEvent, patterns, } from '../../../../openscd/src/foundation.js';
-import { newActionEvent } from '../../../../_snowpack/link/packages/core/dist/foundation/deprecated/editor.js';
+import { find, getValue, identity, isPublic, newSubWizardEvent, newWizardEvent, patterns, } from '../../../../openscd/src/foundation.js';
+import { cloneElement, createElement, getChildElementsByTagName, } from '../../../../_snowpack/link/packages/xml/dist/index.js';
+import { newActionEvent, } from '../../../../_snowpack/link/packages/core/dist/foundation/deprecated/editor.js';
 import { addReferencedDataTypes, allDataTypeSelector, unifyCreateActionArray, } from './foundation.js';
 function remove(element) {
     return (wizard) => {

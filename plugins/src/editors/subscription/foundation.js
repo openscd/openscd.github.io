@@ -11,13 +11,15 @@ var __decorate = (decorators, target, key, kind) => {
 };
 import {css, LitElement, query} from "../../../../_snowpack/pkg/lit-element.js";
 import {
-  cloneElement,
   compareNames,
-  createElement,
   getSclSchemaVersion,
   isPublic,
   minAvailableLogicalNodeInstance
 } from "../../../../openscd/src/foundation.js";
+import {
+  cloneElement,
+  createElement
+} from "../../../../_snowpack/link/packages/xml/dist/index.js";
 import {getFcdaReferences} from "../../../../openscd/src/foundation/ied.js";
 import {SCL_NAMESPACE} from "../../../../openscd/src/schemas.js";
 export var View;

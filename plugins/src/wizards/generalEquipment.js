@@ -1,11 +1,13 @@
 import {html} from "../../../_snowpack/pkg/lit-element.js";
 import {get} from "../../../_snowpack/pkg/lit-translate.js";
 import {
-  cloneElement,
-  createElement,
-  getChildElementsByTagName,
   getValue
 } from "../../../openscd/src/foundation.js";
+import {
+  cloneElement,
+  createElement,
+  getChildElementsByTagName
+} from "../../../_snowpack/link/packages/xml/dist/index.js";
 export function editGeneralEquipmentWizard(element) {
   const name = element.getAttribute("name");
   const desc = element.getAttribute("desc");

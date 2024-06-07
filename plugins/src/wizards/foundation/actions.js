@@ -1,7 +1,9 @@
 import {
-  cloneElement,
   getValue
 } from "../../../../openscd/src/foundation.js";
+import {
+  cloneElement
+} from "../../../../_snowpack/link/packages/xml/dist/index.js";
 import {
   createUpdateAction
 } from "../../../../_snowpack/link/packages/core/dist/foundation/deprecated/editor.js";

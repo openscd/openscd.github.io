@@ -2,10 +2,10 @@ import {html} from "../../../_snowpack/pkg/lit-element.js";
 import {get} from "../../../_snowpack/pkg/lit-translate.js";
 import "../../../openscd/src/wizard-textfield.js";
 import {
-  createElement,
   getValue,
   identity
 } from "../../../openscd/src/foundation.js";
+import {createElement} from "../../../_snowpack/link/packages/xml/dist/index.js";
 import {contentGseOrSmvWizard, updateAddress} from "./address.js";
 export function getMTimeAction(type, oldTime, Time, gse) {
   if (oldTime === null) {

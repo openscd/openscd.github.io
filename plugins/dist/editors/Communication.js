@@ -3,7 +3,8 @@ import { LitElement, html, property, css } from '../../../_snowpack/pkg/lit-elem
 import { get } from '../../../_snowpack/pkg/lit-translate.js';
 import '../../../_snowpack/pkg/@material/mwc-fab.js';
 import './communication/subnetwork-editor.js';
-import { newWizardEvent, createElement, isPublic, } from '../../../openscd/src/foundation.js';
+import { newWizardEvent, isPublic } from '../../../openscd/src/foundation.js';
+import { createElement } from '../../../_snowpack/link/packages/xml/dist/index.js';
 import { newActionEvent } from '../../../_snowpack/link/packages/core/dist/foundation/deprecated/editor.js';
 import { createSubNetworkWizard } from '../wizards/subnetwork.js';
 /** An editor [[`plugin`]] for editing the `Communication` section. */
