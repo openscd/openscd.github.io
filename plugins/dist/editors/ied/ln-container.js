@@ -3,18 +3,21 @@ import { customElement, html, query } from '../../../../_snowpack/pkg/lit-elemen
 import { nothing } from '../../../../_snowpack/pkg/lit-html.js';
 import { until } from '../../../../_snowpack/pkg/lit-html/directives/until.js';
 import { get } from '../../../../_snowpack/pkg/lit-translate.js';
-import { getInstanceAttribute, getNameAttribute, } from '../../../../openscd/src/foundation.js';
+import { getInstanceAttribute, getNameAttribute, newWizardEvent, } from '../../../../openscd/src/foundation.js';
 import '../../../../openscd/src/action-pane.js';
 import './do-container.js';
 import { Container } from './foundation.js';
+import { wizards } from '../../wizards/wizard-library.js';
 /** [[`IED`]] plugin subeditor for editing `LN` and `LN0` element. */
 let LNContainer = class LNContainer extends Container {
     header() {
         const prefix = this.element.getAttribute('prefix');
         const inst = getInstanceAttribute(this.element);
+        const desc = this.element.getAttribute('desc');
         const data = this.nsdoc.getDataDescription(this.element);
         return html `${prefix != null ? html `${prefix} &mdash; ` : nothing}
-    ${data.label} ${inst ? html ` &mdash; ${inst}` : nothing}`;
+    ${data.label} ${inst ? html ` &mdash; ${inst}` : nothing}
+    ${desc ? html ` &mdash; ${desc}` : nothing}`;
     }
     /**
      * Get the DO child elements of this LN(0) section.
@@ -39,11 +42,25 @@ let LNContainer = class LNContainer extends Container {
         const doName = getNameAttribute(dO);
         return this.element.querySelector(`:scope > DOI[name="${doName}"]`);
     }
+    openEditWizard() {
+        const wizardType = this.element.tagName === 'LN' ? 'LN' : 'LN0';
+        const wizard = wizards[wizardType].edit(this.element);
+        if (wizard)
+            this.dispatchEvent(newWizardEvent(wizard));
+    }
     render() {
         const doElements = this.getDOElements();
         return html `<action-pane .label="${until(this.header())}">
       ${doElements.length > 0
-            ? html `<abbr
+            ? html `<abbr slot="action">
+          <mwc-icon-button
+            slot="action"
+            mini
+            icon="edit"
+            @click="${() => this.openEditWizard()}}"
+          ></mwc-icon-button>
+        </abbr>
+        <abbr
             slot="action"
             title="${get('iededitor.toggleChildElements')}"
           >

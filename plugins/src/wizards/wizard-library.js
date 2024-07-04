@@ -50,6 +50,8 @@ import {
 import {createTapChangerWizard, editTapChangerWizard} from "./tapchanger.js";
 import {createLineWizard, editLineWizard} from "./line.js";
 import {createProcessWizard, editProcessWizard} from "./process.js";
+import {editLNWizard} from "./ln.js";
+import {editLN0Wizard} from "./ln0.js";
 export function emptyWizard() {
   return;
 }
@@ -307,11 +309,11 @@ export const wizards = {
     create: emptyWizard
   },
   LN: {
-    edit: emptyWizard,
+    edit: editLNWizard,
     create: emptyWizard
   },
   LN0: {
-    edit: emptyWizard,
+    edit: editLN0Wizard,
     create: emptyWizard
   },
   LNode: {
