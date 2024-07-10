@@ -31,7 +31,6 @@ export function renderLNWizard(lnType, desc, prefix, lnClass, inst) {
     ></wizard-textfield>`,
         html `<wizard-textfield
       label="inst"
-      required
       .maybeValue=${inst}
       helper="${get('ln.wizard.instHelper')}"
     ></wizard-textfield>`,

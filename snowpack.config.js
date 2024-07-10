@@ -32,5 +32,8 @@ export default {
   alias: {
     "@openscd/open-scd": "../openscd/",
     "@openscd/plugins": "../plugins/"
+  },
+  buildOptions: {
+    baseUrl: process.env.PUBLIC_URL || "/"
   }
 };
