@@ -65,6 +65,12 @@ export function existExtRef(parentInputs, fcda, control) {
 }
 export function getExtRef(parentInputs, fcda, control) {
     function createCriteria(attributeName, value) {
+        // For ExtRef the attribute 'srcLNClass' is optional and defaults to 'LLN0', here we ignore 'srcLNClass' completely for 'LLN0'
+        // because otherwise we would have to extend the querySelector to multiple selector groups checking for 'LLN0' or missing 'srcLNClass'
+        const shouldIgnoreCriteria = attributeName === 'srcLNClass' && value === 'LLN0';
+        if (shouldIgnoreCriteria) {
+            return '';
+        }
         if (value) {
             return `[${attributeName}="${value}"]`;
         }

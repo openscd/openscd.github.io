@@ -58,7 +58,10 @@ function checkEditionSpecificRequirements(controlTag, controlElement, extRefElem
   }
   const lDeviceElement = controlElement?.closest("LDevice") ?? void 0;
   const lnElement = controlElement?.closest("LN0") ?? void 0;
-  return (extRefElement.getAttribute("serviceType") ?? "") === serviceTypes[controlTag] && sameAttributeValueDiffName(extRefElement, "srcLDInst", lDeviceElement, "inst") && sameAttributeValueDiffName(extRefElement, "scrPrefix", lnElement, "prefix") && sameAttributeValueDiffName(extRefElement, "srcLNClass", lnElement, "lnClass") && sameAttributeValueDiffName(extRefElement, "srcLNInst", lnElement, "inst") && sameAttributeValueDiffName(extRefElement, "srcCBName", controlElement, "name");
+  const extRefIsMissingSrcLNClass = !extRefElement.hasAttribute("srcLNClass");
+  const isLnClassLLN0 = lnElement?.getAttribute("lnClass") === "LLN0";
+  const canIgnoreSrcLNClass = isLnClassLLN0 && extRefIsMissingSrcLNClass;
+  return (extRefElement.getAttribute("serviceType") ?? "") === serviceTypes[controlTag] && sameAttributeValueDiffName(extRefElement, "srcLDInst", lDeviceElement, "inst") && sameAttributeValueDiffName(extRefElement, "scrPrefix", lnElement, "prefix") && (canIgnoreSrcLNClass || sameAttributeValueDiffName(extRefElement, "srcLNClass", lnElement, "lnClass")) && sameAttributeValueDiffName(extRefElement, "srcLNInst", lnElement, "inst") && sameAttributeValueDiffName(extRefElement, "srcCBName", controlElement, "name");
 }
 export function isSubscribedTo(controlTag, controlElement, fcdaElement, extRefElement) {
   return extRefElement.getAttribute("iedName") === fcdaElement?.closest("IED")?.getAttribute("name") && sameAttributeValue(fcdaElement, extRefElement, "ldInst") && sameAttributeValue(fcdaElement, extRefElement, "prefix") && sameAttributeValue(fcdaElement, extRefElement, "lnClass") && sameAttributeValue(fcdaElement, extRefElement, "lnInst") && sameAttributeValue(fcdaElement, extRefElement, "doName") && sameAttributeValue(fcdaElement, extRefElement, "daName") && checkEditionSpecificRequirements(controlTag, controlElement, extRefElement);

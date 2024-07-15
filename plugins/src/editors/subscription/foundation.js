@@ -76,6 +76,10 @@ export function existExtRef(parentInputs, fcda, control) {
 }
 export function getExtRef(parentInputs, fcda, control) {
   function createCriteria(attributeName, value) {
+    const shouldIgnoreCriteria = attributeName === "srcLNClass" && value === "LLN0";
+    if (shouldIgnoreCriteria) {
+      return "";
+    }
     if (value) {
       return `[${attributeName}="${value}"]`;
     }
