@@ -54,6 +54,13 @@ export let OscdLayout = class extends LitElement {
     this.shouldValidate = false;
     this.redoCount = 0;
   }
+  render() {
+    return html`
+      <slot></slot>
+      ${this.renderHeader()} ${this.renderAside()} ${this.renderContent()}
+      ${this.renderLanding()} ${this.renderPlugging()}
+    `;
+  }
   get canUndo() {
     return this.editCount >= 0;
   }
@@ -76,51 +83,10 @@ export let OscdLayout = class extends LitElement {
     return this.menuEntries.filter((plugin) => plugin.position === "bottom");
   }
   get menu() {
-    const topMenu = [];
-    const middleMenu = [];
-    const bottomMenu = [];
-    const validators = [];
-    this.topMenu.forEach((plugin) => topMenu.push({
-      icon: plugin.icon || pluginIcons["menu"],
-      name: plugin.name,
-      action: (ae) => {
-        this.dispatchEvent(newPendingStateEvent(ae.target.items[ae.detail.index].nextElementSibling.run()));
-      },
-      disabled: () => plugin.requireDoc && this.doc === null,
-      content: plugin.content,
-      kind: "top"
-    }));
-    this.middleMenu.forEach((plugin) => middleMenu.push({
-      icon: plugin.icon || pluginIcons["menu"],
-      name: plugin.name,
-      action: (ae) => {
-        this.dispatchEvent(newPendingStateEvent(ae.target.items[ae.detail.index].nextElementSibling.run()));
-      },
-      disabled: () => plugin.requireDoc && this.doc === null,
-      content: plugin.content,
-      kind: "middle"
-    }));
-    this.bottomMenu.forEach((plugin) => bottomMenu.push({
-      icon: plugin.icon || pluginIcons["menu"],
-      name: plugin.name,
-      action: (ae) => {
-        this.dispatchEvent(newPendingStateEvent(ae.target.items[ae.detail.index].nextElementSibling.run()));
-      },
-      disabled: () => plugin.requireDoc && this.doc === null,
-      content: plugin.content,
-      kind: "middle"
-    }));
-    this.validators.forEach((plugin) => validators.push({
-      icon: plugin.icon || pluginIcons["validator"],
-      name: plugin.name,
-      action: (ae) => {
-        this.dispatchEvent(newEmptyIssuesEvent(plugin.src));
-        this.dispatchEvent(newPendingStateEvent(ae.target.items[ae.detail.index].nextElementSibling.validate()));
-      },
-      disabled: () => this.doc === null,
-      content: plugin.content,
-      kind: "validator"
-    }));
+    const topMenu = this.generateMenu(this.topMenu, "top");
+    const middleMenu = this.generateMenu(this.middleMenu, "middle");
+    const bottomMenu = this.generateMenu(this.bottomMenu, "bottom");
+    const validators = this.generateValidatorMenus(this.validators);
     if (middleMenu.length > 0)
       middleMenu.push("divider");
     if (bottomMenu.length > 0)
@@ -200,20 +166,22 @@ export let OscdLayout = class extends LitElement {
     return this.plugins.filter((plugin) => plugin.installed && plugin.kind === "editor");
   }
   handleKeyPress(e) {
-    let handled = false;
-    const ctrlAnd = (key) => e.key === key && e.ctrlKey && (handled = true);
-    if (ctrlAnd("m"))
-      this.menuUI.open = !this.menuUI.open;
-    if (ctrlAnd("o"))
-      this.menuUI.querySelector('mwc-list-item[iconid="folder_open"]')?.click();
-    if (ctrlAnd("O"))
-      this.menuUI.querySelector('mwc-list-item[iconid="create_new_folder"]')?.click();
-    if (ctrlAnd("s"))
-      this.menuUI.querySelector('mwc-list-item[iconid="save"]')?.click();
-    if (ctrlAnd("P"))
-      this.pluginUI.show();
-    if (handled)
-      e.preventDefault();
+    if (!e.ctrlKey) {
+      return;
+    }
+    const keyFunctionMap = {
+      m: () => this.menuUI.open = !this.menuUI.open,
+      o: () => this.menuUI.querySelector('mwc-list-item[iconid="folder_open"]')?.click(),
+      O: () => this.menuUI.querySelector('mwc-list-item[iconid="create_new_folder"]')?.click(),
+      s: () => this.menuUI.querySelector('mwc-list-item[iconid="save"]')?.click(),
+      P: () => this.pluginUI.show()
+    };
+    const fn = keyFunctionMap[e.key];
+    if (!fn) {
+      return;
+    }
+    e.preventDefault();
+    fn();
   }
   handleAddPlugin() {
     const pluginSrcInput = this.pluginDownloadUI.querySelector("#pluginSrcInput");
@@ -243,8 +211,9 @@ export let OscdLayout = class extends LitElement {
     this.host.addEventListener("validate", async () => {
       this.shouldValidate = true;
       await this.validated;
-      if (!this.shouldValidate)
+      if (!this.shouldValidate) {
         return;
+      }
       this.shouldValidate = false;
       this.validated = Promise.allSettled(this.menuUI.querySelector("mwc-list").items.filter((item) => item.className === "validator").map((item) => item.nextElementSibling.validate())).then();
       this.dispatchEvent(newPendingStateEvent(this.validated));
@@ -261,11 +230,42 @@ export let OscdLayout = class extends LitElement {
       this.requestUpdate();
     });
   }
+  generateMenu(plugins, kind) {
+    return plugins.map((plugin) => {
+      return {
+        icon: plugin.icon || pluginIcons["menu"],
+        name: plugin.name,
+        action: (ae) => {
+          this.dispatchEvent(newPendingStateEvent(ae.target.items[ae.detail.index].nextElementSibling.run()));
+        },
+        disabled: () => plugin.requireDoc && this.doc === null,
+        content: plugin.content,
+        kind
+      };
+    });
+  }
+  generateValidatorMenus(plugins) {
+    return plugins.map((plugin) => {
+      return {
+        icon: plugin.icon || pluginIcons["validator"],
+        name: plugin.name,
+        action: (ae) => {
+          this.dispatchEvent(newEmptyIssuesEvent(plugin.src));
+          this.dispatchEvent(newPendingStateEvent(ae.target.items[ae.detail.index].nextElementSibling.validate()));
+        },
+        disabled: () => this.doc === null,
+        content: plugin.content,
+        kind: "validator"
+      };
+    });
+  }
   renderMenuItem(me) {
-    if (me === "divider")
+    if (me === "divider") {
       return html`<li divider padded role="separator"></li>`;
-    if (me.actionItem)
+    }
+    if (me.actionItem) {
       return html``;
+    }
     return html`
       <mwc-list-item
         class="${me.kind}"
@@ -280,16 +280,17 @@ export let OscdLayout = class extends LitElement {
     `;
   }
   renderActionItem(me) {
-    if (me !== "divider" && me.actionItem)
-      return html`<mwc-icon-button
-        slot="actionItems"
-        icon="${me.icon}"
-        label="${me.name}"
-        ?disabled=${me.disabled?.() || !me.action}
-        @click=${me.action}
-      ></mwc-icon-button>`;
-    else
+    if (me === "divider" || !me.actionItem) {
       return html``;
+    }
+    return html`
+    <mwc-icon-button
+      slot="actionItems"
+      icon="${me.icon}"
+      label="${me.name}"
+      ?disabled=${me.disabled?.() || !me.action}
+      @click=${me.action}
+    ></mwc-icon-button>`;
   }
   renderEditorTab({name, icon}) {
     return html`<mwc-tab label=${get(name)} icon=${icon || "edit"}> </mwc-tab>`;
@@ -310,41 +311,73 @@ export let OscdLayout = class extends LitElement {
     return html`
       <mwc-drawer class="mdc-theme--surface" hasheader type="modal" id="menu">
         <span slot="title">${get("menu.title")}</span>
-        ${this.docName ? html`<span slot="subtitle">${this.docName}</span>` : ""}
+          ${renderTitle(this.docName)}
         <mwc-list
           wrapFocus
-          @action=${(ae) => {
-      if (ae.target instanceof List)
-        this.menu.filter((item) => item !== "divider" && !item.actionItem)[ae.detail.index]?.action?.(ae);
-    }}
+          @action=${makeListAction(this.menu)}
         >
           ${this.menu.map(this.renderMenuItem)}
         </mwc-list>
       </mwc-drawer>
     `;
+    function renderTitle(docName) {
+      if (!docName)
+        return html``;
+      return html`<span slot="subtitle">${docName}</span>`;
+    }
+    function makeListAction(menuItems) {
+      return function listAction(ae) {
+        if (ae.target instanceof List)
+          menuItems.filter((item) => item !== "divider" && !item.actionItem)[ae.detail.index]?.action?.(ae);
+      };
+    }
   }
   renderContent() {
+    if (!this.doc)
+      return html``;
     return html`
-      ${this.doc ? html`<mwc-tab-bar
-              @MDCTabBar:activated=${(e) => this.activeTab = e.detail.index}
-            >
-              ${this.editors.map(this.renderEditorTab)}
-            </mwc-tab-bar>
-            ${this.editors[this.activeTab]?.content ? this.editors[this.activeTab].content : ``}` : ``}
+      <mwc-tab-bar @MDCTabBar:activated=${(e) => this.activeTab = e.detail.index}>
+        ${this.editors.map(this.renderEditorTab)}
+      </mwc-tab-bar>
+      ${renderEditorContent(this.editors, this.activeTab)}
     `;
+    function renderEditorContent(editors, activeTab) {
+      const content = editors[activeTab]?.content;
+      if (!content) {
+        return html``;
+      }
+      return html`${content}`;
+    }
   }
   renderLanding() {
-    return html` ${!this.doc ? html`<div class="landing">
-          ${this.menu.filter((mi) => mi !== "divider").map((mi, index) => mi.kind === "top" && !mi.disabled?.() ? html`
-                    <mwc-icon-button
-                      class="landing_icon"
-                      icon="${mi.icon}"
-                      @click="${() => this.menuUI.querySelector("mwc-list").items[index].click()}"
-                    >
-                      <div class="landing_label">${mi.name}</div>
-                    </mwc-icon-button>
-                  ` : html``)}
-        </div>` : ``}`;
+    if (this.doc) {
+      return html``;
+    }
+    return html`
+      <div class="landing">
+        ${renderMenuItems(this.menu, this.menuUI)}
+      </div>`;
+    function renderMenuItems(menuItemsAndDividers, menuUI) {
+      const menuItems = menuItemsAndDividers.filter((mi) => mi !== "divider");
+      return menuItems.map((mi, index) => {
+        if (mi.kind !== "top" || mi.disabled?.()) {
+          return html``;
+        }
+        return html`
+              <mwc-icon-button
+                class="landing_icon"
+                icon="${mi.icon}"
+                @click="${() => clickListItem(index)}"
+              >
+                <div class="landing_label">${mi.name}</div>
+              </mwc-icon-button>
+            `;
+      });
+      function clickListItem(index) {
+        const listItem = menuUI.querySelector("mwc-list").items[index];
+        listItem.click();
+      }
+    }
   }
   renderDownloadUI() {
     return html`
@@ -436,18 +469,20 @@ export let OscdLayout = class extends LitElement {
   }
   renderPluginKind(type, plugins) {
     return html`
-      ${plugins.map((plugin) => html`<mwc-check-list-item
+      ${plugins.map((plugin) => html`
+        <mwc-check-list-item
             class="${plugin.official ? "official" : "external"}"
             value="${plugin.src}"
             ?selected=${plugin.installed}
             hasMeta
             left
           >
-            <mwc-icon slot="meta"
-              >${plugin.icon || pluginIcons[plugin.kind]}</mwc-icon
-            >
+            <mwc-icon slot="meta">
+              ${plugin.icon || pluginIcons[plugin.kind]}
+            </mwc-icon>
             ${plugin.name}
-          </mwc-check-list-item>`)}
+          </mwc-check-list-item>
+        `)}
     `;
   }
   renderPluginUI() {
@@ -516,13 +551,6 @@ export let OscdLayout = class extends LitElement {
   }
   renderPlugging() {
     return html` ${this.renderPluginUI()} ${this.renderDownloadUI()} `;
-  }
-  render() {
-    return html`
-      <slot></slot>
-      ${this.renderHeader()} ${this.renderAside()} ${this.renderContent()}
-      ${this.renderLanding()} ${this.renderPlugging()}
-    `;
   }
 };
 OscdLayout.styles = css`

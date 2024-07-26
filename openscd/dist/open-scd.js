@@ -26,7 +26,7 @@ import './addons/Wizards.js';
 import './addons/Editor.js';
 import './addons/History.js';
 import './addons/Layout.js';
-import { officialPlugins } from './plugins.js';
+import { officialPlugins as builtinPlugins } from './plugins.js';
 import { initializeNsdoc } from './foundation/nsdoc.js';
 export function newResetPluginsEvent() {
     return new CustomEvent('reset-plugins', { bubbles: true, composed: true });
@@ -225,7 +225,7 @@ let OpenSCD = class OpenSCD extends LitElement {
         this.requestUpdate();
     }
     resetPlugins() {
-        this.storePlugins(officialPlugins.concat(this.parsedPlugins).map(plugin => {
+        this.storePlugins(builtinPlugins.concat(this.parsedPlugins).map(plugin => {
             return {
                 src: plugin.src,
                 installed: plugin.default ?? false,
@@ -234,40 +234,56 @@ let OpenSCD = class OpenSCD extends LitElement {
         }));
     }
     get parsedPlugins() {
-        return this.plugins.menu
-            .map((p) => ({
-            ...p,
-            position: typeof p.position !== 'number'
-                ? p.position
-                : undefined,
-            kind: 'menu',
-            installed: p.active ?? false,
-        }))
-            .concat(this.plugins.editor.map((p) => ({
-            ...p,
+        const menuPlugins = this.plugins.menu.map((plugin) => {
+            let newPosition = plugin.position;
+            if (typeof plugin.position === 'number') {
+                newPosition = undefined;
+            }
+            return {
+                ...plugin,
+                position: newPosition,
+                kind: 'menu',
+                installed: plugin.active ?? false,
+            };
+        });
+        const editorPlugins = this.plugins.editor.map((plugin) => ({
+            ...plugin,
             position: undefined,
             kind: 'editor',
-            installed: p.active ?? false,
-        })));
+            installed: plugin.active ?? false,
+        }));
+        const allPlugnis = [...menuPlugins, ...editorPlugins];
+        return allPlugnis;
     }
     get sortedStoredPlugins() {
-        return this.storedPlugins
-            .map(plugin => {
-            if (!plugin.official)
+        const mergedPlugins = this.storedPlugins.map(plugin => {
+            if (!plugin.official) {
                 return plugin;
-            const officialPlugin = officialPlugins
+            }
+            ;
+            const officialPlugin = builtinPlugins
                 .concat(this.parsedPlugins)
                 .find(needle => needle.src === plugin.src);
             return {
                 ...officialPlugin,
                 ...plugin,
             };
-        })
+        });
+        return mergedPlugins
             .sort(compareNeedsDoc)
             .sort(menuCompare);
     }
     get storedPlugins() {
-        return (JSON.parse(localStorage.getItem('plugins') ?? '[]', (key, value) => value.src && value.installed ? this.addContent(value) : value));
+        const pluginsConfigStr = localStorage.getItem('plugins') ?? '[]';
+        const storedPlugins = JSON.parse(pluginsConfigStr);
+        const plugins = storedPlugins.map(plugin => {
+            const isInstalled = plugin.src && plugin.installed;
+            if (!isInstalled) {
+                return plugin;
+            }
+            return this.addContent(plugin);
+        });
+        return plugins;
     }
     get locale() {
         return navigator.language || 'en-US';
@@ -281,14 +297,17 @@ let OpenSCD = class OpenSCD extends LitElement {
     }
     setPlugins(indices) {
         const newPlugins = this.sortedStoredPlugins.map((plugin, index) => {
-            return { ...plugin, installed: indices.has(index) };
+            return {
+                ...plugin,
+                installed: indices.has(index)
+            };
         });
         this.storePlugins(newPlugins);
     }
     updatePlugins() {
         const stored = this.storedPlugins;
         const officialStored = stored.filter(p => p.official);
-        const newOfficial = officialPlugins
+        const newOfficial = builtinPlugins
             .concat(this.parsedPlugins)
             .filter(p => !officialStored.find(o => o.src === p.src))
             .map(plugin => {
@@ -298,7 +317,7 @@ let OpenSCD = class OpenSCD extends LitElement {
                 official: true,
             };
         });
-        const oldOfficial = officialStored.filter(p => !officialPlugins
+        const oldOfficial = officialStored.filter(p => !builtinPlugins
             .concat(this.parsedPlugins)
             .find(o => p.src === o.src));
         const newPlugins = stored.filter(p => !oldOfficial.find(o => p.src === o.src));
