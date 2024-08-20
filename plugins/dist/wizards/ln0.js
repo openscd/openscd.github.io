@@ -8,6 +8,7 @@ export function renderLN0Wizard(lnType, desc, lnClass, inst) {
         html `<wizard-textfield
       label="lnType"
       .maybeValue=${lnType}
+      readonly
       required
       helper="${get('ln0.wizard.lnTypeHelper')}"
     ></wizard-textfield>`,
@@ -19,6 +20,7 @@ export function renderLN0Wizard(lnType, desc, lnClass, inst) {
     ></wizard-textfield>`,
         html `<wizard-textfield
       label="lnClass"
+      readonly
       required
       .maybeValue=${lnClass}
       helper="${get('ln0.wizard.lnClassHelper')}"
@@ -26,6 +28,7 @@ export function renderLN0Wizard(lnType, desc, lnClass, inst) {
         html `<wizard-textfield
       label="inst"
       .maybeValue=${inst}
+      readonly
       helper="${get('ln0.wizard.instHelper')}"
     ></wizard-textfield>`,
     ];
