@@ -28,6 +28,8 @@ import './addons/History.js';
 import './addons/Layout.js';
 import { officialPlugins as builtinPlugins } from './plugins.js';
 import { initializeNsdoc } from './foundation/nsdoc.js';
+import { newConfigurePluginEvent } from './plugin.events.js';
+import { newLogEvent } from '../../_snowpack/link/packages/core/dist/foundation/deprecated/history.js';
 export function newResetPluginsEvent() {
     return new CustomEvent('reset-plugins', { bubbles: true, composed: true });
 }
@@ -101,7 +103,6 @@ function staticTagHtml(oldStrings, ...oldArgs) {
     strings.push(`${penultimateString}${lastArg}${lastString}`);
     return html(strings, ...args);
 }
-export const menuPosition = ['top', 'middle', 'bottom'];
 function withoutContent(plugin) {
     return { ...plugin, content: undefined };
 }
@@ -172,12 +173,46 @@ let OpenSCD = class OpenSCD extends LitElement {
         if (src.startsWith('blob:'))
             URL.revokeObjectURL(src);
     }
+    /**
+     *
+     * @deprecated Use `handleConfigurationPluginEvent` instead
+     */
+    handleAddExternalPlugin(e) {
+        this.addExternalPlugin(e.detail.plugin);
+        const { name, kind } = e.detail.plugin;
+        const event = newConfigurePluginEvent(name, kind, e.detail.plugin);
+        this.handleConfigurationPluginEvent(event);
+    }
+    handleConfigurationPluginEvent(e) {
+        const { name, kind, config } = e.detail;
+        const hasPlugin = this.hasPlugin(name, kind);
+        const hasConfig = config !== null;
+        const isChangeEvent = hasPlugin && hasConfig;
+        const isRemoveEvent = hasPlugin && !hasConfig;
+        const isAddEvent = !hasPlugin && hasConfig;
+        // the `&& config`is only because typescript
+        // cannot infer that `isChangeEvent` and `isAddEvent` implies `config !== null`
+        if (isChangeEvent && config) {
+            this.changePlugin(config);
+        }
+        else if (isRemoveEvent) {
+            this.removePlugin(name, kind);
+        }
+        else if (isAddEvent && config) {
+            this.addPlugin(config);
+        }
+        else {
+            const event = newLogEvent({
+                kind: "error",
+                title: "Invalid plugin configuration event",
+                message: JSON.stringify({ name, kind, config }),
+            });
+            this.dispatchEvent(event);
+        }
+    }
     connectedCallback() {
         super.connectedCallback();
         this.addEventListener('reset-plugins', this.resetPlugins);
-        this.addEventListener('add-external-plugin', (e) => {
-            this.addExternalPlugin(e.detail.plugin);
-        });
         this.addEventListener('set-plugins', (e) => {
             this.setPlugins(e.detail.indices);
         });
@@ -207,6 +242,8 @@ let OpenSCD = class OpenSCD extends LitElement {
               .editCount=${this.editCount}
             >
               <oscd-layout
+                @add-external-plugin=${this.handleAddExternalPlugin}
+                @oscd-configure-plugin=${this.handleConfigurationPluginEvent}
                 .host=${this}
                 .doc=${this.doc}
                 .docName=${this.docName}
@@ -223,6 +260,50 @@ let OpenSCD = class OpenSCD extends LitElement {
     storePlugins(plugins) {
         localStorage.setItem('plugins', JSON.stringify(plugins.map(withoutContent)));
         this.requestUpdate();
+    }
+    /**
+     *
+     * @param name
+     * @param kind
+     * @returns the index of the plugin in the stored plugin list
+     */
+    findPluginIndex(name, kind) {
+        return this.storedPlugins.findIndex(p => p.name === name && p.kind === kind);
+    }
+    hasPlugin(name, kind) {
+        return this.findPluginIndex(name, kind) > -1;
+    }
+    removePlugin(name, kind) {
+        const newPlugins = this.storedPlugins.filter(p => p.name !== name || p.kind !== kind);
+        this.storePlugins(newPlugins);
+    }
+    addPlugin(plugin) {
+        const newPlugins = [...this.storedPlugins, plugin];
+        this.storePlugins(newPlugins);
+    }
+    /**
+     *
+     * @param plugin
+     * @throws if the plugin is not found
+     */
+    changePlugin(plugin) {
+        const storedPlugins = this.storedPlugins;
+        const { name, kind } = plugin;
+        const pluginIndex = this.findPluginIndex(name, kind);
+        if (pluginIndex < 0) {
+            const event = newLogEvent({
+                kind: "error",
+                title: "Plugin not found, stopping change process",
+                message: JSON.stringify({ name, kind }),
+            });
+            this.dispatchEvent(event);
+            return;
+        }
+        const pluginToChange = storedPlugins[pluginIndex];
+        const changedPlugin = { ...pluginToChange, ...plugin };
+        const newPlugins = [...storedPlugins];
+        newPlugins.splice(pluginIndex, 1, changedPlugin);
+        this.storePlugins(newPlugins);
     }
     resetPlugins() {
         this.storePlugins(builtinPlugins.concat(this.parsedPlugins).map(plugin => {
