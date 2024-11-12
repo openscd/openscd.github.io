@@ -231,6 +231,9 @@ export let OscdLayout = class extends LitElement {
       }
       this.requestUpdate();
     });
+    document.addEventListener("open-plugin-download", () => {
+      this.pluginDownloadUI.show();
+    });
   }
   generateMenu(plugins, kind) {
     return plugins.map((plugin) => {
