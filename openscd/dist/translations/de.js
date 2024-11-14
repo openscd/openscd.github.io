@@ -113,6 +113,7 @@ export const de = {
         moved: '{{ name }} verschoben',
         updated: '{{ name }} bearbeitet',
         import: '{{name}} importiert',
+        complex: 'Mehrere Elemente bearbeitet',
         error: {
             create: 'Konnte {{ name }} nicht hinzufügen',
             update: 'Konnte {{ name }} nicht bearbeiten',

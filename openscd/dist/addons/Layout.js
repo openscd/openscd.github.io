@@ -28,7 +28,6 @@ let OscdLayout = class OscdLayout extends LitElement {
         this.plugins = [];
         this.validated = Promise.resolve();
         this.shouldValidate = false;
-        this.redoCount = 0;
     }
     render() {
         return html `
@@ -36,12 +35,6 @@ let OscdLayout = class OscdLayout extends LitElement {
       ${this.renderHeader()} ${this.renderAside()} ${this.renderContent()}
       ${this.renderLanding()} ${this.renderPlugging()}
     `;
-    }
-    get canUndo() {
-        return this.editCount >= 0;
-    }
-    get canRedo() {
-        return this.redoCount > 0;
     }
     // Computed properties
     get validators() {
@@ -79,7 +72,7 @@ let OscdLayout = class OscdLayout extends LitElement {
                 action: () => {
                     this.dispatchEvent(newUndoEvent());
                 },
-                disabled: () => !this.canUndo,
+                disabled: () => !this.historyState.canUndo,
                 kind: 'static',
             },
             {
@@ -89,7 +82,7 @@ let OscdLayout = class OscdLayout extends LitElement {
                 action: () => {
                     this.dispatchEvent(newRedoEvent());
                 },
-                disabled: () => !this.canRedo,
+                disabled: () => !this.historyState.canRedo,
                 kind: 'static',
             },
             ...validators,
@@ -206,16 +199,6 @@ let OscdLayout = class OscdLayout extends LitElement {
         });
         this.handleKeyPress = this.handleKeyPress.bind(this);
         document.onkeydown = this.handleKeyPress;
-        this.host.addEventListener('oscd-edit-completed', (evt) => {
-            const initiator = evt.detail.initiator;
-            if (initiator === 'undo') {
-                this.redoCount += 1;
-            }
-            else if (initiator === 'redo') {
-                this.redoCount -= 1;
-            }
-            this.requestUpdate();
-        });
         document.addEventListener("open-plugin-download", () => {
             this.pluginDownloadUI.show();
         });
@@ -706,14 +689,14 @@ __decorate([
     property({ type: Object })
 ], OscdLayout.prototype, "host", void 0);
 __decorate([
+    property({ type: Object })
+], OscdLayout.prototype, "historyState", void 0);
+__decorate([
     state()
 ], OscdLayout.prototype, "validated", void 0);
 __decorate([
     state()
 ], OscdLayout.prototype, "shouldValidate", void 0);
-__decorate([
-    state()
-], OscdLayout.prototype, "redoCount", void 0);
 __decorate([
     query('#menu')
 ], OscdLayout.prototype, "menuUI", void 0);

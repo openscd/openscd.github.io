@@ -27,11 +27,12 @@ import "../../../_snowpack/pkg/@material/mwc-list.js";
 import "../../../_snowpack/pkg/@material/mwc-list/mwc-list-item.js";
 import "../../../_snowpack/pkg/@material/mwc-snackbar.js";
 import "../filtered-list.js";
-import {
-  newActionEvent,
-  invert
-} from "../../../_snowpack/link/packages/core/dist/foundation/deprecated/editor.js";
 import {getFilterIcon, iconColors} from "../icons/icons.js";
+import {newEditEvent} from "../../../_snowpack/link/packages/core/dist/foundation.js";
+export const historyStateEvent = "history-state";
+function newHistoryStateEvent(state2) {
+  return new CustomEvent(historyStateEvent, {detail: state2});
+}
 const icons = {
   info: "info",
   warning: "warning",
@@ -99,6 +100,7 @@ export let OscdHistory = class extends LitElement {
     this.historyUIHandler = this.historyUIHandler.bind(this);
     this.emptyIssuesHandler = this.emptyIssuesHandler.bind(this);
     this.handleKeyPress = this.handleKeyPress.bind(this);
+    this.dispatchHistoryStateEvent = this.dispatchHistoryStateEvent.bind(this);
     document.onkeydown = this.handleKeyPress;
   }
   get canUndo() {
@@ -131,17 +133,17 @@ export let OscdHistory = class extends LitElement {
   undo() {
     if (!this.canUndo)
       return false;
-    const invertedAction = invert(this.history[this.editCount].action);
-    this.dispatchEvent(newActionEvent(invertedAction, "undo"));
-    this.editCount = this.previousAction;
+    const undoEdit = this.history[this.editCount].undo;
+    this.host.dispatchEvent(newEditEvent(undoEdit, "undo"));
+    this.setEditCount(this.previousAction);
     return true;
   }
   redo() {
     if (!this.canRedo)
       return false;
-    const nextAction = this.history[this.nextAction].action;
-    this.dispatchEvent(newActionEvent(nextAction, "redo"));
-    this.editCount = this.nextAction;
+    const redoEdit = this.history[this.nextAction].redo;
+    this.host.dispatchEvent(newEditEvent(redoEdit, "redo"));
+    this.setEditCount(this.nextAction);
     return true;
   }
   onHistory(detail) {
@@ -149,21 +151,28 @@ export let OscdHistory = class extends LitElement {
       time: new Date(),
       ...detail
     };
-    if (entry.kind === "action") {
-      if (entry.action.derived)
-        return;
-      entry.action.derived = true;
-      if (this.nextAction !== -1)
-        this.history.splice(this.nextAction);
-      this.editCount = this.history.length;
+    if (this.nextAction !== -1) {
+      this.history.splice(this.nextAction);
     }
     this.history.push(entry);
+    this.setEditCount(this.history.length - 1);
     this.requestUpdate("history", []);
   }
   onReset() {
     this.log = [];
     this.history = [];
-    this.editCount = -1;
+    this.setEditCount(-1);
+  }
+  setEditCount(count) {
+    this.editCount = count;
+    this.dispatchHistoryStateEvent();
+  }
+  dispatchHistoryStateEvent() {
+    this.host.dispatchEvent(newHistoryStateEvent({
+      editCount: this.editCount,
+      canUndo: this.canUndo,
+      canRedo: this.canRedo
+    }));
   }
   onInfo(detail) {
     const entry = {

@@ -1,11 +1,11 @@
 import { __decorate } from "../../../_snowpack/pkg/tslib.js";
-import { newEditCompletedEvent } from '../../../_snowpack/link/packages/core/dist/foundation.js';
+import { newEditCompletedEvent, newEditEvent } from '../../../_snowpack/link/packages/core/dist/foundation.js';
 import { property, LitElement, customElement, html, } from '../../../_snowpack/pkg/lit-element.js';
 import { get } from '../../../_snowpack/pkg/lit-translate.js';
 import { newLogEvent } from '../../../_snowpack/link/packages/core/dist/foundation/deprecated/history.js';
 import { newValidateEvent } from '../../../_snowpack/link/packages/core/dist/foundation/deprecated/validation.js';
-import { getReference } from '../foundation.js';
-import { isCreate, isDelete, isMove, isSimple, isReplace, isUpdate, } from '../../../_snowpack/link/packages/core/dist/foundation/deprecated/editor.js';
+import { isComplex, isInsert, isNamespaced, isRemove, isUpdate, } from '../../../_snowpack/link/packages/core/dist/foundation.js';
+import { convertEditV1toV2 } from './editor/edit-v1-to-v2-converter.js';
 let OscdEditor = class OscdEditor extends LitElement {
     constructor() {
         super(...arguments);
@@ -15,282 +15,34 @@ let OscdEditor = class OscdEditor extends LitElement {
         this.docName = '';
         /** The UUID of the current [[`doc`]] */
         this.docId = '';
-        this.editCount = -1;
     }
-    checkCreateValidity(create) {
-        if (create.checkValidity !== undefined)
-            return create.checkValidity();
-        if (!(create.new.element instanceof Element) ||
-            !(create.new.parent instanceof Element))
-            return true;
-        const invalidNaming = create.new.element.hasAttribute('name') &&
-            Array.from(create.new.parent.children).some(elm => elm.tagName === create.new.element.tagName &&
-                elm.getAttribute('name') ===
-                    create.new.element.getAttribute('name'));
-        if (invalidNaming) {
-            this.dispatchEvent(newLogEvent({
-                kind: 'error',
-                title: get('editing.error.create', {
-                    name: create.new.element.tagName,
-                }),
-                message: get('editing.error.nameClash', {
-                    parent: create.new.parent instanceof HTMLElement
-                        ? create.new.parent.tagName
-                        : 'Document',
-                    child: create.new.element.tagName,
-                    name: create.new.element.getAttribute('name'),
-                }),
-            }));
-            return false;
+    getLogText(edit) {
+        if (isInsert(edit)) {
+            const name = edit.node instanceof Element ?
+                edit.node.tagName :
+                get('editing.node');
+            return { title: get('editing.created', { name }) };
         }
-        const invalidId = create.new.element.hasAttribute('id') &&
-            Array.from(create.new.parent.ownerDocument.querySelectorAll('LNodeType, DOType, DAType, EnumType')).some(elm => elm.getAttribute('id') ===
-                create.new.element.getAttribute('id'));
-        if (invalidId) {
-            this.dispatchEvent(newLogEvent({
-                kind: 'error',
-                title: get('editing.error.create', {
-                    name: create.new.element.tagName,
-                }),
-                message: get('editing.error.idClash', {
-                    id: create.new.element.getAttribute('id'),
-                }),
-            }));
-            return false;
+        else if (isUpdate(edit)) {
+            const name = edit.element.tagName;
+            return { title: get('editing.updated', { name }) };
         }
-        return true;
-    }
-    onCreate(action) {
-        if (!this.checkCreateValidity(action))
-            return false;
-        if (action.new.reference === undefined &&
-            action.new.element instanceof Element &&
-            action.new.parent instanceof Element)
-            action.new.reference = getReference(action.new.parent, action.new.element.tagName);
-        else
-            action.new.reference = action.new.reference ?? null;
-        action.new.parent.insertBefore(action.new.element, action.new.reference);
-        return true;
-    }
-    logCreate(action) {
-        const name = action.new.element instanceof Element
-            ? action.new.element.tagName
-            : get('editing.node');
-        this.dispatchEvent(newLogEvent({
-            kind: 'action',
-            title: get('editing.created', { name }),
-            action,
-        }));
-    }
-    onDelete(action) {
-        if (!action.old.reference)
-            action.old.reference = action.old.element.nextSibling;
-        if (action.old.element.parentNode !== action.old.parent)
-            return false;
-        action.old.parent.removeChild(action.old.element);
-        return true;
-    }
-    logDelete(action) {
-        const name = action.old.element instanceof Element
-            ? action.old.element.tagName
-            : get('editing.node');
-        this.dispatchEvent(newLogEvent({
-            kind: 'action',
-            title: get('editing.deleted', { name }),
-            action,
-        }));
-    }
-    checkMoveValidity(move) {
-        if (move.checkValidity !== undefined)
-            return move.checkValidity();
-        const invalid = move.old.element.hasAttribute('name') &&
-            move.new.parent !== move.old.parent &&
-            Array.from(move.new.parent.children).some(elm => elm.tagName === move.old.element.tagName &&
-                elm.getAttribute('name') === move.old.element.getAttribute('name'));
-        if (invalid)
-            this.dispatchEvent(newLogEvent({
-                kind: 'error',
-                title: get('editing.error.move', {
-                    name: move.old.element.tagName,
-                }),
-                message: get('editing.error.nameClash', {
-                    parent: move.new.parent.tagName,
-                    child: move.old.element.tagName,
-                    name: move.old.element.getAttribute('name'),
-                }),
-            }));
-        return !invalid;
-    }
-    onMove(action) {
-        if (!this.checkMoveValidity(action))
-            return false;
-        if (!action.old.reference)
-            action.old.reference = action.old.element.nextSibling;
-        if (action.new.reference === undefined)
-            action.new.reference = getReference(action.new.parent, action.old.element.tagName);
-        action.new.parent.insertBefore(action.old.element, action.new.reference);
-        return true;
-    }
-    logMove(action) {
-        this.dispatchEvent(newLogEvent({
-            kind: 'action',
-            title: get('editing.moved', {
-                name: action.old.element.tagName,
-            }),
-            action: action,
-        }));
-    }
-    checkReplaceValidity(replace) {
-        if (replace.checkValidity !== undefined)
-            return replace.checkValidity();
-        const invalidNaming = replace.new.element.hasAttribute('name') &&
-            replace.new.element.getAttribute('name') !==
-                replace.old.element.getAttribute('name') &&
-            Array.from(replace.old.element.parentElement?.children ?? []).some(elm => elm.tagName === replace.new.element.tagName &&
-                elm.getAttribute('name') === replace.new.element.getAttribute('name'));
-        if (invalidNaming) {
-            this.dispatchEvent(newLogEvent({
-                kind: 'error',
-                title: get('editing.error.update', {
-                    name: replace.new.element.tagName,
-                }),
-                message: get('editing.error.nameClash', {
-                    parent: replace.old.element.parentElement.tagName,
-                    child: replace.new.element.tagName,
-                    name: replace.new.element.getAttribute('name'),
-                }),
-            }));
-            return false;
+        else if (isRemove(edit)) {
+            const name = edit.node instanceof Element ?
+                edit.node.tagName :
+                get('editing.node');
+            return { title: get('editing.deleted', { name }) };
         }
-        const invalidId = replace.new.element.hasAttribute('id') &&
-            replace.new.element.getAttribute('id') !==
-                replace.old.element.getAttribute('id') &&
-            Array.from(replace.new.element.ownerDocument.querySelectorAll('LNodeType, DOType, DAType, EnumType')).some(elm => elm.getAttribute('id') ===
-                replace.new.element.getAttribute('id'));
-        if (invalidId) {
-            this.dispatchEvent(newLogEvent({
-                kind: 'error',
-                title: get('editing.error.update', {
-                    name: replace.new.element.tagName,
-                }),
-                message: get('editing.error.idClash', {
-                    id: replace.new.element.getAttribute('id'),
-                }),
-            }));
-            return false;
+        else if (isComplex(edit)) {
+            const message = edit.map(e => this.getLogText(e)).map(({ title }) => title).join(', ');
+            return { title: get('editing.complex'), message };
         }
-        return true;
+        return { title: '' };
     }
-    onReplace(action) {
-        if (!this.checkReplaceValidity(action))
-            return false;
-        action.new.element.append(...Array.from(action.old.element.children));
-        action.old.element.replaceWith(action.new.element);
-        return true;
-    }
-    logUpdate(action) {
-        const name = isReplace(action)
-            ? action.new.element.tagName
-            : action.element.tagName;
-        this.dispatchEvent(newLogEvent({
-            kind: 'action',
-            title: get('editing.updated', {
-                name,
-            }),
-            action: action,
-        }));
-    }
-    checkUpdateValidity(update) {
-        if (update.checkValidity !== undefined)
-            return update.checkValidity();
-        if (update.oldAttributes['name'] !== update.newAttributes['name']) {
-            const invalidNaming = Array.from(update.element.parentElement?.children ?? []).some(elm => elm.tagName === update.element.tagName &&
-                elm.getAttribute('name') === update.newAttributes['name']);
-            if (invalidNaming) {
-                this.dispatchEvent(newLogEvent({
-                    kind: 'error',
-                    title: get('editing.error.update', {
-                        name: update.element.tagName,
-                    }),
-                    message: get('editing.error.nameClash', {
-                        parent: update.element.parentElement.tagName,
-                        child: update.element.tagName,
-                        name: update.newAttributes['name'],
-                    }),
-                }));
-                return false;
-            }
-        }
-        const invalidId = update.newAttributes['id'] &&
-            Array.from(update.element.ownerDocument.querySelectorAll('LNodeType, DOType, DAType, EnumType')).some(elm => elm.getAttribute('id') === update.newAttributes['id']);
-        if (invalidId) {
-            this.dispatchEvent(newLogEvent({
-                kind: 'error',
-                title: get('editing.error.update', {
-                    name: update.element.tagName,
-                }),
-                message: get('editing.error.idClash', {
-                    id: update.newAttributes['id'],
-                }),
-            }));
-            return false;
-        }
-        return true;
-    }
-    onUpdate(action) {
-        if (!this.checkUpdateValidity(action))
-            return false;
-        Array.from(action.element.attributes).forEach(attr => action.element.removeAttributeNode(attr));
-        Object.entries(action.newAttributes).forEach(([key, value]) => {
-            if (value !== null && value !== undefined)
-                action.element.setAttribute(key, value);
-        });
-        return true;
-    }
-    onSimpleAction(action) {
-        if (isMove(action))
-            return this.onMove(action);
-        else if (isCreate(action))
-            return this.onCreate(action);
-        else if (isDelete(action))
-            return this.onDelete(action);
-        else if (isReplace(action))
-            return this.onReplace(action);
-        else if (isUpdate(action))
-            return this.onUpdate(action);
-    }
-    logSimpleAction(action) {
-        if (isMove(action))
-            this.logMove(action);
-        else if (isCreate(action))
-            this.logCreate(action);
-        else if (isDelete(action))
-            this.logDelete(action);
-        else if (isReplace(action))
-            this.logUpdate(action);
-        else if (isUpdate(action))
-            this.logUpdate(action);
-    }
-    async onAction(event) {
-        if (isSimple(event.detail.action)) {
-            if (this.onSimpleAction(event.detail.action))
-                this.logSimpleAction(event.detail.action);
-        }
-        else if (event.detail.action.actions.length > 0) {
-            event.detail.action.actions.forEach(element => this.onSimpleAction(element));
-            this.dispatchEvent(newLogEvent({
-                kind: 'action',
-                title: event.detail.action.title,
-                action: event.detail.action,
-            }));
-        }
-        else
-            return;
-        if (!this.doc)
-            return;
-        await this.updateComplete;
-        this.dispatchEvent(newValidateEvent());
-        this.dispatchEvent(newEditCompletedEvent(event.detail.action, event.detail.initiator));
+    onAction(event) {
+        const edit = convertEditV1toV2(event.detail.action);
+        const initiator = event.detail.initiator;
+        this.host.dispatchEvent(newEditEvent(edit, initiator));
     }
     /**
      *
@@ -313,12 +65,32 @@ let OscdEditor = class OscdEditor extends LitElement {
     }
     connectedCallback() {
         super.connectedCallback();
+        // Deprecated editor action API, use 'oscd-edit' instead.
         this.host.addEventListener('editor-action', this.onAction.bind(this));
+        this.host.addEventListener('oscd-edit', event => this.handleEditEvent(event));
         this.host.addEventListener('open-doc', this.onOpenDoc);
         this.host.addEventListener('oscd-open', this.handleOpenDoc);
     }
     render() {
         return html `<slot></slot>`;
+    }
+    async handleEditEvent(event) {
+        const edit = event.detail.edit;
+        const undoEdit = handleEdit(edit);
+        this.dispatchEvent(newEditCompletedEvent(event.detail.edit, event.detail.initiator));
+        const shouldCreateHistoryEntry = event.detail.initiator !== 'redo' && event.detail.initiator !== 'undo';
+        if (shouldCreateHistoryEntry) {
+            const { title, message } = this.getLogText(edit);
+            this.dispatchEvent(newLogEvent({
+                kind: 'action',
+                title,
+                message,
+                redo: edit,
+                undo: undoEdit,
+            }));
+        }
+        await this.updateComplete;
+        this.dispatchEvent(newValidateEvent());
     }
 };
 __decorate([
@@ -335,13 +107,102 @@ __decorate([
         type: Object,
     })
 ], OscdEditor.prototype, "host", void 0);
-__decorate([
-    property({
-        type: Number,
-    })
-], OscdEditor.prototype, "editCount", void 0);
 OscdEditor = __decorate([
     customElement('oscd-editor')
 ], OscdEditor);
 export { OscdEditor };
+function handleEdit(edit) {
+    if (isInsert(edit))
+        return handleInsert(edit);
+    if (isUpdate(edit))
+        return handleUpdate(edit);
+    if (isRemove(edit))
+        return handleRemove(edit);
+    if (isComplex(edit))
+        return edit.map(handleEdit).reverse();
+    return [];
+}
+function localAttributeName(attribute) {
+    return attribute.includes(':') ? attribute.split(':', 2)[1] : attribute;
+}
+function handleInsert({ parent, node, reference, }) {
+    try {
+        const { parentNode, nextSibling } = node;
+        /**
+         * This is a workaround for converted edit api v1 events,
+         * because if multiple edits are converted, they are converted before the changes from the previous edits are applied to the document
+         * so if you first remove an element and then add a clone with changed attributes, the reference will be the element to remove since it hasnt been removed yet
+         */
+        if (!parent.contains(reference)) {
+            reference = null;
+        }
+        parent.insertBefore(node, reference);
+        if (parentNode)
+            return {
+                node,
+                parent: parentNode,
+                reference: nextSibling,
+            };
+        return { node };
+    }
+    catch (e) {
+        // do nothing if insert doesn't work on these nodes
+        return [];
+    }
+}
+function handleUpdate({ element, attributes }) {
+    const oldAttributes = { ...attributes };
+    Object.entries(attributes)
+        .reverse()
+        .forEach(([name, value]) => {
+        let oldAttribute;
+        if (isNamespaced(value))
+            oldAttribute = {
+                value: element.getAttributeNS(value.namespaceURI, localAttributeName(name)),
+                namespaceURI: value.namespaceURI,
+            };
+        else
+            oldAttribute = element.getAttributeNode(name)?.namespaceURI
+                ? {
+                    value: element.getAttribute(name),
+                    namespaceURI: element.getAttributeNode(name).namespaceURI,
+                }
+                : element.getAttribute(name);
+        oldAttributes[name] = oldAttribute;
+    });
+    for (const entry of Object.entries(attributes)) {
+        try {
+            const [attribute, value] = entry;
+            if (isNamespaced(value)) {
+                if (value.value === null)
+                    element.removeAttributeNS(value.namespaceURI, localAttributeName(attribute));
+                else
+                    element.setAttributeNS(value.namespaceURI, attribute, value.value);
+            }
+            else if (value === null)
+                element.removeAttribute(attribute);
+            else
+                element.setAttribute(attribute, value);
+        }
+        catch (e) {
+            // do nothing if update doesn't work on this attribute
+            delete oldAttributes[entry[0]];
+        }
+    }
+    return {
+        element,
+        attributes: oldAttributes,
+    };
+}
+function handleRemove({ node }) {
+    const { parentNode: parent, nextSibling: reference } = node;
+    node.parentNode?.removeChild(node);
+    if (parent)
+        return {
+            node,
+            parent,
+            reference,
+        };
+    return [];
+}
 //# sourceMappingURL=Editor.js.map
