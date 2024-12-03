@@ -272,7 +272,7 @@ let OscdLayout = class OscdLayout extends LitElement {
     ></mwc-icon-button>`;
     }
     renderEditorTab({ name, icon }) {
-        return html `<mwc-tab label=${get(name)} icon=${icon || 'edit'}> </mwc-tab>`;
+        return html `<mwc-tab label=${name} icon=${icon || 'edit'}> </mwc-tab>`;
     }
     /** Renders top bar which features icon buttons for undo, redo, log, scl history and diagnostics*/
     renderHeader() {

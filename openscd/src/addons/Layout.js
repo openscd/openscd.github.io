@@ -286,7 +286,7 @@ export let OscdLayout = class extends LitElement {
     ></mwc-icon-button>`;
   }
   renderEditorTab({name, icon}) {
-    return html`<mwc-tab label=${get(name)} icon=${icon || "edit"}> </mwc-tab>`;
+    return html`<mwc-tab label=${name} icon=${icon || "edit"}> </mwc-tab>`;
   }
   renderHeader() {
     return html`<mwc-top-app-bar-fixed>

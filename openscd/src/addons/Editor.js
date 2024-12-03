@@ -81,6 +81,9 @@ export let OscdEditor = class extends LitElement {
     return html`<slot></slot>`;
   }
   async handleEditEvent(event) {
+    if (isOpenEnergyEditEvent(event)) {
+      event = convertOpenEnergyEditEventToEditEvent(event);
+    }
     const edit = event.detail.edit;
     const undoEdit = handleEdit(edit);
     this.dispatchEvent(newEditCompletedEvent(event.detail.edit, event.detail.initiator));
@@ -199,4 +202,12 @@ function handleRemove({node}) {
       reference
     };
   return [];
+}
+function isOpenEnergyEditEvent(event) {
+  const eventDetail = event.detail;
+  return isComplex(eventDetail) || isInsert(eventDetail) || isUpdate(eventDetail) || isRemove(eventDetail);
+}
+function convertOpenEnergyEditEventToEditEvent(event) {
+  const eventDetail = event.detail;
+  return newEditEvent(eventDetail);
 }
