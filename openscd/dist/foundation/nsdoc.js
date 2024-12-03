@@ -1,11 +1,15 @@
 import { iec6185072, iec6185073, iec6185074, iec6185081 } from "./nsd.js";
 const [nsd72, nsd73, nsd74, nsd81] = await Promise.all([iec6185072, iec6185073, iec6185074, iec6185081]);
+let nsdoc72 = undefined;
+let nsdoc73 = undefined;
+let nsdoc74 = undefined;
+let nsdoc81 = undefined;
 /**
  * Initialize the full Nsdoc object.
  * @returns A fully initialized Nsdoc object for wizards/editors to use.
  */
 export function initializeNsdoc() {
-    const [nsdoc72, nsdoc73, nsdoc74, nsdoc81] = [
+    [nsdoc72, nsdoc73, nsdoc74, nsdoc81] = [
         localStorage.getItem('IEC 61850-7-2') ? new DOMParser().parseFromString(localStorage.getItem('IEC 61850-7-2'), 'application/xml') : undefined,
         localStorage.getItem('IEC 61850-7-3') ? new DOMParser().parseFromString(localStorage.getItem('IEC 61850-7-3'), 'application/xml') : undefined,
         localStorage.getItem('IEC 61850-7-4') ? new DOMParser().parseFromString(localStorage.getItem('IEC 61850-7-4'), 'application/xml') : undefined,
