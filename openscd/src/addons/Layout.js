@@ -44,6 +44,7 @@ import "../../../_snowpack/pkg/@material/mwc-dialog.js";
 import "../../../_snowpack/pkg/@material/mwc-switch.js";
 import "../../../_snowpack/pkg/@material/mwc-select.js";
 import "../../../_snowpack/pkg/@material/mwc-textfield.js";
+import {nothing} from "../../../_snowpack/pkg/lit.js";
 export let OscdLayout = class extends LitElement {
   constructor() {
     super(...arguments);
@@ -59,6 +60,8 @@ export let OscdLayout = class extends LitElement {
     return html`
       <div
         @open-plugin-download=${() => this.pluginDownloadUI.show()}
+        @oscd-activate-editor=${this.handleActivateEditorByEvent}
+        @oscd-run-menu=${this.handleRunMenuByEvent}
       >
         <slot></slot>
         ${this.renderHeader()} ${this.renderAside()} ${this.renderContent()}
@@ -102,7 +105,8 @@ export let OscdLayout = class extends LitElement {
           this.dispatchEvent(newUndoEvent());
         },
         disabled: () => !this.historyState.canUndo,
-        kind: "static"
+        kind: "static",
+        content: () => html``
       },
       {
         icon: "redo",
@@ -112,7 +116,8 @@ export let OscdLayout = class extends LitElement {
           this.dispatchEvent(newRedoEvent());
         },
         disabled: () => !this.historyState.canRedo,
-        kind: "static"
+        kind: "static",
+        content: () => html``
       },
       ...validators,
       {
@@ -122,7 +127,8 @@ export let OscdLayout = class extends LitElement {
         action: () => {
           this.dispatchEvent(newHistoryUIEvent(true, HistoryUIKind.log));
         },
-        kind: "static"
+        kind: "static",
+        content: () => html``
       },
       {
         icon: "history",
@@ -131,7 +137,8 @@ export let OscdLayout = class extends LitElement {
         action: () => {
           this.dispatchEvent(newHistoryUIEvent(true, HistoryUIKind.history));
         },
-        kind: "static"
+        kind: "static",
+        content: () => html``
       },
       {
         icon: "rule",
@@ -140,7 +147,8 @@ export let OscdLayout = class extends LitElement {
         action: () => {
           this.dispatchEvent(newHistoryUIEvent(true, HistoryUIKind.diagnostic));
         },
-        kind: "static"
+        kind: "static",
+        content: () => html``
       },
       "divider",
       ...middleMenu,
@@ -150,14 +158,16 @@ export let OscdLayout = class extends LitElement {
         action: () => {
           this.dispatchEvent(newSettingsUIEvent(true));
         },
-        kind: "static"
+        kind: "static",
+        content: () => html``
       },
       ...bottomMenu,
       {
         icon: "extension",
         name: "plugins.heading",
         action: () => this.pluginUI.show(),
-        kind: "static"
+        kind: "static",
+        content: () => html``
       }
     ];
   }
@@ -232,7 +242,12 @@ export let OscdLayout = class extends LitElement {
           this.dispatchEvent(newPendingStateEvent(ae.target.items[ae.detail.index].nextElementSibling.run()));
         },
         disabled: () => plugin.requireDoc && this.doc === null,
-        content: plugin.content,
+        content: () => {
+          if (plugin.content) {
+            return plugin.content();
+          }
+          return html``;
+        },
         kind
       };
     });
@@ -247,16 +262,18 @@ export let OscdLayout = class extends LitElement {
           this.dispatchEvent(newPendingStateEvent(ae.target.items[ae.detail.index].nextElementSibling.validate()));
         },
         disabled: () => this.doc === null,
-        content: plugin.content,
+        content: plugin.content ?? (() => html``),
         kind: "validator"
       };
     });
   }
   renderMenuItem(me) {
-    if (me === "divider") {
+    const isDivider = me === "divider";
+    const hasActionItem = me !== "divider" && me.actionItem;
+    if (isDivider) {
       return html`<li divider padded role="separator"></li>`;
     }
-    if (me.actionItem) {
+    if (hasActionItem) {
       return html``;
     }
     return html`
@@ -264,12 +281,13 @@ export let OscdLayout = class extends LitElement {
         class="${me.kind}"
         iconid="${me.icon}"
         graphic="icon"
+        data-name="${me.name}"
         .disabled=${me.disabled?.() || !me.action}
         ><mwc-icon slot="graphic">${me.icon}</mwc-icon>
         <span>${get(me.name)}</span>
         ${me.hint ? html`<span slot="secondary"><tt>${me.hint}</tt></span>` : ""}
       </mwc-list-item>
-      ${me.content ?? ""}
+      ${me.content ? me.content() : nothing}
     `;
   }
   renderActionItem(me) {
@@ -325,18 +343,24 @@ export let OscdLayout = class extends LitElement {
       };
     }
   }
-  renderContent() {
+  calcActiveEditors() {
     const hasActiveDoc = Boolean(this.doc);
-    const activeEditors = this.editors.filter((editor) => {
+    return this.editors.filter((editor) => {
       const doesNotRequireDoc = editor.requireDoc === false;
       return doesNotRequireDoc || hasActiveDoc;
-    }).map(this.renderEditorTab);
+    });
+  }
+  renderContent() {
+    const activeEditors = this.calcActiveEditors().map(this.renderEditorTab);
     const hasActiveEditors = activeEditors.length > 0;
     if (!hasActiveEditors) {
       return html``;
     }
     return html`
-      <mwc-tab-bar @MDCTabBar:activated=${(e) => this.activeTab = e.detail.index}>
+      <mwc-tab-bar
+        @MDCTabBar:activated=${this.handleActivatedEditorTabByUser}
+        activeIndex=${this.activeTab}
+      >
         ${activeEditors}
       </mwc-tab-bar>
       ${renderEditorContent(this.editors, this.activeTab, this.doc)}
@@ -351,8 +375,33 @@ export let OscdLayout = class extends LitElement {
       if (!content) {
         return html``;
       }
-      return html`${content}`;
+      return html`${content()}`;
     }
+  }
+  handleActivatedEditorTabByUser(e) {
+    const tabIndex = e.detail.index;
+    this.activateTab(tabIndex);
+  }
+  handleActivateEditorByEvent(e) {
+    const {name, src} = e.detail;
+    const editors = this.calcActiveEditors();
+    const wantedEditorIndex = editors.findIndex((editor) => editor.name === name || editor.src === src);
+    if (wantedEditorIndex < 0) {
+      return;
+    }
+    this.activateTab(wantedEditorIndex);
+  }
+  activateTab(index) {
+    this.activeTab = index;
+  }
+  handleRunMenuByEvent(e) {
+    this.menuUI.open = true;
+    const menuEntry = this.menuUI.querySelector(`[data-name="${e.detail.name}"]`);
+    const menuElement = menuEntry.nextElementSibling;
+    if (!menuElement) {
+      return;
+    }
+    menuElement.run();
   }
   renderLanding() {
     if (this.doc) {

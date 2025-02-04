@@ -5,4 +5,8 @@ export { newEditEventV2 } from './foundation/edit-event.js';
 export { handleEditV2 } from './foundation/handle-edit.js';
 export { cyrb64 } from './foundation/cyrb64.js';
 export { newEditCompletedEvent } from './foundation/edit-completed-event.js';
+/** @returns the cartesian product of `arrays` */
+export function crossProduct(...arrays) {
+    return arrays.reduce((a, b) => a.flatMap(d => b.map(e => [d, e].flat())), [[]]);
+}
 //# sourceMappingURL=foundation.js.map
