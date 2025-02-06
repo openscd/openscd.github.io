@@ -1,4 +1,4 @@
-function generatePluginPath(plugin) {
+export function generatePluginPath(plugin) {
     return location.origin + location.pathname + plugin;
 }
 export const officialPlugins = [

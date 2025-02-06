@@ -204,7 +204,7 @@ let OpenSCD = class OpenSCD extends LitElement {
         this.storePlugins(newPlugins);
     }
     resetPlugins() {
-        this.storePlugins(builtinPlugins.concat(this.parsedPlugins).map(plugin => {
+        this.storePlugins(this.getBuiltInPlugins().concat(this.parsedPlugins).map(plugin => {
             return {
                 ...plugin,
                 installed: plugin.default ?? false,
@@ -253,7 +253,7 @@ let OpenSCD = class OpenSCD extends LitElement {
                 return plugin;
             }
             ;
-            const builtInPlugin = [...builtinPlugins, ...this.parsedPlugins]
+            const builtInPlugin = [...this.getBuiltInPlugins(), ...this.parsedPlugins]
                 .find(p => p.src === plugin.src);
             return {
                 ...builtInPlugin,
@@ -293,12 +293,12 @@ let OpenSCD = class OpenSCD extends LitElement {
     loadPlugins() {
         const localPluginConfigs = this.getPluginConfigsFromLocalStorage();
         const overwritesOfBultInPlugins = localPluginConfigs.filter((p) => {
-            return builtinPlugins.some(b => b.src === p.src);
+            return this.getBuiltInPlugins().some(b => b.src === p.src);
         });
         const userInstalledPlugins = localPluginConfigs.filter((p) => {
-            return !builtinPlugins.some(b => b.src === p.src);
+            return !this.getBuiltInPlugins().some(b => b.src === p.src);
         });
-        const mergedBuiltInPlugins = builtinPlugins.map((builtInPlugin) => {
+        const mergedBuiltInPlugins = this.getBuiltInPlugins().map((builtInPlugin) => {
             const noopOverwrite = {};
             const overwrite = overwritesOfBultInPlugins
                 .find(p => p.src === builtInPlugin.src)
@@ -320,6 +320,9 @@ let OpenSCD = class OpenSCD extends LitElement {
         const newPlugins = this.storedPlugins;
         newPlugins.push(plugin);
         this.storePlugins(newPlugins);
+    }
+    getBuiltInPlugins() {
+        return builtinPlugins;
     }
     addContent(plugin) {
         const tag = this.pluginTag(plugin.src);
