@@ -278,8 +278,7 @@ export let OpenSCD = class extends LitElement {
       const overwrite = overwritesOfBultInPlugins.find((p) => p.src === builtInPlugin.src) ?? noopOverwrite;
       return {
         ...builtInPlugin,
-        ...overwrite,
-        installed: true
+        ...overwrite
       };
     });
     const mergedPlugins = [...mergedBuiltInPlugins, ...userInstalledPlugins];

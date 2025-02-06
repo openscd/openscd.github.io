@@ -306,7 +306,6 @@ let OpenSCD = class OpenSCD extends LitElement {
             return {
                 ...builtInPlugin,
                 ...overwrite,
-                installed: true, // TODO: is this correct? should we decide it based on something?
             };
         });
         const mergedPlugins = [...mergedBuiltInPlugins, ...userInstalledPlugins];
