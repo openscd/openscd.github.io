@@ -1,5 +1,4 @@
 import { __decorate } from "../../_snowpack/pkg/tslib.js";
-//#region import
 import { customElement, html, LitElement, property, state, } from '../../_snowpack/pkg/lit-element.js';
 import { classMap } from '../../_snowpack/pkg/lit-html/directives/class-map.js';
 import '../../_snowpack/pkg/@material/mwc-icon.js';
@@ -32,7 +31,6 @@ import { initializeNsdoc } from './foundation/nsdoc.js';
 import { historyStateEvent } from './addons/History.js';
 import { newConfigurePluginEvent } from './plugin.events.js';
 import { newLogEvent } from '../../_snowpack/link/packages/core/dist/foundation/deprecated/history.js';
-//#endregion import
 /** The `<open-scd>` custom element is the main entry point of the
  * Open Substation Configuration Designer. */
 let OpenSCD = class OpenSCD extends LitElement {
@@ -51,11 +49,11 @@ let OpenSCD = class OpenSCD extends LitElement {
         /** Object containing all *.nsdoc files and a function extracting element's label form them*/
         this.nsdoc = initializeNsdoc();
         this.currentSrc = '';
+        this.storedPlugins = [];
         /**
          * @prop {PluginSet} plugins - Set of plugins that are used by OpenSCD
          */
         this.plugins = { menu: [], editor: [] };
-        this.storedPlugins = [];
         this.loadedPlugins = new Set();
         // PLUGGING INTERFACES
         this.pluginTags = new Map();
@@ -75,6 +73,7 @@ let OpenSCD = class OpenSCD extends LitElement {
               <oscd-layout
                 @add-external-plugin=${this.handleAddExternalPlugin}
                 @oscd-configure-plugin=${this.handleConfigurationPluginEvent}
+                @set-plugins=${(e) => this.setPlugins(e.detail.selectedPlugins)}
                 .host=${this}
                 .doc=${this.doc}
                 .docName=${this.docName}
@@ -151,9 +150,6 @@ let OpenSCD = class OpenSCD extends LitElement {
         this.loadPlugins();
         // TODO: let Lit handle the event listeners, move to render()
         this.addEventListener('reset-plugins', this.resetPlugins);
-        this.addEventListener('set-plugins', (e) => {
-            this.setPlugins(e.detail.indices);
-        });
         this.addEventListener(historyStateEvent, (e) => {
             this.historyState = e.detail;
             this.requestUpdate();
@@ -173,11 +169,11 @@ let OpenSCD = class OpenSCD extends LitElement {
     }
     removePlugin(name, kind) {
         const newPlugins = this.storedPlugins.filter(p => p.name !== name || p.kind !== kind);
-        this.storePlugins(newPlugins);
+        this.updateStoredPlugins(newPlugins);
     }
     addPlugin(plugin) {
         const newPlugins = [...this.storedPlugins, plugin];
-        this.storePlugins(newPlugins);
+        this.updateStoredPlugins(newPlugins);
     }
     /**
      *
@@ -201,15 +197,19 @@ let OpenSCD = class OpenSCD extends LitElement {
         const changedPlugin = { ...pluginToChange, ...plugin };
         const newPlugins = [...storedPlugins];
         newPlugins.splice(pluginIndex, 1, changedPlugin);
-        this.storePlugins(newPlugins);
+        // this.storePlugins(newPlugins);
+        this.updateStoredPlugins(newPlugins);
     }
     resetPlugins() {
-        this.storePlugins(this.getBuiltInPlugins().concat(this.parsedPlugins).map(plugin => {
+        const builtInPlugins = this.getBuiltInPlugins();
+        const allPlugins = [...builtInPlugins, ...this.parsedPlugins];
+        const newPluginConfigs = allPlugins.map(plugin => {
             return {
                 ...plugin,
-                installed: plugin.default ?? false,
+                active: plugin.activeByDefault ?? false,
             };
-        }));
+        });
+        this.storePlugins(newPluginConfigs);
     }
     get parsedPlugins() {
         const menuPlugins = this.plugins.menu.map((plugin) => {
@@ -221,15 +221,18 @@ let OpenSCD = class OpenSCD extends LitElement {
                 ...plugin,
                 position: newPosition,
                 kind: 'menu',
-                installed: plugin.active ?? false,
+                active: plugin.active ?? false,
             };
         });
-        const editorPlugins = this.plugins.editor.map((plugin) => ({
-            ...plugin,
-            position: undefined,
-            kind: 'editor',
-            installed: plugin.active ?? false,
-        }));
+        const editorPlugins = this.plugins.editor.map((plugin) => {
+            const editorPlugin = {
+                ...plugin,
+                position: undefined,
+                kind: 'editor',
+                active: plugin.active ?? false,
+            };
+            return editorPlugin;
+        });
         const allPlugnis = [...menuPlugins, ...editorPlugins];
         return allPlugnis;
     }
@@ -238,7 +241,7 @@ let OpenSCD = class OpenSCD extends LitElement {
         // Generate content of each plugin
         //
         const plugins = newPlugins.map(plugin => {
-            const isInstalled = plugin.src && plugin.installed;
+            const isInstalled = plugin.src && plugin.active;
             if (!isInstalled) {
                 return plugin;
             }
@@ -281,11 +284,15 @@ let OpenSCD = class OpenSCD extends LitElement {
         }
         return docs;
     }
-    setPlugins(indices) {
-        const newPlugins = this.storedPlugins.map((plugin, index) => {
+    setPlugins(selectedPlugins) {
+        const newPlugins = this.storedPlugins.map((storedPlugin) => {
+            const isSelected = selectedPlugins.some((selectedPlugin) => {
+                return selectedPlugin.name === storedPlugin.name
+                    && selectedPlugin.src === storedPlugin.src;
+            });
             return {
-                ...plugin,
-                installed: indices.has(index)
+                ...storedPlugin,
+                active: isSelected
             };
         });
         this.updateStoredPlugins(newPlugins);
@@ -299,18 +306,15 @@ let OpenSCD = class OpenSCD extends LitElement {
             return !this.getBuiltInPlugins().some(b => b.src === p.src);
         });
         const mergedBuiltInPlugins = this.getBuiltInPlugins().map((builtInPlugin) => {
-            const noopOverwrite = {};
-            const overwrite = overwritesOfBultInPlugins
-                .find(p => p.src === builtInPlugin.src)
-                ?? noopOverwrite;
-            return {
+            let overwrite = overwritesOfBultInPlugins.find(p => p.src === builtInPlugin.src);
+            const mergedPlugin = {
                 ...builtInPlugin,
                 ...overwrite,
+                active: overwrite?.active ?? builtInPlugin.activeByDefault,
             };
+            return mergedPlugin;
         });
         const mergedPlugins = [...mergedBuiltInPlugins, ...userInstalledPlugins];
-        // TODO: kind is string and enum, figour out later
-        // @ts-expect-error
         this.updateStoredPlugins(mergedPlugins);
     }
     async addExternalPlugin(plugin) {
@@ -399,11 +403,11 @@ __decorate([
     property({ type: String })
 ], OpenSCD.prototype, "src", null);
 __decorate([
-    property({ type: Object })
-], OpenSCD.prototype, "plugins", void 0);
-__decorate([
     state()
 ], OpenSCD.prototype, "storedPlugins", void 0);
+__decorate([
+    property({ type: Object })
+], OpenSCD.prototype, "plugins", void 0);
 __decorate([
     state()
 ], OpenSCD.prototype, "loadedPlugins", void 0);
@@ -424,11 +428,11 @@ export function newAddExternalPluginEvent(plugin) {
         detail: { plugin },
     });
 }
-export function newSetPluginsEvent(indices) {
+export function newSetPluginsEvent(selectedPlugins) {
     return new CustomEvent('set-plugins', {
         bubbles: true,
         composed: true,
-        detail: { indices },
+        detail: { selectedPlugins },
     });
 }
 /**
