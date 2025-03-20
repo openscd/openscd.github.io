@@ -41,6 +41,7 @@ import "../../../_snowpack/pkg/@material/mwc-textfield.js";
 import {nothing} from "../../../_snowpack/pkg/lit.js";
 import "./plugin-manager/plugin-manager.js";
 import "./plugin-manager/custom-plugin-dialog.js";
+import "./menu-tabs/menu-tabs.js";
 export let OscdLayout = class extends LitElement {
   constructor() {
     super(...arguments);
@@ -51,6 +52,7 @@ export let OscdLayout = class extends LitElement {
     this.plugins = [];
     this.validated = Promise.resolve();
     this.shouldValidate = false;
+    this.activeEditor = this.calcActiveEditors()[0];
   }
   render() {
     return html`
@@ -346,16 +348,16 @@ export let OscdLayout = class extends LitElement {
       return html``;
     }
     return html`
-      <mwc-tab-bar
-        @MDCTabBar:activated=${this.handleActivatedEditorTabByUser}
-        activeIndex=${this.activeTab}
+      <oscd-menu-tabs
+        .editors=${this.calcActiveEditors()}
+        .activeEditor=${this.activeEditor}
+        @oscd-editor-tab-activated=${this.handleEditorTabActivated}
       >
-        ${activeEditors}
-      </mwc-tab-bar>
-      ${renderEditorContent(this.editors, this.activeTab, this.doc)}
+      </oscd-menu-tabs>
+      ${renderEditorContent(this.doc, this.activeEditor)}
     `;
-    function renderEditorContent(editors, activeTab, doc) {
-      const editor = editors[activeTab];
+    function renderEditorContent(doc, activeEditor) {
+      const editor = activeEditor;
       const requireDoc = editor?.requireDoc;
       if (requireDoc && !doc) {
         return html``;
@@ -366,6 +368,9 @@ export let OscdLayout = class extends LitElement {
       }
       return html`${content()}`;
     }
+  }
+  handleEditorTabActivated(e) {
+    this.activeEditor = e.detail.editor;
   }
   handleActivatedEditorTabByUser(e) {
     const tabIndex = e.detail.index;
@@ -545,6 +550,9 @@ __decorate([
 __decorate([
   state()
 ], OscdLayout.prototype, "shouldValidate", 2);
+__decorate([
+  state()
+], OscdLayout.prototype, "activeEditor", 2);
 __decorate([
   query("#menu")
 ], OscdLayout.prototype, "menuUI", 2);
