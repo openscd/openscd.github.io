@@ -88,7 +88,8 @@ export const de = {
     title: {
       select: "{{tagName}} auswählen",
       edit: "{{tagName}} bearbeiten",
-      add: "{{tagName}} hinzufügen"
+      add: "{{tagName}} hinzufügen",
+      selectAp: "ConnectedAP auswählen"
     }
   },
   openSCD: {

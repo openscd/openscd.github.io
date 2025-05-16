@@ -1,11 +1,12 @@
 import { __decorate } from "../../../../_snowpack/pkg/tslib.js";
-import { LitElement, html, customElement, property, state, } from '../../../../_snowpack/pkg/lit-element.js';
+import { LitElement, html, customElement, property, state, css, } from '../../../../_snowpack/pkg/lit-element.js';
 import '../../../../_snowpack/pkg/@material/mwc-icon.js';
 import '../../../../openscd/src/action-icon.js';
 import { sizableSmvIcon } from '../../../../openscd/src/icons/icons.js';
 import { newWizardEvent } from '../../../../openscd/src/foundation.js';
 import { newActionEvent } from '../../../../_snowpack/link/packages/core/dist/foundation/deprecated/editor.js';
 import { editSMvWizard } from '../../wizards/smv.js';
+import { getAllConnectedAPsOfSameIED } from './foundation.js';
 let SmvEditor = class SmvEditor extends LitElement {
     get label() {
         return (this.element.getAttribute('ldInst') +
@@ -14,6 +15,13 @@ let SmvEditor = class SmvEditor extends LitElement {
     }
     openEditWizard() {
         this.dispatchEvent(newWizardEvent(editSMvWizard(this.element)));
+    }
+    openSmvMoveDialog() {
+        this.dispatchEvent(new CustomEvent('request-smv-move', {
+            detail: { element: this.element },
+            bubbles: true,
+            composed: true,
+        }));
     }
     remove() {
         if (this.element)
@@ -26,6 +34,8 @@ let SmvEditor = class SmvEditor extends LitElement {
             }));
     }
     render() {
+        const allConnectedAPsOfSameIED = getAllConnectedAPsOfSameIED(this.element, this.doc);
+        const hasMoreThanOneConnectedAP = allConnectedAPsOfSameIED.length > 1;
         return html `<action-icon label="${this.label}" .icon="${sizableSmvIcon}"
       ><mwc-fab
         slot="action"
@@ -37,11 +47,28 @@ let SmvEditor = class SmvEditor extends LitElement {
         slot="action"
         mini
         icon="delete"
-        @click="${() => this.remove()}}"
-      ></mwc-fab
-    ></action-icon>`;
+        @click="${() => this.remove()}"
+      ></mwc-fab>
+      <mwc-fab
+        slot="action"
+        mini
+        icon="forward"
+        class="smv-move-button"
+        ?disabled=${!hasMoreThanOneConnectedAP}
+        @click="${() => this.openSmvMoveDialog()}"
+      >
+      </mwc-fab>
+    </action-icon>`;
     }
 };
+SmvEditor.styles = css `
+    :host(:focus-within) .smv-move-button[disabled] {
+      color: var(--mdc-theme-text-disabled-on-light, #9e9e9e);
+      pointer-events: none;
+      cursor: not-allowed;
+      opacity: 0.5;
+    }
+  `;
 __decorate([
     property({ attribute: false })
 ], SmvEditor.prototype, "doc", void 0);
