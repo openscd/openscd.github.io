@@ -1,4 +1,4 @@
-import { N as NodePart, A as AttributePart } from './common/lit-html-487c1dfc.js';
+import { N as NodePart, A as AttributePart } from './common/lit-html-e07bf80b.js';
 
 const CLEANUP_PARTS_MS = 1000 * 60;
 const LANG_CHANGED_EVENT = "langChanged";

@@ -47,6 +47,7 @@ import {initializeNsdoc} from "./foundation/nsdoc.js";
 import {historyStateEvent} from "./addons/History.js";
 import {newConfigurePluginEvent} from "./plugin.events.js";
 import {newLogEvent} from "../../_snowpack/link/packages/core/dist/foundation/deprecated/history.js";
+import {pluginTag} from "./plugin-tag.js";
 export let OpenSCD = class extends LitElement {
   constructor() {
     super(...arguments);
@@ -335,15 +336,8 @@ export let OpenSCD = class extends LitElement {
   }
   pluginTag(uri) {
     if (!this.pluginTags.has(uri)) {
-      let h1 = 3735928559, h2 = 1103547991;
-      for (let i = 0, ch; i < uri.length; i++) {
-        ch = uri.charCodeAt(i);
-        h1 = Math.imul(h1 ^ ch, 2654435761);
-        h2 = Math.imul(h2 ^ ch, 1597334677);
-      }
-      h1 = Math.imul(h1 ^ h1 >>> 16, 2246822507) ^ Math.imul(h2 ^ h2 >>> 13, 3266489909);
-      h2 = Math.imul(h2 ^ h2 >>> 16, 2246822507) ^ Math.imul(h1 ^ h1 >>> 13, 3266489909);
-      this.pluginTags.set(uri, "oscd-plugin" + ((h2 >>> 0).toString(16).padStart(8, "0") + (h1 >>> 0).toString(16).padStart(8, "0")));
+      const tag = pluginTag(uri);
+      this.pluginTags.set(uri, tag);
     }
     return this.pluginTags.get(uri);
   }

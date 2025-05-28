@@ -12,7 +12,7 @@ import '../../../_snowpack/pkg/@material/mwc-dialog.js';
 import '../../../_snowpack/pkg/@material/mwc-switch.js';
 import '../../../_snowpack/pkg/@material/mwc-select.js';
 import '../../../_snowpack/pkg/@material/mwc-textfield.js';
-import { nothing } from '../../../_snowpack/pkg/lit.js';
+import { pluginTag } from '../plugin-tag.js';
 import "./plugin-manager/plugin-manager.js";
 import "./plugin-manager/custom-plugin-dialog.js";
 import "./menu-tabs/menu-tabs.js";
@@ -39,13 +39,17 @@ let OscdLayout = class OscdLayout extends LitElement {
         @oscd-run-menu=${this.handleRunMenuByEvent}
       >
         <slot></slot>
-        ${this.renderHeader()} ${this.renderAside()} ${this.renderContent()}
-        ${this.renderLanding()} ${this.renderPlugging()}
+        ${this.renderHeader()} ${this.renderAside()} ${this.renderMenuContent()}
+        ${this.renderContent()} ${this.renderLanding()} ${this.renderPlugging()}
       </div>
     `;
     }
     renderPlugging() {
         return html ` ${this.renderPluginUI()} ${this.renderDownloadUI()} `;
+    }
+    getMenuContent(src) {
+        const tag = pluginTag(src);
+        return this.menuContent.querySelector(tag);
     }
     /** Renders the "Add Custom Plug-in" UI*/
     renderDownloadUI() {
@@ -202,7 +206,14 @@ let OscdLayout = class OscdLayout extends LitElement {
             this.validated = Promise.allSettled(this.menuUI
                 .querySelector('mwc-list')
                 .items.filter(item => item.className === 'validator')
-                .map(item => item.nextElementSibling.validate())).then();
+                .map(item => {
+                const src = item.dataset.src ?? '';
+                const menuContentElement = this.getMenuContent(src);
+                if (!menuContentElement) {
+                    return;
+                }
+                return menuContentElement.validate();
+            })).then();
             this.dispatchEvent(newPendingStateEvent(this.validated));
         });
         this.handleKeyPress = this.handleKeyPress.bind(this);
@@ -216,8 +227,13 @@ let OscdLayout = class OscdLayout extends LitElement {
             return {
                 icon: plugin.icon || pluginIcons['menu'],
                 name: plugin.name,
+                src: plugin.src,
                 action: ae => {
-                    this.dispatchEvent(newPendingStateEvent((ae.target.items[ae.detail.index].nextElementSibling).run()));
+                    const menuContentElement = this.getMenuContent(plugin.src);
+                    if (!menuContentElement) {
+                        return;
+                    }
+                    this.dispatchEvent(newPendingStateEvent(menuContentElement.run()));
                 },
                 disabled: () => plugin.requireDoc && this.doc === null,
                 content: () => {
@@ -235,9 +251,14 @@ let OscdLayout = class OscdLayout extends LitElement {
             return {
                 icon: plugin.icon || pluginIcons['validator'],
                 name: plugin.name,
+                src: plugin.src,
                 action: ae => {
                     this.dispatchEvent(newEmptyIssuesEvent(plugin.src));
-                    this.dispatchEvent(newPendingStateEvent((ae.target.items[ae.detail.index].nextElementSibling).validate()));
+                    const menuContentElement = this.getMenuContent(plugin.src);
+                    if (!menuContentElement) {
+                        return;
+                    }
+                    this.dispatchEvent(newPendingStateEvent(menuContentElement.validate()));
                 },
                 disabled: () => this.doc === null,
                 content: plugin.content ?? (() => html ``),
@@ -260,6 +281,7 @@ let OscdLayout = class OscdLayout extends LitElement {
         iconid="${me.icon}"
         graphic="icon"
         data-name="${me.name}"
+        data-src="${me.src ?? ''}"
         .disabled=${me.disabled?.() || !me.action}
         ><mwc-icon slot="graphic">${me.icon}</mwc-icon>
         <span>${get(me.name)}</span>
@@ -267,7 +289,6 @@ let OscdLayout = class OscdLayout extends LitElement {
             ? html `<span slot="secondary"><tt>${me.hint}</tt></span>`
             : ''}
       </mwc-list-item>
-      ${me.content ? me.content() : nothing}
     `;
     }
     renderActionItem(me) {
@@ -298,6 +319,15 @@ let OscdLayout = class OscdLayout extends LitElement {
       <div slot="title" id="title">${this.docName}</div>
       ${this.menu.map(this.renderActionItem)}
     </mwc-top-app-bar-fixed>`;
+    }
+    renderMenuContent() {
+        return html `
+      <div id="menuContent">
+        ${this.menu
+            .filter(p => p.content)
+            .map(p => p.content())}
+      </div>
+    `;
     }
     /**
      * Renders a drawer toolbar featuring the scl filename, enabled menu plugins,
@@ -386,11 +416,11 @@ let OscdLayout = class OscdLayout extends LitElement {
         // TODO: this is a workaround, fix it
         this.menuUI.open = true;
         const menuEntry = this.menuUI.querySelector(`[data-name="${e.detail.name}"]`);
-        const menuElement = menuEntry.nextElementSibling;
-        if (!menuElement) {
+        const menuContentElement = this.getMenuContent(menuEntry.dataset.src ?? '');
+        if (!menuContentElement) {
             return;
-        } // TODO: log error
-        menuElement.run();
+        }
+        menuContentElement.run();
     }
     /**
      * Renders the landing buttons (open project and new project)
@@ -556,6 +586,9 @@ __decorate([
 __decorate([
     query('#menu')
 ], OscdLayout.prototype, "menuUI", void 0);
+__decorate([
+    query('#menuContent')
+], OscdLayout.prototype, "menuContent", void 0);
 __decorate([
     query('#pluginManager')
 ], OscdLayout.prototype, "pluginUI", void 0);

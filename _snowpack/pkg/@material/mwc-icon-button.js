@@ -1,16 +1,16 @@
 import { e as __decorate } from '../common/tslib.es6-52cb4f42.js';
-import { p as property, q as query, a as queryAsync, s as state, e as eventOptions, L as LitElement, b as customElement } from '../common/lit-element-39cf9538.js';
-import { R as RippleHandlers } from '../common/ripple-handlers-8ff759ce.js';
+import { p as property, q as query, a as queryAsync, s as state, e as eventOptions, L as LitElement, b as customElement } from '../common/lit-element-05157a0d.js';
+import { R as RippleHandlers } from '../common/ripple-handlers-614b9d4e.js';
 import { a as ariaProperty } from '../common/aria-property-2938771c.js';
-import { h as html } from '../common/lit-html-487c1dfc.js';
-import { s as styles } from '../common/mwc-icon-button.css-3983863d.js';
-import '../common/render-d4c46927.js';
+import { h as html } from '../common/lit-html-e07bf80b.js';
+import { s as styles } from '../common/mwc-icon-button.css-9cc392d9.js';
+import '../common/render-ab1aa234.js';
 import '../common/ponyfill-44e20603.js';
-import '../common/base-element-2666facd.js';
+import '../common/base-element-338757e6.js';
 import '../common/foundation-20340859.js';
 import '../common/foundation-7cea7f4a.js';
-import '../common/class-map-a3c1fa78.js';
-import '../common/style-map-1aebedfa.js';
+import '../common/class-map-aad33d7c.js';
+import '../common/style-map-3468e116.js';
 
 /** @soyCompatible */
 class IconButtonBase extends LitElement {

@@ -38,7 +38,7 @@ import "../../../_snowpack/pkg/@material/mwc-dialog.js";
 import "../../../_snowpack/pkg/@material/mwc-switch.js";
 import "../../../_snowpack/pkg/@material/mwc-select.js";
 import "../../../_snowpack/pkg/@material/mwc-textfield.js";
-import {nothing} from "../../../_snowpack/pkg/lit.js";
+import {pluginTag} from "../plugin-tag.js";
 import "./plugin-manager/plugin-manager.js";
 import "./plugin-manager/custom-plugin-dialog.js";
 import "./menu-tabs/menu-tabs.js";
@@ -61,13 +61,17 @@ export let OscdLayout = class extends LitElement {
         @oscd-run-menu=${this.handleRunMenuByEvent}
       >
         <slot></slot>
-        ${this.renderHeader()} ${this.renderAside()} ${this.renderContent()}
-        ${this.renderLanding()} ${this.renderPlugging()}
+        ${this.renderHeader()} ${this.renderAside()} ${this.renderMenuContent()}
+        ${this.renderContent()} ${this.renderLanding()} ${this.renderPlugging()}
       </div>
     `;
   }
   renderPlugging() {
     return html` ${this.renderPluginUI()} ${this.renderDownloadUI()} `;
+  }
+  getMenuContent(src) {
+    const tag = pluginTag(src);
+    return this.menuContent.querySelector(tag);
   }
   renderDownloadUI() {
     return html`
@@ -214,7 +218,14 @@ export let OscdLayout = class extends LitElement {
         return;
       }
       this.shouldValidate = false;
-      this.validated = Promise.allSettled(this.menuUI.querySelector("mwc-list").items.filter((item) => item.className === "validator").map((item) => item.nextElementSibling.validate())).then();
+      this.validated = Promise.allSettled(this.menuUI.querySelector("mwc-list").items.filter((item) => item.className === "validator").map((item) => {
+        const src = item.dataset.src ?? "";
+        const menuContentElement = this.getMenuContent(src);
+        if (!menuContentElement) {
+          return;
+        }
+        return menuContentElement.validate();
+      })).then();
       this.dispatchEvent(newPendingStateEvent(this.validated));
     });
     this.handleKeyPress = this.handleKeyPress.bind(this);
@@ -228,8 +239,13 @@ export let OscdLayout = class extends LitElement {
       return {
         icon: plugin.icon || pluginIcons["menu"],
         name: plugin.name,
+        src: plugin.src,
         action: (ae) => {
-          this.dispatchEvent(newPendingStateEvent(ae.target.items[ae.detail.index].nextElementSibling.run()));
+          const menuContentElement = this.getMenuContent(plugin.src);
+          if (!menuContentElement) {
+            return;
+          }
+          this.dispatchEvent(newPendingStateEvent(menuContentElement.run()));
         },
         disabled: () => plugin.requireDoc && this.doc === null,
         content: () => {
@@ -247,9 +263,14 @@ export let OscdLayout = class extends LitElement {
       return {
         icon: plugin.icon || pluginIcons["validator"],
         name: plugin.name,
+        src: plugin.src,
         action: (ae) => {
           this.dispatchEvent(newEmptyIssuesEvent(plugin.src));
-          this.dispatchEvent(newPendingStateEvent(ae.target.items[ae.detail.index].nextElementSibling.validate()));
+          const menuContentElement = this.getMenuContent(plugin.src);
+          if (!menuContentElement) {
+            return;
+          }
+          this.dispatchEvent(newPendingStateEvent(menuContentElement.validate()));
         },
         disabled: () => this.doc === null,
         content: plugin.content ?? (() => html``),
@@ -272,12 +293,12 @@ export let OscdLayout = class extends LitElement {
         iconid="${me.icon}"
         graphic="icon"
         data-name="${me.name}"
+        data-src="${me.src ?? ""}"
         .disabled=${me.disabled?.() || !me.action}
         ><mwc-icon slot="graphic">${me.icon}</mwc-icon>
         <span>${get(me.name)}</span>
         ${me.hint ? html`<span slot="secondary"><tt>${me.hint}</tt></span>` : ""}
       </mwc-list-item>
-      ${me.content ? me.content() : nothing}
     `;
   }
   renderActionItem(me) {
@@ -307,6 +328,13 @@ export let OscdLayout = class extends LitElement {
       <div slot="title" id="title">${this.docName}</div>
       ${this.menu.map(this.renderActionItem)}
     </mwc-top-app-bar-fixed>`;
+  }
+  renderMenuContent() {
+    return html`
+      <div id="menuContent">
+        ${this.menu.filter((p) => p.content).map((p) => p.content())}
+      </div>
+    `;
   }
   renderAside() {
     return html`
@@ -383,11 +411,11 @@ export let OscdLayout = class extends LitElement {
   handleRunMenuByEvent(e) {
     this.menuUI.open = true;
     const menuEntry = this.menuUI.querySelector(`[data-name="${e.detail.name}"]`);
-    const menuElement = menuEntry.nextElementSibling;
-    if (!menuElement) {
+    const menuContentElement = this.getMenuContent(menuEntry.dataset.src ?? "");
+    if (!menuContentElement) {
       return;
     }
-    menuElement.run();
+    menuContentElement.run();
   }
   renderLanding() {
     if (this.doc) {
@@ -545,6 +573,9 @@ __decorate([
 __decorate([
   query("#menu")
 ], OscdLayout.prototype, "menuUI", 2);
+__decorate([
+  query("#menuContent")
+], OscdLayout.prototype, "menuContent", 2);
 __decorate([
   query("#pluginManager")
 ], OscdLayout.prototype, "pluginUI", 2);

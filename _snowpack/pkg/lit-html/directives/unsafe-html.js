@@ -1,4 +1,4 @@
-import { d as directive, N as NodePart, g as isPrimitive } from '../../common/lit-html-487c1dfc.js';
+import { d as directive, N as NodePart, f as isPrimitive } from '../../common/lit-html-e07bf80b.js';
 
 /**
  * @license
