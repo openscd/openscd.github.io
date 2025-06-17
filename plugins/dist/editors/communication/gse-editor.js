@@ -6,7 +6,7 @@ import { newWizardEvent } from '../../../../openscd/src/foundation.js';
 import { newActionEvent } from '../../../../_snowpack/link/packages/core/dist/foundation/deprecated/editor.js';
 import { sizableGooseIcon } from '../../../../openscd/src/icons/icons.js';
 import { editGseWizard } from '../../wizards/gse.js';
-import { getAllConnectedAPsOfSameIED } from './foundation.js';
+import { canMoveCommunicationElementToConnectedAP, getAllConnectedAPsOfSameIED } from './foundation.js';
 let GseEditor = class GseEditor extends LitElement {
     get label() {
         return (this.element.getAttribute('ldInst') +
@@ -34,8 +34,8 @@ let GseEditor = class GseEditor extends LitElement {
             }));
     }
     render() {
-        const allConnectedAPsOfSameIED = getAllConnectedAPsOfSameIED(this.element, this.doc);
-        const hasMoreThanOneConnectedAP = allConnectedAPsOfSameIED.length > 1;
+        const validTargetConnectedAPs = getAllConnectedAPsOfSameIED(this.element, this.doc).filter(cap => canMoveCommunicationElementToConnectedAP(this.element, cap, this.doc));
+        const hasValidConnectedAPMoveTarget = validTargetConnectedAPs.length > 0;
         return html `<action-icon label="${this.label}" .icon="${sizableGooseIcon}"
       ><mwc-fab
         slot="action"
@@ -54,7 +54,7 @@ let GseEditor = class GseEditor extends LitElement {
         mini
         icon="forward"
         class="gse-move-button"
-        ?disabled="${!hasMoreThanOneConnectedAP}"
+        ?disabled="${!hasValidConnectedAPMoveTarget}"
         @click="${() => this.openGseMoveDialog()}"
       >
       </mwc-fab>

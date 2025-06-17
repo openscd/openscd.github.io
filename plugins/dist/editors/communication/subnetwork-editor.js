@@ -10,7 +10,7 @@ import { newWizardEvent, compareNames, } from '../../../../openscd/src/foundatio
 import { newActionEvent } from '../../../../_snowpack/link/packages/core/dist/foundation/deprecated/editor.js';
 import { createConnectedApWizard } from '../../wizards/connectedap.js';
 import { wizards } from '../../wizards/wizard-library.js';
-import { getAllConnectedAPsOfSameIED } from './foundation.js';
+import { canMoveCommunicationElementToConnectedAP, getAllConnectedAPsOfSameIED } from './foundation.js';
 /** [[`Communication`]] subeditor for a `SubNetwork` element. */
 let SubNetworkEditor = class SubNetworkEditor extends LitElement {
     constructor() {
@@ -129,7 +129,7 @@ let SubNetworkEditor = class SubNetworkEditor extends LitElement {
         if (!this.moveTargetElement)
             return html ``;
         const allConnectedAPs = getAllConnectedAPsOfSameIED(this.moveTargetElement, this.doc);
-        const currentConnectedAP = this.moveTargetElement.closest('ConnectedAP');
+        const validTargetConnectedAPs = allConnectedAPs.filter(cap => canMoveCommunicationElementToConnectedAP(this.moveTargetElement, cap, this.doc));
         return html `
       <mwc-dialog
         id="moveDialog"
@@ -145,7 +145,7 @@ let SubNetworkEditor = class SubNetworkEditor extends LitElement {
                 class=${connectedAP === this.newlySelectedAP ? 'selected' : ''}
                 @click=${() => (this.newlySelectedAP = connectedAP)}
                 ?selected=${connectedAP === this.newlySelectedAP}
-                ?disabled=${connectedAP === currentConnectedAP}
+                ?disabled=${!validTargetConnectedAPs.includes(connectedAP)}
               >
                 ${connectedAP.getAttribute('iedName')} >
                 ${connectedAP.getAttribute('apName')}
