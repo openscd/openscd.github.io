@@ -325,9 +325,15 @@ export let OscdLayout = class extends LitElement {
         slot="navigationIcon"
         @click=${() => this.menuUI.open = true}
       ></mwc-icon-button>
-      <div slot="title" id="title">${this.docName}</div>
-      ${this.menu.map(this.renderActionItem)}
+      ${this.renderTitle()}
+      ${this.renderActionItems()}
     </mwc-top-app-bar-fixed>`;
+  }
+  renderTitle() {
+    return html`<div slot="title" id="title">${this.docName}</div>`;
+  }
+  renderActionItems() {
+    return html`${this.menu.map(this.renderActionItem)}`;
   }
   renderMenuContent() {
     return html`
