@@ -25,6 +25,13 @@ export const defaults = {
     'IEC 61850-8-1': undefined,
 };
 let OscdSettings = class OscdSettings extends LitElement {
+    constructor() {
+        super(...arguments);
+        /** Object containing all *.nsdoc files and a function extracting element's label form them*/
+        this.nsdoc = initializeNsdoc();
+        this.nsdUploadButton = true;
+        this.languageConfig = { languages, loader };
+    }
     /** Current [[`Settings`]] in `localStorage`, default to [[`defaults`]]. */
     get settings() {
         return {
@@ -240,16 +247,10 @@ let OscdSettings = class OscdSettings extends LitElement {
     parseToXmlObject(text) {
         return new DOMParser().parseFromString(text, 'application/xml');
     }
-    constructor() {
-        super();
-        /** Object containing all *.nsdoc files and a function extracting element's label form them*/
-        this.nsdoc = initializeNsdoc();
-        this.nsdUploadButton = true;
-        registerTranslateConfig({ loader, empty: key => key });
-        use(this.settings.language);
-    }
     connectedCallback() {
         super.connectedCallback();
+        registerTranslateConfig({ loader: this.languageConfig.loader, empty: key => key });
+        use(this.settings.language);
         if (this.host) {
             this.host.addEventListener('oscd-settings', (evt) => {
                 evt.detail.show ? this.settingsUI.show() : this.settingsUI.close();
@@ -270,7 +271,7 @@ let OscdSettings = class OscdSettings extends LitElement {
             icon="language"
             label="${get('settings.language')}"
           >
-            ${Object.keys(languages).map(lang => html `<mwc-list-item
+            ${Object.keys(this.languageConfig.languages).map(lang => html `<mwc-list-item
                   graphic="icon"
                   value="${lang}"
                   ?selected=${lang === this.settings.language}
@@ -436,6 +437,9 @@ __decorate([
 __decorate([
     property({ type: Boolean })
 ], OscdSettings.prototype, "nsdUploadButton", void 0);
+__decorate([
+    property({ type: Object })
+], OscdSettings.prototype, "languageConfig", void 0);
 __decorate([
     query('#settings')
 ], OscdSettings.prototype, "settingsUI", void 0);
