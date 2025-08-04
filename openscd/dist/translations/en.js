@@ -89,7 +89,7 @@ export const en = {
             select: 'Select {{tagName}}',
             edit: 'Edit {{tagName}}',
             add: 'Add {{tagName}}',
-            selectAp: 'Select New ConnectedAP'
+            selectAp: 'Select New ConnectedAP',
         },
     },
     openSCD: {
@@ -153,7 +153,7 @@ export const en = {
         name: 'Diagnostics',
         zeroissues: 'No errors found in the project',
         placeholder: 'Issues found during validation will show up here',
-        missingnsd: 'Cannot validate DataTypeTemplates. The version of the project must be higher than or equal to 2007B3',
+        missingnsd: 'Cannot validate DataTypeTemplates. The version of the project must be higher than or equal to 2007B5',
     },
     plugins: {
         heading: 'Plug-ins',
@@ -273,7 +273,7 @@ export const en = {
             prefixHelper: 'Prefix of the logical node',
             lnClassHelper: 'Logical node class',
             instHelper: 'Instance',
-        }
+        },
     },
     ln0: {
         wizard: {
@@ -284,7 +284,7 @@ export const en = {
             lnTypeHelper: 'Logical node type',
             lnClassHelper: 'Logical node class',
             instHelper: 'Instance',
-        }
+        },
     },
     powertransformer: {
         wizard: {

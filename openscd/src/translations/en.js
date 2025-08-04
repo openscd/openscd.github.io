@@ -153,7 +153,7 @@ export const en = {
     name: "Diagnostics",
     zeroissues: "No errors found in the project",
     placeholder: "Issues found during validation will show up here",
-    missingnsd: "Cannot validate DataTypeTemplates. The version of the project must be higher than or equal to 2007B3"
+    missingnsd: "Cannot validate DataTypeTemplates. The version of the project must be higher than or equal to 2007B5"
   },
   plugins: {
     heading: "Plug-ins",

@@ -16,13 +16,8 @@ import "../../../_snowpack/pkg/@material/mwc-icon-button.js";
 import "../../../_snowpack/pkg/@material/mwc-list.js";
 import "../../../_snowpack/pkg/@material/mwc-list/mwc-list-item.js";
 import "../../../openscd/src/filtered-list.js";
-import {
-  identity,
-  newWizardEvent
-} from "../../../openscd/src/foundation.js";
-import {
-  createElement
-} from "../../../_snowpack/link/packages/xml/dist/index.js";
+import {identity, newWizardEvent} from "../../../openscd/src/foundation.js";
+import {createElement} from "../../../_snowpack/link/packages/xml/dist/index.js";
 import {newActionEvent} from "../../../_snowpack/link/packages/core/dist/foundation/deprecated/editor.js";
 import {styles} from "./templates/foundation.js";
 import {
@@ -42,7 +37,7 @@ import {
   lNodeTypeWizard
 } from "./templates/lnodetype-wizard.js";
 const templates = fetch("public/xml/templates.scd").then((response) => response.text()).then((str) => new DOMParser().parseFromString(str, "application/xml"));
-const nsd74 = fetch("public/xml/IEC_61850-7-4_2007B3.nsd").then((response) => response.text()).then((str) => new DOMParser().parseFromString(str, "application/xml"));
+const nsd74 = fetch("public/xml/IEC_61850-7-4_2007B5.nsd").then((response) => response.text()).then((str) => new DOMParser().parseFromString(str, "application/xml"));
 const nsd7420 = fetch("public/xml/IEC_61850-7-420_2019A4.nsd").then((response) => response.text()).then((str) => new DOMParser().parseFromString(str, "application/xml"));
 export default class TemplatesPlugin extends LitElement {
   constructor() {

@@ -89,7 +89,7 @@ export const de = {
             select: '{{tagName}} auswählen',
             edit: '{{tagName}} bearbeiten',
             add: '{{tagName}} hinzufügen',
-            selectAp: 'ConnectedAP auswählen'
+            selectAp: 'ConnectedAP auswählen',
         },
     },
     openSCD: {
@@ -169,7 +169,7 @@ export const de = {
         name: 'Daignoseübersicht',
         zeroissues: 'Es konnten keine Fehler in dem Projekt gefunden werden.',
         placeholder: 'Hier werden Validierungsfehler angezeigt.',
-        missingnsd: 'DataTypeTemplates können nicht validiert werden. Das Projekt muss die Version 2007B3 oder höher haben.',
+        missingnsd: 'DataTypeTemplates können nicht validiert werden. Das Projekt muss die Version 2007B5 oder höher haben.',
     },
     plugins: {
         heading: 'Plug-ins',
@@ -273,7 +273,7 @@ export const de = {
             prefixHelper: 'Prefix des Logical Nodes',
             lnClassHelper: 'Logical Node Klasse',
             instHelper: 'Instanz',
-        }
+        },
     },
     ln0: {
         wizard: {
@@ -284,7 +284,7 @@ export const de = {
             lnTypeHelper: 'Logical Node Typ',
             lnClassHelper: 'Logical Node Klasse',
             instHelper: 'Instanz',
-        }
+        },
     },
     powertransformer: {
         wizard: {
