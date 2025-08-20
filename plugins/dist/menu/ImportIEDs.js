@@ -265,13 +265,13 @@ export default class ImportingIedPlugin extends LitElement {
         updateNamespaces(this.doc.documentElement, ied.ownerDocument.documentElement);
         const dataTypeTemplateActions = addDataTypeTemplates(ied, this.doc);
         const communicationActions = addCommunicationElements(ied, this.doc);
-        const actions = communicationActions.concat(dataTypeTemplateActions);
-        actions.push({
+        const insertIed = {
             new: {
                 parent: this.doc.querySelector(':root'),
                 element: ied,
             },
-        });
+        };
+        const actions = [...communicationActions, insertIed, ...dataTypeTemplateActions];
         this.dispatchEvent(newActionEvent({
             title: get('editing.import', { name: ied.getAttribute('name') }),
             actions,
