@@ -28,6 +28,7 @@ import './addons/History.js';
 import './addons/Layout.js';
 import { officialPlugins as builtinPlugins } from './plugins.js';
 import { initializeNsdoc } from './foundation/nsdoc.js';
+import { OscdApi } from '../../_snowpack/link/packages/core/dist/foundation.js';
 import { historyStateEvent } from './addons/History.js';
 import { newConfigurePluginEvent } from './plugin.events.js';
 import { newLogEvent } from '../../_snowpack/link/packages/core/dist/foundation/deprecated/history.js';
@@ -349,6 +350,7 @@ let OpenSCD = class OpenSCD extends LitElement {
             .nsdoc=${this.nsdoc}
             .docs=${this.docs}
             .locale=${this.locale}
+            .oscdApi=${new OscdApi(tag)}
             class="${classMap({
                     plugin: true,
                     menu: plugin.kind === 'menu',

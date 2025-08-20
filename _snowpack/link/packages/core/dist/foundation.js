@@ -9,4 +9,5 @@ export { newEditCompletedEvent } from './foundation/edit-completed-event.js';
 export function crossProduct(...arrays) {
     return arrays.reduce((a, b) => a.flatMap(d => b.map(e => [d, e].flat())), [[]]);
 }
+export { OscdApi } from './api/api.js';
 //# sourceMappingURL=foundation.js.map
