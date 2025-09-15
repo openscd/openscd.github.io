@@ -170,15 +170,15 @@ function createConnectedApAction(parent) {
                 apName,
             });
             actions.push({ new: { parent, element: connectedAp } });
-            actions.push(...initSMVElements(doc, connectedAp, {
-                macGeneratorSmv,
-                appidGeneratorSmv,
-                unconnectedSampledValueControl,
-            }));
             actions.push(...initGSEElements(doc, connectedAp, {
                 macGeneratorGse,
                 appidGeneratorGse,
                 unconnectedGseControl,
+            }));
+            actions.push(...initSMVElements(doc, connectedAp, {
+                macGeneratorSmv,
+                appidGeneratorSmv,
+                unconnectedSampledValueControl,
             }));
             return { title: 'Added ConnectedAP', actions };
         });
