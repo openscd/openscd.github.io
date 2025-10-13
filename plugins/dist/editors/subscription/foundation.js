@@ -427,7 +427,9 @@ export function canCreateValidExtRef(fcda, controlBlock) {
         'lnInst',
         'doName',
     ].map(attr => fcda.getAttribute(attr));
-    if (!iedName || !ldInst || !lnClass || !lnInst || !doName) {
+    // lnInst is only required for ln that are not ln0
+    const hasValidLnInst = lnClass === 'LLN0' || !!lnInst;
+    if (!iedName || !ldInst || !lnClass || !hasValidLnInst || !doName) {
         return false;
     }
     // For 2003 schema or serviceType `Poll`, the extra fields aren't needed.

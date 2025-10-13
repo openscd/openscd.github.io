@@ -323,7 +323,8 @@ export function canCreateValidExtRef(fcda, controlBlock) {
     "lnInst",
     "doName"
   ].map((attr) => fcda.getAttribute(attr));
-  if (!iedName || !ldInst || !lnClass || !lnInst || !doName) {
+  const hasValidLnInst = lnClass === "LLN0" || !!lnInst;
+  if (!iedName || !ldInst || !lnClass || !hasValidLnInst || !doName) {
     return false;
   }
   if (getSclSchemaVersion(fcda.ownerDocument) === "2003" || controlBlock === void 0) {
