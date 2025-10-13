@@ -218,6 +218,7 @@ export const en = {
         missing: 'No IED',
         toggleChildElements: 'Toggle child elements',
         settings: 'Show Services the IED/AccessPoint provides',
+        createIed: 'Create Virtual IED',
         wizard: {
             daTitle: 'Show DA Info',
             doTitle: 'Show DO Info',
@@ -236,6 +237,11 @@ export const en = {
             daFc: 'Data attribute functional constraint',
             daBType: 'Data attribute type',
             daValue: 'Data attribute value',
+        },
+        createDialog: {
+            iedName: 'IED Name',
+            nameFormatError: 'IED name cannot contain spaces',
+            nameUniqueError: 'IED name already exists',
         },
     },
     ied: {

@@ -14,6 +14,8 @@ import {
   getInstanceAttribute,
   getNameAttribute
 } from "../../../../openscd/src/foundation.js";
+import {createElement} from "../../../../_snowpack/link/packages/xml/dist/index.js";
+import {insertSelectedLNodeType} from "../../../../_snowpack/pkg/@openenergytools/scl-lib/dist/tDataTypeTemplates/insertSelectedLNodeType.js";
 export class Container extends LitElement {
   constructor() {
     super();
@@ -48,12 +50,56 @@ __decorate([
 export function findElement(ancestors, tagName) {
   return ancestors.find((element) => element.tagName === tagName) ?? null;
 }
-export function findLogicaNodeElement(ancestors) {
+export function findLogicalNodeElement(ancestors) {
   let element = findElement(ancestors, "LN0");
   if (!element) {
     element = findElement(ancestors, "LN");
   }
   return element;
+}
+export function findLLN0LNodeType(doc) {
+  return doc.querySelector('DataTypeTemplates > LNodeType[lnClass="LLN0"]');
+}
+export function createLLN0LNodeType(doc, id) {
+  const selection = {
+    Beh: {
+      stVal: {
+        on: {},
+        blocked: {},
+        test: {},
+        "test/blocked": {},
+        off: {}
+      },
+      q: {},
+      t: {}
+    }
+  };
+  const logicalnode = {
+    class: "LLN0",
+    id
+  };
+  return insertSelectedLNodeType(doc, selection, logicalnode);
+}
+export function createIEDStructure(doc, iedName, lnTypeId, manufacturer = "OpenSCD") {
+  const ied = createElement(doc, "IED", {
+    name: iedName,
+    manufacturer
+  });
+  const accessPoint = createElement(doc, "AccessPoint", {name: "AP1"});
+  ied.appendChild(accessPoint);
+  const server = createElement(doc, "Server", {});
+  accessPoint.appendChild(server);
+  const authentication = createElement(doc, "Authentication", {});
+  server.appendChild(authentication);
+  const lDevice = createElement(doc, "LDevice", {inst: "LD1"});
+  server.appendChild(lDevice);
+  const ln0 = createElement(doc, "LN0", {
+    lnClass: "LLN0",
+    inst: "",
+    lnType: lnTypeId
+  });
+  lDevice.appendChild(ln0);
+  return ied;
 }
 export function findDOTypeElement(element) {
   if (element && element.hasAttribute("type")) {

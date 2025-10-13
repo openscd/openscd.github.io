@@ -3,12 +3,12 @@ import { get } from '../../../../_snowpack/pkg/lit-translate.js';
 import '../../../../_snowpack/pkg/@material/mwc-textarea.js';
 import '../../../../_snowpack/pkg/@material/mwc-textfield.js';
 import { getDescriptionAttribute, getInstanceAttribute, getNameAttribute, } from '../../../../openscd/src/foundation.js';
-import { findDOTypeElement, findElement, findLogicaNodeElement, } from './foundation.js';
+import { findDOTypeElement, findElement, findLogicalNodeElement, } from './foundation.js';
 function renderFields(element, instanceElement, ancestors, nsdoc) {
     const iedElement = findElement(ancestors, 'IED');
     const accessPointElement = findElement(ancestors, 'AccessPoint');
     const lDeviceElement = findElement(ancestors, 'LDevice');
-    const logicalNodeElement = findLogicaNodeElement(ancestors);
+    const logicalNodeElement = findLogicalNodeElement(ancestors);
     const doTypeElement = findDOTypeElement(element);
     return [
         html `

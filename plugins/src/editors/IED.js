@@ -12,23 +12,32 @@ var __decorate = (decorators, target, key, kind) => {
 import {
   css,
   html,
-  LitElement,
+  query,
   property,
-  state
+  state,
+  LitElement
 } from "../../../_snowpack/pkg/lit-element.js";
-import {get} from "../../../_snowpack/pkg/lit-translate.js";
+import {translate} from "../../../_snowpack/pkg/lit-translate.js";
 import {nothing} from "../../../_snowpack/pkg/lit-html.js";
 import "../../../_snowpack/pkg/@material/mwc-list/mwc-check-list-item.js";
 import "../../../_snowpack/pkg/@material/mwc-list/mwc-radio-list-item.js";
+import "../../../_snowpack/pkg/@material/mwc-button.js";
 import "../../../openscd/src/oscd-filter-button.js";
 import "./ied/ied-container.js";
 import "./ied/element-path.js";
+import "./ied/create-ied-dialog.js";
+import {
+  findLLN0LNodeType,
+  createLLN0LNodeType,
+  createIEDStructure
+} from "./ied/foundation.js";
 import {
   compareNames,
   getDescriptionAttribute,
   getNameAttribute
 } from "../../../openscd/src/foundation.js";
 import {getIcon} from "../../../openscd/src/icons/icons.js";
+import {newEditEventV2} from "../../../_snowpack/link/packages/core/dist/foundation.js";
 export default class IedPlugin extends LitElement {
   constructor() {
     super(...arguments);
@@ -81,6 +90,26 @@ export default class IedPlugin extends LitElement {
   disconnectedCallback() {
     super.disconnectedCallback();
     this.storePluginState();
+  }
+  createVirtualIED(iedName) {
+    const inserts = [];
+    const existingLLN0 = findLLN0LNodeType(this.doc);
+    const lnTypeId = existingLLN0?.getAttribute("id") || "PlaceholderLLN0";
+    const ied = createIEDStructure(this.doc, iedName, lnTypeId);
+    const dataTypeTemplates = this.doc.querySelector("DataTypeTemplates");
+    inserts.push({
+      parent: this.doc.querySelector("SCL"),
+      node: ied,
+      reference: dataTypeTemplates
+    });
+    if (!existingLLN0) {
+      const lnodeTypeInserts = createLLN0LNodeType(this.doc, lnTypeId);
+      inserts.push(...lnodeTypeInserts);
+    }
+    this.dispatchEvent(newEditEventV2(inserts));
+    this.selectedIEDs = [iedName];
+    this.selectedLNClasses = [];
+    this.requestUpdate("selectedIed");
   }
   updated(_changedProperties) {
     super.updated(_changedProperties);
@@ -136,80 +165,98 @@ export default class IedPlugin extends LitElement {
     this.selectedLNClasses = [];
     this.requestUpdate("selectedIed");
   }
-  render() {
+  renderIEDList() {
     const iedList = this.iedList;
-    if (iedList.length > 0) {
-      return html`<section>
-        <div class="header">
-          <h1>${get("filters")}:</h1>
-
-          <oscd-filter-button
-            id="iedFilter"
-            icon="developer_board"
-            .header=${get("iededitor.iedSelector")}
-            @selected-items-changed="${(e) => this.onSelectionChange(e.detail.selectedItems)}"
-          >
-            ${iedList.map((ied) => {
-        const name = getNameAttribute(ied);
-        const descr = getDescriptionAttribute(ied);
-        const type = ied.getAttribute("type");
-        const manufacturer = ied.getAttribute("manufacturer");
-        return html` <mwc-radio-list-item
-                value="${name}"
-                ?twoline="${type && manufacturer}"
-                ?selected="${this.selectedIEDs.includes(name ?? "")}"
-              >
-                ${name} ${descr ? html` (${descr})` : html``}
-                <span slot="secondary">
-                  ${type} ${type && manufacturer ? html`&mdash;` : nothing}
-                  ${manufacturer}
-                </span>
-              </mwc-radio-list-item>`;
-      })}
-          </oscd-filter-button>
-
-          <oscd-filter-button
-            id="lnClassesFilter"
-            multi="true"
-            .header="${get("iededitor.lnFilter")}"
-            @selected-items-changed="${(e) => {
-        this.selectedLNClasses = e.detail.selectedItems;
-        this.requestUpdate("selectedIed");
-      }}"
-          >
-            <span slot="icon">${getIcon("lNIcon")}</span>
-            ${this.lnClassList.map((lnClassInfo) => {
-        const value = lnClassInfo[0];
-        const label = lnClassInfo[1];
-        return html`<mwc-check-list-item
-                value="${value}"
-                ?selected="${this.selectedLNClasses.includes(value)}"
-              >
-                ${label}
-              </mwc-check-list-item>`;
-      })}
-          </oscd-filter-button>
-
-          <element-path class="elementPath"></element-path>
-        </div>
-
-        <ied-container
-          .editCount=${this.editCount}
-          .doc=${this.doc}
-          .element=${this.selectedIed}
-          .selectedLNClasses=${this.calcSelectedLNClasses()}
-          .nsdoc=${this.nsdoc}
-        ></ied-container>
-      </section>`;
+    if (iedList.length === 0) {
+      return html`<h1>
+        <span style="color: var(--base1)"
+          >${translate("iededitor.missing")}</span
+        >
+      </h1>`;
     }
-    return html`<h1>
-      <span style="color: var(--base1)">${get("iededitor.missing")}</span>
-    </h1>`;
+    return html`<section>
+      <div class="header">
+        <h1>${translate("filters")}:</h1>
+        <oscd-filter-button
+          id="iedFilter"
+          icon="developer_board"
+          .header=${translate("iededitor.iedSelector")}
+          @selected-items-changed="${(e) => this.onSelectionChange(e.detail.selectedItems)}"
+        >
+          ${iedList.map((ied) => {
+      const name = getNameAttribute(ied);
+      const descr = getDescriptionAttribute(ied);
+      const type = ied.getAttribute("type");
+      const manufacturer = ied.getAttribute("manufacturer");
+      return html` <mwc-radio-list-item
+              value="${name}"
+              ?twoline="${type && manufacturer}"
+              ?selected="${this.selectedIEDs.includes(name ?? "")}"
+            >
+              ${name} ${descr ? html` (${descr})` : html``}
+              <span slot="secondary">
+                ${type} ${type && manufacturer ? html`&mdash;` : nothing}
+                ${manufacturer}
+              </span>
+            </mwc-radio-list-item>`;
+    })}
+        </oscd-filter-button>
+
+        <oscd-filter-button
+          id="lnClassesFilter"
+          multi="true"
+          .header="${translate("iededitor.lnFilter")}"
+          @selected-items-changed="${(e) => {
+      this.selectedLNClasses = e.detail.selectedItems;
+      this.requestUpdate("selectedIed");
+    }}"
+        >
+          <span slot="icon">${getIcon("lNIcon")}</span>
+          ${this.lnClassList.map((lnClassInfo) => {
+      const value = lnClassInfo[0];
+      const label = lnClassInfo[1];
+      return html`<mwc-check-list-item
+              value="${value}"
+              ?selected="${this.selectedLNClasses.includes(value)}"
+            >
+              ${label}
+            </mwc-check-list-item>`;
+    })}
+        </oscd-filter-button>
+
+        <element-path class="elementPath"></element-path>
+      </div>
+
+      <ied-container
+        .editCount=${this.editCount}
+        .doc=${this.doc}
+        .element=${this.selectedIed}
+        .selectedLNClasses=${this.calcSelectedLNClasses()}
+        .nsdoc=${this.nsdoc}
+      ></ied-container>
+    </section>`;
+  }
+  render() {
+    return html`<div>
+      <mwc-button
+        class="add-ied-button"
+        icon="add"
+        @click=${() => this.createIedDialog.show()}
+      >
+        ${translate("iededitor.createIed")}
+      </mwc-button>
+      ${this.renderIEDList()}
+      <create-ied-dialog
+        .doc=${this.doc}
+        .onConfirm=${(iedName) => this.createVirtualIED(iedName)}
+      ></create-ied-dialog>
+    </div>`;
   }
 }
 IedPlugin.styles = css`
     :host {
       width: 100vw;
+      position: relative;
     }
 
     section {
@@ -236,6 +283,12 @@ IedPlugin.styles = css`
       margin-left: auto;
       padding-right: 12px;
     }
+
+    .add-ied-button {
+      display: block;
+      float: right;
+      margin: 8px 12px 0 0;
+    }
   `;
 __decorate([
   property()
@@ -249,6 +302,9 @@ __decorate([
 __decorate([
   property()
 ], IedPlugin.prototype, "oscdApi", 2);
+__decorate([
+  query("create-ied-dialog")
+], IedPlugin.prototype, "createIedDialog", 2);
 __decorate([
   state()
 ], IedPlugin.prototype, "selectedIEDs", 2);

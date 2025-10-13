@@ -3,7 +3,7 @@ import { get } from '../../../../_snowpack/pkg/lit-translate.js';
 import '../../../../_snowpack/pkg/@material/mwc-textarea.js';
 import '../../../../_snowpack/pkg/@material/mwc-textfield.js';
 import { getDescriptionAttribute, getInstanceAttribute, getNameAttribute, } from '../../../../openscd/src/foundation.js';
-import { findDOTypeElement, findElement, findLogicaNodeElement, getValueElements, } from './foundation.js';
+import { findDOTypeElement, findElement, findLogicalNodeElement, getValueElements, } from './foundation.js';
 function getValues(element) {
     const hasValue = getValueElements(element).length !== 0;
     return hasValue
@@ -16,7 +16,7 @@ function renderFields(element, instanceElement, ancestors, nsdoc) {
     const iedElement = findElement(ancestors, 'IED');
     const accessPointElement = findElement(ancestors, 'AccessPoint');
     const lDeviceElement = findElement(ancestors, 'LDevice');
-    const logicalNodeElement = findLogicaNodeElement(ancestors);
+    const logicalNodeElement = findLogicalNodeElement(ancestors);
     const doElement = findElement(ancestors, 'DO');
     const doTypeElement = findDOTypeElement(doElement);
     return [

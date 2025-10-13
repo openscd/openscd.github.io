@@ -28,6 +28,7 @@
     "@material/mwc-textarea": "./@material/mwc-textarea.js",
     "@material/mwc-textfield": "./@material/mwc-textfield.js",
     "@material/mwc-top-app-bar-fixed": "./@material/mwc-top-app-bar-fixed.js",
+    "@openenergytools/scl-lib/dist/tDataTypeTemplates/insertSelectedLNodeType.js": "./@openenergytools/scl-lib/dist/tDataTypeTemplates/insertSelectedLNodeType.js",
     "ace-custom-element": "./ace-custom-element.js",
     "lit-element": "./lit-element.js",
     "lit-html": "./lit-html.js",

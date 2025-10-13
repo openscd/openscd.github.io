@@ -10,7 +10,7 @@ import {
 import {
   findDOTypeElement,
   findElement,
-  findLogicaNodeElement,
+  findLogicalNodeElement,
   getValueElements
 } from "./foundation.js";
 function getValues(element) {
@@ -21,7 +21,7 @@ function renderFields(element, instanceElement, ancestors, nsdoc) {
   const iedElement = findElement(ancestors, "IED");
   const accessPointElement = findElement(ancestors, "AccessPoint");
   const lDeviceElement = findElement(ancestors, "LDevice");
-  const logicalNodeElement = findLogicaNodeElement(ancestors);
+  const logicalNodeElement = findLogicalNodeElement(ancestors);
   const doElement = findElement(ancestors, "DO");
   const doTypeElement = findDOTypeElement(doElement);
   return [
