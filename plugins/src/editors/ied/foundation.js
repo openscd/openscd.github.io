@@ -101,6 +101,22 @@ export function createIEDStructure(doc, iedName, lnTypeId, manufacturer = "OpenS
   lDevice.appendChild(ln0);
   return ied;
 }
+export function createAccessPoint(doc, name) {
+  return createElement(doc, "AccessPoint", {name});
+}
+export function createServerAt(doc, apName, desc) {
+  const attributes = {apName};
+  if (desc) {
+    attributes.desc = desc;
+  }
+  return createElement(doc, "ServerAt", attributes);
+}
+export function getExistingAccessPointNames(ied) {
+  return Array.from(ied.querySelectorAll(":scope > AccessPoint")).map((ap) => ap.getAttribute("name")).filter((name) => name !== null);
+}
+export function getAccessPointsWithServer(ied) {
+  return Array.from(ied.querySelectorAll(":scope > AccessPoint")).filter((ap) => ap.querySelector(":scope > Server")).map((ap) => ap.getAttribute("name")).filter((name) => name !== null);
+}
 export function findDOTypeElement(element) {
   if (element && element.hasAttribute("type")) {
     const type = element.getAttribute("type");
@@ -146,4 +162,10 @@ export function newFullElementPathEvent(elementNames, eventInitDict) {
     ...eventInitDict,
     detail: {elementNames, ...eventInitDict?.detail}
   });
+}
+export function getLDeviceInsts(server) {
+  return Array.from(server.querySelectorAll(":scope > LDevice")).map((ld) => ld.getAttribute("inst") || "");
+}
+export function getLNodeTypes(doc) {
+  return Array.from(doc.querySelectorAll("DataTypeTemplates > LNodeType"));
 }

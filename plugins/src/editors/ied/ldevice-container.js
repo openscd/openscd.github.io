@@ -18,7 +18,10 @@ import {
   state
 } from "../../../../_snowpack/pkg/lit-element.js";
 import {nothing} from "../../../../_snowpack/pkg/lit-html.js";
-import {get} from "../../../../_snowpack/pkg/lit-translate.js";
+import {get, translate} from "../../../../_snowpack/pkg/lit-translate.js";
+import {newEditEventV2} from "../../../../_snowpack/link/packages/core/dist/foundation.js";
+import {createElement} from "../../../../_snowpack/link/packages/xml/dist/index.js";
+import {logicalDeviceIcon} from "../../../../openscd/src/icons/ied-icons.js";
 import {
   getDescriptionAttribute,
   getInstanceAttribute,
@@ -26,11 +29,12 @@ import {
   getLdNameAttribute,
   newWizardEvent
 } from "../../../../openscd/src/foundation.js";
-import {logicalDeviceIcon} from "../../../../openscd/src/icons/ied-icons.js";
-import "../../../../openscd/src/action-pane.js";
-import "./ln-container.js";
 import {wizards} from "../../wizards/wizard-library.js";
 import {Container} from "./foundation.js";
+import {lnInstGenerator} from "../../../../_snowpack/pkg/@openenergytools/scl-lib/dist/generator/lnInstGenerator.js";
+import "../../../../openscd/src/action-pane.js";
+import "./ln-container.js";
+import "./add-ln-dialog.js";
 export let LDeviceContainer = class extends Container {
   constructor() {
     super(...arguments);
@@ -62,6 +66,24 @@ export let LDeviceContainer = class extends Container {
       return this.selectedLNClasses.includes(lnClass);
     });
   }
+  handleAddLN(data) {
+    const getInst = lnInstGenerator(this.element, "LN");
+    const inserts = [];
+    for (let i = 0; i < data.amount; i++) {
+      const inst = getInst(data.lnClass);
+      if (!inst)
+        break;
+      const lnAttrs = {
+        lnClass: data.lnClass,
+        lnType: data.lnType,
+        inst,
+        ...data.prefix ? {prefix: data.prefix} : {}
+      };
+      const ln = createElement(this.doc, "LN", lnAttrs);
+      inserts.push({parent: this.element, node: ln, reference: null});
+    }
+    this.dispatchEvent(newEditEventV2(inserts));
+  }
   render() {
     const lnElements = this.lnElements;
     return html`<action-pane .label="${this.header()}">
@@ -70,6 +92,12 @@ export let LDeviceContainer = class extends Container {
         <mwc-icon-button
           icon="edit"
           @click=${() => this.openEditWizard()}
+        ></mwc-icon-button>
+      </abbr>
+      <abbr slot="action" title=${translate("iededitor.addLnDialog.title")}>
+        <mwc-icon-button
+          icon="playlist_add"
+          @click=${() => this.addLnDialog.show()}
         ></mwc-icon-button>
       </abbr>
       ${lnElements.length > 0 ? html`<abbr
@@ -93,6 +121,10 @@ export let LDeviceContainer = class extends Container {
                 .ancestors=${[...this.ancestors, this.element]}
               ></ln-container> `) : nothing}
       </div>
+      <add-ln-dialog
+        .doc=${this.doc}
+        .onConfirm=${(data) => this.handleAddLN(data)}
+      ></add-ln-dialog>
     </action-pane>`;
   }
 };
@@ -120,6 +152,9 @@ __decorate([
 __decorate([
   query("#toggleButton")
 ], LDeviceContainer.prototype, "toggleButton", 2);
+__decorate([
+  query("add-ln-dialog")
+], LDeviceContainer.prototype, "addLnDialog", 2);
 __decorate([
   state()
 ], LDeviceContainer.prototype, "lnElements", 1);
