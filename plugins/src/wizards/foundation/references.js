@@ -2,7 +2,13 @@ import {
   getNameAttribute,
   isPublic
 } from "../../../../openscd/src/foundation.js";
-const referenceInfoTags = ["IED", "Substation", "VoltageLevel", "Bay"];
+const referenceInfoTags = [
+  "IED",
+  "AccessPoint",
+  "Substation",
+  "VoltageLevel",
+  "Bay"
+];
 const referenceInfos = {
   IED: [
     {
@@ -40,6 +46,12 @@ const referenceInfos = {
     {
       attributeName: null,
       filter: simpleTextContentFilter(`LN > DOI > DAI > Val`)
+    }
+  ],
+  AccessPoint: [
+    {
+      attributeName: "apName",
+      filter: simpleAttributeFilter(`ServerAt`)
     }
   ],
   Substation: [

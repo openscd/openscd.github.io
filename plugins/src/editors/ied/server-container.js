@@ -66,6 +66,7 @@ export let ServerContainer = class extends Container {
     });
     const ln0 = createElement(this.doc, "LN0", {
       lnClass: "LLN0",
+      inst: "",
       lnType: lnTypeId
     });
     lDevice.appendChild(ln0);

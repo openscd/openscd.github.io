@@ -11,6 +11,7 @@ import { createPowerTransformerWizard, editPowerTransformerWizard, } from './pow
 import { editSubNetworkWizard } from './subnetwork.js';
 import { editIEDWizard } from './ied.js';
 import { editLDeviceWizard } from './ldevice.js';
+import { editAccessPointWizard } from './accesspoint.js';
 import { editTrgOpsWizard } from './trgops.js';
 import { createDaWizard } from './da.js';
 import { editDAIWizard } from './dai.js';
@@ -37,7 +38,7 @@ export const wizards = {
         create: emptyWizard,
     },
     AccessPoint: {
-        edit: emptyWizard,
+        edit: editAccessPointWizard,
         create: emptyWizard,
     },
     Address: {

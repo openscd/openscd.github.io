@@ -4,7 +4,7 @@ import '../../../_snowpack/pkg/@material/mwc-list.js';
 import '../../../_snowpack/pkg/@material/mwc-list/mwc-list-item.js';
 import '../../../openscd/src/wizard-textfield.js';
 import { identity, isPublic, newSubWizardEvent, newWizardEvent, } from '../../../openscd/src/foundation.js';
-import { newActionEvent } from '../../../_snowpack/link/packages/core/dist/foundation/deprecated/editor.js';
+import { newActionEvent, } from '../../../_snowpack/link/packages/core/dist/foundation/deprecated/editor.js';
 import { patterns } from './foundation/limits.js';
 import { updateNamingAttributeWithReferencesAction } from './foundation/actions.js';
 import { deleteReferences } from './foundation/references.js';
@@ -42,9 +42,9 @@ export function renderIEDWizard(name, desc, type, manufacturer, configVersion, o
     ></wizard-textfield>`,
         html `<wizard-textfield
       label="manufacturer"
-      .maybeValue=${manufacturer || '-'}
-      readOnly
-      disabled
+      .maybeValue=${manufacturer}
+      helper="${get('ied.wizard.manufacturerHelper')}"
+      pattern="${patterns.normalizedString}"
     ></wizard-textfield>`,
         html `<wizard-textfield
       label="configVersion"

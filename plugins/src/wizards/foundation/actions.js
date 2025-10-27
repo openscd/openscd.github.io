@@ -1,9 +1,7 @@
 import {
   getValue
 } from "../../../../openscd/src/foundation.js";
-import {
-  cloneElement
-} from "../../../../_snowpack/link/packages/xml/dist/index.js";
+import {cloneElement} from "../../../../_snowpack/link/packages/xml/dist/index.js";
 import {
   createUpdateAction
 } from "../../../../_snowpack/link/packages/core/dist/foundation/deprecated/editor.js";
@@ -45,6 +43,7 @@ export function updateNamingAttributeWithReferencesAction(element, messageTitleK
   return (inputs) => {
     const newAttributes = {};
     processNamingAttributes(newAttributes, element, inputs);
+    processOptionalAttribute(newAttributes, element, inputs, "manufacturer", "manufacturer");
     if (Object.keys(newAttributes).length == 0) {
       return [];
     }
@@ -67,6 +66,15 @@ export function processNamingAttributes(newAttributes, element, inputs) {
   }
   if (desc !== element.getAttribute("desc")) {
     newAttributes["desc"] = desc;
+  }
+}
+function processOptionalAttribute(newAttributes, element, inputs, inputLabel, attrName) {
+  const input = inputs.find((i) => i.label === inputLabel);
+  if (!input)
+    return;
+  const value = getValue(input);
+  if (value !== element.getAttribute(attrName)) {
+    newAttributes[attrName] = value;
   }
 }
 export function addMissingAttributes(element, newAttributes) {

@@ -1,5 +1,11 @@
 import { getNameAttribute, isPublic, } from '../../../../openscd/src/foundation.js';
-const referenceInfoTags = ['IED', 'Substation', 'VoltageLevel', 'Bay'];
+const referenceInfoTags = [
+    'IED',
+    'AccessPoint',
+    'Substation',
+    'VoltageLevel',
+    'Bay',
+];
 /*
  * For every supported tag a list of information about which elements to search for and which attribute value
  * to replace with the new value typed in the screen by the user. This is used to update references to a name
@@ -43,6 +49,12 @@ const referenceInfos = {
         {
             attributeName: null,
             filter: simpleTextContentFilter(`LN > DOI > DAI > Val`),
+        },
+    ],
+    AccessPoint: [
+        {
+            attributeName: 'apName',
+            filter: simpleAttributeFilter(`ServerAt`),
         },
     ],
     Substation: [

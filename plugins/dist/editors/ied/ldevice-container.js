@@ -6,6 +6,7 @@ import { newEditEventV2 } from '../../../../_snowpack/link/packages/core/dist/fo
 import { createElement } from '../../../../_snowpack/link/packages/xml/dist/index.js';
 import { logicalDeviceIcon } from '../../../../openscd/src/icons/ied-icons.js';
 import { getDescriptionAttribute, getInstanceAttribute, getNameAttribute, getLdNameAttribute, newWizardEvent, } from '../../../../openscd/src/foundation.js';
+import { newActionEvent } from '../../../../_snowpack/link/packages/core/dist/foundation/deprecated/editor.js';
 import { wizards } from '../../wizards/wizard-library.js';
 import { Container } from './foundation.js';
 import { lnInstGenerator } from '../../../../_snowpack/pkg/@openenergytools/scl-lib/dist/generator/lnInstGenerator.js';
@@ -65,10 +66,21 @@ let LDeviceContainer = class LDeviceContainer extends Container {
         }
         this.dispatchEvent(newEditEventV2(inserts));
     }
+    removeLDevice() {
+        this.dispatchEvent(newActionEvent({
+            old: { parent: this.element.parentElement, element: this.element },
+        }));
+    }
     render() {
         const lnElements = this.lnElements;
         return html `<action-pane .label="${this.header()}">
       <mwc-icon slot="icon">${logicalDeviceIcon}</mwc-icon>
+      <mwc-icon-button
+        slot="action"
+        icon="delete"
+        title="${translate('remove')}"
+        @click=${() => this.removeLDevice()}
+      ></mwc-icon-button>
       <abbr slot="action" title="${get('edit')}">
         <mwc-icon-button
           icon="edit"

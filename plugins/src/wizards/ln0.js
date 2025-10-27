@@ -1,19 +1,26 @@
 import {html} from "../../../_snowpack/pkg/lit-element.js";
 import {get} from "../../../_snowpack/pkg/lit-translate.js";
+import "../../../_snowpack/pkg/@material/mwc-list/mwc-list-item.js";
 import "../../../openscd/src/wizard-textfield.js";
+import "../../../openscd/src/wizard-select.js";
 import {
   getValue
 } from "../../../openscd/src/foundation.js";
 import {cloneElement} from "../../../_snowpack/link/packages/xml/dist/index.js";
-export function renderLN0Wizard(lnType, desc, lnClass, inst) {
+function getLNodeTypeOptions(element) {
+  const doc = element.ownerDocument;
+  const lNodeTypes = Array.from(doc.querySelectorAll('DataTypeTemplates > LNodeType[lnClass="LLN0"]'));
+  return lNodeTypes.map((lnt) => lnt.getAttribute("id")).filter((id) => id);
+}
+export function renderLN0Wizard(lnodeTypeIds, lnType, desc, lnClass, inst) {
   return [
-    html`<wizard-textfield
+    html`<wizard-select
       label="lnType"
       .maybeValue=${lnType}
-      readonly
       required
       helper="${get("ln0.wizard.lnTypeHelper")}"
-    ></wizard-textfield>`,
+      >${lnodeTypeIds.map((id) => html`<mwc-list-item value="${id}">${id}</mwc-list-item>`)}</wizard-select
+    >`,
     html`<wizard-textfield
       label="desc"
       .maybeValue=${desc}
@@ -55,6 +62,7 @@ function updateAction(element) {
   };
 }
 export function editLN0Wizard(element) {
+  const lnodeTypeIds = getLNodeTypeOptions(element);
   return [
     {
       title: get("ln0.wizard.title.edit"),
@@ -64,7 +72,7 @@ export function editLN0Wizard(element) {
         label: get("save"),
         action: updateAction(element)
       },
-      content: renderLN0Wizard(element.getAttribute("lnType"), element.getAttribute("desc"), element.getAttribute("lnClass"), element.getAttribute("inst"))
+      content: renderLN0Wizard(lnodeTypeIds, element.getAttribute("lnType"), element.getAttribute("desc"), element.getAttribute("lnClass"), element.getAttribute("inst"))
     }
   ];
 }

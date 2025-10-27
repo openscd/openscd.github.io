@@ -44,9 +44,9 @@ export function renderIEDWizard(name, desc, type, manufacturer, configVersion, o
     ></wizard-textfield>`,
     html`<wizard-textfield
       label="manufacturer"
-      .maybeValue=${manufacturer || "-"}
-      readOnly
-      disabled
+      .maybeValue=${manufacturer}
+      helper="${get("ied.wizard.manufacturerHelper")}"
+      pattern="${patterns.normalizedString}"
     ></wizard-textfield>`,
     html`<wizard-textfield
       label="configVersion"

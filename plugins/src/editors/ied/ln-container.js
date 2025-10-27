@@ -12,12 +12,13 @@ var __decorate = (decorators, target, key, kind) => {
 import {customElement, html, query} from "../../../../_snowpack/pkg/lit-element.js";
 import {nothing} from "../../../../_snowpack/pkg/lit-html.js";
 import {until} from "../../../../_snowpack/pkg/lit-html/directives/until.js";
-import {get} from "../../../../_snowpack/pkg/lit-translate.js";
+import {get, translate} from "../../../../_snowpack/pkg/lit-translate.js";
 import {
   getInstanceAttribute,
   getNameAttribute,
   newWizardEvent
 } from "../../../../openscd/src/foundation.js";
+import {newActionEvent} from "../../../../_snowpack/link/packages/core/dist/foundation/deprecated/editor.js";
 import "../../../../openscd/src/action-pane.js";
 import "./do-container.js";
 import {Container} from "./foundation.js";
@@ -50,28 +51,37 @@ export let LNContainer = class extends Container {
     if (wizard)
       this.dispatchEvent(newWizardEvent(wizard));
   }
+  removeElement() {
+    if (this.element.tagName === "LN") {
+      this.dispatchEvent(newActionEvent({
+        old: {parent: this.element.parentElement, element: this.element}
+      }));
+    }
+  }
   render() {
     const doElements = this.getDOElements();
     return html`<action-pane .label="${until(this.header())}">
-      ${doElements.length > 0 ? html`<abbr slot="action">
-          <mwc-icon-button
-            slot="action"
-            mini
-            icon="edit"
-            @click="${() => this.openEditWizard()}}"
-          ></mwc-icon-button>
-        </abbr>
-        <abbr
-            slot="action"
-            title="${get("iededitor.toggleChildElements")}"
-          >
-            <mwc-icon-button-toggle
-              id="toggleButton"
-              onIcon="keyboard_arrow_up"
-              offIcon="keyboard_arrow_down"
-              @click=${() => this.requestUpdate()}
-            ></mwc-icon-button-toggle>
-          </abbr>` : nothing}
+      ${doElements.length > 0 ? html`${this.element.tagName === "LN" ? html`<mwc-icon-button
+                  slot="action"
+                  icon="delete"
+                  title="${translate("remove")}"
+                  @click=${() => this.removeElement()}
+                ></mwc-icon-button>` : nothing}<abbr slot="action">
+              <mwc-icon-button
+                slot="action"
+                mini
+                icon="edit"
+                @click="${() => this.openEditWizard()}}"
+              ></mwc-icon-button>
+            </abbr>
+            <abbr slot="action" title="${get("iededitor.toggleChildElements")}">
+              <mwc-icon-button-toggle
+                id="toggleButton"
+                onIcon="keyboard_arrow_up"
+                offIcon="keyboard_arrow_down"
+                @click=${() => this.requestUpdate()}
+              ></mwc-icon-button-toggle>
+            </abbr>` : nothing}
       ${this.toggleButton?.on ? doElements.map((dO) => html`<do-container
               .editCount=${this.editCount}
               .doc=${this.doc}

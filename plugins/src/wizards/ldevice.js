@@ -9,7 +9,7 @@ import {
 import {cloneElement} from "../../../_snowpack/link/packages/xml/dist/index.js";
 import {patterns} from "./foundation/limits.js";
 const lDeviceNamePattern = "[A-Za-z][0-9A-Za-z_]{0,2}|[A-Za-z][0-9A-Za-z_]{4,63}|[A-MO-Za-z][0-9A-Za-z_]{3}|N[0-9A-Za-np-z_][0-9A-Za-z_]{2}|No[0-9A-Za-mo-z_][0-9A-Za-z_]|Non[0-9A-Za-df-z_]";
-export function renderLdeviceWizard(ldName, readOnly, desc, ldInst) {
+export function renderLdeviceWizard(ldName, readOnly, desc, inst, reservedInst) {
   return [
     readOnly ? html`<wizard-textfield
           label="ldName"
@@ -35,10 +35,13 @@ export function renderLdeviceWizard(ldName, readOnly, desc, ldInst) {
       pattern="${patterns.normalizedString}"
     ></wizard-textfield>`,
     html`<wizard-textfield
-      label="ldInst"
-      .maybeValue=${ldInst}
-      readOnly
-      disabled
+      label="inst"
+      .maybeValue=${inst}
+      required
+      helper="${get("ldevice.wizard.instHelper")}"
+      validationMessage="${get("textfield.required")}"
+      pattern="${patterns.normalizedString}"
+      .reservedValues=${reservedInst}
     ></wizard-textfield>`
   ];
 }
@@ -48,10 +51,16 @@ function ldNameIsAllowed(element) {
     return true;
   return false;
 }
+function reservedInstLDevice(currentElement) {
+  const ied = currentElement.closest("IED");
+  if (!ied)
+    return [];
+  return Array.from(ied.querySelectorAll(":scope > AccessPoint > Server > LDevice")).map((ld) => ld.getAttribute("inst") ?? "").filter((name) => name !== currentElement.getAttribute("inst"));
+}
 function updateAction(element) {
   return (inputs) => {
     const ldAttrs = {};
-    const ldKeys = ["ldName", "desc"];
+    const ldKeys = ["desc", "inst"];
     ldKeys.forEach((key) => {
       ldAttrs[key] = getValue(inputs.find((i) => i.label === key));
     });
@@ -77,7 +86,7 @@ export function editLDeviceWizard(element) {
         label: get("save"),
         action: updateAction(element)
       },
-      content: renderLdeviceWizard(element.getAttribute("ldName"), !ldNameIsAllowed(element), element.getAttribute("desc"), element.getAttribute("inst"))
+      content: renderLdeviceWizard(element.getAttribute("ldName"), !ldNameIsAllowed(element), element.getAttribute("desc"), element.getAttribute("inst"), reservedInstLDevice(element))
     }
   ];
 }
