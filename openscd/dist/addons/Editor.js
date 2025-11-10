@@ -1,5 +1,5 @@
 import { __decorate } from "../../../_snowpack/pkg/tslib.js";
-import { newEditEvent, handleEditV2, isInsertV2, isRemoveV2, isSetAttributesV2, isSetTextContentV2, isComplexV2, newEditEventV2 } from '../../../_snowpack/link/packages/core/dist/foundation.js';
+import { newEditEvent, newEditEventV2 } from '../../../_snowpack/link/packages/core/dist/foundation.js';
 import { property, LitElement, customElement, html, } from '../../../_snowpack/pkg/lit-element.js';
 import { get } from '../../../_snowpack/pkg/lit-translate.js';
 import { newLogEvent } from '../../../_snowpack/link/packages/core/dist/foundation/deprecated/history.js';
@@ -16,29 +16,6 @@ let OscdEditor = class OscdEditor extends LitElement {
         this.docName = '';
         /** The UUID of the current [[`doc`]] */
         this.docId = '';
-    }
-    getLogText(edit) {
-        if (isInsertV2(edit)) {
-            const name = edit.node instanceof Element ?
-                edit.node.tagName :
-                get('editing.node');
-            return { title: get('editing.created', { name }) };
-        }
-        else if (isSetAttributesV2(edit) || isSetTextContentV2(edit)) {
-            const name = edit.element.tagName;
-            return { title: get('editing.updated', { name }) };
-        }
-        else if (isRemoveV2(edit)) {
-            const name = edit.node instanceof Element ?
-                edit.node.tagName :
-                get('editing.node');
-            return { title: get('editing.deleted', { name }) };
-        }
-        else if (isComplexV2(edit)) {
-            const message = edit.map(e => this.getLogText(e)).map(({ title }) => title).join(', ');
-            return { title: get('editing.complex'), message };
-        }
-        return { title: '' };
     }
     onAction(event) {
         const edit = convertEditActiontoV1(event.detail.action);
@@ -91,20 +68,8 @@ let OscdEditor = class OscdEditor extends LitElement {
         return html `<slot></slot>`;
     }
     async handleEditEventV2(event) {
-        const edit = event.detail.edit;
-        const undoEdit = handleEditV2(edit);
-        const shouldCreateHistoryEntry = event.detail.createHistoryEntry !== false;
-        if (shouldCreateHistoryEntry) {
-            const { title, message } = this.getLogText(edit);
-            this.dispatchEvent(newLogEvent({
-                kind: 'action',
-                title: event.detail.title ?? title,
-                message,
-                redo: edit,
-                undo: undoEdit,
-                squash: event.detail.squash
-            }));
-        }
+        const { edit, title, squash } = event.detail;
+        this.editor.commit(edit, { title, squash });
         await this.updateComplete;
         this.dispatchEvent(newValidateEvent());
     }
@@ -118,6 +83,9 @@ __decorate([
 __decorate([
     property({ type: String })
 ], OscdEditor.prototype, "docId", void 0);
+__decorate([
+    property({ type: Object })
+], OscdEditor.prototype, "editor", void 0);
 __decorate([
     property({
         type: Object,

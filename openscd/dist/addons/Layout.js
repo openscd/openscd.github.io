@@ -4,7 +4,7 @@ import { get } from '../../../_snowpack/pkg/lit-translate.js';
 import { newPendingStateEvent } from '../../../_snowpack/link/packages/core/dist/foundation/deprecated/waiter.js';
 import { newSettingsUIEvent } from '../../../_snowpack/link/packages/core/dist/foundation/deprecated/settings.js';
 import { pluginIcons, } from '../open-scd.js';
-import { HistoryUIKind, newEmptyIssuesEvent, newHistoryUIEvent, newRedoEvent, newUndoEvent, } from './History.js';
+import { HistoryUIKind, newEmptyIssuesEvent, newHistoryUIEvent } from './History.js';
 import { List } from '../../../_snowpack/pkg/@material/mwc-list.js';
 import '../../../_snowpack/pkg/@material/mwc-drawer.js';
 import '../../../_snowpack/pkg/@material/mwc-list.js';
@@ -99,9 +99,9 @@ let OscdLayout = class OscdLayout extends LitElement {
                 name: 'undo',
                 actionItem: true,
                 action: () => {
-                    this.dispatchEvent(newUndoEvent());
+                    this.editor.undo();
                 },
-                disabled: () => !this.historyState.canUndo,
+                disabled: () => !this.editor.canUndo,
                 kind: 'static',
                 content: () => html ``,
             },
@@ -110,9 +110,9 @@ let OscdLayout = class OscdLayout extends LitElement {
                 name: 'redo',
                 actionItem: true,
                 action: () => {
-                    this.dispatchEvent(newRedoEvent());
+                    this.editor.redo();
                 },
-                disabled: () => !this.historyState.canRedo,
+                disabled: () => !this.editor.canRedo,
                 kind: 'static',
                 content: () => html ``,
             },
@@ -580,14 +580,14 @@ __decorate([
     property({ type: Number })
 ], OscdLayout.prototype, "editCount", void 0);
 __decorate([
+    property({ type: Object })
+], OscdLayout.prototype, "editor", void 0);
+__decorate([
     property({ type: Array })
 ], OscdLayout.prototype, "plugins", void 0);
 __decorate([
     property({ type: Object })
 ], OscdLayout.prototype, "host", void 0);
-__decorate([
-    property({ type: Object })
-], OscdLayout.prototype, "historyState", void 0);
 __decorate([
     state()
 ], OscdLayout.prototype, "validated", void 0);

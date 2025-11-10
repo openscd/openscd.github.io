@@ -11,11 +11,7 @@ import '../../../_snowpack/pkg/@material/mwc-list/mwc-list-item.js';
 import '../../../_snowpack/pkg/@material/mwc-snackbar.js';
 import '../filtered-list.js';
 import { getFilterIcon, iconColors } from '../icons/icons.js';
-import { isComplexV2, newEditEventV2 } from '../../../_snowpack/link/packages/core/dist/foundation.js';
-export const historyStateEvent = 'history-state';
-function newHistoryStateEvent(state) {
-    return new CustomEvent(historyStateEvent, { detail: state });
-}
+import { getLogText } from './history/get-log-text.js';
 const icons = {
     info: 'info',
     warning: 'warning',
@@ -63,35 +59,7 @@ export function newEmptyIssuesEvent(pluginSrc, eventInitDict) {
         detail: { pluginSrc, ...eventInitDict?.detail },
     });
 }
-export function newUndoEvent() {
-    return new CustomEvent('undo', { bubbles: true, composed: true });
-}
-export function newRedoEvent() {
-    return new CustomEvent('redo', { bubbles: true, composed: true });
-}
 let OscdHistory = class OscdHistory extends LitElement {
-    get canUndo() {
-        return this.editCount >= 0;
-    }
-    get canRedo() {
-        return this.nextAction >= 0;
-    }
-    get previousAction() {
-        if (!this.canUndo)
-            return -1;
-        return this.history
-            .slice(0, this.editCount)
-            .map(entry => (entry.kind == 'action' ? true : false))
-            .lastIndexOf(true);
-    }
-    get nextAction() {
-        let index = this.history
-            .slice(this.editCount + 1)
-            .findIndex(entry => entry.kind == 'action');
-        if (index >= 0)
-            index += this.editCount + 1;
-        return index;
-    }
     onIssue(de) {
         const issues = this.diagnoses.get(de.detail.validatorId);
         if (!issues)
@@ -103,88 +71,15 @@ let OscdHistory = class OscdHistory extends LitElement {
         this.issueUI.show();
     }
     undo() {
-        if (!this.canUndo)
-            return false;
-        const undoEdit = this.history[this.editCount].undo;
-        this.host.dispatchEvent(newEditEventV2(undoEdit, { createHistoryEntry: false }));
-        this.setEditCount(this.previousAction);
-        return true;
+        this.editor.undo();
     }
     redo() {
-        if (!this.canRedo)
-            return false;
-        const redoEdit = this.history[this.nextAction].redo;
-        this.host.dispatchEvent(newEditEventV2(redoEdit, { createHistoryEntry: false }));
-        this.setEditCount(this.nextAction);
-        return true;
-    }
-    onHistory(detail) {
-        const entry = {
-            time: new Date(),
-            ...detail,
-        };
-        if (this.nextAction !== -1) {
-            this.history.splice(this.nextAction);
-        }
-        this.addHistoryEntry(entry);
-        this.setEditCount(this.history.length - 1);
-        this.requestUpdate('history', []);
-    }
-    addHistoryEntry(entry) {
-        const shouldSquash = Boolean(entry.squash) && this.history.length > 0;
-        if (shouldSquash) {
-            const previousEntry = this.history.pop();
-            const squashedEntry = this.squashHistoryEntries(entry, previousEntry);
-            this.history.push(squashedEntry);
-        }
-        else {
-            this.history.push(entry);
-        }
-    }
-    squashHistoryEntries(current, previous) {
-        const undo = this.squashUndo(current.undo, previous.undo);
-        const redo = this.squashRedo(current.redo, previous.redo);
-        return {
-            ...current,
-            undo,
-            redo
-        };
-    }
-    squashUndo(current, previous) {
-        const isCurrentComplex = isComplexV2(current);
-        const isPreviousComplex = isComplexV2(previous);
-        const previousUndos = (isPreviousComplex ? previous : [previous]);
-        const currentUndos = (isCurrentComplex ? current : [current]);
-        return [
-            ...currentUndos,
-            ...previousUndos
-        ];
-    }
-    squashRedo(current, previous) {
-        const isCurrentComplex = isComplexV2(current);
-        const isPreviousComplex = isComplexV2(previous);
-        const previousRedos = (isPreviousComplex ? previous : [previous]);
-        const currentRedos = (isCurrentComplex ? current : [current]);
-        return [
-            ...previousRedos,
-            ...currentRedos
-        ];
+        this.editor.redo();
     }
     onReset() {
         this.log = [];
-        this.history = [];
-        this.setEditCount(-1);
-    }
-    setEditCount(count) {
-        this.editCount = count;
-        this.dispatchHistoryStateEvent();
-    }
-    dispatchHistoryStateEvent() {
-        this.host.dispatchEvent(newHistoryStateEvent({
-            editCount: this.editCount,
-            canUndo: this.canUndo,
-            canRedo: this.canRedo
-        }));
+        this.editor.reset();
+        this.updateHistory();
     }
     onInfo(detail) {
         const entry = {
@@ -213,7 +108,7 @@ let OscdHistory = class OscdHistory extends LitElement {
                 this.onReset();
                 break;
             case 'action':
-                this.onHistory(le.detail);
+                // No longer needed
                 break;
             default:
                 this.onInfo(le.detail);
@@ -248,15 +143,27 @@ let OscdHistory = class OscdHistory extends LitElement {
                 ? this.diagnosticUI.close()
                 : this.diagnosticUI.show();
     }
+    updateHistory() {
+        const { past, future } = this.editor;
+        const activeIndex = past.length - 1;
+        const allEntries = [...past, ...future];
+        this.history = allEntries.map((e, index) => {
+            const { title, message } = getLogText(e.redo);
+            return {
+                isActive: index === activeIndex,
+                time: e.time,
+                title: e.title ?? title,
+                message
+            };
+        });
+    }
     constructor() {
         super();
         /** All [[`LogEntry`]]s received so far through [[`LogEvent`]]s. */
         this.log = [];
-        /** All [[`CommitEntry`]]s received so far through [[`LogEvent`]]s */
-        this.history = [];
-        /** Index of the last [[`EditorAction`]] applied. */
-        this.editCount = -1;
         this.diagnoses = new Map();
+        this.history = [];
+        this.unsubscribers = [];
         this.undo = this.undo.bind(this);
         this.redo = this.redo.bind(this);
         this.onLog = this.onLog.bind(this);
@@ -264,18 +171,19 @@ let OscdHistory = class OscdHistory extends LitElement {
         this.historyUIHandler = this.historyUIHandler.bind(this);
         this.emptyIssuesHandler = this.emptyIssuesHandler.bind(this);
         this.handleKeyPress = this.handleKeyPress.bind(this);
-        this.dispatchHistoryStateEvent = this.dispatchHistoryStateEvent.bind(this);
         document.onkeydown = this.handleKeyPress;
     }
     connectedCallback() {
         super.connectedCallback();
+        this.unsubscribers.push(this.editor.subscribe(e => this.updateHistory()), this.editor.subscribeUndoRedo(e => this.updateHistory()));
         this.host.addEventListener('log', this.onLog);
         this.host.addEventListener('issue', this.onIssue);
         this.host.addEventListener('history-dialog-ui', this.historyUIHandler);
         this.host.addEventListener('empty-issues', this.emptyIssuesHandler);
-        this.host.addEventListener('undo', this.undo);
-        this.host.addEventListener('redo', this.redo);
         this.diagnoses.clear();
+    }
+    disconnectedCallback() {
+        this.unsubscribers.forEach(u => u());
     }
     renderLogEntry(entry, index, log) {
         return html ` <abbr title="${entry.title}">
@@ -283,7 +191,6 @@ let OscdHistory = class OscdHistory extends LitElement {
         class="${entry.kind}"
         graphic="icon"
         ?twoline=${!!entry.message}
-        ?activated=${this.editCount == log.length - index - 1}
       >
         <span>
           <!-- FIXME: replace tt with mwc-chip asap -->
@@ -299,27 +206,25 @@ let OscdHistory = class OscdHistory extends LitElement {
       </mwc-list-item></abbr
     >`;
     }
-    renderHistoryEntry(entry, index, history) {
+    renderHistoryEntry(entry) {
         return html ` <abbr title="${entry.title}">
       <mwc-list-item
-        class="${entry.kind}"
-        graphic="icon"
         ?twoline=${!!entry.message}
-        ?activated=${this.editCount == history.length - index - 1}
+        ?activated=${entry.isActive}
       >
         <span>
-          <!-- FIXME: replace tt with mwc-chip asap -->
-          <tt>${entry.time?.toLocaleString()}</tt>
-          ${entry.title}</span
-        >
+          <tt>${this.formatTime(entry.time)}</tt>
+          ${entry.title}
+        </span>
         <span slot="secondary">${entry.message}</span>
-        <mwc-icon
-          slot="graphic"
-          style="--mdc-theme-text-icon-on-background:var(${iconColors[entry.kind]})"
-          >history</mwc-icon
-        >
-      </mwc-list-item></abbr
-    >`;
+      </mwc-list-item>
+    </abbr>`;
+    }
+    formatTime(time) {
+        const date = new Date(time);
+        const hours = date.getHours();
+        const minutes = date.getMinutes();
+        return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`;
     }
     renderLog() {
         if (this.log.length > 0)
@@ -332,7 +237,7 @@ let OscdHistory = class OscdHistory extends LitElement {
     }
     renderHistory() {
         if (this.history.length > 0)
-            return this.history.slice().reverse().map(this.renderHistoryEntry, this);
+            return this.history.slice().reverse().map(e => this.renderHistoryEntry(e));
         else
             return html `<mwc-list-item disabled graphic="icon">
         <span>${get('history.placeholder')}</span>
@@ -393,14 +298,14 @@ let OscdHistory = class OscdHistory extends LitElement {
       <mwc-button
         icon="undo"
         label="${get('undo')}"
-        ?disabled=${!this.canUndo}
+        ?disabled=${!this.editor.canUndo}
         @click=${this.undo}
         slot="secondaryAction"
       ></mwc-button>
       <mwc-button
         icon="redo"
         label="${get('redo')}"
-        ?disabled=${!this.canRedo}
+        ?disabled=${!this.editor.canRedo}
         @click=${this.redo}
         slot="secondaryAction"
       ></mwc-button>
@@ -543,22 +448,20 @@ __decorate([
     property({ type: Array })
 ], OscdHistory.prototype, "log", void 0);
 __decorate([
-    property({ type: Array })
-], OscdHistory.prototype, "history", void 0);
-__decorate([
-    property({ type: Number })
-], OscdHistory.prototype, "editCount", void 0);
+    property({ type: Object })
+], OscdHistory.prototype, "editor", void 0);
 __decorate([
     property()
 ], OscdHistory.prototype, "diagnoses", void 0);
 __decorate([
-    property({
-        type: Object,
-    })
+    property({ type: Object })
 ], OscdHistory.prototype, "host", void 0);
 __decorate([
     state()
 ], OscdHistory.prototype, "latestIssue", void 0);
+__decorate([
+    state()
+], OscdHistory.prototype, "history", void 0);
 __decorate([
     query('#log')
 ], OscdHistory.prototype, "logUI", void 0);

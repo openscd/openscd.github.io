@@ -44,8 +44,7 @@ import "./addons/History.js";
 import "./addons/Layout.js";
 import {officialPlugins as builtinPlugins} from "./plugins.js";
 import {initializeNsdoc} from "./foundation/nsdoc.js";
-import {OscdApi} from "../../_snowpack/link/packages/core/dist/foundation.js";
-import {historyStateEvent} from "./addons/History.js";
+import {OscdApi, XMLEditor} from "../../_snowpack/link/packages/core/dist/foundation.js";
 import {newConfigurePluginEvent} from "./plugin.events.js";
 import {newLogEvent} from "../../_snowpack/link/packages/core/dist/foundation/deprecated/history.js";
 import {pluginTag} from "./plugin-tag.js";
@@ -55,14 +54,12 @@ export let OpenSCD = class extends LitElement {
     this.doc = null;
     this.docName = "";
     this.docId = "";
-    this.historyState = {
-      editCount: -1,
-      canRedo: false,
-      canUndo: false
-    };
+    this.editor = new XMLEditor();
     this.nsdoc = initializeNsdoc();
     this.currentSrc = "";
     this.storedPlugins = [];
+    this.editCount = -1;
+    this.unsubscribers = [];
     this.plugins = {menu: [], editor: []};
     this.loadedPlugins = new Set();
     this.pluginTags = new Map();
@@ -71,13 +68,17 @@ export let OpenSCD = class extends LitElement {
     return html`<oscd-waiter>
       <oscd-settings .host=${this}>
         <oscd-wizards .host=${this}>
-          <oscd-history .host=${this} .editCount=${this.historyState.editCount}>
+          <oscd-history
+            .host=${this}
+            .editor=${this.editor}
+          >
             <oscd-editor
               .doc=${this.doc}
               .docName=${this.docName}
               .docId=${this.docId}
               .host=${this}
-              .editCount=${this.historyState.editCount}
+              .editCount=${this.editCount}
+              .editor=${this.editor}
             >
               <oscd-layout
                 @add-external-plugin=${this.handleAddExternalPlugin}
@@ -86,9 +87,9 @@ export let OpenSCD = class extends LitElement {
                 .host=${this}
                 .doc=${this.doc}
                 .docName=${this.docName}
-                .editCount=${this.historyState.editCount}
-                .historyState=${this.historyState}
+                .editCount=${this.editCount}
                 .plugins=${this.storedPlugins}
+                .editor=${this.editor}
               >
               </oscd-layout>
             </oscd-editor>
@@ -146,11 +147,11 @@ export let OpenSCD = class extends LitElement {
   connectedCallback() {
     super.connectedCallback();
     this.loadPlugins();
+    this.unsubscribers.push(this.editor.subscribe((e) => this.editCount++), this.editor.subscribeUndoRedo((e) => this.editCount++));
     this.addEventListener("reset-plugins", this.resetPlugins);
-    this.addEventListener(historyStateEvent, (e) => {
-      this.historyState = e.detail;
-      this.requestUpdate();
-    });
+  }
+  disconnectedCallback() {
+    this.unsubscribers.forEach((u) => u());
   }
   findPluginIndex(name, kind) {
     return this.storedPlugins.findIndex((p) => p.name === name && p.kind === kind);
@@ -318,7 +319,7 @@ export let OpenSCD = class extends LitElement {
         return staticTagHtml`<${tag}
             .doc=${this.doc}
             .docName=${this.docName}
-            .editCount=${this.historyState.editCount}
+            .editCount=${this.editCount}
             .plugins=${this.storedPlugins}
             .docId=${this.docId}
             .pluginId=${plugin.src}
@@ -326,6 +327,7 @@ export let OpenSCD = class extends LitElement {
             .docs=${this.docs}
             .locale=${this.locale}
             .oscdApi=${new OscdApi(tag)}
+            .editor=${this.editor}
             class="${classMap({
           plugin: true,
           menu: plugin.kind === "menu",
@@ -354,9 +356,6 @@ __decorate([
   property({type: String})
 ], OpenSCD.prototype, "docId", 2);
 __decorate([
-  state()
-], OpenSCD.prototype, "historyState", 2);
-__decorate([
   property({attribute: false})
 ], OpenSCD.prototype, "nsdoc", 2);
 __decorate([
@@ -365,6 +364,9 @@ __decorate([
 __decorate([
   state()
 ], OpenSCD.prototype, "storedPlugins", 2);
+__decorate([
+  state()
+], OpenSCD.prototype, "editCount", 2);
 __decorate([
   property({type: Object})
 ], OpenSCD.prototype, "plugins", 2);

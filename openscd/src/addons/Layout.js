@@ -27,9 +27,7 @@ import {
 import {
   HistoryUIKind,
   newEmptyIssuesEvent,
-  newHistoryUIEvent,
-  newRedoEvent,
-  newUndoEvent
+  newHistoryUIEvent
 } from "./History.js";
 import {List} from "../../../_snowpack/pkg/@material/mwc-list.js";
 import "../../../_snowpack/pkg/@material/mwc-drawer.js";
@@ -116,9 +114,9 @@ export let OscdLayout = class extends LitElement {
         name: "undo",
         actionItem: true,
         action: () => {
-          this.dispatchEvent(newUndoEvent());
+          this.editor.undo();
         },
-        disabled: () => !this.historyState.canUndo,
+        disabled: () => !this.editor.canUndo,
         kind: "static",
         content: () => html``
       },
@@ -127,9 +125,9 @@ export let OscdLayout = class extends LitElement {
         name: "redo",
         actionItem: true,
         action: () => {
-          this.dispatchEvent(newRedoEvent());
+          this.editor.redo();
         },
-        disabled: () => !this.historyState.canRedo,
+        disabled: () => !this.editor.canRedo,
         kind: "static",
         content: () => html``
       },
@@ -559,14 +557,14 @@ __decorate([
   property({type: Number})
 ], OscdLayout.prototype, "editCount", 2);
 __decorate([
+  property({type: Object})
+], OscdLayout.prototype, "editor", 2);
+__decorate([
   property({type: Array})
 ], OscdLayout.prototype, "plugins", 2);
 __decorate([
   property({type: Object})
 ], OscdLayout.prototype, "host", 2);
-__decorate([
-  property({type: Object})
-], OscdLayout.prototype, "historyState", 2);
 __decorate([
   state()
 ], OscdLayout.prototype, "validated", 2);
