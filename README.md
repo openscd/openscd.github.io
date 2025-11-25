@@ -3,7 +3,7 @@
 
 > [!CAUTION]
 > #This instance of OpenSCD is end of life. Part of the development will continue in LF eneryg CoMPAS.
-> #Try it here: [demo.compass.energy](demo.compass.energy)
+> #Try it here: [demo.compass.energy](demo.compas.energy)
 
 
 
